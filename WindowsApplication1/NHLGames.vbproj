@@ -60,6 +60,7 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -90,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Utilities\Downloader.vb" />
+    <Compile Include="Objects\Game.vb" />
+    <Compile Include="Objects\GameStream.vb" />
     <Compile Include="URL.Designer.vb">
       <DependentUpon>URL.vb</DependentUpon>
     </Compile>
@@ -119,6 +123,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Utilities\HostsFile.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="URL.resx">

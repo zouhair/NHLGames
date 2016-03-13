@@ -41,13 +41,13 @@ Partial Class NHLGames
         Me.rbHome = New System.Windows.Forms.RadioButton()
         Me.rbAway = New System.Windows.Forms.RadioButton()
         Me.gbCDN = New System.Windows.Forms.GroupBox()
-        Me.rbAkamai = New System.Windows.Forms.RadioButton()
         Me.rbLevel3 = New System.Windows.Forms.RadioButton()
+        Me.rbAkamai = New System.Windows.Forms.RadioButton()
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.btnURL = New System.Windows.Forms.Button()
         Me.gbServer = New System.Windows.Forms.GroupBox()
-        Me.rbLive = New System.Windows.Forms.RadioButton()
         Me.rbVOD = New System.Windows.Forms.RadioButton()
+        Me.rbLive = New System.Windows.Forms.RadioButton()
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbQuality.SuspendLayout()
         Me.gbFeed.SuspendLayout()
@@ -75,6 +75,7 @@ Partial Class NHLGames
         '
         'dtDate
         '
+        Me.dtDate.CustomFormat = "yyyy-MM-dd"
         Me.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtDate.Location = New System.Drawing.Point(5, 12)
         Me.dtDate.Name = "dtDate"
@@ -100,6 +101,7 @@ Partial Class NHLGames
         Me.btnWatch.TabIndex = 4
         Me.btnWatch.Text = "Watch"
         Me.btnWatch.UseVisualStyleBackColor = True
+        Me.btnWatch.Visible = False
         '
         'btnRefresh
         '
@@ -191,7 +193,6 @@ Partial Class NHLGames
         Me.gbQuality.Controls.Add(Me.rbQual3)
         Me.gbQuality.Controls.Add(Me.rbQual5)
         Me.gbQuality.Controls.Add(Me.rbQual4)
-        Me.gbQuality.Enabled = False
         Me.gbQuality.Location = New System.Drawing.Point(609, 38)
         Me.gbQuality.Name = "gbQuality"
         Me.gbQuality.Size = New System.Drawing.Size(75, 181)
@@ -211,6 +212,7 @@ Partial Class NHLGames
         Me.gbFeed.TabIndex = 15
         Me.gbFeed.TabStop = False
         Me.gbFeed.Text = "Feed"
+        Me.gbFeed.Visible = False
         '
         'rbFrench
         '
@@ -273,16 +275,6 @@ Partial Class NHLGames
         Me.gbCDN.TabStop = False
         Me.gbCDN.Text = "CDN"
         '
-        'rbAkamai
-        '
-        Me.rbAkamai.AutoSize = True
-        Me.rbAkamai.Location = New System.Drawing.Point(5, 42)
-        Me.rbAkamai.Name = "rbAkamai"
-        Me.rbAkamai.Size = New System.Drawing.Size(60, 17)
-        Me.rbAkamai.TabIndex = 0
-        Me.rbAkamai.Text = "Akamai"
-        Me.rbAkamai.UseVisualStyleBackColor = True
-        '
         'rbLevel3
         '
         Me.rbLevel3.AutoSize = True
@@ -294,6 +286,16 @@ Partial Class NHLGames
         Me.rbLevel3.TabStop = True
         Me.rbLevel3.Text = "Level 3"
         Me.rbLevel3.UseVisualStyleBackColor = True
+        '
+        'rbAkamai
+        '
+        Me.rbAkamai.AutoSize = True
+        Me.rbAkamai.Location = New System.Drawing.Point(5, 42)
+        Me.rbAkamai.Name = "rbAkamai"
+        Me.rbAkamai.Size = New System.Drawing.Size(60, 17)
+        Me.rbAkamai.TabIndex = 0
+        Me.rbAkamai.Text = "Akamai"
+        Me.rbAkamai.UseVisualStyleBackColor = True
         '
         'lblVersion
         '
@@ -316,13 +318,22 @@ Partial Class NHLGames
         '
         Me.gbServer.Controls.Add(Me.rbVOD)
         Me.gbServer.Controls.Add(Me.rbLive)
-        Me.gbServer.Enabled = False
         Me.gbServer.Location = New System.Drawing.Point(609, 347)
         Me.gbServer.Name = "gbServer"
         Me.gbServer.Size = New System.Drawing.Size(75, 62)
         Me.gbServer.TabIndex = 19
         Me.gbServer.TabStop = False
         Me.gbServer.Text = "Server"
+        '
+        'rbVOD
+        '
+        Me.rbVOD.AutoSize = True
+        Me.rbVOD.Location = New System.Drawing.Point(5, 39)
+        Me.rbVOD.Name = "rbVOD"
+        Me.rbVOD.Size = New System.Drawing.Size(48, 17)
+        Me.rbVOD.TabIndex = 1
+        Me.rbVOD.Text = "VOD"
+        Me.rbVOD.UseVisualStyleBackColor = True
         '
         'rbLive
         '
@@ -335,16 +346,6 @@ Partial Class NHLGames
         Me.rbLive.TabStop = True
         Me.rbLive.Text = "Live"
         Me.rbLive.UseVisualStyleBackColor = True
-        '
-        'rbVOD
-        '
-        Me.rbVOD.AutoSize = True
-        Me.rbVOD.Location = New System.Drawing.Point(5, 39)
-        Me.rbVOD.Name = "rbVOD"
-        Me.rbVOD.Size = New System.Drawing.Size(48, 17)
-        Me.rbVOD.TabIndex = 1
-        Me.rbVOD.Text = "VOD"
-        Me.rbVOD.UseVisualStyleBackColor = True
         '
         'NHLGames
         '
