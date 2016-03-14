@@ -18,8 +18,8 @@ Public Class Game
     Public FrenchStream As GameStream = New GameStream()
 
     Public Sub Watch(args As GameWatchArguments)
-
-        Process.Start(Application.StartupPath & "\livestreamer-v1.12.2\livestreamer.exe", args.ToString() & " --http-no-ssl-verify")
+        Debug.WriteLine("Running: " & (Application.StartupPath & "\livestreamer-v1.12.2\livestreamer.exe"" " & args.ToString()))
+        Process.Start(Application.StartupPath & "\livestreamer-v1.12.2\livestreamer.exe", args.ToString())
     End Sub
 
     Public ReadOnly Property AreAnyStreamsAvailable As Boolean
@@ -28,41 +28,9 @@ Public Class Game
         End Get
     End Property
 
-    Public Class GameWatchArguments
 
-        Dim strUrl As String = """hlsvariant://"
-
-        Public Property Quality As String = ""
-        Public Property Is60FPS As Boolean = False
-        Public Property CDN As String = ""
-        Public Property Server As String = ""
-        Public Property Stream As GameStream
-        Public Property IsVOD As Boolean = False
-
-
-        Public Overrides Function ToString() As String
-            Dim returnValue As String = strUrl
-            If IsVOD Then
-                returnValue &= Stream.VODURL
-            Else
-                returnValue &= Stream.GameURL
-            End If
-
-            If Is60FPS Then
-                returnValue &= " name_key=bitrate"" "
-            Else
-                returnValue &= """ "
-            End If
-
-            returnValue = returnValue.Replace("CDN", CDN)
-
-            returnValue &= Quality
-
-            Return returnValue
-        End Function
-
-    End Class
     Public Sub New(game As JObject, availableGameIds As List(Of String))
+
         Dim timeZoneInfo As TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time")
         Dim localizedDateTime As DateTime = TimeZoneInfo.ConvertTime(Date.Parse(game.Property("gameDate").Value.ToString()), timeZoneInfo)
         [Date] = localizedDateTime.ToLocalTime()
@@ -112,5 +80,46 @@ Public Class Game
         Next
         Return returnValue
     End Function
+
+
+    Public Class GameWatchArguments
+        Public Property Quality As String = ""
+        Public Property Is60FPS As Boolean = False
+        Public Property CDN As String = ""
+        Public Property Server As String = ""
+        Public Property Stream As GameStream
+        Public Property IsVOD As Boolean = False
+
+        Public Property VLCPath As String = ""
+
+
+        Public Overrides Function ToString() As String
+
+            Dim returnValue As String = ""
+            If String.IsNullOrEmpty(VLCPath) = False Then
+                returnValue &= "--player """ & VLCPath & """ "
+            End If
+
+            returnValue &= """hlsvariant://"
+            If IsVOD Then
+                returnValue &= Stream.VODURL
+            Else
+                returnValue &= Stream.GameURL
+            End If
+
+            If Is60FPS Then
+                returnValue &= " name_key=bitrate"" "
+            Else
+                returnValue &= """ "
+            End If
+
+            returnValue = returnValue.Replace("CDN", CDN)
+
+            returnValue &= Quality
+            returnValue &= " --http-no-ssl-verify"
+            Return returnValue
+        End Function
+
+    End Class
 
 End Class

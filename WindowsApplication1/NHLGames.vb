@@ -238,6 +238,8 @@ Public Class NHLGames
             args.Stream = game.FrenchStream
         End If
 
+        args.VLCPath = FileAccess.LocateEXE("vlc.exe", "\VideoLAN\VLC")
+
         game.Watch(args)
 
 
