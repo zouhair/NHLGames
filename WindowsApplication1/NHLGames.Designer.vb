@@ -48,11 +48,19 @@ Partial Class NHLGames
         Me.gbServer = New System.Windows.Forms.GroupBox()
         Me.rbVOD = New System.Windows.Forms.RadioButton()
         Me.rbLive = New System.Windows.Forms.RadioButton()
+        Me.SplitContainer = New System.Windows.Forms.SplitContainer()
+        Me.RichTextBox = New System.Windows.Forms.RichTextBox()
+        Me.pnlSettings = New System.Windows.Forms.Panel()
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbQuality.SuspendLayout()
         Me.gbFeed.SuspendLayout()
         Me.gbCDN.SuspendLayout()
         Me.gbServer.SuspendLayout()
+        CType(Me.SplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer.Panel1.SuspendLayout()
+        Me.SplitContainer.Panel2.SuspendLayout()
+        Me.SplitContainer.SuspendLayout()
+        Me.pnlSettings.SuspendLayout()
         Me.SuspendLayout()
         '
         'gridGames
@@ -63,14 +71,15 @@ Partial Class NHLGames
         Me.gridGames.AllowUserToResizeRows = False
         Me.gridGames.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable
         Me.gridGames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridGames.Location = New System.Drawing.Point(5, 38)
+        Me.gridGames.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gridGames.Location = New System.Drawing.Point(0, 0)
         Me.gridGames.MultiSelect = False
         Me.gridGames.Name = "gridGames"
         Me.gridGames.ReadOnly = True
         Me.gridGames.RowHeadersVisible = False
         Me.gridGames.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.gridGames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.gridGames.Size = New System.Drawing.Size(598, 500)
+        Me.gridGames.Size = New System.Drawing.Size(580, 364)
         Me.gridGames.TabIndex = 0
         '
         'dtDate
@@ -95,7 +104,7 @@ Partial Class NHLGames
         'btnWatch
         '
         Me.btnWatch.Enabled = False
-        Me.btnWatch.Location = New System.Drawing.Point(609, 415)
+        Me.btnWatch.Location = New System.Drawing.Point(10, 375)
         Me.btnWatch.Name = "btnWatch"
         Me.btnWatch.Size = New System.Drawing.Size(75, 23)
         Me.btnWatch.TabIndex = 4
@@ -193,7 +202,7 @@ Partial Class NHLGames
         Me.gbQuality.Controls.Add(Me.rbQual3)
         Me.gbQuality.Controls.Add(Me.rbQual5)
         Me.gbQuality.Controls.Add(Me.rbQual4)
-        Me.gbQuality.Location = New System.Drawing.Point(609, 38)
+        Me.gbQuality.Location = New System.Drawing.Point(10, 3)
         Me.gbQuality.Name = "gbQuality"
         Me.gbQuality.Size = New System.Drawing.Size(75, 181)
         Me.gbQuality.TabIndex = 14
@@ -206,7 +215,7 @@ Partial Class NHLGames
         Me.gbFeed.Controls.Add(Me.rbNational)
         Me.gbFeed.Controls.Add(Me.rbHome)
         Me.gbFeed.Controls.Add(Me.rbAway)
-        Me.gbFeed.Location = New System.Drawing.Point(609, 225)
+        Me.gbFeed.Location = New System.Drawing.Point(10, 185)
         Me.gbFeed.Name = "gbFeed"
         Me.gbFeed.Size = New System.Drawing.Size(75, 116)
         Me.gbFeed.TabIndex = 15
@@ -268,7 +277,7 @@ Partial Class NHLGames
         Me.gbCDN.Controls.Add(Me.rbLevel3)
         Me.gbCDN.Controls.Add(Me.rbAkamai)
         Me.gbCDN.Enabled = False
-        Me.gbCDN.Location = New System.Drawing.Point(609, 473)
+        Me.gbCDN.Location = New System.Drawing.Point(10, 433)
         Me.gbCDN.Name = "gbCDN"
         Me.gbCDN.Size = New System.Drawing.Size(75, 65)
         Me.gbCDN.TabIndex = 16
@@ -307,7 +316,7 @@ Partial Class NHLGames
         '
         'btnURL
         '
-        Me.btnURL.Location = New System.Drawing.Point(609, 444)
+        Me.btnURL.Location = New System.Drawing.Point(10, 404)
         Me.btnURL.Name = "btnURL"
         Me.btnURL.Size = New System.Drawing.Size(75, 23)
         Me.btnURL.TabIndex = 18
@@ -318,7 +327,7 @@ Partial Class NHLGames
         '
         Me.gbServer.Controls.Add(Me.rbVOD)
         Me.gbServer.Controls.Add(Me.rbLive)
-        Me.gbServer.Location = New System.Drawing.Point(609, 347)
+        Me.gbServer.Location = New System.Drawing.Point(10, 307)
         Me.gbServer.Name = "gbServer"
         Me.gbServer.Size = New System.Drawing.Size(75, 62)
         Me.gbServer.TabIndex = 19
@@ -347,24 +356,64 @@ Partial Class NHLGames
         Me.rbLive.Text = "Live"
         Me.rbLive.UseVisualStyleBackColor = True
         '
+        'SplitContainer
+        '
+        Me.SplitContainer.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.SplitContainer.Location = New System.Drawing.Point(5, 38)
+        Me.SplitContainer.Name = "SplitContainer"
+        Me.SplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'SplitContainer.Panel1
+        '
+        Me.SplitContainer.Panel1.Controls.Add(Me.gridGames)
+        '
+        'SplitContainer.Panel2
+        '
+        Me.SplitContainer.Panel2.Controls.Add(Me.RichTextBox)
+        Me.SplitContainer.Size = New System.Drawing.Size(580, 500)
+        Me.SplitContainer.SplitterDistance = 364
+        Me.SplitContainer.TabIndex = 20
+        '
+        'RichTextBox
+        '
+        Me.RichTextBox.BackColor = System.Drawing.Color.White
+        Me.RichTextBox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RichTextBox.Location = New System.Drawing.Point(0, 0)
+        Me.RichTextBox.Name = "RichTextBox"
+        Me.RichTextBox.ReadOnly = True
+        Me.RichTextBox.Size = New System.Drawing.Size(580, 132)
+        Me.RichTextBox.TabIndex = 0
+        Me.RichTextBox.Text = ""
+        '
+        'pnlSettings
+        '
+        Me.pnlSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlSettings.Controls.Add(Me.gbQuality)
+        Me.pnlSettings.Controls.Add(Me.gbFeed)
+        Me.pnlSettings.Controls.Add(Me.btnURL)
+        Me.pnlSettings.Controls.Add(Me.gbServer)
+        Me.pnlSettings.Controls.Add(Me.btnWatch)
+        Me.pnlSettings.Controls.Add(Me.gbCDN)
+        Me.pnlSettings.Location = New System.Drawing.Point(591, 38)
+        Me.pnlSettings.Name = "pnlSettings"
+        Me.pnlSettings.Size = New System.Drawing.Size(88, 500)
+        Me.pnlSettings.TabIndex = 21
+        '
         'NHLGames
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(691, 544)
-        Me.Controls.Add(Me.gbServer)
-        Me.Controls.Add(Me.btnURL)
+        Me.Controls.Add(Me.pnlSettings)
+        Me.Controls.Add(Me.SplitContainer)
         Me.Controls.Add(Me.lblVersion)
-        Me.Controls.Add(Me.gbCDN)
-        Me.Controls.Add(Me.gbFeed)
-        Me.Controls.Add(Me.gbQuality)
         Me.Controls.Add(Me.btnRefresh)
-        Me.Controls.Add(Me.btnWatch)
         Me.Controls.Add(Me.btnHosts)
         Me.Controls.Add(Me.dtDate)
-        Me.Controls.Add(Me.gridGames)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(707, 583)
         Me.Name = "NHLGames"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "NHL Games"
@@ -377,6 +426,11 @@ Partial Class NHLGames
         Me.gbCDN.PerformLayout()
         Me.gbServer.ResumeLayout(False)
         Me.gbServer.PerformLayout()
+        Me.SplitContainer.Panel1.ResumeLayout(False)
+        Me.SplitContainer.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer.ResumeLayout(False)
+        Me.pnlSettings.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -407,4 +461,7 @@ Partial Class NHLGames
     Friend WithEvents gbServer As GroupBox
     Friend WithEvents rbVOD As RadioButton
     Friend WithEvents rbLive As RadioButton
+    Friend WithEvents SplitContainer As SplitContainer
+    Friend WithEvents RichTextBox As RichTextBox
+    Friend WithEvents pnlSettings As Panel
 End Class

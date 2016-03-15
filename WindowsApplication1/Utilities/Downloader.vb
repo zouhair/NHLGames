@@ -14,9 +14,11 @@ Public Class Downloader
     Private Shared LocalFileDirectory = Application.StartupPath
 
     Private Shared Sub DownloadFile(URL As String, fileName As String, Optional checkIfExists As Boolean = False, Optional overwrite As Boolean = True)
+
         Dim fullPath As String = LocalFileDirectory & fileName
 
         If (checkIfExists = False) OrElse (checkIfExists AndAlso My.Computer.FileSystem.FileExists(fullPath) = False) Then
+            Console.WriteLine("Downloading file: " & URL & " to " & LocalFileDirectory & fileName)
             My.Computer.Network.DownloadFile(URL, LocalFileDirectory & fileName, "", "", False, 10000, overwrite)
         End If
 
@@ -36,12 +38,16 @@ Public Class Downloader
 
     Public Shared Function DownloadApplicationVersion() As String
 
+        Console.WriteLine("Checking application version")
+
         DownloadFile(ApplicationVersionURL, ApplicationVersionFileName)
         Return ReadFileContents(ApplicationVersionFileName).Trim()
 
     End Function
 
     Public Shared Function DownloadAvailableGames() As List(Of String)
+
+        Console.WriteLine("Checking available games")
 
         DownloadFile(GamesTxtURL, GamesTextFileName)
         Return ReadFileContents(GamesTextFileName).Split(New Char() {vbLf}).ToList()
@@ -51,6 +57,8 @@ Public Class Downloader
 
 
     Public Shared Function DownloadJSONSchedule(startDate As DateTime) As JObject
+
+        Console.WriteLine("Checking game schedule")
 
         Dim returnValue As New JObject
         Dim dateTimeString As String = startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)

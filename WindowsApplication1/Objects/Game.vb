@@ -18,8 +18,31 @@ Public Class Game
     Public FrenchStream As GameStream = New GameStream()
 
     Public Sub Watch(args As GameWatchArguments)
-        Debug.WriteLine("Running: " & (Application.StartupPath & "\livestreamer-v1.12.2\livestreamer.exe"" " & args.ToString()))
-        Process.Start(Application.StartupPath & "\livestreamer-v1.12.2\livestreamer.exe", args.ToString())
+
+        Dim liveStreamerPath As String = Application.StartupPath & "\livestreamer-v1.12.2\livestreamer.exe"
+        Debug.WriteLine("Running: " & liveStreamerPath & " " & args.ToString())
+
+        Dim proc = New Process() With {.StartInfo =
+            New ProcessStartInfo With {
+            .FileName = liveStreamerPath,
+            .Arguments = args.ToString(),
+            .UseShellExecute = False,
+            .RedirectStandardOutput = True,
+            .CreateNoWindow = False}
+        }
+
+        proc.Start()
+
+        While (proc.StandardOutput.EndOfStream = False)
+            Dim line = proc.StandardOutput.ReadLine()
+            Console.WriteLine(line)
+        End While
+
+        proc.WaitForExit()
+        'If (proc.ExitCode <> 0) Then
+        '    Dim errjor = "fg"
+        'End If
+
     End Sub
 
     Public ReadOnly Property AreAnyStreamsAvailable As Boolean

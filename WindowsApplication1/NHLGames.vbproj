@@ -125,6 +125,7 @@
     </Compile>
     <Compile Include="Utilities\FileAccess.vb" />
     <Compile Include="Utilities\HostsFile.vb" />
+    <Compile Include="Utilities\TextboxConsoleOutputRediect.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="URL.resx">

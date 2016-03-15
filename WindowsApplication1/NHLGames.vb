@@ -2,6 +2,8 @@
 Imports System.IO
 Imports System.Threading
 Imports Newtonsoft.Json.Linq
+Imports NHLGames.TextboxConsoleOutputRediect
+
 Public Class NHLGames
 
     Private AvailableGames As New List(Of String)
@@ -30,6 +32,11 @@ Public Class NHLGames
     Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
         VersionCheck()
         dtDate.Value = DateTime.Now()
+
+        'Setup redirecting console.out to 
+        Dim _writer = New TextBoxStreamWriter(RichTextBox)
+        Console.SetOut(_writer)
+
     End Sub
 
     Private Sub dtDate_ValueChanged(sender As Object, e As EventArgs) Handles dtDate.ValueChanged
@@ -45,7 +52,7 @@ Public Class NHLGames
 
             Dim JSONSchedule As JObject = Downloader.DownloadJSONSchedule(dateTime)
             AvailableGames = Downloader.DownloadAvailableGames()
-            Games = Game.GetGames(JSONSchedule, availableGames)
+            Games = Game.GetGames(JSONSchedule, AvailableGames)
 
             For Each game As Game In Games
                 row = {game.Id.ToString(), game.Date.ToLocalTime().ToString("hh:mm"), game.AwayTeam, game.AwayAbbrev, game.HomeTeam, game.HomeAbbrev, game.AwayStream.GameURL, game.AwayStream.VODURL, game.AwayStream.Availability, game.HomeStream.GameURL, game.HomeStream.VODURL, game.HomeStream.Availability, game.NationalStream.GameURL, game.NationalStream.VODURL, game.NationalStream.Availability, game.FrenchStream.GameURL, game.FrenchStream.VODURL, game.FrenchStream.Availability}
@@ -312,4 +319,6 @@ Public Class NHLGames
         Dim dialogURL As New dlURL(strUrl)
         dialogURL.ShowDialog()
     End Sub
+
+
 End Class
