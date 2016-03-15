@@ -69,6 +69,7 @@ Partial Class NHLGames
         Me.gridGames.AllowUserToDeleteRows = False
         Me.gridGames.AllowUserToResizeColumns = False
         Me.gridGames.AllowUserToResizeRows = False
+        Me.gridGames.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.gridGames.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable
         Me.gridGames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridGames.Dock = System.Windows.Forms.DockStyle.Fill

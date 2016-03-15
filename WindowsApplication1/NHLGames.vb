@@ -91,26 +91,24 @@ Public Class NHLGames
 
         gridGames.CellBorderStyle = DataGridViewCellBorderStyle.None
 
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "GameID", .HeaderText = "Game ID", .Visible = False})
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "time", .HeaderText = "Time", .Width = 35})
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "away", .HeaderText = "Away Team", .Width = 150})
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "awayAbbrev", .HeaderText = "Away Abbrev", .Visible = False})
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "home", .HeaderText = "Home Team", .Width = 150})
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "homeAbbrev", .HeaderText = "Home Abbrev", .Visible = False})
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "awayLIVE", .HeaderText = "Away URL", .Visible = False})
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "awayVOD", .HeaderText = "Away VOD", .Visible = False})
-        gridGames.Columns.Add(New DataGridViewLinkColumn() With {.Name = "awayLIVEStatus", .HeaderText = "Away Stream", .Width = 65})
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "homeLIVE", .HeaderText = "Home URL", .Visible = False})
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "homeVOD", .HeaderText = "Home VOD", .Visible = False})
-        gridGames.Columns.Add(New DataGridViewLinkColumn() With {.Name = "homeLIVEStatus", .HeaderText = "Home Stream", .Width = 65})
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "nationalLIVE", .HeaderText = "National URL", .Visible = False})
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "nationalVOD", .HeaderText = "National VOD", .Visible = False})
-        gridGames.Columns.Add(New DataGridViewLinkColumn() With {.Name = "nationalLIVEStatus", .HeaderText = "National Stream", .Width = 65})
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "frenchLIVE", .HeaderText = "French URL", .Visible = False})
-        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "frenchVOD", .HeaderText = "French VOD", .Visible = False})
-        gridGames.Columns.Add(New DataGridViewLinkColumn() With {.Name = "frenchLIVEStatus", .HeaderText = "French Stream", .Width = 65})
-
-
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "GameID", .HeaderText = "Game ID", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "time", .HeaderText = "Time", .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "away", .HeaderText = "Away Team", .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "awayAbbrev", .HeaderText = "Away Abbrev", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "home", .HeaderText = "Home Team", .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "homeAbbrev", .HeaderText = "Home Abbrev", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "awayLIVE", .HeaderText = "Away URL", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "awayVOD", .HeaderText = "Away VOD", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewLinkColumn() With {.Name = "awayLIVEStatus", .HeaderText = "Away Stream", .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "homeLIVE", .HeaderText = "Home URL", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "homeVOD", .HeaderText = "Home VOD", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewLinkColumn() With {.Name = "homeLIVEStatus", .HeaderText = "Home Stream", .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "nationalLIVE", .HeaderText = "National URL", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "nationalVOD", .HeaderText = "National VOD", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewLinkColumn() With {.Name = "nationalLIVEStatus", .HeaderText = "National Stream", .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "frenchLIVE", .HeaderText = "French URL", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "frenchVOD", .HeaderText = "French VOD", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewLinkColumn() With {.Name = "frenchLIVEStatus", .HeaderText = "French Stream", .AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill})
 
         For Each column As DataGridViewColumn In gridGames.Columns
             column.SortMode = DataGridViewColumnSortMode.NotSortable
@@ -120,23 +118,27 @@ Public Class NHLGames
 
     Private Sub gridGames_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridGames.CellClick
 
-        Dim cellText As String = gridGames.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-        If cellText = "Watch" Then
-
-            Dim selectedGameID As String = gridGames.Rows(e.RowIndex).Cells(0).Value
-            Dim game As Game = Games.Find(Function(val) val.Id.ToString() = selectedGameID)
+        If e.RowIndex > -1 AndAlso e.ColumnIndex > -1 Then
 
 
-            If (gridGames.Columns(e.ColumnIndex).Name = "awayLIVEStatus") Then
-                WatchGame(rbLive.Checked = False, game, GameStream.StreamType.Away)
-            ElseIf (gridGames.Columns(e.ColumnIndex).Name = "homeLIVEStatus") Then
-                WatchGame(rbLive.Checked = False, game, GameStream.StreamType.Home)
-            ElseIf (gridGames.Columns(e.ColumnIndex).Name = "nationalLIVEStatus") Then
-                WatchGame(rbLive.Checked = False, game, GameStream.StreamType.National)
-            ElseIf (gridGames.Columns(e.ColumnIndex).Name = "frenchLIVEStatus") Then
-                WatchGame(rbLive.Checked = False, game, GameStream.StreamType.French)
+            Dim cellText As String = gridGames.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+            If cellText = "Watch" Then
+
+                Dim selectedGameID As String = gridGames.Rows(e.RowIndex).Cells(0).Value
+                Dim game As Game = Games.Find(Function(val) val.Id.ToString() = selectedGameID)
+
+
+                If (gridGames.Columns(e.ColumnIndex).Name = "awayLIVEStatus") Then
+                    WatchGame(rbLive.Checked = False, game, GameStream.StreamType.Away)
+                ElseIf (gridGames.Columns(e.ColumnIndex).Name = "homeLIVEStatus") Then
+                    WatchGame(rbLive.Checked = False, game, GameStream.StreamType.Home)
+                ElseIf (gridGames.Columns(e.ColumnIndex).Name = "nationalLIVEStatus") Then
+                    WatchGame(rbLive.Checked = False, game, GameStream.StreamType.National)
+                ElseIf (gridGames.Columns(e.ColumnIndex).Name = "frenchLIVEStatus") Then
+                    WatchGame(rbLive.Checked = False, game, GameStream.StreamType.French)
+                End If
+
             End If
-
         End If
     End Sub
 
@@ -320,5 +322,7 @@ Public Class NHLGames
         dialogURL.ShowDialog()
     End Sub
 
-
+    Private Sub NHLGames_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd
+        'gridGames.Refresh()
+    End Sub
 End Class
