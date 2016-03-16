@@ -271,9 +271,17 @@ Public Class NHLGames
             args.Stream = game.FrenchStream
         End If
 
-        args.VLCPath = FileAccess.LocateEXE("vlc.exe", "\VideoLAN\VLC")
+        If rbMPC.Checked Then
+            args.PlayerPath = FileAccess.LocateEXE("mpc-hc64.exe", "\MPC-HC")
+        Else
+            args.PlayerPath = FileAccess.LocateEXE("vlc.exe", "\VideoLAN\VLC")
+        End If
 
-        game.Watch(args)
+
+        Task.Run(Of Boolean)((Function()
+                                  game.Watch(args)
+                                  Return True
+                              End Function))
 
 
     End Sub
@@ -332,15 +340,15 @@ Public Class NHLGames
             strCDN = "akc"
         End If
 
-        If rbHome.Checked Then
-            strUrl = gridGames.SelectedRows(0).Cells("home" & strServer).Value.Replace("CDN", strCDN)
-        ElseIf rbAway.Checked Then
-            strUrl = gridGames.SelectedRows(0).Cells("away" & strServer).Value.Replace("CDN", strCDN)
-        ElseIf rbNational.Checked Then
-            strUrl = gridGames.SelectedRows(0).Cells("national" & strServer).Value.Replace("CDN", strCDN)
-        ElseIf rbFrench.Checked Then
-            strUrl = gridGames.SelectedRows(0).Cells("french" & strServer).Value.Replace("CDN", strCDN)
-        End If
+        'If rbMPC.Checked Then
+        '    strUrl = gridGames.SelectedRows(0).Cells("home" & strServer).Value.Replace("CDN", strCDN)
+        'ElseIf rbVLC.Checked Then
+        '    strUrl = gridGames.SelectedRows(0).Cells("away" & strServer).Value.Replace("CDN", strCDN)
+        'ElseIf rbNational.Checked Then
+        '    strUrl = gridGames.SelectedRows(0).Cells("national" & strServer).Value.Replace("CDN", strCDN)
+        'ElseIf rbFrench.Checked Then
+        '    strUrl = gridGames.SelectedRows(0).Cells("french" & strServer).Value.Replace("CDN", strCDN)
+        'End If
 
         Dim dialogURL As New dlURL(strUrl)
         dialogURL.ShowDialog()
@@ -380,5 +388,16 @@ Public Class NHLGames
     Private Sub RichTextBox_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox.TextChanged
         RichTextBox.SelectionStart = RichTextBox.Text.Length
         RichTextBox.ScrollToCaret()
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkVLCDownload.LinkClicked
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("http://www.videolan.org/vlc/download-windows.html")
+        Process.Start(sInfo)
+    End Sub
+
+    Private Sub lnkMPCDownload_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkMPCDownload.LinkClicked
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://mpc-hc.org/downloads/")
+        Process.Start(sInfo)
+
     End Sub
 End Class

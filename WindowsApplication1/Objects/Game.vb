@@ -38,7 +38,7 @@ Public Class Game
     Public Sub Watch(args As GameWatchArguments)
 
         Dim liveStreamerPath As String = Application.StartupPath & "\livestreamer-v1.12.2\livestreamer.exe"
-        Debug.WriteLine("Running: " & liveStreamerPath & " " & args.ToString())
+        Console.WriteLine("Running: " & liveStreamerPath & " " & args.ToString())
 
         Dim proc = New Process() With {.StartInfo =
             New ProcessStartInfo With {
@@ -46,8 +46,9 @@ Public Class Game
             .Arguments = args.ToString(),
             .UseShellExecute = False,
             .RedirectStandardOutput = True,
-            .CreateNoWindow = False}
+            .CreateNoWindow = True}
         }
+        proc.EnableRaisingEvents = True
 
         proc.Start()
 
@@ -56,7 +57,7 @@ Public Class Game
             Console.WriteLine(line)
         End While
 
-        proc.WaitForExit()
+        'proc.WaitForExit()
         'If (proc.ExitCode <> 0) Then
         '    Dim errjor = "fg"
         'End If
@@ -145,15 +146,16 @@ Public Class Game
         Public Property Stream As GameStream
         Public Property IsVOD As Boolean = False
 
-        Public Property VLCPath As String = ""
+        Public Property PlayerPath As String = ""
 
 
         Public Overrides Function ToString() As String
 
             Dim returnValue As String = ""
-            If String.IsNullOrEmpty(VLCPath) = False Then
-                returnValue &= "--player """ & VLCPath & """ "
+            If String.IsNullOrEmpty(PlayerPath) = False Then
+                returnValue &= " --player """ & PlayerPath & """ " '--player-passthrough=hls 
             End If
+
 
             returnValue &= """hlsvariant://"
             If IsVOD Then

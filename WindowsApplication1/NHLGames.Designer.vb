@@ -22,6 +22,7 @@ Partial Class NHLGames
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -39,11 +40,9 @@ Partial Class NHLGames
         Me.rbQual6 = New System.Windows.Forms.RadioButton()
         Me.chk60 = New System.Windows.Forms.CheckBox()
         Me.gbQuality = New System.Windows.Forms.GroupBox()
-        Me.gbFeed = New System.Windows.Forms.GroupBox()
-        Me.rbFrench = New System.Windows.Forms.RadioButton()
-        Me.rbNational = New System.Windows.Forms.RadioButton()
-        Me.rbHome = New System.Windows.Forms.RadioButton()
-        Me.rbAway = New System.Windows.Forms.RadioButton()
+        Me.gbPlayer = New System.Windows.Forms.GroupBox()
+        Me.rbMPC = New System.Windows.Forms.RadioButton()
+        Me.rbVLC = New System.Windows.Forms.RadioButton()
         Me.gbCDN = New System.Windows.Forms.GroupBox()
         Me.rbLevel3 = New System.Windows.Forms.RadioButton()
         Me.rbAkamai = New System.Windows.Forms.RadioButton()
@@ -55,9 +54,13 @@ Partial Class NHLGames
         Me.SplitContainer = New System.Windows.Forms.SplitContainer()
         Me.RichTextBox = New System.Windows.Forms.RichTextBox()
         Me.pnlSettings = New System.Windows.Forms.Panel()
+        Me.lnkVLCDownload = New System.Windows.Forms.LinkLabel()
+        Me.lnkMPCDownload = New System.Windows.Forms.LinkLabel()
+        Me.MPCTooltip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.VLCTooltip = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbQuality.SuspendLayout()
-        Me.gbFeed.SuspendLayout()
+        Me.gbPlayer.SuspendLayout()
         Me.gbCDN.SuspendLayout()
         Me.gbServer.SuspendLayout()
         CType(Me.SplitContainer, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -246,68 +249,40 @@ Partial Class NHLGames
         Me.gbQuality.TabStop = False
         Me.gbQuality.Text = "Quality"
         '
-        'gbFeed
+        'gbPlayer
         '
-        Me.gbFeed.Controls.Add(Me.rbFrench)
-        Me.gbFeed.Controls.Add(Me.rbNational)
-        Me.gbFeed.Controls.Add(Me.rbHome)
-        Me.gbFeed.Controls.Add(Me.rbAway)
-        Me.gbFeed.Location = New System.Drawing.Point(10, 185)
-        Me.gbFeed.Name = "gbFeed"
-        Me.gbFeed.Size = New System.Drawing.Size(75, 116)
-        Me.gbFeed.TabIndex = 15
-        Me.gbFeed.TabStop = False
-        Me.gbFeed.Text = "Feed"
-        Me.gbFeed.Visible = False
+        Me.gbPlayer.Controls.Add(Me.lnkMPCDownload)
+        Me.gbPlayer.Controls.Add(Me.lnkVLCDownload)
+        Me.gbPlayer.Controls.Add(Me.rbMPC)
+        Me.gbPlayer.Controls.Add(Me.rbVLC)
+        Me.gbPlayer.Location = New System.Drawing.Point(10, 185)
+        Me.gbPlayer.Name = "gbPlayer"
+        Me.gbPlayer.Size = New System.Drawing.Size(75, 76)
+        Me.gbPlayer.TabIndex = 15
+        Me.gbPlayer.TabStop = False
+        Me.gbPlayer.Text = "Player"
         '
-        'rbFrench
+        'rbMPC
         '
-        Me.rbFrench.AutoSize = True
-        Me.rbFrench.Enabled = False
-        Me.rbFrench.Location = New System.Drawing.Point(5, 90)
-        Me.rbFrench.Name = "rbFrench"
-        Me.rbFrench.Size = New System.Drawing.Size(58, 17)
-        Me.rbFrench.TabIndex = 3
-        Me.rbFrench.TabStop = True
-        Me.rbFrench.Text = "French"
-        Me.rbFrench.UseVisualStyleBackColor = True
+        Me.rbMPC.AutoSize = True
+        Me.rbMPC.Location = New System.Drawing.Point(5, 42)
+        Me.rbMPC.Name = "rbMPC"
+        Me.rbMPC.Size = New System.Drawing.Size(48, 17)
+        Me.rbMPC.TabIndex = 1
+        Me.rbMPC.Text = "MPC"
+        Me.rbMPC.UseVisualStyleBackColor = True
         '
-        'rbNational
+        'rbVLC
         '
-        Me.rbNational.AutoSize = True
-        Me.rbNational.Enabled = False
-        Me.rbNational.Location = New System.Drawing.Point(5, 65)
-        Me.rbNational.Name = "rbNational"
-        Me.rbNational.Size = New System.Drawing.Size(64, 17)
-        Me.rbNational.TabIndex = 2
-        Me.rbNational.TabStop = True
-        Me.rbNational.Text = "National"
-        Me.rbNational.UseVisualStyleBackColor = True
-        '
-        'rbHome
-        '
-        Me.rbHome.AutoSize = True
-        Me.rbHome.Checked = True
-        Me.rbHome.Enabled = False
-        Me.rbHome.Location = New System.Drawing.Point(5, 42)
-        Me.rbHome.Name = "rbHome"
-        Me.rbHome.Size = New System.Drawing.Size(53, 17)
-        Me.rbHome.TabIndex = 1
-        Me.rbHome.TabStop = True
-        Me.rbHome.Text = "Home"
-        Me.rbHome.UseVisualStyleBackColor = True
-        '
-        'rbAway
-        '
-        Me.rbAway.AutoSize = True
-        Me.rbAway.Enabled = False
-        Me.rbAway.Location = New System.Drawing.Point(5, 19)
-        Me.rbAway.Name = "rbAway"
-        Me.rbAway.Size = New System.Drawing.Size(51, 17)
-        Me.rbAway.TabIndex = 0
-        Me.rbAway.TabStop = True
-        Me.rbAway.Text = "Away"
-        Me.rbAway.UseVisualStyleBackColor = True
+        Me.rbVLC.AutoSize = True
+        Me.rbVLC.Checked = True
+        Me.rbVLC.Location = New System.Drawing.Point(5, 19)
+        Me.rbVLC.Name = "rbVLC"
+        Me.rbVLC.Size = New System.Drawing.Size(45, 17)
+        Me.rbVLC.TabIndex = 0
+        Me.rbVLC.TabStop = True
+        Me.rbVLC.Text = "VLC"
+        Me.rbVLC.UseVisualStyleBackColor = True
         '
         'gbCDN
         '
@@ -324,22 +299,22 @@ Partial Class NHLGames
         'rbLevel3
         '
         Me.rbLevel3.AutoSize = True
-        Me.rbLevel3.Checked = True
         Me.rbLevel3.Location = New System.Drawing.Point(5, 19)
         Me.rbLevel3.Name = "rbLevel3"
         Me.rbLevel3.Size = New System.Drawing.Size(60, 17)
         Me.rbLevel3.TabIndex = 1
-        Me.rbLevel3.TabStop = True
         Me.rbLevel3.Text = "Level 3"
         Me.rbLevel3.UseVisualStyleBackColor = True
         '
         'rbAkamai
         '
         Me.rbAkamai.AutoSize = True
+        Me.rbAkamai.Checked = True
         Me.rbAkamai.Location = New System.Drawing.Point(5, 42)
         Me.rbAkamai.Name = "rbAkamai"
         Me.rbAkamai.Size = New System.Drawing.Size(60, 17)
         Me.rbAkamai.TabIndex = 0
+        Me.rbAkamai.TabStop = True
         Me.rbAkamai.Text = "Akamai"
         Me.rbAkamai.UseVisualStyleBackColor = True
         '
@@ -359,6 +334,7 @@ Partial Class NHLGames
         Me.btnURL.TabIndex = 18
         Me.btnURL.Text = "Get URL"
         Me.btnURL.UseVisualStyleBackColor = True
+        Me.btnURL.Visible = False
         '
         'gbServer
         '
@@ -426,13 +402,13 @@ Partial Class NHLGames
         Me.RichTextBox.ReadOnly = True
         Me.RichTextBox.Size = New System.Drawing.Size(580, 132)
         Me.RichTextBox.TabIndex = 0
-        Me.RichTextBox.Text = "Console Output..."
+        Me.RichTextBox.Text = "Console Output..." & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'pnlSettings
         '
         Me.pnlSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlSettings.Controls.Add(Me.gbQuality)
-        Me.pnlSettings.Controls.Add(Me.gbFeed)
+        Me.pnlSettings.Controls.Add(Me.gbPlayer)
         Me.pnlSettings.Controls.Add(Me.btnURL)
         Me.pnlSettings.Controls.Add(Me.gbServer)
         Me.pnlSettings.Controls.Add(Me.btnWatch)
@@ -441,6 +417,30 @@ Partial Class NHLGames
         Me.pnlSettings.Name = "pnlSettings"
         Me.pnlSettings.Size = New System.Drawing.Size(88, 500)
         Me.pnlSettings.TabIndex = 21
+        '
+        'lnkVLCDownload
+        '
+        Me.lnkVLCDownload.AutoSize = True
+        Me.lnkVLCDownload.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lnkVLCDownload.Location = New System.Drawing.Point(52, 21)
+        Me.lnkVLCDownload.Name = "lnkVLCDownload"
+        Me.lnkVLCDownload.Size = New System.Drawing.Size(13, 13)
+        Me.lnkVLCDownload.TabIndex = 2
+        Me.lnkVLCDownload.TabStop = True
+        Me.lnkVLCDownload.Text = "?"
+        Me.VLCTooltip.SetToolTip(Me.lnkVLCDownload, "Download VLC")
+        '
+        'lnkMPCDownload
+        '
+        Me.lnkMPCDownload.AutoSize = True
+        Me.lnkMPCDownload.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lnkMPCDownload.Location = New System.Drawing.Point(52, 44)
+        Me.lnkMPCDownload.Name = "lnkMPCDownload"
+        Me.lnkMPCDownload.Size = New System.Drawing.Size(13, 13)
+        Me.lnkMPCDownload.TabIndex = 3
+        Me.lnkMPCDownload.TabStop = True
+        Me.lnkMPCDownload.Text = "?"
+        Me.MPCTooltip.SetToolTip(Me.lnkMPCDownload, "Download MPC-HC")
         '
         'NHLGames
         '
@@ -462,8 +462,8 @@ Partial Class NHLGames
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbQuality.ResumeLayout(False)
         Me.gbQuality.PerformLayout()
-        Me.gbFeed.ResumeLayout(False)
-        Me.gbFeed.PerformLayout()
+        Me.gbPlayer.ResumeLayout(False)
+        Me.gbPlayer.PerformLayout()
         Me.gbCDN.ResumeLayout(False)
         Me.gbCDN.PerformLayout()
         Me.gbServer.ResumeLayout(False)
@@ -489,11 +489,9 @@ Partial Class NHLGames
     Friend WithEvents rbQual6 As System.Windows.Forms.RadioButton
     Friend WithEvents chk60 As CheckBox
     Friend WithEvents gbQuality As GroupBox
-    Friend WithEvents gbFeed As GroupBox
-    Friend WithEvents rbFrench As RadioButton
-    Friend WithEvents rbNational As RadioButton
-    Friend WithEvents rbHome As RadioButton
-    Friend WithEvents rbAway As RadioButton
+    Friend WithEvents gbPlayer As GroupBox
+    Friend WithEvents rbMPC As RadioButton
+    Friend WithEvents rbVLC As RadioButton
     Friend WithEvents gbCDN As GroupBox
     Friend WithEvents rbLevel3 As RadioButton
     Friend WithEvents rbAkamai As RadioButton
@@ -506,4 +504,8 @@ Partial Class NHLGames
     Friend WithEvents RichTextBox As RichTextBox
     Friend WithEvents pnlSettings As Panel
     Friend WithEvents gridGames As DataGridView
+    Friend WithEvents lnkVLCDownload As LinkLabel
+    Friend WithEvents lnkMPCDownload As LinkLabel
+    Friend WithEvents MPCTooltip As ToolTip
+    Friend WithEvents VLCTooltip As ToolTip
 End Class
