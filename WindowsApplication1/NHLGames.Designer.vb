@@ -22,6 +22,10 @@ Partial Class NHLGames
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(NHLGames))
         Me.gridGames = New System.Windows.Forms.DataGridView()
         Me.dtDate = New System.Windows.Forms.DateTimePicker()
         Me.btnHosts = New System.Windows.Forms.Button()
@@ -70,15 +74,47 @@ Partial Class NHLGames
         Me.gridGames.AllowUserToResizeColumns = False
         Me.gridGames.AllowUserToResizeRows = False
         Me.gridGames.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.gridGames.BackgroundColor = System.Drawing.Color.White
         Me.gridGames.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable
-        Me.gridGames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gridGames.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(3, 5, 3, 0)
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.gridGames.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.gridGames.ColumnHeadersHeight = 30
+        Me.gridGames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.gridGames.DefaultCellStyle = DataGridViewCellStyle2
         Me.gridGames.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gridGames.Location = New System.Drawing.Point(0, 0)
         Me.gridGames.MultiSelect = False
         Me.gridGames.Name = "gridGames"
         Me.gridGames.ReadOnly = True
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 5, 0, 0)
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.gridGames.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.gridGames.RowHeadersVisible = False
         Me.gridGames.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+        Me.gridGames.RowTemplate.DefaultCellStyle.Padding = New System.Windows.Forms.Padding(0, 2, 0, 2)
+        Me.gridGames.RowTemplate.DividerHeight = 1
+        Me.gridGames.RowTemplate.Height = 35
         Me.gridGames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.gridGames.Size = New System.Drawing.Size(580, 364)
         Me.gridGames.TabIndex = 0
@@ -379,14 +415,18 @@ Partial Class NHLGames
         '
         'RichTextBox
         '
-        Me.RichTextBox.BackColor = System.Drawing.Color.White
+        Me.RichTextBox.AutoWordSelection = True
+        Me.RichTextBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.RichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.RichTextBox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RichTextBox.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RichTextBox.ForeColor = System.Drawing.Color.White
         Me.RichTextBox.Location = New System.Drawing.Point(0, 0)
         Me.RichTextBox.Name = "RichTextBox"
         Me.RichTextBox.ReadOnly = True
         Me.RichTextBox.Size = New System.Drawing.Size(580, 132)
         Me.RichTextBox.TabIndex = 0
-        Me.RichTextBox.Text = ""
+        Me.RichTextBox.Text = "Console Output..."
         '
         'pnlSettings
         '
@@ -413,6 +453,7 @@ Partial Class NHLGames
         Me.Controls.Add(Me.btnRefresh)
         Me.Controls.Add(Me.btnHosts)
         Me.Controls.Add(Me.dtDate)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimumSize = New System.Drawing.Size(707, 583)
         Me.Name = "NHLGames"
@@ -436,7 +477,6 @@ Partial Class NHLGames
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents gridGames As System.Windows.Forms.DataGridView
     Friend WithEvents dtDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents btnHosts As System.Windows.Forms.Button
     Friend WithEvents btnWatch As System.Windows.Forms.Button
@@ -465,4 +505,5 @@ Partial Class NHLGames
     Friend WithEvents SplitContainer As SplitContainer
     Friend WithEvents RichTextBox As RichTextBox
     Friend WithEvents pnlSettings As Panel
+    Friend WithEvents gridGames As DataGridView
 End Class

@@ -8,9 +8,27 @@ Public Class Game
 
     Public AwayTeam As String
     Public AwayAbbrev As String
+    Public ReadOnly Property AwayTeamLogo As String
+        Get
+            If (String.IsNullOrEmpty(AwayTeam) = False) Then
+                Return RemoveDiacritics(AwayTeam.Replace(" ", "")) & ".gif"
+            Else
+                Return ""
+            End If
+        End Get
+    End Property
 
     Public HomeTeam As String
     Public HomeAbbrev As String
+    Public ReadOnly Property HomeTeamLogo As String
+        Get
+            If (String.IsNullOrEmpty(HomeTeam) = False) Then
+                Return RemoveDiacritics(HomeTeam.Replace(" ", "")) & ".gif"
+            Else
+                Return ""
+            End If
+        End Get
+    End Property
 
     Public AwayStream As GameStream = New GameStream()
     Public HomeStream As GameStream = New GameStream()
@@ -60,9 +78,9 @@ Public Class Game
 
 
         For Each team In game.Property("teams")
-            AwayTeam = team("away").Item("team").Item("name").ToString() & " (" & team("away").Item("team").Item("abbreviation").ToString() & ")"
+            AwayTeam = team("away").Item("team").Item("name").ToString() '& " (" & team("away").Item("team").Item("abbreviation").ToString() & ")"
             AwayAbbrev = team("away").Item("team").Item("abbreviation").ToString()
-            HomeTeam = team("home").Item("team").Item("name").ToString() & " (" & team("home").Item("team").Item("abbreviation").ToString() & ")"
+            HomeTeam = team("home").Item("team").Item("name").ToString() '& " (" & team("home").Item("team").Item("abbreviation").ToString() & ")"
             HomeAbbrev = team("home").Item("team").Item("abbreviation").ToString()
         Next
 
@@ -102,6 +120,20 @@ Public Class Game
             End If
         Next
         Return returnValue
+    End Function
+
+    Private Shared Function RemoveDiacritics(text As String) As String
+        Dim normalizedString = text.Normalize(System.Text.NormalizationForm.FormD)
+        Dim stringBuilder = New System.Text.StringBuilder()
+
+        For Each c As String In normalizedString
+            Dim unicodeCategory__1 = CharUnicodeInfo.GetUnicodeCategory(c)
+            If unicodeCategory__1 <> UnicodeCategory.NonSpacingMark Then
+                stringBuilder.Append(c)
+            End If
+        Next
+
+        Return stringBuilder.ToString().Normalize(System.Text.NormalizationForm.FormC)
     End Function
 
 
