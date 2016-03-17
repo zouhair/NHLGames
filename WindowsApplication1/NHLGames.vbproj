@@ -60,6 +60,7 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -90,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Utilities\Downloader.vb" />
+    <Compile Include="Objects\Game.vb" />
+    <Compile Include="Objects\GameStream.vb" />
     <Compile Include="URL.Designer.vb">
       <DependentUpon>URL.vb</DependentUpon>
     </Compile>
@@ -119,6 +123,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Utilities\FileAccess.vb" />
+    <Compile Include="Utilities\HostsFile.vb" />
+    <Compile Include="Utilities\ImageFetcher.vb" />
+    <Compile Include="Utilities\TextboxConsoleOutputRediect.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="URL.resx">
@@ -163,6 +171,42 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Logos\AnaheimDucks.gif" />
+    <EmbeddedResource Include="Logos\ArizonaCoyotes.gif" />
+    <EmbeddedResource Include="Logos\BostonBruins.gif" />
+    <EmbeddedResource Include="Logos\BuffaloSabres.gif" />
+    <EmbeddedResource Include="Logos\CalgaryFlames.gif" />
+    <EmbeddedResource Include="Logos\CarolinaHurricanes.gif" />
+    <EmbeddedResource Include="Logos\ChicagoBlackhawks.gif" />
+    <EmbeddedResource Include="Logos\ColoradoAvalanche.gif" />
+    <EmbeddedResource Include="Logos\ColumbusBlueJackets.gif" />
+    <EmbeddedResource Include="Logos\DallasStars.gif" />
+    <EmbeddedResource Include="Logos\DetroitRedWings.gif" />
+    <EmbeddedResource Include="Logos\EdmontonOilers.gif" />
+    <EmbeddedResource Include="Logos\FloridaPanthers.gif" />
+    <EmbeddedResource Include="Logos\LosAngelesKings.gif" />
+    <EmbeddedResource Include="Logos\MinnesotaWild.gif" />
+    <EmbeddedResource Include="Logos\MontrealCanadiens.gif" />
+    <EmbeddedResource Include="Logos\NashvillePredators.gif" />
+    <EmbeddedResource Include="Logos\NewJerseyDevils.gif" />
+    <EmbeddedResource Include="Logos\NewYorkIslanders.gif" />
+    <EmbeddedResource Include="Logos\NewYorkRangers.gif" />
+    <EmbeddedResource Include="Logos\OttawaSenators.gif" />
+    <EmbeddedResource Include="Logos\PhiladelphiaFlyers.gif" />
+    <EmbeddedResource Include="Logos\PittsburghPenguins.gif" />
+    <EmbeddedResource Include="Logos\SanJoseSharks.gif" />
+    <EmbeddedResource Include="Logos\StLouisBlues.gif" />
+    <EmbeddedResource Include="Logos\TampaBayLightning.gif" />
+    <EmbeddedResource Include="Logos\TorontoMapleLeafs.gif" />
+    <EmbeddedResource Include="Logos\VancouverCanucks.gif" />
+    <EmbeddedResource Include="Logos\WashingtonCapitals.gif" />
+    <EmbeddedResource Include="Logos\WinnipegJets.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Logos\nhl-icon.png" />
+    <Content Include="Logos\nhl_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
