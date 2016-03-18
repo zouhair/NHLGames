@@ -11,7 +11,7 @@ Public Class Game
     Public ReadOnly Property AwayTeamLogo As String
         Get
             If (String.IsNullOrEmpty(AwayTeam) = False) Then
-                Return RemoveDiacritics(AwayTeam.Replace(" ", "")) & ".gif"
+                Return RemoveDiacritics(AwayTeam.Replace(" ", "").Replace(".", "")) & ".gif"
             Else
                 Return ""
             End If
@@ -23,7 +23,7 @@ Public Class Game
     Public ReadOnly Property HomeTeamLogo As String
         Get
             If (String.IsNullOrEmpty(HomeTeam) = False) Then
-                Return RemoveDiacritics(HomeTeam.Replace(" ", "")) & ".gif"
+                Return RemoveDiacritics(HomeTeam.Replace(" ", "").Replace(".", "")) & ".gif"
             Else
                 Return ""
             End If
@@ -73,9 +73,13 @@ Public Class Game
 
     Public Sub New(game As JObject, availableGameIds As List(Of String))
 
-        Dim timeZoneInfo As TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time")
-        Dim localizedDateTime As DateTime = TimeZoneInfo.ConvertTime(Date.Parse(game.Property("gameDate").Value.ToString()), timeZoneInfo)
-        [Date] = localizedDateTime.ToLocalTime()
+        Dim timeZoneInfo As TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time")
+        Try
+            Dim localizedDateTime As DateTime = TimeZoneInfo.ConvertTime(Date.Parse(game.Property("gameDate").Value.ToString()), timeZoneInfo)
+        Catch ex As System.ArgumentException
+        End Try
+        '[Date] = localizedDateTime.ToLocalTime()
+        [Date] = Date.Parse(game.Property("gameDate").Value.ToString())
 
 
         For Each team In game.Property("teams")

@@ -81,9 +81,9 @@ Public Class NHLGames
                 gridGames.Rows.Insert(gridGames.Rows.Count,
                                       game.Id.ToString(),
                                       game.Date.ToLocalTime().ToString("h:mm tt"),
-                                        ImageFetcher.GetEmbeddedImage(game.HomeTeamLogo),
                                       ImageFetcher.GetEmbeddedImage(game.AwayTeamLogo),
-                game.AwayTeam,
+                                      ImageFetcher.GetEmbeddedImage(game.HomeTeamLogo),
+                                      game.AwayTeam,
                                       game.AwayAbbrev,
                                       game.HomeTeam,
                                       game.HomeAbbrev,
@@ -142,8 +142,8 @@ Public Class NHLGames
         gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "GameID", .HeaderText = "Game ID", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
         gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "time", .HeaderText = "Time", .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
 
-        gridGames.Columns.Add(New DataGridViewImageColumn() With {.Name = "HomeLogo", .HeaderText = "Home Team", .ImageLayout = DataGridViewImageCellLayout.Zoom, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
         gridGames.Columns.Add(New DataGridViewImageColumn() With {.Name = "AwayLogo", .HeaderText = "Away Team", .ImageLayout = DataGridViewImageCellLayout.Zoom, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewImageColumn() With {.Name = "HomeLogo", .HeaderText = "Home Team", .ImageLayout = DataGridViewImageCellLayout.Zoom, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
 
         gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "away", .HeaderText = "Away Team", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
         gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "awayAbbrev", .HeaderText = "Away Abbrev", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
@@ -209,7 +209,8 @@ Public Class NHLGames
 
     Private Sub btnHosts_Click(sender As Object, e As EventArgs) Handles btnHosts.Click
 
-        HostsFile.AddEntry("82.196.2.27 mf.svc.nhl.com")
+        'HostsFile.AddEntry("82.196.2.27 mf.svc.nhl.com")
+        HostsFile.AddEntry("146.185.131.14 mf.svc.nhl.com")
 
     End Sub
 

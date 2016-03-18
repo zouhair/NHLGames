@@ -4,9 +4,9 @@ Imports Newtonsoft.Json.Linq
 
 Public Class Downloader
 
-    Private Shared GamesTxtURL = "http://showtimes.ninja/games.txt"
+    Private Shared GamesTxtURL = "http://showtimes.ninja/static/games.txt"
     Private Shared ScheduleAPIURL = "http://statsapi.web.nhl.com/api/v1/schedule?startDate={0}&endDate={1}&expand=schedule.teams,schedule.game.content.media.epg"
-    Private Shared ApplicationVersionURL = "http://showtimes.ninja/version.txt"
+    Private Shared ApplicationVersionURL = "http://showtimes.ninja/static/version.txt"
 
     Private Shared ApplicationVersionFileName As String = "version.txt"
     Private Shared GamesTextFileName As String = "games.txt"
@@ -15,11 +15,11 @@ Public Class Downloader
 
     Private Shared Sub DownloadFile(URL As String, fileName As String, Optional checkIfExists As Boolean = False, Optional overwrite As Boolean = True)
 
-        Dim fullPath As String = LocalFileDirectory & fileName
+        Dim fullPath As String = LocalFileDirectory & "\" & fileName
 
         If (checkIfExists = False) OrElse (checkIfExists AndAlso My.Computer.FileSystem.FileExists(fullPath) = False) Then
-            Console.WriteLine("Downloading file: " & URL & " to " & LocalFileDirectory & fileName)
-            My.Computer.Network.DownloadFile(URL, LocalFileDirectory & fileName, "", "", False, 10000, overwrite)
+            Console.WriteLine("Downloading file: " & URL & " to " & fullPath)
+            My.Computer.Network.DownloadFile(URL, fullPath, "", "", False, 10000, overwrite)
         End If
 
     End Sub
@@ -27,7 +27,7 @@ Public Class Downloader
     Private Shared Function ReadFileContents(fileName As String) As String
 
         Dim returnValue As String = ""
-        Dim filePath As String = LocalFileDirectory & fileName
+        Dim filePath As String = LocalFileDirectory & "\" & fileName
 
         Using streamReader As IO.StreamReader = New IO.StreamReader(filePath)
             returnValue = streamReader.ReadToEnd()
