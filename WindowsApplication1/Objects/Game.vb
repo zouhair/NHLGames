@@ -1,88 +1,17 @@
 ﻿Imports System.Globalization
 Imports Newtonsoft.Json.Linq
 
-<DebuggerDisplay("{HomeTeam} vs. {AwayTeam} at {[Date]}")>
 Public Class Game
-
-    Public Event GameUpdated(sender As Game)
-    Public Event HomeTeamScoreChanged(sender As Game, newScore As String)
-    Public Event AwayTeamScoreChanged(sender As Game, newScore As String)
-    Public Event GameStatusChanged(sender As Game, isActive As Boolean)
-
-    Private _GameObj As JObject
-
     Public Id As Guid = Guid.NewGuid()
-    Public GameID As String = ""
+
     Public [Date] As DateTime
+
     Public AwayTeam As String
     Public AwayAbbrev As String
-
-
-    Public AwayStream As GameStream = New GameStream()
-    Public HomeStream As GameStream = New GameStream()
-    Public NationalStream As GameStream = New GameStream()
-    Public FrenchStream As GameStream = New GameStream()
-
-    Public Overrides Function ToString() As String
-        Return HomeTeam & " vs " & AwayTeam
-    End Function
-
-    Private _StatusID As String = ""
-    Public Property StatusID As String
-        Get
-            Return _StatusID
-        End Get
-        Set(value As String)
-            If value <> _StatusID Then
-                _StatusID = value
-                RaiseEvent GameStatusChanged(Me, _StatusID)
-                RaiseEvent GameUpdated(Me)
-            End If
-
-        End Set
-    End Property
-
-
-    Public ReadOnly Property GameIsLive As Boolean
-        Get
-            Return _StatusID = "3"
-        End Get
-
-    End Property
-
-    Private _HomeScore As String = ""
-    Public Property HomeScore As String
-        Get
-            Return _HomeScore
-        End Get
-        Set(value As String)
-            If value <> _AwayScore Then
-                _HomeScore = value
-                RaiseEvent HomeTeamScoreChanged(Me, _AwayScore)
-                RaiseEvent GameUpdated(Me)
-            End If
-        End Set
-    End Property
-
-    Private _AwayScore As String = ""
-    Public Property AwayScore As String
-        Get
-            Return _AwayScore
-        End Get
-        Set(value As String)
-            If value <> _AwayScore Then
-                _AwayScore = value
-                RaiseEvent AwayTeamScoreChanged(Me, _AwayScore)
-                RaiseEvent GameUpdated(Me)
-            End If
-
-        End Set
-    End Property
-
     Public ReadOnly Property AwayTeamLogo As String
         Get
             If (String.IsNullOrEmpty(AwayTeam) = False) Then
-                Return RemoveDiacritics(AwayTeam.Replace(" ", "").Replace(".", "")) & ".gif"
+                Return RemoveDiacritics(AwayTeam.Replace(" ", "")) & ".gif"
             Else
                 Return ""
             End If
@@ -94,54 +23,24 @@ Public Class Game
     Public ReadOnly Property HomeTeamLogo As String
         Get
             If (String.IsNullOrEmpty(HomeTeam) = False) Then
-                Return RemoveDiacritics(HomeTeam.Replace(" ", "").Replace(".", "")) & ".gif"
+                Return RemoveDiacritics(HomeTeam.Replace(" ", "")) & ".gif"
             Else
                 Return ""
             End If
         End Get
     End Property
 
-    Public Sub Update(game As Game)
-
-        If _GameObj.GetHashCode() <> game.GetHashCode() Then
-
-            _StatusID = game._StatusID
-
-            If GameIsLive Then
-                AwayScore = game.AwayScore
-            End If
-
-            If GameIsLive Then
-                HomeScore = game.HomeScore
-            End If
-        End If
-
-    End Sub
-
-    Public Sub Update(game As JObject)
-
-        If _GameObj.ToString() <> game.ToString() Then
-
-            _StatusID = game("status")("statusCode").ToString()
-
-            If GameIsLive Then
-                AwayScore = game("teams")("away")("score")
-            End If
-
-            If GameIsLive Then
-                HomeScore = game("teams")("home")("score")
-            End If
-        End If
-
-    End Sub
+    Public AwayStream As GameStream = New GameStream()
+    Public HomeStream As GameStream = New GameStream()
+    Public NationalStream As GameStream = New GameStream()
+    Public FrenchStream As GameStream = New GameStream()
 
     Public Sub Watch(args As GameWatchArguments)
 
-        Dim t As Task = New Task(Function()
-                                     Dim liveStreamerPath As String = Application.StartupPath & "\livestreamer-v1.12.2\livestreamer.exe"
-                                     Console.WriteLine("Running:    " & liveStreamerPath & " " & args.ToString())
+        Dim liveStreamerPath As String = Application.StartupPath & "\livestreamer-v1.12.2\livestreamer.exe"
+        Console.WriteLine("Running: " & liveStreamerPath & " " & args.ToString())
 
-                                     Dim proc = New Process() With {.StartInfo =
+        Dim proc = New Process() With {.StartInfo =
             New ProcessStartInfo With {
             .FileName = liveStreamerPath,
             .Arguments = args.ToString(),
@@ -149,18 +48,14 @@ Public Class Game
             .RedirectStandardOutput = True,
             .CreateNoWindow = True}
         }
-                                     proc.EnableRaisingEvents = True
+        proc.EnableRaisingEvents = True
 
-                                     proc.Start()
+        proc.Start()
 
-                                     While (proc.StandardOutput.EndOfStream = False)
-                                         Dim line = proc.StandardOutput.ReadLine()
-                                         Console.WriteLine(line)
-                                     End While
-                                     Return ""
-                                 End Function)
-        t.Start()
-
+        While (proc.StandardOutput.EndOfStream = False)
+            Dim line = proc.StandardOutput.ReadLine()
+            Console.WriteLine(line)
+        End While
 
         'proc.WaitForExit()
         'If (proc.ExitCode <> 0) Then
@@ -178,45 +73,17 @@ Public Class Game
 
     Public Sub New(game As JObject, availableGameIds As List(Of String))
 
-        _GameObj = game
-
-        LoadGameData(game, availableGameIds)
-
-    End Sub
-
-    Private Sub LoadGameData(game As JObject, availableGameIds As List(Of String))
-
-        'Dim timeZoneInfo As TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time")
-        Dim dateTimeStr As String = game.Property("gameDate").Value.ToString() '"2016-03-20T21:00:00Z"
-        Dim dateTimeVal As DateTime
-        If (DateTime.TryParseExact(dateTimeStr, "yyyy-MM-ddTHH:mm:ssZ", System.Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, dateTimeVal) = False) Then
-
-            dateTimeVal = Date.Parse(game.Property("gameDate").Value.ToString())
-        End If
-
-        [Date] = dateTimeVal.ToLocalTime()
-
-        GameID = game.Property("gamePk").ToString()
-        _StatusID = game("status")("statusCode").ToString()
-
-        If [Date] <= DateTime.Now Then
-            HomeScore = game("teams")("home")("score").ToString()
-            AwayScore = game("teams")("away")("score").ToString()
-        End If
+        Dim timeZoneInfo As TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time")
+        Dim localizedDateTime As DateTime = TimeZoneInfo.ConvertTime(Date.Parse(game.Property("gameDate").Value.ToString()), timeZoneInfo)
+        [Date] = localizedDateTime.ToLocalTime()
 
 
-
-        HomeTeam = game("teams")("home")("team")("name").ToString()
-        HomeAbbrev = game("teams")("home")("team")("abbreviation").ToString()
-
-
-
-
-
-        AwayTeam = game("teams")("away")("team")("name").ToString()
-        AwayAbbrev = game("teams")("away")("team")("abbreviation").ToString()
-
-
+        For Each team In game.Property("teams")
+            AwayTeam = team("away").Item("team").Item("name").ToString() '& " (" & team("away").Item("team").Item("abbreviation").ToString() & ")"
+            AwayAbbrev = team("away").Item("team").Item("abbreviation").ToString()
+            HomeTeam = team("home").Item("team").Item("name").ToString() '& " (" & team("home").Item("team").Item("abbreviation").ToString() & ")"
+            HomeAbbrev = team("home").Item("team").Item("abbreviation").ToString()
+        Next
 
         If game("content")("media") IsNot Nothing Then
             For Each stream As JObject In game("content")("media")("epg")
@@ -239,7 +106,22 @@ Public Class Game
                 End If
             Next
         End If
+
     End Sub
+
+    Public Shared Function GetGames(jsonObj As JToken, availableGames As List(Of String)) As List(Of Game)
+
+        Dim returnValue As New List(Of Game)
+        For Each o As JToken In jsonObj.Children(Of JToken)
+            If o.Path = "dates" Then
+                For Each game As JObject In o.Children.Item(0)("games").Children(Of JObject)
+                    returnValue.Add(New Game(game, availableGames))
+
+                Next
+            End If
+        Next
+        Return returnValue
+    End Function
 
     Private Shared Function RemoveDiacritics(text As String) As String
         Dim normalizedString = text.Normalize(System.Text.NormalizationForm.FormD)
@@ -257,13 +139,6 @@ Public Class Game
 
 
     Public Class GameWatchArguments
-
-        Enum PlayerTypeEnum
-            None = 0
-            VLC = 1
-            MPC = 2
-        End Enum
-
         Public Property Quality As String = ""
         Public Property Is60FPS As Boolean = False
         Public Property CDN As String = ""
@@ -272,16 +147,6 @@ Public Class Game
         Public Property IsVOD As Boolean = False
 
         Public Property PlayerPath As String = ""
-        Public Property PlayerType As PlayerTypeEnum = PlayerTypeEnum.None
-
-        Public Property UseLiveStreamerArgs As Boolean = False
-        Public Property LiveStreamerArgs As String = ""
-
-        Public Property UsePlayerArgs As Boolean = False
-        Public Property PlayerArgs As String = ""
-
-        Public Property UseOutputArgs As Boolean = False
-        Public Property PlayerOutputPath As String = ""
 
 
         Public Overrides Function ToString() As String
@@ -290,6 +155,7 @@ Public Class Game
             If String.IsNullOrEmpty(PlayerPath) = False Then
                 returnValue &= " --player """ & PlayerPath & """ " '--player-passthrough=hls 
             End If
+
 
             returnValue &= """hlsvariant://"
             If IsVOD Then
@@ -305,12 +171,8 @@ Public Class Game
             End If
 
             returnValue = returnValue.Replace("CDN", CDN)
-            If Is60FPS Then
-                returnValue &= " best "
-            Else
-                returnValue &= Quality
-            End If
 
+            returnValue &= Quality
             returnValue &= " --http-no-ssl-verify"
             Return returnValue
         End Function

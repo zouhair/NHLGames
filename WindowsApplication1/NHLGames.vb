@@ -52,9 +52,9 @@ Public Class NHLGames
 
             Dim JSONSchedule As JObject = Downloader.DownloadJSONSchedule(dateTime)
             AvailableGames = Downloader.DownloadAvailableGames()
-            GameManager.RefreshGames(dateTime, JSONSchedule, AvailableGames)
+            Games = Game.GetGames(JSONSchedule, AvailableGames)
 
-            For Each game As Game In GameManager.GamesList
+            For Each game As Game In Games
 
                 'Dim newRow As DataGridViewRow = gridGames.Rows(0).Clone()
 
@@ -209,7 +209,7 @@ Public Class NHLGames
 
     Private Sub btnHosts_Click(sender As Object, e As EventArgs) Handles btnHosts.Click
 
-        HostsFile.AddEntry("82.196.2.27", "mf.svc.nhl.com")
+        HostsFile.AddEntry("82.196.2.27 mf.svc.nhl.com")
 
     End Sub
 
