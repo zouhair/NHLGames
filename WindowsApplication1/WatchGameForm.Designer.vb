@@ -26,64 +26,68 @@ Partial Class WatchGameForm
     Private Sub InitializeComponent()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlAdvanced = New MetroFramework.Controls.MetroPanel()
-        Me.pnlBasic = New MetroFramework.Controls.MetroPanel()
-        Me.pnlActions = New MetroFramework.Controls.MetroPanel()
-        Me.btnWatch = New MetroFramework.Controls.MetroButton()
-        Me.btnCancel = New MetroFramework.Controls.MetroButton()
-        Me.lnkShowAdvanced = New MetroFramework.Controls.MetroLink()
-        Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel2 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel3 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel4 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel5 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel6 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel7 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroPanel1 = New MetroFramework.Controls.MetroPanel()
-        Me.MetroPanel2 = New MetroFramework.Controls.MetroPanel()
-        Me.MetroPanel3 = New MetroFramework.Controls.MetroPanel()
         Me.MetroPanel4 = New MetroFramework.Controls.MetroPanel()
-        Me.chk60 = New MetroFramework.Controls.MetroCheckBox()
-        Me.rbQual1 = New MetroFramework.Controls.MetroRadioButton()
+        Me.rbFrench = New MetroFramework.Controls.MetroRadioButton()
+        Me.rbNational = New MetroFramework.Controls.MetroRadioButton()
+        Me.rbAway = New MetroFramework.Controls.MetroRadioButton()
+        Me.rbHome = New MetroFramework.Controls.MetroRadioButton()
+        Me.MetroPanel3 = New MetroFramework.Controls.MetroPanel()
+        Me.rbVOD = New MetroFramework.Controls.MetroRadioButton()
+        Me.rbLive = New MetroFramework.Controls.MetroRadioButton()
+        Me.MetroPanel2 = New MetroFramework.Controls.MetroPanel()
+        Me.lnkMPCDownload = New MetroFramework.Controls.MetroLink()
+        Me.lnkVLCDownload = New MetroFramework.Controls.MetroLink()
+        Me.rbMPC = New MetroFramework.Controls.MetroRadioButton()
+        Me.rbVLC = New MetroFramework.Controls.MetroRadioButton()
+        Me.MetroPanel1 = New MetroFramework.Controls.MetroPanel()
         Me.rbQual6 = New MetroFramework.Controls.MetroRadioButton()
         Me.rbQual5 = New MetroFramework.Controls.MetroRadioButton()
         Me.rbQual4 = New MetroFramework.Controls.MetroRadioButton()
         Me.rbQual3 = New MetroFramework.Controls.MetroRadioButton()
         Me.rbQual2 = New MetroFramework.Controls.MetroRadioButton()
-        Me.rbVLC = New MetroFramework.Controls.MetroRadioButton()
-        Me.rbMPC = New MetroFramework.Controls.MetroRadioButton()
-        Me.rbLive = New MetroFramework.Controls.MetroRadioButton()
-        Me.rbVOD = New MetroFramework.Controls.MetroRadioButton()
-        Me.rbHome = New MetroFramework.Controls.MetroRadioButton()
-        Me.rbAway = New MetroFramework.Controls.MetroRadioButton()
-        Me.chkEnableOutput = New MetroFramework.Controls.MetroCheckBox()
-        Me.chkEnablePlayerArgs = New MetroFramework.Controls.MetroCheckBox()
-        Me.chkEnableStreamArgs = New MetroFramework.Controls.MetroCheckBox()
-        Me.txtStreamerArgs = New MetroFramework.Controls.MetroTextBox()
-        Me.txtPlayerArgs = New MetroFramework.Controls.MetroTextBox()
-        Me.txtOutputPath = New MetroFramework.Controls.MetroTextBox()
-        Me.lnkVLCDownload = New MetroFramework.Controls.MetroLink()
-        Me.lnkMPCDownload = New MetroFramework.Controls.MetroLink()
-        Me.rbNational = New MetroFramework.Controls.MetroRadioButton()
-        Me.rbFrench = New MetroFramework.Controls.MetroRadioButton()
+        Me.chk60 = New MetroFramework.Controls.MetroCheckBox()
+        Me.rbQual1 = New MetroFramework.Controls.MetroRadioButton()
+        Me.MetroLabel4 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel3 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel2 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
+        Me.pnlBasic = New MetroFramework.Controls.MetroPanel()
         Me.MetroPanel5 = New MetroFramework.Controls.MetroPanel()
         Me.rbAkamai = New MetroFramework.Controls.MetroRadioButton()
         Me.rbLevel3 = New MetroFramework.Controls.MetroRadioButton()
+        Me.chkEnableStreamArgs = New MetroFramework.Controls.MetroCheckBox()
+        Me.chkEnablePlayerArgs = New MetroFramework.Controls.MetroCheckBox()
+        Me.chkEnableOutput = New MetroFramework.Controls.MetroCheckBox()
+        Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel7 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel6 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel5 = New MetroFramework.Controls.MetroLabel()
+        Me.pnlActions = New MetroFramework.Controls.MetroPanel()
+        Me.lnkShowAdvanced = New MetroFramework.Controls.MetroLink()
+        Me.btnWatch = New MetroFramework.Controls.MetroButton()
+        Me.btnCancel = New MetroFramework.Controls.MetroButton()
+        Me.txtOutputPath = New System.Windows.Forms.TextBox()
+        Me.txtPlayerArgs = New System.Windows.Forms.TextBox()
+        Me.txtStreamerArgs = New System.Windows.Forms.TextBox()
+        Me.FlowLayoutPanel1.SuspendLayout()
         Me.pnlAdvanced.SuspendLayout()
-        Me.pnlBasic.SuspendLayout()
-        Me.pnlActions.SuspendLayout()
-        Me.MetroPanel1.SuspendLayout()
-        Me.MetroPanel2.SuspendLayout()
-        Me.MetroPanel3.SuspendLayout()
         Me.MetroPanel4.SuspendLayout()
+        Me.MetroPanel3.SuspendLayout()
+        Me.MetroPanel2.SuspendLayout()
+        Me.MetroPanel1.SuspendLayout()
+        Me.pnlBasic.SuspendLayout()
         Me.MetroPanel5.SuspendLayout()
+        Me.pnlActions.SuspendLayout()
         Me.SuspendLayout()
         '
         'FlowLayoutPanel1
         '
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(274, 42)
+        Me.FlowLayoutPanel1.Controls.Add(Me.pnlAdvanced)
+        Me.FlowLayoutPanel1.Controls.Add(Me.pnlBasic)
+        Me.FlowLayoutPanel1.Controls.Add(Me.pnlActions)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(6, 15)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(200, 100)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(562, 319)
         Me.FlowLayoutPanel1.TabIndex = 0
         '
         'pnlAdvanced
@@ -99,7 +103,7 @@ Partial Class WatchGameForm
         Me.pnlAdvanced.HorizontalScrollbarBarColor = True
         Me.pnlAdvanced.HorizontalScrollbarHighlightOnWheel = False
         Me.pnlAdvanced.HorizontalScrollbarSize = 10
-        Me.pnlAdvanced.Location = New System.Drawing.Point(3, 115)
+        Me.pnlAdvanced.Location = New System.Drawing.Point(3, 3)
         Me.pnlAdvanced.Name = "pnlAdvanced"
         Me.pnlAdvanced.Size = New System.Drawing.Size(547, 134)
         Me.pnlAdvanced.TabIndex = 55
@@ -107,144 +111,156 @@ Partial Class WatchGameForm
         Me.pnlAdvanced.VerticalScrollbarHighlightOnWheel = False
         Me.pnlAdvanced.VerticalScrollbarSize = 10
         '
-        'pnlBasic
+        'MetroPanel4
         '
-        Me.pnlBasic.Controls.Add(Me.MetroPanel5)
-        Me.pnlBasic.Controls.Add(Me.txtOutputPath)
-        Me.pnlBasic.Controls.Add(Me.txtPlayerArgs)
-        Me.pnlBasic.Controls.Add(Me.txtStreamerArgs)
-        Me.pnlBasic.Controls.Add(Me.chkEnableStreamArgs)
-        Me.pnlBasic.Controls.Add(Me.chkEnablePlayerArgs)
-        Me.pnlBasic.Controls.Add(Me.chkEnableOutput)
-        Me.pnlBasic.Controls.Add(Me.MetroLabel8)
-        Me.pnlBasic.Controls.Add(Me.MetroLabel7)
-        Me.pnlBasic.Controls.Add(Me.MetroLabel6)
-        Me.pnlBasic.Controls.Add(Me.MetroLabel5)
-        Me.pnlBasic.HorizontalScrollbarBarColor = True
-        Me.pnlBasic.HorizontalScrollbarHighlightOnWheel = False
-        Me.pnlBasic.HorizontalScrollbarSize = 10
-        Me.pnlBasic.Location = New System.Drawing.Point(3, 255)
-        Me.pnlBasic.Name = "pnlBasic"
-        Me.pnlBasic.Size = New System.Drawing.Size(547, 126)
-        Me.pnlBasic.TabIndex = 2
-        Me.pnlBasic.VerticalScrollbarBarColor = True
-        Me.pnlBasic.VerticalScrollbarHighlightOnWheel = False
-        Me.pnlBasic.VerticalScrollbarSize = 10
+        Me.MetroPanel4.Controls.Add(Me.rbFrench)
+        Me.MetroPanel4.Controls.Add(Me.rbNational)
+        Me.MetroPanel4.Controls.Add(Me.rbAway)
+        Me.MetroPanel4.Controls.Add(Me.rbHome)
+        Me.MetroPanel4.HorizontalScrollbarBarColor = True
+        Me.MetroPanel4.HorizontalScrollbarHighlightOnWheel = False
+        Me.MetroPanel4.HorizontalScrollbarSize = 10
+        Me.MetroPanel4.Location = New System.Drawing.Point(149, 101)
+        Me.MetroPanel4.Name = "MetroPanel4"
+        Me.MetroPanel4.Size = New System.Drawing.Size(395, 25)
+        Me.MetroPanel4.TabIndex = 7
+        Me.MetroPanel4.VerticalScrollbarBarColor = True
+        Me.MetroPanel4.VerticalScrollbarHighlightOnWheel = False
+        Me.MetroPanel4.VerticalScrollbarSize = 10
         '
-        'pnlActions
+        'rbFrench
         '
-        Me.pnlActions.Controls.Add(Me.lnkShowAdvanced)
-        Me.pnlActions.Controls.Add(Me.btnWatch)
-        Me.pnlActions.Controls.Add(Me.btnCancel)
-        Me.pnlActions.HorizontalScrollbarBarColor = True
-        Me.pnlActions.HorizontalScrollbarHighlightOnWheel = False
-        Me.pnlActions.HorizontalScrollbarSize = 10
-        Me.pnlActions.Location = New System.Drawing.Point(3, 387)
-        Me.pnlActions.Name = "pnlActions"
-        Me.pnlActions.Size = New System.Drawing.Size(547, 32)
-        Me.pnlActions.TabIndex = 2
-        Me.pnlActions.VerticalScrollbarBarColor = True
-        Me.pnlActions.VerticalScrollbarHighlightOnWheel = False
-        Me.pnlActions.VerticalScrollbarSize = 10
+        Me.rbFrench.AutoSize = True
+        Me.rbFrench.Location = New System.Drawing.Point(196, 3)
+        Me.rbFrench.Name = "rbFrench"
+        Me.rbFrench.Size = New System.Drawing.Size(59, 15)
+        Me.rbFrench.TabIndex = 14
+        Me.rbFrench.Text = "French"
+        Me.rbFrench.UseSelectable = True
         '
-        'btnWatch
+        'rbNational
         '
-        Me.btnWatch.Location = New System.Drawing.Point(436, 3)
-        Me.btnWatch.Name = "btnWatch"
-        Me.btnWatch.Size = New System.Drawing.Size(108, 23)
-        Me.btnWatch.TabIndex = 51
-        Me.btnWatch.Text = "Watch"
-        Me.btnWatch.UseSelectable = True
+        Me.rbNational.AutoSize = True
+        Me.rbNational.Location = New System.Drawing.Point(122, 3)
+        Me.rbNational.Name = "rbNational"
+        Me.rbNational.Size = New System.Drawing.Size(68, 15)
+        Me.rbNational.TabIndex = 13
+        Me.rbNational.Text = "National"
+        Me.rbNational.UseSelectable = True
         '
-        'btnCancel
+        'rbAway
         '
-        Me.btnCancel.Location = New System.Drawing.Point(322, 3)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(108, 23)
-        Me.btnCancel.TabIndex = 52
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseSelectable = True
+        Me.rbAway.AutoSize = True
+        Me.rbAway.Location = New System.Drawing.Point(65, 3)
+        Me.rbAway.Name = "rbAway"
+        Me.rbAway.Size = New System.Drawing.Size(52, 15)
+        Me.rbAway.TabIndex = 12
+        Me.rbAway.Text = "Away"
+        Me.rbAway.UseSelectable = True
         '
-        'lnkShowAdvanced
+        'rbHome
         '
-        Me.lnkShowAdvanced.Location = New System.Drawing.Point(3, 3)
-        Me.lnkShowAdvanced.Name = "lnkShowAdvanced"
-        Me.lnkShowAdvanced.Size = New System.Drawing.Size(75, 23)
-        Me.lnkShowAdvanced.TabIndex = 53
-        Me.lnkShowAdvanced.Text = "Advanced"
-        Me.lnkShowAdvanced.UseSelectable = True
+        Me.rbHome.AutoSize = True
+        Me.rbHome.Location = New System.Drawing.Point(3, 3)
+        Me.rbHome.Name = "rbHome"
+        Me.rbHome.Size = New System.Drawing.Size(56, 15)
+        Me.rbHome.TabIndex = 11
+        Me.rbHome.Text = "Home"
+        Me.rbHome.UseSelectable = True
         '
-        'MetroLabel1
+        'MetroPanel3
         '
-        Me.MetroLabel1.AutoSize = True
-        Me.MetroLabel1.Location = New System.Drawing.Point(12, 8)
-        Me.MetroLabel1.Name = "MetroLabel1"
-        Me.MetroLabel1.Size = New System.Drawing.Size(69, 19)
-        Me.MetroLabel1.TabIndex = 2
-        Me.MetroLabel1.Text = "Resolution"
+        Me.MetroPanel3.Controls.Add(Me.rbVOD)
+        Me.MetroPanel3.Controls.Add(Me.rbLive)
+        Me.MetroPanel3.HorizontalScrollbarBarColor = True
+        Me.MetroPanel3.HorizontalScrollbarHighlightOnWheel = False
+        Me.MetroPanel3.HorizontalScrollbarSize = 10
+        Me.MetroPanel3.Location = New System.Drawing.Point(149, 70)
+        Me.MetroPanel3.Name = "MetroPanel3"
+        Me.MetroPanel3.Size = New System.Drawing.Size(395, 25)
+        Me.MetroPanel3.TabIndex = 8
+        Me.MetroPanel3.VerticalScrollbarBarColor = True
+        Me.MetroPanel3.VerticalScrollbarHighlightOnWheel = False
+        Me.MetroPanel3.VerticalScrollbarSize = 10
         '
-        'MetroLabel2
+        'rbVOD
         '
-        Me.MetroLabel2.AutoSize = True
-        Me.MetroLabel2.Location = New System.Drawing.Point(12, 38)
-        Me.MetroLabel2.Name = "MetroLabel2"
-        Me.MetroLabel2.Size = New System.Drawing.Size(45, 19)
-        Me.MetroLabel2.TabIndex = 3
-        Me.MetroLabel2.Text = "Player"
+        Me.rbVOD.AutoSize = True
+        Me.rbVOD.Location = New System.Drawing.Point(53, 4)
+        Me.rbVOD.Name = "rbVOD"
+        Me.rbVOD.Size = New System.Drawing.Size(47, 15)
+        Me.rbVOD.TabIndex = 12
+        Me.rbVOD.Text = "VOD"
+        Me.rbVOD.UseSelectable = True
         '
-        'MetroLabel3
+        'rbLive
         '
-        Me.MetroLabel3.AutoSize = True
-        Me.MetroLabel3.Location = New System.Drawing.Point(12, 70)
-        Me.MetroLabel3.Name = "MetroLabel3"
-        Me.MetroLabel3.Size = New System.Drawing.Size(47, 19)
-        Me.MetroLabel3.TabIndex = 4
-        Me.MetroLabel3.Text = "Server"
+        Me.rbLive.AutoSize = True
+        Me.rbLive.Location = New System.Drawing.Point(3, 3)
+        Me.rbLive.Name = "rbLive"
+        Me.rbLive.Size = New System.Drawing.Size(44, 15)
+        Me.rbLive.TabIndex = 11
+        Me.rbLive.Text = "Live"
+        Me.rbLive.UseSelectable = True
         '
-        'MetroLabel4
+        'MetroPanel2
         '
-        Me.MetroLabel4.AutoSize = True
-        Me.MetroLabel4.Location = New System.Drawing.Point(12, 101)
-        Me.MetroLabel4.Name = "MetroLabel4"
-        Me.MetroLabel4.Size = New System.Drawing.Size(51, 19)
-        Me.MetroLabel4.TabIndex = 5
-        Me.MetroLabel4.Text = "Stream"
+        Me.MetroPanel2.Controls.Add(Me.lnkMPCDownload)
+        Me.MetroPanel2.Controls.Add(Me.lnkVLCDownload)
+        Me.MetroPanel2.Controls.Add(Me.rbMPC)
+        Me.MetroPanel2.Controls.Add(Me.rbVLC)
+        Me.MetroPanel2.HorizontalScrollbarBarColor = True
+        Me.MetroPanel2.HorizontalScrollbarHighlightOnWheel = False
+        Me.MetroPanel2.HorizontalScrollbarSize = 10
+        Me.MetroPanel2.Location = New System.Drawing.Point(149, 39)
+        Me.MetroPanel2.Name = "MetroPanel2"
+        Me.MetroPanel2.Size = New System.Drawing.Size(395, 25)
+        Me.MetroPanel2.TabIndex = 7
+        Me.MetroPanel2.VerticalScrollbarBarColor = True
+        Me.MetroPanel2.VerticalScrollbarHighlightOnWheel = False
+        Me.MetroPanel2.VerticalScrollbarSize = 10
         '
-        'MetroLabel5
+        'lnkMPCDownload
         '
-        Me.MetroLabel5.AutoSize = True
-        Me.MetroLabel5.Location = New System.Drawing.Point(12, 4)
-        Me.MetroLabel5.Name = "MetroLabel5"
-        Me.MetroLabel5.Size = New System.Drawing.Size(37, 19)
-        Me.MetroLabel5.TabIndex = 3
-        Me.MetroLabel5.Text = "CDN"
+        Me.lnkMPCDownload.AutoSize = True
+        Me.lnkMPCDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.lnkMPCDownload.Location = New System.Drawing.Point(128, 0)
+        Me.lnkMPCDownload.Name = "lnkMPCDownload"
+        Me.lnkMPCDownload.Size = New System.Drawing.Size(23, 23)
+        Me.lnkMPCDownload.TabIndex = 18
+        Me.lnkMPCDownload.Text = "?"
+        Me.lnkMPCDownload.UseSelectable = True
         '
-        'MetroLabel6
+        'lnkVLCDownload
         '
-        Me.MetroLabel6.AutoSize = True
-        Me.MetroLabel6.Location = New System.Drawing.Point(12, 35)
-        Me.MetroLabel6.Name = "MetroLabel6"
-        Me.MetroLabel6.Size = New System.Drawing.Size(50, 19)
-        Me.MetroLabel6.TabIndex = 4
-        Me.MetroLabel6.Text = "Output"
+        Me.lnkVLCDownload.AutoSize = True
+        Me.lnkVLCDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.lnkVLCDownload.Location = New System.Drawing.Point(47, -1)
+        Me.lnkVLCDownload.Name = "lnkVLCDownload"
+        Me.lnkVLCDownload.Size = New System.Drawing.Size(23, 23)
+        Me.lnkVLCDownload.TabIndex = 17
+        Me.lnkVLCDownload.Text = "?"
+        Me.lnkVLCDownload.UseSelectable = True
         '
-        'MetroLabel7
+        'rbMPC
         '
-        Me.MetroLabel7.AutoSize = True
-        Me.MetroLabel7.Location = New System.Drawing.Point(12, 64)
-        Me.MetroLabel7.Name = "MetroLabel7"
-        Me.MetroLabel7.Size = New System.Drawing.Size(74, 19)
-        Me.MetroLabel7.TabIndex = 5
-        Me.MetroLabel7.Text = "Player args"
+        Me.rbMPC.AutoSize = True
+        Me.rbMPC.Location = New System.Drawing.Point(80, 3)
+        Me.rbMPC.Name = "rbMPC"
+        Me.rbMPC.Size = New System.Drawing.Size(49, 15)
+        Me.rbMPC.TabIndex = 16
+        Me.rbMPC.Text = "MPC"
+        Me.rbMPC.UseSelectable = True
         '
-        'MetroLabel8
+        'rbVLC
         '
-        Me.MetroLabel8.AutoSize = True
-        Me.MetroLabel8.Location = New System.Drawing.Point(12, 96)
-        Me.MetroLabel8.Name = "MetroLabel8"
-        Me.MetroLabel8.Size = New System.Drawing.Size(92, 19)
-        Me.MetroLabel8.TabIndex = 6
-        Me.MetroLabel8.Text = "Streamer args"
+        Me.rbVLC.AutoSize = True
+        Me.rbVLC.Location = New System.Drawing.Point(3, 3)
+        Me.rbVLC.Name = "rbVLC"
+        Me.rbVLC.Size = New System.Drawing.Size(44, 15)
+        Me.rbVLC.TabIndex = 15
+        Me.rbVLC.Text = "VLC"
+        Me.rbVLC.UseSelectable = True
         '
         'MetroPanel1
         '
@@ -265,75 +281,6 @@ Partial Class WatchGameForm
         Me.MetroPanel1.VerticalScrollbarBarColor = True
         Me.MetroPanel1.VerticalScrollbarHighlightOnWheel = False
         Me.MetroPanel1.VerticalScrollbarSize = 10
-        '
-        'MetroPanel2
-        '
-        Me.MetroPanel2.Controls.Add(Me.lnkMPCDownload)
-        Me.MetroPanel2.Controls.Add(Me.lnkVLCDownload)
-        Me.MetroPanel2.Controls.Add(Me.rbMPC)
-        Me.MetroPanel2.Controls.Add(Me.rbVLC)
-        Me.MetroPanel2.HorizontalScrollbarBarColor = True
-        Me.MetroPanel2.HorizontalScrollbarHighlightOnWheel = False
-        Me.MetroPanel2.HorizontalScrollbarSize = 10
-        Me.MetroPanel2.Location = New System.Drawing.Point(149, 39)
-        Me.MetroPanel2.Name = "MetroPanel2"
-        Me.MetroPanel2.Size = New System.Drawing.Size(395, 25)
-        Me.MetroPanel2.TabIndex = 7
-        Me.MetroPanel2.VerticalScrollbarBarColor = True
-        Me.MetroPanel2.VerticalScrollbarHighlightOnWheel = False
-        Me.MetroPanel2.VerticalScrollbarSize = 10
-        '
-        'MetroPanel3
-        '
-        Me.MetroPanel3.Controls.Add(Me.rbVOD)
-        Me.MetroPanel3.Controls.Add(Me.rbLive)
-        Me.MetroPanel3.HorizontalScrollbarBarColor = True
-        Me.MetroPanel3.HorizontalScrollbarHighlightOnWheel = False
-        Me.MetroPanel3.HorizontalScrollbarSize = 10
-        Me.MetroPanel3.Location = New System.Drawing.Point(149, 70)
-        Me.MetroPanel3.Name = "MetroPanel3"
-        Me.MetroPanel3.Size = New System.Drawing.Size(395, 25)
-        Me.MetroPanel3.TabIndex = 8
-        Me.MetroPanel3.VerticalScrollbarBarColor = True
-        Me.MetroPanel3.VerticalScrollbarHighlightOnWheel = False
-        Me.MetroPanel3.VerticalScrollbarSize = 10
-        '
-        'MetroPanel4
-        '
-        Me.MetroPanel4.Controls.Add(Me.rbFrench)
-        Me.MetroPanel4.Controls.Add(Me.rbNational)
-        Me.MetroPanel4.Controls.Add(Me.rbAway)
-        Me.MetroPanel4.Controls.Add(Me.rbHome)
-        Me.MetroPanel4.HorizontalScrollbarBarColor = True
-        Me.MetroPanel4.HorizontalScrollbarHighlightOnWheel = False
-        Me.MetroPanel4.HorizontalScrollbarSize = 10
-        Me.MetroPanel4.Location = New System.Drawing.Point(149, 101)
-        Me.MetroPanel4.Name = "MetroPanel4"
-        Me.MetroPanel4.Size = New System.Drawing.Size(395, 25)
-        Me.MetroPanel4.TabIndex = 7
-        Me.MetroPanel4.VerticalScrollbarBarColor = True
-        Me.MetroPanel4.VerticalScrollbarHighlightOnWheel = False
-        Me.MetroPanel4.VerticalScrollbarSize = 10
-        '
-        'chk60
-        '
-        Me.chk60.AutoSize = True
-        Me.chk60.Location = New System.Drawing.Point(328, 4)
-        Me.chk60.Name = "chk60"
-        Me.chk60.Size = New System.Drawing.Size(54, 15)
-        Me.chk60.TabIndex = 2
-        Me.chk60.Text = "60 fps"
-        Me.chk60.UseSelectable = True
-        '
-        'rbQual1
-        '
-        Me.rbQual1.AutoSize = True
-        Me.rbQual1.Location = New System.Drawing.Point(3, 4)
-        Me.rbQual1.Name = "rbQual1"
-        Me.rbQual1.Size = New System.Drawing.Size(48, 15)
-        Me.rbQual1.TabIndex = 9
-        Me.rbQual1.Text = "224p"
-        Me.rbQual1.UseSelectable = True
         '
         'rbQual6
         '
@@ -385,224 +332,85 @@ Partial Class WatchGameForm
         Me.rbQual2.Text = "228p"
         Me.rbQual2.UseSelectable = True
         '
-        'rbVLC
+        'chk60
         '
-        Me.rbVLC.AutoSize = True
-        Me.rbVLC.Location = New System.Drawing.Point(3, 3)
-        Me.rbVLC.Name = "rbVLC"
-        Me.rbVLC.Size = New System.Drawing.Size(44, 15)
-        Me.rbVLC.TabIndex = 15
-        Me.rbVLC.Text = "VLC"
-        Me.rbVLC.UseSelectable = True
+        Me.chk60.AutoSize = True
+        Me.chk60.Location = New System.Drawing.Point(328, 4)
+        Me.chk60.Name = "chk60"
+        Me.chk60.Size = New System.Drawing.Size(54, 15)
+        Me.chk60.TabIndex = 2
+        Me.chk60.Text = "60 fps"
+        Me.chk60.UseSelectable = True
         '
-        'rbMPC
+        'rbQual1
         '
-        Me.rbMPC.AutoSize = True
-        Me.rbMPC.Location = New System.Drawing.Point(80, 3)
-        Me.rbMPC.Name = "rbMPC"
-        Me.rbMPC.Size = New System.Drawing.Size(49, 15)
-        Me.rbMPC.TabIndex = 16
-        Me.rbMPC.Text = "MPC"
-        Me.rbMPC.UseSelectable = True
+        Me.rbQual1.AutoSize = True
+        Me.rbQual1.Location = New System.Drawing.Point(3, 4)
+        Me.rbQual1.Name = "rbQual1"
+        Me.rbQual1.Size = New System.Drawing.Size(48, 15)
+        Me.rbQual1.TabIndex = 9
+        Me.rbQual1.Text = "224p"
+        Me.rbQual1.UseSelectable = True
         '
-        'rbLive
+        'MetroLabel4
         '
-        Me.rbLive.AutoSize = True
-        Me.rbLive.Location = New System.Drawing.Point(3, 3)
-        Me.rbLive.Name = "rbLive"
-        Me.rbLive.Size = New System.Drawing.Size(44, 15)
-        Me.rbLive.TabIndex = 11
-        Me.rbLive.Text = "Live"
-        Me.rbLive.UseSelectable = True
+        Me.MetroLabel4.AutoSize = True
+        Me.MetroLabel4.Location = New System.Drawing.Point(12, 101)
+        Me.MetroLabel4.Name = "MetroLabel4"
+        Me.MetroLabel4.Size = New System.Drawing.Size(51, 19)
+        Me.MetroLabel4.TabIndex = 5
+        Me.MetroLabel4.Text = "Stream"
         '
-        'rbVOD
+        'MetroLabel3
         '
-        Me.rbVOD.AutoSize = True
-        Me.rbVOD.Location = New System.Drawing.Point(53, 4)
-        Me.rbVOD.Name = "rbVOD"
-        Me.rbVOD.Size = New System.Drawing.Size(47, 15)
-        Me.rbVOD.TabIndex = 12
-        Me.rbVOD.Text = "VOD"
-        Me.rbVOD.UseSelectable = True
+        Me.MetroLabel3.AutoSize = True
+        Me.MetroLabel3.Location = New System.Drawing.Point(12, 70)
+        Me.MetroLabel3.Name = "MetroLabel3"
+        Me.MetroLabel3.Size = New System.Drawing.Size(47, 19)
+        Me.MetroLabel3.TabIndex = 4
+        Me.MetroLabel3.Text = "Server"
         '
-        'rbHome
+        'MetroLabel2
         '
-        Me.rbHome.AutoSize = True
-        Me.rbHome.Location = New System.Drawing.Point(3, 3)
-        Me.rbHome.Name = "rbHome"
-        Me.rbHome.Size = New System.Drawing.Size(56, 15)
-        Me.rbHome.TabIndex = 11
-        Me.rbHome.Text = "Home"
-        Me.rbHome.UseSelectable = True
+        Me.MetroLabel2.AutoSize = True
+        Me.MetroLabel2.Location = New System.Drawing.Point(12, 38)
+        Me.MetroLabel2.Name = "MetroLabel2"
+        Me.MetroLabel2.Size = New System.Drawing.Size(45, 19)
+        Me.MetroLabel2.TabIndex = 3
+        Me.MetroLabel2.Text = "Player"
         '
-        'rbAway
+        'MetroLabel1
         '
-        Me.rbAway.AutoSize = True
-        Me.rbAway.Location = New System.Drawing.Point(65, 3)
-        Me.rbAway.Name = "rbAway"
-        Me.rbAway.Size = New System.Drawing.Size(52, 15)
-        Me.rbAway.TabIndex = 12
-        Me.rbAway.Text = "Away"
-        Me.rbAway.UseSelectable = True
+        Me.MetroLabel1.AutoSize = True
+        Me.MetroLabel1.Location = New System.Drawing.Point(12, 8)
+        Me.MetroLabel1.Name = "MetroLabel1"
+        Me.MetroLabel1.Size = New System.Drawing.Size(69, 19)
+        Me.MetroLabel1.TabIndex = 2
+        Me.MetroLabel1.Text = "Resolution"
         '
-        'chkEnableOutput
+        'pnlBasic
         '
-        Me.chkEnableOutput.AutoSize = True
-        Me.chkEnableOutput.Location = New System.Drawing.Point(484, 43)
-        Me.chkEnableOutput.Name = "chkEnableOutput"
-        Me.chkEnableOutput.Size = New System.Drawing.Size(58, 15)
-        Me.chkEnableOutput.TabIndex = 7
-        Me.chkEnableOutput.Text = "Enable"
-        Me.chkEnableOutput.UseSelectable = True
-        '
-        'chkEnablePlayerArgs
-        '
-        Me.chkEnablePlayerArgs.AutoSize = True
-        Me.chkEnablePlayerArgs.Location = New System.Drawing.Point(484, 68)
-        Me.chkEnablePlayerArgs.Name = "chkEnablePlayerArgs"
-        Me.chkEnablePlayerArgs.Size = New System.Drawing.Size(58, 15)
-        Me.chkEnablePlayerArgs.TabIndex = 8
-        Me.chkEnablePlayerArgs.Text = "Enable"
-        Me.chkEnablePlayerArgs.UseSelectable = True
-        '
-        'chkEnableStreamArgs
-        '
-        Me.chkEnableStreamArgs.AutoSize = True
-        Me.chkEnableStreamArgs.Location = New System.Drawing.Point(484, 96)
-        Me.chkEnableStreamArgs.Name = "chkEnableStreamArgs"
-        Me.chkEnableStreamArgs.Size = New System.Drawing.Size(58, 15)
-        Me.chkEnableStreamArgs.TabIndex = 9
-        Me.chkEnableStreamArgs.Text = "Enable"
-        Me.chkEnableStreamArgs.UseSelectable = True
-        '
-        'txtStreamerArgs
-        '
-        '
-        '
-        '
-        Me.txtStreamerArgs.CustomButton.Image = Nothing
-        Me.txtStreamerArgs.CustomButton.Location = New System.Drawing.Point(307, 1)
-        Me.txtStreamerArgs.CustomButton.Name = ""
-        Me.txtStreamerArgs.CustomButton.Size = New System.Drawing.Size(21, 21)
-        Me.txtStreamerArgs.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
-        Me.txtStreamerArgs.CustomButton.TabIndex = 1
-        Me.txtStreamerArgs.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtStreamerArgs.CustomButton.UseSelectable = True
-        Me.txtStreamerArgs.CustomButton.Visible = False
-        Me.txtStreamerArgs.Lines = New String(-1) {}
-        Me.txtStreamerArgs.Location = New System.Drawing.Point(149, 88)
-        Me.txtStreamerArgs.MaxLength = 32767
-        Me.txtStreamerArgs.Name = "txtStreamerArgs"
-        Me.txtStreamerArgs.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtStreamerArgs.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.txtStreamerArgs.SelectedText = ""
-        Me.txtStreamerArgs.SelectionLength = 0
-        Me.txtStreamerArgs.SelectionStart = 0
-        Me.txtStreamerArgs.Size = New System.Drawing.Size(329, 23)
-        Me.txtStreamerArgs.TabIndex = 15
-        Me.txtStreamerArgs.UseSelectable = True
-        Me.txtStreamerArgs.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtStreamerArgs.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
-        '
-        'txtPlayerArgs
-        '
-        '
-        '
-        '
-        Me.txtPlayerArgs.CustomButton.Image = Nothing
-        Me.txtPlayerArgs.CustomButton.Location = New System.Drawing.Point(307, 1)
-        Me.txtPlayerArgs.CustomButton.Name = ""
-        Me.txtPlayerArgs.CustomButton.Size = New System.Drawing.Size(21, 21)
-        Me.txtPlayerArgs.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
-        Me.txtPlayerArgs.CustomButton.TabIndex = 1
-        Me.txtPlayerArgs.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtPlayerArgs.CustomButton.UseSelectable = True
-        Me.txtPlayerArgs.CustomButton.Visible = False
-        Me.txtPlayerArgs.Lines = New String(-1) {}
-        Me.txtPlayerArgs.Location = New System.Drawing.Point(149, 60)
-        Me.txtPlayerArgs.MaxLength = 32767
-        Me.txtPlayerArgs.Name = "txtPlayerArgs"
-        Me.txtPlayerArgs.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtPlayerArgs.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.txtPlayerArgs.SelectedText = ""
-        Me.txtPlayerArgs.SelectionLength = 0
-        Me.txtPlayerArgs.SelectionStart = 0
-        Me.txtPlayerArgs.Size = New System.Drawing.Size(329, 23)
-        Me.txtPlayerArgs.TabIndex = 16
-        Me.txtPlayerArgs.UseSelectable = True
-        Me.txtPlayerArgs.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtPlayerArgs.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
-        '
-        'txtOutputPath
-        '
-        '
-        '
-        '
-        Me.txtOutputPath.CustomButton.Image = Nothing
-        Me.txtOutputPath.CustomButton.Location = New System.Drawing.Point(307, 1)
-        Me.txtOutputPath.CustomButton.Name = ""
-        Me.txtOutputPath.CustomButton.Size = New System.Drawing.Size(21, 21)
-        Me.txtOutputPath.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
-        Me.txtOutputPath.CustomButton.TabIndex = 1
-        Me.txtOutputPath.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtOutputPath.CustomButton.UseSelectable = True
-        Me.txtOutputPath.CustomButton.Visible = False
-        Me.txtOutputPath.Lines = New String(-1) {}
-        Me.txtOutputPath.Location = New System.Drawing.Point(149, 35)
-        Me.txtOutputPath.MaxLength = 32767
-        Me.txtOutputPath.Name = "txtOutputPath"
-        Me.txtOutputPath.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtOutputPath.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.txtOutputPath.SelectedText = ""
-        Me.txtOutputPath.SelectionLength = 0
-        Me.txtOutputPath.SelectionStart = 0
-        Me.txtOutputPath.Size = New System.Drawing.Size(329, 23)
-        Me.txtOutputPath.TabIndex = 17
-        Me.txtOutputPath.UseSelectable = True
-        Me.txtOutputPath.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtOutputPath.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
-        '
-        'lnkVLCDownload
-        '
-        Me.lnkVLCDownload.AutoSize = True
-        Me.lnkVLCDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.lnkVLCDownload.Location = New System.Drawing.Point(47, -1)
-        Me.lnkVLCDownload.Name = "lnkVLCDownload"
-        Me.lnkVLCDownload.Size = New System.Drawing.Size(23, 23)
-        Me.lnkVLCDownload.TabIndex = 17
-        Me.lnkVLCDownload.Text = "?"
-        Me.lnkVLCDownload.UseSelectable = True
-        '
-        'lnkMPCDownload
-        '
-        Me.lnkMPCDownload.AutoSize = True
-        Me.lnkMPCDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.lnkMPCDownload.Location = New System.Drawing.Point(128, 0)
-        Me.lnkMPCDownload.Name = "lnkMPCDownload"
-        Me.lnkMPCDownload.Size = New System.Drawing.Size(23, 23)
-        Me.lnkMPCDownload.TabIndex = 18
-        Me.lnkMPCDownload.Text = "?"
-        Me.lnkMPCDownload.UseSelectable = True
-        '
-        'rbNational
-        '
-        Me.rbNational.AutoSize = True
-        Me.rbNational.Location = New System.Drawing.Point(122, 3)
-        Me.rbNational.Name = "rbNational"
-        Me.rbNational.Size = New System.Drawing.Size(68, 15)
-        Me.rbNational.TabIndex = 13
-        Me.rbNational.Text = "National"
-        Me.rbNational.UseSelectable = True
-        '
-        'rbFrench
-        '
-        Me.rbFrench.AutoSize = True
-        Me.rbFrench.Location = New System.Drawing.Point(196, 3)
-        Me.rbFrench.Name = "rbFrench"
-        Me.rbFrench.Size = New System.Drawing.Size(59, 15)
-        Me.rbFrench.TabIndex = 14
-        Me.rbFrench.Text = "French"
-        Me.rbFrench.UseSelectable = True
+        Me.pnlBasic.Controls.Add(Me.txtStreamerArgs)
+        Me.pnlBasic.Controls.Add(Me.txtPlayerArgs)
+        Me.pnlBasic.Controls.Add(Me.txtOutputPath)
+        Me.pnlBasic.Controls.Add(Me.MetroPanel5)
+        Me.pnlBasic.Controls.Add(Me.chkEnableStreamArgs)
+        Me.pnlBasic.Controls.Add(Me.chkEnablePlayerArgs)
+        Me.pnlBasic.Controls.Add(Me.chkEnableOutput)
+        Me.pnlBasic.Controls.Add(Me.MetroLabel8)
+        Me.pnlBasic.Controls.Add(Me.MetroLabel7)
+        Me.pnlBasic.Controls.Add(Me.MetroLabel6)
+        Me.pnlBasic.Controls.Add(Me.MetroLabel5)
+        Me.pnlBasic.HorizontalScrollbarBarColor = True
+        Me.pnlBasic.HorizontalScrollbarHighlightOnWheel = False
+        Me.pnlBasic.HorizontalScrollbarSize = 10
+        Me.pnlBasic.Location = New System.Drawing.Point(3, 143)
+        Me.pnlBasic.Name = "pnlBasic"
+        Me.pnlBasic.Size = New System.Drawing.Size(547, 126)
+        Me.pnlBasic.TabIndex = 2
+        Me.pnlBasic.VerticalScrollbarBarColor = True
+        Me.pnlBasic.VerticalScrollbarHighlightOnWheel = False
+        Me.pnlBasic.VerticalScrollbarSize = 10
         '
         'MetroPanel5
         '
@@ -639,34 +447,165 @@ Partial Class WatchGameForm
         Me.rbLevel3.Text = "Level 3"
         Me.rbLevel3.UseSelectable = True
         '
+        'chkEnableStreamArgs
+        '
+        Me.chkEnableStreamArgs.AutoSize = True
+        Me.chkEnableStreamArgs.Location = New System.Drawing.Point(484, 96)
+        Me.chkEnableStreamArgs.Name = "chkEnableStreamArgs"
+        Me.chkEnableStreamArgs.Size = New System.Drawing.Size(58, 15)
+        Me.chkEnableStreamArgs.TabIndex = 9
+        Me.chkEnableStreamArgs.Text = "Enable"
+        Me.chkEnableStreamArgs.UseSelectable = True
+        '
+        'chkEnablePlayerArgs
+        '
+        Me.chkEnablePlayerArgs.AutoSize = True
+        Me.chkEnablePlayerArgs.Location = New System.Drawing.Point(484, 68)
+        Me.chkEnablePlayerArgs.Name = "chkEnablePlayerArgs"
+        Me.chkEnablePlayerArgs.Size = New System.Drawing.Size(58, 15)
+        Me.chkEnablePlayerArgs.TabIndex = 8
+        Me.chkEnablePlayerArgs.Text = "Enable"
+        Me.chkEnablePlayerArgs.UseSelectable = True
+        '
+        'chkEnableOutput
+        '
+        Me.chkEnableOutput.AutoSize = True
+        Me.chkEnableOutput.Location = New System.Drawing.Point(484, 43)
+        Me.chkEnableOutput.Name = "chkEnableOutput"
+        Me.chkEnableOutput.Size = New System.Drawing.Size(58, 15)
+        Me.chkEnableOutput.TabIndex = 7
+        Me.chkEnableOutput.Text = "Enable"
+        Me.chkEnableOutput.UseSelectable = True
+        '
+        'MetroLabel8
+        '
+        Me.MetroLabel8.AutoSize = True
+        Me.MetroLabel8.Location = New System.Drawing.Point(12, 96)
+        Me.MetroLabel8.Name = "MetroLabel8"
+        Me.MetroLabel8.Size = New System.Drawing.Size(92, 19)
+        Me.MetroLabel8.TabIndex = 6
+        Me.MetroLabel8.Text = "Streamer args"
+        '
+        'MetroLabel7
+        '
+        Me.MetroLabel7.AutoSize = True
+        Me.MetroLabel7.Location = New System.Drawing.Point(12, 64)
+        Me.MetroLabel7.Name = "MetroLabel7"
+        Me.MetroLabel7.Size = New System.Drawing.Size(74, 19)
+        Me.MetroLabel7.TabIndex = 5
+        Me.MetroLabel7.Text = "Player args"
+        '
+        'MetroLabel6
+        '
+        Me.MetroLabel6.AutoSize = True
+        Me.MetroLabel6.Location = New System.Drawing.Point(12, 35)
+        Me.MetroLabel6.Name = "MetroLabel6"
+        Me.MetroLabel6.Size = New System.Drawing.Size(50, 19)
+        Me.MetroLabel6.TabIndex = 4
+        Me.MetroLabel6.Text = "Output"
+        '
+        'MetroLabel5
+        '
+        Me.MetroLabel5.AutoSize = True
+        Me.MetroLabel5.Location = New System.Drawing.Point(12, 4)
+        Me.MetroLabel5.Name = "MetroLabel5"
+        Me.MetroLabel5.Size = New System.Drawing.Size(37, 19)
+        Me.MetroLabel5.TabIndex = 3
+        Me.MetroLabel5.Text = "CDN"
+        '
+        'pnlActions
+        '
+        Me.pnlActions.Controls.Add(Me.lnkShowAdvanced)
+        Me.pnlActions.Controls.Add(Me.btnWatch)
+        Me.pnlActions.Controls.Add(Me.btnCancel)
+        Me.pnlActions.HorizontalScrollbarBarColor = True
+        Me.pnlActions.HorizontalScrollbarHighlightOnWheel = False
+        Me.pnlActions.HorizontalScrollbarSize = 10
+        Me.pnlActions.Location = New System.Drawing.Point(3, 275)
+        Me.pnlActions.Name = "pnlActions"
+        Me.pnlActions.Size = New System.Drawing.Size(547, 32)
+        Me.pnlActions.TabIndex = 2
+        Me.pnlActions.VerticalScrollbarBarColor = True
+        Me.pnlActions.VerticalScrollbarHighlightOnWheel = False
+        Me.pnlActions.VerticalScrollbarSize = 10
+        '
+        'lnkShowAdvanced
+        '
+        Me.lnkShowAdvanced.Location = New System.Drawing.Point(3, 3)
+        Me.lnkShowAdvanced.Name = "lnkShowAdvanced"
+        Me.lnkShowAdvanced.Size = New System.Drawing.Size(75, 23)
+        Me.lnkShowAdvanced.TabIndex = 53
+        Me.lnkShowAdvanced.Text = "Advanced"
+        Me.lnkShowAdvanced.UseSelectable = True
+        '
+        'btnWatch
+        '
+        Me.btnWatch.Location = New System.Drawing.Point(436, 3)
+        Me.btnWatch.Name = "btnWatch"
+        Me.btnWatch.Size = New System.Drawing.Size(108, 23)
+        Me.btnWatch.TabIndex = 51
+        Me.btnWatch.Text = "Watch"
+        Me.btnWatch.UseSelectable = True
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Location = New System.Drawing.Point(322, 3)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(108, 23)
+        Me.btnCancel.TabIndex = 52
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseSelectable = True
+        '
+        'txtOutputPath
+        '
+        Me.txtOutputPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtOutputPath.Location = New System.Drawing.Point(149, 38)
+        Me.txtOutputPath.Name = "txtOutputPath"
+        Me.txtOutputPath.Size = New System.Drawing.Size(329, 22)
+        Me.txtOutputPath.TabIndex = 14
+        '
+        'txtPlayerArgs
+        '
+        Me.txtPlayerArgs.Font = New System.Drawing.Font("Segoe UI", 8.25!)
+        Me.txtPlayerArgs.Location = New System.Drawing.Point(149, 63)
+        Me.txtPlayerArgs.Name = "txtPlayerArgs"
+        Me.txtPlayerArgs.Size = New System.Drawing.Size(329, 22)
+        Me.txtPlayerArgs.TabIndex = 15
+        '
+        'txtStreamerArgs
+        '
+        Me.txtStreamerArgs.Font = New System.Drawing.Font("Segoe UI", 8.25!)
+        Me.txtStreamerArgs.Location = New System.Drawing.Point(149, 91)
+        Me.txtStreamerArgs.Name = "txtStreamerArgs"
+        Me.txtStreamerArgs.Size = New System.Drawing.Size(329, 22)
+        Me.txtStreamerArgs.TabIndex = 16
+        '
         'WatchGameForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(1053, 558)
-        Me.Controls.Add(Me.pnlActions)
-        Me.Controls.Add(Me.pnlBasic)
-        Me.Controls.Add(Me.pnlAdvanced)
+        Me.ClientSize = New System.Drawing.Size(589, 352)
         Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Name = "WatchGameForm"
         Me.Resizable = False
+        Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.pnlAdvanced.ResumeLayout(False)
         Me.pnlAdvanced.PerformLayout()
-        Me.pnlBasic.ResumeLayout(False)
-        Me.pnlBasic.PerformLayout()
-        Me.pnlActions.ResumeLayout(False)
-        Me.MetroPanel1.ResumeLayout(False)
-        Me.MetroPanel1.PerformLayout()
-        Me.MetroPanel2.ResumeLayout(False)
-        Me.MetroPanel2.PerformLayout()
-        Me.MetroPanel3.ResumeLayout(False)
-        Me.MetroPanel3.PerformLayout()
         Me.MetroPanel4.ResumeLayout(False)
         Me.MetroPanel4.PerformLayout()
+        Me.MetroPanel3.ResumeLayout(False)
+        Me.MetroPanel3.PerformLayout()
+        Me.MetroPanel2.ResumeLayout(False)
+        Me.MetroPanel2.PerformLayout()
+        Me.MetroPanel1.ResumeLayout(False)
+        Me.MetroPanel1.PerformLayout()
+        Me.pnlBasic.ResumeLayout(False)
+        Me.pnlBasic.PerformLayout()
         Me.MetroPanel5.ResumeLayout(False)
         Me.MetroPanel5.PerformLayout()
+        Me.pnlActions.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -707,9 +646,7 @@ Partial Class WatchGameForm
     Friend WithEvents MetroPanel5 As MetroFramework.Controls.MetroPanel
     Friend WithEvents rbAkamai As MetroFramework.Controls.MetroRadioButton
     Friend WithEvents rbLevel3 As MetroFramework.Controls.MetroRadioButton
-    Friend WithEvents txtOutputPath As MetroFramework.Controls.MetroTextBox
-    Friend WithEvents txtPlayerArgs As MetroFramework.Controls.MetroTextBox
-    Friend WithEvents txtStreamerArgs As MetroFramework.Controls.MetroTextBox
+
     Friend WithEvents chkEnableStreamArgs As MetroFramework.Controls.MetroCheckBox
     Friend WithEvents chkEnablePlayerArgs As MetroFramework.Controls.MetroCheckBox
     Friend WithEvents chkEnableOutput As MetroFramework.Controls.MetroCheckBox
@@ -717,4 +654,7 @@ Partial Class WatchGameForm
     Friend WithEvents MetroLabel7 As MetroFramework.Controls.MetroLabel
     Friend WithEvents MetroLabel6 As MetroFramework.Controls.MetroLabel
     Friend WithEvents MetroLabel5 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents txtStreamerArgs As TextBox
+    Friend WithEvents txtPlayerArgs As TextBox
+    Friend WithEvents txtOutputPath As TextBox
 End Class
