@@ -3,8 +3,15 @@
 Public Class ApplicationSettings
 
     Public Enum Settings
-        InAdminModeToSetHostsEntry = 1
+        Version = 1
         DefaultWatchArgs = 2
+        VLCPath = 3
+        MPCPath = 4
+        LiveStreamerPath = 5
+        ServiioPath = 6
+        ShowScores = 7
+        RefreshIntervalInMin = 8
+        ShowAdvancedWatchPanel = 9
     End Enum
 
     Public Shared Function Read(Of T)(key As Settings, Optional defaultReturnValue As Object = Nothing) As T
@@ -31,6 +38,11 @@ Public Class ApplicationSettings
             Else
                 settings(key.ToString()).Value = value
             End If
+
+            If value.Length > 200 Then
+                value = "[Value too large for display]"
+            End If
+            Console.WriteLine("Status: Setting updated for """ & key.ToString() & """ to """ & value & """")
             configFile.Save(ConfigurationSaveMode.Modified)
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name)
         Catch e As ConfigurationErrorsException

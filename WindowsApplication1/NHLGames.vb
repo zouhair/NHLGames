@@ -350,8 +350,8 @@ Public Class NHLGames
         '    strUrl = gridGames.SelectedRows(0).Cells("french" & strServer).Value.Replace("CDN", strCDN)
         'End If
 
-        Dim dialogURL As New dlURL(strUrl)
-        dialogURL.ShowDialog()
+        'Dim dialogURL As New dlURL(strUrl)
+        'dialogURL.ShowDialog()
     End Sub
 
     Private Sub NHLGames_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd

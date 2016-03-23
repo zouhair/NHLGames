@@ -289,6 +289,8 @@ Public Class Game
             Dim returnValue As String = ""
             If String.IsNullOrEmpty(PlayerPath) = False Then
                 returnValue &= " --player """ & PlayerPath & """ " '--player-passthrough=hls 
+            Else
+                Console.WriteLine("Error: Player path is empty")
             End If
 
             returnValue &= """hlsvariant://"

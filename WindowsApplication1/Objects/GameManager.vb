@@ -6,18 +6,24 @@ Public Class GameManager
     Public Shared Event GamesLoaded(gameObj As List(Of Game))
 
     Shared _GamesList As New Dictionary(Of String, Game)
+
+    Public Shared Property GamesListDate As DateTime = DateTime.MinValue
     Public Shared ReadOnly Property GamesList As List(Of Game)
         Get
             Return _GamesList.Values.ToList()
         End Get
     End Property
 
+    Public Shared Sub ClearGames()
+        _GamesList.Clear()
+        GamesListDate = DateTime.MinValue
+    End Sub
 
 
     Public Shared Sub RefreshGames(dateTime As DateTime, jsonObj As JToken, availableGames As List(Of String))
 
         Dim tempList As New List(Of Game)
-
+        GamesListDate = dateTime
         For Each o As JToken In jsonObj.Children(Of JToken)
             If o.Path = "dates" Then
                 For Each game As JObject In o.Children.Item(0)("games").Children(Of JObject)

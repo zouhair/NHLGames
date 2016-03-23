@@ -78,8 +78,11 @@ Public Class FileAccess
     End Function
     Public Shared Function LocateEXE(filename As [String], Optional suggestedFolderName As String = "") As String
 
+        Console.WriteLine("Status: Locating " & filename)
+
         Dim searchResult As String = SearchPathsForExe(filename)
         If String.IsNullOrEmpty(searchResult) = False Then
+            Console.WriteLine("Status: Located at " & searchResult)
             Return searchResult
         End If
 
@@ -92,9 +95,11 @@ Public Class FileAccess
         searchResult = SearchDirectories(DirectoriesToSearch, filename, suggestedFolderName)
 
         If String.IsNullOrEmpty(searchResult) = False Then
+            Console.WriteLine("Status: Located at " & searchResult)
             Return searchResult
         End If
 
+        Console.WriteLine("Error: Unable to locate " & filename)
         Return [String].Empty
     End Function
 

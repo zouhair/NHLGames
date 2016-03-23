@@ -75,7 +75,7 @@ Public Class HostsFile
 
             If MetroMessageBox.Show(NHLGamesMetro.FormInstance, "This application is missing the required hosts file entry. Do you want to restart this this application as an Administrator and add the required entry?", "Admin Access Required", MessageBoxButtons.YesNo) = DialogResult.Yes Then
 
-                ApplicationSettings.SetValue(ApplicationSettings.Settings.InAdminModeToSetHostsEntry, True)
+                'ApplicationSettings.SetValue(ApplicationSettings.Settings.InAdminModeToSetHostsEntry, True)
                 ' Restart program And run as admin
                 Dim exeName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName
                 Dim startInfo As ProcessStartInfo = New ProcessStartInfo(exeName)

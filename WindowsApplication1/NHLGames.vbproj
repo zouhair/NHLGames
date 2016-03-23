@@ -128,12 +128,6 @@
     <Compile Include="Utilities\Downloader.vb" />
     <Compile Include="Objects\Game.vb" />
     <Compile Include="Objects\GameStream.vb" />
-    <Compile Include="URL.Designer.vb">
-      <DependentUpon>URL.vb</DependentUpon>
-    </Compile>
-    <Compile Include="URL.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="NHLGames.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -177,9 +171,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NHLGamesMetro.resx">
       <DependentUpon>NHLGamesMetro.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="URL.resx">
-      <DependentUpon>URL.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
