@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports System.IO.Path
 Imports Newtonsoft.Json.Linq
 
 <DebuggerDisplay("{HomeTeam} vs. {AwayTeam} at {[Date]}")>
@@ -138,25 +139,28 @@ Public Class Game
     Public Sub Watch(args As GameWatchArguments)
 
         Dim t As Task = New Task(Function()
-                                     Dim liveStreamerPath As String = Application.StartupPath & "\livestreamer-v1.12.2\livestreamer.exe"
+                                     Dim liveStreamerPath As String = Combine(Application.StartupPath, "livestreamer-v1.12.2\livestreamer.exe")
                                      Console.WriteLine("Running:    " & liveStreamerPath & " " & args.ToString())
 
                                      Dim proc = New Process() With {.StartInfo =
-            New ProcessStartInfo With {
-            .FileName = liveStreamerPath,
-            .Arguments = args.ToString(),
-            .UseShellExecute = False,
-            .RedirectStandardOutput = True,
-            .CreateNoWindow = True}
-        }
+                                         New ProcessStartInfo With {
+                                         .FileName = liveStreamerPath,
+                                         .Arguments = args.ToString(),
+                                         .UseShellExecute = False,
+                                         .RedirectStandardOutput = True,
+                                         .CreateNoWindow = True}
+                                     }
                                      proc.EnableRaisingEvents = True
+                                     Try
+                                         proc.Start()
 
-                                     proc.Start()
-
-                                     While (proc.StandardOutput.EndOfStream = False)
-                                         Dim line = proc.StandardOutput.ReadLine()
-                                         Console.WriteLine(line)
-                                     End While
+                                         While (proc.StandardOutput.EndOfStream = False)
+                                             Dim line = proc.StandardOutput.ReadLine()
+                                             Console.WriteLine(line)
+                                         End While
+                                     Catch ex As Exception
+                                         Console.WriteLine("Error: " & ex.Message)
+                                     End Try
                                      Return ""
                                  End Function)
         t.Start()
@@ -270,6 +274,7 @@ Public Class Game
         Public Property Server As String = ""
         Public Property Stream As GameStream
         Public Property IsVOD As Boolean = False
+        Public Property IsMPC As Boolean = False
 
         Public Property PlayerPath As String = ""
         Public Property PlayerType As PlayerTypeEnum = PlayerTypeEnum.None

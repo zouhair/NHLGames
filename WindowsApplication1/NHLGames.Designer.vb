@@ -315,7 +315,6 @@ Partial Class NHLGames
         '
         Me.gbCDN.Controls.Add(Me.rbLevel3)
         Me.gbCDN.Controls.Add(Me.rbAkamai)
-        Me.gbCDN.Enabled = False
         Me.gbCDN.Location = New System.Drawing.Point(10, 433)
         Me.gbCDN.Name = "gbCDN"
         Me.gbCDN.Size = New System.Drawing.Size(75, 65)
@@ -326,22 +325,22 @@ Partial Class NHLGames
         'rbLevel3
         '
         Me.rbLevel3.AutoSize = True
+        Me.rbLevel3.Checked = True
         Me.rbLevel3.Location = New System.Drawing.Point(5, 19)
         Me.rbLevel3.Name = "rbLevel3"
         Me.rbLevel3.Size = New System.Drawing.Size(60, 17)
         Me.rbLevel3.TabIndex = 1
+        Me.rbLevel3.TabStop = True
         Me.rbLevel3.Text = "Level 3"
         Me.rbLevel3.UseVisualStyleBackColor = True
         '
         'rbAkamai
         '
         Me.rbAkamai.AutoSize = True
-        Me.rbAkamai.Checked = True
         Me.rbAkamai.Location = New System.Drawing.Point(5, 42)
         Me.rbAkamai.Name = "rbAkamai"
         Me.rbAkamai.Size = New System.Drawing.Size(60, 17)
         Me.rbAkamai.TabIndex = 0
-        Me.rbAkamai.TabStop = True
         Me.rbAkamai.Text = "Akamai"
         Me.rbAkamai.UseVisualStyleBackColor = True
         '

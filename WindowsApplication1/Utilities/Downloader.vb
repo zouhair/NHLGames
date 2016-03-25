@@ -23,8 +23,8 @@ Public Class Downloader
         Return client.DownloadString(URL)
     End Function
     Private Shared Sub DownloadFile(URL As String, fileName As String, Optional checkIfExists As Boolean = False, Optional overwrite As Boolean = True)
+        Dim fullPath As String = Path.Combine(LocalFileDirectory, fileName)
 
-        Dim fullPath As String = LocalFileDirectory & "\" & fileName
 
         If (checkIfExists = False) OrElse (checkIfExists AndAlso My.Computer.FileSystem.FileExists(fullPath) = False) Then
             Console.WriteLine("Downloading File: " & URL & " to " & fullPath)
@@ -33,17 +33,18 @@ Public Class Downloader
             Console.WriteLine("Status: File aready exists at " & fullPath)
 
         End If
-
     End Sub
 
     Private Shared Function ReadFileContents(fileName As String) As String
-
         Dim returnValue As String = ""
-        Dim filePath As String = LocalFileDirectory & "\" & fileName
-
-        Using streamReader As IO.StreamReader = New IO.StreamReader(filePath)
-            returnValue = streamReader.ReadToEnd()
-        End Using
+        Dim filePath As String = Path.Combine(LocalFileDirectory, fileName)
+        Try
+            Using streamReader As IO.StreamReader = New IO.StreamReader(filePath)
+                returnValue = streamReader.ReadToEnd()
+            End Using
+        Catch ex As Exception
+            Console.WriteLine("Error: " & ex.Message)
+        End Try
 
         Return returnValue
     End Function

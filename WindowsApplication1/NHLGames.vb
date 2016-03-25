@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Threading
 Imports Newtonsoft.Json.Linq
 Imports NHLGames.TextboxConsoleOutputRediect
+Imports System
 
 Public Class NHLGames
 
@@ -30,12 +31,12 @@ Public Class NHLGames
     End Sub
 
     Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
-        VersionCheck()
-        dtDate.Value = DateTime.Now()
-
         'Setup redirecting console.out to 
         Dim _writer = New TextBoxStreamWriter(RichTextBox)
         Console.SetOut(_writer)
+
+        VersionCheck()
+        dtDate.Value = DateTime.Now()
 
     End Sub
 
@@ -81,8 +82,8 @@ Public Class NHLGames
                 gridGames.Rows.Insert(gridGames.Rows.Count,
                                       game.Id.ToString(),
                                       game.Date.ToLocalTime().ToString("h:mm tt"),
-                                        ImageFetcher.GetEmbeddedImage(game.HomeTeamLogo),
                                       ImageFetcher.GetEmbeddedImage(game.AwayTeamLogo),
+                                        ImageFetcher.GetEmbeddedImage(game.HomeTeamLogo),
                 game.AwayTeam,
                                       game.AwayAbbrev,
                                       game.HomeTeam,
@@ -142,8 +143,8 @@ Public Class NHLGames
         gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "GameID", .HeaderText = "Game ID", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
         gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "time", .HeaderText = "Time", .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
 
-        gridGames.Columns.Add(New DataGridViewImageColumn() With {.Name = "HomeLogo", .HeaderText = "Home Team", .ImageLayout = DataGridViewImageCellLayout.Zoom, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
         gridGames.Columns.Add(New DataGridViewImageColumn() With {.Name = "AwayLogo", .HeaderText = "Away Team", .ImageLayout = DataGridViewImageCellLayout.Zoom, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewImageColumn() With {.Name = "HomeLogo", .HeaderText = "Home Team", .ImageLayout = DataGridViewImageCellLayout.Zoom, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
 
         gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "away", .HeaderText = "Away Team", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
         gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "awayAbbrev", .HeaderText = "Away Abbrev", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
@@ -271,6 +272,7 @@ Public Class NHLGames
             args.Stream = game.FrenchStream
         End If
 
+        args.IsMPC = rbMPC.Checked
         If rbMPC.Checked Then
             args.PlayerPath = FileAccess.LocateEXE("mpc-hc64.exe", "\MPC-HC")
         Else
