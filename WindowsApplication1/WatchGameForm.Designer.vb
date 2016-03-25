@@ -170,10 +170,12 @@ Partial Class WatchGameForm
         'rbHome
         '
         Me.rbHome.AutoSize = True
+        Me.rbHome.Checked = True
         Me.rbHome.Location = New System.Drawing.Point(3, 3)
         Me.rbHome.Name = "rbHome"
         Me.rbHome.Size = New System.Drawing.Size(56, 15)
         Me.rbHome.TabIndex = 11
+        Me.rbHome.TabStop = True
         Me.rbHome.Text = "Home"
         Me.rbHome.UseSelectable = True
         '
@@ -205,10 +207,12 @@ Partial Class WatchGameForm
         'rbLive
         '
         Me.rbLive.AutoSize = True
+        Me.rbLive.Checked = True
         Me.rbLive.Location = New System.Drawing.Point(3, 3)
         Me.rbLive.Name = "rbLive"
         Me.rbLive.Size = New System.Drawing.Size(44, 15)
         Me.rbLive.TabIndex = 11
+        Me.rbLive.TabStop = True
         Me.rbLive.Text = "Live"
         Me.rbLive.UseSelectable = True
         '
@@ -268,10 +272,12 @@ Partial Class WatchGameForm
         'rbVLC
         '
         Me.rbVLC.AutoSize = True
+        Me.rbVLC.Checked = True
         Me.rbVLC.Location = New System.Drawing.Point(3, 3)
         Me.rbVLC.Name = "rbVLC"
         Me.rbVLC.Size = New System.Drawing.Size(44, 15)
         Me.rbVLC.TabIndex = 15
+        Me.rbVLC.TabStop = True
         Me.rbVLC.Text = "VLC"
         Me.rbVLC.UseSelectable = True
         '
@@ -298,10 +304,12 @@ Partial Class WatchGameForm
         'rbQual6
         '
         Me.rbQual6.AutoSize = True
+        Me.rbQual6.Checked = True
         Me.rbQual6.Location = New System.Drawing.Point(268, 4)
         Me.rbQual6.Name = "rbQual6"
         Me.rbQual6.Size = New System.Drawing.Size(48, 15)
         Me.rbQual6.TabIndex = 10
+        Me.rbQual6.TabStop = True
         Me.rbQual6.Text = "720p"
         Me.rbQual6.UseSelectable = True
         '
@@ -478,10 +486,12 @@ Partial Class WatchGameForm
         'rbLevel3
         '
         Me.rbLevel3.AutoSize = True
+        Me.rbLevel3.Checked = True
         Me.rbLevel3.Location = New System.Drawing.Point(3, 3)
         Me.rbLevel3.Name = "rbLevel3"
         Me.rbLevel3.Size = New System.Drawing.Size(59, 15)
         Me.rbLevel3.TabIndex = 11
+        Me.rbLevel3.TabStop = True
         Me.rbLevel3.Text = "Level 3"
         Me.rbLevel3.UseSelectable = True
         '

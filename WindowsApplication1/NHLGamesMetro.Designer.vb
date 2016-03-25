@@ -152,7 +152,7 @@ Partial Class NHLGamesMetro
         Me.RichTextBox.Location = New System.Drawing.Point(3, 20)
         Me.RichTextBox.Name = "RichTextBox"
         Me.RichTextBox.ReadOnly = True
-        Me.RichTextBox.Size = New System.Drawing.Size(653, 329)
+        Me.RichTextBox.Size = New System.Drawing.Size(676, 329)
         Me.RichTextBox.TabIndex = 0
         Me.RichTextBox.Text = "Console Output..." & Global.Microsoft.VisualBasic.ChrW(10)
         '
@@ -164,7 +164,7 @@ Partial Class NHLGamesMetro
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl.Location = New System.Drawing.Point(20, 60)
         Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 2
+        Me.TabControl.SelectedIndex = 1
         Me.TabControl.Size = New System.Drawing.Size(690, 420)
         Me.TabControl.TabIndex = 22
         Me.TabControl.UseSelectable = True
@@ -362,7 +362,7 @@ Partial Class NHLGamesMetro
         'btnClearConsole
         '
         Me.btnClearConsole.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClearConsole.Location = New System.Drawing.Point(553, 352)
+        Me.btnClearConsole.Location = New System.Drawing.Point(576, 355)
         Me.btnClearConsole.Name = "btnClearConsole"
         Me.btnClearConsole.Size = New System.Drawing.Size(103, 23)
         Me.btnClearConsole.TabIndex = 2

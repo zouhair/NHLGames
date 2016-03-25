@@ -162,9 +162,11 @@ Public Class WatchGameForm
         If rbMPC.Checked Then
 
             WatchArgs.PlayerType = GameWatchArguments.PlayerTypeEnum.MPC
+            WatchArgs.PlayerPath = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MPCPath)
         Else
 
             WatchArgs.PlayerType = GameWatchArguments.PlayerTypeEnum.VLC
+            WatchArgs.PlayerPath = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VLCPath)
         End If
 
         If rbAkamai.Checked Then
@@ -240,7 +242,7 @@ Public Class WatchGameForm
     End Sub
 
     Private Sub btnWatch_Click(sender As Object, e As EventArgs) Handles btnWatch.Click
-
+        SetEventArgsFromForm()
         Game.Watch(WatchArgs)
         Me.Close()
     End Sub

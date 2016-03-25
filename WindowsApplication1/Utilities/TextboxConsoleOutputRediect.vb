@@ -12,6 +12,13 @@ Public Class TextboxConsoleOutputRediect
             _output = output
         End Sub
 
+        Enum OutputType
+            Normal = 0
+            Status = 1
+            [Error] = 2
+            CLI = 3
+
+        End Enum
         Public Overrides Sub WriteLine(value As String)
 
             MyBase.WriteLine(value)
@@ -19,13 +26,22 @@ Public Class TextboxConsoleOutputRediect
             _output.BeginInvoke(New Action(Function()
                                                Dim startIndex As Integer = -1
                                                Dim length As Integer = -1
-
+                                               Dim type As OutputType = OutputType.Normal
                                                Dim timestamp As String = "[" & DateTime.Now.ToString("HH:mm:ss") & "] "
 
 
-                                               Dim IsError As Boolean = value.ToLower().IndexOf("Error") > -1
-
-                                               If value.IndexOf(":") > -1 Then
+                                               If value.ToLower().IndexOf("error:") > -1 OrElse value.ToLower().IndexOf("exception:") > -1 Then
+                                                   type = OutputType.Error
+                                                   startIndex = _output.TextLength
+                                                   length = value.IndexOf(":") + 2
+                                                   _output.AppendText(vbCr)
+                                               ElseIf value.IndexOf("[cli]") > -1 Then
+                                                   type = OutputType.CLI
+                                                   startIndex = _output.TextLength
+                                                   length = 5
+                                                   _output.AppendText(vbCr)
+                                               ElseIf value.IndexOf(":") > -1 Then
+                                                   type = OutputType.Status
                                                    startIndex = _output.TextLength
                                                    length = value.IndexOf(":") + 2
                                                    _output.AppendText(vbCr)
@@ -39,10 +55,12 @@ Public Class TextboxConsoleOutputRediect
                                                If startIndex > -1 Then
                                                    _output.Select(startIndex, length)
 
-                                                   If IsError Then
+                                                   If type = OutputType.Error Then
                                                        _output.SelectionColor = Color.Red
-                                                   Else
+                                                   ElseIf type = OutputType.Status
                                                        _output.SelectionColor = Color.Green
+                                                   ElseIf type = OutputType.CLI
+                                                       _output.SelectionColor = Color.SkyBlue
                                                    End If
 
                                                    _output.Select(startIndex, length)

@@ -38,10 +38,16 @@ Public Class GameControl
 
     Private Sub SetInitialProperties(Game As Game)
         picHome.SizeMode = PictureBoxSizeMode.StretchImage
-        picHome.Image = ImageFetcher.GetEmbeddedImage(Game.HomeTeamLogo)
+        If String.IsNullOrEmpty(Game.HomeTeamLogo) = False Then
+            picHome.Image = ImageFetcher.GetEmbeddedImage(Game.HomeTeamLogo)
+        End If
+
 
         picAway.SizeMode = PictureBoxSizeMode.StretchImage
-        picAway.Image = ImageFetcher.GetEmbeddedImage(Game.AwayTeamLogo)
+        If String.IsNullOrEmpty(Game.AwayTeamLogo) = False Then
+            picAway.Image = ImageFetcher.GetEmbeddedImage(Game.AwayTeamLogo)
+        End If
+
         lblTime.Text = Game.Date.ToString("h:mm tt")
     End Sub
 

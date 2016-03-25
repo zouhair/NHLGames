@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports System.IO
 Imports System.Net
+Imports System.Text
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 
@@ -18,6 +19,7 @@ Public Class Downloader
 
     Private Shared Function DownloadContents(URL As String) As String
         Dim client As New WebClient
+        client.Encoding = Encoding.UTF8 'Support french chars. I'm looking at you Montreal
         Return client.DownloadString(URL)
     End Function
     Private Shared Sub DownloadFile(URL As String, fileName As String, Optional checkIfExists As Boolean = False, Optional overwrite As Boolean = True)
