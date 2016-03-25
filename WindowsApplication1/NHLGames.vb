@@ -272,6 +272,7 @@ Public Class NHLGames
             args.Stream = game.FrenchStream
         End If
 
+        args.IsMPC = rbMPC.Checked
         If rbMPC.Checked Then
             args.PlayerPath = FileAccess.LocateEXE("mpc-hc64.exe", "\MPC-HC")
         Else
