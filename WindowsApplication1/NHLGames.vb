@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Threading
 Imports Newtonsoft.Json.Linq
 Imports NHLGames.TextboxConsoleOutputRediect
+Imports System
 
 Public Class NHLGames
 
@@ -30,12 +31,12 @@ Public Class NHLGames
     End Sub
 
     Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
-        VersionCheck()
-        dtDate.Value = DateTime.Now()
-
         'Setup redirecting console.out to 
         Dim _writer = New TextBoxStreamWriter(RichTextBox)
         Console.SetOut(_writer)
+
+        VersionCheck()
+        dtDate.Value = DateTime.Now()
 
     End Sub
 
@@ -271,6 +272,7 @@ Public Class NHLGames
             args.Stream = game.FrenchStream
         End If
 
+        args.IsMPC = rbMPC.Checked
         If rbMPC.Checked Then
             args.PlayerPath = FileAccess.LocateEXE("mpc-hc64.exe", "\MPC-HC")
         Else
