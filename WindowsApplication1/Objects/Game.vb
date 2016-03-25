@@ -157,7 +157,7 @@ Public Class Game
 
             Dim returnValue As String = ""
             If String.IsNullOrEmpty(PlayerPath) = False Then
-                returnValue &= " --player """ & PlayerPath & """ " '--player-passthrough=hls 
+                returnValue &= " --player """ & PlayerPath & """ "
             End If
 
 
