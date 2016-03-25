@@ -112,6 +112,7 @@ Public Class WatchGameForm
                 txtOutputPath.Enabled = False
             End If
 
+
         End If
 
         If Game IsNot Nothing Then
@@ -249,5 +250,17 @@ Public Class WatchGameForm
 
     Private Sub WatchGameForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         SetEventArgsFromForm()
+    End Sub
+
+    Private Sub chkEnableOutput_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableOutput.CheckedChanged
+        txtOutputPath.Enabled = chkEnableOutput.Checked
+    End Sub
+
+    Private Sub chkEnablePlayerArgs_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnablePlayerArgs.CheckedChanged
+        txtPlayerArgs.Enabled = chkEnablePlayerArgs.Checked
+    End Sub
+
+    Private Sub chkEnableStreamArgs_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableStreamArgs.CheckedChanged
+        txtStreamerArgs.Enabled = chkEnableStreamArgs.Checked
     End Sub
 End Class

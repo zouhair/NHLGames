@@ -286,9 +286,22 @@ Public Class Game
 
         Public Overrides Function ToString() As String
 
+            '--player-passthrough hls  should allow for seeking, never seems to work
+            '--player-external-http should allow for serviio to serve stream to DLNA player, my TV can't seem to open the media though. DLNA player on phone sort of works, craps out after 10 sec or so
+
             Dim returnValue As String = ""
+            Dim LiteralPlayerArgs As String = ""
+            If UsePlayerArgs Then
+                LiteralPlayerArgs = PlayerArgs
+            End If
+
+
+            If UseOutputArgs Then
+                LiteralPlayerArgs &= " -o '" & PlayerOutputPath & "'"
+            End If
+
             If String.IsNullOrEmpty(PlayerPath) = False Then
-                returnValue &= " --player """ & PlayerPath & """ " '--player-passthrough=hls 
+                returnValue &= " --player ""'" & PlayerPath & "' " & LiteralPlayerArgs & """ " '--player-passthrough=hls 
             Else
                 Console.WriteLine("Error: Player path is empty")
             End If
@@ -313,7 +326,14 @@ Public Class Game
                 returnValue &= Quality
             End If
 
-            returnValue &= " --http-no-ssl-verify"
+            returnValue &= " --http-no-ssl-verify "
+
+            If UseLiveStreamerArgs Then
+                returnValue &= LiveStreamerArgs
+            End If
+
+
+
             Return returnValue
         End Function
 
