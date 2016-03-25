@@ -29,6 +29,8 @@ Public Class Downloader
         If (checkIfExists = False) OrElse (checkIfExists AndAlso My.Computer.FileSystem.FileExists(fullPath) = False) Then
             Console.WriteLine("Downloading File: " & URL & " to " & fullPath)
             My.Computer.Network.DownloadFile(URL, fullPath, "", "", False, 10000, overwrite)
+        Else
+            Console.WriteLine("Status: File aready exists at " & fullPath)
 
         End If
 
@@ -68,7 +70,7 @@ Public Class Downloader
 
     Public Shared Function DownloadJSONSchedule(startDate As DateTime) As JObject
 
-        Console.WriteLine("Checking: Game schedule for " & startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
+        Console.WriteLine("Checking: Fetching game schedule for " & startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
 
         Dim returnValue As New JObject
 
@@ -80,6 +82,7 @@ Public Class Downloader
         Dim data As String = ""
 
         If IsTodaysSchedule Then
+            Console.WriteLine("Status: Downloading todays current schedule from " & URL)
             data = DownloadContents(URL)
         Else
             DownloadFile(URL, fileName, True)

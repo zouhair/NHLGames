@@ -38,7 +38,7 @@ Public Class TextboxConsoleOutputRediect
                                                ElseIf value.IndexOf("[cli]") > -1 Then
                                                    type = OutputType.CLI
                                                    startIndex = _output.TextLength
-                                                   length = 5
+                                                   length = 6
                                                    _output.AppendText(vbCr)
                                                ElseIf value.IndexOf(":") > -1 Then
                                                    type = OutputType.Status

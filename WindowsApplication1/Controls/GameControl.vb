@@ -3,13 +3,16 @@
 Public Class GameControl
 
     Private _Game As Game
-    Public Sub New(Game As Game)
+    Public Sub New(Game As Game, showScores As Boolean)
         InitializeComponent()
 
         _Game = Game
 
         SetInitialProperties(Game)
         UpdateGameStatusProperties(Game)
+
+        lblAwayScore.Visible = showScores
+        lblHomeScore.Visible = showScores
 
         AddHandler _Game.GameUpdated, AddressOf GameUpdatedHandler
 

@@ -37,6 +37,7 @@ Partial Class NHLGamesMetro
         Me.GamesTab = New MetroFramework.Controls.MetroTabPage()
         Me.FlowLayoutPanel = New System.Windows.Forms.FlowLayoutPanel()
         Me.ConsoleTab = New MetroFramework.Controls.MetroTabPage()
+        Me.btnClearConsole = New MetroFramework.Controls.MetroButton()
         Me.SettingTab = New MetroFramework.Controls.MetroTabPage()
         Me.btnLiveStreamerPath = New MetroFramework.Controls.MetroButton()
         Me.btnMPCPath = New MetroFramework.Controls.MetroButton()
@@ -51,7 +52,6 @@ Partial Class NHLGamesMetro
         Me.MetroCheckBox1 = New MetroFramework.Controls.MetroCheckBox()
         Me.btnHosts = New MetroFramework.Controls.MetroButton()
         Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
-        Me.btnClearConsole = New MetroFramework.Controls.MetroButton()
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl.SuspendLayout()
         Me.GamesTab.SuspendLayout()
@@ -164,7 +164,7 @@ Partial Class NHLGamesMetro
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl.Location = New System.Drawing.Point(20, 60)
         Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 1
+        Me.TabControl.SelectedIndex = 0
         Me.TabControl.Size = New System.Drawing.Size(690, 420)
         Me.TabControl.TabIndex = 22
         Me.TabControl.UseSelectable = True
@@ -214,6 +214,16 @@ Partial Class NHLGamesMetro
         Me.ConsoleTab.VerticalScrollbarBarColor = True
         Me.ConsoleTab.VerticalScrollbarHighlightOnWheel = False
         Me.ConsoleTab.VerticalScrollbarSize = 10
+        '
+        'btnClearConsole
+        '
+        Me.btnClearConsole.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClearConsole.Location = New System.Drawing.Point(576, 355)
+        Me.btnClearConsole.Name = "btnClearConsole"
+        Me.btnClearConsole.Size = New System.Drawing.Size(103, 23)
+        Me.btnClearConsole.TabIndex = 2
+        Me.btnClearConsole.Text = "Clear"
+        Me.btnClearConsole.UseSelectable = True
         '
         'SettingTab
         '
@@ -358,16 +368,6 @@ Partial Class NHLGamesMetro
         Me.btnHosts.TabIndex = 27
         Me.btnHosts.Text = "Test Hosts File"
         Me.btnHosts.UseSelectable = True
-        '
-        'btnClearConsole
-        '
-        Me.btnClearConsole.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClearConsole.Location = New System.Drawing.Point(576, 355)
-        Me.btnClearConsole.Name = "btnClearConsole"
-        Me.btnClearConsole.Size = New System.Drawing.Size(103, 23)
-        Me.btnClearConsole.TabIndex = 2
-        Me.btnClearConsole.Text = "Clear"
-        Me.btnClearConsole.UseSelectable = True
         '
         'NHLGamesMetro
         '
