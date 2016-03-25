@@ -15,7 +15,7 @@ Public Class Downloader
     Private Shared ApplicationVersionFileName As String = "version.txt"
     Private Shared GamesTextFileName As String = "games.txt"
 
-    Private Shared LocalFileDirectory = Application.StartupPath
+    Private Shared LocalFileDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
 
     Private Shared Function DownloadContents(URL As String) As String
         Dim client As New WebClient
