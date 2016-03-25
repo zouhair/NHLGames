@@ -1,6 +1,5 @@
 ﻿Imports System.Globalization
 Imports System.IO
-Imports System.IO.Path
 Imports System.Net
 Imports System.Text
 Imports Newtonsoft.Json
@@ -24,21 +23,21 @@ Public Class Downloader
         Return client.DownloadString(URL)
     End Function
     Private Shared Sub DownloadFile(URL As String, fileName As String, Optional checkIfExists As Boolean = False, Optional overwrite As Boolean = True)
-        Dim fullPath As String = Combine(LocalFileDirectory, fileName)
+        Dim fullPath As String = Path.Combine(LocalFileDirectory, fileName)
+
 
         If (checkIfExists = False) OrElse (checkIfExists AndAlso My.Computer.FileSystem.FileExists(fullPath) = False) Then
-            Console.WriteLine("Downloading file: " & URL & " to " & fullPath)
-            Try
-                My.Computer.Network.DownloadFile(URL, fullPath, "", "", False, 10000, overwrite)
-            Catch ex As Exception
-                Console.WriteLine("Error: " & ex.Message)
-            End Try
+            Console.WriteLine("Downloading File: " & URL & " to " & fullPath)
+            My.Computer.Network.DownloadFile(URL, fullPath, "", "", False, 10000, overwrite)
+        Else
+            Console.WriteLine("Status: File aready exists at " & fullPath)
+
         End If
     End Sub
 
     Private Shared Function ReadFileContents(fileName As String) As String
         Dim returnValue As String = ""
-        Dim filePath As String = Combine(LocalFileDirectory, fileName)
+        Dim filePath As String = Path.Combine(LocalFileDirectory, fileName)
         Try
             Using streamReader As IO.StreamReader = New IO.StreamReader(filePath)
                 returnValue = streamReader.ReadToEnd()
@@ -76,7 +75,7 @@ Public Class Downloader
 
         Dim returnValue As New JObject
 
-        Dim IsTodaysSchedule = (startDate.Date.Ticks = DateHelper.GetCentralTime.Date.Ticks)
+        Dim IsTodaysSchedule = (startDate.Date.Ticks = DateHelper.GetPacificTime.Date.Ticks) 'Use Pacific time for West coast games that might still be happening
         Dim dateTimeString As String = startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
         Dim fileName As String = dateTimeString & ".json"
         Dim URL As String = String.Format(ScheduleAPIURL, dateTimeString, dateTimeString)

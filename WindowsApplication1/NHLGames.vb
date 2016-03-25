@@ -391,7 +391,7 @@ Public Class NHLGames
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkVLCDownload.LinkClicked
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("http: //www.videolan.org/vlc/download-windows.html")
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("http://www.videolan.org/vlc/download-windows.html")
         Process.Start(sInfo)
     End Sub
 

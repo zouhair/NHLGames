@@ -25,7 +25,8 @@ Public Class GameControl
         lblHomeScore.Text = Game.HomeScore
         lblHomeTeam.Text = Game.HomeAbbrev
 
-        btnWatch.Enabled = Game.Date <= DateTime.Now 'AndAlso Game.GameIsLive
+        btnWatch.Enabled = Game.Date <= DateTime.Now.ToUniversalTime() 'AndAlso Game.GameIsLive
+        'Compare using universal time
 
         If Game.Date <= DateTime.Now AndAlso Game.GameIsLive Then
             BorderPanel1.BorderColour = Color.Green
@@ -51,7 +52,7 @@ Public Class GameControl
             picAway.Image = ImageFetcher.GetEmbeddedImage(Game.AwayTeamLogo)
         End If
 
-        lblTime.Text = Game.Date.ToString("h:mm tt")
+        lblTime.Text = Game.Date.ToLocalTime().ToString("h:mm tt") 'Convert to local time for display
     End Sub
 
     Private Sub btnWatch_Click(sender As Object, e As EventArgs) Handles btnWatch.Click
