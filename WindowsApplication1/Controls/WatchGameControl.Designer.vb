@@ -22,7 +22,6 @@ Partial Class WatchGameControl
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-
         Me.btnWatch = New MetroFramework.Controls.MetroButton()
         Me.btnCancel = New MetroFramework.Controls.MetroButton()
         Me.MetroLabel5 = New MetroFramework.Controls.MetroLabel()
@@ -287,6 +286,8 @@ Partial Class WatchGameControl
         'chk60
         '
         Me.chk60.AutoSize = True
+        Me.chk60.Checked = True
+        Me.chk60.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chk60.Location = New System.Drawing.Point(324, 3)
         Me.chk60.Name = "chk60"
         Me.chk60.Size = New System.Drawing.Size(54, 15)

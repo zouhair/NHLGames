@@ -270,7 +270,7 @@ Public Class Game
         End Enum
 
         Public Property Quality As String = ""
-        Public Property Is60FPS As Boolean = False
+        Public Property Is60FPS As Boolean = True
         Public Property CDN As String = ""
         Public Property Server As String = ""
         Public Property Stream As GameStream

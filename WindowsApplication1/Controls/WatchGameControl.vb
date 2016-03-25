@@ -112,7 +112,7 @@ Public Class WatchGameControl
     End Sub
     Private Sub SetEventArgsFromForm()
 
-        WatchArgs.Is60FPS = chk60.Checked
+        WatchArgs.Is60FPS = chk60.Checked ' Enable 60fps by default
 
         If rbQual6.Checked Then
             WatchArgs.Quality = "720p"
@@ -221,5 +221,11 @@ Public Class WatchGameControl
 
         '_WatchArgs = watchArgs
         'BindForm()
+    End Sub
+
+    Private Sub rbQual_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual1.Click, rbQual2.Click, rbQual3.Click, rbQual4.Click, rbQual5.Click, rbQual6.Click 'Does not seem to be firing
+        If sender.Equals(rbQual6) = False Then
+            chk60.Checked = False
+        End If
     End Sub
 End Class
