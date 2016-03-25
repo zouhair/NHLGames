@@ -25,7 +25,8 @@ Public Class GameControl
         lblHomeScore.Text = Game.HomeScore
         lblHomeTeam.Text = Game.HomeAbbrev
 
-        btnWatch.Enabled = Game.Date <= DateTime.Now.ToUniversalTime() 'AndAlso Game.GameIsLive
+        'btnWatch.Enabled = Game.Date <= DateTime.Now.ToUniversalTime() 'AndAlso Game.GameIsLive
+        btnWatch.Enabled = Game.AreAnyStreamsAvailable ' Allow watching games as soon as they are available on the server
         'Compare using universal time
 
         If Game.Date <= DateTime.Now AndAlso Game.GameIsLive Then
