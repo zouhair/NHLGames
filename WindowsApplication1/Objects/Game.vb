@@ -143,13 +143,13 @@ Public Class Game
                                      Console.WriteLine("Running:    " & liveStreamerPath & " " & args.ToString())
 
                                      Dim proc = New Process() With {.StartInfo =
-                                         New ProcessStartInfo With {
-                                         .FileName = liveStreamerPath,
-                                         .Arguments = args.ToString(),
-                                         .UseShellExecute = False,
-                                         .RedirectStandardOutput = True,
-                                         .CreateNoWindow = True}
-                                     }
+            New ProcessStartInfo With {
+            .FileName = liveStreamerPath,
+            .Arguments = args.ToString(),
+            .UseShellExecute = False,
+            .RedirectStandardOutput = True,
+            .CreateNoWindow = True}
+        }
                                      proc.EnableRaisingEvents = True
                                      Try
                                          proc.Start()
