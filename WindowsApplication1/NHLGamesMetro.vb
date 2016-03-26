@@ -44,7 +44,11 @@ Public Class NHLGamesMetro
         If mpcPath = "" Then
             mpcPath = FileAccess.LocateEXE("mpc-hc64.exe", "\MPC-HC")
             If mpcPath = String.Empty Then
-                mpcPath = "Unknown"
+                mpcPath = FileAccess.LocateEXE("mpc-hc.exe", "\MPC-HC")
+                If mpcPath = String.Empty Then
+                    mpcPath = "Unknown"
+                End If
+
             Else
                 ApplicationSettings.SetValue(ApplicationSettings.Settings.MPCPath, mpcPath)
             End If

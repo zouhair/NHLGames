@@ -102,7 +102,7 @@ Partial Class NHLGamesMetro
         Me.gridGames.RowTemplate.DividerHeight = 1
         Me.gridGames.RowTemplate.Height = 35
         Me.gridGames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.gridGames.Size = New System.Drawing.Size(208, 0)
+        Me.gridGames.Size = New System.Drawing.Size(288, 0)
         Me.gridGames.TabIndex = 0
         Me.gridGames.Visible = False
         '
@@ -123,9 +123,9 @@ Partial Class NHLGamesMetro
         '
         Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnRefresh.Location = New System.Drawing.Point(558, 6)
+        Me.btnRefresh.Location = New System.Drawing.Point(668, 13)
         Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(121, 29)
+        Me.btnRefresh.Size = New System.Drawing.Size(93, 22)
         Me.btnRefresh.TabIndex = 5
         Me.btnRefresh.Text = "Refresh"
         Me.btnRefresh.UseSelectable = True
@@ -152,7 +152,7 @@ Partial Class NHLGamesMetro
         Me.RichTextBox.Location = New System.Drawing.Point(3, 20)
         Me.RichTextBox.Name = "RichTextBox"
         Me.RichTextBox.ReadOnly = True
-        Me.RichTextBox.Size = New System.Drawing.Size(676, 329)
+        Me.RichTextBox.Size = New System.Drawing.Size(766, 329)
         Me.RichTextBox.TabIndex = 0
         Me.RichTextBox.Text = "Console Output..." & Global.Microsoft.VisualBasic.ChrW(10)
         '
@@ -162,10 +162,10 @@ Partial Class NHLGamesMetro
         Me.TabControl.Controls.Add(Me.ConsoleTab)
         Me.TabControl.Controls.Add(Me.SettingTab)
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl.Location = New System.Drawing.Point(20, 60)
+        Me.TabControl.Location = New System.Drawing.Point(10, 60)
         Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 0
-        Me.TabControl.Size = New System.Drawing.Size(690, 420)
+        Me.TabControl.SelectedIndex = 1
+        Me.TabControl.Size = New System.Drawing.Size(780, 420)
         Me.TabControl.TabIndex = 22
         Me.TabControl.UseSelectable = True
         '
@@ -180,7 +180,7 @@ Partial Class NHLGamesMetro
         Me.GamesTab.HorizontalScrollbarSize = 10
         Me.GamesTab.Location = New System.Drawing.Point(4, 38)
         Me.GamesTab.Name = "GamesTab"
-        Me.GamesTab.Size = New System.Drawing.Size(682, 378)
+        Me.GamesTab.Size = New System.Drawing.Size(772, 378)
         Me.GamesTab.TabIndex = 0
         Me.GamesTab.Text = "Games      "
         Me.GamesTab.VerticalScrollbarBarColor = True
@@ -194,9 +194,9 @@ Partial Class NHLGamesMetro
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlowLayoutPanel.AutoScroll = True
         Me.FlowLayoutPanel.BackColor = System.Drawing.Color.White
-        Me.FlowLayoutPanel.Location = New System.Drawing.Point(7, 41)
+        Me.FlowLayoutPanel.Location = New System.Drawing.Point(3, 41)
         Me.FlowLayoutPanel.Name = "FlowLayoutPanel"
-        Me.FlowLayoutPanel.Size = New System.Drawing.Size(672, 341)
+        Me.FlowLayoutPanel.Size = New System.Drawing.Size(766, 341)
         Me.FlowLayoutPanel.TabIndex = 6
         '
         'ConsoleTab
@@ -208,7 +208,7 @@ Partial Class NHLGamesMetro
         Me.ConsoleTab.HorizontalScrollbarSize = 10
         Me.ConsoleTab.Location = New System.Drawing.Point(4, 38)
         Me.ConsoleTab.Name = "ConsoleTab"
-        Me.ConsoleTab.Size = New System.Drawing.Size(682, 378)
+        Me.ConsoleTab.Size = New System.Drawing.Size(772, 378)
         Me.ConsoleTab.TabIndex = 2
         Me.ConsoleTab.Text = "Console      "
         Me.ConsoleTab.VerticalScrollbarBarColor = True
@@ -218,7 +218,7 @@ Partial Class NHLGamesMetro
         'btnClearConsole
         '
         Me.btnClearConsole.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClearConsole.Location = New System.Drawing.Point(576, 355)
+        Me.btnClearConsole.Location = New System.Drawing.Point(666, 355)
         Me.btnClearConsole.Name = "btnClearConsole"
         Me.btnClearConsole.Size = New System.Drawing.Size(103, 23)
         Me.btnClearConsole.TabIndex = 2
@@ -244,7 +244,7 @@ Partial Class NHLGamesMetro
         Me.SettingTab.HorizontalScrollbarSize = 10
         Me.SettingTab.Location = New System.Drawing.Point(4, 38)
         Me.SettingTab.Name = "SettingTab"
-        Me.SettingTab.Size = New System.Drawing.Size(682, 378)
+        Me.SettingTab.Size = New System.Drawing.Size(692, 378)
         Me.SettingTab.TabIndex = 1
         Me.SettingTab.Text = "Settings      "
         Me.SettingTab.VerticalScrollbarBarColor = True
@@ -254,7 +254,7 @@ Partial Class NHLGamesMetro
         'btnLiveStreamerPath
         '
         Me.btnLiveStreamerPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnLiveStreamerPath.Location = New System.Drawing.Point(545, 81)
+        Me.btnLiveStreamerPath.Location = New System.Drawing.Point(555, 81)
         Me.btnLiveStreamerPath.Name = "btnLiveStreamerPath"
         Me.btnLiveStreamerPath.Size = New System.Drawing.Size(28, 20)
         Me.btnLiveStreamerPath.TabIndex = 50
@@ -264,7 +264,7 @@ Partial Class NHLGamesMetro
         'btnMPCPath
         '
         Me.btnMPCPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnMPCPath.Location = New System.Drawing.Point(545, 54)
+        Me.btnMPCPath.Location = New System.Drawing.Point(555, 54)
         Me.btnMPCPath.Name = "btnMPCPath"
         Me.btnMPCPath.Size = New System.Drawing.Size(28, 20)
         Me.btnMPCPath.TabIndex = 49
@@ -274,7 +274,7 @@ Partial Class NHLGamesMetro
         'btnVLCPath
         '
         Me.btnVLCPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnVLCPath.Location = New System.Drawing.Point(545, 28)
+        Me.btnVLCPath.Location = New System.Drawing.Point(555, 28)
         Me.btnVLCPath.Name = "btnVLCPath"
         Me.btnVLCPath.Size = New System.Drawing.Size(28, 20)
         Me.btnVLCPath.TabIndex = 48
@@ -298,7 +298,7 @@ Partial Class NHLGamesMetro
         Me.txtLiveStreamPath.Location = New System.Drawing.Point(137, 80)
         Me.txtLiveStreamPath.Name = "txtLiveStreamPath"
         Me.txtLiveStreamPath.ReadOnly = True
-        Me.txtLiveStreamPath.Size = New System.Drawing.Size(402, 22)
+        Me.txtLiveStreamPath.Size = New System.Drawing.Size(412, 22)
         Me.txtLiveStreamPath.TabIndex = 46
         '
         'txtMPCPath
@@ -309,7 +309,7 @@ Partial Class NHLGamesMetro
         Me.txtMPCPath.Location = New System.Drawing.Point(137, 54)
         Me.txtMPCPath.Name = "txtMPCPath"
         Me.txtMPCPath.ReadOnly = True
-        Me.txtMPCPath.Size = New System.Drawing.Size(402, 22)
+        Me.txtMPCPath.Size = New System.Drawing.Size(412, 22)
         Me.txtMPCPath.TabIndex = 45
         '
         'MetroLabel3
@@ -338,12 +338,13 @@ Partial Class NHLGamesMetro
         Me.txtVLCPath.Location = New System.Drawing.Point(137, 28)
         Me.txtVLCPath.Name = "txtVLCPath"
         Me.txtVLCPath.ReadOnly = True
-        Me.txtVLCPath.Size = New System.Drawing.Size(402, 22)
+        Me.txtVLCPath.Size = New System.Drawing.Size(412, 22)
         Me.txtVLCPath.TabIndex = 42
         '
         'btnOpenHostsFile
         '
-        Me.btnOpenHostsFile.Location = New System.Drawing.Point(383, 123)
+        Me.btnOpenHostsFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnOpenHostsFile.Location = New System.Drawing.Point(359, 123)
         Me.btnOpenHostsFile.Name = "btnOpenHostsFile"
         Me.btnOpenHostsFile.Size = New System.Drawing.Size(92, 24)
         Me.btnOpenHostsFile.TabIndex = 39
@@ -362,7 +363,8 @@ Partial Class NHLGamesMetro
         '
         'btnHosts
         '
-        Me.btnHosts.Location = New System.Drawing.Point(481, 123)
+        Me.btnHosts.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnHosts.Location = New System.Drawing.Point(457, 123)
         Me.btnHosts.Name = "btnHosts"
         Me.btnHosts.Size = New System.Drawing.Size(92, 24)
         Me.btnHosts.TabIndex = 27
@@ -373,12 +375,13 @@ Partial Class NHLGamesMetro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(730, 500)
+        Me.ClientSize = New System.Drawing.Size(810, 500)
         Me.Controls.Add(Me.TabControl)
         Me.Controls.Add(Me.lblVersion)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimumSize = New System.Drawing.Size(730, 500)
         Me.Name = "NHLGamesMetro"
+        Me.Padding = New System.Windows.Forms.Padding(10, 60, 20, 20)
         Me.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow
         Me.Text = "NHL Games"
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).EndInit()

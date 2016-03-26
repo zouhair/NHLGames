@@ -301,9 +301,7 @@ Public Class Game
             End If
 
 
-            If UseOutputArgs Then
-                LiteralPlayerArgs &= " -o '" & PlayerOutputPath & "'"
-            End If
+
 
             If String.IsNullOrEmpty(PlayerPath) = False Then
                 returnValue &= " --player ""'" & PlayerPath & "' " & LiteralPlayerArgs & """ " '--player-passthrough=hls 
@@ -332,6 +330,10 @@ Public Class Game
             End If
 
             returnValue &= " --http-no-ssl-verify "
+
+            If UseOutputArgs Then
+                returnValue &= " -o """ & PlayerOutputPath & """ "
+            End If
 
             If UseLiveStreamerArgs Then
                 returnValue &= LiveStreamerArgs
