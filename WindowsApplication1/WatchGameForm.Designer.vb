@@ -619,8 +619,6 @@ Partial Class WatchGameForm
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "WatchGameForm"
         Me.Resizable = False
-        Me.ShowIcon = False
-        Me.ShowInTaskbar = False
         Me.Text = "Watch Game"
         Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.pnlBasic.ResumeLayout(False)
