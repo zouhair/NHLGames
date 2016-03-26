@@ -21,6 +21,9 @@ Public Class WatchGameForm
         _Game = game
         _WatchArgs = watchArgs
 
+        rbHome.Text = "Home (" & game.HomeAbbrev & ")"
+        rbAway.Text = "Away (" & game.AwayAbbrev & ")"
+
     End Sub
     Private _WatchArgs As GameWatchArguments
     Public Property WatchArgs As GameWatchArguments

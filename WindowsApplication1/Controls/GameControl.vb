@@ -44,13 +44,15 @@ Public Class GameControl
     Private Sub SetInitialProperties(Game As Game)
         picAway.SizeMode = PictureBoxSizeMode.StretchImage
         If String.IsNullOrEmpty(Game.HomeTeamLogo) = False Then
-            picAway.Image = ImageFetcher.GetEmbeddedImage(Game.AwayTeamLogo)
+            picHome.Image = ImageFetcher.GetEmbeddedImage(Game.HomeTeamLogo)
+            HomeTeamToolTip.SetToolTip(picHome, "Home Team: " & Game.HomeTeam)
         End If
 
 
         picHome.SizeMode = PictureBoxSizeMode.StretchImage
         If String.IsNullOrEmpty(Game.AwayTeamLogo) = False Then
-            picHome.Image = ImageFetcher.GetEmbeddedImage(Game.HomeTeamLogo)
+            picAway.Image = ImageFetcher.GetEmbeddedImage(Game.AwayTeamLogo)
+            AwayTeamToolTip.SetToolTip(picAway, "Away Team: " & Game.AwayTeam)
         End If
 
         lblTime.Text = Game.Date.ToLocalTime().ToString("h:mm tt") 'Convert to local time for display

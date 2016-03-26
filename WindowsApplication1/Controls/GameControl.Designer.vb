@@ -22,6 +22,8 @@ Partial Class GameControl
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.HomeTeamToolTip = New MetroFramework.Components.MetroToolTip()
+        Me.AwayTeamToolTip = New MetroFramework.Components.MetroToolTip()
         Me.BorderPanel1 = New BorderPanel()
         Me.picAway = New System.Windows.Forms.PictureBox()
         Me.lblTime = New MetroFramework.Controls.MetroLabel()
@@ -36,6 +38,18 @@ Partial Class GameControl
         CType(Me.picAway, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picHome, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'HomeTeamToolTip
+        '
+        Me.HomeTeamToolTip.Style = MetroFramework.MetroColorStyle.[Default]
+        Me.HomeTeamToolTip.StyleManager = Nothing
+        Me.HomeTeamToolTip.Theme = MetroFramework.MetroThemeStyle.Light
+        '
+        'AwayTeamToolTip
+        '
+        Me.AwayTeamToolTip.Style = MetroFramework.MetroColorStyle.[Default]
+        Me.AwayTeamToolTip.StyleManager = Nothing
+        Me.AwayTeamToolTip.Theme = MetroFramework.MetroThemeStyle.Light
         '
         'BorderPanel1
         '
@@ -167,4 +181,6 @@ Partial Class GameControl
     Friend WithEvents btnWatch As MetroFramework.Controls.MetroButton
     Friend WithEvents lblTime As MetroFramework.Controls.MetroLabel
     Friend WithEvents BorderPanel1 As BorderPanel
+    Friend WithEvents HomeTeamToolTip As MetroFramework.Components.MetroToolTip
+    Private WithEvents AwayTeamToolTip As MetroFramework.Components.MetroToolTip
 End Class

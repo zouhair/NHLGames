@@ -28,7 +28,7 @@ Partial Class WatchGameForm
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(WatchGameForm))
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlBasic = New MetroFramework.Controls.MetroPanel()
-        Me.MetroPanel4 = New MetroFramework.Controls.MetroPanel()
+        Me.MetroPanel4 = New System.Windows.Forms.FlowLayoutPanel()
         Me.rbFrench = New MetroFramework.Controls.MetroRadioButton()
         Me.rbNational = New MetroFramework.Controls.MetroRadioButton()
         Me.rbAway = New MetroFramework.Controls.MetroRadioButton()
@@ -122,25 +122,19 @@ Partial Class WatchGameForm
         '
         'MetroPanel4
         '
+        Me.MetroPanel4.Controls.Add(Me.rbHome)
+        Me.MetroPanel4.Controls.Add(Me.rbAway)
         Me.MetroPanel4.Controls.Add(Me.rbFrench)
         Me.MetroPanel4.Controls.Add(Me.rbNational)
-        Me.MetroPanel4.Controls.Add(Me.rbAway)
-        Me.MetroPanel4.Controls.Add(Me.rbHome)
-        Me.MetroPanel4.HorizontalScrollbarBarColor = True
-        Me.MetroPanel4.HorizontalScrollbarHighlightOnWheel = False
-        Me.MetroPanel4.HorizontalScrollbarSize = 10
         Me.MetroPanel4.Location = New System.Drawing.Point(149, 101)
         Me.MetroPanel4.Name = "MetroPanel4"
         Me.MetroPanel4.Size = New System.Drawing.Size(395, 25)
         Me.MetroPanel4.TabIndex = 7
-        Me.MetroPanel4.VerticalScrollbarBarColor = True
-        Me.MetroPanel4.VerticalScrollbarHighlightOnWheel = False
-        Me.MetroPanel4.VerticalScrollbarSize = 10
         '
         'rbFrench
         '
         Me.rbFrench.AutoSize = True
-        Me.rbFrench.Location = New System.Drawing.Point(196, 3)
+        Me.rbFrench.Location = New System.Drawing.Point(123, 3)
         Me.rbFrench.Name = "rbFrench"
         Me.rbFrench.Size = New System.Drawing.Size(59, 15)
         Me.rbFrench.TabIndex = 14
@@ -150,7 +144,7 @@ Partial Class WatchGameForm
         'rbNational
         '
         Me.rbNational.AutoSize = True
-        Me.rbNational.Location = New System.Drawing.Point(122, 3)
+        Me.rbNational.Location = New System.Drawing.Point(188, 3)
         Me.rbNational.Name = "rbNational"
         Me.rbNational.Size = New System.Drawing.Size(68, 15)
         Me.rbNational.TabIndex = 13
@@ -619,8 +613,6 @@ Partial Class WatchGameForm
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "WatchGameForm"
         Me.Resizable = False
-        Me.ShowIcon = False
-        Me.ShowInTaskbar = False
         Me.Text = "Watch Game"
         Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.pnlBasic.ResumeLayout(False)
@@ -652,7 +644,7 @@ Partial Class WatchGameForm
     Friend WithEvents btnWatch As MetroFramework.Controls.MetroButton
     Friend WithEvents btnCancel As MetroFramework.Controls.MetroButton
     Friend WithEvents lnkShowAdvanced As MetroFramework.Controls.MetroLink
-    Friend WithEvents MetroPanel4 As MetroFramework.Controls.MetroPanel
+    Friend WithEvents MetroPanel4 As FlowLayoutPanel
     Friend WithEvents rbFrench As MetroFramework.Controls.MetroRadioButton
     Friend WithEvents rbNational As MetroFramework.Controls.MetroRadioButton
     Friend WithEvents rbAway As MetroFramework.Controls.MetroRadioButton
