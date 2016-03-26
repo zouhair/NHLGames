@@ -204,7 +204,7 @@ Public Class Game
         GameID = game.Property("gamePk").ToString()
         _StatusID = game("status")("statusCode").ToString()
 
-        If [Date] <= DateTime.Now Then
+        If [Date] <= DateTime.Now.ToUniversalTime() Then
             HomeScore = game("teams")("home")("score").ToString()
             AwayScore = game("teams")("away")("score").ToString()
         End If

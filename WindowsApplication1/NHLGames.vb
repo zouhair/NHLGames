@@ -36,7 +36,7 @@ Public Class NHLGames
         Console.SetOut(_writer)
 
         VersionCheck()
-        dtDate.Value = DateTime.Now()
+        dtDate.Value = DateHelper.GetPacificTime() 'Default to pacific time to avoid switching days early
 
     End Sub
 
