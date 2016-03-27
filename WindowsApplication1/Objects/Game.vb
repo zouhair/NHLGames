@@ -276,6 +276,7 @@ Public Class Game
         Public Property IsVOD As Boolean = False
         Public Property IsMPC As Boolean = False
 
+        Public Property GameTitle As String = ""
         Public Property PlayerPath As String = ""
         Public Property PlayerType As PlayerTypeEnum = PlayerTypeEnum.None
 
@@ -301,10 +302,14 @@ Public Class Game
             End If
 
 
+            Dim titleArg As String = ""
+            If PlayerType = PlayerTypeEnum.VLC Then
+                titleArg = " --meta-title '" & GameTitle & "' "
+            End If
 
 
             If String.IsNullOrEmpty(PlayerPath) = False Then
-                returnValue &= " --player ""'" & PlayerPath & "' " & LiteralPlayerArgs & """ " '--player-passthrough=hls 
+                returnValue &= " --player ""'" & PlayerPath & "' " & titleArg & LiteralPlayerArgs & """ " '--player-passthrough=hls 
             Else
                 Console.WriteLine("Error: Player path is empty")
             End If

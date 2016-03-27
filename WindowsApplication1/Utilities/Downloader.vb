@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.IO.Path
 Imports System.Net
 Imports System.Text
+Imports MetroFramework
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 
@@ -16,7 +17,29 @@ Public Class Downloader
     Private Shared ApplicationVersionFileName As String = "version.txt"
     Private Shared GamesTextFileName As String = "games.txt"
 
-    Private Shared LocalFileDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
+    Private Shared LocalFileDirectory = ""
+
+    Private Shared Function GetLocalFileDirectory() As String
+        If String.IsNullOrEmpty(LocalFileDirectory) Then
+
+            Dim localAppDataPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
+            Dim exeStartupPath As String = Application.StartupPath
+            Dim tempPath As String = Path.GetTempPath()
+
+            If FileAccess.HasAccess(localAppDataPath) Then
+                LocalFileDirectory = localAppDataPath
+            ElseIf FileAccess.HasAccess(exeStartupPath)
+                Console.WriteLine("Error: Unable to write to path: " & localAppDataPath)
+                LocalFileDirectory = exeStartupPath
+            ElseIf FileAccess.HasAccess(tempPath)
+                Console.WriteLine("Error: Unable to write to path: " & exeStartupPath)
+                LocalFileDirectory = tempPath
+            End If
+        End If
+
+        Return LocalFileDirectory
+
+    End Function
 
     Private Shared Function DownloadContents(URL As String) As String
         Dim client As New WebClient
@@ -24,7 +47,7 @@ Public Class Downloader
         Return client.DownloadString(URL)
     End Function
     Private Shared Sub DownloadFile(URL As String, fileName As String, Optional checkIfExists As Boolean = False, Optional overwrite As Boolean = True)
-        Dim fullPath As String = Path.Combine(LocalFileDirectory, fileName)
+        Dim fullPath As String = Path.Combine(GetLocalFileDirectory(), fileName)
 
 
         If (checkIfExists = False) OrElse (checkIfExists AndAlso My.Computer.FileSystem.FileExists(fullPath) = False) Then
@@ -38,7 +61,7 @@ Public Class Downloader
 
     Private Shared Function ReadFileContents(fileName As String) As String
         Dim returnValue As String = ""
-        Dim filePath As String = Path.Combine(LocalFileDirectory, fileName)
+        Dim filePath As String = Path.Combine(GetLocalFileDirectory(), fileName)
         Try
             Using streamReader As IO.StreamReader = New IO.StreamReader(filePath)
                 returnValue = streamReader.ReadToEnd()

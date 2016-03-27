@@ -25,7 +25,7 @@ Public Class BorderPanel
     Protected Overrides Sub OnPaintBackground(e As PaintEventArgs)
         MyBase.OnPaintBackground(e)
 
-        e.Graphics.DrawRectangle(New Pen(BorderColour, 3), -1, -1, ClientSize.Width - 1, ClientSize.Height - 1)
+        e.Graphics.DrawRectangle(New Pen(BorderColour, 2), 0, 0, ClientSize.Width - 1, ClientSize.Height - 1)
     End Sub
 
 

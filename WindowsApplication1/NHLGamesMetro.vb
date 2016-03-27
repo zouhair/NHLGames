@@ -12,7 +12,7 @@ Public Class NHLGamesMetro
     Private AvailableGames As New List(Of String)
     Private Const ServerIP As String = "146.185.131.14"
     Private Const DomainName As String = "mf.svc.nhl.com"
-
+    Private Shared SettingsLoaded As Boolean = False
     Public Shared FormInstance As NHLGamesMetro = Nothing
 
     ' Starts the application. -- See: https://msdn.microsoft.com/en-us/library/system.windows.forms.application.threadexception(v=vs.110).aspx
@@ -79,6 +79,116 @@ Public Class NHLGamesMetro
         MetroCheckBox1.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True)
 
 
+        Dim watchArgs As Game.GameWatchArguments = New Game.GameWatchArguments With {.Is60FPS = True, .Quality = "720p", .PlayerType = Game.GameWatchArguments.PlayerTypeEnum.VLC, .IsVOD = False, .CDN = "l3c"}
+        watchArgs = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs, watchArgs)
+        BindWatchArgsToForm(watchArgs)
+
+        SettingsLoaded = True
+
+    End Sub
+
+    Private Sub SetEventArgsFromForm()
+        If SettingsLoaded = True Then
+
+
+            Dim WatchArgs As New Game.GameWatchArguments
+
+            WatchArgs.Is60FPS = chk60.Checked
+
+            If rbQual6.Checked Then
+                WatchArgs.Quality = "720p"
+            ElseIf rbQual5.Checked
+                WatchArgs.Quality = "540p"
+            ElseIf rbQual4.Checked
+                WatchArgs.Quality = "504p"
+            ElseIf rbQual3.Checked
+                WatchArgs.Quality = "360p"
+            ElseIf rbQual2.Checked
+                WatchArgs.Quality = "288p"
+            ElseIf rbQual1.Checked
+                WatchArgs.Quality = "224p"
+            End If
+
+            WatchArgs.IsVOD = rbVOD.Checked
+
+            If rbMPC.Checked Then
+                WatchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.MPC
+                WatchArgs.PlayerPath = txtMPCPath.Text
+            Else
+                WatchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.VLC
+                WatchArgs.PlayerPath = txtVLCPath.Text
+            End If
+
+            If rbAkamai.Checked Then
+                WatchArgs.CDN = "akc"
+            ElseIf rbLevel3.Checked
+                WatchArgs.CDN = "l3c"
+            End If
+
+            WatchArgs.UsePlayerArgs = chkEnablePlayerArgs.Checked
+            WatchArgs.PlayerArgs = txtPlayerArgs.Text
+
+            WatchArgs.UseLiveStreamerArgs = chkEnableStreamArgs.Checked
+            WatchArgs.LiveStreamerArgs = txtStreamerArgs.Text
+
+            WatchArgs.UseOutputArgs = chkEnableOutput.Checked
+            WatchArgs.PlayerOutputPath = txtOutputPath.Text
+
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.DefaultWatchArgs, Serialization.SerializeObject(Of Game.GameWatchArguments)(WatchArgs))
+        End If
+    End Sub
+
+    Private Sub BindWatchArgsToForm(WatchArgs As Game.GameWatchArguments)
+
+        If WatchArgs IsNot Nothing Then
+
+            chk60.Checked = WatchArgs.Is60FPS
+            Select Case WatchArgs.Quality
+                Case "720p"
+                    rbQual6.Checked = True
+                Case "540p"
+                    rbQual5.Checked = True
+                Case "504p"
+                    rbQual4.Checked = True
+                Case "360p"
+                    rbQual3.Checked = True
+                Case "288p"
+                    rbQual2.Checked = True
+                Case "224p"
+                    rbQual1.Checked = True
+            End Select
+
+            If WatchArgs.IsVOD Then
+                rbVOD.Checked = True
+            Else
+                rbLive.Checked = True
+            End If
+
+            If WatchArgs.CDN = "akc" Then
+                rbAkamai.Checked = True
+            ElseIf WatchArgs.CDN = "l3c"
+                rbLevel3.Checked = True
+            End If
+
+
+            rbVLC.Checked = WatchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.VLC
+            rbMPC.Checked = WatchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.MPC
+
+            chkEnablePlayerArgs.Checked = WatchArgs.UsePlayerArgs
+            txtPlayerArgs.Enabled = WatchArgs.UsePlayerArgs
+            txtPlayerArgs.Text = WatchArgs.PlayerArgs
+
+            chkEnableStreamArgs.Checked = WatchArgs.UseLiveStreamerArgs
+            txtStreamerArgs.Enabled = WatchArgs.UseLiveStreamerArgs
+            txtStreamerArgs.Text = WatchArgs.LiveStreamerArgs
+
+            txtOutputPath.Text = WatchArgs.PlayerOutputPath
+            txtOutputPath.Enabled = WatchArgs.UseOutputArgs
+            chkEnableOutput.Checked = WatchArgs.UseOutputArgs
+
+
+
+        End If
     End Sub
 
     ' Handle the UI exceptions by showing a dialog box, and asking the user whether
@@ -107,8 +217,8 @@ Public Class NHLGamesMetro
             lblVersion.ForeColor = Color.Red
             MetroMessageBox.Show(Me, "You don't have the latest version of this application. Things may not work properly (or at all).", "New Version Available", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else
-            'lblVersion.Text = "Up to date! You are running " & settingsReader.GetValue("version", GetType(String)) & "."
-            'lblVersion.ForeColor = Color.Green
+            lblVersion.Text = "Version: " & ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version)
+            lblVersion.ForeColor = Color.Gray
         End If
     End Sub
 
@@ -135,6 +245,8 @@ Public Class NHLGamesMetro
         IntitializeApplicationSettings()
 
 
+
+
     End Sub
 
 
@@ -147,10 +259,9 @@ Public Class NHLGamesMetro
     Private Sub LoadGames(dateTime As DateTime)
 
         Try
-
             'If dateTime <> GameManager.GamesListDate Then
             GameManager.ClearGames()
-                FlowLayoutPanel.Controls.Clear()
+            FlowLayoutPanel.Controls.Clear()
             'End If
 
             Dim JSONSchedule As JObject = Downloader.DownloadJSONSchedule(dateTime)
@@ -165,73 +276,6 @@ Public Class NHLGamesMetro
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         LoadGames(dtDate.Value)
     End Sub
-
-
-
-    Private Sub btnWatch_Click(sender As Object, e As EventArgs)
-        'If rbLive.Checked Then
-        '    WatchGame(False)
-        'Else
-        '    WatchGame(True)
-        'End If
-    End Sub
-
-
-    'Private Sub WatchGame(isVOD As Boolean, game As Game, streamType As GameStream.StreamType)
-
-    '    Dim args As New Game.GameWatchArguments
-    '    args.IsVOD = isVOD
-    '    Dim cdn As String = String.Empty
-
-
-    '    If rbLevel3.Checked Then
-    '        args.CDN = "l3c"
-    '    ElseIf rbAkamai.Checked Then
-    '        args.CDN = "akc"
-    '    End If
-
-    '    If rbQual1.Checked Then
-    '        args.Quality = "224p"
-    '    ElseIf rbQual2.Checked Then
-    '        args.Quality = "288p"
-    '    ElseIf rbQual3.Checked Then
-    '        args.Quality = "360p"
-    '    ElseIf rbQual4.Checked Then
-    '        args.Quality = "504p"
-    '    ElseIf rbQual6.Checked Then
-    '        args.Quality = "540p"
-    '    ElseIf rbQual6.Checked Then
-    '        args.Quality = "720p"
-    '        If chk60.Checked Then
-    '            args.Is60FPS = True
-    '            args.Quality = "best"
-    '        End If
-    '    End If
-
-    '    If streamType = GameStream.StreamType.Away Then
-    '        args.Stream = game.AwayStream
-    '    ElseIf streamType = GameStream.StreamType.Home Then
-    '        args.Stream = game.HomeStream
-    '    ElseIf streamType = GameStream.StreamType.National Then
-    '        args.Stream = game.NationalStream
-    '    ElseIf streamType = GameStream.StreamType.French Then
-    '        args.Stream = game.FrenchStream
-    '    End If
-
-    '    If rbMPC.Checked Then
-    '        args.PlayerPath = FileAccess.LocateEXE("mpc-hc64.exe", "\MPC-HC")
-    '    Else
-    '        args.PlayerPath = FileAccess.LocateEXE("vlc.exe", "\VideoLAN\VLC")
-    '    End If
-
-
-    '    Task.Run(Of Boolean)((Function()
-    '                              game.Watch(args)
-    '                              Return True
-    '                          End Function))
-
-
-    'End Sub
 
     Private Sub RichTextBox_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox.TextChanged
         RichTextBox.SelectionStart = RichTextBox.Text.Length
@@ -297,4 +341,102 @@ Public Class NHLGamesMetro
             MetroMessageBox.Show(Me, "Hosts entry doesn't seem to be working :(", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
+
+#Region "Settings Changed Update Settings"
+
+
+    Private Sub chk60_CheckedChanged(sender As Object, e As EventArgs) Handles chk60.CheckedChanged
+        rbQual6.Checked = True
+        SetEventArgsFromForm()
+
+    End Sub
+
+    Private Sub txtVLCPath_TextChanged(sender As Object, e As EventArgs) Handles txtVLCPath.TextChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub txtMPCPath_TextChanged(sender As Object, e As EventArgs) Handles txtMPCPath.TextChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub txtLiveStreamPath_TextChanged(sender As Object, e As EventArgs) Handles txtLiveStreamPath.TextChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub rbQual1_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual1.CheckedChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub rbQual2_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual2.CheckedChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub rbQual3_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual3.CheckedChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub rbQual4_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual4.CheckedChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub rbQual5_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual5.CheckedChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub rbQual6_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual6.CheckedChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub rbVLC_CheckedChanged(sender As Object, e As EventArgs) Handles rbVLC.CheckedChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub rbMPC_CheckedChanged(sender As Object, e As EventArgs) Handles rbMPC.CheckedChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub rbLive_CheckedChanged(sender As Object, e As EventArgs) Handles rbLive.CheckedChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub rbVOD_CheckedChanged(sender As Object, e As EventArgs) Handles rbVOD.CheckedChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub rbLevel3_CheckedChanged(sender As Object, e As EventArgs) Handles rbLevel3.CheckedChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub rbAkamai_CheckedChanged(sender As Object, e As EventArgs) Handles rbAkamai.CheckedChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub txtOutputPath_TextChanged(sender As Object, e As EventArgs) Handles txtOutputPath.TextChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub txtPlayerArgs_TextChanged(sender As Object, e As EventArgs) Handles txtPlayerArgs.TextChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub txtStreamerArgs_TextChanged(sender As Object, e As EventArgs) Handles txtStreamerArgs.TextChanged
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub chkEnableOutput_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableOutput.CheckedChanged
+        txtOutputPath.Enabled = chkEnableOutput.Checked
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub chkEnablePlayerArgs_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnablePlayerArgs.CheckedChanged
+        txtPlayerArgs.Enabled = chkEnablePlayerArgs.Checked
+        SetEventArgsFromForm()
+    End Sub
+
+    Private Sub chkEnableStreamArgs_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableStreamArgs.CheckedChanged
+        txtStreamerArgs.Enabled = chkEnableStreamArgs.Checked
+        SetEventArgsFromForm()
+    End Sub
+
+#End Region
 End Class

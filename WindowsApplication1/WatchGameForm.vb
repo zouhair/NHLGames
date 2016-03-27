@@ -130,6 +130,8 @@ Public Class WatchGameForm
         pnlAdvanced.Visible = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowAdvancedWatchPanel, False)
 
     End Sub
+
+
     Private Sub SetEventArgsFromForm()
 
         WatchArgs.Is60FPS = chk60.Checked

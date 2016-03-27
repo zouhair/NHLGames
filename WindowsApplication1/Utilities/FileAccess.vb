@@ -136,6 +136,21 @@ Public Class FileAccess
     End Function
 
 
+    Public Shared Function HasAccess(ByVal ltFullPath As String)
+        Try
+            Dim filePath As String = Path.Combine(ltFullPath, "test.txt")
+            File.WriteAllText(filePath, "Test ability to write to this directory")
+            Using inputstreamreader As New StreamReader(filePath)
+                inputstreamreader.Close()
+            End Using
+            Using inputStream As FileStream = File.Open(filePath, FileMode.Open, System.IO.FileAccess.ReadWrite, FileShare.None)
+                inputStream.Close()
+                Return True
+            End Using
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 
 
 
