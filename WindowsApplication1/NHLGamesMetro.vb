@@ -71,7 +71,12 @@ Public Class NHLGamesMetro
 
         Dim liveStreamerPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.LiveStreamerPath, "")
         If liveStreamerPath = "" Then
-            liveStreamerPath = Application.StartupPath & "\livestreamer-v1.12.2\livestreamer.exe"
+            ' First check inside app folder
+            liveStreamerPath = Path.Combine(Application.StartupPath, "livestreamer-v1.12.2\livestreamer.exe")
+            If Not File.Exists(liveStreamerPath) Then
+                ' If no such file check if we can find one in system
+                liveStreamerPath = FileAccess.LocateEXE("livestreamer.exe", "\Livestreamer")
+            End If
             ApplicationSettings.SetValue(ApplicationSettings.Settings.LiveStreamerPath, liveStreamerPath)
         End If
         txtLiveStreamPath.Text = liveStreamerPath
@@ -118,6 +123,8 @@ Public Class NHLGamesMetro
                 WatchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.VLC
                 WatchArgs.PlayerPath = txtVLCPath.Text
             End If
+
+            WatchArgs.LiveStreamerPath = txtLiveStreamPath.Text
 
             If rbAkamai.Checked Then
                 WatchArgs.CDN = "akc"
@@ -294,8 +301,9 @@ Public Class NHLGamesMetro
         OpenFileDialog.Filter = "VLC|vlc.exe"
         OpenFileDialog.Multiselect = False
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-            If String.IsNullOrEmpty(OpenFileDialog.FileName) = False Then
+            If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtVLCPath.Text <> OpenFileDialog.FileName Then
                 ApplicationSettings.SetValue(ApplicationSettings.Settings.VLCPath, OpenFileDialog.FileName)
+                txtVLCPath.Text = OpenFileDialog.FileName
             End If
 
         End If
@@ -305,8 +313,9 @@ Public Class NHLGamesMetro
         OpenFileDialog.Filter = "MPC|mpc-hc64.exe"
         OpenFileDialog.Multiselect = False
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-            If String.IsNullOrEmpty(OpenFileDialog.FileName) = False Then
+            If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtMPCPath.Text <> OpenFileDialog.FileName Then
                 ApplicationSettings.SetValue(ApplicationSettings.Settings.MPCPath, OpenFileDialog.FileName)
+                txtMPCPath.Text = OpenFileDialog.FileName
             End If
         End If
     End Sub
@@ -315,8 +324,9 @@ Public Class NHLGamesMetro
         OpenFileDialog.Filter = "LiveStreamer|livestreamer.exe"
         OpenFileDialog.Multiselect = False
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-            If String.IsNullOrEmpty(OpenFileDialog.FileName) = False Then
+            If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtLiveStreamPath.Text <> OpenFileDialog.FileName Then
                 ApplicationSettings.SetValue(ApplicationSettings.Settings.LiveStreamerPath, OpenFileDialog.FileName)
+                txtLiveStreamPath.Text = OpenFileDialog.FileName
             End If
         End If
     End Sub
