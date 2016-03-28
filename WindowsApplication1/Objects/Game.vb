@@ -139,12 +139,11 @@ Public Class Game
     Public Sub Watch(args As GameWatchArguments)
 
         Dim t As Task = New Task(Function()
-                                     Dim liveStreamerPath As String = Combine(Application.StartupPath, "livestreamer-v1.12.2\livestreamer.exe")
-                                     Console.WriteLine("Running:    " & liveStreamerPath & " " & args.ToString())
+                                     Console.WriteLine("Running:    " & args.LiveStreamerPath & " " & args.ToString())
 
                                      Dim proc = New Process() With {.StartInfo =
             New ProcessStartInfo With {
-            .FileName = liveStreamerPath,
+            .FileName = args.LiveStreamerPath,
             .Arguments = args.ToString(),
             .UseShellExecute = False,
             .RedirectStandardOutput = True,
@@ -280,6 +279,7 @@ Public Class Game
         Public Property PlayerPath As String = ""
         Public Property PlayerType As PlayerTypeEnum = PlayerTypeEnum.None
 
+        Public Property LiveStreamerPath As String = ""
         Public Property UseLiveStreamerArgs As Boolean = False
         Public Property LiveStreamerArgs As String = ""
 
