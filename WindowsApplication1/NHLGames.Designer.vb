@@ -1,4 +1,6 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿Imports MetroFramework.Controls
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class NHLGames
     Inherits System.Windows.Forms.Form
 
@@ -28,7 +30,7 @@ Partial Class NHLGames
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(NHLGames))
         Me.gridGames = New System.Windows.Forms.DataGridView()
-        Me.dtDate = New System.Windows.Forms.DateTimePicker()
+        Me.dtDate = New MetroFramework.Controls.MetroDateTime()
         Me.btnHosts = New System.Windows.Forms.Button()
         Me.btnWatch = New System.Windows.Forms.Button()
         Me.btnRefresh = New System.Windows.Forms.Button()
@@ -41,6 +43,8 @@ Partial Class NHLGames
         Me.chk60 = New System.Windows.Forms.CheckBox()
         Me.gbQuality = New System.Windows.Forms.GroupBox()
         Me.gbPlayer = New System.Windows.Forms.GroupBox()
+        Me.lnkMPCDownload = New System.Windows.Forms.LinkLabel()
+        Me.lnkVLCDownload = New System.Windows.Forms.LinkLabel()
         Me.rbMPC = New System.Windows.Forms.RadioButton()
         Me.rbVLC = New System.Windows.Forms.RadioButton()
         Me.gbCDN = New System.Windows.Forms.GroupBox()
@@ -54,8 +58,6 @@ Partial Class NHLGames
         Me.SplitContainer = New System.Windows.Forms.SplitContainer()
         Me.RichTextBox = New System.Windows.Forms.RichTextBox()
         Me.pnlSettings = New System.Windows.Forms.Panel()
-        Me.lnkVLCDownload = New System.Windows.Forms.LinkLabel()
-        Me.lnkMPCDownload = New System.Windows.Forms.LinkLabel()
         Me.MPCTooltip = New System.Windows.Forms.ToolTip(Me.components)
         Me.VLCTooltip = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -127,9 +129,10 @@ Partial Class NHLGames
         Me.dtDate.CustomFormat = "yyyy-MM-dd"
         Me.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtDate.Location = New System.Drawing.Point(5, 12)
+        Me.dtDate.MinimumSize = New System.Drawing.Size(0, 29)
         Me.dtDate.Name = "dtDate"
         Me.dtDate.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.dtDate.Size = New System.Drawing.Size(96, 20)
+        Me.dtDate.Size = New System.Drawing.Size(96, 29)
         Me.dtDate.TabIndex = 2
         '
         'btnHosts
@@ -262,6 +265,30 @@ Partial Class NHLGames
         Me.gbPlayer.TabStop = False
         Me.gbPlayer.Text = "Player"
         '
+        'lnkMPCDownload
+        '
+        Me.lnkMPCDownload.AutoSize = True
+        Me.lnkMPCDownload.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lnkMPCDownload.Location = New System.Drawing.Point(52, 44)
+        Me.lnkMPCDownload.Name = "lnkMPCDownload"
+        Me.lnkMPCDownload.Size = New System.Drawing.Size(13, 13)
+        Me.lnkMPCDownload.TabIndex = 3
+        Me.lnkMPCDownload.TabStop = True
+        Me.lnkMPCDownload.Text = "?"
+        Me.MPCTooltip.SetToolTip(Me.lnkMPCDownload, "Download MPC-HC")
+        '
+        'lnkVLCDownload
+        '
+        Me.lnkVLCDownload.AutoSize = True
+        Me.lnkVLCDownload.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lnkVLCDownload.Location = New System.Drawing.Point(52, 21)
+        Me.lnkVLCDownload.Name = "lnkVLCDownload"
+        Me.lnkVLCDownload.Size = New System.Drawing.Size(13, 13)
+        Me.lnkVLCDownload.TabIndex = 2
+        Me.lnkVLCDownload.TabStop = True
+        Me.lnkVLCDownload.Text = "?"
+        Me.VLCTooltip.SetToolTip(Me.lnkVLCDownload, "Download VLC")
+        '
         'rbMPC
         '
         Me.rbMPC.AutoSize = True
@@ -288,7 +315,6 @@ Partial Class NHLGames
         '
         Me.gbCDN.Controls.Add(Me.rbLevel3)
         Me.gbCDN.Controls.Add(Me.rbAkamai)
-        Me.gbCDN.Enabled = False
         Me.gbCDN.Location = New System.Drawing.Point(10, 433)
         Me.gbCDN.Name = "gbCDN"
         Me.gbCDN.Size = New System.Drawing.Size(75, 65)
@@ -299,22 +325,22 @@ Partial Class NHLGames
         'rbLevel3
         '
         Me.rbLevel3.AutoSize = True
+        Me.rbLevel3.Checked = True
         Me.rbLevel3.Location = New System.Drawing.Point(5, 19)
         Me.rbLevel3.Name = "rbLevel3"
         Me.rbLevel3.Size = New System.Drawing.Size(60, 17)
         Me.rbLevel3.TabIndex = 1
+        Me.rbLevel3.TabStop = True
         Me.rbLevel3.Text = "Level 3"
         Me.rbLevel3.UseVisualStyleBackColor = True
         '
         'rbAkamai
         '
         Me.rbAkamai.AutoSize = True
-        Me.rbAkamai.Checked = True
         Me.rbAkamai.Location = New System.Drawing.Point(5, 42)
         Me.rbAkamai.Name = "rbAkamai"
         Me.rbAkamai.Size = New System.Drawing.Size(60, 17)
         Me.rbAkamai.TabIndex = 0
-        Me.rbAkamai.TabStop = True
         Me.rbAkamai.Text = "Akamai"
         Me.rbAkamai.UseVisualStyleBackColor = True
         '
@@ -418,30 +444,6 @@ Partial Class NHLGames
         Me.pnlSettings.Size = New System.Drawing.Size(88, 500)
         Me.pnlSettings.TabIndex = 21
         '
-        'lnkVLCDownload
-        '
-        Me.lnkVLCDownload.AutoSize = True
-        Me.lnkVLCDownload.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lnkVLCDownload.Location = New System.Drawing.Point(52, 21)
-        Me.lnkVLCDownload.Name = "lnkVLCDownload"
-        Me.lnkVLCDownload.Size = New System.Drawing.Size(13, 13)
-        Me.lnkVLCDownload.TabIndex = 2
-        Me.lnkVLCDownload.TabStop = True
-        Me.lnkVLCDownload.Text = "?"
-        Me.VLCTooltip.SetToolTip(Me.lnkVLCDownload, "Download VLC")
-        '
-        'lnkMPCDownload
-        '
-        Me.lnkMPCDownload.AutoSize = True
-        Me.lnkMPCDownload.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lnkMPCDownload.Location = New System.Drawing.Point(52, 44)
-        Me.lnkMPCDownload.Name = "lnkMPCDownload"
-        Me.lnkMPCDownload.Size = New System.Drawing.Size(13, 13)
-        Me.lnkMPCDownload.TabIndex = 3
-        Me.lnkMPCDownload.TabStop = True
-        Me.lnkMPCDownload.Text = "?"
-        Me.MPCTooltip.SetToolTip(Me.lnkMPCDownload, "Download MPC-HC")
-        '
         'NHLGames
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -477,7 +479,7 @@ Partial Class NHLGames
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents dtDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtDate As MetroDateTime
     Friend WithEvents btnHosts As System.Windows.Forms.Button
     Friend WithEvents btnWatch As System.Windows.Forms.Button
     Friend WithEvents btnRefresh As System.Windows.Forms.Button
@@ -498,8 +500,6 @@ Partial Class NHLGames
     Friend WithEvents lblVersion As Label
     Friend WithEvents btnURL As Button
     Friend WithEvents gbServer As GroupBox
-    Friend WithEvents rbVOD As RadioButton
-    Friend WithEvents rbLive As RadioButton
     Friend WithEvents SplitContainer As SplitContainer
     Friend WithEvents RichTextBox As RichTextBox
     Friend WithEvents pnlSettings As Panel
@@ -508,4 +508,6 @@ Partial Class NHLGames
     Friend WithEvents lnkMPCDownload As LinkLabel
     Friend WithEvents MPCTooltip As ToolTip
     Friend WithEvents VLCTooltip As ToolTip
+    Friend WithEvents rbVOD As RadioButton
+    Friend WithEvents rbLive As RadioButton
 End Class

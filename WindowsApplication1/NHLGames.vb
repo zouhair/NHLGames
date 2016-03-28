@@ -53,9 +53,9 @@ Public Class NHLGames
 
             Dim JSONSchedule As JObject = Downloader.DownloadJSONSchedule(dateTime)
             AvailableGames = Downloader.DownloadAvailableGames()
-            Games = Game.GetGames(JSONSchedule, AvailableGames)
+            GameManager.RefreshGames(dateTime, JSONSchedule, AvailableGames)
 
-            For Each game As Game In Games
+            For Each game As Game In GameManager.GamesList
 
                 'Dim newRow As DataGridViewRow = gridGames.Rows(0).Clone()
 
@@ -82,9 +82,9 @@ Public Class NHLGames
                 gridGames.Rows.Insert(gridGames.Rows.Count,
                                       game.Id.ToString(),
                                       game.Date.ToLocalTime().ToString("h:mm tt"),
-                                        ImageFetcher.GetEmbeddedImage(game.HomeTeamLogo),
                                       ImageFetcher.GetEmbeddedImage(game.AwayTeamLogo),
-                game.AwayTeam,
+                                      ImageFetcher.GetEmbeddedImage(game.HomeTeamLogo),
+                                      game.AwayTeam,
                                       game.AwayAbbrev,
                                       game.HomeTeam,
                                       game.HomeAbbrev,
@@ -143,8 +143,8 @@ Public Class NHLGames
         gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "GameID", .HeaderText = "Game ID", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
         gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "time", .HeaderText = "Time", .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
 
-        gridGames.Columns.Add(New DataGridViewImageColumn() With {.Name = "HomeLogo", .HeaderText = "Home Team", .ImageLayout = DataGridViewImageCellLayout.Zoom, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
         gridGames.Columns.Add(New DataGridViewImageColumn() With {.Name = "AwayLogo", .HeaderText = "Away Team", .ImageLayout = DataGridViewImageCellLayout.Zoom, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
+        gridGames.Columns.Add(New DataGridViewImageColumn() With {.Name = "HomeLogo", .HeaderText = "Home Team", .ImageLayout = DataGridViewImageCellLayout.Zoom, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
 
         gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "away", .HeaderText = "Away Team", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
         gridGames.Columns.Add(New DataGridViewTextBoxColumn() With {.Name = "awayAbbrev", .HeaderText = "Away Abbrev", .Visible = False, .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells})
@@ -209,9 +209,7 @@ Public Class NHLGames
     End Sub
 
     Private Sub btnHosts_Click(sender As Object, e As EventArgs) Handles btnHosts.Click
-
-        HostsFile.AddEntry("82.196.2.27 mf.svc.nhl.com")
-
+        HostsFile.AddEntry("146.185.131.14", "mf.svc.nhl.com")
     End Sub
 
     Private Sub btnWatch_Click(sender As Object, e As EventArgs) Handles btnWatch.Click
@@ -352,8 +350,8 @@ Public Class NHLGames
         '    strUrl = gridGames.SelectedRows(0).Cells("french" & strServer).Value.Replace("CDN", strCDN)
         'End If
 
-        Dim dialogURL As New dlURL(strUrl)
-        dialogURL.ShowDialog()
+        'Dim dialogURL As New dlURL(strUrl)
+        'dialogURL.ShowDialog()
     End Sub
 
     Private Sub NHLGames_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd
