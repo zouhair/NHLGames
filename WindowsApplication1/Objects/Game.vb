@@ -197,13 +197,12 @@ Public Class Game
             dateTimeVal = Date.Parse(game.Property("gameDate").Value.ToString())
         End If
 
-        '[Date] = dateTimeVal.ToLocalTime() 'Don't convert to local time since times are UTC
-        [Date] = dateTimeVal.ToUniversalTime()
+        [Date] = dateTimeVal.ToLocalTime()
 
         GameID = game.Property("gamePk").ToString()
         _StatusID = game("status")("statusCode").ToString()
 
-        If [Date] <= DateTime.Now.ToUniversalTime() Then
+        If [Date] <= DateTime.Now Then
             HomeScore = game("teams")("home")("score").ToString()
             AwayScore = game("teams")("away")("score").ToString()
         End If
