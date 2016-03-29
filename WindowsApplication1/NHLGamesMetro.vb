@@ -84,16 +84,21 @@ Public Class NHLGamesMetro
         MetroCheckBox1.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True)
 
 
-        Dim watchArgs As Game.GameWatchArguments = New Game.GameWatchArguments With {.Is60FPS = True, .Quality = "720p", .PlayerType = Game.GameWatchArguments.PlayerTypeEnum.VLC, .IsVOD = False, .CDN = "l3c"}
-        watchArgs = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs, watchArgs)
+        Dim watchArgs As Game.GameWatchArguments = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
+
+        If watchArgs Is Nothing Then
+            SetEventArgsFromForm(True)
+            watchArgs = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
+        End If
+
         BindWatchArgsToForm(watchArgs)
 
         SettingsLoaded = True
 
     End Sub
 
-    Private Sub SetEventArgsFromForm()
-        If SettingsLoaded = True Then
+    Private Sub SetEventArgsFromForm(Optional ForceSet As Boolean = False)
+        If SettingsLoaded OrElse ForceSet Then
 
 
             Dim WatchArgs As New Game.GameWatchArguments
