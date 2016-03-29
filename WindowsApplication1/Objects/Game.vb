@@ -268,7 +268,7 @@ Public Class Game
         End Enum
 
         Public Property Quality As String = ""
-        Public Property Is60FPS As Boolean = False
+        Public Property Is60FPS As Boolean = True
         Public Property CDN As String = ""
         Public Property Server As String = ""
         Public Property Stream As GameStream
@@ -276,10 +276,12 @@ Public Class Game
         Public Property IsMPC As Boolean = False
 
         Public Property GameTitle As String = ""
+
         Public Property PlayerPath As String = ""
         Public Property PlayerType As PlayerTypeEnum = PlayerTypeEnum.None
 
         Public Property LiveStreamerPath As String = ""
+
         Public Property UseLiveStreamerArgs As Boolean = False
         Public Property LiveStreamerArgs As String = ""
 

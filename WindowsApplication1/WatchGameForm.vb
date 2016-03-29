@@ -138,15 +138,15 @@ Public Class WatchGameForm
 
         If rbQual6.Checked Then
             WatchArgs.Quality = "720p"
-        ElseIf rbQual5.Checked
+        ElseIf rbQual5.Checked Then
             WatchArgs.Quality = "540p"
-        ElseIf rbQual4.Checked
+        ElseIf rbQual4.Checked Then
             WatchArgs.Quality = "504p"
-        ElseIf rbQual3.Checked
+        ElseIf rbQual3.Checked Then
             WatchArgs.Quality = "360p"
-        ElseIf rbQual2.Checked
+        ElseIf rbQual2.Checked Then
             WatchArgs.Quality = "288p"
-        ElseIf rbQual1.Checked
+        ElseIf rbQual1.Checked Then
             WatchArgs.Quality = "224p"
         End If
 
@@ -159,11 +159,11 @@ Public Class WatchGameForm
 
         If rbAway.Checked = True Then
             WatchArgs.Stream = Game.AwayStream
-        ElseIf rbNational.Checked = True
+        ElseIf rbNational.Checked = True Then
             WatchArgs.Stream = Game.NationalStream
-        ElseIf rbFrench.Checked = True
+        ElseIf rbFrench.Checked = True Then
             WatchArgs.Stream = Game.FrenchStream
-        ElseIf rbHome.Checked = True
+        ElseIf rbHome.Checked = True Then
             WatchArgs.Stream = Game.HomeStream
         End If
 
@@ -179,7 +179,7 @@ Public Class WatchGameForm
 
         If rbAkamai.Checked Then
             WatchArgs.CDN = "akc"
-        ElseIf rbLevel3.Checked
+        ElseIf rbLevel3.Checked Then
             WatchArgs.CDN = "l3c"
         End If
 

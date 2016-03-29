@@ -30,7 +30,7 @@ Public Class GameControl
         If Game.Date <= DateTime.Now AndAlso Game.GameIsLive Then
             BorderPanel1.BorderColour = Color.Green
             'lblVS.Visible = True
-        ElseIf Game.Date <= DateTime.Now
+        ElseIf Game.Date <= DateTime.Now Then
             BorderPanel1.BorderColour = Color.LightGray
             'lblVS.Visible = True
         Else
@@ -100,6 +100,5 @@ Public Class GameControl
         args.GameTitle = _Game.HomeAbbrev & " VS " & _Game.AwayAbbrev
         Return args
     End Function
-
 End Class
 

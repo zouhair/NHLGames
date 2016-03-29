@@ -206,7 +206,7 @@ Partial Class GameControl
         Me.lblAwayScore.Location = New System.Drawing.Point(131, 32)
         Me.lblAwayScore.Name = "lblAwayScore"
         Me.lblAwayScore.Size = New System.Drawing.Size(17, 19)
-        Me.lblAwayScore.TabIndex = 6
+        Me.lblAwayScore.TabIndex = 5
         Me.lblAwayScore.Text = "0"
         '
         'lblHomeTeam
@@ -215,9 +215,10 @@ Partial Class GameControl
         Me.lblHomeTeam.Location = New System.Drawing.Point(7, 46)
         Me.lblHomeTeam.Name = "lblHomeTeam"
         Me.lblHomeTeam.Size = New System.Drawing.Size(55, 19)
-        Me.lblHomeTeam.TabIndex = 3
+        Me.lblHomeTeam.TabIndex = 4
         Me.lblHomeTeam.Text = "Home"
         Me.lblHomeTeam.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblHomeScore.Text = "0"
         '
         'lblHomeScore
         '
