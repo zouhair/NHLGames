@@ -22,12 +22,30 @@ Public Class ApplicationSettings
             If String.IsNullOrEmpty(result) OrElse IsNothing(result) Then
                 Return defaultReturnValue
             End If
-            Return CType(result, T)
+
+            If TypeOf result Is T Then
+                result = DirectCast(result, T)
+                Return result
+            End If
+
+            Dim boolReturn As Boolean
+            If Boolean.TryParse(result, boolReturn) Then
+                Return CType(result, T)
+            End If
+
+            Try
+                Return Serialization.DeserializeObject(Of T)(result)
+            Catch ex As Exception
+                Console.WriteLine("Failed to deserialize setting value of " & key.ToString() & " to type: " & GetType(T).ToString())
+                Return defaultReturnValue
+            End Try
+
         Catch e As ConfigurationErrorsException
             Console.WriteLine("Error reading app setting: " & key)
             Return defaultReturnValue
         End Try
     End Function
+
 
     Public Shared Sub SetValue(key As Settings, value As String)
         Try

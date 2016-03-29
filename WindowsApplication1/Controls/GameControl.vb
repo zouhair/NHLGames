@@ -29,7 +29,9 @@ Public Class GameControl
         btnWatch.Enabled = Game.AreAnyStreamsAvailable ' Allow watching games as soon as they are available on the server
         'Compare using universal time
 
-        If Game.Date <= DateTime.Now.ToUniversalTime() AndAlso Game.GameIsLive Then
+        'btnWatch.Enabled = Game.Date <= DateTime.Now 'AndAlso Game.GameIsLive
+
+        If Game.Date <= DateTime.Now AndAlso Game.GameIsLive Then
             BorderPanel1.BorderColour = Color.Green
             'lblVS.Visible = True
         ElseIf Game.Date <= DateTime.Now.ToUniversalTime() Then
@@ -42,7 +44,6 @@ Public Class GameControl
     End Sub
 
     Private Sub SetInitialProperties(Game As Game)
-        picAway.SizeMode = PictureBoxSizeMode.StretchImage
         If String.IsNullOrEmpty(Game.HomeTeamLogo) = False Then
             picHome.Image = ImageFetcher.GetEmbeddedImage(Game.HomeTeamLogo)
             HomeTeamToolTip.SetToolTip(picHome, "Home Team: " & Game.HomeTeam)
@@ -55,18 +56,52 @@ Public Class GameControl
             AwayTeamToolTip.SetToolTip(picAway, "Away Team: " & Game.AwayTeam)
         End If
 
-        lblTime.Text = Game.Date.ToLocalTime().ToString("h:mm tt") 'Convert to local time for display
+        lblTime.Text = Game.Date.ToString("h:mm tt")
+
+        lblAwayStream.Visible = Game.AwayStream.IsAvailable
+        lblHomeStream.Visible = Game.HomeStream.IsAvailable
+        lblFrenchStream.Visible = Game.FrenchStream.IsAvailable
+        lblNationalStream.Visible = Game.NationalStream.IsAvailable
     End Sub
 
-    Private Sub btnWatch_Click(sender As Object, e As EventArgs) Handles btnWatch.Click
+    Private Sub btnWatch_Click(sender As Object, e As EventArgs)
         Dim newForm As New WatchGameForm(_Game, New GameWatchArguments())
         newForm.ShowDialog(Me)
-        'newForm.WatchGameControl.btnWatch.Focus()
     End Sub
 
     Private Sub GameUpdatedHandler(game As Game)
         _Game = game
         UpdateGameStatusProperties(game)
     End Sub
+
+    Private Sub lblHomeStream_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblHomeStream.LinkClicked
+        Dim args = WatchArgs()
+        args.Stream = _Game.HomeStream
+        _Game.Watch(args)
+    End Sub
+
+    Private Sub lblAwayStream_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblAwayStream.LinkClicked
+        Dim args = WatchArgs()
+        args.Stream = _Game.AwayStream
+        _Game.Watch(args)
+    End Sub
+
+    Private Sub lblFrenchStream_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblFrenchStream.LinkClicked
+        Dim args = WatchArgs()
+        args.Stream = _Game.FrenchStream
+        _Game.Watch(args)
+    End Sub
+
+    Private Sub lblNationalStream_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblNationalStream.LinkClicked
+        Dim args = WatchArgs()
+        args.Stream = _Game.NationalStream
+        _Game.Watch(args)
+    End Sub
+
+    Private Function WatchArgs() As Game.GameWatchArguments
+        Dim args = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
+        args.GameTitle = _Game.HomeAbbrev & " VS " & _Game.AwayAbbrev
+        Return args
+    End Function
 End Class
 

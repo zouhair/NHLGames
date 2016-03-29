@@ -139,17 +139,16 @@ Public Class Game
     Public Sub Watch(args As GameWatchArguments)
 
         Dim t As Task = New Task(Function()
-                                     Dim liveStreamerPath As String = Combine(Application.StartupPath, "livestreamer-v1.12.2\livestreamer.exe")
-                                     Console.WriteLine("Running:    " & liveStreamerPath & " " & args.ToString())
+                                     Console.WriteLine("Running:    " & args.LiveStreamerPath & " " & args.ToString())
 
                                      Dim proc = New Process() With {.StartInfo =
-                                         New ProcessStartInfo With {
-                                         .FileName = liveStreamerPath,
-                                         .Arguments = args.ToString(),
-                                         .UseShellExecute = False,
-                                         .RedirectStandardOutput = True,
-                                         .CreateNoWindow = True}
-                                     }
+            New ProcessStartInfo With {
+            .FileName = args.LiveStreamerPath,
+            .Arguments = args.ToString(),
+            .UseShellExecute = False,
+            .RedirectStandardOutput = True,
+            .CreateNoWindow = True}
+        }
                                      proc.EnableRaisingEvents = True
                                      Try
                                          proc.Start()
@@ -277,8 +276,12 @@ Public Class Game
         Public Property IsVOD As Boolean = False
         Public Property IsMPC As Boolean = False
 
+        Public Property GameTitle As String = ""
+
         Public Property PlayerPath As String = ""
         Public Property PlayerType As PlayerTypeEnum = PlayerTypeEnum.None
+
+        Public Property LiveStreamerPath As String = ""
 
         Public Property UseLiveStreamerArgs As Boolean = False
         Public Property LiveStreamerArgs As String = ""
@@ -302,12 +305,14 @@ Public Class Game
             End If
 
 
-            If UseOutputArgs Then
-                LiteralPlayerArgs &= " -o '" & PlayerOutputPath & "'"
+            Dim titleArg As String = ""
+            If PlayerType = PlayerTypeEnum.VLC Then
+                titleArg = " --meta-title '" & GameTitle & "' "
             End If
 
+
             If String.IsNullOrEmpty(PlayerPath) = False Then
-                returnValue &= " --player ""'" & PlayerPath & "' " & LiteralPlayerArgs & """ " '--player-passthrough=hls 
+                returnValue &= " --player ""'" & PlayerPath & "' " & titleArg & LiteralPlayerArgs & """ " '--player-passthrough=hls 
             Else
                 Console.WriteLine("Error: Player path is empty")
             End If
@@ -333,6 +338,10 @@ Public Class Game
             End If
 
             returnValue &= " --http-no-ssl-verify "
+
+            If UseOutputArgs Then
+                returnValue &= " -o """ & PlayerOutputPath & """ "
+            End If
 
             If UseLiveStreamerArgs Then
                 returnValue &= LiveStreamerArgs
