@@ -448,5 +448,16 @@ Public Class NHLGamesMetro
         SetEventArgsFromForm()
     End Sub
 
+    Private Sub MetroButton1_Click(sender As Object, e As EventArgs) Handles MetroButton1.Click
+        SaveFileDialog.Filter = "MP4 Files (*.mp4)|*.MP4"
+        SaveFileDialog.DefaultExt = "mp4"
+        SaveFileDialog.AddExtension = True
+
+        If SaveFileDialog.ShowDialog() = DialogResult.OK Then
+            txtOutputPath.Text = SaveFileDialog.FileName
+            SetEventArgsFromForm()
+        End If
+    End Sub
+
 #End Region
 End Class

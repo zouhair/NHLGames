@@ -39,27 +39,26 @@ Partial Class NHLGamesMetro
         Me.ConsoleTab = New MetroFramework.Controls.MetroTabPage()
         Me.btnClearConsole = New MetroFramework.Controls.MetroButton()
         Me.SettingTab = New MetroFramework.Controls.MetroTabPage()
-        Me.btnLiveStreamerPath = New MetroFramework.Controls.MetroButton()
-        Me.btnMPCPath = New MetroFramework.Controls.MetroButton()
-        Me.btnVLCPath = New MetroFramework.Controls.MetroButton()
-        Me.MetroLabel4 = New MetroFramework.Controls.MetroLabel()
-        Me.txtLiveStreamPath = New System.Windows.Forms.TextBox()
-        Me.txtMPCPath = New System.Windows.Forms.TextBox()
-        Me.MetroLabel3 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel2 = New MetroFramework.Controls.MetroLabel()
-        Me.txtVLCPath = New System.Windows.Forms.TextBox()
-        Me.btnOpenHostsFile = New MetroFramework.Controls.MetroButton()
-        Me.MetroCheckBox1 = New MetroFramework.Controls.MetroCheckBox()
-        Me.btnHosts = New MetroFramework.Controls.MetroButton()
-        Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.chkEnableStreamArgs = New MetroFramework.Controls.MetroCheckBox()
+        Me.txtStreamerArgs = New System.Windows.Forms.TextBox()
+        Me.chkEnablePlayerArgs = New MetroFramework.Controls.MetroCheckBox()
+        Me.chkEnableOutput = New MetroFramework.Controls.MetroCheckBox()
         Me.MetroPanel3 = New MetroFramework.Controls.MetroPanel()
         Me.rbVOD = New MetroFramework.Controls.MetroRadioButton()
         Me.rbLive = New MetroFramework.Controls.MetroRadioButton()
+        Me.txtPlayerArgs = New System.Windows.Forms.TextBox()
+        Me.txtOutputPath = New System.Windows.Forms.TextBox()
         Me.MetroPanel2 = New MetroFramework.Controls.MetroPanel()
         Me.lnkMPCDownload = New MetroFramework.Controls.MetroLink()
         Me.lnkVLCDownload = New MetroFramework.Controls.MetroLink()
         Me.rbMPC = New MetroFramework.Controls.MetroRadioButton()
         Me.rbVLC = New MetroFramework.Controls.MetroRadioButton()
+        Me.MetroPanel5 = New MetroFramework.Controls.MetroPanel()
+        Me.rbAkamai = New MetroFramework.Controls.MetroRadioButton()
+        Me.rbLevel3 = New MetroFramework.Controls.MetroRadioButton()
+        Me.MetroLabel5 = New MetroFramework.Controls.MetroLabel()
+        Me.btnLiveStreamerPath = New MetroFramework.Controls.MetroButton()
+        Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
         Me.MetroPanel1 = New MetroFramework.Controls.MetroPanel()
         Me.rbQual6 = New MetroFramework.Controls.MetroRadioButton()
         Me.rbQual5 = New MetroFramework.Controls.MetroRadioButton()
@@ -68,22 +67,25 @@ Partial Class NHLGamesMetro
         Me.rbQual2 = New MetroFramework.Controls.MetroRadioButton()
         Me.chk60 = New MetroFramework.Controls.MetroCheckBox()
         Me.rbQual1 = New MetroFramework.Controls.MetroRadioButton()
-        Me.MetroLabel5 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel6 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel7 = New MetroFramework.Controls.MetroLabel()
-        Me.txtStreamerArgs = New System.Windows.Forms.TextBox()
-        Me.txtPlayerArgs = New System.Windows.Forms.TextBox()
-        Me.txtOutputPath = New System.Windows.Forms.TextBox()
-        Me.MetroPanel5 = New MetroFramework.Controls.MetroPanel()
-        Me.rbAkamai = New MetroFramework.Controls.MetroRadioButton()
-        Me.rbLevel3 = New MetroFramework.Controls.MetroRadioButton()
-        Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel9 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel10 = New MetroFramework.Controls.MetroLabel()
+        Me.btnMPCPath = New MetroFramework.Controls.MetroButton()
+        Me.MetroLabel6 = New MetroFramework.Controls.MetroLabel()
+        Me.btnVLCPath = New MetroFramework.Controls.MetroButton()
+        Me.MetroLabel4 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel11 = New MetroFramework.Controls.MetroLabel()
-        Me.chkEnableStreamArgs = New MetroFramework.Controls.MetroCheckBox()
-        Me.chkEnablePlayerArgs = New MetroFramework.Controls.MetroCheckBox()
-        Me.chkEnableOutput = New MetroFramework.Controls.MetroCheckBox()
+        Me.txtLiveStreamPath = New System.Windows.Forms.TextBox()
+        Me.MetroLabel7 = New MetroFramework.Controls.MetroLabel()
+        Me.txtMPCPath = New System.Windows.Forms.TextBox()
+        Me.MetroLabel3 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel2 = New MetroFramework.Controls.MetroLabel()
+        Me.txtVLCPath = New System.Windows.Forms.TextBox()
+        Me.btnOpenHostsFile = New MetroFramework.Controls.MetroButton()
+        Me.MetroCheckBox1 = New MetroFramework.Controls.MetroCheckBox()
+        Me.btnHosts = New MetroFramework.Controls.MetroButton()
+        Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog()
+        Me.MetroButton1 = New MetroFramework.Controls.MetroButton()
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl.SuspendLayout()
         Me.GamesTab.SuspendLayout()
@@ -91,8 +93,8 @@ Partial Class NHLGamesMetro
         Me.SettingTab.SuspendLayout()
         Me.MetroPanel3.SuspendLayout()
         Me.MetroPanel2.SuspendLayout()
-        Me.MetroPanel1.SuspendLayout()
         Me.MetroPanel5.SuspendLayout()
+        Me.MetroPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'gridGames
@@ -149,7 +151,7 @@ Partial Class NHLGamesMetro
         Me.dtDate.CustomFormat = "yyyy-MM-dd"
         Me.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtDate.Location = New System.Drawing.Point(7, 6)
-        Me.dtDate.MinimumSize = New System.Drawing.Size(0, 29)
+        Me.dtDate.MinimumSize = New System.Drawing.Size(4, 29)
         Me.dtDate.Name = "dtDate"
         Me.dtDate.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.dtDate.Size = New System.Drawing.Size(125, 29)
@@ -217,7 +219,7 @@ Partial Class NHLGamesMetro
         Me.GamesTab.HorizontalScrollbarSize = 10
         Me.GamesTab.Location = New System.Drawing.Point(4, 38)
         Me.GamesTab.Name = "GamesTab"
-        Me.GamesTab.Size = New System.Drawing.Size(772, 378)
+        Me.GamesTab.Size = New System.Drawing.Size(766, 426)
         Me.GamesTab.TabIndex = 0
         Me.GamesTab.Text = "Games      "
         Me.GamesTab.VerticalScrollbarBarColor = True
@@ -264,6 +266,7 @@ Partial Class NHLGamesMetro
         '
         'SettingTab
         '
+        Me.SettingTab.Controls.Add(Me.MetroButton1)
         Me.SettingTab.Controls.Add(Me.chkEnableStreamArgs)
         Me.SettingTab.Controls.Add(Me.txtStreamerArgs)
         Me.SettingTab.Controls.Add(Me.chkEnablePlayerArgs)
@@ -305,128 +308,49 @@ Partial Class NHLGamesMetro
         Me.SettingTab.VerticalScrollbarHighlightOnWheel = False
         Me.SettingTab.VerticalScrollbarSize = 10
         '
-        'btnLiveStreamerPath
+        'chkEnableStreamArgs
         '
-        Me.btnLiveStreamerPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnLiveStreamerPath.Location = New System.Drawing.Point(629, 86)
-        Me.btnLiveStreamerPath.Name = "btnLiveStreamerPath"
-        Me.btnLiveStreamerPath.Size = New System.Drawing.Size(28, 20)
-        Me.btnLiveStreamerPath.TabIndex = 50
-        Me.btnLiveStreamerPath.Text = "..."
-        Me.btnLiveStreamerPath.UseSelectable = True
+        Me.chkEnableStreamArgs.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkEnableStreamArgs.AutoSize = True
+        Me.chkEnableStreamArgs.Location = New System.Drawing.Point(629, 333)
+        Me.chkEnableStreamArgs.Name = "chkEnableStreamArgs"
+        Me.chkEnableStreamArgs.Size = New System.Drawing.Size(58, 15)
+        Me.chkEnableStreamArgs.TabIndex = 9
+        Me.chkEnableStreamArgs.Text = "Enable"
+        Me.chkEnableStreamArgs.UseSelectable = True
         '
-        'btnMPCPath
+        'txtStreamerArgs
         '
-        Me.btnMPCPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnMPCPath.Location = New System.Drawing.Point(629, 58)
-        Me.btnMPCPath.Name = "btnMPCPath"
-        Me.btnMPCPath.Size = New System.Drawing.Size(28, 20)
-        Me.btnMPCPath.TabIndex = 49
-        Me.btnMPCPath.Text = "..."
-        Me.btnMPCPath.UseSelectable = True
-        '
-        'btnVLCPath
-        '
-        Me.btnVLCPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnVLCPath.Location = New System.Drawing.Point(629, 31)
-        Me.btnVLCPath.Name = "btnVLCPath"
-        Me.btnVLCPath.Size = New System.Drawing.Size(28, 20)
-        Me.btnVLCPath.TabIndex = 48
-        Me.btnVLCPath.Text = "..."
-        Me.btnVLCPath.UseSelectable = True
-        '
-        'MetroLabel4
-        '
-        Me.MetroLabel4.AutoSize = True
-        Me.MetroLabel4.Location = New System.Drawing.Point(17, 86)
-        Me.MetroLabel4.Name = "MetroLabel4"
-        Me.MetroLabel4.Size = New System.Drawing.Size(114, 19)
-        Me.MetroLabel4.TabIndex = 47
-        Me.MetroLabel4.Text = "LiveStreamer Path"
-        '
-        'txtLiveStreamPath
-        '
-        Me.txtLiveStreamPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.txtStreamerArgs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtLiveStreamPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtLiveStreamPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLiveStreamPath.Location = New System.Drawing.Point(137, 84)
-        Me.txtLiveStreamPath.Name = "txtLiveStreamPath"
-        Me.txtLiveStreamPath.ReadOnly = True
-        Me.txtLiveStreamPath.Size = New System.Drawing.Size(486, 22)
-        Me.txtLiveStreamPath.TabIndex = 46
+        Me.txtStreamerArgs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtStreamerArgs.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStreamerArgs.Location = New System.Drawing.Point(137, 328)
+        Me.txtStreamerArgs.Name = "txtStreamerArgs"
+        Me.txtStreamerArgs.Size = New System.Drawing.Size(486, 22)
+        Me.txtStreamerArgs.TabIndex = 16
         '
-        'txtMPCPath
+        'chkEnablePlayerArgs
         '
-        Me.txtMPCPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtMPCPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtMPCPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMPCPath.Location = New System.Drawing.Point(137, 56)
-        Me.txtMPCPath.Name = "txtMPCPath"
-        Me.txtMPCPath.ReadOnly = True
-        Me.txtMPCPath.Size = New System.Drawing.Size(486, 22)
-        Me.txtMPCPath.TabIndex = 45
+        Me.chkEnablePlayerArgs.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkEnablePlayerArgs.AutoSize = True
+        Me.chkEnablePlayerArgs.Location = New System.Drawing.Point(629, 305)
+        Me.chkEnablePlayerArgs.Name = "chkEnablePlayerArgs"
+        Me.chkEnablePlayerArgs.Size = New System.Drawing.Size(58, 15)
+        Me.chkEnablePlayerArgs.TabIndex = 8
+        Me.chkEnablePlayerArgs.Text = "Enable"
+        Me.chkEnablePlayerArgs.UseSelectable = True
         '
-        'MetroLabel3
+        'chkEnableOutput
         '
-        Me.MetroLabel3.AutoSize = True
-        Me.MetroLabel3.Location = New System.Drawing.Point(17, 58)
-        Me.MetroLabel3.Name = "MetroLabel3"
-        Me.MetroLabel3.Size = New System.Drawing.Size(67, 19)
-        Me.MetroLabel3.TabIndex = 44
-        Me.MetroLabel3.Text = "MPC Path"
-        '
-        'MetroLabel2
-        '
-        Me.MetroLabel2.AutoSize = True
-        Me.MetroLabel2.Location = New System.Drawing.Point(17, 31)
-        Me.MetroLabel2.Name = "MetroLabel2"
-        Me.MetroLabel2.Size = New System.Drawing.Size(60, 19)
-        Me.MetroLabel2.TabIndex = 43
-        Me.MetroLabel2.Text = "VLC Path"
-        '
-        'txtVLCPath
-        '
-        Me.txtVLCPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtVLCPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtVLCPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtVLCPath.Location = New System.Drawing.Point(137, 28)
-        Me.txtVLCPath.Name = "txtVLCPath"
-        Me.txtVLCPath.ReadOnly = True
-        Me.txtVLCPath.Size = New System.Drawing.Size(486, 22)
-        Me.txtVLCPath.TabIndex = 42
-        '
-        'btnOpenHostsFile
-        '
-        Me.btnOpenHostsFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnOpenHostsFile.Location = New System.Drawing.Point(433, 114)
-        Me.btnOpenHostsFile.Name = "btnOpenHostsFile"
-        Me.btnOpenHostsFile.Size = New System.Drawing.Size(92, 24)
-        Me.btnOpenHostsFile.TabIndex = 39
-        Me.btnOpenHostsFile.Text = "Open Hosts File"
-        Me.btnOpenHostsFile.UseSelectable = True
-        '
-        'MetroCheckBox1
-        '
-        Me.MetroCheckBox1.AutoSize = True
-        Me.MetroCheckBox1.Location = New System.Drawing.Point(137, 123)
-        Me.MetroCheckBox1.Name = "MetroCheckBox1"
-        Me.MetroCheckBox1.Size = New System.Drawing.Size(89, 15)
-        Me.MetroCheckBox1.TabIndex = 28
-        Me.MetroCheckBox1.Text = "Show Scores"
-        Me.MetroCheckBox1.UseSelectable = True
-        '
-        'btnHosts
-        '
-        Me.btnHosts.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnHosts.Location = New System.Drawing.Point(531, 114)
-        Me.btnHosts.Name = "btnHosts"
-        Me.btnHosts.Size = New System.Drawing.Size(92, 24)
-        Me.btnHosts.TabIndex = 27
-        Me.btnHosts.Text = "Test Hosts File"
-        Me.btnHosts.UseSelectable = True
+        Me.chkEnableOutput.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkEnableOutput.AutoSize = True
+        Me.chkEnableOutput.Location = New System.Drawing.Point(629, 277)
+        Me.chkEnableOutput.Name = "chkEnableOutput"
+        Me.chkEnableOutput.Size = New System.Drawing.Size(58, 15)
+        Me.chkEnableOutput.TabIndex = 7
+        Me.chkEnableOutput.Text = "Enable"
+        Me.chkEnableOutput.UseSelectable = True
         '
         'MetroPanel3
         '
@@ -464,6 +388,29 @@ Partial Class NHLGamesMetro
         Me.rbLive.TabStop = True
         Me.rbLive.Text = "Live"
         Me.rbLive.UseSelectable = True
+        '
+        'txtPlayerArgs
+        '
+        Me.txtPlayerArgs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtPlayerArgs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtPlayerArgs.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPlayerArgs.Location = New System.Drawing.Point(137, 300)
+        Me.txtPlayerArgs.Name = "txtPlayerArgs"
+        Me.txtPlayerArgs.Size = New System.Drawing.Size(486, 22)
+        Me.txtPlayerArgs.TabIndex = 15
+        '
+        'txtOutputPath
+        '
+        Me.txtOutputPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtOutputPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtOutputPath.Enabled = False
+        Me.txtOutputPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtOutputPath.Location = New System.Drawing.Point(137, 272)
+        Me.txtOutputPath.Name = "txtOutputPath"
+        Me.txtOutputPath.Size = New System.Drawing.Size(451, 22)
+        Me.txtOutputPath.TabIndex = 14
         '
         'MetroPanel2
         '
@@ -527,6 +474,71 @@ Partial Class NHLGamesMetro
         Me.rbVLC.TabStop = True
         Me.rbVLC.Text = "VLC"
         Me.rbVLC.UseSelectable = True
+        '
+        'MetroPanel5
+        '
+        Me.MetroPanel5.Controls.Add(Me.rbAkamai)
+        Me.MetroPanel5.Controls.Add(Me.rbLevel3)
+        Me.MetroPanel5.HorizontalScrollbarBarColor = True
+        Me.MetroPanel5.HorizontalScrollbarHighlightOnWheel = False
+        Me.MetroPanel5.HorizontalScrollbarSize = 10
+        Me.MetroPanel5.Location = New System.Drawing.Point(137, 244)
+        Me.MetroPanel5.Name = "MetroPanel5"
+        Me.MetroPanel5.Size = New System.Drawing.Size(486, 22)
+        Me.MetroPanel5.TabIndex = 13
+        Me.MetroPanel5.VerticalScrollbarBarColor = True
+        Me.MetroPanel5.VerticalScrollbarHighlightOnWheel = False
+        Me.MetroPanel5.VerticalScrollbarSize = 10
+        '
+        'rbAkamai
+        '
+        Me.rbAkamai.AutoSize = True
+        Me.rbAkamai.Location = New System.Drawing.Point(68, 3)
+        Me.rbAkamai.Name = "rbAkamai"
+        Me.rbAkamai.Size = New System.Drawing.Size(63, 15)
+        Me.rbAkamai.TabIndex = 12
+        Me.rbAkamai.Text = "Akamai"
+        Me.rbAkamai.UseSelectable = True
+        '
+        'rbLevel3
+        '
+        Me.rbLevel3.AutoSize = True
+        Me.rbLevel3.Checked = True
+        Me.rbLevel3.Location = New System.Drawing.Point(3, 3)
+        Me.rbLevel3.Name = "rbLevel3"
+        Me.rbLevel3.Size = New System.Drawing.Size(59, 15)
+        Me.rbLevel3.TabIndex = 11
+        Me.rbLevel3.TabStop = True
+        Me.rbLevel3.Text = "Level 3"
+        Me.rbLevel3.UseSelectable = True
+        '
+        'MetroLabel5
+        '
+        Me.MetroLabel5.AutoSize = True
+        Me.MetroLabel5.Location = New System.Drawing.Point(17, 219)
+        Me.MetroLabel5.Name = "MetroLabel5"
+        Me.MetroLabel5.Size = New System.Drawing.Size(47, 19)
+        Me.MetroLabel5.TabIndex = 4
+        Me.MetroLabel5.Text = "Server"
+        '
+        'btnLiveStreamerPath
+        '
+        Me.btnLiveStreamerPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnLiveStreamerPath.Location = New System.Drawing.Point(629, 86)
+        Me.btnLiveStreamerPath.Name = "btnLiveStreamerPath"
+        Me.btnLiveStreamerPath.Size = New System.Drawing.Size(28, 20)
+        Me.btnLiveStreamerPath.TabIndex = 50
+        Me.btnLiveStreamerPath.Text = "..."
+        Me.btnLiveStreamerPath.UseSelectable = True
+        '
+        'MetroLabel8
+        '
+        Me.MetroLabel8.AutoSize = True
+        Me.MetroLabel8.Location = New System.Drawing.Point(17, 332)
+        Me.MetroLabel8.Name = "MetroLabel8"
+        Me.MetroLabel8.Size = New System.Drawing.Size(92, 19)
+        Me.MetroLabel8.TabIndex = 6
+        Me.MetroLabel8.Text = "Streamer args"
         '
         'MetroPanel1
         '
@@ -620,112 +632,6 @@ Partial Class NHLGamesMetro
         Me.rbQual1.Text = "224p"
         Me.rbQual1.UseSelectable = True
         '
-        'MetroLabel5
-        '
-        Me.MetroLabel5.AutoSize = True
-        Me.MetroLabel5.Location = New System.Drawing.Point(17, 219)
-        Me.MetroLabel5.Name = "MetroLabel5"
-        Me.MetroLabel5.Size = New System.Drawing.Size(47, 19)
-        Me.MetroLabel5.TabIndex = 4
-        Me.MetroLabel5.Text = "Server"
-        '
-        'MetroLabel6
-        '
-        Me.MetroLabel6.AutoSize = True
-        Me.MetroLabel6.Location = New System.Drawing.Point(17, 191)
-        Me.MetroLabel6.Name = "MetroLabel6"
-        Me.MetroLabel6.Size = New System.Drawing.Size(45, 19)
-        Me.MetroLabel6.TabIndex = 3
-        Me.MetroLabel6.Text = "Player"
-        '
-        'MetroLabel7
-        '
-        Me.MetroLabel7.AutoSize = True
-        Me.MetroLabel7.Location = New System.Drawing.Point(17, 164)
-        Me.MetroLabel7.Name = "MetroLabel7"
-        Me.MetroLabel7.Size = New System.Drawing.Size(69, 19)
-        Me.MetroLabel7.TabIndex = 2
-        Me.MetroLabel7.Text = "Resolution"
-        '
-        'txtStreamerArgs
-        '
-        Me.txtStreamerArgs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtStreamerArgs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtStreamerArgs.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStreamerArgs.Location = New System.Drawing.Point(137, 328)
-        Me.txtStreamerArgs.Name = "txtStreamerArgs"
-        Me.txtStreamerArgs.Size = New System.Drawing.Size(486, 22)
-        Me.txtStreamerArgs.TabIndex = 16
-        '
-        'txtPlayerArgs
-        '
-        Me.txtPlayerArgs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtPlayerArgs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPlayerArgs.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPlayerArgs.Location = New System.Drawing.Point(137, 300)
-        Me.txtPlayerArgs.Name = "txtPlayerArgs"
-        Me.txtPlayerArgs.Size = New System.Drawing.Size(486, 22)
-        Me.txtPlayerArgs.TabIndex = 15
-        '
-        'txtOutputPath
-        '
-        Me.txtOutputPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtOutputPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtOutputPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOutputPath.Location = New System.Drawing.Point(137, 272)
-        Me.txtOutputPath.Name = "txtOutputPath"
-        Me.txtOutputPath.Size = New System.Drawing.Size(486, 22)
-        Me.txtOutputPath.TabIndex = 14
-        '
-        'MetroPanel5
-        '
-        Me.MetroPanel5.Controls.Add(Me.rbAkamai)
-        Me.MetroPanel5.Controls.Add(Me.rbLevel3)
-        Me.MetroPanel5.HorizontalScrollbarBarColor = True
-        Me.MetroPanel5.HorizontalScrollbarHighlightOnWheel = False
-        Me.MetroPanel5.HorizontalScrollbarSize = 10
-        Me.MetroPanel5.Location = New System.Drawing.Point(137, 244)
-        Me.MetroPanel5.Name = "MetroPanel5"
-        Me.MetroPanel5.Size = New System.Drawing.Size(486, 22)
-        Me.MetroPanel5.TabIndex = 13
-        Me.MetroPanel5.VerticalScrollbarBarColor = True
-        Me.MetroPanel5.VerticalScrollbarHighlightOnWheel = False
-        Me.MetroPanel5.VerticalScrollbarSize = 10
-        '
-        'rbAkamai
-        '
-        Me.rbAkamai.AutoSize = True
-        Me.rbAkamai.Location = New System.Drawing.Point(68, 3)
-        Me.rbAkamai.Name = "rbAkamai"
-        Me.rbAkamai.Size = New System.Drawing.Size(63, 15)
-        Me.rbAkamai.TabIndex = 12
-        Me.rbAkamai.Text = "Akamai"
-        Me.rbAkamai.UseSelectable = True
-        '
-        'rbLevel3
-        '
-        Me.rbLevel3.AutoSize = True
-        Me.rbLevel3.Checked = True
-        Me.rbLevel3.Location = New System.Drawing.Point(3, 3)
-        Me.rbLevel3.Name = "rbLevel3"
-        Me.rbLevel3.Size = New System.Drawing.Size(59, 15)
-        Me.rbLevel3.TabIndex = 11
-        Me.rbLevel3.TabStop = True
-        Me.rbLevel3.Text = "Level 3"
-        Me.rbLevel3.UseSelectable = True
-        '
-        'MetroLabel8
-        '
-        Me.MetroLabel8.AutoSize = True
-        Me.MetroLabel8.Location = New System.Drawing.Point(17, 332)
-        Me.MetroLabel8.Name = "MetroLabel8"
-        Me.MetroLabel8.Size = New System.Drawing.Size(92, 19)
-        Me.MetroLabel8.TabIndex = 6
-        Me.MetroLabel8.Text = "Streamer args"
-        '
         'MetroLabel9
         '
         Me.MetroLabel9.AutoSize = True
@@ -744,6 +650,44 @@ Partial Class NHLGamesMetro
         Me.MetroLabel10.TabIndex = 4
         Me.MetroLabel10.Text = "Output"
         '
+        'btnMPCPath
+        '
+        Me.btnMPCPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMPCPath.Location = New System.Drawing.Point(629, 58)
+        Me.btnMPCPath.Name = "btnMPCPath"
+        Me.btnMPCPath.Size = New System.Drawing.Size(28, 20)
+        Me.btnMPCPath.TabIndex = 49
+        Me.btnMPCPath.Text = "..."
+        Me.btnMPCPath.UseSelectable = True
+        '
+        'MetroLabel6
+        '
+        Me.MetroLabel6.AutoSize = True
+        Me.MetroLabel6.Location = New System.Drawing.Point(17, 191)
+        Me.MetroLabel6.Name = "MetroLabel6"
+        Me.MetroLabel6.Size = New System.Drawing.Size(45, 19)
+        Me.MetroLabel6.TabIndex = 3
+        Me.MetroLabel6.Text = "Player"
+        '
+        'btnVLCPath
+        '
+        Me.btnVLCPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnVLCPath.Location = New System.Drawing.Point(629, 31)
+        Me.btnVLCPath.Name = "btnVLCPath"
+        Me.btnVLCPath.Size = New System.Drawing.Size(28, 20)
+        Me.btnVLCPath.TabIndex = 48
+        Me.btnVLCPath.Text = "..."
+        Me.btnVLCPath.UseSelectable = True
+        '
+        'MetroLabel4
+        '
+        Me.MetroLabel4.AutoSize = True
+        Me.MetroLabel4.Location = New System.Drawing.Point(17, 86)
+        Me.MetroLabel4.Name = "MetroLabel4"
+        Me.MetroLabel4.Size = New System.Drawing.Size(114, 19)
+        Me.MetroLabel4.TabIndex = 47
+        Me.MetroLabel4.Text = "LiveStreamer Path"
+        '
         'MetroLabel11
         '
         Me.MetroLabel11.AutoSize = True
@@ -753,38 +697,108 @@ Partial Class NHLGamesMetro
         Me.MetroLabel11.TabIndex = 3
         Me.MetroLabel11.Text = "CDN"
         '
-        'chkEnableStreamArgs
+        'txtLiveStreamPath
         '
-        Me.chkEnableStreamArgs.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkEnableStreamArgs.AutoSize = True
-        Me.chkEnableStreamArgs.Location = New System.Drawing.Point(629, 333)
-        Me.chkEnableStreamArgs.Name = "chkEnableStreamArgs"
-        Me.chkEnableStreamArgs.Size = New System.Drawing.Size(58, 15)
-        Me.chkEnableStreamArgs.TabIndex = 9
-        Me.chkEnableStreamArgs.Text = "Enable"
-        Me.chkEnableStreamArgs.UseSelectable = True
+        Me.txtLiveStreamPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtLiveStreamPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtLiveStreamPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLiveStreamPath.Location = New System.Drawing.Point(137, 84)
+        Me.txtLiveStreamPath.Name = "txtLiveStreamPath"
+        Me.txtLiveStreamPath.ReadOnly = True
+        Me.txtLiveStreamPath.Size = New System.Drawing.Size(486, 22)
+        Me.txtLiveStreamPath.TabIndex = 46
         '
-        'chkEnablePlayerArgs
+        'MetroLabel7
         '
-        Me.chkEnablePlayerArgs.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkEnablePlayerArgs.AutoSize = True
-        Me.chkEnablePlayerArgs.Location = New System.Drawing.Point(629, 305)
-        Me.chkEnablePlayerArgs.Name = "chkEnablePlayerArgs"
-        Me.chkEnablePlayerArgs.Size = New System.Drawing.Size(58, 15)
-        Me.chkEnablePlayerArgs.TabIndex = 8
-        Me.chkEnablePlayerArgs.Text = "Enable"
-        Me.chkEnablePlayerArgs.UseSelectable = True
+        Me.MetroLabel7.AutoSize = True
+        Me.MetroLabel7.Location = New System.Drawing.Point(17, 164)
+        Me.MetroLabel7.Name = "MetroLabel7"
+        Me.MetroLabel7.Size = New System.Drawing.Size(69, 19)
+        Me.MetroLabel7.TabIndex = 2
+        Me.MetroLabel7.Text = "Resolution"
         '
-        'chkEnableOutput
+        'txtMPCPath
         '
-        Me.chkEnableOutput.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkEnableOutput.AutoSize = True
-        Me.chkEnableOutput.Location = New System.Drawing.Point(629, 277)
-        Me.chkEnableOutput.Name = "chkEnableOutput"
-        Me.chkEnableOutput.Size = New System.Drawing.Size(58, 15)
-        Me.chkEnableOutput.TabIndex = 7
-        Me.chkEnableOutput.Text = "Enable"
-        Me.chkEnableOutput.UseSelectable = True
+        Me.txtMPCPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtMPCPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMPCPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMPCPath.Location = New System.Drawing.Point(137, 56)
+        Me.txtMPCPath.Name = "txtMPCPath"
+        Me.txtMPCPath.ReadOnly = True
+        Me.txtMPCPath.Size = New System.Drawing.Size(486, 22)
+        Me.txtMPCPath.TabIndex = 45
+        '
+        'MetroLabel3
+        '
+        Me.MetroLabel3.AutoSize = True
+        Me.MetroLabel3.Location = New System.Drawing.Point(17, 58)
+        Me.MetroLabel3.Name = "MetroLabel3"
+        Me.MetroLabel3.Size = New System.Drawing.Size(67, 19)
+        Me.MetroLabel3.TabIndex = 44
+        Me.MetroLabel3.Text = "MPC Path"
+        '
+        'MetroLabel2
+        '
+        Me.MetroLabel2.AutoSize = True
+        Me.MetroLabel2.Location = New System.Drawing.Point(17, 31)
+        Me.MetroLabel2.Name = "MetroLabel2"
+        Me.MetroLabel2.Size = New System.Drawing.Size(60, 19)
+        Me.MetroLabel2.TabIndex = 43
+        Me.MetroLabel2.Text = "VLC Path"
+        '
+        'txtVLCPath
+        '
+        Me.txtVLCPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtVLCPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtVLCPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtVLCPath.Location = New System.Drawing.Point(137, 28)
+        Me.txtVLCPath.Name = "txtVLCPath"
+        Me.txtVLCPath.ReadOnly = True
+        Me.txtVLCPath.Size = New System.Drawing.Size(486, 22)
+        Me.txtVLCPath.TabIndex = 42
+        '
+        'btnOpenHostsFile
+        '
+        Me.btnOpenHostsFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnOpenHostsFile.Location = New System.Drawing.Point(433, 114)
+        Me.btnOpenHostsFile.Name = "btnOpenHostsFile"
+        Me.btnOpenHostsFile.Size = New System.Drawing.Size(92, 24)
+        Me.btnOpenHostsFile.TabIndex = 39
+        Me.btnOpenHostsFile.Text = "Open Hosts File"
+        Me.btnOpenHostsFile.UseSelectable = True
+        '
+        'MetroCheckBox1
+        '
+        Me.MetroCheckBox1.AutoSize = True
+        Me.MetroCheckBox1.Location = New System.Drawing.Point(137, 123)
+        Me.MetroCheckBox1.Name = "MetroCheckBox1"
+        Me.MetroCheckBox1.Size = New System.Drawing.Size(89, 15)
+        Me.MetroCheckBox1.TabIndex = 28
+        Me.MetroCheckBox1.Text = "Show Scores"
+        Me.MetroCheckBox1.UseSelectable = True
+        '
+        'btnHosts
+        '
+        Me.btnHosts.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnHosts.Location = New System.Drawing.Point(531, 114)
+        Me.btnHosts.Name = "btnHosts"
+        Me.btnHosts.Size = New System.Drawing.Size(92, 24)
+        Me.btnHosts.TabIndex = 27
+        Me.btnHosts.Text = "Test Hosts File"
+        Me.btnHosts.UseSelectable = True
+        '
+        'MetroButton1
+        '
+        Me.MetroButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.MetroButton1.Location = New System.Drawing.Point(594, 274)
+        Me.MetroButton1.Name = "MetroButton1"
+        Me.MetroButton1.Size = New System.Drawing.Size(28, 20)
+        Me.MetroButton1.TabIndex = 51
+        Me.MetroButton1.Text = "..."
+        Me.MetroButton1.UseSelectable = True
         '
         'NHLGamesMetro
         '
@@ -809,10 +823,10 @@ Partial Class NHLGamesMetro
         Me.MetroPanel3.PerformLayout()
         Me.MetroPanel2.ResumeLayout(False)
         Me.MetroPanel2.PerformLayout()
-        Me.MetroPanel1.ResumeLayout(False)
-        Me.MetroPanel1.PerformLayout()
         Me.MetroPanel5.ResumeLayout(False)
         Me.MetroPanel5.PerformLayout()
+        Me.MetroPanel1.ResumeLayout(False)
+        Me.MetroPanel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -875,4 +889,6 @@ Partial Class NHLGamesMetro
     Friend WithEvents chkEnableStreamArgs As MetroCheckBox
     Friend WithEvents chkEnablePlayerArgs As MetroCheckBox
     Friend WithEvents chkEnableOutput As MetroCheckBox
+    Friend WithEvents MetroButton1 As MetroButton
+    Friend WithEvents SaveFileDialog As SaveFileDialog
 End Class
