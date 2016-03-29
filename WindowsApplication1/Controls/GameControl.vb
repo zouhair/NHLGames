@@ -25,12 +25,6 @@ Public Class GameControl
         lblAwayScore.Text = Game.AwayScore
         lblAwayTeam.Text = Game.AwayAbbrev
 
-        'btnWatch.Enabled = Game.Date <= DateTime.Now.ToUniversalTime() 'AndAlso Game.GameIsLive
-        btnWatch.Enabled = Game.AreAnyStreamsAvailable ' Allow watching games as soon as they are available on the server
-        'Compare using universal time
-
-        'btnWatch.Enabled = Game.Date <= DateTime.Now 'AndAlso Game.GameIsLive
-
         If Game.Date <= DateTime.Now AndAlso Game.GameIsLive Then
             BorderPanel1.BorderColour = Color.Green
             'lblVS.Visible = True

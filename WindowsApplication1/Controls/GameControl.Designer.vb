@@ -33,14 +33,11 @@ Partial Class GameControl
         Me.picHome = New System.Windows.Forms.PictureBox()
         Me.lblTime = New MetroFramework.Controls.MetroLabel()
         Me.picAway = New System.Windows.Forms.PictureBox()
-        Me.btnWatch = New MetroFramework.Controls.MetroButton()
         Me.lblVS = New MetroFramework.Controls.MetroLabel()
         Me.lblAwayScore = New MetroFramework.Controls.MetroLabel()
         Me.lblHomeTeam = New MetroFramework.Controls.MetroLabel()
         Me.lblHomeScore = New MetroFramework.Controls.MetroLabel()
         Me.lblAwayTeam = New MetroFramework.Controls.MetroLabel()
-        Me.lblAwayScore = New MetroFramework.Controls.MetroLabel()
-        Me.lblHomeTeam = New MetroFramework.Controls.MetroLabel()
         Me.BorderPanel1.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
         CType(Me.picHome, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -53,6 +50,8 @@ Partial Class GameControl
         Me.HomeTeamToolTip.StyleManager = Nothing
         Me.HomeTeamToolTip.Theme = MetroFramework.MetroThemeStyle.Light
         '
+        'AwayTeamToolTip
+        '
         Me.AwayTeamToolTip.Style = MetroFramework.MetroColorStyle.[Default]
         Me.AwayTeamToolTip.StyleManager = Nothing
         Me.AwayTeamToolTip.Theme = MetroFramework.MetroThemeStyle.Light
@@ -64,14 +63,11 @@ Partial Class GameControl
         Me.BorderPanel1.Controls.Add(Me.picHome)
         Me.BorderPanel1.Controls.Add(Me.lblTime)
         Me.BorderPanel1.Controls.Add(Me.picAway)
-        Me.BorderPanel1.Controls.Add(Me.btnWatch)
         Me.BorderPanel1.Controls.Add(Me.lblVS)
         Me.BorderPanel1.Controls.Add(Me.lblAwayScore)
         Me.BorderPanel1.Controls.Add(Me.lblHomeTeam)
         Me.BorderPanel1.Controls.Add(Me.lblHomeScore)
         Me.BorderPanel1.Controls.Add(Me.lblAwayTeam)
-        Me.BorderPanel1.Controls.Add(Me.lblAwayScore)
-        Me.BorderPanel1.Controls.Add(Me.lblHomeTeam)
         Me.BorderPanel1.Location = New System.Drawing.Point(0, 0)
         Me.BorderPanel1.Name = "BorderPanel1"
         Me.BorderPanel1.Size = New System.Drawing.Size(228, 95)
@@ -167,13 +163,24 @@ Partial Class GameControl
         Me.lblNationalStream.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         '
         'picHome
+        '
+        Me.picHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.picHome.Location = New System.Drawing.Point(7, 9)
+        Me.picHome.Name = "picHome"
+        Me.picHome.Size = New System.Drawing.Size(55, 34)
+        Me.picHome.TabIndex = 0
+        Me.picHome.TabStop = False
+        '
+        'lblTime
+        '
+        Me.lblTime.Location = New System.Drawing.Point(68, 13)
         Me.lblTime.Name = "lblTime"
         Me.lblTime.Size = New System.Drawing.Size(89, 19)
         Me.lblTime.TabIndex = 8
         Me.lblTime.Text = "7:30 PM"
         Me.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'picHome
+        'picAway
         '
         Me.picAway.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.picAway.Location = New System.Drawing.Point(163, 9)
@@ -181,17 +188,6 @@ Partial Class GameControl
         Me.picAway.Size = New System.Drawing.Size(55, 34)
         Me.picAway.TabIndex = 1
         Me.picAway.TabStop = False
-        '
-        'btnWatch
-        '
-        Me.btnWatch.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnWatch.FontWeight = MetroFramework.MetroButtonWeight.Regular
-        Me.btnWatch.Location = New System.Drawing.Point(108, 61)
-        Me.btnWatch.Name = "btnWatch"
-        Me.btnWatch.Size = New System.Drawing.Size(80, 23)
-        Me.btnWatch.TabIndex = 7
-        Me.btnWatch.Text = "Watch"
-        Me.btnWatch.UseSelectable = True
         '
         'lblVS
         '
@@ -202,25 +198,6 @@ Partial Class GameControl
         Me.lblVS.Size = New System.Drawing.Size(26, 19)
         Me.lblVS.TabIndex = 2
         Me.lblVS.Text = "VS"
-        '
-        'lblHomeScore
-        '
-        Me.lblHomeScore.AutoSize = True
-        Me.lblHomeScore.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.lblHomeScore.Location = New System.Drawing.Point(171, 31)
-        Me.lblHomeScore.Name = "lblHomeScore"
-        Me.lblHomeScore.Size = New System.Drawing.Size(17, 19)
-        Me.lblHomeScore.TabIndex = 6
-        Me.lblHomeScore.Text = "0"
-        '
-        'lblAwayTeam
-        '
-        Me.lblAwayTeam.Location = New System.Drawing.Point(7, 66)
-        Me.lblAwayTeam.Name = "lblAwayTeam"
-        Me.lblAwayTeam.Size = New System.Drawing.Size(80, 19)
-        Me.lblAwayTeam.TabIndex = 3
-        Me.lblAwayTeam.Text = "Away Team"
-        Me.lblAwayTeam.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblAwayScore
         '
@@ -241,6 +218,16 @@ Partial Class GameControl
         Me.lblHomeTeam.TabIndex = 4
         Me.lblHomeTeam.Text = "Home"
         Me.lblHomeTeam.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblHomeScore.Text = "0"
+        '
+        'lblHomeScore
+        '
+        Me.lblHomeScore.AutoSize = True
+        Me.lblHomeScore.FontWeight = MetroFramework.MetroLabelWeight.Bold
+        Me.lblHomeScore.Location = New System.Drawing.Point(76, 32)
+        Me.lblHomeScore.Name = "lblHomeScore"
+        Me.lblHomeScore.Size = New System.Drawing.Size(17, 19)
+        Me.lblHomeScore.TabIndex = 5
         Me.lblHomeScore.Text = "0"
         '
         'lblAwayTeam
@@ -272,13 +259,13 @@ Partial Class GameControl
 
     End Sub
 
-    Friend WithEvents picAway As PictureBox
     Friend WithEvents picHome As PictureBox
+    Friend WithEvents picAway As PictureBox
     Friend WithEvents lblVS As MetroFramework.Controls.MetroLabel
-    Friend WithEvents lblAwayTeam As MetroFramework.Controls.MetroLabel
     Friend WithEvents lblHomeTeam As MetroFramework.Controls.MetroLabel
-    Friend WithEvents lblAwayScore As MetroFramework.Controls.MetroLabel
+    Friend WithEvents lblAwayTeam As MetroFramework.Controls.MetroLabel
     Friend WithEvents lblHomeScore As MetroFramework.Controls.MetroLabel
+    Friend WithEvents lblAwayScore As MetroFramework.Controls.MetroLabel
     Friend WithEvents lblTime As MetroFramework.Controls.MetroLabel
     Friend WithEvents BorderPanel1 As BorderPanel
     Friend WithEvents HomeTeamToolTip As MetroFramework.Components.MetroToolTip
