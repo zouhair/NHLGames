@@ -636,7 +636,7 @@ Partial Class WatchGameForm
 
     End Sub
 
-    Friend WithEvents WatchGameControl As WatchGameControl
+
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents pnlBasic As MetroFramework.Controls.MetroPanel
     Friend WithEvents pnlAdvanced As MetroFramework.Controls.MetroPanel

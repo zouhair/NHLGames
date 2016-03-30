@@ -24,6 +24,8 @@ Public Class WatchGameForm
         rbHome.Text = "Home (" & game.HomeAbbrev & ")"
         rbAway.Text = "Away (" & game.AwayAbbrev & ")"
 
+        Me.Text = "Watch " & game.HomeAbbrev & " VS " & game.AwayAbbrev
+
     End Sub
     Private _WatchArgs As GameWatchArguments
     Public Property WatchArgs As GameWatchArguments
@@ -128,6 +130,8 @@ Public Class WatchGameForm
         pnlAdvanced.Visible = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowAdvancedWatchPanel, False)
 
     End Sub
+
+
     Private Sub SetEventArgsFromForm()
 
         WatchArgs.Is60FPS = chk60.Checked
