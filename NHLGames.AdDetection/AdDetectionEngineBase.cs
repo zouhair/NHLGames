@@ -25,12 +25,12 @@ namespace NHLGames.AdDetection
 
         protected ReadOnlyCollection<int> MediaPlayerProcesses => new ReadOnlyCollection<int>(m_mediaPlayerProcesses);
 
-        internal void AddModule(IAdModule module)
+        internal Task AddModule(IAdModule module)
         {
             lock (m_modules)
             {
                 m_modules.Add(module);
-                Task.Run(() => module.Initialize());
+                return Task.Run(() => module.Initialize());
             }
         }
 
@@ -52,23 +52,29 @@ namespace NHLGames.AdDetection
             m_previousAdPlayingState = false;
             m_firstAdCheck = true;
 
-            foreach (var adModule in modules)
-            {
-                AddModule(adModule);
-            }
+            var initializationTasks = modules.Select(AddModule).ToList();
 
-            Task.Run(() => LoopForever());
+            Task.Run(async () => await LoopForever(initializationTasks));
         }
 
-        public void LoopForever()
+        public async Task LoopForever(List<Task> initializationTasks)
         {
+            try
+            {
+                Task.WaitAll(initializationTasks.ToArray(), TimeSpan.FromSeconds(5));
+            }
+            catch (Exception e)
+            {
+                Utilities.WriteLineWithTime($"Problem initializing tasks: {e.Message}");
+            }
+
             while (true)
             {
                 try
                 {
                     if (!MediaPlayerIsPlaying())
                     {
-                        Thread.Sleep(TimeSpan.FromSeconds(1));
+                        await Task.Delay(TimeSpan.FromSeconds(2));
                         continue;
                     }
 
@@ -86,7 +92,7 @@ namespace NHLGames.AdDetection
                     Utilities.WriteLineWithTime($"Unexpected Exception: {e.Message}");
                 }
 
-                Thread.Sleep(PollPeriodMilliseconds);
+                await Task.Delay(PollPeriodMilliseconds);
             }
         }
 
@@ -117,10 +123,12 @@ namespace NHLGames.AdDetection
                 {
                     if (m_previousAdPlayingState)
                     {
+                        Utilities.WriteLineWithTime("Ad detected - Calling AdStarted on modules.");
                         Task.Run(() => module.AdStarted());
                     }
                     else
                     {
+                        Utilities.WriteLineWithTime("Ad end detected - Calling AdEnded on modules.");
                         Task.Run(() => module.AdEnded());
                     }
                 }

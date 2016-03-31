@@ -11,7 +11,7 @@ namespace NHLGames.AdDetection
         private readonly Dictionary<int, DateTime> m_lastSoundTime = new Dictionary<int, DateTime>();
         protected override int PollPeriodMilliseconds => 100;
 
-        private int m_requiredSilence => 500;
+        private int m_requiredSilenceMilliseconds => 500;
 
         protected override bool IsAdCurrentlyPlaying()
         {
@@ -25,7 +25,7 @@ namespace NHLGames.AdDetection
 
             foreach (var newProcess in newProcesses)
             {
-                AddOrUpdateLastSoundOccured(newProcess);
+                AddOrUpdateLastSoundOccured(newProcess, DateTime.Now.Subtract(TimeSpan.FromMilliseconds(m_requiredSilenceMilliseconds)));
             }
 
 
@@ -38,7 +38,7 @@ namespace NHLGames.AdDetection
             }
 
 
-            if (m_lastSoundTime.Values.All(x => DateTime.Now - x > TimeSpan.FromMilliseconds(m_requiredSilence)))
+            if (m_lastSoundTime.Values.All(x => DateTime.Now - x > TimeSpan.FromMilliseconds(m_requiredSilenceMilliseconds)))
             {
                 return true;
             }
@@ -49,13 +49,18 @@ namespace NHLGames.AdDetection
 
         private void AddOrUpdateLastSoundOccured(int processId)
         {
+            AddOrUpdateLastSoundOccured(processId, DateTime.Now);
+        }
+
+        private void AddOrUpdateLastSoundOccured(int processId, DateTime time)
+        {
             if (m_lastSoundTime.ContainsKey(processId))
             {
-                m_lastSoundTime[processId] = DateTime.Now;
+                m_lastSoundTime[processId] = time;
             }
             else
             {
-                m_lastSoundTime.Add(processId, DateTime.Now);
+                m_lastSoundTime.Add(processId, time);
             }
         }
 
