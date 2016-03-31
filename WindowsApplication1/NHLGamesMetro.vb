@@ -469,5 +469,22 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
+    Private Sub btnYesterday_Click(sender As Object, e As EventArgs) Handles btnYesterday.Click
+        Dim yesterday = dtDate.Value.Add(TimeSpan.FromDays(1))
+
+        If (yesterday >= dtDate.MinDate) Then
+            dtDate.Value = dtDate.Value.Subtract(TimeSpan.FromDays(1))
+        End If
+    End Sub
+
+    Private Sub btnTomorrow_Click(sender As Object, e As EventArgs) Handles btnTomorrow.Click
+
+        Dim tomorrow = dtDate.Value.Add(TimeSpan.FromDays(1))
+
+        If (tomorrow <= dtDate.MaxDate) Then
+            dtDate.Value = dtDate.Value.Add(TimeSpan.FromDays(1))
+        End If
+    End Sub
+
 #End Region
 End Class

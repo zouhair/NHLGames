@@ -35,6 +35,7 @@ Partial Class NHLGamesMetro
         Me.RichTextBox = New System.Windows.Forms.RichTextBox()
         Me.TabControl = New MetroFramework.Controls.MetroTabControl()
         Me.GamesTab = New MetroFramework.Controls.MetroTabPage()
+        Me.btnYesterday = New MetroFramework.Controls.MetroButton()
         Me.FlowLayoutPanel = New System.Windows.Forms.FlowLayoutPanel()
         Me.ConsoleTab = New MetroFramework.Controls.MetroTabPage()
         Me.btnClearConsole = New MetroFramework.Controls.MetroButton()
@@ -84,10 +85,11 @@ Partial Class NHLGamesMetro
         Me.btnOpenHostsFile = New MetroFramework.Controls.MetroButton()
         Me.MetroCheckBox1 = New MetroFramework.Controls.MetroCheckBox()
         Me.btnHosts = New MetroFramework.Controls.MetroButton()
-        Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
-        Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog()
         Me.AdDetectionSettingsTab = New MetroFramework.Controls.MetroTabPage()
         Me.AdDetectionSettingsElementHost = New System.Windows.Forms.Integration.ElementHost()
+        Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog()
+        Me.btnTomorrow = New MetroFramework.Controls.MetroButton()
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl.SuspendLayout()
         Me.GamesTab.SuspendLayout()
@@ -154,7 +156,7 @@ Partial Class NHLGamesMetro
         Me.dtDate.Cursor = System.Windows.Forms.Cursors.Hand
         Me.dtDate.CustomFormat = "yyyy-MM-dd"
         Me.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtDate.Location = New System.Drawing.Point(10, 9)
+        Me.dtDate.Location = New System.Drawing.Point(34, 9)
         Me.dtDate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.dtDate.MinimumSize = New System.Drawing.Size(0, 29)
         Me.dtDate.Name = "dtDate"
@@ -213,13 +215,15 @@ Partial Class NHLGamesMetro
         Me.TabControl.Location = New System.Drawing.Point(15, 92)
         Me.TabControl.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 3
+        Me.TabControl.SelectedIndex = 0
         Me.TabControl.Size = New System.Drawing.Size(1161, 720)
         Me.TabControl.TabIndex = 22
         Me.TabControl.UseSelectable = True
         '
         'GamesTab
         '
+        Me.GamesTab.Controls.Add(Me.btnTomorrow)
+        Me.GamesTab.Controls.Add(Me.btnYesterday)
         Me.GamesTab.Controls.Add(Me.FlowLayoutPanel)
         Me.GamesTab.Controls.Add(Me.gridGames)
         Me.GamesTab.Controls.Add(Me.btnRefresh)
@@ -236,6 +240,18 @@ Partial Class NHLGamesMetro
         Me.GamesTab.VerticalScrollbarBarColor = True
         Me.GamesTab.VerticalScrollbarHighlightOnWheel = False
         Me.GamesTab.VerticalScrollbarSize = 15
+        '
+        'btnYesterday
+        '
+        Me.btnYesterday.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnYesterday.FontSize = MetroFramework.MetroButtonSize.Medium
+        Me.btnYesterday.Location = New System.Drawing.Point(3, 9)
+        Me.btnYesterday.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnYesterday.Name = "btnYesterday"
+        Me.btnYesterday.Size = New System.Drawing.Size(30, 45)
+        Me.btnYesterday.TabIndex = 7
+        Me.btnYesterday.Text = "<"
+        Me.btnYesterday.UseSelectable = True
         '
         'FlowLayoutPanel
         '
@@ -886,6 +902,18 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsElementHost.TabIndex = 2
         Me.AdDetectionSettingsElementHost.Child = Nothing
         '
+        'btnTomorrow
+        '
+        Me.btnTomorrow.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnTomorrow.FontSize = MetroFramework.MetroButtonSize.Medium
+        Me.btnTomorrow.Location = New System.Drawing.Point(222, 9)
+        Me.btnTomorrow.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnTomorrow.Name = "btnTomorrow"
+        Me.btnTomorrow.Size = New System.Drawing.Size(30, 45)
+        Me.btnTomorrow.TabIndex = 8
+        Me.btnTomorrow.Text = ">"
+        Me.btnTomorrow.UseSelectable = True
+        '
         'NHLGamesMetro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -981,4 +1009,6 @@ Partial Class NHLGamesMetro
     Friend WithEvents SaveFileDialog As SaveFileDialog
     Friend WithEvents AdDetectionSettingsTab As MetroTabPage
     Friend WithEvents AdDetectionSettingsElementHost As Integration.ElementHost
+    Friend WithEvents btnYesterday As MetroButton
+    Friend WithEvents btnTomorrow As MetroButton
 End Class
