@@ -4,8 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NHLGames.AdDetection"
+             xmlns:converters="clr-namespace:NHLGames.AdDetection.Converters"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance local:AdDetectorViewModel}" Background="White">
+    <UserControl.Resources>
+        <converters:NullVisibilityConverter x:Key="NullToVisibilityConverter"/>
+
+        <Style x:Key="marginStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+    </UserControl.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -32,7 +40,7 @@
                FontWeight="Bold"
                Content="Note: Any change requires reset to take effect." VerticalAlignment="Center"/>
 
-        <Grid Grid.Row="1" Grid.Column="0" ColumnSpan="3">
+        <Grid Grid.Row="1" Grid.Column="0" ColumnSpan="3" Margin="0,10,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
@@ -41,23 +49,35 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Disabled Modules" FontWeight="Bold" />
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Disabled Modules" FontWeight="Bold" Style="{StaticResource marginStyle}" />
             <ListBox Grid.Row="1" Grid.Column="0" Height="150" VerticalAlignment="Top" 
-                     ItemsSource="{Binding DisabledModules}" 
-                     SelectedItem="{Binding SelectedDisabledModule}"
+                     ItemsSource="{Binding DisabledModules}" DisplayMemberPath="Title"
+                     SelectedItem="{Binding SelectedModule}"
                      SelectionMode="Single" />
-            
+
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                <Button Content="&gt;&gt;&gt;" Width="40" Margin="10" Command="{Binding  EnableModuleCommand}" CommandParameter="{Binding SelectedDisabledModule}" />
-                <Button Content="&lt;&lt;&lt;" Width="40" Command="{Binding DisableModuleCommand}" CommandParameter="{Binding SelectedEnabledModule}" />
+                <Button Content="&gt;&gt;&gt;" Width="40" Margin="10" Command="{Binding  EnableModuleCommand}" CommandParameter="{Binding SelectedModule}" />
+                <Button Content="&lt;&lt;&lt;" Width="40" Command="{Binding DisableModuleCommand}" CommandParameter="{Binding SelectedModule}" />
             </StackPanel>
 
-            <Label Grid.Row="0" Grid.Column="2" Content="Enabled Modules" FontWeight="Bold" />
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Enabled Modules" FontWeight="Bold" Style="{StaticResource marginStyle}" />
             <ListBox Grid.Row="1" Grid.Column="2" Height="150" VerticalAlignment="Top" 
-                     ItemsSource="{Binding EnabledModules}"
-                     SelectedItem="{Binding SelectedEnabledModule}"
+                     ItemsSource="{Binding EnabledModules}" DisplayMemberPath="Title"
+                     SelectedItem="{Binding SelectedModule}"
                      SelectionMode="Single" />
+
+            <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Vertical" Margin="5,0,5,5" Visibility="{Binding SelectedModule, Converter={StaticResource NullToVisibilityConverter}}"
+                        Grid.RowSpan="2">
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="{Binding SelectedModule.Title, StringFormat='\{0} Description:'}" FontWeight="Bold" Style="{StaticResource marginStyle}" />
+                </StackPanel>
+
+                <TextBlock Style="{StaticResource marginStyle}"
+                       Width="300" TextWrapping="Wrap"
+                       Margin="5" Text="{Binding SelectedModule.Description}" />
+            </StackPanel>
 
         </Grid>
     </Grid>

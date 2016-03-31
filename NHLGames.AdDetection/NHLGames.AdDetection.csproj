@@ -80,6 +80,7 @@
     <Compile Include="AdDetectorUserControl.xaml.cs">
       <DependentUpon>AdDetectorUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

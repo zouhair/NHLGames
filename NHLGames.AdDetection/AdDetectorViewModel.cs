@@ -18,27 +18,25 @@ namespace NHLGames.AdDetection
 
         private bool m_adDetectingEnabled;
 
-        private ObservableCollection<string> m_disabledModules;
+        private ObservableCollection<IAdModule> m_disabledModules;
 
-        private DelegateCommand<string> m_disableModuleCommand;
+        private DelegateCommand<IAdModule> m_disableModuleCommand;
 
-        private ObservableCollection<string> m_enabledModules;
+        private ObservableCollection<IAdModule> m_enabledModules;
 
-        private DelegateCommand<string> m_enableModuleCommand;
+        private DelegateCommand<IAdModule> m_enableModuleCommand;
 
         private Dictionary<string, IAdModule> m_modules;
 
-        private string m_selectedDisabledModule;
 
-
-        private string m_selectedEnabledModule;
+        private IAdModule m_selectedModule;
 
         public UserControl SettingsControl;
 
         public AdDetectorViewModel()
         {
-            EnableModuleCommand.ObservesProperty(() => SelectedDisabledModule);
-            DisableModuleCommand.ObservesProperty(() => SelectedEnabledModule);
+            EnableModuleCommand.ObservesProperty(() => SelectedModule);
+            DisableModuleCommand.ObservesProperty(() => SelectedModule);
 
             m_settings = AdDetectionSettings.Load();
 
@@ -48,9 +46,9 @@ namespace NHLGames.AdDetection
             RemoveUninstalledModulesFromConfig();
 
             EnabledModules =
-                new ObservableCollection<string>(m_modules.Keys.Where(x => m_settings.EnabledModules.Contains(x)));
+                new ObservableCollection<IAdModule>(m_modules.Where(x => m_settings.EnabledModules.Contains(x.Key)).Select(x => x.Value));
             DisabledModules =
-                new ObservableCollection<string>(m_modules.Keys.Where(x => !m_settings.EnabledModules.Contains(x)));
+                new ObservableCollection<IAdModule>(m_modules.Where(x => !m_settings.EnabledModules.Contains(x.Key)).Select(x => x.Value));
 
             SettingsControl = new AdDetectorUserControl(this);
 
@@ -59,40 +57,32 @@ namespace NHLGames.AdDetection
             engine.Start(m_modules.Where(x => m_settings.EnabledModules.Contains(x.Key)).Select(x => x.Value).ToList());
         }
 
-        public DelegateCommand<string> EnableModuleCommand
-            => m_enableModuleCommand = m_enableModuleCommand ?? new DelegateCommand<string>(EnableModule, CanExecute);
+        public DelegateCommand<IAdModule> EnableModuleCommand
+            => m_enableModuleCommand = m_enableModuleCommand ?? new DelegateCommand<IAdModule>(EnableModule, CanEnableModuleExecute);
 
-        public DelegateCommand<string> DisableModuleCommand
-            => m_disableModuleCommand = m_disableModuleCommand ?? new DelegateCommand<string>(DisableModule, CanExecute)
+        public DelegateCommand<IAdModule> DisableModuleCommand
+            => m_disableModuleCommand = m_disableModuleCommand ?? new DelegateCommand<IAdModule>(DisableModule, CanDisableModuleExecute)
             ;
 
-        public string SelectedDisabledModule
+        public IAdModule SelectedModule
         {
-            get { return m_selectedDisabledModule; }
+            get { return m_selectedModule; }
             set
             {
-                SetProperty(ref m_selectedDisabledModule, value);
+                SetProperty(ref m_selectedModule, null);
+
+                SetProperty(ref m_selectedModule, value);
                 OnPropertyChanged();
             }
         }
 
-        public string SelectedEnabledModule
-        {
-            get { return m_selectedEnabledModule; }
-            set
-            {
-                SetProperty(ref m_selectedEnabledModule, value);
-                OnPropertyChanged();
-            }
-        }
-
-        public ObservableCollection<string> EnabledModules
+        public ObservableCollection<IAdModule> EnabledModules
         {
             get { return m_enabledModules; }
             set { SetProperty(ref m_enabledModules, value); }
         }
 
-        public ObservableCollection<string> DisabledModules
+        public ObservableCollection<IAdModule> DisabledModules
         {
             get { return m_disabledModules; }
             set { SetProperty(ref m_disabledModules, value); }
@@ -111,26 +101,31 @@ namespace NHLGames.AdDetection
         }
 
 
-        private bool CanExecute(string x)
+        private bool CanDisableModuleExecute(IAdModule x)
         {
-            return !string.IsNullOrWhiteSpace(x);
+            return x != null && m_enabledModules.Contains(x);
         }
 
-        private void EnableModule(string module)
+        private bool CanEnableModuleExecute(IAdModule x)
+        {
+            return x != null && m_disabledModules.Contains(x);
+        }
+
+        private void EnableModule(IAdModule module)
         {
             DisabledModules.Remove(module);
             EnabledModules.Add(module);
 
-            m_settings.EnabledModules = EnabledModules.ToList();
+            m_settings.EnabledModules = EnabledModules.Select(x => x.Title).ToList();
             AdDetectionSettings.Save(m_settings);
         }
 
-        private void DisableModule(string module)
+        private void DisableModule(IAdModule module)
         {
             EnabledModules.Remove(module);
             DisabledModules.Add(module);
 
-            m_settings.EnabledModules = EnabledModules.ToList();
+            m_settings.EnabledModules = EnabledModules.Select(x => x.Title).ToList();
             AdDetectionSettings.Save(m_settings);
         }
 
