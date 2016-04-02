@@ -5,6 +5,7 @@ Imports System.Threading
 Imports MetroFramework
 Imports MetroFramework.Forms
 Imports Newtonsoft.Json.Linq
+Imports NHLGames.AdDetection
 Imports NHLGames.TextboxConsoleOutputRediect
 
 Public Class NHLGamesMetro
@@ -14,6 +15,7 @@ Public Class NHLGamesMetro
     Private Const DomainName As String = "mf.svc.nhl.com"
     Private Shared SettingsLoaded As Boolean = False
     Public Shared FormInstance As NHLGamesMetro = Nothing
+    Private AdDetectorViewModel As AdDetectorViewModel = Nothing
 
     ' Starts the application. -- See: https://msdn.microsoft.com/en-us/library/system.windows.forms.application.threadexception(v=vs.110).aspx
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
@@ -245,6 +247,9 @@ Public Class NHLGamesMetro
     Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
         AddHandler GameManager.NewGameFound, AddressOf NewGameFoundHandler
 
+        AdDetectorViewModel = New AdDetectorViewModel()
+        AdDetectionSettingsElementHost.Child = AdDetectorViewModel.SettingsControl
+
         dtDate.Value = DateHelper.GetCentralTime()
         dtDate.MaxDate = DateHelper.GetCentralTime()
         TabControl.SelectedIndex = 0
@@ -461,6 +466,23 @@ Public Class NHLGamesMetro
         If SaveFileDialog.ShowDialog() = DialogResult.OK Then
             txtOutputPath.Text = SaveFileDialog.FileName
             SetEventArgsFromForm()
+        End If
+    End Sub
+
+    Private Sub btnYesterday_Click(sender As Object, e As EventArgs) Handles btnYesterday.Click
+        Dim yesterday = dtDate.Value.Add(TimeSpan.FromDays(1))
+
+        If (yesterday >= dtDate.MinDate) Then
+            dtDate.Value = dtDate.Value.Subtract(TimeSpan.FromDays(1))
+        End If
+    End Sub
+
+    Private Sub btnTomorrow_Click(sender As Object, e As EventArgs) Handles btnTomorrow.Click
+
+        Dim tomorrow = dtDate.Value.Add(TimeSpan.FromDays(1))
+
+        If (tomorrow <= dtDate.MaxDate) Then
+            dtDate.Value = dtDate.Value.Add(TimeSpan.FromDays(1))
         End If
     End Sub
 
