@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using NHLGames.AdDetection.Common;
-using NHLGames.AdDetection.Properties;
 
-namespace NHLGames.AdDetection
+namespace NHLGames.AdDetection.AdDetectors
 {
     public abstract class AdDetectionEngineBase
     {
+
         private List<int> m_mediaPlayerProcesses;
 
         private List<IAdModule> m_modules = new List<IAdModule>();

@@ -11,27 +11,34 @@ namespace NHLGames.AdDetection
     {
         private static readonly string m_fileName = @"./AdDetectionSettings.xml";
 
+        private static AdDetectionSettings _settings;
+
         private AdDetectionSettings()
         {
+            IsEnabled = false;
+            EnabledModules = new List<string>();
+            EngineType = AdDetectionEngineType.PlayerSystemVolume;
         }
 
-        private AdDetectionSettings(bool isEnabled, List<string> enabledModules)
-        {
-            IsEnabled = isEnabled;
-            EnabledModules = enabledModules;
-        }
+        private static AdDetectionSettings Default => new AdDetectionSettings();
 
-        private static AdDetectionSettings Default => new AdDetectionSettings(false, new List<string>());
-
-        [DataMember(IsRequired = true)]
+        [DataMember]
         public bool IsEnabled { get; set; }
 
         [DataMember]
         public List<string> EnabledModules { get; set; }
 
+        [DataMember]
+        public AdDetectionEngineType EngineType { get; set; }
+
 
         public static AdDetectionSettings Load()
         {
+            if (_settings != null)
+            {
+                return _settings;
+            }
+
             try
             {
                 if (File.Exists(m_fileName))
@@ -41,7 +48,8 @@ namespace NHLGames.AdDetection
                     {
                         using (var reader = XmlReader.Create(fs))
                         {
-                            return (AdDetectionSettings) s.ReadObject(reader);
+                            _settings = (AdDetectionSettings) s.ReadObject(reader);
+                            return _settings;
                         }
                     }
                 }
@@ -51,9 +59,8 @@ namespace NHLGames.AdDetection
                 Console.WriteLine($"Unable to load {m_fileName}. Using default config.");
             }
 
-            var newConfig = Default;
-            Save(newConfig);
-            return newConfig;
+            Save(Default);
+            return _settings;
         }
 
         public static void Save(AdDetectionSettings settings)
@@ -64,6 +71,7 @@ namespace NHLGames.AdDetection
                 using (var fs = File.Open(m_fileName, FileMode.Create))
                 {
                     s.WriteObject(fs, settings);
+                    _settings = settings;
                 }
             }
             catch
