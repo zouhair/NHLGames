@@ -27,10 +27,10 @@ Public Class GameControl
 
         'btnWatch.Enabled = Game.Date <= DateTime.Now 'AndAlso Game.GameIsLive
 
-        If Game.Date <= DateTime.Now AndAlso Game.GameIsLive Then
+        If Game.Date <= DateTime.Now.ToUniversalTime() AndAlso Game.GameIsLive Then
             BorderPanel1.BorderColour = Color.Green
             'lblVS.Visible = True
-        ElseIf Game.Date <= DateTime.Now Then
+        ElseIf Game.Date <= DateTime.Now.ToUniversalTime() Then
             BorderPanel1.BorderColour = Color.LightGray
             'lblVS.Visible = True
         Else

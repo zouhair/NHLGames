@@ -44,41 +44,49 @@ Public Class NHLGamesMetro
 
         Dim mpcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MPCPath, "")
         If mpcPath = "" Then
-            mpcPath = FileAccess.LocateEXE("mpc-hc64.exe", "\MPC-HC")
-            If mpcPath = String.Empty Then
-                mpcPath = FileAccess.LocateEXE("mpc-hc.exe", "\MPC-HC")
-                If mpcPath = String.Empty Then
-                    mpcPath = "Unknown"
-                End If
+            'mpcPath = FileAccess.LocateEXE("mpc-hc64.exe", "\MPC-HC")
+            'If mpcPath = String.Empty Then
+            '    mpcPath = FileAccess.LocateEXE("mpc-hc.exe", "\MPC-HC")
+            '    If mpcPath = String.Empty Then
+            '        mpcPath = "Unknown"
 
-            Else
-                ApplicationSettings.SetValue(ApplicationSettings.Settings.MPCPath, mpcPath)
+            If My.Computer.FileSystem.FileExists("C:\Program Files\MPC-HC\mpc-hc64.exe") Then
+                mpcPath = "C:\Program Files\MPC-HC\mpc-hc64.exe"
+            ElseIf My.Computer.FileSystem.FileExists("C:\Program Files (x86)\MPC-HC\mpc-hc.exe") Then
+                mpcPath = "C:\Program Files (x86)\MPC-HC\mpc-hc.exe"
             End If
         End If
 
         txtMPCPath.Text = mpcPath
+        ApplicationSettings.SetValue(ApplicationSettings.Settings.MPCPath, mpcPath)
 
 
         Dim vlcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VLCPath, "")
         If vlcPath = "" Then
-            vlcPath = FileAccess.LocateEXE("vlc.exe", "\VideoLAN\VLC")
-            If vlcPath = String.Empty Then
-                vlcPath = "Unknown"
-            Else
-                ApplicationSettings.SetValue(ApplicationSettings.Settings.VLCPath, vlcPath)
+            'vlcPath = FileAccess.LocateEXE("vlc.exe", "\VideoLAN\VLC")
+            'If vlcPath = String.Empty Then
+            '    vlcPath = "Unknown"
+
+            If My.Computer.FileSystem.FileExists("C:\Program Files\VideoLAN\VLC\vlc.exe") Then
+                vlcPath = "C:\Program Files\VideoLAN\VLC\vlc.exe"
+            ElseIf My.Computer.FileSystem.FileExists("C:\Program Files (x86)\VideoLAN\VLC\vlc.exe") Then
+                vlcPath = "C:\Program Files (x86)\VideoLAN\VLC\vlc.exe"
             End If
         End If
+
         txtVLCPath.Text = vlcPath
+        ApplicationSettings.SetValue(ApplicationSettings.Settings.VLCPath, vlcPath)
 
 
         Dim liveStreamerPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.LiveStreamerPath, "")
         If liveStreamerPath = "" Then
             ' First check inside app folder
             liveStreamerPath = Path.Combine(Application.StartupPath, "livestreamer-v1.12.2\livestreamer.exe")
-            If Not File.Exists(liveStreamerPath) Then
-                ' If no such file check if we can find one in system
-                liveStreamerPath = FileAccess.LocateEXE("livestreamer.exe", "\Livestreamer")
-            End If
+
+            'If Not File.Exists(liveStreamerPath) Then
+            '    ' If no such file check if we can find one in system
+            '    liveStreamerPath = FileAccess.LocateEXE("livestreamer.exe", "\Livestreamer")
+            'End If
             ApplicationSettings.SetValue(ApplicationSettings.Settings.LiveStreamerPath, liveStreamerPath)
         End If
         txtLiveStreamPath.Text = liveStreamerPath
@@ -109,19 +117,27 @@ Public Class NHLGamesMetro
 
             If rbQual6.Checked Then
                 WatchArgs.Quality = "720p"
-            ElseIf rbQual5.Checked
+            ElseIf rbQual5.Checked Then
                 WatchArgs.Quality = "540p"
-            ElseIf rbQual4.Checked
+                chk60.Checked = False
+                rbQual5.Checked = True
+            ElseIf rbQual4.Checked Then
                 WatchArgs.Quality = "504p"
-            ElseIf rbQual3.Checked
+                chk60.Checked = False
+                rbQual4.Checked = True
+            ElseIf rbQual3.Checked Then
                 WatchArgs.Quality = "360p"
-            ElseIf rbQual2.Checked
+                chk60.Checked = False
+                rbQual3.Checked = True
+            ElseIf rbQual2.Checked Then
                 WatchArgs.Quality = "288p"
-            ElseIf rbQual1.Checked
+                chk60.Checked = False
+                rbQual2.Checked = True
+            ElseIf rbQual1.Checked Then
                 WatchArgs.Quality = "224p"
+                chk60.Checked = False
+                rbQual1.Checked = True
             End If
-
-            WatchArgs.IsVOD = rbVOD.Checked
 
             If rbMPC.Checked Then
                 WatchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.MPC
@@ -172,15 +188,9 @@ Public Class NHLGamesMetro
                     rbQual1.Checked = True
             End Select
 
-            If WatchArgs.IsVOD Then
-                rbVOD.Checked = True
-            Else
-                rbLive.Checked = True
-            End If
-
             If WatchArgs.CDN = "akc" Then
                 rbAkamai.Checked = True
-            ElseIf WatchArgs.CDN = "l3c"
+            ElseIf WatchArgs.CDN = "l3c" Then
                 rbLevel3.Checked = True
             End If
 
@@ -208,7 +218,7 @@ Public Class NHLGamesMetro
     ' Handle the UI exceptions by showing a dialog box, and asking the user whether
     ' or not they wish to abort execution.
     Private Shared Sub Form1_UIThreadException(ByVal sender As Object, ByVal t As ThreadExceptionEventArgs)
-        Console.WriteLine("Error: " & t.Exception.ToString())
+        Console.WriteLine("Error:  " & t.Exception.ToString())
     End Sub
 
     Private Shared Sub CurrentDomain_UnhandledException(ByVal sender As Object, ByVal e As UnhandledExceptionEventArgs)
@@ -250,8 +260,8 @@ Public Class NHLGamesMetro
         AdDetectorViewModel = New AdDetectorViewModel()
         AdDetectionSettingsElementHost.Child = AdDetectorViewModel.SettingsControl
 
-        dtDate.Value = DateHelper.GetCentralTime()
-        dtDate.MaxDate = DateHelper.GetCentralTime()
+        dtDate.Value = DateHelper.GetPacificTime()
+        dtDate.MaxDate = DateHelper.GetPacificTime()
         TabControl.SelectedIndex = 0
 
         If (HostsFile.TestEntry(DomainName, ServerIP) = False) Then
@@ -320,7 +330,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnMPCPath_Click(sender As Object, e As EventArgs) Handles btnMPCPath.Click
-        OpenFileDialog.Filter = "MPC|mpc-hc64.exe"
+        OpenFileDialog.Filter = "MPC|mpc-hc64.exe;mpc-hc.exe"
         OpenFileDialog.Multiselect = False
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
             If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtMPCPath.Text <> OpenFileDialog.FileName Then
@@ -412,14 +422,6 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub rbMPC_CheckedChanged(sender As Object, e As EventArgs) Handles rbMPC.CheckedChanged
-        SetEventArgsFromForm()
-    End Sub
-
-    Private Sub rbLive_CheckedChanged(sender As Object, e As EventArgs) Handles rbLive.CheckedChanged
-        SetEventArgsFromForm()
-    End Sub
-
-    Private Sub rbVOD_CheckedChanged(sender As Object, e As EventArgs) Handles rbVOD.CheckedChanged
         SetEventArgsFromForm()
     End Sub
 

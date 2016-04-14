@@ -1,5 +1,6 @@
 ﻿Imports System.Globalization
 Imports System.IO.Path
+Imports System.Net
 Imports Newtonsoft.Json.Linq
 
 <DebuggerDisplay("{HomeTeam} vs. {AwayTeam} at {[Date]}")>
@@ -197,12 +198,12 @@ Public Class Game
             dateTimeVal = Date.Parse(game.Property("gameDate").Value.ToString())
         End If
 
-        [Date] = dateTimeVal.ToLocalTime()
+        [Date] = dateTimeVal.ToUniversalTime() ' Must use universal time to always get correct date for stream
 
         GameID = game.Property("gamePk").ToString()
         _StatusID = game("status")("statusCode").ToString()
 
-        If [Date] <= DateTime.Now Then
+        If [Date] <= DateTime.Now.ToUniversalTime() Then
             HomeScore = game("teams")("home")("score").ToString()
             AwayScore = game("teams")("away")("score").ToString()
         End If
@@ -317,6 +318,18 @@ Public Class Game
             End If
 
             returnValue &= """hlsvariant://"
+
+            Try
+                Dim myHttpWebRequest As HttpWebRequest = CType(WebRequest.Create(Stream.VODURL), HttpWebRequest)
+                Dim myHttpWebResponse As HttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
+                If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
+                    IsVOD = True
+                End If
+                myHttpWebResponse.Close()
+            Catch e As Exception
+                Console.WriteLine("Trying VOD : {0}", e.Message)
+            End Try
+
             If IsVOD Then
                 returnValue &= Stream.VODURL
             Else
