@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AdModules", "AdModules", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateModule", "AdModules\TemplateModule\TemplateModule.csproj", "{3FD4D720-54E2-456A-802E-A52C151653B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHLGames.AdDetection.Modules.OBS", "AdModules\NHLGames.AdDetection.Modules.OBS\NHLGames.AdDetection.Modules.OBS.csproj", "{D4309ED1-5D5C-4CF6-AB00-2C45D1D97BE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{3FD4D720-54E2-456A-802E-A52C151653B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FD4D720-54E2-456A-802E-A52C151653B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FD4D720-54E2-456A-802E-A52C151653B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4309ED1-5D5C-4CF6-AB00-2C45D1D97BE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4309ED1-5D5C-4CF6-AB00-2C45D1D97BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4309ED1-5D5C-4CF6-AB00-2C45D1D97BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4309ED1-5D5C-4CF6-AB00-2C45D1D97BE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,5 +58,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B3E6426C-2EF0-41FB-BA26-93C140E716D3} = {A517EDE4-24B7-4209-BD10-5A9415B49B3E}
 		{3FD4D720-54E2-456A-802E-A52C151653B3} = {A517EDE4-24B7-4209-BD10-5A9415B49B3E}
+		{D4309ED1-5D5C-4CF6-AB00-2C45D1D97BE9} = {A517EDE4-24B7-4209-BD10-5A9415B49B3E}
 	EndGlobalSection
 EndGlobal

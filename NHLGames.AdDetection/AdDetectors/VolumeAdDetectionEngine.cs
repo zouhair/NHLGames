@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using CSCore.CoreAudioAPI;
 
-namespace NHLGames.AdDetection
+namespace NHLGames.AdDetection.AdDetectors
 {
     public class VolumeAdDetectionEngine : AdDetectionEngineBase
     {
@@ -25,7 +24,7 @@ namespace NHLGames.AdDetection
 
             foreach (var newProcess in newProcesses)
             {
-                AddOrUpdateLastSoundOccured(newProcess, DateTime.Now.Subtract(TimeSpan.FromMilliseconds(m_requiredSilenceMilliseconds)));
+                AddOrUpdateLastSoundOccured(newProcess);
             }
 
 
@@ -47,26 +46,23 @@ namespace NHLGames.AdDetection
             return false;
         }
 
-        private void AddOrUpdateLastSoundOccured(int processId)
-        {
-            AddOrUpdateLastSoundOccured(processId, DateTime.Now);
-        }
 
-        private void AddOrUpdateLastSoundOccured(int processId, DateTime time)
+        private void AddOrUpdateLastSoundOccured(int processId)
         {
             if (m_lastSoundTime.ContainsKey(processId))
             {
-                m_lastSoundTime[processId] = time;
+                m_lastSoundTime[processId] = DateTime.Now;
             }
             else
             {
-                m_lastSoundTime.Add(processId, time);
+                m_lastSoundTime.Add(processId, DateTime.MinValue);
             }
         }
 
 
         public float GetCurrentVolume(int processId)
         {
+            //todo: Must be able to optimize this? Only looking for 1 process, probably don't need to iterate through all of them.
             using (var sessionManager = GetDefaultAudioSessionManager2(DataFlow.Render))
             using (var sessionEnumerator = sessionManager.GetSessionEnumerator())
             {
@@ -90,6 +86,7 @@ namespace NHLGames.AdDetection
 
         private static AudioSessionManager2 GetDefaultAudioSessionManager2(DataFlow dataFlow)
         {
+            //todo: Let people choose their own device if they aren't using the default sound device for VLC/MPC.
             using (var enumerator = new MMDeviceEnumerator())
             {
                 using (var device = enumerator.GetDefaultAudioEndpoint(dataFlow, Role.Multimedia))

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using NHLGames.AdDetection.Properties;
 using XnaFan.ImageComparison;
 
-namespace NHLGames.AdDetection
+namespace NHLGames.AdDetection.AdDetectors
 {
     internal class ScreenAdDetectionEngine : AdDetectionEngineBase
     {

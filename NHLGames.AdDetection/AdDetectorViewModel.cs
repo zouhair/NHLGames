@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Controls;
+using NHLGames.AdDetection.AdDetectors;
 using NHLGames.AdDetection.Common;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -14,9 +15,13 @@ namespace NHLGames.AdDetection
 {
     public class AdDetectorViewModel : BindableBase
     {
-        private readonly AdDetectionSettings m_settings;
-
         private bool m_adDetectingEnabled;
+
+        private IAdDetectionEngineDescriptor m_selectedAdDetectionEngineDescriptor;
+
+        private ObservableCollection<IAdDetectionEngineDescriptor> m_adDetectionEngines;
+
+        private AdDetectionEngineBase m_currentEngine;
 
         private ObservableCollection<IAdModule> m_disabledModules;
 
@@ -26,10 +31,14 @@ namespace NHLGames.AdDetection
 
         private DelegateCommand<IAdModule> m_enableModuleCommand;
 
+        private AdDetectionEngineType m_engineType;
+
         private Dictionary<string, IAdModule> m_modules;
 
 
         private IAdModule m_selectedModule;
+
+        private AdDetectionSettings m_settings;
 
         public UserControl SettingsControl;
 
@@ -38,31 +47,68 @@ namespace NHLGames.AdDetection
             EnableModuleCommand.ObservesProperty(() => SelectedModule);
             DisableModuleCommand.ObservesProperty(() => SelectedModule);
 
-            m_settings = AdDetectionSettings.Load();
-
-            AdDetectingEnabled = m_settings.IsEnabled;
+            AdDetectionEngines = new ObservableCollection<IAdDetectionEngineDescriptor>
+            {
+                new VolumeAdDetectionDescriptor(),
+                new ScreenAdDetectionDescriptor()
+            };
 
             ImportModules();
+
+            LoadConfig();
+
             RemoveUninstalledModulesFromConfig();
 
-            EnabledModules =
-                new ObservableCollection<IAdModule>(m_modules.Where(x => m_settings.EnabledModules.Contains(x.Key)).Select(x => x.Value));
-            DisabledModules =
-                new ObservableCollection<IAdModule>(m_modules.Where(x => !m_settings.EnabledModules.Contains(x.Key)).Select(x => x.Value));
 
             SettingsControl = new AdDetectorUserControl(this);
 
-            //ScreenAdDetectionEngine engine = new ScreenAdDetectionEngine();
-            var engine = new VolumeAdDetectionEngine();
-            engine.Start(m_modules.Where(x => m_settings.EnabledModules.Contains(x.Key)).Select(x => x.Value).ToList());
+            switch (m_engineType)
+            {
+                case AdDetectionEngineType.FullScreenImage:
+                    m_currentEngine = new ScreenAdDetectionEngine();
+                    m_currentEngine.Start(m_modules.Where(x => m_settings.EnabledModules.Contains(x.Key)).Select(x => x.Value).ToList());
+                    break;
+                case AdDetectionEngineType.PlayerSystemVolume:
+                    m_currentEngine = new VolumeAdDetectionEngine();
+                    m_currentEngine.Start(m_modules.Where(x => m_settings.EnabledModules.Contains(x.Key)).Select(x => x.Value).ToList());
+                    break;
+            }
+        }
+
+        public IAdDetectionEngineDescriptor SelectedAdDetectionEngineDescriptor
+        {
+            get { return m_selectedAdDetectionEngineDescriptor; }
+            set
+            {
+                if (SetProperty(ref m_selectedAdDetectionEngineDescriptor, value))
+                {
+                    AdDetectionEngineChanged();
+                }
+            }
+        }
+
+        public ObservableCollection<IAdDetectionEngineDescriptor> AdDetectionEngines
+        {
+            get { return m_adDetectionEngines; }
+            set { SetProperty(ref m_adDetectionEngines, value); }
         }
 
         public DelegateCommand<IAdModule> EnableModuleCommand
-            => m_enableModuleCommand = m_enableModuleCommand ?? new DelegateCommand<IAdModule>(EnableModule, CanEnableModuleExecute);
+            =>
+                m_enableModuleCommand =
+                    m_enableModuleCommand ?? new DelegateCommand<IAdModule>(EnableModule, CanEnableModuleExecute);
 
         public DelegateCommand<IAdModule> DisableModuleCommand
-            => m_disableModuleCommand = m_disableModuleCommand ?? new DelegateCommand<IAdModule>(DisableModule, CanDisableModuleExecute)
-            ;
+            =>
+                m_disableModuleCommand =
+                    m_disableModuleCommand ?? new DelegateCommand<IAdModule>(DisableModule, CanDisableModuleExecute);
+
+
+        public AdDetectionEngineType EngineType
+        {
+            get { return m_engineType; }
+            set { SetProperty(ref m_engineType, value); }
+        }
 
         public IAdModule SelectedModule
         {
@@ -98,6 +144,33 @@ namespace NHLGames.AdDetection
                     EnableChanged();
                 }
             }
+        }
+
+        private void AdDetectionEngineChanged()
+        {
+            if (SelectedAdDetectionEngineDescriptor != null &&
+                SelectedAdDetectionEngineDescriptor.Type != m_settings.EngineType)
+            {
+                m_settings.EngineType = SelectedAdDetectionEngineDescriptor.Type;
+
+                AdDetectionSettings.Save(m_settings);
+            }
+        }
+
+        public void LoadConfig()
+        {
+            m_settings = AdDetectionSettings.Load();
+
+            m_adDetectingEnabled = m_settings.IsEnabled;
+
+            m_enabledModules =
+                new ObservableCollection<IAdModule>(
+                    m_modules.Where(x => m_settings.EnabledModules.Contains(x.Key)).Select(x => x.Value));
+            m_disabledModules =
+                new ObservableCollection<IAdModule>(
+                    m_modules.Where(x => !m_settings.EnabledModules.Contains(x.Key)).Select(x => x.Value));
+
+            m_selectedAdDetectionEngineDescriptor = AdDetectionEngines.FirstOrDefault(x => x.Type == m_settings.EngineType);
         }
 
 

@@ -74,13 +74,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdDetectionEngineBase.cs" />
+    <Compile Include="AdDetectors\AdDetectionEngineBase.cs" />
+    <Compile Include="AdDetectionEngineType.cs" />
     <Compile Include="AdDetectionSettings.cs" />
     <Compile Include="AdDetectorViewModel.cs" />
     <Compile Include="AdDetectorUserControl.xaml.cs">
       <DependentUpon>AdDetectorUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="IAdDetectionEngineDescriptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -89,9 +91,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ScreenAdDetectionEngine.cs" />
+    <Compile Include="ScreenAdDetectionDescriptor.cs" />
+    <Compile Include="AdDetectors\ScreenAdDetectionEngine.cs" />
     <Compile Include="ScreenShotInfo.cs" />
-    <Compile Include="VolumeAdDetectionEngine.cs" />
+    <Compile Include="VolumeAdDetectionDescriptor.cs" />
+    <Compile Include="AdDetectors\VolumeAdDetectionEngine.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
