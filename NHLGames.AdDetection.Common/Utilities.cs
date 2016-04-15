@@ -4,9 +4,9 @@ namespace NHLGames.AdDetection.Common
 {
     public static class Utilities
     {
-        public static void WriteLineWithTime(string message)
+        public static void WriteLine(string message)
         {
-            Console.WriteLine($"[{DateTime.Now}]: {message}");
+            Console.WriteLine($"{message}");
         }
     }
 }
