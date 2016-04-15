@@ -30,7 +30,7 @@ namespace NHLGames.AdDetection.Modules.OBS
             m_viewModel = new ObsModuleViewModel();
         }
 
-        public string Title => "OBS Scene Changer (WIP)";
+        public string Title => "OBS Scene Changer";
 
         public string Description => "Emulates pressing the keys you configured when an ad starts and stops to automatically change scenes for you in OBS Studio.";
 
