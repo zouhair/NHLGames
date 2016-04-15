@@ -67,18 +67,18 @@ namespace NHLGames.AdDetection.Modules.Spotify
                 var now = DateTime.UtcNow;
                 var serverTime = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(status.ServerTime);
                 var difference = now - serverTime;
-                Utilities.WriteLineWithTime(
+                Utilities.WriteLine(
                     $"Connected to Spotify! Online: {status.Online}. Play Enabled: {status.PlayEnabled}");
-                Utilities.WriteLineWithTime(
+                Utilities.WriteLine(
                     $"Playing: {status.Playing}. Running: {status.Running}. Track Not Null : {status.Track != null}");
-                Utilities.WriteLineWithTime($"Client Version: '{status.ClientVersion}'.");
-                Utilities.WriteLineWithTime($"ServerTime: '{serverTime}' ");
-                Utilities.WriteLineWithTime(
+                Utilities.WriteLine($"Client Version: '{status.ClientVersion}'.");
+                Utilities.WriteLine($"ServerTime: '{serverTime}' ");
+                Utilities.WriteLine(
                     $"LocalTime:  '{DateTime.UtcNow}' -- Difference: {difference.TotalMilliseconds}ms");
             }
             catch (Exception e)
             {
-                Utilities.WriteLineWithTime($"Exception logging the Connect status: {e.Message}.");
+                Utilities.WriteLine($"Exception logging the Connect status: {e.Message}.");
             }
 
 
@@ -87,12 +87,12 @@ namespace NHLGames.AdDetection.Modules.Spotify
 
         private void OnPlayerStateChanged(object sender, PlayStateEventArgs e)
         {
-            Utilities.WriteLineWithTime($"Spotify Playing state changed to '{e.Playing}'");
+            Utilities.WriteLine($"Spotify Playing state changed to '{e.Playing}'");
         }
 
         private void ConnectLoop()
         {
-            Utilities.WriteLineWithTime("Attempting to connect to Spotify...");
+            Utilities.WriteLine("Attempting to connect to Spotify...");
 
             while (true)
             {
@@ -103,11 +103,11 @@ namespace NHLGames.AdDetection.Modules.Spotify
                         return;
                     }
 
-                    Utilities.WriteLineWithTime("Failed to connect to Spotify. Attempting to reconnect in 10 seconds.");
+                    Utilities.WriteLine("Failed to connect to Spotify. Attempting to reconnect in 10 seconds.");
                 }
                 catch (Exception e)
                 {
-                    Utilities.WriteLineWithTime(
+                    Utilities.WriteLine(
                         $"Unexpected exception connecting to Spotify: {e.Message}. Attempting to reconnect in {m_connectSleep}.");
                 }
 
@@ -119,28 +119,28 @@ namespace NHLGames.AdDetection.Modules.Spotify
         {
             if (!SpotifyLocalAPI.IsSpotifyRunning())
             {
-                Utilities.WriteLineWithTime("Spotify isn't running. Trying to start it...");
+                Utilities.WriteLine("Spotify isn't running. Trying to start it...");
                 try
                 {
                     SpotifyLocalAPI.RunSpotify();
                 }
                 catch (Exception e)
                 {
-                    Utilities.WriteLineWithTime($"Error starting spotify: {e.Message}");
+                    Utilities.WriteLine($"Error starting spotify: {e.Message}");
                     return false;
                 }
             }
 
             if (!SpotifyLocalAPI.IsSpotifyWebHelperRunning())
             {
-                Utilities.WriteLineWithTime("Spotify Web Helper isn't running. Trying to start it...");
+                Utilities.WriteLine("Spotify Web Helper isn't running. Trying to start it...");
                 try
                 {
                     SpotifyLocalAPI.RunSpotifyWebHelper();
                 }
                 catch (Exception e)
                 {
-                    Utilities.WriteLineWithTime($"Error starting Spotify Web Helper: {e.Message}");
+                    Utilities.WriteLine($"Error starting Spotify Web Helper: {e.Message}");
                     return false;
                 }
             }

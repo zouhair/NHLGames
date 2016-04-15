@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.ComponentModel.Composition;
 using System.Windows.Forms;
 using NHLGames.AdDetection.Common;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace NHLGames.AdDetection.Modules.OBS
@@ -17,56 +21,71 @@ namespace NHLGames.AdDetection.Modules.OBS
     [Export(typeof(IAdModule))]
     public class ObsModule : IAdModule
     {
+        [DllImport("User32.dll")]
+        static extern int SetForegroundWindow(IntPtr point);
+
         private readonly ObsModuleViewModel m_viewModel;
         public ObsModule()
         {
             m_viewModel = new ObsModuleViewModel();
         }
-        /// <summary>
-        ///     The title of your module.
-        /// </summary>
-        public string Title => "OBS Scene Changer (incomplete)";
 
-        /// <summary>
-        ///     A description of your module.
-        /// </summary>
-        public string Description => "Emulates pressing the keys you configured when an ad starts and stops to automatically change scenes for you.";
+        public string Title => "OBS Scene Changer";
 
-        /// <summary>
-        ///     An optional WPF control if you need configurable options.
-        ///     You are responsible for listening to changes and auto-saving them.
-        /// </summary>
+        public string Description => "Emulates pressing the keys you configured when an ad starts and stops to automatically change scenes for you in OBS Studio.";
+
+
         public UserControl SettingsControl => m_viewModel.SettingsControl;
 
-        public void Initialize()
-        {
-            //Initialization code that your module needs to function for it to work
-            //You are responsible for making sure your plugin is initialized in your AdStart/Stop methods.
-        }
+        public void Initialize(){ }
 
         public void AdStarted()
         {
             var settings = ObsModuleSettings.Load();
 
             string toSend = String.Empty;
+            bool modifier = false;
             if (settings.AdSceneCtrl)
             {
                 toSend += "^";
+                modifier = true;
             }
             if (settings.AdSceneAlt)
             {
                 toSend += "%";
+                modifier = true;
             }
             if (settings.AdSceneShift)
             {
                 toSend += "+";
+                modifier = true;
             }
 
-            toSend += settings.AdSceneChar;
+            if (modifier)
+            {
+                toSend += "{";
+                toSend += settings.AdSceneChar;
+                toSend += "}";
+            }
+            else
+            {
+                toSend += settings.AdSceneChar;
+            }
 
             if (!String.IsNullOrEmpty(toSend))
             {
-                SendKeys.SendWait(toSend);
+                IntPtr? obs = hookOBS();
+                if (obs != null)
+                {
+                    Utilities.WriteLine("OBS: Changing to Ad Scene");
+                    SetForegroundWindow((IntPtr)obs);
+                    SendKeys.SendWait(toSend);
+                }
+                else
+                {
+                    Utilities.WriteLine("Error: OBS was not located");
+                }
+
             }
         }
 
@@ -75,30 +94,67 @@ namespace NHLGames.AdDetection.Modules.OBS
             var settings = ObsModuleSettings.Load();
 
             string toSend = String.Empty;
+            bool modifier = false;
             if (settings.GameSceneCtrl)
             {
                 toSend += "^";
+                modifier = true;
             }
             if (settings.GameSceneAlt)
             {
                 toSend += "%";
+                modifier = true;
             }
             if (settings.GameSceneShift)
             {
                 toSend += "+";
+                modifier = true;
             }
 
-            toSend += settings.GameSceneChar;
+            if (modifier)
+            {
+                toSend += "{";
+                toSend += settings.GameSceneChar;
+                toSend += "}";
+            }
+            else
+            {
+                toSend += settings.GameSceneChar;
+            }
+            
 
             if (!String.IsNullOrEmpty(toSend))
             {
-                SendKeys.SendWait(toSend);
+                IntPtr? obs = hookOBS();
+                if (obs != null)
+                {
+                    Utilities.WriteLine("OBS: Changing to Game Scene");
+                    SetForegroundWindow((IntPtr)obs);
+                    SendKeys.SendWait(toSend);
+                }
+                else
+                {
+                    Utilities.WriteLine("Error: OBS was not located");
+                }
+                
             }
         }
 
-        public void Stop()
+        public void Stop() { }
+
+        private IntPtr? hookOBS()
         {
-            //The action to perform when your module is disabled (Not disposed, it can be Initialized again after if it's enabled.
+            List<string> processNames = new List<string>{ "obs32", "obs64" };
+            Process[] pList;
+            for (int i = 0; i < processNames.Count; i++)
+            {
+                pList = Process.GetProcessesByName(processNames[i]);
+                if (pList.Length != 0)
+                {
+                    return pList[0].MainWindowHandle;
+                }
+            }
+            return null;
         }
     }
 }
