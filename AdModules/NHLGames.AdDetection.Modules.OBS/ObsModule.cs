@@ -24,6 +24,9 @@ namespace NHLGames.AdDetection.Modules.OBS
         [DllImport("User32.dll")]
         static extern int SetForegroundWindow(IntPtr point);
 
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
         private readonly ObsModuleViewModel m_viewModel;
         public ObsModule()
         {
@@ -75,15 +78,17 @@ namespace NHLGames.AdDetection.Modules.OBS
             if (!String.IsNullOrEmpty(toSend))
             {
                 IntPtr? obs = hookOBS();
+                IntPtr? curr = GetForegroundWindow();
                 if (obs != null)
                 {
-                    Utilities.WriteLine("OBS: Changing to Ad Scene");
+                    Console.WriteLine("OBS: Changing to Ad Scene");
                     SetForegroundWindow((IntPtr)obs);
                     SendKeys.SendWait(toSend);
+                    SetForegroundWindow((IntPtr)curr);
                 }
                 else
                 {
-                    Utilities.WriteLine("Error: OBS was not located");
+                    Console.WriteLine("Error: OBS was not located");
                 }
 
             }
@@ -126,15 +131,17 @@ namespace NHLGames.AdDetection.Modules.OBS
             if (!String.IsNullOrEmpty(toSend))
             {
                 IntPtr? obs = hookOBS();
+                IntPtr? curr = GetForegroundWindow();
                 if (obs != null)
                 {
-                    Utilities.WriteLine("OBS: Changing to Game Scene");
+                    Console.WriteLine("OBS: Changing to Game Scene");
                     SetForegroundWindow((IntPtr)obs);
                     SendKeys.SendWait(toSend);
+                    SetForegroundWindow((IntPtr)curr);
                 }
                 else
                 {
-                    Utilities.WriteLine("Error: OBS was not located");
+                    Console.WriteLine("Error: OBS was not located");
                 }
                 
             }
