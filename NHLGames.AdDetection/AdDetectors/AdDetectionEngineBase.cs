@@ -63,7 +63,7 @@ namespace NHLGames.AdDetection.AdDetectors
             }
             catch (Exception e)
             {
-                Utilities.WriteLineWithTime($"Problem initializing tasks: {e.Message}");
+                Console.WriteLine($"Problem initializing tasks: {e.Message}");
             }
 
             while (true)
@@ -87,7 +87,7 @@ namespace NHLGames.AdDetection.AdDetectors
                 }
                 catch (Exception e)
                 {
-                    Utilities.WriteLineWithTime($"Unexpected Exception: {e.Message}");
+                    Console.WriteLine($"Unexpected Exception: {e.Message}");
                 }
 
                 await Task.Delay(PollPeriodMilliseconds);
@@ -121,12 +121,12 @@ namespace NHLGames.AdDetection.AdDetectors
                 {
                     if (m_previousAdPlayingState)
                     {
-                        Utilities.WriteLineWithTime("Ad detected - Calling AdStarted on modules.");
+                        Console.WriteLine("Ad Detection: Calling AdStarted on modules.");
                         Task.Run(() => module.AdStarted());
                     }
                     else
                     {
-                        Utilities.WriteLineWithTime("Ad end detected - Calling AdEnded on modules.");
+                        Console.WriteLine("Ad Detection: Calling AdEnded on modules.");
                         Task.Run(() => module.AdEnded());
                     }
                 }
