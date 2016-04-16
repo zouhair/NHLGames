@@ -53,7 +53,7 @@ Public Class GameControl
             AwayTeamToolTip.SetToolTip(picAway, "Away Team: " & Game.AwayTeam)
         End If
 
-        lblTime.Text = Game.Date.ToString("h:mm tt")
+        lblTime.Text = Game.Date.ToLocalTime().ToString("h:mm tt")
 
         lblAwayStream.Visible = Game.AwayStream.IsAvailable
         lblHomeStream.Visible = Game.HomeStream.IsAvailable
