@@ -56,9 +56,21 @@ Public Class GameControl
         lblTime.Text = Game.Date.ToLocalTime().ToString("h:mm tt")
 
         lblAwayStream.Visible = Game.AwayStream.IsAvailable
+        If Game.AwayStream.Network <> String.Empty Then
+            lblAwayStream.Text = lblAwayStream.Text & " (" & Game.AwayStream.Network & ")"
+        End If
         lblHomeStream.Visible = Game.HomeStream.IsAvailable
+        If Game.HomeStream.Network <> String.Empty Then
+            lblHomeStream.Text = lblHomeStream.Text & " (" & Game.HomeStream.Network & ")"
+        End If
         lblFrenchStream.Visible = Game.FrenchStream.IsAvailable
+        If Game.FrenchStream.Network <> String.Empty Then
+            lblFrenchStream.Text = lblFrenchStream.Text & " (" & Game.FrenchStream.Network & ")"
+        End If
         lblNationalStream.Visible = Game.NationalStream.IsAvailable
+        If Game.NationalStream.Network <> String.Empty Then
+            lblNationalStream.Text = lblNationalStream.Text & " (" & Game.NationalStream.Network & ")"
+        End If
     End Sub
 
     Private Sub btnWatch_Click(sender As Object, e As EventArgs)

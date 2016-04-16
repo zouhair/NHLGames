@@ -261,7 +261,7 @@ Public Class NHLGamesMetro
         AdDetectionSettingsElementHost.Child = AdDetectorViewModel.SettingsControl
 
         dtDate.Value = DateHelper.GetPacificTime()
-        dtDate.MaxDate = DateHelper.GetPacificTime()
+        'dtDate.MaxDate = DateHelper.GetPacificTime()
         TabControl.SelectedIndex = 0
 
         If (HostsFile.TestEntry(DomainName, ServerIP) = False) Then
@@ -289,11 +289,18 @@ Public Class NHLGamesMetro
             'If dateTime <> GameManager.GamesListDate Then
             GameManager.ClearGames()
             FlowLayoutPanel.Controls.Clear()
+            FlowLayoutPanel.Height = 390
             'End If
 
             Dim JSONSchedule As JObject = Downloader.DownloadJSONSchedule(dateTime)
             AvailableGames = Downloader.DownloadAvailableGames() 'TODO: not download each time?
             GameManager.RefreshGames(dateTime, JSONSchedule, AvailableGames)
+
+            If FlowLayoutPanel.Height > 400 Then
+                Me.Height = FlowLayoutPanel.Height + 225
+            Else
+                Me.Height = 600
+            End If
 
         Catch ex As Exception
             Console.WriteLine(ex.ToString())
@@ -481,11 +488,11 @@ Public Class NHLGamesMetro
 
     Private Sub btnTomorrow_Click(sender As Object, e As EventArgs) Handles btnTomorrow.Click
 
-        Dim tomorrow = dtDate.Value.Add(TimeSpan.FromDays(1))
+        'Dim tomorrow = dtDate.Value.Add(TimeSpan.FromDays(1))
 
-        If (tomorrow <= dtDate.MaxDate) Then
-            dtDate.Value = dtDate.Value.Add(TimeSpan.FromDays(1))
-        End If
+        'If (tomorrow <= dtDate.MaxDate) Then
+        dtDate.Value = dtDate.Value.Add(TimeSpan.FromDays(1))
+        'End If
     End Sub
 
 #End Region

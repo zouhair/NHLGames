@@ -140,7 +140,7 @@ Partial Class NHLGamesMetro
         Me.gridGames.RowTemplate.DividerHeight = 1
         Me.gridGames.RowTemplate.Height = 35
         Me.gridGames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.gridGames.Size = New System.Drawing.Size(288, 0)
+        Me.gridGames.Size = New System.Drawing.Size(384, 52)
         Me.gridGames.TabIndex = 0
         Me.gridGames.Visible = False
         '
@@ -161,7 +161,7 @@ Partial Class NHLGamesMetro
         '
         Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnRefresh.Location = New System.Drawing.Point(623, 13)
+        Me.btnRefresh.Location = New System.Drawing.Point(757, 12)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(93, 22)
         Me.btnRefresh.TabIndex = 5
@@ -170,8 +170,9 @@ Partial Class NHLGamesMetro
         '
         'lblVersion
         '
+        Me.lblVersion.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblVersion.AutoSize = True
-        Me.lblVersion.Location = New System.Drawing.Point(530, 44)
+        Me.lblVersion.Location = New System.Drawing.Point(664, 44)
         Me.lblVersion.MinimumSize = New System.Drawing.Size(200, 5)
         Me.lblVersion.Name = "lblVersion"
         Me.lblVersion.Size = New System.Drawing.Size(200, 13)
@@ -191,7 +192,7 @@ Partial Class NHLGamesMetro
         Me.RichTextBox.Location = New System.Drawing.Point(3, 20)
         Me.RichTextBox.Name = "RichTextBox"
         Me.RichTextBox.ReadOnly = True
-        Me.RichTextBox.Size = New System.Drawing.Size(760, 377)
+        Me.RichTextBox.Size = New System.Drawing.Size(863, 429)
         Me.RichTextBox.TabIndex = 0
         Me.RichTextBox.Text = "Console Output..." & Global.Microsoft.VisualBasic.ChrW(10)
         '
@@ -204,8 +205,8 @@ Partial Class NHLGamesMetro
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl.Location = New System.Drawing.Point(10, 60)
         Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 0
-        Me.TabControl.Size = New System.Drawing.Size(774, 468)
+        Me.TabControl.SelectedIndex = 3
+        Me.TabControl.Size = New System.Drawing.Size(870, 520)
         Me.TabControl.TabIndex = 22
         Me.TabControl.UseSelectable = True
         '
@@ -222,7 +223,7 @@ Partial Class NHLGamesMetro
         Me.GamesTab.HorizontalScrollbarSize = 10
         Me.GamesTab.Location = New System.Drawing.Point(4, 38)
         Me.GamesTab.Name = "GamesTab"
-        Me.GamesTab.Size = New System.Drawing.Size(766, 426)
+        Me.GamesTab.Size = New System.Drawing.Size(862, 478)
         Me.GamesTab.TabIndex = 0
         Me.GamesTab.Text = "Games      "
         Me.GamesTab.VerticalScrollbarBarColor = True
@@ -257,10 +258,11 @@ Partial Class NHLGamesMetro
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.FlowLayoutPanel.AutoScroll = True
+        Me.FlowLayoutPanel.AutoSize = True
         Me.FlowLayoutPanel.BackColor = System.Drawing.Color.White
         Me.FlowLayoutPanel.Location = New System.Drawing.Point(3, 41)
         Me.FlowLayoutPanel.Name = "FlowLayoutPanel"
-        Me.FlowLayoutPanel.Size = New System.Drawing.Size(766, 341)
+        Me.FlowLayoutPanel.Size = New System.Drawing.Size(863, 442)
         Me.FlowLayoutPanel.TabIndex = 6
         '
         'SettingTab
@@ -298,7 +300,7 @@ Partial Class NHLGamesMetro
         Me.SettingTab.HorizontalScrollbarSize = 10
         Me.SettingTab.Location = New System.Drawing.Point(4, 38)
         Me.SettingTab.Name = "SettingTab"
-        Me.SettingTab.Size = New System.Drawing.Size(766, 426)
+        Me.SettingTab.Size = New System.Drawing.Size(862, 478)
         Me.SettingTab.TabIndex = 1
         Me.SettingTab.Text = "Settings      "
         Me.SettingTab.VerticalScrollbarBarColor = True
@@ -495,7 +497,7 @@ Partial Class NHLGamesMetro
         'MetroLabel8
         '
         Me.MetroLabel8.AutoSize = True
-        Me.MetroLabel8.Location = New System.Drawing.Point(17, 304)
+        Me.MetroLabel8.Location = New System.Drawing.Point(17, 300)
         Me.MetroLabel8.Name = "MetroLabel8"
         Me.MetroLabel8.Size = New System.Drawing.Size(92, 19)
         Me.MetroLabel8.TabIndex = 6
@@ -598,7 +600,7 @@ Partial Class NHLGamesMetro
         'MetroLabel9
         '
         Me.MetroLabel9.AutoSize = True
-        Me.MetroLabel9.Location = New System.Drawing.Point(17, 277)
+        Me.MetroLabel9.Location = New System.Drawing.Point(17, 272)
         Me.MetroLabel9.Name = "MetroLabel9"
         Me.MetroLabel9.Size = New System.Drawing.Size(74, 19)
         Me.MetroLabel9.TabIndex = 5
@@ -607,7 +609,7 @@ Partial Class NHLGamesMetro
         'MetroLabel10
         '
         Me.MetroLabel10.AutoSize = True
-        Me.MetroLabel10.Location = New System.Drawing.Point(17, 249)
+        Me.MetroLabel10.Location = New System.Drawing.Point(17, 244)
         Me.MetroLabel10.Name = "MetroLabel10"
         Me.MetroLabel10.Size = New System.Drawing.Size(50, 19)
         Me.MetroLabel10.TabIndex = 4
@@ -626,7 +628,7 @@ Partial Class NHLGamesMetro
         'MetroLabel6
         '
         Me.MetroLabel6.AutoSize = True
-        Me.MetroLabel6.Location = New System.Drawing.Point(17, 191)
+        Me.MetroLabel6.Location = New System.Drawing.Point(17, 188)
         Me.MetroLabel6.Name = "MetroLabel6"
         Me.MetroLabel6.Size = New System.Drawing.Size(45, 19)
         Me.MetroLabel6.TabIndex = 3
@@ -654,7 +656,7 @@ Partial Class NHLGamesMetro
         'MetroLabel11
         '
         Me.MetroLabel11.AutoSize = True
-        Me.MetroLabel11.Location = New System.Drawing.Point(17, 219)
+        Me.MetroLabel11.Location = New System.Drawing.Point(17, 215)
         Me.MetroLabel11.Name = "MetroLabel11"
         Me.MetroLabel11.Size = New System.Drawing.Size(37, 19)
         Me.MetroLabel11.TabIndex = 3
@@ -675,7 +677,7 @@ Partial Class NHLGamesMetro
         'MetroLabel7
         '
         Me.MetroLabel7.AutoSize = True
-        Me.MetroLabel7.Location = New System.Drawing.Point(17, 164)
+        Me.MetroLabel7.Location = New System.Drawing.Point(17, 160)
         Me.MetroLabel7.Name = "MetroLabel7"
         Me.MetroLabel7.Size = New System.Drawing.Size(69, 19)
         Me.MetroLabel7.TabIndex = 2
@@ -736,7 +738,7 @@ Partial Class NHLGamesMetro
         'MetroCheckBox1
         '
         Me.MetroCheckBox1.AutoSize = True
-        Me.MetroCheckBox1.Location = New System.Drawing.Point(137, 123)
+        Me.MetroCheckBox1.Location = New System.Drawing.Point(137, 114)
         Me.MetroCheckBox1.Name = "MetroCheckBox1"
         Me.MetroCheckBox1.Size = New System.Drawing.Size(89, 15)
         Me.MetroCheckBox1.TabIndex = 28
@@ -762,7 +764,7 @@ Partial Class NHLGamesMetro
         Me.ConsoleTab.HorizontalScrollbarSize = 10
         Me.ConsoleTab.Location = New System.Drawing.Point(4, 38)
         Me.ConsoleTab.Name = "ConsoleTab"
-        Me.ConsoleTab.Size = New System.Drawing.Size(766, 426)
+        Me.ConsoleTab.Size = New System.Drawing.Size(862, 478)
         Me.ConsoleTab.TabIndex = 2
         Me.ConsoleTab.Text = "Console      "
         Me.ConsoleTab.VerticalScrollbarBarColor = True
@@ -772,7 +774,7 @@ Partial Class NHLGamesMetro
         'btnClearConsole
         '
         Me.btnClearConsole.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClearConsole.Location = New System.Drawing.Point(660, 403)
+        Me.btnClearConsole.Location = New System.Drawing.Point(759, 455)
         Me.btnClearConsole.Name = "btnClearConsole"
         Me.btnClearConsole.Size = New System.Drawing.Size(103, 23)
         Me.btnClearConsole.TabIndex = 2
@@ -788,8 +790,9 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 38)
         Me.AdDetectionSettingsTab.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsTab.Name = "AdDetectionSettingsTab"
-        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(766, 426)
+        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(862, 478)
         Me.AdDetectionSettingsTab.TabIndex = 4
+        Me.AdDetectionSettingsTab.Text = "Ad Detection Modules"
         Me.AdDetectionSettingsTab.VerticalScrollbarBarColor = True
         Me.AdDetectionSettingsTab.VerticalScrollbarHighlightOnWheel = False
         Me.AdDetectionSettingsTab.VerticalScrollbarSize = 7
@@ -802,7 +805,7 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsElementHost.Location = New System.Drawing.Point(0, 0)
         Me.AdDetectionSettingsElementHost.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsElementHost.Name = "AdDetectionSettingsElementHost"
-        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(766, 426)
+        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(862, 478)
         Me.AdDetectionSettingsElementHost.TabIndex = 2
         Me.AdDetectionSettingsElementHost.Child = Nothing
         '
@@ -810,18 +813,20 @@ Partial Class NHLGamesMetro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(804, 548)
+        Me.ClientSize = New System.Drawing.Size(900, 600)
         Me.Controls.Add(Me.TabControl)
         Me.Controls.Add(Me.lblVersion)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MinimumSize = New System.Drawing.Size(730, 500)
+        Me.MinimumSize = New System.Drawing.Size(900, 600)
         Me.Name = "NHLGamesMetro"
         Me.Padding = New System.Windows.Forms.Padding(10, 60, 20, 20)
+        Me.Resizable = False
         Me.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow
         Me.Text = "NHL Games"
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl.ResumeLayout(False)
         Me.GamesTab.ResumeLayout(False)
+        Me.GamesTab.PerformLayout()
         Me.SettingTab.ResumeLayout(False)
         Me.SettingTab.PerformLayout()
         Me.MetroPanel2.ResumeLayout(False)

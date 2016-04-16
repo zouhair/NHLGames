@@ -70,7 +70,7 @@ Partial Class GameControl
         Me.BorderPanel1.Controls.Add(Me.lblAwayTeam)
         Me.BorderPanel1.Location = New System.Drawing.Point(0, 0)
         Me.BorderPanel1.Name = "BorderPanel1"
-        Me.BorderPanel1.Size = New System.Drawing.Size(228, 95)
+        Me.BorderPanel1.Size = New System.Drawing.Size(273, 95)
         Me.BorderPanel1.TabIndex = 9
         '
         'FlowLayoutPanel1
@@ -83,7 +83,7 @@ Partial Class GameControl
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(1, 69)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.Padding = New System.Windows.Forms.Padding(5, 5, 5, 0)
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(225, 24)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(270, 24)
         Me.FlowLayoutPanel1.TabIndex = 10
         '
         'lblHomeStream
@@ -218,7 +218,6 @@ Partial Class GameControl
         Me.lblHomeTeam.TabIndex = 4
         Me.lblHomeTeam.Text = "Home"
         Me.lblHomeTeam.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.lblHomeScore.Text = "0"
         '
         'lblHomeScore
         '
@@ -248,7 +247,7 @@ Partial Class GameControl
         Me.Controls.Add(Me.BorderPanel1)
         Me.Name = "GameControl"
         Me.Padding = New System.Windows.Forms.Padding(10)
-        Me.Size = New System.Drawing.Size(236, 102)
+        Me.Size = New System.Drawing.Size(280, 102)
         Me.BorderPanel1.ResumeLayout(False)
         Me.BorderPanel1.PerformLayout()
         Me.FlowLayoutPanel1.ResumeLayout(False)

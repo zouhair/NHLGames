@@ -28,6 +28,8 @@ Public Class GameStream
 
     Public Property IsAvailable As Boolean = False
 
+    Public Property Network As String
+
     Public Sub New()
 
     End Sub
@@ -41,6 +43,7 @@ Public Class GameStream
         Me.GameURL = "http://hlslive-CDN.med2.med.nhl.com/ls04/nhl/" & dateString & "/NHL_GAME_VIDEO_" & game.AwayAbbrev & game.HomeAbbrev & "_M2_" & feedType & "_" & dateString2 & "/master_wired60.m3u8"
         Me.VODURL = "http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/" & dateString & "/NHL_GAME_VIDEO_" & game.AwayAbbrev & game.HomeAbbrev & "_M2_" & feedType & "_" & dateString2 & "/master_wired60.m3u8"
         Me.Type = type
+        Me.Network = stream.Property("callLetters")
 
         If availableGameIds.Contains(PlayBackID) Then
             IsAvailable = True
