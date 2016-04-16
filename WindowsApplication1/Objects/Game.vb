@@ -330,6 +330,24 @@ Public Class Game
                 Console.WriteLine("Trying VOD : {0}", e.Message)
             End Try
 
+            Dim duplicate As String = If(IsVOD, Stream.VODURL, Stream.GameURL)
+            duplicate = duplicate.Substring(0, duplicate.LastIndexOf("/")) & "_1" & duplicate.Substring(duplicate.LastIndexOf("/"), duplicate.Length - duplicate.LastIndexOf("/"))
+
+            Try
+                Dim myHttpWebRequest As HttpWebRequest = CType(WebRequest.Create(duplicate), HttpWebRequest)
+                Dim myHttpWebResponse As HttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
+                If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
+                    If IsVOD Then
+                        Stream.VODURL = duplicate
+                    Else
+                        Stream.GameURL = duplicate
+                    End If
+                End If
+                    myHttpWebResponse.Close()
+            Catch e As Exception
+                Console.WriteLine("Trying Duplicate : {0}", e.Message)
+            End Try
+
             If IsVOD Then
                 returnValue &= Stream.VODURL
             Else
