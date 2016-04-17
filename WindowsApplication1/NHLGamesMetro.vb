@@ -495,5 +495,9 @@ Public Class NHLGamesMetro
         'End If
     End Sub
 
+    Private Sub lblVersion_Click(sender As Object, e As EventArgs) Handles lblVersion.Click
+
+    End Sub
+
 #End Region
 End Class
