@@ -98,7 +98,7 @@ Public Class Downloader
 
         Dim returnValue As New JObject
 
-        Dim IsTodaysSchedule = (startDate.Date.Ticks = DateHelper.GetCentralTime.Date.Ticks)
+        Dim IsTodaysSchedule = (startDate.Date.Ticks = DateHelper.GetPacificTime.Date.Ticks)
         Dim dateTimeString As String = startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
         Dim fileName As String = dateTimeString & ".json"
         Dim URL As String = String.Format(ScheduleAPIURL, dateTimeString, dateTimeString)

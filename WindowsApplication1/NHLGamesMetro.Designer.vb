@@ -205,7 +205,7 @@ Partial Class NHLGamesMetro
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl.Location = New System.Drawing.Point(10, 60)
         Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 0
+        Me.TabControl.SelectedIndex = 1
         Me.TabControl.Size = New System.Drawing.Size(1020, 520)
         Me.TabControl.TabIndex = 22
         Me.TabControl.UseSelectable = True
@@ -465,22 +465,22 @@ Partial Class NHLGamesMetro
         'rbAkamai
         '
         Me.rbAkamai.AutoSize = True
+        Me.rbAkamai.Checked = True
         Me.rbAkamai.Location = New System.Drawing.Point(68, 3)
         Me.rbAkamai.Name = "rbAkamai"
         Me.rbAkamai.Size = New System.Drawing.Size(63, 15)
         Me.rbAkamai.TabIndex = 12
+        Me.rbAkamai.TabStop = True
         Me.rbAkamai.Text = "Akamai"
         Me.rbAkamai.UseSelectable = True
         '
         'rbLevel3
         '
         Me.rbLevel3.AutoSize = True
-        Me.rbLevel3.Checked = True
         Me.rbLevel3.Location = New System.Drawing.Point(3, 3)
         Me.rbLevel3.Name = "rbLevel3"
         Me.rbLevel3.Size = New System.Drawing.Size(59, 15)
         Me.rbLevel3.TabIndex = 11
-        Me.rbLevel3.TabStop = True
         Me.rbLevel3.Text = "Level 3"
         Me.rbLevel3.UseSelectable = True
         '

@@ -3,10 +3,13 @@
 Public Class GameControl
 
     Private _Game As Game
-    Public Sub New(Game As Game, showScores As Boolean)
+    Private _selectedDate As Date
+
+    Public Sub New(Game As Game, showScores As Boolean, selectedDate As Date)
         InitializeComponent()
 
         _Game = Game
+        _selectedDate = selectedDate
 
         SetInitialProperties(Game)
         UpdateGameStatusProperties(Game)
@@ -85,24 +88,64 @@ Public Class GameControl
 
     Private Sub lblHomeStream_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblHomeStream.LinkClicked
         Dim args = WatchArgs()
+
+        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
+            _Game.HomeStream.CheckVOD(args.CDN)
+            args.IsVOD = _Game.HomeStream.IsVOD
+        End If
+
+        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
+            _Game.HomeStream.CheckDuplicate(args.CDN)
+        End If
+
         args.Stream = _Game.HomeStream
         _Game.Watch(args)
     End Sub
 
     Private Sub lblAwayStream_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblAwayStream.LinkClicked
         Dim args = WatchArgs()
+
+        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
+            _Game.AwayStream.CheckVOD(args.CDN)
+            args.IsVOD = _Game.AwayStream.IsVOD
+        End If
+
+        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
+            _Game.AwayStream.CheckDuplicate(args.CDN)
+        End If
+
         args.Stream = _Game.AwayStream
         _Game.Watch(args)
     End Sub
 
     Private Sub lblFrenchStream_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblFrenchStream.LinkClicked
         Dim args = WatchArgs()
+
+        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
+            _Game.FrenchStream.CheckVOD(args.CDN)
+            args.IsVOD = _Game.FrenchStream.IsVOD
+        End If
+
+        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
+            _Game.FrenchStream.CheckDuplicate(args.CDN)
+        End If
+
         args.Stream = _Game.FrenchStream
         _Game.Watch(args)
     End Sub
 
     Private Sub lblNationalStream_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblNationalStream.LinkClicked
         Dim args = WatchArgs()
+
+        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
+            _Game.NationalStream.CheckVOD(args.CDN)
+            args.IsVOD = _Game.NationalStream.IsVOD
+        End If
+
+        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
+            _Game.NationalStream.CheckDuplicate(args.CDN)
+        End If
+
         args.Stream = _Game.NationalStream
         _Game.Watch(args)
     End Sub

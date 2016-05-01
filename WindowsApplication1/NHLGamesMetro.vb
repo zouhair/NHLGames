@@ -248,7 +248,7 @@ Public Class NHLGamesMetro
 
     Public Sub NewGameFoundHandler(gameObj As Game)
 
-        Dim gameControl As New GameControl(gameObj, ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True))
+        Dim gameControl As New GameControl(gameObj, ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True), dtDate.Value)
         FlowLayoutPanel.Controls.Add(gameControl)
 
     End Sub

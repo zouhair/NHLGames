@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Objects\GameManager.vb" />
     <Compile Include="Utilities\ApplicationSettings.vb" />
+    <Compile Include="Utilities\Common.vb" />
     <Compile Include="Utilities\DateHelper.vb" />
     <Compile Include="Utilities\Downloader.vb" />
     <Compile Include="Objects\Game.vb" />
