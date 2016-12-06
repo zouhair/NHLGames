@@ -139,7 +139,7 @@ Public Class Game
     Public Sub Watch(args As GameWatchArguments)
 
         Dim t As Task = New Task(Function()
-                                     Console.WriteLine("Running:    " & args.LiveStreamerPath & " " & args.ToString())
+                                     Console.WriteLine("Starting: livestreamer.exe") '& args.LiveStreamerPath & " " & args.ToString())
 
                                      Dim proc = New Process() With {.StartInfo =
             New ProcessStartInfo With {
@@ -153,10 +153,11 @@ Public Class Game
                                      Try
                                          proc.Start()
 
-                                         While (proc.StandardOutput.EndOfStream = False)
-                                             Dim line = proc.StandardOutput.ReadLine()
-                                             Console.WriteLine(line)
-                                         End While
+                                         'No longer show livestreamer console output
+                                         'While (proc.StandardOutput.EndOfStream = False)
+                                         '    Dim line = proc.StandardOutput.ReadLine()
+                                         '    Console.WriteLine(line)
+                                         'End While
                                      Catch ex As Exception
                                          Console.WriteLine("Error: " & ex.Message)
                                      End Try
@@ -264,6 +265,7 @@ Public Class Game
             None = 0
             VLC = 1
             MPC = 2
+            mpv = 3
         End Enum
 
         Public Property Quality As String = ""
@@ -305,12 +307,18 @@ Public Class Game
             Dim titleArg As String = ""
             If PlayerType = PlayerTypeEnum.VLC Then
                 titleArg = " --meta-title '" & GameTitle & "' "
+            ElseIf PlayerType = PlayerTypeEnum.mpv Then
+                titleArg = " --title '" & GameTitle & "' --user-agent='User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316'"
             End If
 
             If String.IsNullOrEmpty(PlayerPath) = False Then
                 returnValue &= " --player ""'" & PlayerPath & "' " & titleArg & LiteralPlayerArgs & """ " '--player-passthrough=hls 
             Else
                 Console.WriteLine("Error: Player path is empty")
+            End If
+
+            If PlayerType = PlayerTypeEnum.mpv Then
+                returnValue &= " --player-passthrough=hls "
             End If
 
             returnValue &= "--http-cookie=""mediaAuth=" & Common.GetRandomString(240) & """ --http-header=""User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316"" "

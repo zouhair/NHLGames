@@ -16,7 +16,7 @@ Public Class HostsFile
 
         If contents.IndexOf(ip) > -1 Then
             Console.WriteLine("Removing existing entries from hosts file")
-            Return contents.Replace(ip, "# " & ip)
+            Return contents.Replace(ip, String.Empty)
         Else
             Return contents
         End If
@@ -28,9 +28,46 @@ Public Class HostsFile
         File.Copy(path, path & ".bak", True)
     End Sub
 
-    Public Shared Sub AddEntry(ip As String, host As String)
+    Public Shared Sub CleanHosts(ip As String, host As String, checkAdmin As Boolean)
+        If checkAdmin = False OrElse EnsureAdmin() Then
 
-        If EnsureAdmin() Then
+            Dim HostsFilePath As String = Environment.SystemDirectory & "\drivers\etc\hosts"
+
+            Dim fileIsReadonly As Boolean = FileAccess.IsFileReadonly(HostsFilePath)
+
+            If fileIsReadonly Then
+                FileAccess.RemoveReadOnly(HostsFilePath)
+            End If
+
+            Backup(HostsFilePath)
+
+            Dim input As String = ""
+            Using sr As New StreamReader(HostsFilePath)
+                input = sr.ReadToEnd()
+            End Using
+
+            Dim output As String = RemoveOldEntries(ip, host, input)
+
+            Using sw As New StreamWriter(HostsFilePath)
+                sw.Write(output)
+                sw.Close()
+            End Using
+
+            If fileIsReadonly Then
+                FileAccess.AddReadonly(HostsFilePath)
+            End If
+
+
+            If MetroMessageBox.Show(NHLGamesMetro.FormInstance, "Do you wish to view the Hosts file confim the changes?", "Open Hosts File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                Process.Start(HostsFilePath)
+            End If
+
+        End If
+    End Sub
+
+    Public Shared Sub AddEntry(ip As String, host As String, checkAdmin As Boolean)
+
+        If checkAdmin = False OrElse EnsureAdmin() Then
 
             Dim HostsFilePath As String = Environment.SystemDirectory & "\drivers\etc\hosts"
 

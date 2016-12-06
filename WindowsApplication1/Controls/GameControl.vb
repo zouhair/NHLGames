@@ -94,9 +94,9 @@ Public Class GameControl
             args.IsVOD = _Game.HomeStream.IsVOD
         End If
 
-        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
-            _Game.HomeStream.CheckDuplicate(args.CDN)
-        End If
+        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
+        '    _Game.HomeStream.CheckDuplicate(args.CDN)
+        'End If
 
         args.Stream = _Game.HomeStream
         _Game.Watch(args)
@@ -110,9 +110,9 @@ Public Class GameControl
             args.IsVOD = _Game.AwayStream.IsVOD
         End If
 
-        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
-            _Game.AwayStream.CheckDuplicate(args.CDN)
-        End If
+        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
+        '    _Game.AwayStream.CheckDuplicate(args.CDN)
+        'End If
 
         args.Stream = _Game.AwayStream
         _Game.Watch(args)
@@ -126,9 +126,9 @@ Public Class GameControl
             args.IsVOD = _Game.FrenchStream.IsVOD
         End If
 
-        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
-            _Game.FrenchStream.CheckDuplicate(args.CDN)
-        End If
+        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
+        '    _Game.FrenchStream.CheckDuplicate(args.CDN)
+        'End If
 
         args.Stream = _Game.FrenchStream
         _Game.Watch(args)
@@ -142,9 +142,9 @@ Public Class GameControl
             args.IsVOD = _Game.NationalStream.IsVOD
         End If
 
-        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
-            _Game.NationalStream.CheckDuplicate(args.CDN)
-        End If
+        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
+        '    _Game.NationalStream.CheckDuplicate(args.CDN)
+        'End If
 
         args.Stream = _Game.NationalStream
         _Game.Watch(args)
@@ -152,7 +152,7 @@ Public Class GameControl
 
     Private Function WatchArgs() As Game.GameWatchArguments
         Dim args = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
-        args.GameTitle = _Game.HomeAbbrev & " VS " & _Game.AwayAbbrev
+        args.GameTitle = _Game.AwayAbbrev & " @ " & _Game.HomeAbbrev
         Return args
     End Function
 End Class

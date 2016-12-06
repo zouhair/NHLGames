@@ -11,7 +11,8 @@ Imports NHLGames.TextboxConsoleOutputRediect
 Public Class NHLGamesMetro
 
     Private AvailableGames As New List(Of String)
-    Private Const ServerIP As String = "146.185.131.14"
+    Private Const OldServerIP As String = "146.185.131.14"
+    Private Const ServerIP As String = "107.6.175.181"
     Private Const DomainName As String = "mf.svc.nhl.com"
     Private Shared SettingsLoaded As Boolean = False
     Public Shared FormInstance As NHLGamesMetro = Nothing
@@ -77,6 +78,18 @@ Public Class NHLGamesMetro
         txtVLCPath.Text = vlcPath
         ApplicationSettings.SetValue(ApplicationSettings.Settings.VLCPath, vlcPath)
 
+        Dim mpvPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.mpvPath, "")
+        If mpvPath = "" Then
+            ' First check inside app folder
+            mpvPath = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
+
+            'If Not File.Exists(liveStreamerPath) Then
+            '    ' If no such file check if we can find one in system
+            '    liveStreamerPath = FileAccess.LocateEXE("livestreamer.exe", "\Livestreamer")
+            'End If
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.mpvPath, mpvPath)
+        End If
+        txtMpvPath.Text = mpvPath
 
         Dim liveStreamerPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.LiveStreamerPath, "")
         If liveStreamerPath = "" Then
@@ -142,6 +155,9 @@ Public Class NHLGamesMetro
             If rbMPC.Checked Then
                 WatchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.MPC
                 WatchArgs.PlayerPath = txtMPCPath.Text
+            ElseIf rbMpv.Checked Then
+                WatchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.mpv
+                WatchArgs.PlayerPath = txtMpvPath.Text
             Else
                 WatchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.VLC
                 WatchArgs.PlayerPath = txtVLCPath.Text
@@ -151,7 +167,7 @@ Public Class NHLGamesMetro
 
             If rbAkamai.Checked Then
                 WatchArgs.CDN = "akc"
-            ElseIf rbLevel3.Checked
+            ElseIf rbLevel3.Checked Then
                 WatchArgs.CDN = "l3c"
             End If
 
@@ -239,7 +255,9 @@ Public Class NHLGamesMetro
         If strLatest > versionFromSettings Then
             lblVersion.Text = "Version " & strLatest & " available! You are running " & versionFromSettings & "."
             lblVersion.ForeColor = Color.Red
-            MetroMessageBox.Show(Me, "You don't have the latest version of this application. Things may not work properly (or at all).", "New Version Available", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            lnkDownload.Visible = True
+            Dim strChangeLog = Downloader.DownloadChangelog()
+            MetroMessageBox.Show(Me, "Version " & strLatest & " is available! Changes:" & vbCrLf & vbCrLf & strChangeLog, "New Version Available", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else
             lblVersion.Text = "Version: " & ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version)
             lblVersion.ForeColor = Color.Gray
@@ -265,15 +283,12 @@ Public Class NHLGamesMetro
         TabControl.SelectedIndex = 0
 
         If (HostsFile.TestEntry(DomainName, ServerIP) = False) Then
-            HostsFile.AddEntry(ServerIP, DomainName)
+            HostsFile.AddEntry(ServerIP, DomainName, True)
         End If
 
         VersionCheck()
         IntitializeApplicationSettings()
-
-
-
-
+        LoadGames(dtDate.Value)
     End Sub
 
 
@@ -347,8 +362,19 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
+    Private Sub btnMpvPath_Click(sender As Object, e As EventArgs) Handles btnMpvPath.Click
+        OpenFileDialog.Filter = "MPC|mpv.exe"
+        OpenFileDialog.Multiselect = False
+        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+            If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtMpvPath.Text <> OpenFileDialog.FileName Then
+                ApplicationSettings.SetValue(ApplicationSettings.Settings.mpvPath, OpenFileDialog.FileName)
+                txtMpvPath.Text = OpenFileDialog.FileName
+            End If
+        End If
+    End Sub
+
     Private Sub btnLiveStreamerPath_Click(sender As Object, e As EventArgs) Handles btnLiveStreamerPath.Click
-        OpenFileDialog.Filter = "LiveStreamer|livestreamer.exe"
+        OpenFileDialog.Filter = "LiveStreamer|"
         OpenFileDialog.Multiselect = False
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
             If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtLiveStreamPath.Text <> OpenFileDialog.FileName Then
@@ -497,6 +523,32 @@ Public Class NHLGamesMetro
 
     Private Sub lblVersion_Click(sender As Object, e As EventArgs) Handles lblVersion.Click
 
+    End Sub
+
+    Private Sub btnClean_Click(sender As Object, e As EventArgs) Handles btnClean.Click
+        HostsFile.CleanHosts(OldServerIP, DomainName, True)
+        HostsFile.CleanHosts(ServerIP, DomainName, False)
+        HostsFile.AddEntry(ServerIP, DomainName, False)
+    End Sub
+
+    Private Sub lnkVLCDownload_Click(sender As Object, e As EventArgs) Handles lnkVLCDownload.Click
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("http://www.videolan.org/vlc/download-windows.html")
+        Process.Start(sInfo)
+    End Sub
+
+    Private Sub lnkMPCDownload_Click(sender As Object, e As EventArgs) Handles lnkMPCDownload.Click
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://mpc-hc.org/downloads/")
+        Process.Start(sInfo)
+    End Sub
+
+    Private Sub lnkMpvDownload_Click(sender As Object, e As EventArgs) Handles lnkMpvDownload.Click
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://mpv.io/installation/")
+        Process.Start(sInfo)
+    End Sub
+
+    Private Sub lnkDownload_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkDownload.LinkClicked
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://www.reddit.com/r/nhl_games/wiki/downloads")
+        Process.Start(sInfo)
     End Sub
 
 #End Region

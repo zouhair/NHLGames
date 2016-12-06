@@ -99,13 +99,15 @@ namespace NHLGames.AdDetection.AdDetectors
         private bool MediaPlayerIsPlaying()
         {
             var vlcProcesses =
-                Process.GetProcessesByName("vlc").Where(x => x.MainWindowTitle == @"fd://0 - VLC media player" || x.MainWindowTitle.ToLower().Contains(" vs ")).Select(x => x.Id);
+                Process.GetProcessesByName("vlc").Where(x => x.MainWindowTitle == @"fd://0 - VLC media player" || x.MainWindowTitle.ToLower().Contains(" @ ")).Select(x => x.Id);
 
             var mpc64Processes =
-                Process.GetProcessesByName("MPC-HC64").Where(x => x.MainWindowTitle == @"stdin" || x.MainWindowTitle.ToLower().Contains(" vs ")).Select(x => x.Id);
+                Process.GetProcessesByName("MPC-HC64").Where(x => x.MainWindowTitle == @"stdin" || x.MainWindowTitle.ToLower().Contains(" @ ")).Select(x => x.Id);
 
             var mpc32Processes =
-                Process.GetProcessesByName("MPC-HC").Where(x => x.MainWindowTitle == @"stdin" || x.MainWindowTitle.ToLower().Contains(" vs ")).Select(x => x.Id);
+                Process.GetProcessesByName("MPC-HC").Where(x => x.MainWindowTitle == @"stdin" || x.MainWindowTitle.ToLower().Contains(" @ ")).Select(x => x.Id);
+
+            //Add mpv support here
 
             m_mediaPlayerProcesses = vlcProcesses.Concat(mpc64Processes).Concat(mpc32Processes).ToList();
 

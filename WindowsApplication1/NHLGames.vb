@@ -209,7 +209,7 @@ Public Class NHLGames
     End Sub
 
     Private Sub btnHosts_Click(sender As Object, e As EventArgs) Handles btnHosts.Click
-        HostsFile.AddEntry("146.185.131.14", "mf.svc.nhl.com")
+
     End Sub
 
     Private Sub btnWatch_Click(sender As Object, e As EventArgs) Handles btnWatch.Click
