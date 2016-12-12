@@ -7,11 +7,12 @@ Public Class ApplicationSettings
         DefaultWatchArgs = 2
         VLCPath = 3
         MPCPath = 4
-        LiveStreamerPath = 5
-        ServiioPath = 6
-        ShowScores = 7
-        RefreshIntervalInMin = 8
-        ShowAdvancedWatchPanel = 9
+        mpvPath = 5
+        LiveStreamerPath = 6
+        ServiioPath = 7
+        ShowScores = 8
+        RefreshIntervalInMin = 9
+        ShowAdvancedWatchPanel = 10
     End Enum
 
     Public Shared Function Read(Of T)(key As Settings, Optional defaultReturnValue As Object = Nothing) As T

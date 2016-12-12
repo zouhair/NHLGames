@@ -1,5 +1,5 @@
 ﻿Imports System.Globalization
-Imports System.IO.Path
+Imports System.Text
 Imports Newtonsoft.Json.Linq
 
 <DebuggerDisplay("{HomeTeam} vs. {AwayTeam} at {[Date]}")>
@@ -139,7 +139,7 @@ Public Class Game
     Public Sub Watch(args As GameWatchArguments)
 
         Dim t As Task = New Task(Function()
-                                     Console.WriteLine("Running:    " & args.LiveStreamerPath & " " & args.ToString())
+                                     Console.WriteLine("Starting: livestreamer.exe") '& args.LiveStreamerPath & " " & args.ToString())
 
                                      Dim proc = New Process() With {.StartInfo =
             New ProcessStartInfo With {
@@ -153,10 +153,11 @@ Public Class Game
                                      Try
                                          proc.Start()
 
-                                         While (proc.StandardOutput.EndOfStream = False)
-                                             Dim line = proc.StandardOutput.ReadLine()
-                                             Console.WriteLine(line)
-                                         End While
+                                         'No longer show livestreamer console output
+                                         'While (proc.StandardOutput.EndOfStream = False)
+                                         '    Dim line = proc.StandardOutput.ReadLine()
+                                         '    Console.WriteLine(line)
+                                         'End While
                                      Catch ex As Exception
                                          Console.WriteLine("Error: " & ex.Message)
                                      End Try
@@ -197,12 +198,12 @@ Public Class Game
             dateTimeVal = Date.Parse(game.Property("gameDate").Value.ToString())
         End If
 
-        [Date] = dateTimeVal.ToLocalTime()
+        [Date] = dateTimeVal.ToUniversalTime() ' Must use universal time to always get correct date for stream
 
         GameID = game.Property("gamePk").ToString()
         _StatusID = game("status")("statusCode").ToString()
 
-        If [Date] <= DateTime.Now Then
+        If [Date] <= DateTime.Now.ToUniversalTime() Then
             HomeScore = game("teams")("home")("score").ToString()
             AwayScore = game("teams")("away")("score").ToString()
         End If
@@ -258,17 +259,17 @@ Public Class Game
         Return stringBuilder.ToString().Normalize(System.Text.NormalizationForm.FormC)
     End Function
 
-
     Public Class GameWatchArguments
 
         Enum PlayerTypeEnum
             None = 0
             VLC = 1
             MPC = 2
+            mpv = 3
         End Enum
 
         Public Property Quality As String = ""
-        Public Property Is60FPS As Boolean = False
+        Public Property Is60FPS As Boolean = True
         Public Property CDN As String = ""
         Public Property Server As String = ""
         Public Property Stream As GameStream
@@ -276,10 +277,12 @@ Public Class Game
         Public Property IsMPC As Boolean = False
 
         Public Property GameTitle As String = ""
+
         Public Property PlayerPath As String = ""
         Public Property PlayerType As PlayerTypeEnum = PlayerTypeEnum.None
 
         Public Property LiveStreamerPath As String = ""
+
         Public Property UseLiveStreamerArgs As Boolean = False
         Public Property LiveStreamerArgs As String = ""
 
@@ -301,12 +304,12 @@ Public Class Game
                 LiteralPlayerArgs = PlayerArgs
             End If
 
-
             Dim titleArg As String = ""
             If PlayerType = PlayerTypeEnum.VLC Then
                 titleArg = " --meta-title '" & GameTitle & "' "
+            ElseIf PlayerType = PlayerTypeEnum.mpv Then
+                titleArg = " --title '" & GameTitle & "' --user-agent='User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316'"
             End If
-
 
             If String.IsNullOrEmpty(PlayerPath) = False Then
                 returnValue &= " --player ""'" & PlayerPath & "' " & titleArg & LiteralPlayerArgs & """ " '--player-passthrough=hls 
@@ -314,12 +317,21 @@ Public Class Game
                 Console.WriteLine("Error: Player path is empty")
             End If
 
+            If PlayerType = PlayerTypeEnum.mpv Then
+                returnValue &= " --player-passthrough=hls "
+            End If
+
+            returnValue &= "--http-cookie=""mediaAuth=" & Common.GetRandomString(240) & """ --http-header=""User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316"" "
+
             returnValue &= """hlsvariant://"
+
             If IsVOD Then
                 returnValue &= Stream.VODURL
             Else
                 returnValue &= Stream.GameURL
             End If
+
+            returnValue = returnValue.Replace("CDN", CDN)
 
             If Is60FPS Then
                 returnValue &= " name_key=bitrate"" "
@@ -327,7 +339,6 @@ Public Class Game
                 returnValue &= """ "
             End If
 
-            returnValue = returnValue.Replace("CDN", CDN)
             If Is60FPS Then
                 returnValue &= " best "
             Else
@@ -343,8 +354,6 @@ Public Class Game
             If UseLiveStreamerArgs Then
                 returnValue &= LiveStreamerArgs
             End If
-
-
 
             Return returnValue
         End Function

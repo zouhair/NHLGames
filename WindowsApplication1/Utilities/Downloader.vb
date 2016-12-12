@@ -1,6 +1,5 @@
 ﻿Imports System.Globalization
 Imports System.IO
-Imports System.IO.Path
 Imports System.Net
 Imports System.Text
 Imports MetroFramework
@@ -10,12 +9,14 @@ Imports Newtonsoft.Json.Linq
 
 Public Class Downloader
 
-    Private Shared GamesTxtURL = "http://showtimes.ninja/static/games.txt"
+    Private Shared GamesTxtURL = "http://107.6.175.181/static/ids.txt"
     Private Shared ScheduleAPIURL = "http://statsapi.web.nhl.com/api/v1/schedule?startDate={0}&endDate={1}&expand=schedule.teams,schedule.game.content.media.epg"
     Private Shared ApplicationVersionURL = " http://showtimes.ninja/static/version.txt"
+    Private Shared ChangelogURL As String = "http://showtimes.ninja/static/changelog.txt"
 
     Private Shared ApplicationVersionFileName As String = "version.txt"
     Private Shared GamesTextFileName As String = "games.txt"
+    Private Shared ChangelogFileName As String = "changelog.txt"
 
     Private Shared LocalFileDirectory = ""
 
@@ -82,6 +83,11 @@ Public Class Downloader
 
     End Function
 
+    Public Shared Function DownloadChangelog() As String
+        DownloadFile(ChangelogURL, ChangelogFileName)
+        Return ReadFileContents(ChangelogFileName).Trim()
+    End Function
+
     Public Shared Function DownloadAvailableGames() As List(Of String)
 
         Console.WriteLine("Checking: Available games")
@@ -99,7 +105,7 @@ Public Class Downloader
 
         Dim returnValue As New JObject
 
-        Dim IsTodaysSchedule = (startDate.Date.Ticks = DateHelper.GetCentralTime.Date.Ticks)
+        Dim IsTodaysSchedule = (startDate.Date.Ticks = DateHelper.GetPacificTime.Date.Ticks)
         Dim dateTimeString As String = startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
         Dim fileName As String = dateTimeString & ".json"
         Dim URL As String = String.Format(ScheduleAPIURL, dateTimeString, dateTimeString)
@@ -110,7 +116,7 @@ Public Class Downloader
             Console.WriteLine("Status: Downloading todays current schedule from " & URL)
             data = DownloadContents(URL)
         Else
-            DownloadFile(URL, fileName, True)
+            DownloadFile(URL, fileName, False, True)
             data = ReadFileContents(fileName)
         End If
 
