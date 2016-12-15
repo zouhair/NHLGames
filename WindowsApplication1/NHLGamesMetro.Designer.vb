@@ -94,6 +94,8 @@ Partial Class NHLGamesMetro
         Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog()
         Me.lnkDownload = New System.Windows.Forms.LinkLabel()
+        Me.StatusStrip = New System.Windows.Forms.StatusStrip()
+        Me.StatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl.SuspendLayout()
         Me.GamesTab.SuspendLayout()
@@ -103,6 +105,7 @@ Partial Class NHLGamesMetro
         Me.MetroPanel1.SuspendLayout()
         Me.ConsoleTab.SuspendLayout()
         Me.AdDetectionSettingsTab.SuspendLayout()
+        Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'gridGames
@@ -148,7 +151,7 @@ Partial Class NHLGamesMetro
         Me.gridGames.RowTemplate.DividerHeight = 1
         Me.gridGames.RowTemplate.Height = 35
         Me.gridGames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.gridGames.Size = New System.Drawing.Size(534, 52)
+        Me.gridGames.Size = New System.Drawing.Size(544, 72)
         Me.gridGames.TabIndex = 0
         Me.gridGames.Visible = False
         '
@@ -169,7 +172,7 @@ Partial Class NHLGamesMetro
         '
         Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnRefresh.Location = New System.Drawing.Point(873, 12)
+        Me.btnRefresh.Location = New System.Drawing.Point(883, 12)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(93, 22)
         Me.btnRefresh.TabIndex = 5
@@ -180,7 +183,7 @@ Partial Class NHLGamesMetro
         '
         Me.lblVersion.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblVersion.AutoSize = True
-        Me.lblVersion.Location = New System.Drawing.Point(718, 44)
+        Me.lblVersion.Location = New System.Drawing.Point(728, 44)
         Me.lblVersion.MinimumSize = New System.Drawing.Size(200, 5)
         Me.lblVersion.Name = "lblVersion"
         Me.lblVersion.Size = New System.Drawing.Size(200, 13)
@@ -200,7 +203,7 @@ Partial Class NHLGamesMetro
         Me.RichTextBox.Location = New System.Drawing.Point(3, 20)
         Me.RichTextBox.Name = "RichTextBox"
         Me.RichTextBox.ReadOnly = True
-        Me.RichTextBox.Size = New System.Drawing.Size(1006, 429)
+        Me.RichTextBox.Size = New System.Drawing.Size(1016, 419)
         Me.RichTextBox.TabIndex = 0
         Me.RichTextBox.Text = "Console Output..." & Global.Microsoft.VisualBasic.ChrW(10)
         '
@@ -214,7 +217,7 @@ Partial Class NHLGamesMetro
         Me.TabControl.Location = New System.Drawing.Point(10, 60)
         Me.TabControl.Name = "TabControl"
         Me.TabControl.SelectedIndex = 0
-        Me.TabControl.Size = New System.Drawing.Size(1020, 520)
+        Me.TabControl.Size = New System.Drawing.Size(1030, 540)
         Me.TabControl.TabIndex = 22
         Me.TabControl.UseSelectable = True
         '
@@ -231,7 +234,7 @@ Partial Class NHLGamesMetro
         Me.GamesTab.HorizontalScrollbarSize = 10
         Me.GamesTab.Location = New System.Drawing.Point(4, 38)
         Me.GamesTab.Name = "GamesTab"
-        Me.GamesTab.Size = New System.Drawing.Size(1012, 478)
+        Me.GamesTab.Size = New System.Drawing.Size(1022, 498)
         Me.GamesTab.TabIndex = 0
         Me.GamesTab.Text = "Games      "
         Me.GamesTab.VerticalScrollbarBarColor = True
@@ -270,7 +273,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel.BackColor = System.Drawing.Color.White
         Me.FlowLayoutPanel.Location = New System.Drawing.Point(3, 41)
         Me.FlowLayoutPanel.Name = "FlowLayoutPanel"
-        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1013, 442)
+        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1023, 462)
         Me.FlowLayoutPanel.TabIndex = 6
         '
         'SettingTab
@@ -312,7 +315,7 @@ Partial Class NHLGamesMetro
         Me.SettingTab.HorizontalScrollbarSize = 10
         Me.SettingTab.Location = New System.Drawing.Point(4, 38)
         Me.SettingTab.Name = "SettingTab"
-        Me.SettingTab.Size = New System.Drawing.Size(1012, 478)
+        Me.SettingTab.Size = New System.Drawing.Size(1022, 498)
         Me.SettingTab.TabIndex = 1
         Me.SettingTab.Text = "Settings      "
         Me.SettingTab.VerticalScrollbarBarColor = True
@@ -851,7 +854,8 @@ Partial Class NHLGamesMetro
         Me.ConsoleTab.HorizontalScrollbarSize = 10
         Me.ConsoleTab.Location = New System.Drawing.Point(4, 38)
         Me.ConsoleTab.Name = "ConsoleTab"
-        Me.ConsoleTab.Size = New System.Drawing.Size(1012, 478)
+        Me.ConsoleTab.Padding = New System.Windows.Forms.Padding(0, 0, 0, 30)
+        Me.ConsoleTab.Size = New System.Drawing.Size(1022, 498)
         Me.ConsoleTab.TabIndex = 2
         Me.ConsoleTab.Text = "Console      "
         Me.ConsoleTab.VerticalScrollbarBarColor = True
@@ -861,7 +865,7 @@ Partial Class NHLGamesMetro
         'btnClearConsole
         '
         Me.btnClearConsole.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClearConsole.Location = New System.Drawing.Point(906, 452)
+        Me.btnClearConsole.Location = New System.Drawing.Point(916, 442)
         Me.btnClearConsole.Name = "btnClearConsole"
         Me.btnClearConsole.Size = New System.Drawing.Size(103, 23)
         Me.btnClearConsole.TabIndex = 2
@@ -877,7 +881,7 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 38)
         Me.AdDetectionSettingsTab.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsTab.Name = "AdDetectionSettingsTab"
-        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1012, 478)
+        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1022, 498)
         Me.AdDetectionSettingsTab.TabIndex = 4
         Me.AdDetectionSettingsTab.Text = "Ad Detection Modules"
         Me.AdDetectionSettingsTab.VerticalScrollbarBarColor = True
@@ -892,7 +896,7 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsElementHost.Location = New System.Drawing.Point(0, 0)
         Me.AdDetectionSettingsElementHost.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsElementHost.Name = "AdDetectionSettingsElementHost"
-        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1012, 478)
+        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1022, 498)
         Me.AdDetectionSettingsElementHost.TabIndex = 2
         Me.AdDetectionSettingsElementHost.Child = Nothing
         '
@@ -907,18 +911,38 @@ Partial Class NHLGamesMetro
         Me.lnkDownload.Text = "Download"
         Me.lnkDownload.Visible = False
         '
+        'StatusStrip
+        '
+        Me.StatusStrip.BackColor = System.Drawing.Color.White
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatusLabel})
+        Me.StatusStrip.Location = New System.Drawing.Point(10, 574)
+        Me.StatusStrip.Name = "StatusStrip"
+        Me.StatusStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.StatusStrip.Size = New System.Drawing.Size(1030, 26)
+        Me.StatusStrip.SizingGrip = False
+        Me.StatusStrip.TabIndex = 24
+        Me.StatusStrip.Text = "StatusStrip"
+        '
+        'StatusLabel
+        '
+        Me.StatusLabel.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.StatusLabel.Name = "StatusLabel"
+        Me.StatusLabel.Size = New System.Drawing.Size(89, 21)
+        Me.StatusLabel.Text = "StatusLabel"
+        '
         'NHLGamesMetro
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1050, 600)
+        Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.lnkDownload)
         Me.Controls.Add(Me.TabControl)
         Me.Controls.Add(Me.lblVersion)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimumSize = New System.Drawing.Size(1050, 600)
         Me.Name = "NHLGamesMetro"
-        Me.Padding = New System.Windows.Forms.Padding(10, 60, 20, 20)
+        Me.Padding = New System.Windows.Forms.Padding(10, 60, 10, 0)
         Me.Resizable = False
         Me.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow
         Me.Text = "NHL Games"
@@ -936,6 +960,8 @@ Partial Class NHLGamesMetro
         Me.MetroPanel1.PerformLayout()
         Me.ConsoleTab.ResumeLayout(False)
         Me.AdDetectionSettingsTab.ResumeLayout(False)
+        Me.StatusStrip.ResumeLayout(False)
+        Me.StatusStrip.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1008,4 +1034,6 @@ Partial Class NHLGamesMetro
     Friend WithEvents lnkMpvDownload As MetroLink
     Friend WithEvents lblNote As MetroLabel
     Friend WithEvents lnkDownload As LinkLabel
+    Friend WithEvents StatusStrip As StatusStrip
+    Friend WithEvents StatusLabel As ToolStripStatusLabel
 End Class

@@ -17,6 +17,7 @@ Public Class NHLGamesMetro
     Private Shared SettingsLoaded As Boolean = False
     Public Shared FormInstance As NHLGamesMetro = Nothing
     Private AdDetectorViewModel As AdDetectorViewModel = Nothing
+    Private StatusTimer As Timer
 
     ' Starts the application. -- See: https://msdn.microsoft.com/en-us/library/system.windows.forms.application.threadexception(v=vs.110).aspx
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
@@ -266,8 +267,13 @@ Public Class NHLGamesMetro
 
     Public Sub NewGameFoundHandler(gameObj As Game)
 
-        Dim gameControl As New GameControl(gameObj, ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True), dtDate.Value)
-        FlowLayoutPanel.Controls.Add(gameControl)
+        If InvokeRequired Then
+            BeginInvoke(New Action(Of Game)(AddressOf NewGameFoundHandler), gameObj)
+        Else
+            Dim gameControl As New GameControl(gameObj, ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True), dtDate.Value)
+            FlowLayoutPanel.Controls.Add(gameControl)
+        End If
+
 
     End Sub
 
@@ -288,34 +294,66 @@ Public Class NHLGamesMetro
 
         VersionCheck()
         IntitializeApplicationSettings()
-        LoadGames(dtDate.Value)
+        'LoadGames(dtDate.Value) 'Already handled via dtDate_ValueChanged
     End Sub
 
 
 
     Private Sub dtDate_ValueChanged(sender As Object, e As EventArgs) Handles dtDate.ValueChanged
 
-        LoadGames(dtDate.Value)
+        LoadGamesAsync(dtDate.Value)
     End Sub
 
-    Private Sub LoadGames(dateTime As DateTime)
 
-        Try
-            'If dateTime <> GameManager.GamesListDate Then
-            GameManager.ClearGames()
+    ''' <summary>
+    ''' Wrapper for LoadGames to stop UI locking and slow startup
+    ''' </summary>
+    ''' <param name="dateTime"></param>
+    Private Sub LoadGamesAsync(dateTime As DateTime)
+        Dim LoadGamesFunc As New Action(Of DateTime)(Sub(dt As DateTime) LoadGames(dt))
+        LoadGamesFunc.BeginInvoke(dateTime, Nothing, Nothing)
+
+
+    End Sub
+
+    Private Sub ClearGamePanel()
+        If InvokeRequired Then
+            BeginInvoke(New Action(AddressOf ClearGamePanel))
+        Else
             FlowLayoutPanel.Controls.Clear()
             FlowLayoutPanel.Height = 390
-            'End If
+        End If
 
-            Dim JSONSchedule As JObject = Downloader.DownloadJSONSchedule(dateTime)
-            AvailableGames = Downloader.DownloadAvailableGames() 'TODO: not download each time?
-            GameManager.RefreshGames(dateTime, JSONSchedule, AvailableGames)
+    End Sub
+
+    Private Sub ResizeGamePanel()
+        If InvokeRequired Then
+            BeginInvoke(New Action(AddressOf ResizeGamePanel))
+        Else
 
             If FlowLayoutPanel.Height > 400 Then
                 Me.Height = FlowLayoutPanel.Height + 225
             Else
                 Me.Height = 600
             End If
+        End If
+
+    End Sub
+    Private Sub LoadGames(dateTime As DateTime)
+
+        Try
+            SetFormStatusLabel("Loading Games")
+            'If dateTime <> GameManager.GamesListDate Then
+            GameManager.ClearGames()
+            ClearGamePanel()
+            'End If
+
+            Dim JSONSchedule As JObject = Downloader.DownloadJSONSchedule(dateTime)
+            AvailableGames = Downloader.DownloadAvailableGames() 'TODO: not download each time?
+            GameManager.RefreshGames(dateTime, JSONSchedule, AvailableGames)
+            ResizeGamePanel()
+
+            SetFormStatusLabel("Games Loaded")
 
         Catch ex As Exception
             Console.WriteLine(ex.ToString())
@@ -323,7 +361,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        LoadGames(dtDate.Value)
+        LoadGamesAsync(dtDate.Value)
     End Sub
 
     Private Sub RichTextBox_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox.TextChanged
@@ -442,6 +480,16 @@ Public Class NHLGamesMetro
         SetEventArgsFromForm()
     End Sub
 
+
+    Private Sub SetFormStatusLabel(text As String)
+        If InvokeRequired Then
+            BeginInvoke(New Action(Of String)(AddressOf SetFormStatusLabel), text)
+        Else
+            Me.StatusLabel.Text = [text]
+            StatusTimer = New Timer(New TimerCallback(Sub() If StatusLabel.Text = text Then SetFormStatusLabel("")), Nothing, 2000, Timeout.Infinite)
+        End If
+    End Sub
+
     Private Sub rbQual5_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual5.CheckedChanged
         SetEventArgsFromForm()
     End Sub
@@ -550,6 +598,8 @@ Public Class NHLGamesMetro
         Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://www.reddit.com/r/nhl_games/wiki/downloads")
         Process.Start(sInfo)
     End Sub
+
+
 
 #End Region
 End Class
