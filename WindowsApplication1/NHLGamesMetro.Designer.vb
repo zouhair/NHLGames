@@ -162,7 +162,7 @@ Partial Class NHLGamesMetro
         Me.dtDate.CustomFormat = "yyyy-MM-dd"
         Me.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtDate.Location = New System.Drawing.Point(23, 6)
-        Me.dtDate.MinimumSize = New System.Drawing.Size(0, 29)
+        Me.dtDate.MinimumSize = New System.Drawing.Size(4, 29)
         Me.dtDate.Name = "dtDate"
         Me.dtDate.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.dtDate.Size = New System.Drawing.Size(125, 29)
@@ -932,8 +932,7 @@ Partial Class NHLGamesMetro
         '
         'NHLGamesMetro
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1050, 600)
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.lnkDownload)
