@@ -365,7 +365,14 @@ Public Class Game
             returnValue &= " --http-no-ssl-verify "
 
             If UseOutputArgs Then
-                returnValue &= " -o """ & PlayerOutputPath & """ "
+                Dim outputPath As String = PlayerOutputPath.
+                    Replace("(DATE)", DateHelper.GetPacificTime(Stream.Game.Date).ToString("yyyy-MM-dd")).
+                    Replace("(HOME)", Stream.Game.HomeAbbrev).
+                    Replace("(AWAY)", Stream.Game.AwayAbbrev).
+                    Replace("(TYPE)", Stream.Type.ToString()).
+                    Replace("(QUAL)", If(Is60FPS, "720p60", Quality))
+
+                returnValue &= " -o """ & outputPath & """ "
             End If
 
             If UseLiveStreamerArgs Then
