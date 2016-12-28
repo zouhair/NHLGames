@@ -1,5 +1,6 @@
 ﻿Imports System.Globalization
 Imports System.Text
+Imports System.IO
 Imports Newtonsoft.Json.Linq
 
 <DebuggerDisplay("{HomeTeam} vs. {AwayTeam} at {[Date]}")>
@@ -371,12 +372,18 @@ Public Class Game
                     Replace("(AWAY)", Stream.Game.AwayAbbrev).
                     Replace("(TYPE)", Stream.Type.ToString()).
                     Replace("(QUAL)", If(Is60FPS, "720p60", Quality))
+                Dim suffix As Integer = 1
+                Dim originalName = Path.GetFileNameWithoutExtension(outputPath)
+                While (My.Computer.FileSystem.FileExists(outputPath))
+                    outputPath = Path.ChangeExtension(Path.Combine(Path.GetDirectoryName(outputPath), originalName & "_" & suffix), "mp4")
+                    suffix += 1
+                End While
 
                 returnValue &= " -o """ & outputPath & """ "
-            End If
 
-            If UseLiveStreamerArgs Then
-                returnValue &= LiveStreamerArgs
+                If UseLiveStreamerArgs Then
+                    returnValue &= LiveStreamerArgs
+                End If
             End If
 
             Return returnValue
