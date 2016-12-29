@@ -381,10 +381,10 @@ Public Class Game
                 End While
 
                 returnValue &= " -o """ & outputPath & """ "
+            End If
 
-                If UseLiveStreamerArgs Then
-                    returnValue &= LiveStreamerArgs
-                End If
+            If UseLiveStreamerArgs Then
+                returnValue &= LiveStreamerArgs
             End If
 
             Return returnValue
