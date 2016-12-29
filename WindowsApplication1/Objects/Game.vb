@@ -374,8 +374,9 @@ Public Class Game
                     Replace("(QUAL)", If(Is60FPS, "720p60", Quality))
                 Dim suffix As Integer = 1
                 Dim originalName = Path.GetFileNameWithoutExtension(outputPath)
+                Dim originalExt = Path.GetExtension(outputPath)
                 While (My.Computer.FileSystem.FileExists(outputPath))
-                    outputPath = Path.ChangeExtension(Path.Combine(Path.GetDirectoryName(outputPath), originalName & "_" & suffix), "mp4")
+                    outputPath = Path.ChangeExtension(Path.Combine(Path.GetDirectoryName(outputPath), originalName & "_" & suffix), originalExt)
                     suffix += 1
                 End While
 
