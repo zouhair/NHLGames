@@ -107,9 +107,12 @@ namespace NHLGames.AdDetection.AdDetectors
             var mpc32Processes =
                 Process.GetProcessesByName("MPC-HC").Where(x => x.MainWindowTitle == @"stdin" || x.MainWindowTitle.ToLower().Contains(" @ ")).Select(x => x.Id);
 
+            var mpvProcesses =
+                Process.GetProcessesByName("mpv").Select(x => x.Id);
+
             //Add mpv support here
 
-            m_mediaPlayerProcesses = vlcProcesses.Concat(mpc64Processes).Concat(mpc32Processes).ToList();
+            m_mediaPlayerProcesses = vlcProcesses.Concat(mpc64Processes).Concat(mpc32Processes).Concat(mpvProcesses).ToList();
 
 
             return m_mediaPlayerProcesses.Count != 0;

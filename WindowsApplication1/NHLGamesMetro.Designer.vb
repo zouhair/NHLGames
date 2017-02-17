@@ -151,7 +151,7 @@ Partial Class NHLGamesMetro
         Me.gridGames.RowTemplate.DividerHeight = 1
         Me.gridGames.RowTemplate.Height = 35
         Me.gridGames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.gridGames.Size = New System.Drawing.Size(544, 72)
+        Me.gridGames.Size = New System.Drawing.Size(544, 69)
         Me.gridGames.TabIndex = 0
         Me.gridGames.Visible = False
         '
@@ -162,7 +162,7 @@ Partial Class NHLGamesMetro
         Me.dtDate.CustomFormat = "yyyy-MM-dd"
         Me.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtDate.Location = New System.Drawing.Point(23, 6)
-        Me.dtDate.MinimumSize = New System.Drawing.Size(4, 29)
+        Me.dtDate.MinimumSize = New System.Drawing.Size(0, 29)
         Me.dtDate.Name = "dtDate"
         Me.dtDate.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.dtDate.Size = New System.Drawing.Size(125, 29)
@@ -273,7 +273,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel.BackColor = System.Drawing.Color.White
         Me.FlowLayoutPanel.Location = New System.Drawing.Point(3, 41)
         Me.FlowLayoutPanel.Name = "FlowLayoutPanel"
-        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1023, 462)
+        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1023, 459)
         Me.FlowLayoutPanel.TabIndex = 6
         '
         'SettingTab
@@ -313,9 +313,9 @@ Partial Class NHLGamesMetro
         Me.SettingTab.HorizontalScrollbarBarColor = True
         Me.SettingTab.HorizontalScrollbarHighlightOnWheel = False
         Me.SettingTab.HorizontalScrollbarSize = 10
-        Me.SettingTab.Location = New System.Drawing.Point(4, 38)
+        Me.SettingTab.Location = New System.Drawing.Point(4, 35)
         Me.SettingTab.Name = "SettingTab"
-        Me.SettingTab.Size = New System.Drawing.Size(1022, 498)
+        Me.SettingTab.Size = New System.Drawing.Size(1022, 501)
         Me.SettingTab.TabIndex = 1
         Me.SettingTab.Text = "Settings      "
         Me.SettingTab.VerticalScrollbarBarColor = True
@@ -852,10 +852,10 @@ Partial Class NHLGamesMetro
         Me.ConsoleTab.HorizontalScrollbarBarColor = True
         Me.ConsoleTab.HorizontalScrollbarHighlightOnWheel = False
         Me.ConsoleTab.HorizontalScrollbarSize = 10
-        Me.ConsoleTab.Location = New System.Drawing.Point(4, 38)
+        Me.ConsoleTab.Location = New System.Drawing.Point(4, 35)
         Me.ConsoleTab.Name = "ConsoleTab"
         Me.ConsoleTab.Padding = New System.Windows.Forms.Padding(0, 0, 0, 30)
-        Me.ConsoleTab.Size = New System.Drawing.Size(1022, 498)
+        Me.ConsoleTab.Size = New System.Drawing.Size(1022, 501)
         Me.ConsoleTab.TabIndex = 2
         Me.ConsoleTab.Text = "Console      "
         Me.ConsoleTab.VerticalScrollbarBarColor = True
@@ -878,10 +878,10 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsTab.HorizontalScrollbarBarColor = True
         Me.AdDetectionSettingsTab.HorizontalScrollbarHighlightOnWheel = False
         Me.AdDetectionSettingsTab.HorizontalScrollbarSize = 6
-        Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 38)
+        Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 35)
         Me.AdDetectionSettingsTab.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsTab.Name = "AdDetectionSettingsTab"
-        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1022, 498)
+        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1022, 501)
         Me.AdDetectionSettingsTab.TabIndex = 4
         Me.AdDetectionSettingsTab.Text = "Ad Detection Modules"
         Me.AdDetectionSettingsTab.VerticalScrollbarBarColor = True
@@ -896,7 +896,7 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsElementHost.Location = New System.Drawing.Point(0, 0)
         Me.AdDetectionSettingsElementHost.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsElementHost.Name = "AdDetectionSettingsElementHost"
-        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1022, 498)
+        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1022, 501)
         Me.AdDetectionSettingsElementHost.TabIndex = 2
         Me.AdDetectionSettingsElementHost.Child = Nothing
         '

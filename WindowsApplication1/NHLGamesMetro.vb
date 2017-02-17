@@ -11,8 +11,8 @@ Imports NHLGames.TextboxConsoleOutputRediect
 Public Class NHLGamesMetro
 
     Private AvailableGames As New HashSet(Of String)
-    Private Const OldServerIP As String = "146.185.131.14"
-    Private Const ServerIP As String = "107.6.175.181"
+    Private Const OldServerIP As String = "107.6.175.181"
+    Private Const ServerIP As String = "104.251.218.27"
     Private Const DomainName As String = "mf.svc.nhl.com"
     Private Shared SettingsLoaded As Boolean = False
     Public Shared FormInstance As NHLGamesMetro = Nothing
@@ -330,7 +330,6 @@ Public Class NHLGamesMetro
         If InvokeRequired Then
             BeginInvoke(New Action(AddressOf ResizeGamePanel))
         Else
-
             If FlowLayoutPanel.Height > 400 Then
                 Me.Height = FlowLayoutPanel.Height + 225
             Else
@@ -598,8 +597,6 @@ Public Class NHLGamesMetro
         Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://www.reddit.com/r/nhl_games/wiki/downloads")
         Process.Start(sInfo)
     End Sub
-
-
 
 #End Region
 End Class
