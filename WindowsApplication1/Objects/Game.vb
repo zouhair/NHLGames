@@ -1,5 +1,6 @@
 ﻿Imports System.Globalization
 Imports System.Text
+Imports System.IO
 Imports Newtonsoft.Json.Linq
 
 <DebuggerDisplay("{HomeTeam} vs. {AwayTeam} at {[Date]}")>
@@ -365,7 +366,21 @@ Public Class Game
             returnValue &= " --http-no-ssl-verify "
 
             If UseOutputArgs Then
-                returnValue &= " -o """ & PlayerOutputPath & """ "
+                Dim outputPath As String = PlayerOutputPath.
+                    Replace("(DATE)", DateHelper.GetPacificTime(Stream.Game.Date).ToString("yyyy-MM-dd")).
+                    Replace("(HOME)", Stream.Game.HomeAbbrev).
+                    Replace("(AWAY)", Stream.Game.AwayAbbrev).
+                    Replace("(TYPE)", Stream.Type.ToString()).
+                    Replace("(QUAL)", If(Is60FPS, "720p60", Quality))
+                Dim suffix As Integer = 1
+                Dim originalName = Path.GetFileNameWithoutExtension(outputPath)
+                Dim originalExt = Path.GetExtension(outputPath)
+                While (My.Computer.FileSystem.FileExists(outputPath))
+                    outputPath = Path.ChangeExtension(Path.Combine(Path.GetDirectoryName(outputPath), originalName & "_" & suffix), originalExt)
+                    suffix += 1
+                End While
+
+                returnValue &= " -o """ & outputPath & """ "
             End If
 
             If UseLiveStreamerArgs Then
