@@ -9,6 +9,7 @@ Public Class GameStream
     Public VODURL As String = ""
     Public PlayBackID As String = ""
     Public Type As StreamType
+    Public Game As Game
 
     Public Enum StreamType
         Away
@@ -38,6 +39,7 @@ Public Class GameStream
 
     End Sub
     Public Sub New(game As Game, stream As JObject, availableGameIds As HashSet(Of String), type As StreamType)
+        Me.Game = game
         Dim dateString As String = game.Date.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture).Replace("-", "/")
         Dim dateString2 As String = game.Date.ToString("yyyyMMdd", CultureInfo.InvariantCulture)
         Dim feedType As String = stream.Property("mediaFeedType").Value.ToString().Replace("AWAY", "VISIT")

@@ -541,6 +541,15 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub MetroButton1_Click(sender As Object, e As EventArgs) Handles MetroButton1.Click
+        SaveFileDialog.CheckPathExists = True
+        If txtOutputPath.Text.Count > 0 Then
+            SaveFileDialog.InitialDirectory = Path.GetDirectoryName(txtOutputPath.Text)
+            SaveFileDialog.FileName = Path.GetFileName(txtOutputPath.Text)
+        Else
+            SaveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
+            SaveFileDialog.FileName = "(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(QUAL)"
+        End If
+
         SaveFileDialog.Filter = "MP4 Files (*.mp4)|*.MP4"
         SaveFileDialog.DefaultExt = "mp4"
         SaveFileDialog.AddExtension = True
