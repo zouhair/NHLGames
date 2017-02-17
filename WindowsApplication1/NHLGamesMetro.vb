@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Security.Permissions
 Imports System.Threading
+Imports System.Net
 Imports MetroFramework
 Imports MetroFramework.Forms
 Imports Newtonsoft.Json.Linq
@@ -12,7 +13,7 @@ Public Class NHLGamesMetro
 
     Private AvailableGames As New HashSet(Of String)
     Private Const OldServerIP As String = "107.6.175.181"
-    Private Const ServerIP As String = "104.251.218.27"
+    Private ServerIP As String
     Private Const DomainName As String = "mf.svc.nhl.com"
     Private Shared SettingsLoaded As Boolean = False
     Public Shared FormInstance As NHLGamesMetro = Nothing
@@ -287,6 +288,8 @@ Public Class NHLGamesMetro
         dtDate.Value = DateHelper.GetPacificTime()
         'dtDate.MaxDate = DateHelper.GetPacificTime()
         TabControl.SelectedIndex = 0
+
+        ServerIP = Dns.GetHostEntry("nhl.chickenkiller.com").AddressList.First.ToString()
 
         If (HostsFile.TestEntry(DomainName, ServerIP) = False) Then
             HostsFile.AddEntry(ServerIP, DomainName, True)

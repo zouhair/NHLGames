@@ -52,7 +52,7 @@ Public Class GameStream
         End If
 
         Dim args = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
-        Dim address As String = "http://104.251.218.27/m3u8/" & GameManager.GamesListDate.ToString("yyyy-MM-dd") & "/" & Me.PlayBackID & args.CDN
+        Dim address As String = "http://nhl.chickenkiller.com/m3u8/" & GameManager.GamesListDate.ToString("yyyy-MM-dd") & "/" & Me.PlayBackID & args.CDN
 
         If IsAvailable Then
             If CheckURL(address) Then
