@@ -74,6 +74,15 @@ Public Class GameControl
         If Game.NationalStream.Network <> String.Empty Then
             lblNationalStream.Text = lblNationalStream.Text & " (" & Game.NationalStream.Network & ")"
         End If
+        lblMultiCam1.Visible = Game.MultiCam1Stream.IsAvailable
+
+        lblMultiCam2.Visible = Game.MultiCam2Stream.IsAvailable
+
+        lblRefCam.Visible = Game.RefCamStream.IsAvailable
+
+        lblEndzoneCam1.Visible = Game.EndzoneCam1Stream.IsAvailable
+
+        lblEndzoneCam2.Visible = Game.EndzoneCam2Stream.IsAvailable
     End Sub
 
     Private Sub btnWatch_Click(sender As Object, e As EventArgs)
@@ -147,6 +156,85 @@ Public Class GameControl
         'End If
 
         args.Stream = _Game.NationalStream
+        _Game.Watch(args)
+    End Sub
+
+    Private Sub lblMultiCam1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblMultiCam1.LinkClicked
+        Dim args = WatchArgs()
+
+        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
+            _Game.MultiCam1Stream.CheckVOD(args.CDN)
+            args.IsVOD = _Game.MultiCam1Stream.IsVOD
+        End If
+
+        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
+        '    _Game.NationalStream.CheckDuplicate(args.CDN)
+        'End If
+
+        args.Stream = _Game.MultiCam1Stream
+        _Game.Watch(args)
+    End Sub
+
+    Private Sub lblMultiCam2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblMultiCam2.LinkClicked
+        Dim args = WatchArgs()
+
+        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
+            _Game.MultiCam2Stream.CheckVOD(args.CDN)
+            args.IsVOD = _Game.MultiCam2Stream.IsVOD
+        End If
+
+        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
+        '    _Game.NationalStream.CheckDuplicate(args.CDN)
+        'End If
+
+        args.Stream = _Game.MultiCam2Stream
+        _Game.Watch(args)
+    End Sub
+
+    Private Sub lblRefCam_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblRefCam.LinkClicked
+        Dim args = WatchArgs()
+
+        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
+            _Game.RefCamStream.CheckVOD(args.CDN)
+            args.IsVOD = _Game.RefCamStream.IsVOD
+        End If
+
+        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
+        '    _Game.NationalStream.CheckDuplicate(args.CDN)
+        'End If
+
+        args.Stream = _Game.RefCamStream
+        _Game.Watch(args)
+    End Sub
+
+    Private Sub lblEndzoneCam1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblEndzoneCam1.LinkClicked
+        Dim args = WatchArgs()
+
+        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
+            _Game.EndzoneCam1Stream.CheckVOD(args.CDN)
+            args.IsVOD = _Game.EndzoneCam1Stream.IsVOD
+        End If
+
+        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
+        '    _Game.NationalStream.CheckDuplicate(args.CDN)
+        'End If
+
+        args.Stream = _Game.EndzoneCam1Stream
+        _Game.Watch(args)
+    End Sub
+    Private Sub lblEndzoneCam2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblEndzoneCam2.LinkClicked
+        Dim args = WatchArgs()
+
+        If DateHelper.GetPacificTime(_Game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
+            _Game.EndzoneCam2Stream.CheckVOD(args.CDN)
+            args.IsVOD = _Game.EndzoneCam2Stream.IsVOD
+        End If
+
+        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
+        '    _Game.NationalStream.CheckDuplicate(args.CDN)
+        'End If
+
+        args.Stream = _Game.EndzoneCam2Stream
         _Game.Watch(args)
     End Sub
 

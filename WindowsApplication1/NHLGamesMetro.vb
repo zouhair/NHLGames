@@ -12,7 +12,6 @@ Imports NHLGames.TextboxConsoleOutputRediect
 Public Class NHLGamesMetro
 
     Private AvailableGames As New HashSet(Of String)
-    Private Const OldServerIP As String = "107.6.175.181"
     Private ServerIP As String
     Private Const DomainName As String = "mf.svc.nhl.com"
     Private Shared SettingsLoaded As Boolean = False
@@ -585,9 +584,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnClean_Click(sender As Object, e As EventArgs) Handles btnClean.Click
-        HostsFile.CleanHosts(OldServerIP, DomainName, True)
-        HostsFile.CleanHosts(ServerIP, DomainName, False)
-        HostsFile.AddEntry(ServerIP, DomainName, False)
+        HostsFile.CleanHosts(DomainName, True)
     End Sub
 
     Private Sub lnkVLCDownload_Click(sender As Object, e As EventArgs) Handles lnkVLCDownload.Click
@@ -608,6 +605,10 @@ Public Class NHLGamesMetro
     Private Sub lnkDownload_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkDownload.LinkClicked
         Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://www.reddit.com/r/nhl_games/wiki/downloads")
         Process.Start(sInfo)
+    End Sub
+
+    Private Sub btnAddHosts_Click(sender As Object, e As EventArgs) Handles btnAddHosts.Click
+        HostsFile.AddEntry(ServerIP, DomainName, True)
     End Sub
 
 #End Region

@@ -24,6 +24,11 @@ Public Class Game
     Public HomeStream As GameStream = New GameStream()
     Public NationalStream As GameStream = New GameStream()
     Public FrenchStream As GameStream = New GameStream()
+    Public MultiCam1Stream As GameStream = New GameStream()
+    Public MultiCam2Stream As GameStream = New GameStream()
+    Public RefCamStream As GameStream = New GameStream()
+    Public EndzoneCam1Stream As GameStream = New GameStream()
+    Public EndzoneCam2Stream As GameStream = New GameStream()
 
     Public Overrides Function ToString() As String
         Return HomeTeam & " vs " & AwayTeam
@@ -241,6 +246,20 @@ Public Class Game
                                 NationalStream = New GameStream(Me, innerStream, availableGameIds, GameStream.StreamType.National)
                             ElseIf strType = "FRENCH" Then
                                 FrenchStream = New GameStream(Me, innerStream, availableGameIds, GameStream.StreamType.French)
+                            ElseIf strType = "COMPOSITE" Then
+                                If innerStream.Property("feedName").Value.ToString().Equals("Multi-Cam 1") Then
+                                    MultiCam1Stream = New GameStream(Me, innerStream, availableGameIds, GameStream.StreamType.MultiCam1)
+                                ElseIf innerStream.Property("feedName").Value.ToString().Equals("Multi-Cam 2") Then
+                                    MultiCam2Stream = New GameStream(Me, innerStream, availableGameIds, GameStream.StreamType.MultiCam2)
+                                End If
+                            ElseIf strType = "ISO" Then
+                                If innerStream.Property("feedName").Value.ToString().Equals("Ref Cam") Then
+                                    RefCamStream = New GameStream(Me, innerStream, availableGameIds, GameStream.StreamType.RefCam)
+                                ElseIf innerStream.Property("feedName").Value.ToString().Equals("Endzone Cam 1") Then
+                                    EndzoneCam1Stream = New GameStream(Me, innerStream, availableGameIds, GameStream.StreamType.EndzoneCam1)
+                                ElseIf innerStream.Property("feedName").Value.ToString().Equals("Endzone Cam 2") Then
+                                    EndzoneCam2Stream = New GameStream(Me, innerStream, availableGameIds, GameStream.StreamType.EndzoneCam2)
+                                End If
                             End If
                         Next
                     Next
@@ -316,8 +335,8 @@ Public Class Game
 
             Dim titleArg As String = ""
             If PlayerType = PlayerTypeEnum.VLC Then
-                titleArg = " --meta-title '" & GameTitle & "' "
-            ElseIf PlayerType = PlayerTypeEnum.mpv Then
+                titleArg = " - -meta - title '" & GameTitle & "' "
+                                ElseIf PlayerType = PlayerTypeEnum.mpv Then
                 titleArg = " --title '" & GameTitle & "' --user-agent='User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316'"
             End If
 

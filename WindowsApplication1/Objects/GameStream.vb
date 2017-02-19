@@ -16,6 +16,11 @@ Public Class GameStream
         Home
         National
         French
+        MultiCam1
+        MultiCam2
+        RefCam
+        EndzoneCam1
+        EndzoneCam2
     End Enum
 
     Public ReadOnly Property Availability As String
@@ -53,6 +58,7 @@ Public Class GameStream
 
         Dim args = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
         Dim address As String = "http://nhl.chickenkiller.com/m3u8/" & GameManager.GamesListDate.ToString("yyyy-MM-dd") & "/" & Me.PlayBackID & args.CDN
+        Dim legacyAddress As String = "http://nhl.chickenkiller.com/m3u8/" & GameManager.GamesListDate.ToString("yyyy-MM-dd") & "/" & Me.PlayBackID
 
         If IsAvailable Then
             If CheckURL(address) Then
@@ -63,9 +69,18 @@ Public Class GameStream
             Else
                 IsAvailable = False
             End If
+
+            If IsAvailable = False AndAlso CheckURL(legacyAddress) Then
+                Dim client As WebClient = New WebClient()
+                client.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316")
+                Dim reader As StreamReader = New StreamReader(client.OpenRead(legacyAddress))
+                Me.GameURL = reader.ReadToEnd()
+                IsAvailable = True
+            End If
         End If
 
         Me.VODURL = "http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/" & dateString & "/NHL_GAME_VIDEO_" & game.AwayAbbrev & game.HomeAbbrev & "_M2_" & feedType & "_" & dateString2 & "/master_wired60.m3u8"
+
         Me.Type = type
         Me.Network = stream.Property("callLetters")
     End Sub

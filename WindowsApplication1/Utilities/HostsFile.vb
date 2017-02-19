@@ -10,17 +10,18 @@ Public Class HostsFile
         Return ip = resolvedIP
     End Function
 
-    Private Shared Function RemoveOldEntries(ip As String, host As String, contents As String) As String
+    Private Shared Function RemoveOldEntries(host As String, contents As String) As String
+        Dim newContents As String = String.Empty
 
-        Dim entry As String = ip & " " & host
+        Console.WriteLine("Removing existing entries from hosts file")
 
-        If contents.IndexOf(ip) > -1 Then
-            Console.WriteLine("Removing existing entries from hosts file")
-            Return contents.Replace(ip, String.Empty)
-        Else
-            Return contents
-        End If
+        For Each line In contents.Split(vbCrLf)
+            If line.Contains(host) = False Then
+                newContents &= line.Replace(vbCrLf, String.Empty)
+            End If
+        Next
 
+        Return newContents
     End Function
 
     Private Shared Sub Backup(path As String)
@@ -28,7 +29,7 @@ Public Class HostsFile
         File.Copy(path, path & ".bak", True)
     End Sub
 
-    Public Shared Sub CleanHosts(ip As String, host As String, checkAdmin As Boolean)
+    Public Shared Sub CleanHosts(host As String, checkAdmin As Boolean)
         If checkAdmin = False OrElse EnsureAdmin() Then
 
             Dim HostsFilePath As String = Environment.SystemDirectory & "\drivers\etc\hosts"
@@ -46,7 +47,7 @@ Public Class HostsFile
                 input = sr.ReadToEnd()
             End Using
 
-            Dim output As String = RemoveOldEntries(ip, host, input)
+            Dim output As String = RemoveOldEntries(host, input)
 
             Using sw As New StreamWriter(HostsFilePath)
                 sw.Write(output)
@@ -84,7 +85,7 @@ Public Class HostsFile
                 input = sr.ReadToEnd()
             End Using
 
-            Dim output As String = RemoveOldEntries(ip, host, input)
+            Dim output As String = RemoveOldEntries(host, input)
 
             output = output + vbNewLine + ip & " " & host
 

@@ -30,6 +30,11 @@ Partial Class GameControl
         Me.lblAwayStream = New System.Windows.Forms.LinkLabel()
         Me.lblFrenchStream = New System.Windows.Forms.LinkLabel()
         Me.lblNationalStream = New System.Windows.Forms.LinkLabel()
+        Me.lblMultiCam1 = New System.Windows.Forms.LinkLabel()
+        Me.lblMultiCam2 = New System.Windows.Forms.LinkLabel()
+        Me.lblRefCam = New System.Windows.Forms.LinkLabel()
+        Me.lblEndzoneCam1 = New System.Windows.Forms.LinkLabel()
+        Me.lblEndzoneCam2 = New System.Windows.Forms.LinkLabel()
         Me.picAway = New System.Windows.Forms.PictureBox()
         Me.lblTime = New MetroFramework.Controls.MetroLabel()
         Me.picHome = New System.Windows.Forms.PictureBox()
@@ -68,9 +73,10 @@ Partial Class GameControl
         Me.BorderPanel1.Controls.Add(Me.lblAwayTeam)
         Me.BorderPanel1.Controls.Add(Me.lblAwayScore)
         Me.BorderPanel1.Controls.Add(Me.lblHomeTeam)
-        Me.BorderPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.BorderPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BorderPanel1.Location = New System.Drawing.Point(10, 10)
         Me.BorderPanel1.Name = "BorderPanel1"
-        Me.BorderPanel1.Size = New System.Drawing.Size(313, 95)
+        Me.BorderPanel1.Size = New System.Drawing.Size(314, 146)
         Me.BorderPanel1.TabIndex = 9
         '
         'FlowLayoutPanel1
@@ -80,10 +86,15 @@ Partial Class GameControl
         Me.FlowLayoutPanel1.Controls.Add(Me.lblAwayStream)
         Me.FlowLayoutPanel1.Controls.Add(Me.lblFrenchStream)
         Me.FlowLayoutPanel1.Controls.Add(Me.lblNationalStream)
+        Me.FlowLayoutPanel1.Controls.Add(Me.lblMultiCam1)
+        Me.FlowLayoutPanel1.Controls.Add(Me.lblMultiCam2)
+        Me.FlowLayoutPanel1.Controls.Add(Me.lblRefCam)
+        Me.FlowLayoutPanel1.Controls.Add(Me.lblEndzoneCam1)
+        Me.FlowLayoutPanel1.Controls.Add(Me.lblEndzoneCam2)
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(1, 69)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.Padding = New System.Windows.Forms.Padding(5, 5, 5, 0)
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(310, 24)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(310, 74)
         Me.FlowLayoutPanel1.TabIndex = 10
         '
         'lblHomeStream
@@ -161,6 +172,101 @@ Partial Class GameControl
         Me.lblNationalStream.TabStop = True
         Me.lblNationalStream.Text = "National"
         Me.lblNationalStream.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        '
+        'lblMultiCam1
+        '
+        Me.lblMultiCam1.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblMultiCam1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lblMultiCam1.AutoSize = True
+        Me.lblMultiCam1.BackColor = System.Drawing.Color.Transparent
+        Me.lblMultiCam1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblMultiCam1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMultiCam1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblMultiCam1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.lblMultiCam1.LinkColor = System.Drawing.Color.Black
+        Me.lblMultiCam1.Location = New System.Drawing.Point(203, 5)
+        Me.lblMultiCam1.Name = "lblMultiCam1"
+        Me.lblMultiCam1.Size = New System.Drawing.Size(85, 15)
+        Me.lblMultiCam1.TabIndex = 12
+        Me.lblMultiCam1.TabStop = True
+        Me.lblMultiCam1.Text = "3 Camera View"
+        Me.lblMultiCam1.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        '
+        'lblMultiCam2
+        '
+        Me.lblMultiCam2.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblMultiCam2.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lblMultiCam2.AutoSize = True
+        Me.lblMultiCam2.BackColor = System.Drawing.Color.Transparent
+        Me.lblMultiCam2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblMultiCam2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMultiCam2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblMultiCam2.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.lblMultiCam2.LinkColor = System.Drawing.Color.Black
+        Me.lblMultiCam2.Location = New System.Drawing.Point(8, 20)
+        Me.lblMultiCam2.Name = "lblMultiCam2"
+        Me.lblMultiCam2.Size = New System.Drawing.Size(85, 15)
+        Me.lblMultiCam2.TabIndex = 13
+        Me.lblMultiCam2.TabStop = True
+        Me.lblMultiCam2.Text = "6 Camera View"
+        Me.lblMultiCam2.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        '
+        'lblRefCam
+        '
+        Me.lblRefCam.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblRefCam.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lblRefCam.AutoSize = True
+        Me.lblRefCam.BackColor = System.Drawing.Color.Transparent
+        Me.lblRefCam.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblRefCam.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRefCam.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblRefCam.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.lblRefCam.LinkColor = System.Drawing.Color.Black
+        Me.lblRefCam.Location = New System.Drawing.Point(99, 20)
+        Me.lblRefCam.Name = "lblRefCam"
+        Me.lblRefCam.Size = New System.Drawing.Size(52, 15)
+        Me.lblRefCam.TabIndex = 14
+        Me.lblRefCam.TabStop = True
+        Me.lblRefCam.Text = "Ref Cam"
+        Me.lblRefCam.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        '
+        'lblEndzoneCam1
+        '
+        Me.lblEndzoneCam1.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblEndzoneCam1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lblEndzoneCam1.AutoSize = True
+        Me.lblEndzoneCam1.BackColor = System.Drawing.Color.Transparent
+        Me.lblEndzoneCam1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblEndzoneCam1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEndzoneCam1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblEndzoneCam1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.lblEndzoneCam1.LinkColor = System.Drawing.Color.Black
+        Me.lblEndzoneCam1.Location = New System.Drawing.Point(157, 20)
+        Me.lblEndzoneCam1.Name = "lblEndzoneCam1"
+        Me.lblEndzoneCam1.Size = New System.Drawing.Size(89, 15)
+        Me.lblEndzoneCam1.TabIndex = 15
+        Me.lblEndzoneCam1.TabStop = True
+        Me.lblEndzoneCam1.Text = "Endzone Cam 1"
+        Me.lblEndzoneCam1.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        '
+        'lblEndzoneCam2
+        '
+        Me.lblEndzoneCam2.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblEndzoneCam2.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lblEndzoneCam2.AutoSize = True
+        Me.lblEndzoneCam2.BackColor = System.Drawing.Color.Transparent
+        Me.lblEndzoneCam2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblEndzoneCam2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEndzoneCam2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblEndzoneCam2.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.lblEndzoneCam2.LinkColor = System.Drawing.Color.Black
+        Me.lblEndzoneCam2.Location = New System.Drawing.Point(8, 35)
+        Me.lblEndzoneCam2.Name = "lblEndzoneCam2"
+        Me.lblEndzoneCam2.Size = New System.Drawing.Size(89, 15)
+        Me.lblEndzoneCam2.TabIndex = 16
+        Me.lblEndzoneCam2.TabStop = True
+        Me.lblEndzoneCam2.Text = "Endzone Cam 2"
+        Me.lblEndzoneCam2.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         '
         'picAway
         '
@@ -247,7 +353,7 @@ Partial Class GameControl
         Me.Controls.Add(Me.BorderPanel1)
         Me.Name = "GameControl"
         Me.Padding = New System.Windows.Forms.Padding(10)
-        Me.Size = New System.Drawing.Size(320, 102)
+        Me.Size = New System.Drawing.Size(334, 166)
         Me.BorderPanel1.ResumeLayout(False)
         Me.BorderPanel1.PerformLayout()
         Me.FlowLayoutPanel1.ResumeLayout(False)
@@ -274,4 +380,9 @@ Partial Class GameControl
     Friend WithEvents lblFrenchStream As LinkLabel
     Friend WithEvents lblNationalStream As LinkLabel
     Friend WithEvents lblHomeStream As LinkLabel
+    Friend WithEvents lblMultiCam1 As LinkLabel
+    Friend WithEvents lblMultiCam2 As LinkLabel
+    Friend WithEvents lblRefCam As LinkLabel
+    Friend WithEvents lblEndzoneCam1 As LinkLabel
+    Friend WithEvents lblEndzoneCam2 As LinkLabel
 End Class
