@@ -335,8 +335,8 @@ Public Class Game
 
             Dim titleArg As String = ""
             If PlayerType = PlayerTypeEnum.VLC Then
-                titleArg = " - -meta - title '" & GameTitle & "' "
-                                ElseIf PlayerType = PlayerTypeEnum.mpv Then
+                titleArg = " --meta-title '" & GameTitle & "' "
+            ElseIf PlayerType = PlayerTypeEnum.mpv Then
                 titleArg = " --title '" & GameTitle & "' --user-agent='User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316'"
             End If
 
