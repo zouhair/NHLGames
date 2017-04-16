@@ -34,6 +34,8 @@ Partial Class NHLGamesMetro
         Me.RichTextBox = New System.Windows.Forms.RichTextBox()
         Me.TabControl = New MetroFramework.Controls.MetroTabControl()
         Me.GamesTab = New MetroFramework.Controls.MetroTabPage()
+        Me.progress = New System.Windows.Forms.ProgressBar()
+        Me.NoGames = New System.Windows.Forms.Label()
         Me.flpCalender = New System.Windows.Forms.FlowLayoutPanel()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnYesterday = New System.Windows.Forms.Button()
@@ -99,10 +101,8 @@ Partial Class NHLGamesMetro
         Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog()
         Me.lnkDownload = New System.Windows.Forms.LinkLabel()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
-        Me.progress = New System.Windows.Forms.ProgressBar()
-        Me.tmrAnimate = New System.Windows.Forms.Timer(Me.components)
-        Me.NoGames = New System.Windows.Forms.Label()
         Me.StatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tmrAnimate = New System.Windows.Forms.Timer(Me.components)
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl.SuspendLayout()
         Me.GamesTab.SuspendLayout()
@@ -130,7 +130,7 @@ Partial Class NHLGamesMetro
         Me.gridGames.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(3, 5, 3, 0)
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -145,7 +145,7 @@ Partial Class NHLGamesMetro
         Me.gridGames.ReadOnly = True
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(0, 5, 0, 0)
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -158,7 +158,7 @@ Partial Class NHLGamesMetro
         Me.gridGames.RowTemplate.DividerHeight = 1
         Me.gridGames.RowTemplate.Height = 35
         Me.gridGames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.gridGames.Size = New System.Drawing.Size(182, 15)
+        Me.gridGames.Size = New System.Drawing.Size(182, 14)
         Me.gridGames.TabIndex = 0
         Me.gridGames.Visible = False
         '
@@ -169,7 +169,7 @@ Partial Class NHLGamesMetro
         Me.lblVersion.Location = New System.Drawing.Point(735, 44)
         Me.lblVersion.MinimumSize = New System.Drawing.Size(200, 5)
         Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.Size = New System.Drawing.Size(200, 13)
+        Me.lblVersion.Size = New System.Drawing.Size(200, 20)
         Me.lblVersion.TabIndex = 17
         Me.lblVersion.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
@@ -228,12 +228,40 @@ Partial Class NHLGamesMetro
         Me.GamesTab.VerticalScrollbarHighlightOnWheel = False
         Me.GamesTab.VerticalScrollbarSize = 10
         '
+        'progress
+        '
+        Me.progress.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.progress.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.progress.Location = New System.Drawing.Point(801, 3)
+        Me.progress.Name = "progress"
+        Me.progress.Size = New System.Drawing.Size(180, 30)
+        Me.progress.Step = 1
+        Me.progress.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.progress.TabIndex = 0
+        Me.progress.Visible = False
+        '
+        'NoGames
+        '
+        Me.NoGames.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.NoGames.AutoSize = True
+        Me.NoGames.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.NoGames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NoGames.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NoGames.ForeColor = System.Drawing.Color.DimGray
+        Me.NoGames.Location = New System.Drawing.Point(679, 4)
+        Me.NoGames.Name = "NoGames"
+        Me.NoGames.Padding = New System.Windows.Forms.Padding(20, 5, 20, 5)
+        Me.NoGames.Size = New System.Drawing.Size(259, 41)
+        Me.NoGames.TabIndex = 25
+        Me.NoGames.Text = "No Games Found"
+        Me.NoGames.Visible = False
+        '
         'flpCalender
         '
         Me.flpCalender.AutoSize = True
         Me.flpCalender.BackColor = System.Drawing.Color.LightGray
         Me.flpCalender.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
-        Me.flpCalender.Location = New System.Drawing.Point(8, 44)
+        Me.flpCalender.Location = New System.Drawing.Point(8, 55)
         Me.flpCalender.Margin = New System.Windows.Forms.Padding(0)
         Me.flpCalender.Name = "flpCalender"
         Me.flpCalender.Size = New System.Drawing.Size(37, 30)
@@ -254,7 +282,7 @@ Partial Class NHLGamesMetro
         Me.btnRefresh.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnRefresh.Location = New System.Drawing.Point(987, 10)
+        Me.btnRefresh.Location = New System.Drawing.Point(987, 15)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(34, 34)
         Me.btnRefresh.TabIndex = 15
@@ -270,7 +298,7 @@ Partial Class NHLGamesMetro
         Me.btnYesterday.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
         Me.btnYesterday.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.btnYesterday.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnYesterday.Location = New System.Drawing.Point(10, 12)
+        Me.btnYesterday.Location = New System.Drawing.Point(15, 15)
         Me.btnYesterday.Name = "btnYesterday"
         Me.btnYesterday.Size = New System.Drawing.Size(30, 30)
         Me.btnYesterday.TabIndex = 14
@@ -286,7 +314,7 @@ Partial Class NHLGamesMetro
         Me.btnTomorrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
         Me.btnTomorrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.btnTomorrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnTomorrow.Location = New System.Drawing.Point(292, 12)
+        Me.btnTomorrow.Location = New System.Drawing.Point(317, 15)
         Me.btnTomorrow.Name = "btnTomorrow"
         Me.btnTomorrow.Size = New System.Drawing.Size(30, 30)
         Me.btnTomorrow.TabIndex = 13
@@ -304,7 +332,7 @@ Partial Class NHLGamesMetro
         Me.btnDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.btnDate.Location = New System.Drawing.Point(248, 10)
+        Me.btnDate.Location = New System.Drawing.Point(267, 12)
         Me.btnDate.Name = "btnDate"
         Me.btnDate.Size = New System.Drawing.Size(34, 34)
         Me.btnDate.TabIndex = 12
@@ -313,11 +341,11 @@ Partial Class NHLGamesMetro
         'lblDate
         '
         Me.lblDate.BackColor = System.Drawing.Color.White
-        Me.lblDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDate.ForeColor = System.Drawing.Color.Black
-        Me.lblDate.Location = New System.Drawing.Point(44, 16)
+        Me.lblDate.Location = New System.Drawing.Point(36, 13)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(198, 24)
+        Me.lblDate.Size = New System.Drawing.Size(237, 37)
         Me.lblDate.TabIndex = 11
         Me.lblDate.Text = "Day, Mon 00, Year"
         Me.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -332,7 +360,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel.BackColor = System.Drawing.Color.White
         Me.FlowLayoutPanel.Location = New System.Drawing.Point(-4, 55)
         Me.FlowLayoutPanel.Name = "FlowLayoutPanel"
-        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1037, 409)
+        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1037, 408)
         Me.FlowLayoutPanel.TabIndex = 6
         '
         'SettingTab
@@ -373,9 +401,9 @@ Partial Class NHLGamesMetro
         Me.SettingTab.HorizontalScrollbarBarColor = True
         Me.SettingTab.HorizontalScrollbarHighlightOnWheel = False
         Me.SettingTab.HorizontalScrollbarSize = 10
-        Me.SettingTab.Location = New System.Drawing.Point(4, 38)
+        Me.SettingTab.Location = New System.Drawing.Point(4, 39)
         Me.SettingTab.Name = "SettingTab"
-        Me.SettingTab.Size = New System.Drawing.Size(1029, 498)
+        Me.SettingTab.Size = New System.Drawing.Size(1029, 497)
         Me.SettingTab.TabIndex = 1
         Me.SettingTab.Text = "Settings      "
         Me.SettingTab.VerticalScrollbarBarColor = True
@@ -421,7 +449,7 @@ Partial Class NHLGamesMetro
         Me.txtMpvPath.Location = New System.Drawing.Point(136, 84)
         Me.txtMpvPath.Name = "txtMpvPath"
         Me.txtMpvPath.ReadOnly = True
-        Me.txtMpvPath.Size = New System.Drawing.Size(486, 22)
+        Me.txtMpvPath.Size = New System.Drawing.Size(486, 29)
         Me.txtMpvPath.TabIndex = 53
         '
         'MetroLabel1
@@ -462,7 +490,7 @@ Partial Class NHLGamesMetro
         Me.txtStreamerArgs.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtStreamerArgs.Location = New System.Drawing.Point(137, 328)
         Me.txtStreamerArgs.Name = "txtStreamerArgs"
-        Me.txtStreamerArgs.Size = New System.Drawing.Size(486, 22)
+        Me.txtStreamerArgs.Size = New System.Drawing.Size(486, 29)
         Me.txtStreamerArgs.TabIndex = 16
         '
         'chkEnablePlayerArgs
@@ -495,7 +523,7 @@ Partial Class NHLGamesMetro
         Me.txtPlayerArgs.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPlayerArgs.Location = New System.Drawing.Point(137, 300)
         Me.txtPlayerArgs.Name = "txtPlayerArgs"
-        Me.txtPlayerArgs.Size = New System.Drawing.Size(486, 22)
+        Me.txtPlayerArgs.Size = New System.Drawing.Size(486, 29)
         Me.txtPlayerArgs.TabIndex = 15
         '
         'txtOutputPath
@@ -507,7 +535,7 @@ Partial Class NHLGamesMetro
         Me.txtOutputPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtOutputPath.Location = New System.Drawing.Point(137, 272)
         Me.txtOutputPath.Name = "txtOutputPath"
-        Me.txtOutputPath.Size = New System.Drawing.Size(451, 22)
+        Me.txtOutputPath.Size = New System.Drawing.Size(451, 29)
         Me.txtOutputPath.TabIndex = 14
         '
         'MetroPanel2
@@ -536,7 +564,7 @@ Partial Class NHLGamesMetro
         Me.lnkMpvDownload.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lnkMpvDownload.Location = New System.Drawing.Point(219, -1)
         Me.lnkMpvDownload.Name = "lnkMpvDownload"
-        Me.lnkMpvDownload.Size = New System.Drawing.Size(23, 23)
+        Me.lnkMpvDownload.Size = New System.Drawing.Size(28, 30)
         Me.lnkMpvDownload.TabIndex = 20
         Me.lnkMpvDownload.Text = "?"
         Me.lnkMpvDownload.UseSelectable = True
@@ -560,7 +588,7 @@ Partial Class NHLGamesMetro
         Me.lnkMPCDownload.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lnkMPCDownload.Location = New System.Drawing.Point(137, -1)
         Me.lnkMPCDownload.Name = "lnkMPCDownload"
-        Me.lnkMPCDownload.Size = New System.Drawing.Size(23, 23)
+        Me.lnkMPCDownload.Size = New System.Drawing.Size(28, 30)
         Me.lnkMPCDownload.TabIndex = 18
         Me.lnkMPCDownload.Text = "?"
         Me.lnkMPCDownload.UseSelectable = True
@@ -572,7 +600,7 @@ Partial Class NHLGamesMetro
         Me.lnkVLCDownload.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lnkVLCDownload.Location = New System.Drawing.Point(53, -1)
         Me.lnkVLCDownload.Name = "lnkVLCDownload"
-        Me.lnkVLCDownload.Size = New System.Drawing.Size(23, 23)
+        Me.lnkVLCDownload.Size = New System.Drawing.Size(28, 30)
         Me.lnkVLCDownload.TabIndex = 17
         Me.lnkVLCDownload.Text = "?"
         Me.lnkVLCDownload.UseSelectable = True
@@ -831,7 +859,7 @@ Partial Class NHLGamesMetro
         Me.txtLiveStreamPath.Location = New System.Drawing.Point(137, 112)
         Me.txtLiveStreamPath.Name = "txtLiveStreamPath"
         Me.txtLiveStreamPath.ReadOnly = True
-        Me.txtLiveStreamPath.Size = New System.Drawing.Size(486, 22)
+        Me.txtLiveStreamPath.Size = New System.Drawing.Size(486, 29)
         Me.txtLiveStreamPath.TabIndex = 46
         '
         'MetroLabel7
@@ -852,7 +880,7 @@ Partial Class NHLGamesMetro
         Me.txtMPCPath.Location = New System.Drawing.Point(137, 55)
         Me.txtMPCPath.Name = "txtMPCPath"
         Me.txtMPCPath.ReadOnly = True
-        Me.txtMPCPath.Size = New System.Drawing.Size(486, 22)
+        Me.txtMPCPath.Size = New System.Drawing.Size(486, 29)
         Me.txtMPCPath.TabIndex = 45
         '
         'MetroLabel3
@@ -882,7 +910,7 @@ Partial Class NHLGamesMetro
         Me.txtVLCPath.Location = New System.Drawing.Point(137, 28)
         Me.txtVLCPath.Name = "txtVLCPath"
         Me.txtVLCPath.ReadOnly = True
-        Me.txtVLCPath.Size = New System.Drawing.Size(486, 22)
+        Me.txtVLCPath.Size = New System.Drawing.Size(486, 29)
         Me.txtVLCPath.TabIndex = 42
         '
         'btnOpenHostsFile
@@ -922,10 +950,10 @@ Partial Class NHLGamesMetro
         Me.ConsoleTab.HorizontalScrollbarBarColor = True
         Me.ConsoleTab.HorizontalScrollbarHighlightOnWheel = False
         Me.ConsoleTab.HorizontalScrollbarSize = 10
-        Me.ConsoleTab.Location = New System.Drawing.Point(4, 38)
+        Me.ConsoleTab.Location = New System.Drawing.Point(4, 39)
         Me.ConsoleTab.Name = "ConsoleTab"
         Me.ConsoleTab.Padding = New System.Windows.Forms.Padding(0, 0, 0, 30)
-        Me.ConsoleTab.Size = New System.Drawing.Size(1029, 498)
+        Me.ConsoleTab.Size = New System.Drawing.Size(1029, 497)
         Me.ConsoleTab.TabIndex = 2
         Me.ConsoleTab.Text = "Console      "
         Me.ConsoleTab.VerticalScrollbarBarColor = True
@@ -948,10 +976,10 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsTab.HorizontalScrollbarBarColor = True
         Me.AdDetectionSettingsTab.HorizontalScrollbarHighlightOnWheel = False
         Me.AdDetectionSettingsTab.HorizontalScrollbarSize = 6
-        Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 38)
+        Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 39)
         Me.AdDetectionSettingsTab.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsTab.Name = "AdDetectionSettingsTab"
-        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1029, 498)
+        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1029, 497)
         Me.AdDetectionSettingsTab.TabIndex = 4
         Me.AdDetectionSettingsTab.Text = "Ad Detection Modules"
         Me.AdDetectionSettingsTab.VerticalScrollbarBarColor = True
@@ -966,7 +994,7 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsElementHost.Location = New System.Drawing.Point(0, 0)
         Me.AdDetectionSettingsElementHost.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsElementHost.Name = "AdDetectionSettingsElementHost"
-        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1029, 498)
+        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1029, 497)
         Me.AdDetectionSettingsElementHost.TabIndex = 2
         Me.AdDetectionSettingsElementHost.Child = Nothing
         '
@@ -975,7 +1003,7 @@ Partial Class NHLGamesMetro
         Me.lnkDownload.AutoSize = True
         Me.lnkDownload.Location = New System.Drawing.Point(967, 44)
         Me.lnkDownload.Name = "lnkDownload"
-        Me.lnkDownload.Size = New System.Drawing.Size(55, 13)
+        Me.lnkDownload.Size = New System.Drawing.Size(80, 20)
         Me.lnkDownload.TabIndex = 23
         Me.lnkDownload.TabStop = True
         Me.lnkDownload.Text = "Download"
@@ -988,6 +1016,7 @@ Partial Class NHLGamesMetro
         Me.StatusStrip.AutoSize = False
         Me.StatusStrip.BackColor = System.Drawing.Color.Gainsboro
         Me.StatusStrip.Dock = System.Windows.Forms.DockStyle.None
+        Me.StatusStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatusLabel})
         Me.StatusStrip.Location = New System.Drawing.Point(0, 565)
         Me.StatusStrip.Margin = New System.Windows.Forms.Padding(0, 0, 20, 0)
@@ -998,47 +1027,19 @@ Partial Class NHLGamesMetro
         Me.StatusStrip.TabIndex = 24
         Me.StatusStrip.Text = "StatusStrip"
         '
-        'progress
-        '
-        Me.progress.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.progress.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.progress.Location = New System.Drawing.Point(801, 3)
-        Me.progress.Name = "progress"
-        Me.progress.Size = New System.Drawing.Size(180, 30)
-        Me.progress.Step = 1
-        Me.progress.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-        Me.progress.TabIndex = 0
-        Me.progress.Visible = False
-        '
-        'tmrAnimate
-        '
-        Me.tmrAnimate.Enabled = True
-        Me.tmrAnimate.Interval = 40
-        '
-        'NoGames
-        '
-        Me.NoGames.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.NoGames.AutoSize = True
-        Me.NoGames.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.NoGames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.NoGames.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NoGames.ForeColor = System.Drawing.Color.DimGray
-        Me.NoGames.Location = New System.Drawing.Point(679, 4)
-        Me.NoGames.Name = "NoGames"
-        Me.NoGames.Padding = New System.Windows.Forms.Padding(20, 5, 20, 5)
-        Me.NoGames.Size = New System.Drawing.Size(183, 30)
-        Me.NoGames.TabIndex = 25
-        Me.NoGames.Text = "No Games Found"
-        Me.NoGames.Visible = False
-        '
         'StatusLabel
         '
         Me.StatusLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.StatusLabel.Margin = New System.Windows.Forms.Padding(0, 3, 3, 2)
         Me.StatusLabel.Name = "StatusLabel"
         Me.StatusLabel.Padding = New System.Windows.Forms.Padding(0, 0, 20, 0)
-        Me.StatusLabel.Size = New System.Drawing.Size(105, 30)
+        Me.StatusLabel.Size = New System.Drawing.Size(159, 30)
         Me.StatusLabel.Text = "StatusLabel"
+        '
+        'tmrAnimate
+        '
+        Me.tmrAnimate.Enabled = True
+        Me.tmrAnimate.Interval = 40
         '
         'NHLGamesMetro
         '
