@@ -25,20 +25,24 @@ Partial Class NHLGamesMetro
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(NHLGamesMetro))
         Me.gridGames = New System.Windows.Forms.DataGridView()
-        Me.dtDate = New MetroFramework.Controls.MetroDateTime()
-        Me.btnRefresh = New MetroFramework.Controls.MetroButton()
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.RichTextBox = New System.Windows.Forms.RichTextBox()
         Me.TabControl = New MetroFramework.Controls.MetroTabControl()
         Me.GamesTab = New MetroFramework.Controls.MetroTabPage()
-        Me.btnTomorrow = New MetroFramework.Controls.MetroButton()
-        Me.btnYesterday = New MetroFramework.Controls.MetroButton()
+        Me.flpCalender = New System.Windows.Forms.FlowLayoutPanel()
+        Me.btnRefresh = New System.Windows.Forms.Button()
+        Me.btnYesterday = New System.Windows.Forms.Button()
+        Me.btnTomorrow = New System.Windows.Forms.Button()
+        Me.btnDate = New System.Windows.Forms.Button()
+        Me.lblDate = New System.Windows.Forms.Label()
         Me.FlowLayoutPanel = New System.Windows.Forms.FlowLayoutPanel()
         Me.SettingTab = New MetroFramework.Controls.MetroTabPage()
+        Me.btnAddHosts = New MetroFramework.Controls.MetroButton()
         Me.btnClean = New MetroFramework.Controls.MetroButton()
         Me.btnMpvPath = New MetroFramework.Controls.MetroButton()
         Me.txtMpvPath = New System.Windows.Forms.TextBox()
@@ -95,8 +99,10 @@ Partial Class NHLGamesMetro
         Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog()
         Me.lnkDownload = New System.Windows.Forms.LinkLabel()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
+        Me.progress = New System.Windows.Forms.ProgressBar()
+        Me.tmrAnimate = New System.Windows.Forms.Timer(Me.components)
+        Me.NoGames = New System.Windows.Forms.Label()
         Me.StatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.btnAddHosts = New MetroFramework.Controls.MetroButton()
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl.SuspendLayout()
         Me.GamesTab.SuspendLayout()
@@ -133,7 +139,7 @@ Partial Class NHLGamesMetro
         Me.gridGames.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.gridGames.ColumnHeadersHeight = 30
         Me.gridGames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.gridGames.Location = New System.Drawing.Point(204, 12)
+        Me.gridGames.Location = New System.Drawing.Point(475, 10)
         Me.gridGames.MultiSelect = False
         Me.gridGames.Name = "gridGames"
         Me.gridGames.ReadOnly = True
@@ -152,39 +158,15 @@ Partial Class NHLGamesMetro
         Me.gridGames.RowTemplate.DividerHeight = 1
         Me.gridGames.RowTemplate.Height = 35
         Me.gridGames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.gridGames.Size = New System.Drawing.Size(544, 66)
+        Me.gridGames.Size = New System.Drawing.Size(182, 15)
         Me.gridGames.TabIndex = 0
         Me.gridGames.Visible = False
-        '
-        'dtDate
-        '
-        Me.dtDate.Checked = False
-        Me.dtDate.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.dtDate.CustomFormat = "yyyy-MM-dd"
-        Me.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtDate.Location = New System.Drawing.Point(23, 6)
-        Me.dtDate.MinimumSize = New System.Drawing.Size(0, 29)
-        Me.dtDate.Name = "dtDate"
-        Me.dtDate.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.dtDate.Size = New System.Drawing.Size(125, 29)
-        Me.dtDate.TabIndex = 2
-        '
-        'btnRefresh
-        '
-        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnRefresh.Location = New System.Drawing.Point(883, 12)
-        Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(93, 22)
-        Me.btnRefresh.TabIndex = 5
-        Me.btnRefresh.Text = "Refresh"
-        Me.btnRefresh.UseSelectable = True
         '
         'lblVersion
         '
         Me.lblVersion.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblVersion.AutoSize = True
-        Me.lblVersion.Location = New System.Drawing.Point(728, 44)
+        Me.lblVersion.Location = New System.Drawing.Point(735, 44)
         Me.lblVersion.MinimumSize = New System.Drawing.Size(200, 5)
         Me.lblVersion.Name = "lblVersion"
         Me.lblVersion.Size = New System.Drawing.Size(200, 13)
@@ -204,7 +186,7 @@ Partial Class NHLGamesMetro
         Me.RichTextBox.Location = New System.Drawing.Point(3, 20)
         Me.RichTextBox.Name = "RichTextBox"
         Me.RichTextBox.ReadOnly = True
-        Me.RichTextBox.Size = New System.Drawing.Size(1016, 419)
+        Me.RichTextBox.Size = New System.Drawing.Size(1016, 410)
         Me.RichTextBox.TabIndex = 0
         Me.RichTextBox.Text = "Console Output..." & Global.Microsoft.VisualBasic.ChrW(10)
         '
@@ -217,52 +199,128 @@ Partial Class NHLGamesMetro
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl.Location = New System.Drawing.Point(10, 60)
         Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 1
-        Me.TabControl.Size = New System.Drawing.Size(1030, 540)
+        Me.TabControl.SelectedIndex = 0
+        Me.TabControl.Size = New System.Drawing.Size(1037, 540)
         Me.TabControl.TabIndex = 22
         Me.TabControl.UseSelectable = True
         '
         'GamesTab
         '
-        Me.GamesTab.Controls.Add(Me.btnTomorrow)
-        Me.GamesTab.Controls.Add(Me.btnYesterday)
-        Me.GamesTab.Controls.Add(Me.FlowLayoutPanel)
-        Me.GamesTab.Controls.Add(Me.gridGames)
+        Me.GamesTab.Controls.Add(Me.progress)
+        Me.GamesTab.Controls.Add(Me.NoGames)
+        Me.GamesTab.Controls.Add(Me.flpCalender)
         Me.GamesTab.Controls.Add(Me.btnRefresh)
-        Me.GamesTab.Controls.Add(Me.dtDate)
+        Me.GamesTab.Controls.Add(Me.btnYesterday)
+        Me.GamesTab.Controls.Add(Me.btnTomorrow)
+        Me.GamesTab.Controls.Add(Me.btnDate)
+        Me.GamesTab.Controls.Add(Me.lblDate)
+        Me.GamesTab.Controls.Add(Me.gridGames)
+        Me.GamesTab.Controls.Add(Me.FlowLayoutPanel)
         Me.GamesTab.HorizontalScrollbarBarColor = True
         Me.GamesTab.HorizontalScrollbarHighlightOnWheel = False
         Me.GamesTab.HorizontalScrollbarSize = 10
         Me.GamesTab.Location = New System.Drawing.Point(4, 38)
         Me.GamesTab.Name = "GamesTab"
-        Me.GamesTab.Size = New System.Drawing.Size(1022, 498)
+        Me.GamesTab.Size = New System.Drawing.Size(1029, 498)
         Me.GamesTab.TabIndex = 0
         Me.GamesTab.Text = "Games      "
         Me.GamesTab.VerticalScrollbarBarColor = True
         Me.GamesTab.VerticalScrollbarHighlightOnWheel = False
         Me.GamesTab.VerticalScrollbarSize = 10
         '
-        'btnTomorrow
+        'flpCalender
         '
-        Me.btnTomorrow.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnTomorrow.FontSize = MetroFramework.MetroButtonSize.Medium
-        Me.btnTomorrow.Location = New System.Drawing.Point(148, 6)
-        Me.btnTomorrow.Name = "btnTomorrow"
-        Me.btnTomorrow.Size = New System.Drawing.Size(20, 29)
-        Me.btnTomorrow.TabIndex = 8
-        Me.btnTomorrow.Text = ">"
-        Me.btnTomorrow.UseSelectable = True
+        Me.flpCalender.AutoSize = True
+        Me.flpCalender.BackColor = System.Drawing.Color.LightGray
+        Me.flpCalender.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
+        Me.flpCalender.Location = New System.Drawing.Point(8, 44)
+        Me.flpCalender.Margin = New System.Windows.Forms.Padding(0)
+        Me.flpCalender.Name = "flpCalender"
+        Me.flpCalender.Size = New System.Drawing.Size(37, 30)
+        Me.flpCalender.TabIndex = 10
+        Me.flpCalender.Visible = False
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRefresh.BackColor = System.Drawing.Color.DimGray
+        Me.btnRefresh.BackgroundImage = Global.NHLGames.My.Resources.Resources.wrefresh
+        Me.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnRefresh.FlatAppearance.BorderSize = 0
+        Me.btnRefresh.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
+        Me.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
+        Me.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefresh.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnRefresh.Location = New System.Drawing.Point(987, 10)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(34, 34)
+        Me.btnRefresh.TabIndex = 15
+        Me.btnRefresh.UseVisualStyleBackColor = False
         '
         'btnYesterday
         '
-        Me.btnYesterday.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnYesterday.FontSize = MetroFramework.MetroButtonSize.Medium
-        Me.btnYesterday.Location = New System.Drawing.Point(2, 6)
+        Me.btnYesterday.BackColor = System.Drawing.Color.DimGray
+        Me.btnYesterday.BackgroundImage = Global.NHLGames.My.Resources.Resources.wleft
+        Me.btnYesterday.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnYesterday.FlatAppearance.BorderSize = 0
+        Me.btnYesterday.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
+        Me.btnYesterday.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
+        Me.btnYesterday.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.btnYesterday.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnYesterday.Location = New System.Drawing.Point(10, 12)
         Me.btnYesterday.Name = "btnYesterday"
-        Me.btnYesterday.Size = New System.Drawing.Size(20, 29)
-        Me.btnYesterday.TabIndex = 7
-        Me.btnYesterday.Text = "<"
-        Me.btnYesterday.UseSelectable = True
+        Me.btnYesterday.Size = New System.Drawing.Size(30, 30)
+        Me.btnYesterday.TabIndex = 14
+        Me.btnYesterday.UseVisualStyleBackColor = False
+        '
+        'btnTomorrow
+        '
+        Me.btnTomorrow.BackColor = System.Drawing.Color.DimGray
+        Me.btnTomorrow.BackgroundImage = Global.NHLGames.My.Resources.Resources.wright
+        Me.btnTomorrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnTomorrow.FlatAppearance.BorderSize = 0
+        Me.btnTomorrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
+        Me.btnTomorrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
+        Me.btnTomorrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.btnTomorrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnTomorrow.Location = New System.Drawing.Point(292, 12)
+        Me.btnTomorrow.Name = "btnTomorrow"
+        Me.btnTomorrow.Size = New System.Drawing.Size(30, 30)
+        Me.btnTomorrow.TabIndex = 13
+        Me.btnTomorrow.UseVisualStyleBackColor = False
+        '
+        'btnDate
+        '
+        Me.btnDate.BackColor = System.Drawing.Color.DimGray
+        Me.btnDate.BackgroundImage = Global.NHLGames.My.Resources.Resources.wdate
+        Me.btnDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnDate.FlatAppearance.BorderSize = 0
+        Me.btnDate.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
+        Me.btnDate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
+        Me.btnDate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.btnDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.btnDate.Location = New System.Drawing.Point(248, 10)
+        Me.btnDate.Name = "btnDate"
+        Me.btnDate.Size = New System.Drawing.Size(34, 34)
+        Me.btnDate.TabIndex = 12
+        Me.btnDate.UseVisualStyleBackColor = False
+        '
+        'lblDate
+        '
+        Me.lblDate.BackColor = System.Drawing.Color.White
+        Me.lblDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDate.ForeColor = System.Drawing.Color.Black
+        Me.lblDate.Location = New System.Drawing.Point(44, 16)
+        Me.lblDate.Name = "lblDate"
+        Me.lblDate.Size = New System.Drawing.Size(198, 24)
+        Me.lblDate.TabIndex = 11
+        Me.lblDate.Text = "Day, Mon 00, Year"
+        Me.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FlowLayoutPanel
         '
@@ -272,9 +330,9 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel.AutoScroll = True
         Me.FlowLayoutPanel.AutoSize = True
         Me.FlowLayoutPanel.BackColor = System.Drawing.Color.White
-        Me.FlowLayoutPanel.Location = New System.Drawing.Point(3, 41)
+        Me.FlowLayoutPanel.Location = New System.Drawing.Point(-4, 55)
         Me.FlowLayoutPanel.Name = "FlowLayoutPanel"
-        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1023, 456)
+        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1037, 409)
         Me.FlowLayoutPanel.TabIndex = 6
         '
         'SettingTab
@@ -317,12 +375,22 @@ Partial Class NHLGamesMetro
         Me.SettingTab.HorizontalScrollbarSize = 10
         Me.SettingTab.Location = New System.Drawing.Point(4, 38)
         Me.SettingTab.Name = "SettingTab"
-        Me.SettingTab.Size = New System.Drawing.Size(1022, 498)
+        Me.SettingTab.Size = New System.Drawing.Size(1029, 498)
         Me.SettingTab.TabIndex = 1
         Me.SettingTab.Text = "Settings      "
         Me.SettingTab.VerticalScrollbarBarColor = True
         Me.SettingTab.VerticalScrollbarHighlightOnWheel = False
         Me.SettingTab.VerticalScrollbarSize = 10
+        '
+        'btnAddHosts
+        '
+        Me.btnAddHosts.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAddHosts.Location = New System.Drawing.Point(245, 140)
+        Me.btnAddHosts.Name = "btnAddHosts"
+        Me.btnAddHosts.Size = New System.Drawing.Size(92, 24)
+        Me.btnAddHosts.TabIndex = 56
+        Me.btnAddHosts.Text = "Add Hosts Entry"
+        Me.btnAddHosts.UseSelectable = True
         '
         'btnClean
         '
@@ -361,7 +429,7 @@ Partial Class NHLGamesMetro
         Me.MetroLabel1.AutoSize = True
         Me.MetroLabel1.Location = New System.Drawing.Point(17, 84)
         Me.MetroLabel1.Name = "MetroLabel1"
-        Me.MetroLabel1.Size = New System.Drawing.Size(64, 19)
+        Me.MetroLabel1.Size = New System.Drawing.Size(65, 19)
         Me.MetroLabel1.TabIndex = 52
         Me.MetroLabel1.Text = "mpv Path"
         '
@@ -741,7 +809,7 @@ Partial Class NHLGamesMetro
         Me.MetroLabel4.AutoSize = True
         Me.MetroLabel4.Location = New System.Drawing.Point(17, 112)
         Me.MetroLabel4.Name = "MetroLabel4"
-        Me.MetroLabel4.Size = New System.Drawing.Size(114, 19)
+        Me.MetroLabel4.Size = New System.Drawing.Size(115, 19)
         Me.MetroLabel4.TabIndex = 47
         Me.MetroLabel4.Text = "LiveStreamer Path"
         '
@@ -792,7 +860,7 @@ Partial Class NHLGamesMetro
         Me.MetroLabel3.AutoSize = True
         Me.MetroLabel3.Location = New System.Drawing.Point(17, 55)
         Me.MetroLabel3.Name = "MetroLabel3"
-        Me.MetroLabel3.Size = New System.Drawing.Size(67, 19)
+        Me.MetroLabel3.Size = New System.Drawing.Size(68, 19)
         Me.MetroLabel3.TabIndex = 44
         Me.MetroLabel3.Text = "MPC Path"
         '
@@ -801,7 +869,7 @@ Partial Class NHLGamesMetro
         Me.MetroLabel2.AutoSize = True
         Me.MetroLabel2.Location = New System.Drawing.Point(17, 28)
         Me.MetroLabel2.Name = "MetroLabel2"
-        Me.MetroLabel2.Size = New System.Drawing.Size(60, 19)
+        Me.MetroLabel2.Size = New System.Drawing.Size(62, 19)
         Me.MetroLabel2.TabIndex = 43
         Me.MetroLabel2.Text = "VLC Path"
         '
@@ -854,10 +922,10 @@ Partial Class NHLGamesMetro
         Me.ConsoleTab.HorizontalScrollbarBarColor = True
         Me.ConsoleTab.HorizontalScrollbarHighlightOnWheel = False
         Me.ConsoleTab.HorizontalScrollbarSize = 10
-        Me.ConsoleTab.Location = New System.Drawing.Point(4, 35)
+        Me.ConsoleTab.Location = New System.Drawing.Point(4, 38)
         Me.ConsoleTab.Name = "ConsoleTab"
         Me.ConsoleTab.Padding = New System.Windows.Forms.Padding(0, 0, 0, 30)
-        Me.ConsoleTab.Size = New System.Drawing.Size(1022, 501)
+        Me.ConsoleTab.Size = New System.Drawing.Size(1029, 498)
         Me.ConsoleTab.TabIndex = 2
         Me.ConsoleTab.Text = "Console      "
         Me.ConsoleTab.VerticalScrollbarBarColor = True
@@ -867,7 +935,7 @@ Partial Class NHLGamesMetro
         'btnClearConsole
         '
         Me.btnClearConsole.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClearConsole.Location = New System.Drawing.Point(916, 442)
+        Me.btnClearConsole.Location = New System.Drawing.Point(916, 433)
         Me.btnClearConsole.Name = "btnClearConsole"
         Me.btnClearConsole.Size = New System.Drawing.Size(103, 23)
         Me.btnClearConsole.TabIndex = 2
@@ -880,10 +948,10 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsTab.HorizontalScrollbarBarColor = True
         Me.AdDetectionSettingsTab.HorizontalScrollbarHighlightOnWheel = False
         Me.AdDetectionSettingsTab.HorizontalScrollbarSize = 6
-        Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 35)
+        Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 38)
         Me.AdDetectionSettingsTab.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsTab.Name = "AdDetectionSettingsTab"
-        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1022, 501)
+        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1029, 498)
         Me.AdDetectionSettingsTab.TabIndex = 4
         Me.AdDetectionSettingsTab.Text = "Ad Detection Modules"
         Me.AdDetectionSettingsTab.VerticalScrollbarBarColor = True
@@ -898,7 +966,7 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsElementHost.Location = New System.Drawing.Point(0, 0)
         Me.AdDetectionSettingsElementHost.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsElementHost.Name = "AdDetectionSettingsElementHost"
-        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1022, 501)
+        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1029, 498)
         Me.AdDetectionSettingsElementHost.TabIndex = 2
         Me.AdDetectionSettingsElementHost.Child = Nothing
         '
@@ -915,37 +983,67 @@ Partial Class NHLGamesMetro
         '
         'StatusStrip
         '
-        Me.StatusStrip.BackColor = System.Drawing.Color.White
+        Me.StatusStrip.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.StatusStrip.AutoSize = False
+        Me.StatusStrip.BackColor = System.Drawing.Color.Gainsboro
+        Me.StatusStrip.Dock = System.Windows.Forms.DockStyle.None
         Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatusLabel})
-        Me.StatusStrip.Location = New System.Drawing.Point(10, 574)
+        Me.StatusStrip.Location = New System.Drawing.Point(0, 565)
+        Me.StatusStrip.Margin = New System.Windows.Forms.Padding(0, 0, 20, 0)
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.StatusStrip.Size = New System.Drawing.Size(1030, 26)
+        Me.StatusStrip.Size = New System.Drawing.Size(1058, 35)
         Me.StatusStrip.SizingGrip = False
         Me.StatusStrip.TabIndex = 24
         Me.StatusStrip.Text = "StatusStrip"
         '
+        'progress
+        '
+        Me.progress.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.progress.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.progress.Location = New System.Drawing.Point(801, 3)
+        Me.progress.Name = "progress"
+        Me.progress.Size = New System.Drawing.Size(180, 30)
+        Me.progress.Step = 1
+        Me.progress.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.progress.TabIndex = 0
+        Me.progress.Visible = False
+        '
+        'tmrAnimate
+        '
+        Me.tmrAnimate.Enabled = True
+        Me.tmrAnimate.Interval = 40
+        '
+        'NoGames
+        '
+        Me.NoGames.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.NoGames.AutoSize = True
+        Me.NoGames.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.NoGames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NoGames.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NoGames.ForeColor = System.Drawing.Color.DimGray
+        Me.NoGames.Location = New System.Drawing.Point(679, 4)
+        Me.NoGames.Name = "NoGames"
+        Me.NoGames.Padding = New System.Windows.Forms.Padding(20, 5, 20, 5)
+        Me.NoGames.Size = New System.Drawing.Size(183, 30)
+        Me.NoGames.TabIndex = 25
+        Me.NoGames.Text = "No Games Found"
+        Me.NoGames.Visible = False
+        '
         'StatusLabel
         '
-        Me.StatusLabel.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.StatusLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.StatusLabel.Margin = New System.Windows.Forms.Padding(0, 3, 3, 2)
         Me.StatusLabel.Name = "StatusLabel"
-        Me.StatusLabel.Size = New System.Drawing.Size(89, 21)
+        Me.StatusLabel.Padding = New System.Windows.Forms.Padding(0, 0, 20, 0)
+        Me.StatusLabel.Size = New System.Drawing.Size(105, 30)
         Me.StatusLabel.Text = "StatusLabel"
-        '
-        'btnAddHosts
-        '
-        Me.btnAddHosts.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAddHosts.Location = New System.Drawing.Point(245, 140)
-        Me.btnAddHosts.Name = "btnAddHosts"
-        Me.btnAddHosts.Size = New System.Drawing.Size(92, 24)
-        Me.btnAddHosts.TabIndex = 56
-        Me.btnAddHosts.Text = "Add Hosts Entry"
-        Me.btnAddHosts.UseSelectable = True
         '
         'NHLGamesMetro
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(1050, 600)
+        Me.ClientSize = New System.Drawing.Size(1057, 600)
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.lnkDownload)
         Me.Controls.Add(Me.TabControl)
@@ -977,8 +1075,6 @@ Partial Class NHLGamesMetro
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents dtDate As MetroDateTime
-    Friend WithEvents btnRefresh As MetroButton
     Friend WithEvents gbPlayer As GroupBox
     Friend WithEvents lblVersion As Label
     Friend WithEvents gbServer As GroupBox
@@ -1035,8 +1131,6 @@ Partial Class NHLGamesMetro
     Friend WithEvents SaveFileDialog As SaveFileDialog
     Friend WithEvents AdDetectionSettingsTab As MetroTabPage
     Friend WithEvents AdDetectionSettingsElementHost As Integration.ElementHost
-    Friend WithEvents btnYesterday As MetroButton
-    Friend WithEvents btnTomorrow As MetroButton
     Friend WithEvents btnClean As MetroButton
     Friend WithEvents btnMpvPath As MetroButton
     Friend WithEvents txtMpvPath As TextBox
@@ -1046,6 +1140,15 @@ Partial Class NHLGamesMetro
     Friend WithEvents lblNote As MetroLabel
     Friend WithEvents lnkDownload As LinkLabel
     Friend WithEvents StatusStrip As StatusStrip
-    Friend WithEvents StatusLabel As ToolStripStatusLabel
     Friend WithEvents btnAddHosts As MetroButton
+    Friend WithEvents flpCalender As FlowLayoutPanel
+    Friend WithEvents lblDate As Label
+    Friend WithEvents btnDate As Button
+    Friend WithEvents btnYesterday As Button
+    Friend WithEvents btnTomorrow As Button
+    Friend WithEvents btnRefresh As Button
+    Friend WithEvents progress As ProgressBar
+    Friend WithEvents tmrAnimate As Timer
+    Friend WithEvents NoGames As Label
+    Friend WithEvents StatusLabel As ToolStripStatusLabel
 End Class

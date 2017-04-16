@@ -114,6 +114,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\BorderPanel.vb" />
+    <Compile Include="Controls\CalenderControl.Designer.vb">
+      <DependentUpon>CalenderControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CalenderControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\GameControl.Designer.vb">
       <DependentUpon>GameControl.vb</DependentUpon>
     </Compile>
@@ -168,6 +174,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\CalenderControl.resx">
+      <DependentUpon>CalenderControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\GameControl.resx">
       <DependentUpon>GameControl.vb</DependentUpon>
     </EmbeddedResource>
@@ -254,6 +263,14 @@
   <ItemGroup>
     <EmbeddedResource Include="Logos\nhl-icon.png" />
     <None Include="DeveloperReadme.txt" />
+    <None Include="Icons\bdown.png" />
+    <None Include="Icons\bleft.png" />
+    <None Include="Icons\bright.png" />
+    <None Include="Icons\bup.png" />
+    <None Include="Icons\wdate.png" />
+    <None Include="Icons\wleft.png" />
+    <None Include="Icons\wrefresh.png" />
+    <None Include="Icons\wright.png" />
     <Content Include="Logos\nhl_icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
