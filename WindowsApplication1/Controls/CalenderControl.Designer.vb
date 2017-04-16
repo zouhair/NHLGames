@@ -89,7 +89,7 @@ Partial Class CalenderControl
         Me.btnToday.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro
         Me.btnToday.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnToday.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnToday.ForeColor = System.Drawing.Color.Black
+        Me.btnToday.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
         Me.btnToday.Location = New System.Drawing.Point(4, 244)
         Me.btnToday.Name = "btnToday"
         Me.btnToday.Size = New System.Drawing.Size(313, 35)
@@ -102,12 +102,12 @@ Partial Class CalenderControl
         Me.lblDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
-        Me.lblDate.Font = New System.Drawing.Font("Verdana", 13.0!, System.Drawing.FontStyle.Bold)
+        Me.lblDate.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDate.ForeColor = System.Drawing.Color.White
-        Me.lblDate.Location = New System.Drawing.Point(40, 6)
+        Me.lblDate.Location = New System.Drawing.Point(32, 6)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Padding = New System.Windows.Forms.Padding(30, 0, 0, 0)
-        Me.lblDate.Size = New System.Drawing.Size(210, 26)
+        Me.lblDate.Size = New System.Drawing.Size(225, 26)
         Me.lblDate.TabIndex = 1
         Me.lblDate.Text = "Month Year"
         Me.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -937,9 +937,9 @@ Partial Class CalenderControl
         Me.btnNextMonth.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
         Me.btnNextMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNextMonth.Font = New System.Drawing.Font("Verdana", 20.0!, System.Drawing.FontStyle.Bold)
-        Me.btnNextMonth.Location = New System.Drawing.Point(290, 5)
+        Me.btnNextMonth.Location = New System.Drawing.Point(290, 6)
         Me.btnNextMonth.Name = "btnNextMonth"
-        Me.btnNextMonth.Size = New System.Drawing.Size(28, 28)
+        Me.btnNextMonth.Size = New System.Drawing.Size(26, 26)
         Me.btnNextMonth.TabIndex = 16
         Me.btnNextMonth.UseVisualStyleBackColor = False
         '
@@ -955,9 +955,9 @@ Partial Class CalenderControl
         Me.btnBeforeMonth.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
         Me.btnBeforeMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBeforeMonth.Font = New System.Drawing.Font("Verdana", 20.0!, System.Drawing.FontStyle.Bold)
-        Me.btnBeforeMonth.Location = New System.Drawing.Point(0, 5)
+        Me.btnBeforeMonth.Location = New System.Drawing.Point(0, 6)
         Me.btnBeforeMonth.Name = "btnBeforeMonth"
-        Me.btnBeforeMonth.Size = New System.Drawing.Size(28, 28)
+        Me.btnBeforeMonth.Size = New System.Drawing.Size(26, 26)
         Me.btnBeforeMonth.TabIndex = 17
         Me.btnBeforeMonth.UseVisualStyleBackColor = False
         '
