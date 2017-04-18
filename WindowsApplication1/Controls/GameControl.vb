@@ -5,7 +5,7 @@ Public Class GameControl
     Private _Game As Game
     Private _selectedDate As Date
 
-    Public Sub New(Game As Game, showScores As Boolean, selectedDate As Date)
+    Public Sub New(Game As Game, showScores As Boolean, showLiveScores As Boolean, selectedDate As Date)
         InitializeComponent()
 
         _Game = Game
@@ -14,8 +14,24 @@ Public Class GameControl
         SetInitialProperties(Game)
         UpdateGameStatusProperties(Game)
 
-        lblHomeScore.Visible = showScores
-        lblAwayScore.Visible = showScores
+        If Game.GameIsLive Then
+            lblHomeScore.Visible = showLiveScores
+            lblAwayScore.Visible = showLiveScores
+            If Not showLiveScores And Game.GameIsInPlayoff And Game.Date.ToLocalTime() = Date.Today Then
+                lblNotInSeason.Text = "Playoffs"
+            End If
+        Else
+            lblHomeScore.Visible = showScores
+            lblAwayScore.Visible = showScores
+            If showScores And Game.GameIsFinal And Game.GamePeriod <> "3rd" Then
+                lblTime.Text += If(Game.GamePeriod <> "", "/" + Game.GamePeriod, "")
+            End If
+            If Not showScores And Game.GameIsInPlayoff And Game.GameIsFinal Then
+                lblNotInSeason.Text = "Playoffs"
+            End If
+        End If
+
+        lblLive.Visible = Game.GameIsLive
 
         AddHandler _Game.GameUpdated, AddressOf GameUpdatedHandler
 
@@ -29,16 +45,14 @@ Public Class GameControl
         lblAwayTeam.Text = Game.AwayAbbrev
 
         'btnWatch.Enabled = Game.Date <= DateTime.Now 'AndAlso Game.GameIsLive
-
-        If Game.Date <= DateTime.Now.ToUniversalTime() AndAlso Game.GameIsLive Then
-            BorderPanel1.BorderColour = Color.Green
-            'lblVS.Visible = True
-        ElseIf Game.Date <= DateTime.Now.ToUniversalTime() Then
-            BorderPanel1.BorderColour = Color.LightGray
-            'lblVS.Visible = True
-        Else
+        If Game.GameIsScheduled And Game.Date.ToLocalTime() <= Date.Today.AddDays(1) Then
+            BorderPanel1.BorderColour = Color.FromArgb(255, 0, 175, 220)
+        ElseIf Game.GameIsPreGame Then
+            BorderPanel1.BorderColour = Color.Lime
+        ElseIf Game.GameIsLive Then
+            BorderPanel1.BorderColour = Color.Red
+        ElseIf Game.GameIsScheduled Then
             BorderPanel1.BorderColour = Color.DarkGray
-            'lblVS.Visible = False
         End If
     End Sub
 
@@ -56,7 +70,38 @@ Public Class GameControl
             HomeTeamToolTip.SetToolTip(picHome, "Home Team: " & Game.HomeTeam)
         End If
 
-        lblTime.Text = Game.Date.ToLocalTime().ToString("h:mm tt")
+        lblPeriod.Text = ""
+        lblNotInSeason.Text = ""
+        If Not Game.GameIsInSeason Then
+            If Game.GameIsInPlayoff Then
+                If Game.GameIsLive Or Game.GameIsPreGame Then
+                    lblNotInSeason.Text = "GM " + Game.SeriesGameNumber + ": " + Game.SeriesGameStatus
+                Else
+                    lblNotInSeason.Text = Game.SeriesGameStatus
+                    lblPeriod.Text = "Game" + Game.SeriesGameNumber
+                End If
+            Else
+                lblNotInSeason.Text = "Preseason"
+            End If
+        End If
+
+
+        If Game.GameIsLive Then
+            lblTime.Text = Game.GameTimeLeft.ToString()
+            lblPeriod.Text = Game.GamePeriod.ToString()
+        ElseIf Game.GameIsFinal Then
+            lblTime.Text = Game.GameState.ToString
+        ElseIf Game.GameIsPreGame Then
+            lblTime.Text = Game.Date.ToLocalTime().ToString("h:mm tt")
+            lblPeriod.Text = Game.GameState.ToString
+        Else
+            lblTime.Text = Game.Date.ToLocalTime().ToString("h:mm tt")
+        End If
+
+        lblNoStream.Visible = If(Not Game.AreAnyStreamsAvailable And Game.Date.ToLocalTime <= Date.Today.AddDays(1), True, False)
+        If Not Game.AreAnyStreamsAvailable And Game.Date.ToLocalTime >= Date.Today Then
+            lblNoStream.Text = "Streams available during pregame"
+        End If
 
         lblAwayStream.Visible = Game.AwayStream.IsAvailable
         If Game.AwayStream.Network <> String.Empty Then

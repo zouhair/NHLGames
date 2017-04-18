@@ -161,7 +161,7 @@ Public Class CalenderControl
                         Return Su4
                     Case 5
                         Return Su5
-                    Case 6
+                    Case Else
                         Return Su6
                 End Select
             Case DayOfWeek.Monday
@@ -176,7 +176,7 @@ Public Class CalenderControl
                         Return Mo4
                     Case 5
                         Return Mo5
-                    Case 6
+                    Case Else
                         Return Mo6
                 End Select
             Case DayOfWeek.Tuesday
@@ -191,7 +191,7 @@ Public Class CalenderControl
                         Return Tu4
                     Case 5
                         Return Tu5
-                    Case 6
+                    Case Else
                         Return Tu6
                 End Select
             Case DayOfWeek.Wednesday
@@ -206,7 +206,7 @@ Public Class CalenderControl
                         Return We4
                     Case 5
                         Return We5
-                    Case 6
+                    Case Else
                         Return We6
                 End Select
             Case DayOfWeek.Thursday
@@ -221,7 +221,7 @@ Public Class CalenderControl
                         Return Th4
                     Case 5
                         Return Th5
-                    Case 6
+                    Case Else
                         Return Th6
                 End Select
             Case DayOfWeek.Friday
@@ -236,10 +236,10 @@ Public Class CalenderControl
                         Return Fr4
                     Case 5
                         Return Fr5
-                    Case 6
+                    Case Else
                         Return Fr6
                 End Select
-            Case DayOfWeek.Saturday
+            Case Else
                 Select Case row
                     Case 1
                         Return Sa1
@@ -251,7 +251,7 @@ Public Class CalenderControl
                         Return Sa4
                     Case 5
                         Return Sa5
-                    Case 6
+                    Case Else
                         Return Sa6
                 End Select
         End Select

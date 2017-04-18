@@ -20,7 +20,7 @@ Public Class NHLGamesMetro
     Private AdDetectorViewModel As AdDetectorViewModel = Nothing
     Private StatusTimer As Timer
     Private LoadingTimer As Timer
-    Private btm As Bitmap
+    Public Shared m_progressValue As Integer = 0
     Public Shared m_flpCalendar As FlowLayoutPanel
     Public Shared m_lblDate As Label
     Public Shared m_Date As Date
@@ -112,7 +112,7 @@ Public Class NHLGamesMetro
         txtLiveStreamPath.Text = liveStreamerPath
 
         MetroCheckBox1.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True)
-
+        MetroCheckBox2.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores, True)
 
         Dim watchArgs As Game.GameWatchArguments = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
 
@@ -286,7 +286,8 @@ Public Class NHLGamesMetro
         If InvokeRequired Then
             BeginInvoke(New Action(Of Game)(AddressOf NewGameFoundHandler), gameObj)
         Else
-            Dim gameControl As New GameControl(gameObj, ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True), m_Date)
+            Dim gameControl As New GameControl(gameObj, ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores),
+                ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores, True), m_Date)
             FlowLayoutPanel.Controls.Add(gameControl)
         End If
 
@@ -347,8 +348,8 @@ Public Class NHLGamesMetro
 
     End Sub
     Private Sub LoadGames(dateTime As DateTime)
-
         Try
+            NHLGamesMetro.m_progressValue = 0
             SetLoading(True)
             SetFormStatusLabel("Loading Games")
 
@@ -363,7 +364,6 @@ Public Class NHLGamesMetro
             ResizeGamePanel()
             SetFormStatusLabel("Games Found : " + GameManager.GamesList.Count.ToString())
             SetLoading(False)
-
         Catch ex As Exception
             Console.WriteLine(ex.ToString())
         End Try
@@ -636,10 +636,10 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub tmrAnimate_Tick(sender As Object, e As EventArgs) Handles tmrAnimate.Tick
-        If progress.Value <> 100 Then
-            progress.Value += 2
-        Else
-            progress.Value = 0
+        If NHLGamesMetro.m_progressValue < 1000 Then
+            progress.Value = NHLGamesMetro.m_progressValue
+        ElseIf progress.Value < 1000 And NHLGamesMetro.m_progressValue <= 1000 Then
+            progress.Value = 1000
         End If
 
         'I use a timer cause it never fails to hide the progress bar or the <no games> label when the games are loaded
@@ -665,5 +665,10 @@ Public Class NHLGamesMetro
         End If
 
     End Sub
+
+    Private Sub MetroCheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles MetroCheckBox2.CheckedChanged
+        ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowLiveScores, MetroCheckBox2.Checked)
+    End Sub
+
 #End Region
 End Class

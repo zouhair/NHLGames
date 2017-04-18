@@ -10,7 +10,6 @@ Public Class ImageFetcher
         Else
             Return Nothing
         End If
-
     End Function
 
 End Class
