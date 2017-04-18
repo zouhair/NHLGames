@@ -25,7 +25,7 @@ Public Class GameManager
         Dim tempList As New List(Of Game)
         GamesListDate = dateTime
         Try
-            Dim progress = Convert.ToInt32((1000 - NHLGamesMetro.m_progressValue) / Convert.ToInt32(jsonObj("totalGames").ToString())) - 1
+            Dim progress = Convert.ToInt32((NHLGamesMetro.m_progressMaxValue - NHLGamesMetro.m_progressValue) / Convert.ToInt32(jsonObj("totalGames").ToString())) - 1
             For Each o As JToken In jsonObj.Children(Of JToken)
                 If o.Path = "dates" Then
                     For Each game As JObject In o.Children.Item(0)("games").Children(Of JObject)

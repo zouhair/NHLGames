@@ -21,6 +21,7 @@ Public Class NHLGamesMetro
     Private StatusTimer As Timer
     Private LoadingTimer As Timer
     Public Shared m_progressValue As Integer = 0
+    Public Shared m_progressMaxValue As Integer = 1000
     Public Shared m_flpCalendar As FlowLayoutPanel
     Public Shared m_lblDate As Label
     Public Shared m_Date As Date
@@ -503,9 +504,7 @@ Public Class NHLGamesMetro
             BeginInvoke(New Action(Of Boolean)(AddressOf SetLoading), visible)
         Else
             Me.progress.Visible = [visible]
-            Me.progress.Value = 0
-
-            LoadingTimer = New Timer(New TimerCallback(Sub() If progress.Visible Then SetLoading(True)), Nothing, 2000, Timeout.Infinite)
+            LoadingTimer = New Timer(New TimerCallback(Sub() If progress.Visible Then SetLoading(True)), Nothing, 1000, Timeout.Infinite)
         End If
     End Sub
 
@@ -636,10 +635,10 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub tmrAnimate_Tick(sender As Object, e As EventArgs) Handles tmrAnimate.Tick
-        If NHLGamesMetro.m_progressValue < 1000 Then
+        If NHLGamesMetro.m_progressValue < Me.progress.Maximum Then
             progress.Value = NHLGamesMetro.m_progressValue
-        ElseIf progress.Value < 1000 And NHLGamesMetro.m_progressValue <= 1000 Then
-            progress.Value = 1000
+        ElseIf progress.Value < Me.progress.Maximum And NHLGamesMetro.m_progressValue <= Me.progress.Maximum Then
+            progress.Value = Me.progress.Maximum
         End If
 
         'I use a timer cause it never fails to hide the progress bar or the <no games> label when the games are loaded
