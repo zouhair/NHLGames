@@ -51,6 +51,12 @@ Public Class NHLGamesMetro
 
     Private Sub IntitializeApplicationSettings()
 
+        SettingsToolTip.SetToolTip(rbQual1, "~0.4Go/hr")
+        SettingsToolTip.SetToolTip(rbQual2, "~0.5Go/hr")
+        SettingsToolTip.SetToolTip(rbQual3, "~0.9Go/hr")
+        SettingsToolTip.SetToolTip(rbQual4, "~1.2Go/hr")
+        SettingsToolTip.SetToolTip(rbQual5, "~1.5Go/hr")
+        SettingsToolTip.SetToolTip(rbQual6, "~2.0Go/hr")
         Dim mpcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MPCPath, "")
         If mpcPath = "" Then
             'mpcPath = FileAccess.LocateEXE("mpc-hc64.exe", "\MPC-HC")

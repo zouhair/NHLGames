@@ -37,13 +37,15 @@ Public Class Game
     Public SeriesGameNumber As String = ""
     Public SeriesGameStatus As String = ""
 
-    Public AwayTeam As String = ""
+    Public Away As String = ""
     Public AwayAbbrev As String = ""
-    Public AwayTeamLogo As String = ""
+    Public AwayTeam As String = ""
+    Public AwayTeamName As String = ""
 
-    Public HomeTeam As String = ""
+    Public Home As String = ""
     Public HomeAbbrev As String = ""
-    Public HomeTeamLogo As String = ""
+    Public HomeTeam As String = ""
+    Public HomeTeamName As String = ""
 
     Public AwayStream As GameStream = New GameStream()
     Public HomeStream As GameStream = New GameStream()
@@ -250,13 +252,15 @@ Public Class Game
         _StatusID = game("status")("statusCode").ToString()
         Dim status = If(_StatusID >= 5, 5, _StatusID)
 
-        HomeTeam = game("teams")("home")("team")("name").ToString()
+        Home = game("teams")("home")("team")("locationName").ToString()
         HomeAbbrev = game("teams")("home")("team")("abbreviation").ToString()
-        HomeTeamLogo = RemoveDiacritics(game("teams")("home")("team")("teamName").ToString().Replace(" ", "").Replace(".", "")) & ".gif"
+        HomeTeam = RemoveDiacritics(game("teams")("home")("team")("teamName").ToString().Replace(" ", "").Replace(".", ""))
+        HomeTeamName = Home + " " + HomeTeam
 
-        AwayTeam = game("teams")("away")("team")("name").ToString()
+        Away = game("teams")("away")("team")("locationName").ToString()
         AwayAbbrev = game("teams")("away")("team")("abbreviation").ToString()
-        AwayTeamLogo = RemoveDiacritics(game("teams")("away")("team")("teamName").ToString().Replace(" ", "").Replace(".", "")) & ".gif"
+        AwayTeam = RemoveDiacritics(game("teams")("away")("team")("teamName").ToString().Replace(" ", "").Replace(".", ""))
+        AwayTeamName = Away + " " + AwayTeam
         _GameType = Convert.ToInt32(GetChar(game("gamePk"), 6)) - 48 'Get type of the game : 1 preseason, 2 regular, 3 series
         GameState = [Enum].Parse(GetType(GameStateEnum), status)
 

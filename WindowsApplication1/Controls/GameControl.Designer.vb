@@ -22,8 +22,7 @@ Partial Class GameControl
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.HomeTeamToolTip = New MetroFramework.Components.MetroToolTip()
-        Me.AwayTeamToolTip = New MetroFramework.Components.MetroToolTip()
+        Me.TeamToolTip = New MetroFramework.Components.MetroToolTip()
         Me.BorderPanel1 = New BorderPanel()
         Me.lblAwayTeam = New MetroFramework.Controls.MetroLabel()
         Me.picAway = New System.Windows.Forms.PictureBox()
@@ -47,23 +46,18 @@ Partial Class GameControl
         Me.lblVS = New MetroFramework.Controls.MetroLabel()
         Me.lblTime = New MetroFramework.Controls.MetroLabel()
         Me.lblNotInSeason = New MetroFramework.Controls.MetroLabel()
+        Me.FeedToolTip = New MetroFramework.Components.MetroToolTip()
         Me.BorderPanel1.SuspendLayout()
         CType(Me.picAway, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picHome, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FlowLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'HomeTeamToolTip
+        'TeamToolTip
         '
-        Me.HomeTeamToolTip.Style = MetroFramework.MetroColorStyle.[Default]
-        Me.HomeTeamToolTip.StyleManager = Nothing
-        Me.HomeTeamToolTip.Theme = MetroFramework.MetroThemeStyle.Light
-        '
-        'AwayTeamToolTip
-        '
-        Me.AwayTeamToolTip.Style = MetroFramework.MetroColorStyle.[Default]
-        Me.AwayTeamToolTip.StyleManager = Nothing
-        Me.AwayTeamToolTip.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.TeamToolTip.Style = MetroFramework.MetroColorStyle.[Default]
+        Me.TeamToolTip.StyleManager = Nothing
+        Me.TeamToolTip.Theme = MetroFramework.MetroThemeStyle.Light
         '
         'BorderPanel1
         '
@@ -401,6 +395,12 @@ Partial Class GameControl
         Me.lblNotInSeason.Text = "NotInSeason"
         Me.lblNotInSeason.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'FeedToolTip
+        '
+        Me.FeedToolTip.Style = MetroFramework.MetroColorStyle.[Default]
+        Me.FeedToolTip.StyleManager = Nothing
+        Me.FeedToolTip.Theme = MetroFramework.MetroThemeStyle.Light
+        '
         'GameControl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -420,7 +420,6 @@ Partial Class GameControl
     End Sub
 
     Friend WithEvents picAway As PictureBox
-    Friend WithEvents picHome As PictureBox
     Friend WithEvents lblVS As MetroFramework.Controls.MetroLabel
     Friend WithEvents lblAwayTeam As MetroFramework.Controls.MetroLabel
     Friend WithEvents lblHomeTeam As MetroFramework.Controls.MetroLabel
@@ -428,8 +427,7 @@ Partial Class GameControl
     Friend WithEvents lblHomeScore As MetroFramework.Controls.MetroLabel
     Friend WithEvents lblTime As MetroFramework.Controls.MetroLabel
     Friend WithEvents BorderPanel1 As BorderPanel
-    Friend WithEvents HomeTeamToolTip As MetroFramework.Components.MetroToolTip
-    Private WithEvents AwayTeamToolTip As MetroFramework.Components.MetroToolTip
+    Friend WithEvents TeamToolTip As MetroFramework.Components.MetroToolTip
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents lblAwayStream As LinkLabel
     Friend WithEvents lblFrenchStream As LinkLabel
@@ -444,4 +442,6 @@ Partial Class GameControl
     Friend WithEvents lblPeriod As MetroFramework.Controls.MetroLabel
     Friend WithEvents lblNoStream As Label
     Friend WithEvents lblNotInSeason As MetroFramework.Controls.MetroLabel
+    Friend WithEvents picHome As PictureBox
+    Friend WithEvents FeedToolTip As MetroFramework.Components.MetroToolTip
 End Class

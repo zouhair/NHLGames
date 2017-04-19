@@ -58,16 +58,16 @@ Public Class GameControl
 
     Private Sub SetInitialProperties(Game As Game)
         picAway.SizeMode = PictureBoxSizeMode.StretchImage
-        If String.IsNullOrEmpty(Game.HomeTeamLogo) = False Then
-            picAway.Image = ImageFetcher.GetEmbeddedImage(Game.AwayTeamLogo)
-            AwayTeamToolTip.SetToolTip(picAway, "Away Team: " & Game.AwayTeam)
+        If String.IsNullOrEmpty(Game.HomeTeam) = False Then
+            picAway.Image = ImageFetcher.GetEmbeddedImage(Game.AwayTeam)
+            TeamToolTip.SetToolTip(picAway, "Away Team: " & Game.AwayTeamName)
         End If
 
 
         picHome.SizeMode = PictureBoxSizeMode.StretchImage
-        If String.IsNullOrEmpty(Game.AwayTeamLogo) = False Then
-            picHome.Image = ImageFetcher.GetEmbeddedImage(Game.HomeTeamLogo)
-            HomeTeamToolTip.SetToolTip(picHome, "Home Team: " & Game.HomeTeam)
+        If String.IsNullOrEmpty(Game.AwayTeam) = False Then
+            picHome.Image = ImageFetcher.GetEmbeddedImage(Game.HomeTeam)
+            TeamToolTip.SetToolTip(picHome, "Home Team: " & Game.HomeTeamName)
         End If
 
         lblPeriod.Text = ""
@@ -103,22 +103,48 @@ Public Class GameControl
             lblNoStream.Text = "Streams available during pregame"
         End If
 
+        Dim tip As String = ""
+
         lblAwayStream.Visible = Game.AwayStream.IsAvailable
-        If Game.AwayStream.Network <> String.Empty Then
-            lblAwayStream.Text = lblAwayStream.Text & " (" & Game.AwayStream.Network & ")"
+        If Game.AwayStream.IsAvailable Then
+            tip = Game.Away + " stream"
+            If Game.AwayStream.Network <> String.Empty Then
+                lblAwayStream.Text += " (" & Game.AwayStream.Network & ")"
+                tip += " on " + Game.AwayStream.Network
+            End If
+            TeamToolTip.SetToolTip(lblAwayStream, tip)
         End If
+
         lblHomeStream.Visible = Game.HomeStream.IsAvailable
-        If Game.HomeStream.Network <> String.Empty Then
-            lblHomeStream.Text = lblHomeStream.Text & " (" & Game.HomeStream.Network & ")"
+        If Game.HomeStream.IsAvailable Then
+            tip = Game.Home + " stream"
+            If Game.HomeStream.Network <> String.Empty Then
+                lblHomeStream.Text += " (" & Game.HomeStream.Network & ")"
+                tip += " on " + Game.HomeStream.Network
+            End If
+            TeamToolTip.SetToolTip(lblHomeStream, tip)
         End If
+
         lblFrenchStream.Visible = Game.FrenchStream.IsAvailable
-        If Game.FrenchStream.Network <> String.Empty Then
-            lblFrenchStream.Text = lblFrenchStream.Text & " (" & Game.FrenchStream.Network & ")"
+        If Game.FrenchStream.IsAvailable Then
+            tip = "French canadians stream"
+            If Game.FrenchStream.Network <> String.Empty Then
+                lblFrenchStream.Text += " (" & Game.FrenchStream.Network & ")"
+                tip += " on " + Game.FrenchStream.Network
+            End If
+            TeamToolTip.SetToolTip(lblFrenchStream, tip)
         End If
+
         lblNationalStream.Visible = Game.NationalStream.IsAvailable
-        If Game.NationalStream.Network <> String.Empty Then
-            lblNationalStream.Text = lblNationalStream.Text & " (" & Game.NationalStream.Network & ")"
+        If Game.NationalStream.IsAvailable Then
+            tip = "National stream"
+            If Game.NationalStream.Network <> String.Empty Then
+                lblNationalStream.Text += " (" & Game.NationalStream.Network & ")"
+                tip += " on " + Game.NationalStream.Network
+            End If
+            TeamToolTip.SetToolTip(lblNationalStream, tip)
         End If
+
         lblMultiCam1.Visible = Game.MultiCam1Stream.IsAvailable
 
         lblMultiCam2.Visible = Game.MultiCam2Stream.IsAvailable
