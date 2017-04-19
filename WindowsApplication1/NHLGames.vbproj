@@ -139,9 +139,7 @@
     <Compile Include="Utilities\Downloader.vb" />
     <Compile Include="Objects\Game.vb" />
     <Compile Include="Objects\GameStream.vb" />
-    <Compile Include="NHLGames.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="NHLGames.vb" />
     <Compile Include="NHLGames.Designer.vb">
       <DependentUpon>NHLGames.vb</DependentUpon>
       <SubType>Form</SubType>
@@ -259,7 +257,6 @@
     <EmbeddedResource Include="Logos\Canucks.gif" />
     <EmbeddedResource Include="Logos\Capitals.gif" />
     <EmbeddedResource Include="Logos\Coyotes.gif" />
-    <EmbeddedResource Include="Logos\cup.gif" />
     <EmbeddedResource Include="Logos\Devils.gif" />
     <EmbeddedResource Include="Logos\Ducks.gif" />
     <EmbeddedResource Include="Logos\Flames.gif" />
