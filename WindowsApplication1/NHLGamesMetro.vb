@@ -597,18 +597,18 @@ Public Class NHLGamesMetro
         Process.Start(sInfo)
     End Sub
 
-    Private Sub lnkMpvDownload_Click(sender As Object, e As EventArgs) Handles lnkMpvDownload.Click
+    Private Sub lnkMpvDownload_Click(sender As Object, e As EventArgs)
         Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://mpv.io/installation/")
-        Process.Start(sInfo)
-    End Sub
-
-    Private Sub lnkDownload_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkDownload.LinkClicked
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://www.reddit.com/r/nhl_games/wiki/downloads")
         Process.Start(sInfo)
     End Sub
 
     Private Sub btnAddHosts_Click(sender As Object, e As EventArgs) Handles btnAddHosts.Click
         HostsFile.AddEntry(ServerIP, DomainName, True)
+    End Sub
+
+    Private Sub lnkDownload_Click(sender As Object, e As EventArgs) Handles lnkDownload.Click
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://www.reddit.com/r/nhl_games/wiki/downloads")
+        Process.Start(sInfo)
     End Sub
 
 #End Region
