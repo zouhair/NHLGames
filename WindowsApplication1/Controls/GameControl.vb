@@ -85,11 +85,6 @@ Public Class GameControl
         lblEndzoneCam2.Visible = Game.EndzoneCam2Stream.IsAvailable
     End Sub
 
-    Private Sub btnWatch_Click(sender As Object, e As EventArgs)
-        Dim newForm As New WatchGameForm(_Game, New GameWatchArguments())
-        newForm.ShowDialog(Me)
-    End Sub
-
     Private Sub GameUpdatedHandler(game As Game)
         _Game = game
         UpdateGameStatusProperties(game)
