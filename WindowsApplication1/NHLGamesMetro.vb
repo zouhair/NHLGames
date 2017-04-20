@@ -304,7 +304,6 @@ Public Class NHLGamesMetro
         End If
         VersionCheck()
         IntitializeApplicationSettings()
-        LoadGamesAsync(m_Date)
     End Sub
 
 
