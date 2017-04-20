@@ -158,6 +158,7 @@
     <Compile Include="Utilities\FileAccess.vb" />
     <Compile Include="Utilities\HostsFile.vb" />
     <Compile Include="Utilities\ImageFetcher.vb" />
+    <Compile Include="Utilities\PathFinder.vb" />
     <Compile Include="Utilities\Serialization.vb" />
     <Compile Include="Utilities\TextboxConsoleOutputRediect.vb" />
     <Compile Include="WatchGameForm.Designer.vb">
