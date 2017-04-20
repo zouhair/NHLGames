@@ -7,7 +7,7 @@ Public Class PathFinder
     End Function
 
     Public Shared Function GetPathOfMPC() As String
-        Return My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\MPC-HC\MPC-HC", "ExePath", Nothing)
+        Return My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\MPC-HC\MPC-HC", "ExePath", "C:\Program Files\MPC-HC\mpc-hc64.exe")
     End Function
 
 End Class
