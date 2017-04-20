@@ -2,8 +2,7 @@
 
 Public Class PathFinder
     Public Shared Function GetPathOfVLC() As String
-        Dim vlcValue = My.Computer.Registry.GetValue(
-            "HKEY_LOCAL_MACHINE\SOFTWARE\VideoLAN\VLC", "InstallDir", Nothing)
+        Dim vlcValue = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\VideoLAN\VLC", "InstallDir", Nothing)
         If vlcValue.Substring(vlcValue.Length - 4, 4) <> ".exe" Then
             vlcValue += "\vlc.exe"
         End If
