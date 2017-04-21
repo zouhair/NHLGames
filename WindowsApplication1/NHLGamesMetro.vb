@@ -65,10 +65,11 @@ Public Class NHLGamesMetro
             If mpc <> "" Then
                 mpcPath = mpc
             End If
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.MPCPath, mpcPath)
+        ElseIf mpcPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.mpcPath, "") Then
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.MPCPath, mpcPath)
         End If
-
         txtMPCPath.Text = mpcPath
-        ApplicationSettings.SetValue(ApplicationSettings.Settings.MPCPath, mpcPath)
 
 
         Dim vlcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VLCPath, "")
@@ -77,22 +78,21 @@ Public Class NHLGamesMetro
             If vlc <> "" Then
                 vlcPath = vlc
             End If
+        ElseIf vlcPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.vlcPath, "") Then
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.VLCPath, vlcPath)
         End If
-
         txtVLCPath.Text = vlcPath
-        ApplicationSettings.SetValue(ApplicationSettings.Settings.VLCPath, vlcPath)
+
 
         Dim mpvPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.mpvPath, "")
         If mpvPath = "" Then
             ' First check inside app folder
             mpvPath = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
-
             If Not File.Exists(mpvPath) Then
                 Console.WriteLine("Can't find mpv.exe. It came with NHLGames. You probably moved it or deleted it." +
-                                  "However, NHLGames can run without it, as long as you have VLC Or mpc installed And set.")
+                                  "However, NHLGames can run without it, as long as you have VLC or mpc installed and set.")
                 mpvPath = ""
             End If
-
             ApplicationSettings.SetValue(ApplicationSettings.Settings.mpvPath, mpvPath)
         ElseIf mpvPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.mpvPath, "") Then
             If File.Exists(mpvPath) Then
@@ -101,18 +101,17 @@ Public Class NHLGamesMetro
         End If
         txtMpvPath.Text = mpvPath
 
+
         Dim liveStreamerPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.LiveStreamerPath, "")
         If liveStreamerPath = "" Then
             ' First check inside app folder
             liveStreamerPath = Path.Combine(Application.StartupPath, "livestreamer-v1.12.2\livestreamer.exe")
-
             If Not File.Exists(liveStreamerPath) Then
                 Console.WriteLine("Error:  Can't find livestreamer.exe. It came with NHLGames. You probably moved it or deleted it and " +
-                                  "NHLGames needs it to send the stream to your media player. You will have to put it back there, " +
-                                  "just drop the folder 'livestreamer-v1.12.2' next to NHLGames.exe.")
+                                  "NHLGames needs it to send the stream to your media player. If you don't set any custom path, you will " +
+                                  "have to put it back there, just drop the folder 'livestreamer-v1.12.2' next to NHLGames.exe.")
                 liveStreamerPath = ""
             End If
-
             ApplicationSettings.SetValue(ApplicationSettings.Settings.LiveStreamerPath, liveStreamerPath)
         ElseIf liveStreamerPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.LiveStreamerPath, "") Then
             If File.Exists(liveStreamerPath) Then
@@ -120,6 +119,7 @@ Public Class NHLGamesMetro
             End If
         End If
         txtLiveStreamPath.Text = liveStreamerPath
+
 
         MetroCheckBox1.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True)
         MetroCheckBox2.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores, True)
