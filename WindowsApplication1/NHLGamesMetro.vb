@@ -51,58 +51,75 @@ Public Class NHLGamesMetro
 
     Private Sub IntitializeApplicationSettings()
 
-        SettingsToolTip.SetToolTip(rbQual1, "~0.4Go/hr")
-        SettingsToolTip.SetToolTip(rbQual2, "~0.5Go/hr")
-        SettingsToolTip.SetToolTip(rbQual3, "~0.9Go/hr")
-        SettingsToolTip.SetToolTip(rbQual4, "~1.2Go/hr")
-        SettingsToolTip.SetToolTip(rbQual5, "~1.5Go/hr")
-        SettingsToolTip.SetToolTip(rbQual6, "~2.0Go/hr")
+        SettingsToolTip.SetToolTip(rbQual1, "300Mo/hr")
+        SettingsToolTip.SetToolTip(rbQual2, "500Mo/hr")
+        SettingsToolTip.SetToolTip(rbQual3, "700Mo/hr")
+        SettingsToolTip.SetToolTip(rbQual4, "950Mo/hr")
+        SettingsToolTip.SetToolTip(rbQual5, "1.3Go/hr")
+        SettingsToolTip.SetToolTip(rbQual6, "1.8Go/hr")
+        SettingsToolTip.SetToolTip(chk60, "+700Mo/hr (+40%)")
+
         Dim mpcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MPCPath, "")
         If mpcPath = "" Then
-            If My.Computer.FileSystem.FileExists(PathFinder.GetPathOfMPC) Then
-                mpcPath = PathFinder.GetPathOfMPC
+            Dim mpc As String = PathFinder.GetPathOfMPC
+            If mpc <> "" Then
+                mpcPath = mpc
             End If
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.MPCPath, mpcPath)
+        ElseIf mpcPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.mpcPath, "") Then
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.MPCPath, mpcPath)
         End If
-
         txtMPCPath.Text = mpcPath
-        ApplicationSettings.SetValue(ApplicationSettings.Settings.MPCPath, mpcPath)
 
 
         Dim vlcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VLCPath, "")
         If vlcPath = "" Then
-            If My.Computer.FileSystem.FileExists(PathFinder.GetPathOfVLC) Then
-                vlcPath = PathFinder.GetPathOfVLC
+            Dim vlc As String = PathFinder.GetPathOfVLC
+            If vlc <> "" Then
+                vlcPath = vlc
             End If
+        ElseIf vlcPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.vlcPath, "") Then
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.VLCPath, vlcPath)
         End If
-
         txtVLCPath.Text = vlcPath
-        ApplicationSettings.SetValue(ApplicationSettings.Settings.VLCPath, vlcPath)
+
 
         Dim mpvPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.mpvPath, "")
         If mpvPath = "" Then
             ' First check inside app folder
             mpvPath = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
-
-            'If Not File.Exists(liveStreamerPath) Then
-            '    ' If no such file check if we can find one in system
-            '    liveStreamerPath = FileAccess.LocateEXE("livestreamer.exe", "\Livestreamer")
-            'End If
+            If Not File.Exists(mpvPath) Then
+                Console.WriteLine("Can't find mpv.exe. It came with NHLGames. You probably moved it or deleted it." +
+                                  "However, NHLGames can run without it, as long as you have VLC or mpc installed and set.")
+                mpvPath = ""
+            End If
             ApplicationSettings.SetValue(ApplicationSettings.Settings.mpvPath, mpvPath)
+        ElseIf mpvPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.mpvPath, "") Then
+            If File.Exists(mpvPath) Then
+                ApplicationSettings.SetValue(ApplicationSettings.Settings.mpvPath, mpvPath)
+            End If
         End If
         txtMpvPath.Text = mpvPath
+
 
         Dim liveStreamerPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.LiveStreamerPath, "")
         If liveStreamerPath = "" Then
             ' First check inside app folder
             liveStreamerPath = Path.Combine(Application.StartupPath, "livestreamer-v1.12.2\livestreamer.exe")
-
-            'If Not File.Exists(liveStreamerPath) Then
-            '    ' If no such file check if we can find one in system
-            '    liveStreamerPath = FileAccess.LocateEXE("livestreamer.exe", "\Livestreamer")
-            'End If
+            If Not File.Exists(liveStreamerPath) Then
+                Console.WriteLine("Error:  Can't find livestreamer.exe. It came with NHLGames. You probably moved it or deleted it and " +
+                                  "NHLGames needs it to send the stream to your media player. If you don't set any custom path, you will " +
+                                  "have to put it back there, just drop the folder 'livestreamer-v1.12.2' next to NHLGames.exe.")
+                liveStreamerPath = ""
+            End If
             ApplicationSettings.SetValue(ApplicationSettings.Settings.LiveStreamerPath, liveStreamerPath)
+        ElseIf liveStreamerPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.LiveStreamerPath, "") Then
+            If File.Exists(liveStreamerPath) Then
+                ApplicationSettings.SetValue(ApplicationSettings.Settings.LiveStreamerPath, liveStreamerPath)
+            End If
         End If
         txtLiveStreamPath.Text = liveStreamerPath
+
 
         MetroCheckBox1.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True)
         MetroCheckBox2.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores, True)
@@ -120,6 +137,11 @@ Public Class NHLGamesMetro
         lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(m_Date.DayOfWeek).Substring(0, 3) + ", " +
             CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(m_Date.Month).Substring(0, 3) + " " +
             Date.Today.Day.ToString + ", " + m_Date.Year.ToString
+
+        progress.Location = New Point((FlowLayoutPanel.Width - progress.Width) / 2, FlowLayoutPanel.Location.Y + 150)
+        NoGames.Location = New Point((FlowLayoutPanel.Width - NoGames.Width) / 2, FlowLayoutPanel.Location.Y + 148)
+
+        tmrAnimate.Start()
 
         SettingsLoaded = True
 
@@ -184,12 +206,6 @@ Public Class NHLGamesMetro
 
             WatchArgs.UseOutputArgs = chkEnableOutput.Checked
             WatchArgs.PlayerOutputPath = txtOutputPath.Text
-
-            progress.Location = New Point((FlowLayoutPanel.Width - progress.Width) / 2, FlowLayoutPanel.Location.Y + 150)
-            NoGames.Location = New Point((FlowLayoutPanel.Width - NoGames.Width) / 2, FlowLayoutPanel.Location.Y + 148)
-
-            tmrAnimate.Start()
-
             ApplicationSettings.SetValue(ApplicationSettings.Settings.DefaultWatchArgs, Serialization.SerializeObject(Of Game.GameWatchArguments)(WatchArgs))
         End If
     End Sub
@@ -271,6 +287,7 @@ Public Class NHLGamesMetro
         Else
             lblVersion.Text = "Version: " & ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version)
             lblVersion.ForeColor = Color.Gray
+            lblVersion.Padding = New Padding(0, 0, 0, 0)
         End If
     End Sub
 
@@ -602,16 +619,6 @@ Public Class NHLGamesMetro
         Process.Start(sInfo)
     End Sub
 
-    Private Sub lnkMpvDownload_Click(sender As Object, e As EventArgs) Handles lnkMpvDownload.Click
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://mpv.io/installation/")
-        Process.Start(sInfo)
-    End Sub
-
-    Private Sub lnkDownload_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkDownload.LinkClicked
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://www.reddit.com/r/nhl_games/wiki/downloads")
-        Process.Start(sInfo)
-    End Sub
-
     Private Sub btnAddHosts_Click(sender As Object, e As EventArgs) Handles btnAddHosts.Click
         HostsFile.AddEntry(ServerIP, DomainName, True)
     End Sub
@@ -658,6 +665,11 @@ Public Class NHLGamesMetro
 
     Private Sub MetroCheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles MetroCheckBox2.CheckedChanged
         ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowLiveScores, MetroCheckBox2.Checked)
+    End Sub
+
+    Private Sub lnkDownload_Click(sender As Object, e As EventArgs) Handles lnkDownload.Click
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://www.reddit.com/r/nhl_games/wiki/downloads")
+        Process.Start(sInfo)
     End Sub
 
 #End Region

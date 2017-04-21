@@ -99,7 +99,7 @@ Public Class GameControl
         End If
 
         lblNoStream.Visible = If(Not Game.AreAnyStreamsAvailable And Game.Date.ToLocalTime <= Date.Today.AddDays(1), True, False)
-        If Not Game.AreAnyStreamsAvailable And Game.Date.ToLocalTime >= Date.Today Then
+        If Not Game.AreAnyStreamsAvailable And Game.Date.ToLocalTime >= Date.Today And Game.GameState < 5 Then
             lblNoStream.Text = "Streams available during pregame"
         End If
 
