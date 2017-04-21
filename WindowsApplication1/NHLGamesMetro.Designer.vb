@@ -1059,6 +1059,7 @@ Partial Class NHLGamesMetro
         '
         'lnkDownload
         '
+        Me.lnkDownload.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lnkDownload.AutoSize = True
         Me.lnkDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.lnkDownload.Cursor = System.Windows.Forms.Cursors.Hand
@@ -1069,6 +1070,7 @@ Partial Class NHLGamesMetro
         Me.lnkDownload.TabIndex = 59
         Me.lnkDownload.Text = "Download"
         Me.lnkDownload.UseSelectable = True
+        Me.lnkDownload.Visible = False
         '
         'NHLGamesMetro
         '

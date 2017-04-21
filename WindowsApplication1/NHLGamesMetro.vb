@@ -270,8 +270,8 @@ Public Class NHLGamesMetro
         Dim strLatest = Downloader.DownloadApplicationVersion()
         Console.WriteLine("Status: Current version is " & strLatest)
         Dim versionFromSettings = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version, "")
-        If strLatest < versionFromSettings Then
-            lblVersion.Text = "Version " & strLatest & " available! You are running " & versionFromSettings & " :"
+        If strLatest > versionFromSettings Then
+            lblVersion.Text = "Version " & strLatest & " available! You are running " & versionFromSettings & "."
             lblVersion.ForeColor = Color.Red
             lnkDownload.Visible = True
             Dim strChangeLog = Downloader.DownloadChangelog()
@@ -279,6 +279,7 @@ Public Class NHLGamesMetro
         Else
             lblVersion.Text = "Version: " & ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version)
             lblVersion.ForeColor = Color.Gray
+            lblVersion.Padding = New Padding(0, 0, 0, 0)
         End If
     End Sub
 
