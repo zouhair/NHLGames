@@ -104,7 +104,7 @@ Partial Class NHLGamesMetro
         Me.StatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrAnimate = New System.Windows.Forms.Timer(Me.components)
         Me.SettingsToolTip = New MetroFramework.Components.MetroToolTip()
-        Me.lnkDownload = New System.Windows.Forms.LinkLabel()
+        Me.lnkDownload = New MetroFramework.Controls.MetroLink()
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl.SuspendLayout()
         Me.GamesTab.SuspendLayout()
@@ -167,13 +167,13 @@ Partial Class NHLGamesMetro
         'lblVersion
         '
         Me.lblVersion.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblVersion.AutoSize = True
-        Me.lblVersion.Location = New System.Drawing.Point(735, 44)
+        Me.lblVersion.Location = New System.Drawing.Point(670, 44)
         Me.lblVersion.MinimumSize = New System.Drawing.Size(200, 5)
         Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.Size = New System.Drawing.Size(200, 13)
+        Me.lblVersion.Padding = New System.Windows.Forms.Padding(0, 0, 60, 0)
+        Me.lblVersion.Size = New System.Drawing.Size(373, 23)
         Me.lblVersion.TabIndex = 17
-        Me.lblVersion.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.lblVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'RichTextBox
         '
@@ -201,7 +201,7 @@ Partial Class NHLGamesMetro
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl.Location = New System.Drawing.Point(10, 60)
         Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 1
+        Me.TabControl.SelectedIndex = 0
         Me.TabControl.Size = New System.Drawing.Size(1037, 540)
         Me.TabControl.TabIndex = 22
         Me.TabControl.UseSelectable = True
@@ -971,10 +971,10 @@ Partial Class NHLGamesMetro
         Me.ConsoleTab.HorizontalScrollbarBarColor = True
         Me.ConsoleTab.HorizontalScrollbarHighlightOnWheel = False
         Me.ConsoleTab.HorizontalScrollbarSize = 10
-        Me.ConsoleTab.Location = New System.Drawing.Point(4, 35)
+        Me.ConsoleTab.Location = New System.Drawing.Point(4, 38)
         Me.ConsoleTab.Name = "ConsoleTab"
         Me.ConsoleTab.Padding = New System.Windows.Forms.Padding(0, 0, 0, 30)
-        Me.ConsoleTab.Size = New System.Drawing.Size(1029, 501)
+        Me.ConsoleTab.Size = New System.Drawing.Size(1029, 498)
         Me.ConsoleTab.TabIndex = 2
         Me.ConsoleTab.Text = "Console      "
         Me.ConsoleTab.VerticalScrollbarBarColor = True
@@ -997,10 +997,10 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsTab.HorizontalScrollbarBarColor = True
         Me.AdDetectionSettingsTab.HorizontalScrollbarHighlightOnWheel = False
         Me.AdDetectionSettingsTab.HorizontalScrollbarSize = 6
-        Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 35)
+        Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 38)
         Me.AdDetectionSettingsTab.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsTab.Name = "AdDetectionSettingsTab"
-        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1029, 501)
+        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1029, 498)
         Me.AdDetectionSettingsTab.TabIndex = 4
         Me.AdDetectionSettingsTab.Text = "Ad Detection Modules"
         Me.AdDetectionSettingsTab.VerticalScrollbarBarColor = True
@@ -1015,7 +1015,7 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsElementHost.Location = New System.Drawing.Point(0, 0)
         Me.AdDetectionSettingsElementHost.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsElementHost.Name = "AdDetectionSettingsElementHost"
-        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1029, 501)
+        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1029, 498)
         Me.AdDetectionSettingsElementHost.TabIndex = 2
         Me.AdDetectionSettingsElementHost.Child = Nothing
         '
@@ -1060,20 +1060,22 @@ Partial Class NHLGamesMetro
         'lnkDownload
         '
         Me.lnkDownload.AutoSize = True
-        Me.lnkDownload.Location = New System.Drawing.Point(967, 44)
+        Me.lnkDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.lnkDownload.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lnkDownload.ForeColor = System.Drawing.Color.Black
+        Me.lnkDownload.Location = New System.Drawing.Point(982, 44)
         Me.lnkDownload.Name = "lnkDownload"
-        Me.lnkDownload.Size = New System.Drawing.Size(55, 13)
-        Me.lnkDownload.TabIndex = 23
-        Me.lnkDownload.TabStop = True
+        Me.lnkDownload.Size = New System.Drawing.Size(65, 23)
+        Me.lnkDownload.TabIndex = 59
         Me.lnkDownload.Text = "Download"
-        Me.lnkDownload.Visible = False
+        Me.lnkDownload.UseSelectable = True
         '
         'NHLGamesMetro
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1057, 600)
-        Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.lnkDownload)
+        Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.TabControl)
         Me.Controls.Add(Me.lblVersion)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -1180,5 +1182,5 @@ Partial Class NHLGamesMetro
     Friend WithEvents MetroCheckBox2 As MetroCheckBox
     Friend WithEvents MetroLabel5 As MetroLabel
     Friend WithEvents SettingsToolTip As MetroFramework.Components.MetroToolTip
-    Friend WithEvents lnkDownload As LinkLabel
+    Friend WithEvents lnkDownload As MetroLink
 End Class

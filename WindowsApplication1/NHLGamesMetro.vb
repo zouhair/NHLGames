@@ -51,12 +51,14 @@ Public Class NHLGamesMetro
 
     Private Sub IntitializeApplicationSettings()
 
-        SettingsToolTip.SetToolTip(rbQual1, "~0.4Go/hr")
-        SettingsToolTip.SetToolTip(rbQual2, "~0.5Go/hr")
-        SettingsToolTip.SetToolTip(rbQual3, "~0.9Go/hr")
-        SettingsToolTip.SetToolTip(rbQual4, "~1.2Go/hr")
-        SettingsToolTip.SetToolTip(rbQual5, "~1.5Go/hr")
-        SettingsToolTip.SetToolTip(rbQual6, "~2.0Go/hr")
+        SettingsToolTip.SetToolTip(rbQual1, "300Mo/hr")
+        SettingsToolTip.SetToolTip(rbQual2, "500Mo/hr")
+        SettingsToolTip.SetToolTip(rbQual3, "700Mo/hr")
+        SettingsToolTip.SetToolTip(rbQual4, "950Mo/hr")
+        SettingsToolTip.SetToolTip(rbQual5, "1.3Go/hr")
+        SettingsToolTip.SetToolTip(rbQual6, "1.8Go/hr")
+        SettingsToolTip.SetToolTip(chk60, "+700Mo/hr (+40%)")
+
         Dim mpcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MPCPath, "")
         If mpcPath = "" Then
             Dim mpc As String = PathFinder.GetPathOfMPC
@@ -268,8 +270,8 @@ Public Class NHLGamesMetro
         Dim strLatest = Downloader.DownloadApplicationVersion()
         Console.WriteLine("Status: Current version is " & strLatest)
         Dim versionFromSettings = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version, "")
-        If strLatest > versionFromSettings Then
-            lblVersion.Text = "Version " & strLatest & " available! You are running " & versionFromSettings & "."
+        If strLatest < versionFromSettings Then
+            lblVersion.Text = "Version " & strLatest & " available! You are running " & versionFromSettings & " :"
             lblVersion.ForeColor = Color.Red
             lnkDownload.Visible = True
             Dim strChangeLog = Downloader.DownloadChangelog()
@@ -608,11 +610,6 @@ Public Class NHLGamesMetro
         Process.Start(sInfo)
     End Sub
 
-    Private Sub lnkDownload_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkDownload.LinkClicked
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://www.reddit.com/r/nhl_games/wiki/downloads")
-        Process.Start(sInfo)
-    End Sub
-
     Private Sub btnAddHosts_Click(sender As Object, e As EventArgs) Handles btnAddHosts.Click
         HostsFile.AddEntry(ServerIP, DomainName, True)
     End Sub
@@ -627,8 +624,8 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub tmrAnimate_Tick(sender As Object, e As EventArgs) Handles tmrAnimate.Tick
-        If NHLGamesMetro.m_progressValue <Me.progress.Maximum Then
-            progress.Value= NHLGamesMetro.m_progressValue
+        If NHLGamesMetro.m_progressValue < Me.progress.Maximum Then
+            progress.Value = NHLGamesMetro.m_progressValue
         ElseIf progress.Value < Me.progress.Maximum And NHLGamesMetro.m_progressValue <= Me.progress.Maximum Then
             progress.Value = Me.progress.Maximum
         End If
@@ -659,6 +656,11 @@ Public Class NHLGamesMetro
 
     Private Sub MetroCheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles MetroCheckBox2.CheckedChanged
         ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowLiveScores, MetroCheckBox2.Checked)
+    End Sub
+
+    Private Sub lnkDownload_Click(sender As Object, e As EventArgs) Handles lnkDownload.Click
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://www.reddit.com/r/nhl_games/wiki/downloads")
+        Process.Start(sInfo)
     End Sub
 
 #End Region
