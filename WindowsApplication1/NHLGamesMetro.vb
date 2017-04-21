@@ -126,6 +126,11 @@ Public Class NHLGamesMetro
             CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(m_Date.Month).Substring(0, 3) + " " +
             Date.Today.Day.ToString + ", " + m_Date.Year.ToString
 
+        progress.Location = New Point((FlowLayoutPanel.Width - progress.Width) / 2, FlowLayoutPanel.Location.Y + 150)
+        NoGames.Location = New Point((FlowLayoutPanel.Width - NoGames.Width) / 2, FlowLayoutPanel.Location.Y + 148)
+
+        tmrAnimate.Start()
+
         SettingsLoaded = True
 
     End Sub
@@ -189,12 +194,6 @@ Public Class NHLGamesMetro
 
             WatchArgs.UseOutputArgs = chkEnableOutput.Checked
             WatchArgs.PlayerOutputPath = txtOutputPath.Text
-
-            progress.Location = New Point((FlowLayoutPanel.Width - progress.Width) / 2, FlowLayoutPanel.Location.Y + 150)
-            NoGames.Location = New Point((FlowLayoutPanel.Width - NoGames.Width) / 2, FlowLayoutPanel.Location.Y + 148)
-
-            tmrAnimate.Start()
-
             ApplicationSettings.SetValue(ApplicationSettings.Settings.DefaultWatchArgs, Serialization.SerializeObject(Of Game.GameWatchArguments)(WatchArgs))
         End If
     End Sub
