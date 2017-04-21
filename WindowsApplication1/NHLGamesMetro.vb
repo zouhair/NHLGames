@@ -94,6 +94,10 @@ Public Class NHLGamesMetro
             End If
 
             ApplicationSettings.SetValue(ApplicationSettings.Settings.mpvPath, mpvPath)
+        ElseIf mpvPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.mpvPath, "") Then
+            If File.Exists(mpvPath) Then
+                ApplicationSettings.SetValue(ApplicationSettings.Settings.mpvPath, mpvPath)
+            End If
         End If
         txtMpvPath.Text = mpvPath
 
@@ -110,6 +114,10 @@ Public Class NHLGamesMetro
             End If
 
             ApplicationSettings.SetValue(ApplicationSettings.Settings.LiveStreamerPath, liveStreamerPath)
+        ElseIf liveStreamerPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.LiveStreamerPath, "") Then
+            If File.Exists(liveStreamerPath) Then
+                ApplicationSettings.SetValue(ApplicationSettings.Settings.LiveStreamerPath, liveStreamerPath)
+            End If
         End If
         txtLiveStreamPath.Text = liveStreamerPath
 
