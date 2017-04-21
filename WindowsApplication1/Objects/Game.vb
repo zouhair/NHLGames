@@ -252,6 +252,13 @@ Public Class Game
         _StatusID = game("status")("statusCode").ToString()
         Dim status = If(_StatusID >= 5, 5, _StatusID)
 
+        If Not (game.TryGetValue("teams", "home") And game.TryGetValue("teams", "away") And
+                game.TryGetValue("linescore", "currentPeriodOrdinal") And game.TryGetValue("linescore", "currentPeriodTimeRemaining") And
+                game.TryGetValue("seriesSummary", "gameNumber") And game.TryGetValue("seriesSummary", "seriesStatusShort") And
+                game.TryGetValue("content", "media")) Then
+            Console.WriteLine("Error: Unable to decode url from NHL API, the structure changed. We will have to fix this.")
+        End If
+
         Home = game("teams")("home")("team")("locationName").ToString()
         HomeAbbrev = game("teams")("home")("team")("abbreviation").ToString()
         HomeTeam = RemoveDiacritics(game("teams")("home")("team")("teamName").ToString().Replace(" ", "").Replace(".", ""))
