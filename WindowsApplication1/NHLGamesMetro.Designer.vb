@@ -44,6 +44,8 @@ Partial Class NHLGamesMetro
         Me.lblDate = New System.Windows.Forms.Label()
         Me.FlowLayoutPanel = New System.Windows.Forms.FlowLayoutPanel()
         Me.SettingTab = New MetroFramework.Controls.MetroTabPage()
+        Me.lnkVLCDownload = New MetroFramework.Controls.MetroLink()
+        Me.lnkMPCDownload = New MetroFramework.Controls.MetroLink()
         Me.MetroCheckBox2 = New MetroFramework.Controls.MetroCheckBox()
         Me.MetroLabel5 = New MetroFramework.Controls.MetroLabel()
         Me.btnAddHosts = New MetroFramework.Controls.MetroButton()
@@ -59,10 +61,7 @@ Partial Class NHLGamesMetro
         Me.txtPlayerArgs = New System.Windows.Forms.TextBox()
         Me.txtOutputPath = New System.Windows.Forms.TextBox()
         Me.MetroPanel2 = New MetroFramework.Controls.MetroPanel()
-        Me.lnkMpvDownload = New MetroFramework.Controls.MetroLink()
         Me.rbMpv = New MetroFramework.Controls.MetroRadioButton()
-        Me.lnkMPCDownload = New MetroFramework.Controls.MetroLink()
-        Me.lnkVLCDownload = New MetroFramework.Controls.MetroLink()
         Me.rbMPC = New MetroFramework.Controls.MetroRadioButton()
         Me.rbVLC = New MetroFramework.Controls.MetroRadioButton()
         Me.MetroPanel5 = New MetroFramework.Controls.MetroPanel()
@@ -105,7 +104,7 @@ Partial Class NHLGamesMetro
         Me.StatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrAnimate = New System.Windows.Forms.Timer(Me.components)
         Me.SettingsToolTip = New MetroFramework.Components.MetroToolTip()
-        Me.lnkDownload = New System.Windows.Forms.LinkLabel()
+        Me.lnkDownload = New MetroFramework.Controls.MetroLink()
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl.SuspendLayout()
         Me.GamesTab.SuspendLayout()
@@ -168,13 +167,13 @@ Partial Class NHLGamesMetro
         'lblVersion
         '
         Me.lblVersion.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblVersion.AutoSize = True
-        Me.lblVersion.Location = New System.Drawing.Point(735, 44)
+        Me.lblVersion.Location = New System.Drawing.Point(670, 44)
         Me.lblVersion.MinimumSize = New System.Drawing.Size(200, 5)
         Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.Size = New System.Drawing.Size(200, 13)
+        Me.lblVersion.Padding = New System.Windows.Forms.Padding(0, 0, 60, 0)
+        Me.lblVersion.Size = New System.Drawing.Size(373, 23)
         Me.lblVersion.TabIndex = 17
-        Me.lblVersion.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.lblVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'RichTextBox
         '
@@ -202,7 +201,7 @@ Partial Class NHLGamesMetro
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl.Location = New System.Drawing.Point(10, 60)
         Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 1
+        Me.TabControl.SelectedIndex = 0
         Me.TabControl.Size = New System.Drawing.Size(1037, 540)
         Me.TabControl.TabIndex = 22
         Me.TabControl.UseSelectable = True
@@ -235,7 +234,7 @@ Partial Class NHLGamesMetro
         '
         Me.progress.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.progress.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.progress.Location = New System.Drawing.Point(548, 20)
+        Me.progress.Location = New System.Drawing.Point(533, 14)
         Me.progress.MarqueeAnimationSpeed = 10
         Me.progress.Maximum = 1000
         Me.progress.Name = "progress"
@@ -253,7 +252,7 @@ Partial Class NHLGamesMetro
         Me.NoGames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.NoGames.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NoGames.ForeColor = System.Drawing.Color.DimGray
-        Me.NoGames.Location = New System.Drawing.Point(679, 4)
+        Me.NoGames.Location = New System.Drawing.Point(739, 14)
         Me.NoGames.Margin = New System.Windows.Forms.Padding(3)
         Me.NoGames.Name = "NoGames"
         Me.NoGames.Padding = New System.Windows.Forms.Padding(20, 6, 20, 6)
@@ -367,12 +366,11 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel.BackColor = System.Drawing.Color.White
         Me.FlowLayoutPanel.Location = New System.Drawing.Point(-4, 55)
         Me.FlowLayoutPanel.Name = "FlowLayoutPanel"
-        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1037, 393)
+        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1037, 387)
         Me.FlowLayoutPanel.TabIndex = 6
         '
         'SettingTab
         '
-        Me.SettingTab.Controls.Add(Me.lnkMpvDownload)
         Me.SettingTab.Controls.Add(Me.lnkVLCDownload)
         Me.SettingTab.Controls.Add(Me.lnkMPCDownload)
         Me.SettingTab.Controls.Add(Me.MetroCheckBox2)
@@ -421,6 +419,32 @@ Partial Class NHLGamesMetro
         Me.SettingTab.VerticalScrollbarBarColor = True
         Me.SettingTab.VerticalScrollbarHighlightOnWheel = False
         Me.SettingTab.VerticalScrollbarSize = 10
+        '
+        'lnkVLCDownload
+        '
+        Me.lnkVLCDownload.AutoSize = True
+        Me.lnkVLCDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.lnkVLCDownload.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lnkVLCDownload.ForeColor = System.Drawing.Color.Black
+        Me.lnkVLCDownload.Location = New System.Drawing.Point(687, 59)
+        Me.lnkVLCDownload.Name = "lnkVLCDownload"
+        Me.lnkVLCDownload.Size = New System.Drawing.Size(88, 23)
+        Me.lnkVLCDownload.TabIndex = 17
+        Me.lnkVLCDownload.Text = "Download VLC"
+        Me.lnkVLCDownload.UseSelectable = True
+        '
+        'lnkMPCDownload
+        '
+        Me.lnkMPCDownload.AutoSize = True
+        Me.lnkMPCDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.lnkMPCDownload.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lnkMPCDownload.ForeColor = System.Drawing.Color.Black
+        Me.lnkMPCDownload.Location = New System.Drawing.Point(687, 90)
+        Me.lnkMPCDownload.Name = "lnkMPCDownload"
+        Me.lnkMPCDownload.Size = New System.Drawing.Size(91, 23)
+        Me.lnkMPCDownload.TabIndex = 18
+        Me.lnkMPCDownload.Text = "Download MPC"
+        Me.lnkMPCDownload.UseSelectable = True
         '
         'MetroCheckBox2
         '
@@ -585,18 +609,6 @@ Partial Class NHLGamesMetro
         Me.MetroPanel2.VerticalScrollbarHighlightOnWheel = False
         Me.MetroPanel2.VerticalScrollbarSize = 10
         '
-        'lnkMpvDownload
-        '
-        Me.lnkMpvDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.lnkMpvDownload.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lnkMpvDownload.ForeColor = System.Drawing.Color.Black
-        Me.lnkMpvDownload.Location = New System.Drawing.Point(687, 124)
-        Me.lnkMpvDownload.Name = "lnkMpvDownload"
-        Me.lnkMpvDownload.Size = New System.Drawing.Size(91, 23)
-        Me.lnkMpvDownload.TabIndex = 20
-        Me.lnkMpvDownload.Text = "Download mpv"
-        Me.lnkMpvDownload.UseSelectable = True
-        '
         'rbMpv
         '
         Me.rbMpv.AutoSize = True
@@ -608,32 +620,6 @@ Partial Class NHLGamesMetro
         Me.rbMpv.TabStop = True
         Me.rbMpv.Text = "mpv"
         Me.rbMpv.UseSelectable = True
-        '
-        'lnkMPCDownload
-        '
-        Me.lnkMPCDownload.AutoSize = True
-        Me.lnkMPCDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.lnkMPCDownload.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lnkMPCDownload.ForeColor = System.Drawing.Color.Black
-        Me.lnkMPCDownload.Location = New System.Drawing.Point(687, 90)
-        Me.lnkMPCDownload.Name = "lnkMPCDownload"
-        Me.lnkMPCDownload.Size = New System.Drawing.Size(91, 23)
-        Me.lnkMPCDownload.TabIndex = 18
-        Me.lnkMPCDownload.Text = "Download MPC"
-        Me.lnkMPCDownload.UseSelectable = True
-        '
-        'lnkVLCDownload
-        '
-        Me.lnkVLCDownload.AutoSize = True
-        Me.lnkVLCDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.lnkVLCDownload.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lnkVLCDownload.ForeColor = System.Drawing.Color.Black
-        Me.lnkVLCDownload.Location = New System.Drawing.Point(687, 59)
-        Me.lnkVLCDownload.Name = "lnkVLCDownload"
-        Me.lnkVLCDownload.Size = New System.Drawing.Size(88, 23)
-        Me.lnkVLCDownload.TabIndex = 17
-        Me.lnkVLCDownload.Text = "Download VLC"
-        Me.lnkVLCDownload.UseSelectable = True
         '
         'rbMPC
         '
@@ -847,11 +833,12 @@ Partial Class NHLGamesMetro
         'MetroLabel6
         '
         Me.MetroLabel6.AutoSize = True
-        Me.MetroLabel6.Location = New System.Drawing.Point(23, 258)
+        Me.MetroLabel6.Location = New System.Drawing.Point(14, 258)
+        Me.MetroLabel6.Margin = New System.Windows.Forms.Padding(0, 0, 3, 0)
         Me.MetroLabel6.Name = "MetroLabel6"
-        Me.MetroLabel6.Size = New System.Drawing.Size(45, 19)
+        Me.MetroLabel6.Size = New System.Drawing.Size(55, 19)
         Me.MetroLabel6.TabIndex = 3
-        Me.MetroLabel6.Text = "Player"
+        Me.MetroLabel6.Text = "* Player"
         '
         'btnVLCPath
         '
@@ -866,20 +853,22 @@ Partial Class NHLGamesMetro
         'MetroLabel4
         '
         Me.MetroLabel4.AutoSize = True
-        Me.MetroLabel4.Location = New System.Drawing.Point(23, 154)
+        Me.MetroLabel4.Location = New System.Drawing.Point(14, 154)
+        Me.MetroLabel4.Margin = New System.Windows.Forms.Padding(0, 0, 3, 0)
         Me.MetroLabel4.Name = "MetroLabel4"
-        Me.MetroLabel4.Size = New System.Drawing.Size(115, 19)
+        Me.MetroLabel4.Size = New System.Drawing.Size(125, 19)
         Me.MetroLabel4.TabIndex = 47
-        Me.MetroLabel4.Text = "LiveStreamer Path"
+        Me.MetroLabel4.Text = "* LiveStreamer Path"
         '
         'MetroLabel11
         '
         Me.MetroLabel11.AutoSize = True
-        Me.MetroLabel11.Location = New System.Drawing.Point(23, 294)
+        Me.MetroLabel11.Location = New System.Drawing.Point(14, 294)
+        Me.MetroLabel11.Margin = New System.Windows.Forms.Padding(0, 0, 3, 0)
         Me.MetroLabel11.Name = "MetroLabel11"
-        Me.MetroLabel11.Size = New System.Drawing.Size(37, 19)
+        Me.MetroLabel11.Size = New System.Drawing.Size(47, 19)
         Me.MetroLabel11.TabIndex = 3
-        Me.MetroLabel11.Text = "CDN"
+        Me.MetroLabel11.Text = "* CDN"
         '
         'txtLiveStreamPath
         '
@@ -896,11 +885,12 @@ Partial Class NHLGamesMetro
         'MetroLabel7
         '
         Me.MetroLabel7.AutoSize = True
-        Me.MetroLabel7.Location = New System.Drawing.Point(23, 229)
+        Me.MetroLabel7.Location = New System.Drawing.Point(14, 229)
+        Me.MetroLabel7.Margin = New System.Windows.Forms.Padding(0, 0, 3, 0)
         Me.MetroLabel7.Name = "MetroLabel7"
-        Me.MetroLabel7.Size = New System.Drawing.Size(69, 19)
+        Me.MetroLabel7.Size = New System.Drawing.Size(79, 19)
         Me.MetroLabel7.TabIndex = 2
-        Me.MetroLabel7.Text = "Resolution"
+        Me.MetroLabel7.Text = "* Resolution"
         '
         'txtMPCPath
         '
@@ -981,10 +971,10 @@ Partial Class NHLGamesMetro
         Me.ConsoleTab.HorizontalScrollbarBarColor = True
         Me.ConsoleTab.HorizontalScrollbarHighlightOnWheel = False
         Me.ConsoleTab.HorizontalScrollbarSize = 10
-        Me.ConsoleTab.Location = New System.Drawing.Point(4, 35)
+        Me.ConsoleTab.Location = New System.Drawing.Point(4, 38)
         Me.ConsoleTab.Name = "ConsoleTab"
         Me.ConsoleTab.Padding = New System.Windows.Forms.Padding(0, 0, 0, 30)
-        Me.ConsoleTab.Size = New System.Drawing.Size(1029, 501)
+        Me.ConsoleTab.Size = New System.Drawing.Size(1029, 498)
         Me.ConsoleTab.TabIndex = 2
         Me.ConsoleTab.Text = "Console      "
         Me.ConsoleTab.VerticalScrollbarBarColor = True
@@ -1007,10 +997,10 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsTab.HorizontalScrollbarBarColor = True
         Me.AdDetectionSettingsTab.HorizontalScrollbarHighlightOnWheel = False
         Me.AdDetectionSettingsTab.HorizontalScrollbarSize = 6
-        Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 35)
+        Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 38)
         Me.AdDetectionSettingsTab.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsTab.Name = "AdDetectionSettingsTab"
-        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1029, 501)
+        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1029, 498)
         Me.AdDetectionSettingsTab.TabIndex = 4
         Me.AdDetectionSettingsTab.Text = "Ad Detection Modules"
         Me.AdDetectionSettingsTab.VerticalScrollbarBarColor = True
@@ -1025,7 +1015,7 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsElementHost.Location = New System.Drawing.Point(0, 0)
         Me.AdDetectionSettingsElementHost.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsElementHost.Name = "AdDetectionSettingsElementHost"
-        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1029, 501)
+        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1029, 498)
         Me.AdDetectionSettingsElementHost.TabIndex = 2
         Me.AdDetectionSettingsElementHost.Child = Nothing
         '
@@ -1069,21 +1059,25 @@ Partial Class NHLGamesMetro
         '
         'lnkDownload
         '
+        Me.lnkDownload.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lnkDownload.AutoSize = True
-        Me.lnkDownload.Location = New System.Drawing.Point(967, 44)
+        Me.lnkDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.lnkDownload.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lnkDownload.ForeColor = System.Drawing.Color.Black
+        Me.lnkDownload.Location = New System.Drawing.Point(982, 44)
         Me.lnkDownload.Name = "lnkDownload"
-        Me.lnkDownload.Size = New System.Drawing.Size(55, 13)
-        Me.lnkDownload.TabIndex = 23
-        Me.lnkDownload.TabStop = True
+        Me.lnkDownload.Size = New System.Drawing.Size(65, 23)
+        Me.lnkDownload.TabIndex = 59
         Me.lnkDownload.Text = "Download"
+        Me.lnkDownload.UseSelectable = True
         Me.lnkDownload.Visible = False
         '
         'NHLGamesMetro
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1057, 600)
-        Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.lnkDownload)
+        Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.TabControl)
         Me.Controls.Add(Me.lblVersion)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -1174,7 +1168,6 @@ Partial Class NHLGamesMetro
     Friend WithEvents txtMpvPath As TextBox
     Friend WithEvents MetroLabel1 As MetroLabel
     Friend WithEvents rbMpv As MetroRadioButton
-    Friend WithEvents lnkMpvDownload As MetroLink
     Friend WithEvents lblNote As MetroLabel
     Friend WithEvents StatusStrip As StatusStrip
     Friend WithEvents btnAddHosts As MetroButton
@@ -1191,5 +1184,5 @@ Partial Class NHLGamesMetro
     Friend WithEvents MetroCheckBox2 As MetroCheckBox
     Friend WithEvents MetroLabel5 As MetroLabel
     Friend WithEvents SettingsToolTip As MetroFramework.Components.MetroToolTip
-    Friend WithEvents lnkDownload As LinkLabel
+    Friend WithEvents lnkDownload As MetroLink
 End Class
