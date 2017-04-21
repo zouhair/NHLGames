@@ -254,9 +254,17 @@ Public Class Game
 
         If Not (game.TryGetValue("teams", "home") And game.TryGetValue("teams", "away") And
                 game.TryGetValue("linescore", "currentPeriodOrdinal") And game.TryGetValue("linescore", "currentPeriodTimeRemaining") And
-                game.TryGetValue("seriesSummary", "gameNumber") And game.TryGetValue("seriesSummary", "seriesStatusShort") And
                 game.TryGetValue("content", "media")) Then
-            Console.WriteLine("Error: Unable to decode url from NHL API, the structure changed. We will have to fix this.")
+            Console.WriteLine("Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this.")
+        End If
+
+        _GameType = Convert.ToInt32(GetChar(game("gamePk"), 6)) - 48 'Get type of the game : 1 preseason, 2 regular, 3 series
+        GameState = [Enum].Parse(GetType(GameStateEnum), status)
+
+        If _GameType = 3 Then
+            If Not game.TryGetValue("seriesSummary", "gameNumber") And game.TryGetValue("seriesSummary", "seriesStatusShort") Then
+                Console.WriteLine("Error: Unable to decode url from NHL API, the structure has changed for playoffs games. We will have to fix this.")
+            End If
         End If
 
         Home = game("teams")("home")("team")("locationName").ToString()
@@ -268,8 +276,6 @@ Public Class Game
         AwayAbbrev = game("teams")("away")("team")("abbreviation").ToString()
         AwayTeam = RemoveDiacritics(game("teams")("away")("team")("teamName").ToString().Replace(" ", "").Replace(".", ""))
         AwayTeamName = Away + " " + AwayTeam
-        _GameType = Convert.ToInt32(GetChar(game("gamePk"), 6)) - 48 'Get type of the game : 1 preseason, 2 regular, 3 series
-        GameState = [Enum].Parse(GetType(GameStateEnum), status)
 
         If (status >= 3) Then
             GamePeriod = game("linescore")("currentPeriodOrdinal").ToString() '1st 2nd 3rd OT 2OT ...
