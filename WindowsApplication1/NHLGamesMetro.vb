@@ -88,6 +88,7 @@ Public Class NHLGamesMetro
             If Not File.Exists(mpvPath) Then
                 Console.WriteLine("Can't find mpv.exe. It came with NHLGames. You probably moved it or deleted it." +
                                   "However, NHLGames can run without it, as long as you have VLC Or mpc installed And set.")
+                mpvPath = ""
             End If
 
             ApplicationSettings.SetValue(ApplicationSettings.Settings.mpvPath, mpvPath)
@@ -103,6 +104,7 @@ Public Class NHLGamesMetro
                 Console.WriteLine("Error:  Can't find livestreamer.exe. It came with NHLGames. You probably moved it or deleted it and " +
                                   "NHLGames needs it to send the stream to your media player. You will have to put it back there, " +
                                   "just drop the folder 'livestreamer-v1.12.2' next to NHLGames.exe.")
+                liveStreamerPath = ""
             End If
 
             ApplicationSettings.SetValue(ApplicationSettings.Settings.LiveStreamerPath, liveStreamerPath)
@@ -603,11 +605,6 @@ Public Class NHLGamesMetro
 
     Private Sub lnkMPCDownload_Click(sender As Object, e As EventArgs) Handles lnkMPCDownload.Click
         Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://mpc-hc.org/downloads/")
-        Process.Start(sInfo)
-    End Sub
-
-    Private Sub lnkMpvDownload_Click(sender As Object, e As EventArgs) Handles lnkMpvDownload.Click
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://mpv.io/installation/")
         Process.Start(sInfo)
     End Sub
 
