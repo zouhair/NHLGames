@@ -15,10 +15,14 @@ Public Class HostsFile
 
         Console.WriteLine("Removing existing entries from hosts file")
 
-        For Each line In contents.Split(vbCrLf)
-            If line.Contains(host) = False Then
-                'newContents &= line.Replace(vbCrLf, String.Empty)
-                newContents &= line
+        Dim hostsFile = contents.Split(vbCrLf)
+
+        For lineCount As Integer = 0 To hostsFile.Length - 1
+            If hostsFile(lineCount).Contains(host) = False Then
+                newContents &= hostsFile(lineCount).Replace(vbCrLf, String.Empty)
+                If lineCount < hostsFile.Length - 1 Then
+                    newContents &= vbCrLf
+                End If
             End If
         Next
 
