@@ -62,7 +62,9 @@ Public Class ApplicationSettings
             If value.Length > 200 Then
                 value = "[Value too large for display]"
             End If
-            Console.WriteLine("Status: Setting updated for """ & key.ToString() & """ to """ & value & """")
+            If key <> ApplicationSettings.Settings.DefaultWatchArgs Then
+                Console.WriteLine("Status: Setting updated for """ & key.ToString() & """ to """ & value & """")
+            End If
             configFile.Save(ConfigurationSaveMode.Modified)
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name)
         Catch e As ConfigurationErrorsException

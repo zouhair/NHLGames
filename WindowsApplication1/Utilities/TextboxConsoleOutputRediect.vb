@@ -57,9 +57,9 @@ Public Class TextboxConsoleOutputRediect
 
                                                    If type = OutputType.Error Then
                                                        _output.SelectionColor = Color.Red
-                                                   ElseIf type = OutputType.Status
+                                                   ElseIf type = OutputType.Status Then
                                                        _output.SelectionColor = Color.Green
-                                                   ElseIf type = OutputType.CLI
+                                                   ElseIf type = OutputType.CLI Then
                                                        _output.SelectionColor = Color.SkyBlue
                                                    End If
 

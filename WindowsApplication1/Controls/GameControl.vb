@@ -78,7 +78,7 @@ Public Class GameControl
                     lblNotInSeason.Text = "GM " + Game.SeriesGameNumber + ": " + Game.SeriesGameStatus
                 Else
                     lblNotInSeason.Text = Game.SeriesGameStatus
-                    lblPeriod.Text = "Game" + Game.SeriesGameNumber
+                    lblPeriod.Text = "Game " + Game.SeriesGameNumber
                 End If
             Else
                 lblNotInSeason.Text = "Preseason"

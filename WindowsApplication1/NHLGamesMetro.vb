@@ -150,7 +150,6 @@ Public Class NHLGamesMetro
     Private Sub SetEventArgsFromForm(Optional ForceSet As Boolean = False)
         If SettingsLoaded OrElse ForceSet Then
 
-
             Dim WatchArgs As New Game.GameWatchArguments
 
             WatchArgs.Is60FPS = chk60.Checked
@@ -160,23 +159,18 @@ Public Class NHLGamesMetro
             ElseIf rbQual5.Checked Then
                 WatchArgs.Quality = "540p"
                 chk60.Checked = False
-                rbQual5.Checked = True
             ElseIf rbQual4.Checked Then
                 WatchArgs.Quality = "504p"
                 chk60.Checked = False
-                rbQual4.Checked = True
             ElseIf rbQual3.Checked Then
                 WatchArgs.Quality = "360p"
                 chk60.Checked = False
-                rbQual3.Checked = True
             ElseIf rbQual2.Checked Then
                 WatchArgs.Quality = "288p"
                 chk60.Checked = False
-                rbQual2.Checked = True
             ElseIf rbQual1.Checked Then
                 WatchArgs.Quality = "224p"
                 chk60.Checked = False
-                rbQual1.Checked = True
             End If
 
             If rbMPC.Checked Then
@@ -251,8 +245,6 @@ Public Class NHLGamesMetro
             txtOutputPath.Text = WatchArgs.PlayerOutputPath
             txtOutputPath.Enabled = WatchArgs.UseOutputArgs
             chkEnableOutput.Checked = WatchArgs.UseOutputArgs
-
-
 
         End If
     End Sub
@@ -396,7 +388,7 @@ Public Class NHLGamesMetro
 
     Private Sub btnVLCPath_Click(sender As Object, e As EventArgs) Handles btnVLCPath.Click
 
-        OpenFileDialog.Filter = "VLC|vlc.exe"
+        OpenFileDialog.Filter = "VLC|vlc.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
             If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtVLCPath.Text <> OpenFileDialog.FileName Then
@@ -408,7 +400,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnMPCPath_Click(sender As Object, e As EventArgs) Handles btnMPCPath.Click
-        OpenFileDialog.Filter = "MPC|mpc-hc64.exe;mpc-hc.exe"
+        OpenFileDialog.Filter = "MPC|mpc-hc64.exe;mpc-hc.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
             If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtMPCPath.Text <> OpenFileDialog.FileName Then
@@ -419,7 +411,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnMpvPath_Click(sender As Object, e As EventArgs) Handles btnMpvPath.Click
-        OpenFileDialog.Filter = "MPC|mpv.exe"
+        OpenFileDialog.Filter = "MPC|mpv.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
             If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtMpvPath.Text <> OpenFileDialog.FileName Then
@@ -430,7 +422,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnLiveStreamerPath_Click(sender As Object, e As EventArgs) Handles btnLiveStreamerPath.Click
-        OpenFileDialog.Filter = "LiveStreamer|"
+        OpenFileDialog.Filter = "LiveStreamer|livestreamer.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
             If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtLiveStreamPath.Text <> OpenFileDialog.FileName Then
@@ -442,11 +434,6 @@ Public Class NHLGamesMetro
 
     Private Sub MetroCheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles MetroCheckBox1.CheckedChanged
         ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowScores, MetroCheckBox1.Checked)
-    End Sub
-
-    Private Sub MetroTrackBar1_Scroll(sender As Object, e As ScrollEventArgs)
-        'lblRefreshValue.Text = MetroTrackBar1.Value & " Minutes"
-        'ApplicationSettings.SetValue(ApplicationSettings.Settings.RefreshIntervalInMin, MetroTrackBar1.Value)
     End Sub
 
     Private Sub btnClearConsole_Click(sender As Object, e As EventArgs) Handles btnClearConsole.Click
@@ -465,9 +452,17 @@ Public Class NHLGamesMetro
 
 
     Private Sub chk60_CheckedChanged(sender As Object, e As EventArgs) Handles chk60.CheckedChanged
-        rbQual6.Checked = True
+        If chk60.Checked Then
+            rbQual6.Checked = True
+            _writeToConsoleSettingsChanged("Quality", rbQual6.Text + " @ " + chk60.Text)
+        ElseIf rbQual6.Checked Then
+            _writeToConsoleSettingsChanged("Quality", rbQual6.Text)
+        End If
         SetEventArgsFromForm()
+    End Sub
 
+    Private Sub _writeToConsoleSettingsChanged(key As String, value As String)
+        Console.WriteLine("Status: Setting updated for """ & key & """ to """ & value & """")
     End Sub
 
     Private Sub txtVLCPath_TextChanged(sender As Object, e As EventArgs) Handles txtVLCPath.TextChanged
@@ -481,23 +476,6 @@ Public Class NHLGamesMetro
     Private Sub txtLiveStreamPath_TextChanged(sender As Object, e As EventArgs) Handles txtLiveStreamPath.TextChanged
         SetEventArgsFromForm()
     End Sub
-
-    Private Sub rbQual1_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual1.CheckedChanged
-        SetEventArgsFromForm()
-    End Sub
-
-    Private Sub rbQual2_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual2.CheckedChanged
-        SetEventArgsFromForm()
-    End Sub
-
-    Private Sub rbQual3_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual3.CheckedChanged
-        SetEventArgsFromForm()
-    End Sub
-
-    Private Sub rbQual4_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual4.CheckedChanged
-        SetEventArgsFromForm()
-    End Sub
-
 
     Private Sub SetFormStatusLabel(text As String)
         If InvokeRequired Then
@@ -516,55 +494,55 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub rbQual5_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual5.CheckedChanged
+    Private Sub quality_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual6.CheckedChanged, rbQual5.CheckedChanged, rbQual4.CheckedChanged, rbQual3.CheckedChanged, rbQual2.CheckedChanged, rbQual1.CheckedChanged
         SetEventArgsFromForm()
+        Dim rb As RadioButton = sender
+        If (Not chk60.Checked And rb.Checked) Then _writeToConsoleSettingsChanged("Quality", rb.Text)
     End Sub
 
-    Private Sub rbQual6_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual6.CheckedChanged
+    Private Sub player_CheckedChanged(sender As Object, e As EventArgs) Handles rbVLC.CheckedChanged, rbMPC.CheckedChanged, rbMpv.CheckedChanged
         SetEventArgsFromForm()
+        Dim rb As RadioButton = sender
+        If (rb.Checked) Then _writeToConsoleSettingsChanged("Player", rb.Text)
     End Sub
 
-    Private Sub rbVLC_CheckedChanged(sender As Object, e As EventArgs) Handles rbVLC.CheckedChanged
+    Private Sub rbCDN_CheckedChanged(sender As Object, e As EventArgs) Handles rbLevel3.CheckedChanged, rbAkamai.CheckedChanged
         SetEventArgsFromForm()
-    End Sub
-
-    Private Sub rbMPC_CheckedChanged(sender As Object, e As EventArgs) Handles rbMPC.CheckedChanged
-        SetEventArgsFromForm()
-    End Sub
-
-    Private Sub rbLevel3_CheckedChanged(sender As Object, e As EventArgs) Handles rbLevel3.CheckedChanged
-        SetEventArgsFromForm()
-    End Sub
-
-    Private Sub rbAkamai_CheckedChanged(sender As Object, e As EventArgs) Handles rbAkamai.CheckedChanged
-        SetEventArgsFromForm()
+        Dim rb As RadioButton = sender
+        If (rb.Checked) Then _writeToConsoleSettingsChanged("CDN", rb.Text)
     End Sub
 
     Private Sub txtOutputPath_TextChanged(sender As Object, e As EventArgs) Handles txtOutputPath.TextChanged
         SetEventArgsFromForm()
+        _writeToConsoleSettingsChanged("Output", txtOutputPath.Text)
     End Sub
 
     Private Sub txtPlayerArgs_TextChanged(sender As Object, e As EventArgs) Handles txtPlayerArgs.TextChanged
         SetEventArgsFromForm()
+        _writeToConsoleSettingsChanged("Player args", txtPlayerArgs.Text)
     End Sub
 
     Private Sub txtStreamerArgs_TextChanged(sender As Object, e As EventArgs) Handles txtStreamerArgs.TextChanged
         SetEventArgsFromForm()
+        _writeToConsoleSettingsChanged("Streamer args", txtStreamerArgs.Text)
     End Sub
 
     Private Sub chkEnableOutput_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableOutput.CheckedChanged
         txtOutputPath.Enabled = chkEnableOutput.Checked
         SetEventArgsFromForm()
+        _writeToConsoleSettingsChanged("Output Enable", chkEnableOutput.Checked)
     End Sub
 
     Private Sub chkEnablePlayerArgs_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnablePlayerArgs.CheckedChanged
         txtPlayerArgs.Enabled = chkEnablePlayerArgs.Checked
         SetEventArgsFromForm()
+        _writeToConsoleSettingsChanged("Player args Enable", chkEnablePlayerArgs.Checked)
     End Sub
 
     Private Sub chkEnableStreamArgs_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableStreamArgs.CheckedChanged
         txtStreamerArgs.Enabled = chkEnableStreamArgs.Checked
         SetEventArgsFromForm()
+        _writeToConsoleSettingsChanged("Streamer args Enable", chkEnableStreamArgs.Checked)
     End Sub
 
     Private Sub MetroButton1_Click(sender As Object, e As EventArgs) Handles MetroButton1.Click
@@ -670,6 +648,22 @@ Public Class NHLGamesMetro
     Private Sub lnkDownload_Click(sender As Object, e As EventArgs) Handles lnkDownload.Click
         Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://www.reddit.com/r/nhl_games/wiki/downloads")
         Process.Start(sInfo)
+    End Sub
+
+    Private Sub TabControl_MouseClick(sender As Object, e As MouseEventArgs) Handles TabControl.MouseClick
+        flpCalender.Visible = False
+    End Sub
+
+    Private Sub GamesTab_Click(sender As Object, e As EventArgs) Handles GamesTab.Click
+        flpCalender.Visible = False
+    End Sub
+
+    Private Sub FlowLayoutPanel_Click(sender As Object, e As EventArgs) Handles FlowLayoutPanel.Click
+        flpCalender.Visible = False
+    End Sub
+
+    Private Sub txtMpvPath_TextChanged(sender As Object, e As EventArgs) Handles txtMpvPath.TextChanged
+        SetEventArgsFromForm()
     End Sub
 
 #End Region
