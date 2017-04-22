@@ -17,7 +17,8 @@ Public Class HostsFile
 
         For Each line In contents.Split(vbCrLf)
             If line.Contains(host) = False Then
-                newContents &= line.Replace(vbCrLf, String.Empty)
+                'newContents &= line.Replace(vbCrLf, String.Empty)
+                newContents &= line
             End If
         Next
 

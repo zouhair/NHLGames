@@ -68,7 +68,7 @@ Partial Class NHLGamesMetro
         Me.lblNote = New MetroFramework.Controls.MetroLabel()
         Me.rbAkamai = New MetroFramework.Controls.MetroRadioButton()
         Me.rbLevel3 = New MetroFramework.Controls.MetroRadioButton()
-        Me.btnLiveStreamerPath = New MetroFramework.Controls.MetroButton()
+        Me.btnstreamlinkPath = New MetroFramework.Controls.MetroButton()
         Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
         Me.MetroPanel1 = New MetroFramework.Controls.MetroPanel()
         Me.rbQual6 = New MetroFramework.Controls.MetroRadioButton()
@@ -389,7 +389,7 @@ Partial Class NHLGamesMetro
         Me.SettingTab.Controls.Add(Me.txtOutputPath)
         Me.SettingTab.Controls.Add(Me.MetroPanel2)
         Me.SettingTab.Controls.Add(Me.MetroPanel5)
-        Me.SettingTab.Controls.Add(Me.btnLiveStreamerPath)
+        Me.SettingTab.Controls.Add(Me.btnstreamlinkPath)
         Me.SettingTab.Controls.Add(Me.MetroLabel8)
         Me.SettingTab.Controls.Add(Me.MetroPanel1)
         Me.SettingTab.Controls.Add(Me.MetroLabel9)
@@ -689,15 +689,15 @@ Partial Class NHLGamesMetro
         Me.rbLevel3.Text = "Level 3"
         Me.rbLevel3.UseSelectable = True
         '
-        'btnLiveStreamerPath
+        'btnstreamlinkPath
         '
-        Me.btnLiveStreamerPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnLiveStreamerPath.Location = New System.Drawing.Point(653, 156)
-        Me.btnLiveStreamerPath.Name = "btnLiveStreamerPath"
-        Me.btnLiveStreamerPath.Size = New System.Drawing.Size(28, 20)
-        Me.btnLiveStreamerPath.TabIndex = 50
-        Me.btnLiveStreamerPath.Text = "..."
-        Me.btnLiveStreamerPath.UseSelectable = True
+        Me.btnstreamlinkPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnstreamlinkPath.Location = New System.Drawing.Point(653, 156)
+        Me.btnstreamlinkPath.Name = "btnstreamlinkPath"
+        Me.btnstreamlinkPath.Size = New System.Drawing.Size(28, 20)
+        Me.btnstreamlinkPath.TabIndex = 50
+        Me.btnstreamlinkPath.Text = "..."
+        Me.btnstreamlinkPath.UseSelectable = True
         '
         'MetroLabel8
         '
@@ -858,7 +858,7 @@ Partial Class NHLGamesMetro
         Me.MetroLabel4.Name = "MetroLabel4"
         Me.MetroLabel4.Size = New System.Drawing.Size(125, 19)
         Me.MetroLabel4.TabIndex = 47
-        Me.MetroLabel4.Text = "* LiveStreamer Path"
+        Me.MetroLabel4.Text = "* streamlink Path"
         '
         'MetroLabel11
         '
@@ -1126,7 +1126,7 @@ Partial Class NHLGamesMetro
     Friend WithEvents txtVLCPath As TextBox
     Friend WithEvents MetroLabel4 As MetroLabel
     Friend WithEvents txtLiveStreamPath As TextBox
-    Friend WithEvents btnLiveStreamerPath As MetroButton
+    Friend WithEvents btnstreamlinkPath As MetroButton
     Friend WithEvents btnMPCPath As MetroButton
     Friend WithEvents btnVLCPath As MetroButton
     Friend WithEvents OpenFileDialog As OpenFileDialog
