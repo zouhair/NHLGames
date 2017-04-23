@@ -252,6 +252,7 @@
     <EmbeddedResource Include="Logos\Kings.gif" />
     <EmbeddedResource Include="Logos\Lightning.gif" />
     <EmbeddedResource Include="Logos\MapleLeafs.gif" />
+    <Content Include="Icons\live.gif" />
     <Content Include="Logos\nhl_icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

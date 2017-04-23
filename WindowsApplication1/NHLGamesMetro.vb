@@ -23,6 +23,9 @@ Public Class NHLGamesMetro
     Public Shared m_progressValue As Integer = 0
     Public Shared m_progressMaxValue As Integer = 1000
     Public Shared m_flpCalendar As FlowLayoutPanel
+    Public Shared m_StreamStarted As Boolean = False
+    Public Shared m_progressVisible As Boolean = False
+    Public Shared m_error As Boolean = False
     Public Shared m_lblDate As Label
     Public Shared m_Date As Date
 
@@ -140,8 +143,6 @@ Public Class NHLGamesMetro
 
         progress.Location = New Point((FlowLayoutPanel.Width - progress.Width) / 2, FlowLayoutPanel.Location.Y + 150)
         NoGames.Location = New Point((FlowLayoutPanel.Width - NoGames.Width) / 2, FlowLayoutPanel.Location.Y + 148)
-
-        tmrAnimate.Start()
 
         SettingsLoaded = True
 
@@ -350,7 +351,7 @@ Public Class NHLGamesMetro
     End Sub
     Private Sub LoadGames(dateTime As DateTime)
         Try
-            NHLGamesMetro.m_progressValue = 0
+
             SetLoading(True)
             SetFormStatusLabel("Loading Games")
 
@@ -611,19 +612,27 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub tmrAnimate_Tick(sender As Object, e As EventArgs) Handles tmrAnimate.Tick
+        If m_StreamStarted Then
+            progress.Visible = m_progressVisible
+            FlowLayoutPanel.Enabled = False
+            FlowLayoutPanel.Focus()
+        Else
+            FlowLayoutPanel.Enabled = True
+        End If
+
         If NHLGamesMetro.m_progressValue < Me.progress.Maximum Then
             progress.Value = NHLGamesMetro.m_progressValue
         ElseIf progress.Value < Me.progress.Maximum And NHLGamesMetro.m_progressValue <= Me.progress.Maximum Then
             progress.Value = Me.progress.Maximum
         End If
 
-        'I use a timer cause it never fails to hide the progress bar or the <no games> label when the games are loaded
         If progress.Visible Then
             btnDate.Enabled = False
             btnTomorrow.Enabled = False
             btnYesterday.Enabled = False
             NoGames.Visible = False
         Else
+            m_progressValue = 0
             btnDate.Enabled = True
             btnTomorrow.Enabled = True
             btnYesterday.Enabled = True
@@ -635,8 +644,13 @@ Public Class NHLGamesMetro
         End If
 
         If FlowLayoutPanel.Controls.Count <> 0 And (progress.Visible Or NoGames.Visible) Then
-            progress.Visible = False
+            If Not m_StreamStarted Then progress.Visible = False
             NoGames.Visible = False
+        End If
+
+        If m_error Then
+            m_error = False
+            MetroMessageBox.Show(Me, "Something went wront, see the console for more details", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
     End Sub

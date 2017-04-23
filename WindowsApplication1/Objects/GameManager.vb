@@ -30,6 +30,7 @@ Public Class GameManager
                 If o.Path = "dates" Then
                     For Each game As JObject In o.Children.Item(0)("games").Children(Of JObject)
                         tempList.Add(New Game(game, availableGames, progress))
+                        Threading.Thread.Sleep(100)
                     Next
                 End If
             Next

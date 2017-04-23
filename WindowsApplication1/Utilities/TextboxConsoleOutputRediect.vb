@@ -73,16 +73,6 @@ Public Class TextboxConsoleOutputRediect
                                            End Function))
 
         End Sub
-        'Public Overrides Sub Write(value As Char)
-        '    MyBase.Write(value)
-
-        '    If (value <> vbLf) Then
-        '        _output.BeginInvoke(New Action(Function()
-        '                                           _output.AppendText(value.ToString())
-        '                                       End Function))
-        '    End If
-
-        'End Sub
 
         Public Overrides ReadOnly Property Encoding() As Encoding
             Get
@@ -90,8 +80,5 @@ Public Class TextboxConsoleOutputRediect
             End Get
         End Property
     End Class
-
-
-
 
 End Class

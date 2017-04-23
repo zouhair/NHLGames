@@ -181,7 +181,10 @@ Public Class Game
     End Sub
 
     Public Sub Watch(args As GameWatchArguments)
-
+        Dim progressStep As Integer = NHLGamesMetro.m_progressMaxValue / 4
+        Dim lstKeywords As New List(Of String) From {"Found matching plugin stream", "Available streams", "Opening stream", "Starting player"}
+        NHLGamesMetro.m_StreamStarted = True
+        NHLGamesMetro.m_progressVisible = True
         Dim t As Task = New Task(Function()
                                      Console.WriteLine("Starting: " & args.LiveStreamerPath & " " & args.ToString(True))
 
@@ -200,23 +203,29 @@ Public Class Game
                                          'Remove stream URL from console output
                                          While (proc.StandardOutput.EndOfStream = False)
                                              Dim line = proc.StandardOutput.ReadLine()
-                                             If line.Contains("m3u8") Then
+                                             If line.Contains(lstKeywords(0)) Then
                                                  line = line.Substring(0, line.IndexOf("http://")) & "--URL CENSORED--." & line.Substring(line.IndexOf("m3u8"))
                                              End If
+                                             If lstKeywords.Any(Function(x) line.Contains(x)) Then
+                                                 NHLGamesMetro.m_progressValue += progressStep
+                                             End If
                                              Console.WriteLine(line)
+                                             Threading.Thread.Sleep(100)
+                                             If line.Contains(lstKeywords(3)) Then
+                                                 NHLGamesMetro.m_progressVisible = False
+                                                 Threading.Thread.Sleep(1000)
+                                                 NHLGamesMetro.m_StreamStarted = False
+                                             End If
                                          End While
                                      Catch ex As Exception
                                          Console.WriteLine("Error: " & ex.Message)
+                                         NHLGamesMetro.m_progressVisible = False
+                                         NHLGamesMetro.m_StreamStarted = False
+                                         NHLGamesMetro.m_error = True
                                      End Try
                                      Return ""
                                  End Function)
         t.Start()
-
-
-        'proc.WaitForExit()
-        'If (proc.ExitCode <> 0) Then
-        '    Dim errjor = "fg"
-        'End If
 
     End Sub
 

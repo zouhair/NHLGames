@@ -26,8 +26,8 @@ Partial Class NHLGamesMetro
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(NHLGamesMetro))
         Me.gridGames = New System.Windows.Forms.DataGridView()
         Me.lblVersion = New System.Windows.Forms.Label()
@@ -130,30 +130,30 @@ Partial Class NHLGamesMetro
         Me.gridGames.BackgroundColor = System.Drawing.Color.White
         Me.gridGames.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable
         Me.gridGames.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(3, 5, 3, 0)
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.gridGames.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle13.Padding = New System.Windows.Forms.Padding(3, 5, 3, 0)
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.gridGames.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
         Me.gridGames.ColumnHeadersHeight = 30
         Me.gridGames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.gridGames.Location = New System.Drawing.Point(475, 10)
         Me.gridGames.MultiSelect = False
         Me.gridGames.Name = "gridGames"
         Me.gridGames.ReadOnly = True
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(0, 5, 0, 0)
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.gridGames.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle14.Padding = New System.Windows.Forms.Padding(0, 5, 0, 0)
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.gridGames.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
         Me.gridGames.RowHeadersVisible = False
         Me.gridGames.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.gridGames.RowTemplate.DefaultCellStyle.Padding = New System.Windows.Forms.Padding(0, 2, 0, 2)
@@ -221,9 +221,9 @@ Partial Class NHLGamesMetro
         Me.GamesTab.HorizontalScrollbarBarColor = True
         Me.GamesTab.HorizontalScrollbarHighlightOnWheel = False
         Me.GamesTab.HorizontalScrollbarSize = 10
-        Me.GamesTab.Location = New System.Drawing.Point(4, 38)
+        Me.GamesTab.Location = New System.Drawing.Point(4, 35)
         Me.GamesTab.Name = "GamesTab"
-        Me.GamesTab.Size = New System.Drawing.Size(1029, 498)
+        Me.GamesTab.Size = New System.Drawing.Size(1029, 501)
         Me.GamesTab.TabIndex = 0
         Me.GamesTab.Text = "Games      "
         Me.GamesTab.VerticalScrollbarBarColor = True
@@ -1049,7 +1049,6 @@ Partial Class NHLGamesMetro
         'tmrAnimate
         '
         Me.tmrAnimate.Enabled = True
-        Me.tmrAnimate.Interval = 40
         '
         'SettingsToolTip
         '

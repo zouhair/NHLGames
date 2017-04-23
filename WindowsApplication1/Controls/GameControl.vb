@@ -31,8 +31,8 @@ Public Class GameControl
             End If
         End If
 
-        lblLive.Visible = Game.GameIsLive
-
+        live1.Visible = Game.GameIsLive
+        live2.Visible = Game.GameIsLive
         AddHandler _Game.GameUpdated, AddressOf GameUpdatedHandler
 
     End Sub
@@ -63,7 +63,7 @@ Public Class GameControl
             TeamToolTip.SetToolTip(picAway, "Away Team: " & Game.AwayTeamName)
         End If
 
-
+        live2.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
         picHome.SizeMode = PictureBoxSizeMode.StretchImage
         If String.IsNullOrEmpty(Game.AwayTeam) = False Then
             picHome.Image = ImageFetcher.GetEmbeddedImage(Game.HomeTeam)
