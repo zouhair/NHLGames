@@ -1,8 +1,6 @@
 ﻿Imports System.Globalization
-Imports System.Text
 Imports System.IO
 Imports Newtonsoft.Json.Linq
-
 
 Public Enum GameStateEnum
     Scheduled = 1
@@ -60,7 +58,6 @@ Public Class Game
     Public Overrides Function ToString() As String
         Return HomeTeam & " vs " & AwayTeam
     End Function
-
 
     Public Property StatusID As String
         Get
@@ -180,10 +177,12 @@ Public Class Game
 
     End Sub
 
+
     Public Sub Watch(args As GameWatchArguments)
         Dim progressStep As Integer = NHLGamesMetro.m_progressMaxValue / 4
         Dim lstKeywords As New List(Of String) From {"Found matching plugin stream", "Available streams", "Opening stream", "Starting player"}
         NHLGamesMetro.m_StreamStarted = True
+        'NHLGamesMetro.FormInstance.SetLoading(True)
         NHLGamesMetro.m_progressVisible = True
         Dim t As Task = New Task(Function()
                                      Console.WriteLine("Starting: " & args.LiveStreamerPath & " " & args.ToString(True))
@@ -203,7 +202,7 @@ Public Class Game
                                          'Remove stream URL from console output
                                          While (proc.StandardOutput.EndOfStream = False)
                                              Dim line = proc.StandardOutput.ReadLine()
-                                             If line.Contains(lstKeywords(0)) Then
+                                             If line.Contains(lstKeywords(0)) Or line.Contains("Unable to open URL:") Then
                                                  line = line.Substring(0, line.IndexOf("http://")) & "--URL CENSORED--." & line.Substring(line.IndexOf("m3u8"))
                                              End If
                                              If lstKeywords.Any(Function(x) line.Contains(x)) Then
@@ -212,7 +211,7 @@ Public Class Game
                                              Console.WriteLine(line)
                                              Threading.Thread.Sleep(100)
                                              If line.Contains(lstKeywords(3)) Then
-                                                 NHLGamesMetro.m_progressVisible = False
+                                                 'NHLGamesMetro.FormInstance.SetLoading(False)
                                                  Threading.Thread.Sleep(1000)
                                                  NHLGamesMetro.m_StreamStarted = False
                                              End If
@@ -225,9 +224,8 @@ Public Class Game
                                          Console.WriteLine("Error: " & ex.Message)
                                          NHLGamesMetro.m_progressVisible = False
                                          NHLGamesMetro.m_StreamStarted = False
-                                         NHLGamesMetro.m_error = True
                                      End Try
-                                     Return ""
+                                     Return Nothing
                                  End Function)
         t.Start()
 
@@ -243,14 +241,13 @@ Public Class Game
     Public Sub New(game As JObject, availableGameIds As HashSet(Of String), maxprogress As Integer)
 
         _GameObj = game
-
-        LoadGameData(game, availableGameIds, maxprogress)
+        Dim messageError As String = LoadGameData(game, availableGameIds, maxprogress)
+        GameManager.MessageError = messageError
 
     End Sub
 
-    Private Sub LoadGameData(game As JObject, availableGameIds As HashSet(Of String), maxprogressize As Integer)
-
-        'Dim timeZoneInfo As TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time")
+    Private Function LoadGameData(game As JObject, availableGameIds As HashSet(Of String), maxprogressize As Integer)
+        Dim messageError As String = Nothing
         Dim dateTimeStr As String = game.Property("gameDate").Value.ToString() '"2016-03-20T21:00:00Z"
         Dim dateTimeVal As DateTime
         If (DateTime.TryParseExact(dateTimeStr, "yyyy-MM-ddTHH:mm:ssZ", System.Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, dateTimeVal) = False) Then
@@ -268,7 +265,7 @@ Public Class Game
         If Not (game.TryGetValue("teams", "home") And game.TryGetValue("teams", "away") And
                 game.TryGetValue("linescore", "currentPeriodOrdinal") And game.TryGetValue("linescore", "currentPeriodTimeRemaining") And
                 game.TryGetValue("content", "media")) Then
-            Console.WriteLine("Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this.")
+            messageError = "Unable to decode url from NHL API, the structure has changed. We will have to fix this."
         End If
 
         _GameType = Convert.ToInt32(GetChar(game("gamePk"), 6)) - 48 'Get type of the game : 1 preseason, 2 regular, 3 series
@@ -276,25 +273,23 @@ Public Class Game
 
         If _GameType = 3 Then
             If Not game.TryGetValue("seriesSummary", "gameNumber") And game.TryGetValue("seriesSummary", "seriesStatusShort") Then
-                Console.WriteLine("Error: Unable to decode url from NHL API, the structure has changed for playoffs games. We will have to fix this.")
+                messageError = "Unable to decode url from NHL API, the structure has changed for playoffs games. We will have to fix this."
             End If
         End If
 
         Home = game("teams")("home")("team")("locationName").ToString()
         HomeAbbrev = game("teams")("home")("team")("abbreviation").ToString()
-        HomeTeam = RemoveDiacritics(game("teams")("home")("team")("teamName").ToString().Replace(" ", "").Replace(".", ""))
+        HomeTeam = game("teams")("home")("team")("teamName").ToString()
         HomeTeamName = Home + " " + HomeTeam
 
         Away = game("teams")("away")("team")("locationName").ToString()
         AwayAbbrev = game("teams")("away")("team")("abbreviation").ToString()
-        AwayTeam = RemoveDiacritics(game("teams")("away")("team")("teamName").ToString().Replace(" ", "").Replace(".", ""))
+        AwayTeam = game("teams")("away")("team")("teamName").ToString()
         AwayTeamName = Away + " " + AwayTeam
 
         If (status >= 3) Then
             GamePeriod = game("linescore")("currentPeriodOrdinal").ToString() '1st 2nd 3rd OT 2OT ...
-            'If (status < 5) Then
             GameTimeLeft = game("linescore")("currentPeriodTimeRemaining").ToString() 'Final, 12:34, 20:00
-            'End If
         End If
 
         If _GameType = 3 Then
@@ -344,20 +339,7 @@ Public Class Game
                 End If
             Next
         End If
-    End Sub
-
-    Private Shared Function RemoveDiacritics(text As String) As String
-        Dim normalizedString = text.Normalize(System.Text.NormalizationForm.FormD)
-        Dim stringBuilder = New System.Text.StringBuilder()
-
-        For Each c As String In normalizedString
-            Dim unicodeCategory__1 = CharUnicodeInfo.GetUnicodeCategory(c)
-            If unicodeCategory__1 <> UnicodeCategory.NonSpacingMark Then
-                stringBuilder.Append(c)
-            End If
-        Next
-
-        Return stringBuilder.ToString().Normalize(System.Text.NormalizationForm.FormC)
+        Return messageError
     End Function
 
     Public Class GameWatchArguments

@@ -48,103 +48,17 @@ Public Class CalenderControl
     End Sub
 
     Sub clearall()
-        Su1.Text = ""
-        Su2.Text = ""
-        Su3.Text = ""
-        Su4.Text = ""
-        Su5.Text = ""
-        Su6.Text = ""
-
-        Mo1.Text = ""
-        Mo2.Text = ""
-        Mo3.Text = ""
-        Mo4.Text = ""
-        Mo5.Text = ""
-        Mo6.Text = ""
-
-        Tu1.Text = ""
-        Tu2.Text = ""
-        Tu3.Text = ""
-        Tu4.Text = ""
-        Tu5.Text = ""
-        Tu6.Text = ""
-
-        We1.Text = ""
-        We2.Text = ""
-        We3.Text = ""
-        We4.Text = ""
-        We5.Text = ""
-        We6.Text = ""
-
-        Th1.Text = ""
-        Th2.Text = ""
-        Th3.Text = ""
-        Th4.Text = ""
-        Th5.Text = ""
-        Th6.Text = ""
-
-        Fr1.Text = ""
-        Fr2.Text = ""
-        Fr3.Text = ""
-        Fr4.Text = ""
-        Fr5.Text = ""
-        Fr6.Text = ""
-
-        Sa1.Text = ""
-        Sa2.Text = ""
-        Sa3.Text = ""
-        Sa4.Text = ""
-        Sa5.Text = ""
-        Sa6.Text = ""
-
-        Su1.Visible = True
-        Su2.Visible = True
-        Su3.Visible = True
-        Su4.Visible = True
-        Su5.Visible = True
-        Su6.Visible = True
-
-        Mo1.Visible = True
-        Mo2.Visible = True
-        Mo3.Visible = True
-        Mo4.Visible = True
-        Mo5.Visible = True
-        Mo6.Visible = True
-
-        Tu1.Visible = True
-        Tu2.Visible = True
-        Tu3.Visible = True
-        Tu4.Visible = True
-        Tu5.Visible = True
-        Tu6.Visible = True
-
-        We1.Visible = True
-        We2.Visible = True
-        We3.Visible = True
-        We4.Visible = True
-        We5.Visible = True
-        We6.Visible = True
-
-        Th1.Visible = True
-        Th2.Visible = True
-        Th3.Visible = True
-        Th4.Visible = True
-        Th5.Visible = True
-        Th6.Visible = True
-
-        Fr1.Visible = True
-        Fr2.Visible = True
-        Fr3.Visible = True
-        Fr4.Visible = True
-        Fr5.Visible = True
-        Fr6.Visible = True
-
-        Sa1.Visible = True
-        Sa2.Visible = True
-        Sa3.Visible = True
-        Sa4.Visible = True
-        Sa5.Visible = True
-        Sa6.Visible = True
+        For Each txt In {
+            Su1, Su2, Su3, Su4, Su5, Su6,
+            Mo1, Mo2, Mo3, Mo4, Mo5, Mo6,
+            Tu1, Tu2, Tu3, Tu4, Tu5, Tu6,
+            We1, We2, We3, We4, We5, We6,
+            Th1, Th2, Th3, Th4, Th5, Th6,
+            Fr1, Fr2, Fr3, Fr4, Fr5, Fr6,
+            Sa1, Sa2, Sa3, Sa4, Sa5, Sa6}
+            txt.Text = Nothing
+            txt.Visible = True
+        Next
     End Sub
 
     Function getButton(ByVal day As DayOfWeek, ByVal row As Integer) As System.Windows.Forms.Button

@@ -1,4 +1,4 @@
-﻿Imports NHLGames.Game
+﻿Imports System.Globalization
 
 Public Class GameControl
 
@@ -44,7 +44,6 @@ Public Class GameControl
         lblAwayScore.Text = Game.AwayScore
         lblAwayTeam.Text = Game.AwayAbbrev
 
-        'btnWatch.Enabled = Game.Date <= DateTime.Now 'AndAlso Game.GameIsLive
         If Game.GameIsScheduled And Game.Date.ToLocalTime() <= Date.Today.AddDays(1) Then
             BorderPanel1.BorderColour = Color.FromArgb(255, 0, 175, 220)
         ElseIf Game.GameIsPreGame Then
@@ -56,17 +55,31 @@ Public Class GameControl
         End If
     End Sub
 
+    Private Shared Function RemoveDiacritics(text As String) As String
+        Dim normalizedString = text.Normalize(System.Text.NormalizationForm.FormD)
+        Dim stringBuilder = New System.Text.StringBuilder()
+
+        For Each c As String In normalizedString
+            Dim unicodeCategory__1 = CharUnicodeInfo.GetUnicodeCategory(c)
+            If unicodeCategory__1 <> UnicodeCategory.NonSpacingMark Then
+                stringBuilder.Append(c)
+            End If
+        Next
+
+        Return stringBuilder.ToString().Normalize(System.Text.NormalizationForm.FormC)
+    End Function
+
     Private Sub SetInitialProperties(Game As Game)
         picAway.SizeMode = PictureBoxSizeMode.StretchImage
         If String.IsNullOrEmpty(Game.HomeTeam) = False Then
-            picAway.Image = ImageFetcher.GetEmbeddedImage(Game.AwayTeam)
+            picAway.Image = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(Game.AwayTeam).Replace(" ", "").Replace(".", ""))
             TeamToolTip.SetToolTip(picAway, "Away Team: " & Game.AwayTeamName)
         End If
 
         live2.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
         picHome.SizeMode = PictureBoxSizeMode.StretchImage
         If String.IsNullOrEmpty(Game.AwayTeam) = False Then
-            picHome.Image = ImageFetcher.GetEmbeddedImage(Game.HomeTeam)
+            picHome.Image = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(Game.HomeTeam).Replace(" ", "").Replace(".", ""))
             TeamToolTip.SetToolTip(picHome, "Home Team: " & Game.HomeTeamName)
         End If
 
@@ -84,7 +97,6 @@ Public Class GameControl
                 lblNotInSeason.Text = "Preseason"
             End If
         End If
-
 
         If Game.GameIsLive Then
             lblTime.Text = Game.GameTimeLeft.ToString()
@@ -107,7 +119,7 @@ Public Class GameControl
 
         lblAwayStream.Visible = Game.AwayStream.IsAvailable
         If Game.AwayStream.IsAvailable Then
-            tip = Game.Away + " stream"
+            tip = Game.AwayTeamName + " stream"
             If Game.AwayStream.Network <> String.Empty Then
                 lblAwayStream.Text += " (" & Game.AwayStream.Network & ")"
                 tip += " on " + Game.AwayStream.Network
@@ -117,7 +129,7 @@ Public Class GameControl
 
         lblHomeStream.Visible = Game.HomeStream.IsAvailable
         If Game.HomeStream.IsAvailable Then
-            tip = Game.Home + " stream"
+            tip = Game.HomeTeamName + " stream"
             If Game.HomeStream.Network <> String.Empty Then
                 lblHomeStream.Text += " (" & Game.HomeStream.Network & ")"
                 tip += " on " + Game.HomeStream.Network
@@ -169,10 +181,6 @@ Public Class GameControl
             args.IsVOD = _Game.HomeStream.IsVOD
         End If
 
-        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
-        '    _Game.HomeStream.CheckDuplicate(args.CDN)
-        'End If
-
         args.Stream = _Game.HomeStream
         _Game.Watch(args)
     End Sub
@@ -184,10 +192,6 @@ Public Class GameControl
             _Game.AwayStream.CheckVOD(args.CDN)
             args.IsVOD = _Game.AwayStream.IsVOD
         End If
-
-        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
-        '    _Game.AwayStream.CheckDuplicate(args.CDN)
-        'End If
 
         args.Stream = _Game.AwayStream
         _Game.Watch(args)
@@ -201,10 +205,6 @@ Public Class GameControl
             args.IsVOD = _Game.FrenchStream.IsVOD
         End If
 
-        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
-        '    _Game.FrenchStream.CheckDuplicate(args.CDN)
-        'End If
-
         args.Stream = _Game.FrenchStream
         _Game.Watch(args)
     End Sub
@@ -216,10 +216,6 @@ Public Class GameControl
             _Game.NationalStream.CheckVOD(args.CDN)
             args.IsVOD = _Game.NationalStream.IsVOD
         End If
-
-        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
-        '    _Game.NationalStream.CheckDuplicate(args.CDN)
-        'End If
 
         args.Stream = _Game.NationalStream
         _Game.Watch(args)
@@ -233,10 +229,6 @@ Public Class GameControl
             args.IsVOD = _Game.MultiCam1Stream.IsVOD
         End If
 
-        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
-        '    _Game.NationalStream.CheckDuplicate(args.CDN)
-        'End If
-
         args.Stream = _Game.MultiCam1Stream
         _Game.Watch(args)
     End Sub
@@ -248,10 +240,6 @@ Public Class GameControl
             _Game.MultiCam2Stream.CheckVOD(args.CDN)
             args.IsVOD = _Game.MultiCam2Stream.IsVOD
         End If
-
-        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
-        '    _Game.NationalStream.CheckDuplicate(args.CDN)
-        'End If
 
         args.Stream = _Game.MultiCam2Stream
         _Game.Watch(args)
@@ -265,10 +253,6 @@ Public Class GameControl
             args.IsVOD = _Game.RefCamStream.IsVOD
         End If
 
-        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
-        '    _Game.NationalStream.CheckDuplicate(args.CDN)
-        'End If
-
         args.Stream = _Game.RefCamStream
         _Game.Watch(args)
     End Sub
@@ -281,10 +265,6 @@ Public Class GameControl
             args.IsVOD = _Game.EndzoneCam1Stream.IsVOD
         End If
 
-        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
-        '    _Game.NationalStream.CheckDuplicate(args.CDN)
-        'End If
-
         args.Stream = _Game.EndzoneCam1Stream
         _Game.Watch(args)
     End Sub
@@ -295,10 +275,6 @@ Public Class GameControl
             _Game.EndzoneCam2Stream.CheckVOD(args.CDN)
             args.IsVOD = _Game.EndzoneCam2Stream.IsVOD
         End If
-
-        'If DateHelper.GetPacificTime(_Game.Date).ToShortDateString = _selectedDate.ToShortDateString() Then
-        '    _Game.NationalStream.CheckDuplicate(args.CDN)
-        'End If
 
         args.Stream = _Game.EndzoneCam2Stream
         _Game.Watch(args)

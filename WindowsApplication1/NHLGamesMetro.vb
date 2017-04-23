@@ -16,7 +16,7 @@ Public Class NHLGamesMetro
     Private ServerIP As String
     Private Const DomainName As String = "mf.svc.nhl.com"
     Private Shared SettingsLoaded As Boolean = False
-    Public Shared FormInstance As NHLGamesMetro = Nothing
+   Public Shared FormInstance As NHLGamesMetro = Nothing
     Private AdDetectorViewModel As AdDetectorViewModel = Nothing
     Private StatusTimer As Timer
     Private LoadingTimer As Timer
@@ -25,7 +25,6 @@ Public Class NHLGamesMetro
     Public Shared m_flpCalendar As FlowLayoutPanel
     Public Shared m_StreamStarted As Boolean = False
     Public Shared m_progressVisible As Boolean = False
-    Public Shared m_error As Boolean = False
     Public Shared m_lblDate As Label
     Public Shared m_Date As Date
 
@@ -137,12 +136,13 @@ Public Class NHLGamesMetro
         BindWatchArgsToForm(watchArgs)
 
         m_Date = DateHelper.GetPacificTime()
-        lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(m_Date.DayOfWeek).Substring(0, 3) + ", " +
-            CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(m_Date.Month).Substring(0, 3) + " " +
-            Date.Today.Day.ToString + ", " + m_Date.Year.ToString
 
         progress.Location = New Point((FlowLayoutPanel.Width - progress.Width) / 2, FlowLayoutPanel.Location.Y + 150)
         NoGames.Location = New Point((FlowLayoutPanel.Width - NoGames.Width) / 2, FlowLayoutPanel.Location.Y + 148)
+
+        lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(m_Date.DayOfWeek).Substring(0, 3) + ", " +
+            CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(m_Date.Month).Substring(0, 3) + " " +
+            Date.Today.Day.ToString + ", " + m_Date.Year.ToString
 
         SettingsLoaded = True
 
@@ -262,12 +262,9 @@ Public Class NHLGamesMetro
     End Sub
 
     Public Sub HandleException(e As Exception)
-
         Console.WriteLine(e.ToString())
-
     End Sub
     Private Sub VersionCheck()
-
         Dim strLatest = Downloader.DownloadApplicationVersion()
         Console.WriteLine("Status: Current version is " & strLatest)
         Dim versionFromSettings = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version, "")
@@ -294,7 +291,6 @@ Public Class NHLGamesMetro
             FlowLayoutPanel.Controls.Add(gameControl)
         End If
 
-
     End Sub
 
 
@@ -304,7 +300,7 @@ Public Class NHLGamesMetro
         m_lblDate = lblDate
         AdDetectorViewModel = New AdDetectorViewModel()
         AdDetectionSettingsElementHost.Child = AdDetectorViewModel.SettingsControl
-        'dtDate.MaxDate = DateHelper.GetPacificTime()
+
         TabControl.SelectedIndex = 0
         flpCalender.Controls.Add(New CalenderControl(flpCalender))
         ServerIP = Dns.GetHostEntry("nhl.chickenkiller.com").AddressList.First.ToString()
@@ -312,7 +308,9 @@ Public Class NHLGamesMetro
         If (HostsFile.TestEntry(DomainName, ServerIP) = False) Then
             HostsFile.AddEntry(ServerIP, DomainName, True)
         End If
+
         VersionCheck()
+        Downloader.CleanRepertoryForOldJsonFiles()
         IntitializeApplicationSettings()
     End Sub
 
@@ -324,7 +322,6 @@ Public Class NHLGamesMetro
     Private Sub LoadGamesAsync(dateTime As DateTime)
         Dim LoadGamesFunc As New Action(Of DateTime)(Sub(dt As DateTime) LoadGames(dt))
         LoadGamesFunc.BeginInvoke(dateTime, Nothing, Nothing)
-
     End Sub
 
     Private Sub ClearGamePanel()
@@ -332,38 +329,23 @@ Public Class NHLGamesMetro
             BeginInvoke(New Action(AddressOf ClearGamePanel))
         Else
             FlowLayoutPanel.Controls.Clear()
-            FlowLayoutPanel.Height = 390
+            FlowLayoutPanel.Height = 400
         End If
 
     End Sub
 
-    Private Sub ResizeGamePanel()
-        If InvokeRequired Then
-            BeginInvoke(New Action(AddressOf ResizeGamePanel))
-        Else
-            If FlowLayoutPanel.Height > 400 Then
-                Me.Height = FlowLayoutPanel.Height + 225
-            Else
-                Me.Height = 600
-            End If
-        End If
-
-    End Sub
     Private Sub LoadGames(dateTime As DateTime)
         Try
-
             SetLoading(True)
             SetFormStatusLabel("Loading Games")
 
-            'If dateTime <> GameManager.GamesListDate Then
             GameManager.ClearGames()
             ClearGamePanel()
-            'End If
 
             Dim JSONSchedule As JObject = Downloader.DownloadJSONSchedule(dateTime)
-            AvailableGames = Downloader.DownloadAvailableGames() 'TODO: not download each time?
+            AvailableGames = Downloader.DownloadAvailableGames()
             GameManager.RefreshGames(dateTime, JSONSchedule, AvailableGames)
-            ResizeGamePanel()
+
             SetFormStatusLabel("Games Found : " + GameManager.GamesList.Count.ToString())
             SetLoading(False)
         Catch ex As Exception
@@ -490,7 +472,7 @@ Public Class NHLGamesMetro
         If InvokeRequired Then
             BeginInvoke(New Action(Of Boolean)(AddressOf SetLoading), visible)
         Else
-            Me.progress.Visible = [visible]
+            progress.Visible = [visible]
             LoadingTimer = New Timer(New TimerCallback(Sub() If progress.Visible Then SetLoading(True)), Nothing, 1000, Timeout.Infinite)
         End If
     End Sub
@@ -646,11 +628,6 @@ Public Class NHLGamesMetro
         If FlowLayoutPanel.Controls.Count <> 0 And (progress.Visible Or NoGames.Visible) Then
             If Not m_StreamStarted Then progress.Visible = False
             NoGames.Visible = False
-        End If
-
-        If m_error Then
-            m_error = False
-            MetroMessageBox.Show(Me, "Something went wront, see the console for more details", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
     End Sub

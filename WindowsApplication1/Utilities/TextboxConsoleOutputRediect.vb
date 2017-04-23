@@ -3,7 +3,6 @@ Imports System.Text
 
 Public Class TextboxConsoleOutputRediect
 
-
     Public Class TextBoxStreamWriter
         Inherits TextWriter
         Private _output As RichTextBox = Nothing
@@ -20,7 +19,7 @@ Public Class TextboxConsoleOutputRediect
 
         End Enum
         Public Overrides Sub WriteLine(value As String)
-
+            Dim lastError As String = Nothing
             MyBase.WriteLine(value)
 
             _output.BeginInvoke(New Action(Function()
@@ -30,12 +29,12 @@ Public Class TextboxConsoleOutputRediect
                                                Dim timestamp As String = "[" & DateTime.Now.ToString("HH:mm:ss") & "] "
 
 
-                                               If value.ToLower().IndexOf("error:") > -1 OrElse value.ToLower().IndexOf("exception:") > -1 Then
+                                               If value.ToLower().IndexOf("error:") = 0 OrElse value.ToLower().IndexOf("exception:") = 0 Then
                                                    type = OutputType.Error
                                                    startIndex = _output.TextLength
                                                    length = value.IndexOf(":") + 2
                                                    _output.AppendText(vbCr)
-                                               ElseIf value.IndexOf("[cli]") > -1 Then
+                                               ElseIf value.IndexOf("[cli]") = 0 Then
                                                    type = OutputType.CLI
                                                    startIndex = _output.TextLength
                                                    length = 6
@@ -45,6 +44,10 @@ Public Class TextboxConsoleOutputRediect
                                                    startIndex = _output.TextLength
                                                    length = value.IndexOf(":") + 2
                                                    _output.AppendText(vbCr)
+                                               End If
+
+                                               If type = OutputType.Error Then
+                                                   lastError = value
                                                End If
 
                                                value = timestamp & value
@@ -68,6 +71,7 @@ Public Class TextboxConsoleOutputRediect
 
                                                End If
 
+                                               If lastError <> Nothing Then ShowMessageErrorToForm(lastError)
 
                                                Return ""
                                            End Function))
@@ -80,5 +84,13 @@ Public Class TextboxConsoleOutputRediect
             End Get
         End Property
     End Class
+
+    Private Shared Sub ShowMessageErrorToForm(MessageError As String)
+        If NHLGamesMetro.FormInstance.InvokeRequired Then
+            NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String)(AddressOf ShowMessageErrorToForm), MessageError)
+        Else
+            MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, "An error happened :" + vbCrLf + MessageError + vbCrLf + "See the console for more details.", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+    End Sub
 
 End Class
