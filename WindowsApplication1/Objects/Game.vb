@@ -217,6 +217,10 @@ Public Class Game
                                                  NHLGamesMetro.m_StreamStarted = False
                                              End If
                                          End While
+                                         If (NHLGamesMetro.m_StreamStarted) Then
+                                             NHLGamesMetro.m_progressVisible = False
+                                             NHLGamesMetro.m_StreamStarted = False
+                                         End If
                                      Catch ex As Exception
                                          Console.WriteLine("Error: " & ex.Message)
                                          NHLGamesMetro.m_progressVisible = False
