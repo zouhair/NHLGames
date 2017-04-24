@@ -183,11 +183,11 @@ Public Class Game
     Public Sub Watch(args As GameWatchArguments)
 
         Dim t As Task = New Task(Function()
-                                     Console.WriteLine("Starting: " & args.LiveStreamerPath & " " & args.ToString(True))
+                                     Console.WriteLine("Starting: " & args.streamlinkPath & " " & args.ToString(True))
 
                                      Dim proc = New Process() With {.StartInfo =
             New ProcessStartInfo With {
-            .FileName = args.LiveStreamerPath,
+            .FileName = args.streamlinkPath,
             .Arguments = args.ToString(),
             .UseShellExecute = False,
             .RedirectStandardOutput = True,
@@ -369,10 +369,10 @@ Public Class Game
         Public Property PlayerPath As String = ""
         Public Property PlayerType As PlayerTypeEnum = PlayerTypeEnum.None
 
-        Public Property LiveStreamerPath As String = ""
+        Public Property streamlinkPath As String = ""
 
-        Public Property UseLiveStreamerArgs As Boolean = False
-        Public Property LiveStreamerArgs As String = ""
+        Public Property UsestreamlinkArgs As Boolean = False
+        Public Property streamlinkArgs As String = ""
 
         Public Property UsePlayerArgs As Boolean = False
         Public Property PlayerArgs As String = ""
@@ -393,36 +393,40 @@ Public Class Game
             '--player-external-http should allow for serviio to serve stream to DLNA player, my TV can't seem to open the media though. DLNA player on phone sort of works, craps out after 10 sec or so
 
             Dim returnValue As String = ""
-            Dim LiteralPlayerArgs As String = ""
+            Dim dblQuot As String = """"
+            Dim dblQuot2 As String = """"""
+            Dim space As String = " "
+            Dim literalPlayerArgs As String = String.Empty
+
             If UsePlayerArgs Then
-                LiteralPlayerArgs = PlayerArgs
+                literalPlayerArgs = PlayerArgs
             End If
 
-            Dim titleArg As String = ""
+            Dim titleArg As String = literalPlayerArgs
             If PlayerType = PlayerTypeEnum.VLC Then
-                titleArg = " --meta-title '" & GameTitle & "' "
+                titleArg = "--meta-title" & space & dblQuot2 & GameTitle & dblQuot2 & space
             ElseIf PlayerType = PlayerTypeEnum.mpv Then
-                titleArg = " --title '" & GameTitle & "' --user-agent='User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316'"
+                titleArg = "--title" & space & dblQuot2 & GameTitle & dblQuot2 & space & "--user-agent=User-Agent=" & dblQuot2 & "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316" & dblQuot2 & space
             End If
 
             If String.IsNullOrEmpty(PlayerPath) = False Then
-                returnValue &= " --player ""'" & PlayerPath & "' " & titleArg & LiteralPlayerArgs & """ " '--player-passthrough=hls 
+                returnValue &= space & "--player" & space & dblQuot & PlayerPath & space & titleArg & literalPlayerArgs & space & dblQuot & space
             Else
                 Console.WriteLine("Error: Player path is empty")
             End If
 
             If PlayerType = PlayerTypeEnum.mpv Then
-                returnValue &= " --player-passthrough=hls "
+                returnValue &= "--player-passthrough=hls" & space
             End If
 
             If SafeOutput = False Then
-                returnValue &= "--http-cookie=""mediaAuth=" & Common.GetRandomString(240) & " """
+                returnValue &= "--http-cookie=" & dblQuot & "mediaAuth=" & Common.GetRandomString(240) & space & dblQuot & space
             End If
 
-            returnValue &= "--http-header=""User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316"" "
+            returnValue &= "--http-header=" & dblQuot & "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316" & dblQuot & space
 
             If SafeOutput = False Then
-                returnValue &= """hlsvariant://"
+                returnValue &= dblQuot & "hlsvariant://"
 
                 If IsVOD Then
                     returnValue &= Stream.VODURL
@@ -430,24 +434,24 @@ Public Class Game
                     returnValue &= Stream.GameURL
                 End If
 
-                returnValue = returnValue.Replace("CDN", CDN)
+                returnValue = returnValue.Replace("CDN", CDN) & space
             Else
-                returnValue &= """hlsvariant://--URL CENSORED--"
+                returnValue &= dblQuot & "hlsvariant://--URL CENSORED--" & space
             End If
 
             If Is60FPS Then
-                returnValue &= " name_key=bitrate"" "
+                returnValue &= "name_key=bitrate" & dblQuot & space
             Else
-                returnValue &= """ "
+                returnValue &= dblQuot & space
             End If
 
             If Is60FPS Then
-                returnValue &= " best "
+                returnValue &= "best" & space
             Else
-                returnValue &= Quality
+                returnValue &= Quality & space
             End If
 
-            returnValue &= " --http-no-ssl-verify "
+            returnValue &= "--http-no-ssl-verify" & space
 
             If UseOutputArgs Then
                 Dim outputPath As String = PlayerOutputPath.
@@ -464,11 +468,11 @@ Public Class Game
                     suffix += 1
                 End While
 
-                returnValue &= " -o """ & outputPath & """ "
+                returnValue &= "-o" & space & dblQuot & outputPath & dblQuot & space
             End If
 
-            If UseLiveStreamerArgs Then
-                returnValue &= LiveStreamerArgs
+            If UsestreamlinkArgs Then
+                returnValue &= streamlinkArgs
             End If
 
             Return returnValue
