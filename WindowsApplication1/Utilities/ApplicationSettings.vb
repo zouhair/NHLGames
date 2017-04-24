@@ -8,7 +8,7 @@ Public Class ApplicationSettings
         VLCPath = 3
         MPCPath = 4
         mpvPath = 5
-        LiveStreamerPath = 6
+        streamlinkPath = 6
         ServiioPath = 7
         ShowScores = 8
         RefreshIntervalInMin = 9

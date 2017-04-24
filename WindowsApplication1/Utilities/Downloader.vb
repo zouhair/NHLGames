@@ -8,7 +8,7 @@ Imports Newtonsoft.Json.Linq
 
 Public Class Downloader
 
-    Private Shared GamesTxtURL As String = "http://nhl.chickenkiller.com/static/ids.txt"
+    Private Shared GamesTxtURL As String = "http://nhl.freegamez.gq/static/ids.txt"
     Private Shared ScheduleAPIURL As String = "http://statsapi.web.nhl.com/api/v1/schedule?startDate={0}&endDate={1}&expand=schedule.teams,schedule.linescore,schedule.game.seriesSummary,schedule.game.content.media.epg"
     Private Shared ApplicationVersionURL As String = "https://showtimes.ninja/static/version.txt"
     Private Shared ChangelogURL As String = "https://showtimes.ninja/static/changelog.txt"

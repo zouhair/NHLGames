@@ -59,7 +59,7 @@ Public Class NHLGamesMetro
 
         TabControl.SelectedIndex = 0
         flpCalender.Controls.Add(New CalenderControl(flpCalender))
-        ServerIP = Dns.GetHostEntry("nhl.chickenkiller.com").AddressList.First.ToString()
+        ServerIP = Dns.GetHostEntry("nhl.freegamez.gq").AddressList.First.ToString()
 
         If (HostsFile.TestEntry(DomainName, ServerIP) = False) Then
             HostsFile.AddEntry(ServerIP, DomainName, True)
@@ -120,23 +120,24 @@ Public Class NHLGamesMetro
         End If
         txtMpvPath.Text = mpvPath
 
-        Dim liveStreamerPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.LiveStreamerPath, "")
-        If liveStreamerPath = "" Then
+
+        Dim streamlinkPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.streamlinkPath, "")
+        If streamlinkPath = "" Then
             ' First check inside app folder
-            liveStreamerPath = Path.Combine(Application.StartupPath, "livestreamer-v1.12.2\livestreamer.exe")
-            If Not File.Exists(liveStreamerPath) Then
-                Console.WriteLine("Error: Can't find livestreamer.exe. It came with NHLGames. You probably moved it or deleted it and " +
+            streamlinkPath = Path.Combine(Application.StartupPath, "streamlink-0.5.0\streamlink.exe")
+            If Not File.Exists(streamlinkPath) Then
+                Console.WriteLine("Error:  Can't find streamlink.exe. It came with NHLGames. You probably moved it or deleted it and " +
                                   "NHLGames needs it to send the stream to your media player. If you don't set any custom path, you will " +
-                                  "have to put it back there, just drop the folder 'livestreamer-v1.12.2' next to NHLGames.exe.")
-                liveStreamerPath = ""
+                                  "have to put it back there, just drop the folder 'streamlink-0.5.0' next to NHLGames.exe.")
+                streamlinkPath = ""
             End If
-            ApplicationSettings.SetValue(ApplicationSettings.Settings.LiveStreamerPath, liveStreamerPath)
-        ElseIf liveStreamerPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.LiveStreamerPath, "") Then
-            If File.Exists(liveStreamerPath) Then
-                ApplicationSettings.SetValue(ApplicationSettings.Settings.LiveStreamerPath, liveStreamerPath)
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.streamlinkPath, streamlinkPath)
+        ElseIf streamlinkPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.streamlinkPath, "") Then
+            If File.Exists(streamlinkPath) Then
+                ApplicationSettings.SetValue(ApplicationSettings.Settings.streamlinkPath, streamlinkPath)
             End If
         End If
-        txtLiveStreamPath.Text = liveStreamerPath
+        txtLiveStreamPath.Text = streamlinkPath
 
         MetroCheckBox1.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True)
         MetroCheckBox2.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores, True)
@@ -199,7 +200,7 @@ Public Class NHLGamesMetro
                 WatchArgs.PlayerPath = txtVLCPath.Text
             End If
 
-            WatchArgs.LiveStreamerPath = txtLiveStreamPath.Text
+            WatchArgs.streamlinkPath = txtLiveStreamPath.Text
 
             If rbAkamai.Checked Then
                 WatchArgs.CDN = "akc"
@@ -210,8 +211,8 @@ Public Class NHLGamesMetro
             WatchArgs.UsePlayerArgs = chkEnablePlayerArgs.Checked
             WatchArgs.PlayerArgs = txtPlayerArgs.Text
 
-            WatchArgs.UseLiveStreamerArgs = chkEnableStreamArgs.Checked
-            WatchArgs.LiveStreamerArgs = txtStreamerArgs.Text
+            WatchArgs.UsestreamlinkArgs = chkEnableStreamArgs.Checked
+            WatchArgs.streamlinkArgs = txtStreamerArgs.Text
 
             WatchArgs.UseOutputArgs = chkEnableOutput.Checked
             WatchArgs.PlayerOutputPath = txtOutputPath.Text
@@ -252,9 +253,9 @@ Public Class NHLGamesMetro
             txtPlayerArgs.Enabled = WatchArgs.UsePlayerArgs
             txtPlayerArgs.Text = WatchArgs.PlayerArgs
 
-            chkEnableStreamArgs.Checked = WatchArgs.UseLiveStreamerArgs
-            txtStreamerArgs.Enabled = WatchArgs.UseLiveStreamerArgs
-            txtStreamerArgs.Text = WatchArgs.LiveStreamerArgs
+            chkEnableStreamArgs.Checked = WatchArgs.UsestreamlinkArgs
+            txtStreamerArgs.Enabled = WatchArgs.UsestreamlinkArgs
+            txtStreamerArgs.Text = WatchArgs.streamlinkArgs
 
             txtOutputPath.Text = WatchArgs.PlayerOutputPath
             txtOutputPath.Enabled = WatchArgs.UseOutputArgs
@@ -400,14 +401,14 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub btnLiveStreamerPath_Click(sender As Object, e As EventArgs) Handles btnLiveStreamerPath.Click
-        OpenFileDialog.Filter = "LiveStreamer|livestreamer.exe|All files (*.*)|*.*"
+    Private Sub btnstreamlinkPath_Click(sender As Object, e As EventArgs) Handles btnstreamlinkPath.Click
+        OpenFileDialog.Filter = "streamlink|streamlink.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
 
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
 
             If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtLiveStreamPath.Text <> OpenFileDialog.FileName Then
-                ApplicationSettings.SetValue(ApplicationSettings.Settings.LiveStreamerPath, OpenFileDialog.FileName)
+                ApplicationSettings.SetValue(ApplicationSettings.Settings.streamlinkPath, OpenFileDialog.FileName)
                 txtLiveStreamPath.Text = OpenFileDialog.FileName
             End If
 
