@@ -23,6 +23,7 @@ Public Class NHLGamesMetro
     Public Shared m_flpCalendar As FlowLayoutPanel
     Public Shared m_StreamStarted As Boolean = False
     Public Shared m_progressVisible As Boolean = False
+    Public Shared m_gamesDownloadedTime As Date
     Public Shared m_lblDate As Label
     Public Shared m_Date As Date = DateHelper.GetPacificTime()
 
@@ -87,7 +88,7 @@ Public Class NHLGamesMetro
                 mpcPath = mpc
             End If
             ApplicationSettings.SetValue(ApplicationSettings.Settings.MPCPath, mpcPath)
-        ElseIf mpcPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.mpcPath, "") Then
+        ElseIf mpcPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MPCPath, "") Then
             ApplicationSettings.SetValue(ApplicationSettings.Settings.MPCPath, mpcPath)
         End If
         txtMPCPath.Text = mpcPath
@@ -98,7 +99,7 @@ Public Class NHLGamesMetro
             If vlc <> "" Then
                 vlcPath = vlc
             End If
-        ElseIf vlcPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.vlcPath, "") Then
+        ElseIf vlcPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VLCPath, "") Then
             ApplicationSettings.SetValue(ApplicationSettings.Settings.VLCPath, vlcPath)
         End If
         txtVLCPath.Text = vlcPath
@@ -159,7 +160,7 @@ Public Class NHLGamesMetro
         Date.Today.Day.ToString + ", " + m_Date.Year.ToString
 
         m_lblDate = lblDate
-
+        m_gamesDownloadedTime = Now
         SettingsLoaded = True
     End Sub
 
@@ -327,6 +328,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub LoadGames(dateTime As DateTime, refreshing As Boolean)
+        Dim AvailableGames As HashSet(Of String) = New HashSet(Of String)
         Try
             SetLoading(True)
             SetFormStatusLabel("Loading Games")

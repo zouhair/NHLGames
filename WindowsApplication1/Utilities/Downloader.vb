@@ -123,13 +123,13 @@ Public Class Downloader
     Public Shared Function DownloadAvailableGames() As HashSet(Of String)
 
         Console.WriteLine("Checking: Available games")
-        DownloadFile(GamesTxtURL, GamesTextFileName, True)
+        DownloadFile(GamesTxtURL, GamesTextFileName)
         Return New HashSet(Of String)(ReadFileContents(GamesTextFileName).Split(New Char() {vbLf}))
     End Function
 
 
 
-    Public Shared Function DownloadJSONSchedule(startDate As DateTime, refreshing As Boolean) As JObject
+    Public Shared Function DownloadJSONSchedule(startDate As DateTime, Optional refreshing As Boolean = False) As JObject
 
         Console.WriteLine("Checking: Fetching game schedule for " & startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
 
