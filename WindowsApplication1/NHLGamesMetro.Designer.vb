@@ -34,6 +34,8 @@ Partial Class NHLGamesMetro
         Me.RichTextBox = New System.Windows.Forms.RichTextBox()
         Me.TabControl = New MetroFramework.Controls.MetroTabControl()
         Me.GamesTab = New MetroFramework.Controls.MetroTabPage()
+        Me.NoGames = New System.Windows.Forms.Label()
+        Me.progress = New System.Windows.Forms.ProgressBar()
         Me.flpCalender = New System.Windows.Forms.FlowLayoutPanel()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnYesterday = New System.Windows.Forms.Button()
@@ -96,8 +98,6 @@ Partial Class NHLGamesMetro
         Me.btnClearConsole = New MetroFramework.Controls.MetroButton()
         Me.AdDetectionSettingsTab = New MetroFramework.Controls.MetroTabPage()
         Me.AdDetectionSettingsElementHost = New System.Windows.Forms.Integration.ElementHost()
-        Me.progress = New System.Windows.Forms.ProgressBar()
-        Me.NoGames = New System.Windows.Forms.Label()
         Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog = New System.Windows.Forms.SaveFileDialog()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
@@ -188,7 +188,7 @@ Partial Class NHLGamesMetro
         Me.RichTextBox.Location = New System.Drawing.Point(3, 20)
         Me.RichTextBox.Name = "RichTextBox"
         Me.RichTextBox.ReadOnly = True
-        Me.RichTextBox.Size = New System.Drawing.Size(1016, 404)
+        Me.RichTextBox.Size = New System.Drawing.Size(1016, 401)
         Me.RichTextBox.TabIndex = 0
         Me.RichTextBox.Text = ""
         '
@@ -201,7 +201,7 @@ Partial Class NHLGamesMetro
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl.Location = New System.Drawing.Point(10, 60)
         Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 2
+        Me.TabControl.SelectedIndex = 0
         Me.TabControl.Size = New System.Drawing.Size(1037, 540)
         Me.TabControl.TabIndex = 22
         Me.TabControl.UseSelectable = True
@@ -229,6 +229,40 @@ Partial Class NHLGamesMetro
         Me.GamesTab.VerticalScrollbarBarColor = True
         Me.GamesTab.VerticalScrollbarHighlightOnWheel = False
         Me.GamesTab.VerticalScrollbarSize = 10
+        '
+        'NoGames
+        '
+        Me.NoGames.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.NoGames.AutoSize = True
+        Me.NoGames.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.NoGames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.NoGames.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NoGames.ForeColor = System.Drawing.Color.DimGray
+        Me.NoGames.Location = New System.Drawing.Point(192, 469)
+        Me.NoGames.Margin = New System.Windows.Forms.Padding(3)
+        Me.NoGames.Name = "NoGames"
+        Me.NoGames.Padding = New System.Windows.Forms.Padding(20, 6, 20, 6)
+        Me.NoGames.Size = New System.Drawing.Size(156, 30)
+        Me.NoGames.TabIndex = 25
+        Me.NoGames.Text = "No Games Found"
+        Me.NoGames.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.NoGames.Visible = False
+        '
+        'progress
+        '
+        Me.progress.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.progress.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.progress.Location = New System.Drawing.Point(-10, 468)
+        Me.progress.MarqueeAnimationSpeed = 10
+        Me.progress.Maximum = 1000
+        Me.progress.MaximumSize = New System.Drawing.Size(200, 30)
+        Me.progress.MinimumSize = New System.Drawing.Size(200, 30)
+        Me.progress.Name = "progress"
+        Me.progress.Size = New System.Drawing.Size(200, 30)
+        Me.progress.Step = 1
+        Me.progress.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.progress.TabIndex = 0
+        Me.progress.Visible = False
         '
         'flpCalender
         '
@@ -321,7 +355,6 @@ Partial Class NHLGamesMetro
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(234, 37)
         Me.lblDate.TabIndex = 11
-        Me.lblDate.Text = "Day, Mon 00, Year"
         Me.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FlowLayoutPanel
@@ -334,7 +367,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.FlowLayoutPanel.Location = New System.Drawing.Point(-10, 53)
         Me.FlowLayoutPanel.Name = "FlowLayoutPanel"
-        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1040, 405)
+        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1040, 402)
         Me.FlowLayoutPanel.TabIndex = 1
         '
         'SettingTab
@@ -379,9 +412,9 @@ Partial Class NHLGamesMetro
         Me.SettingTab.HorizontalScrollbarBarColor = True
         Me.SettingTab.HorizontalScrollbarHighlightOnWheel = False
         Me.SettingTab.HorizontalScrollbarSize = 10
-        Me.SettingTab.Location = New System.Drawing.Point(4, 38)
+        Me.SettingTab.Location = New System.Drawing.Point(4, 35)
         Me.SettingTab.Name = "SettingTab"
-        Me.SettingTab.Size = New System.Drawing.Size(1029, 498)
+        Me.SettingTab.Size = New System.Drawing.Size(1029, 501)
         Me.SettingTab.TabIndex = 1
         Me.SettingTab.Text = "Settings      "
         Me.SettingTab.VerticalScrollbarBarColor = True
@@ -952,7 +985,7 @@ Partial Class NHLGamesMetro
         'btnClearConsole
         '
         Me.btnClearConsole.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClearConsole.Location = New System.Drawing.Point(916, 427)
+        Me.btnClearConsole.Location = New System.Drawing.Point(916, 424)
         Me.btnClearConsole.Name = "btnClearConsole"
         Me.btnClearConsole.Size = New System.Drawing.Size(103, 23)
         Me.btnClearConsole.TabIndex = 2
@@ -965,10 +998,10 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsTab.HorizontalScrollbarBarColor = True
         Me.AdDetectionSettingsTab.HorizontalScrollbarHighlightOnWheel = False
         Me.AdDetectionSettingsTab.HorizontalScrollbarSize = 6
-        Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 38)
+        Me.AdDetectionSettingsTab.Location = New System.Drawing.Point(4, 35)
         Me.AdDetectionSettingsTab.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsTab.Name = "AdDetectionSettingsTab"
-        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1029, 498)
+        Me.AdDetectionSettingsTab.Size = New System.Drawing.Size(1029, 501)
         Me.AdDetectionSettingsTab.TabIndex = 4
         Me.AdDetectionSettingsTab.Text = "Ad Detection Modules"
         Me.AdDetectionSettingsTab.VerticalScrollbarBarColor = True
@@ -983,41 +1016,9 @@ Partial Class NHLGamesMetro
         Me.AdDetectionSettingsElementHost.Location = New System.Drawing.Point(0, 0)
         Me.AdDetectionSettingsElementHost.Margin = New System.Windows.Forms.Padding(2)
         Me.AdDetectionSettingsElementHost.Name = "AdDetectionSettingsElementHost"
-        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1029, 498)
+        Me.AdDetectionSettingsElementHost.Size = New System.Drawing.Size(1029, 501)
         Me.AdDetectionSettingsElementHost.TabIndex = 2
         Me.AdDetectionSettingsElementHost.Child = Nothing
-        '
-        'progress
-        '
-        Me.progress.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.progress.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.progress.Location = New System.Drawing.Point(-10, 468)
-        Me.progress.MarqueeAnimationSpeed = 10
-        Me.progress.Maximum = 1000
-        Me.progress.Name = "progress"
-        Me.progress.Size = New System.Drawing.Size(200, 30)
-        Me.progress.Step = 1
-        Me.progress.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-        Me.progress.TabIndex = 0
-        Me.progress.Visible = False
-        '
-        'NoGames
-        '
-        Me.NoGames.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.NoGames.AutoSize = True
-        Me.NoGames.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.NoGames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.NoGames.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NoGames.ForeColor = System.Drawing.Color.DimGray
-        Me.NoGames.Location = New System.Drawing.Point(192, 469)
-        Me.NoGames.Margin = New System.Windows.Forms.Padding(3)
-        Me.NoGames.Name = "NoGames"
-        Me.NoGames.Padding = New System.Windows.Forms.Padding(20, 6, 20, 6)
-        Me.NoGames.Size = New System.Drawing.Size(156, 30)
-        Me.NoGames.TabIndex = 25
-        Me.NoGames.Text = "No Games Found"
-        Me.NoGames.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.NoGames.Visible = False
         '
         'StatusStrip
         '
@@ -1028,11 +1029,11 @@ Partial Class NHLGamesMetro
         Me.StatusStrip.Dock = System.Windows.Forms.DockStyle.None
         Me.StatusStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatusLabel})
-        Me.StatusStrip.Location = New System.Drawing.Point(4, 565)
+        Me.StatusStrip.Location = New System.Drawing.Point(0, 565)
         Me.StatusStrip.Margin = New System.Windows.Forms.Padding(0, 0, 20, 0)
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.StatusStrip.Size = New System.Drawing.Size(1054, 35)
+        Me.StatusStrip.Size = New System.Drawing.Size(1057, 35)
         Me.StatusStrip.SizingGrip = False
         Me.StatusStrip.TabIndex = 24
         Me.StatusStrip.Text = "StatusStrip"

@@ -4,11 +4,9 @@ Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Net
 Imports MetroFramework
-Imports MetroFramework.Forms
 Imports Newtonsoft.Json.Linq
 Imports NHLGames.AdDetection
 Imports NHLGames.TextboxConsoleOutputRediect
-Imports System.Drawing.Text
 
 Public Class NHLGamesMetro
 
@@ -16,7 +14,7 @@ Public Class NHLGamesMetro
     Private ServerIP As String
     Private Const DomainName As String = "mf.svc.nhl.com"
     Private Shared SettingsLoaded As Boolean = False
-   Public Shared FormInstance As NHLGamesMetro = Nothing
+    Public Shared FormInstance As NHLGamesMetro = Nothing
     Private AdDetectorViewModel As AdDetectorViewModel = Nothing
     Private StatusTimer As Timer
     Private LoadingTimer As Timer
@@ -26,7 +24,7 @@ Public Class NHLGamesMetro
     Public Shared m_StreamStarted As Boolean = False
     Public Shared m_progressVisible As Boolean = False
     Public Shared m_lblDate As Label
-    Public Shared m_Date As Date
+    Public Shared m_Date As Date = DateHelper.GetPacificTime()
 
     ' Starts the application. -- See: https://msdn.microsoft.com/en-us/library/system.windows.forms.application.threadexception(v=vs.110).aspx
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
@@ -51,6 +49,27 @@ Public Class NHLGamesMetro
         Application.Run(form)
     End Sub
 
+    Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        AddHandler GameManager.NewGameFound, AddressOf NewGameFoundHandler
+        m_flpCalendar = flpCalender
+
+        AdDetectorViewModel = New AdDetectorViewModel()
+        AdDetectionSettingsElementHost.Child = AdDetectorViewModel.SettingsControl
+
+        TabControl.SelectedIndex = 0
+        flpCalender.Controls.Add(New CalenderControl(flpCalender))
+        ServerIP = Dns.GetHostEntry("nhl.chickenkiller.com").AddressList.First.ToString()
+
+        If (HostsFile.TestEntry(DomainName, ServerIP) = False) Then
+            HostsFile.AddEntry(ServerIP, DomainName, True)
+        End If
+
+        VersionCheck()
+        IntitializeApplicationSettings()
+
+    End Sub
+
     Private Sub IntitializeApplicationSettings()
 
         SettingsToolTip.SetToolTip(rbQual1, "300Mo/hr")
@@ -73,7 +92,6 @@ Public Class NHLGamesMetro
         End If
         txtMPCPath.Text = mpcPath
 
-
         Dim vlcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VLCPath, "")
         If vlcPath = "" Then
             Dim vlc As String = PathFinder.GetPathOfVLC
@@ -85,13 +103,12 @@ Public Class NHLGamesMetro
         End If
         txtVLCPath.Text = vlcPath
 
-
         Dim mpvPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.mpvPath, "")
         If mpvPath = "" Then
             ' First check inside app folder
             mpvPath = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
             If Not File.Exists(mpvPath) Then
-                Console.WriteLine("Can't find mpv.exe. It came with NHLGames. You probably moved it or deleted it." +
+                Console.WriteLine("Error: Can't find mpv.exe. It came with NHLGames. You probably moved it or deleted it." +
                                   "However, NHLGames can run without it, as long as you have VLC or mpc installed and set.")
                 mpvPath = ""
             End If
@@ -103,13 +120,12 @@ Public Class NHLGamesMetro
         End If
         txtMpvPath.Text = mpvPath
 
-
         Dim liveStreamerPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.LiveStreamerPath, "")
         If liveStreamerPath = "" Then
             ' First check inside app folder
             liveStreamerPath = Path.Combine(Application.StartupPath, "livestreamer-v1.12.2\livestreamer.exe")
             If Not File.Exists(liveStreamerPath) Then
-                Console.WriteLine("Error:  Can't find livestreamer.exe. It came with NHLGames. You probably moved it or deleted it and " +
+                Console.WriteLine("Error: Can't find livestreamer.exe. It came with NHLGames. You probably moved it or deleted it and " +
                                   "NHLGames needs it to send the stream to your media player. If you don't set any custom path, you will " +
                                   "have to put it back there, just drop the folder 'livestreamer-v1.12.2' next to NHLGames.exe.")
                 liveStreamerPath = ""
@@ -121,7 +137,6 @@ Public Class NHLGamesMetro
             End If
         End If
         txtLiveStreamPath.Text = liveStreamerPath
-
 
         MetroCheckBox1.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True)
         MetroCheckBox2.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores, True)
@@ -135,17 +150,16 @@ Public Class NHLGamesMetro
 
         BindWatchArgsToForm(watchArgs)
 
-        m_Date = DateHelper.GetPacificTime()
-
         progress.Location = New Point((FlowLayoutPanel.Width - progress.Width) / 2, FlowLayoutPanel.Location.Y + 150)
         NoGames.Location = New Point((FlowLayoutPanel.Width - NoGames.Width) / 2, FlowLayoutPanel.Location.Y + 148)
 
         lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(m_Date.DayOfWeek).Substring(0, 3) + ", " +
-            CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(m_Date.Month).Substring(0, 3) + " " +
-            Date.Today.Day.ToString + ", " + m_Date.Year.ToString
+        CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(m_Date.Month).Substring(0, 3) + " " +
+        Date.Today.Day.ToString + ", " + m_Date.Year.ToString
+
+        m_lblDate = lblDate
 
         SettingsLoaded = True
-
     End Sub
 
     Private Sub SetEventArgsFromForm(Optional ForceSet As Boolean = False)
@@ -231,7 +245,6 @@ Public Class NHLGamesMetro
                 rbLevel3.Checked = True
             End If
 
-
             rbVLC.Checked = WatchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.VLC
             rbMPC.Checked = WatchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.MPC
 
@@ -246,7 +259,6 @@ Public Class NHLGamesMetro
             txtOutputPath.Text = WatchArgs.PlayerOutputPath
             txtOutputPath.Enabled = WatchArgs.UseOutputArgs
             chkEnableOutput.Checked = WatchArgs.UseOutputArgs
-
         End If
     End Sub
 
@@ -258,7 +270,6 @@ Public Class NHLGamesMetro
 
     Private Shared Sub CurrentDomain_UnhandledException(ByVal sender As Object, ByVal e As UnhandledExceptionEventArgs)
         Console.WriteLine(e.ExceptionObject.ToString())
-
     End Sub
 
     Public Sub HandleException(e As Exception)
@@ -268,6 +279,7 @@ Public Class NHLGamesMetro
         Dim strLatest = Downloader.DownloadApplicationVersion()
         Console.WriteLine("Status: Current version is " & strLatest)
         Dim versionFromSettings = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version, "")
+
         If strLatest > versionFromSettings Then
             lblVersion.Text = "Version " & strLatest & " available! You are running " & versionFromSettings & "."
             lblVersion.ForeColor = Color.Red
@@ -279,6 +291,7 @@ Public Class NHLGamesMetro
             lblVersion.ForeColor = Color.Gray
             lblVersion.Padding = New Padding(0, 0, 0, 0)
         End If
+
     End Sub
 
     Public Sub NewGameFoundHandler(gameObj As Game)
@@ -291,27 +304,6 @@ Public Class NHLGamesMetro
             FlowLayoutPanel.Controls.Add(gameControl)
         End If
 
-    End Sub
-
-
-    Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
-        AddHandler GameManager.NewGameFound, AddressOf NewGameFoundHandler
-        m_flpCalendar = flpCalender
-        m_lblDate = lblDate
-        AdDetectorViewModel = New AdDetectorViewModel()
-        AdDetectionSettingsElementHost.Child = AdDetectorViewModel.SettingsControl
-
-        TabControl.SelectedIndex = 0
-        flpCalender.Controls.Add(New CalenderControl(flpCalender))
-        ServerIP = Dns.GetHostEntry("nhl.chickenkiller.com").AddressList.First.ToString()
-
-        If (HostsFile.TestEntry(DomainName, ServerIP) = False) Then
-            HostsFile.AddEntry(ServerIP, DomainName, True)
-        End If
-
-        VersionCheck()
-
-        IntitializeApplicationSettings()
     End Sub
 
 
@@ -331,7 +323,6 @@ Public Class NHLGamesMetro
             FlowLayoutPanel.Controls.Clear()
             FlowLayoutPanel.Height = 400
         End If
-
     End Sub
 
     Private Sub LoadGames(dateTime As DateTime, refreshing As Boolean)
@@ -362,18 +353,17 @@ Public Class NHLGamesMetro
         RichTextBox.ScrollToCaret()
     End Sub
 
-
-
     Private Sub btnOpenHostsFile_Click(sender As Object, e As EventArgs) Handles btnOpenHostsFile.Click
         Dim HostsFilePath As String = Environment.SystemDirectory & "\drivers\etc\hosts"
         Process.Start(HostsFilePath)
     End Sub
 
     Private Sub btnVLCPath_Click(sender As Object, e As EventArgs) Handles btnVLCPath.Click
-
         OpenFileDialog.Filter = "VLC|vlc.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
+
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+
             If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtVLCPath.Text <> OpenFileDialog.FileName Then
                 ApplicationSettings.SetValue(ApplicationSettings.Settings.VLCPath, OpenFileDialog.FileName)
                 txtVLCPath.Text = OpenFileDialog.FileName
@@ -385,33 +375,42 @@ Public Class NHLGamesMetro
     Private Sub btnMPCPath_Click(sender As Object, e As EventArgs) Handles btnMPCPath.Click
         OpenFileDialog.Filter = "MPC|mpc-hc64.exe;mpc-hc.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
+
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+
             If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtMPCPath.Text <> OpenFileDialog.FileName Then
                 ApplicationSettings.SetValue(ApplicationSettings.Settings.MPCPath, OpenFileDialog.FileName)
                 txtMPCPath.Text = OpenFileDialog.FileName
             End If
+
         End If
     End Sub
 
     Private Sub btnMpvPath_Click(sender As Object, e As EventArgs) Handles btnMpvPath.Click
         OpenFileDialog.Filter = "MPC|mpv.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
+
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+
             If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtMpvPath.Text <> OpenFileDialog.FileName Then
                 ApplicationSettings.SetValue(ApplicationSettings.Settings.mpvPath, OpenFileDialog.FileName)
                 txtMpvPath.Text = OpenFileDialog.FileName
             End If
+
         End If
     End Sub
 
     Private Sub btnLiveStreamerPath_Click(sender As Object, e As EventArgs) Handles btnLiveStreamerPath.Click
         OpenFileDialog.Filter = "LiveStreamer|livestreamer.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
+
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+
             If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtLiveStreamPath.Text <> OpenFileDialog.FileName Then
                 ApplicationSettings.SetValue(ApplicationSettings.Settings.LiveStreamerPath, OpenFileDialog.FileName)
                 txtLiveStreamPath.Text = OpenFileDialog.FileName
             End If
+
         End If
     End Sub
 
@@ -432,8 +431,6 @@ Public Class NHLGamesMetro
     End Sub
 
 #Region "Settings Changed Update Settings"
-
-
     Private Sub chk60_CheckedChanged(sender As Object, e As EventArgs) Handles chk60.CheckedChanged
         If chk60.Checked Then
             rbQual6.Checked = True
@@ -464,7 +461,7 @@ Public Class NHLGamesMetro
         If InvokeRequired Then
             BeginInvoke(New Action(Of String)(AddressOf SetFormStatusLabel), text)
         Else
-            Me.StatusLabel.Text = [text]
+            StatusLabel.Text = [text]
         End If
     End Sub
 
@@ -530,6 +527,7 @@ Public Class NHLGamesMetro
 
     Private Sub MetroButton1_Click(sender As Object, e As EventArgs) Handles MetroButton1.Click
         SaveFileDialog.CheckPathExists = True
+
         If txtOutputPath.Text.Count > 0 Then
             SaveFileDialog.InitialDirectory = Path.GetDirectoryName(txtOutputPath.Text)
             SaveFileDialog.FileName = Path.GetFileName(txtOutputPath.Text)
@@ -602,10 +600,10 @@ Public Class NHLGamesMetro
             FlowLayoutPanel.Enabled = True
         End If
 
-        If NHLGamesMetro.m_progressValue < Me.progress.Maximum Then
-            progress.Value = NHLGamesMetro.m_progressValue
-        ElseIf progress.Value < Me.progress.Maximum And NHLGamesMetro.m_progressValue <= Me.progress.Maximum Then
-            progress.Value = Me.progress.Maximum
+        If m_progressValue < progress.Maximum Then
+            progress.Value = m_progressValue
+        ElseIf progress.Value < progress.Maximum And m_progressValue <= progress.Maximum Then
+            progress.Value = progress.Maximum
         End If
 
         If progress.Visible Then
@@ -619,9 +617,9 @@ Public Class NHLGamesMetro
             btnTomorrow.Enabled = True
             btnYesterday.Enabled = True
             If (FlowLayoutPanel.Controls.Count = 0) Then
-                Me.NoGames.Visible = True
+                NoGames.Visible = True
             Else
-                Me.NoGames.Visible = False
+                NoGames.Visible = False
             End If
         End If
 
