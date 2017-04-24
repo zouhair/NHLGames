@@ -22,34 +22,26 @@ Public Class Downloader
     Private Shared Function GetLocalFileDirectory() As String
         If String.IsNullOrEmpty(LocalFileDirectory) Then
 
-            Dim localAppDataPath As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
             Dim exeStartupPath As String = Application.StartupPath
+            Dim localAppDataPath As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
             Dim tempPath As String = Path.GetTempPath()
-            Dim dir As String = "\NHLGamesTemp"
+            Dim dir As String = "NHLGames"
 
-            If FileAccess.HasAccess(exeStartupPath) Then
-                If Not Directory.Exists(exeStartupPath + dir) Then MkDir(exeStartupPath + dir)
-                If Not Directory.Exists(exeStartupPath + dir) Then
-                    LocalFileDirectory = exeStartupPath
-                Else
-                    LocalFileDirectory = exeStartupPath + dir
-                End If
-            ElseIf FileAccess.HasAccess(localAppDataPath) Then
-                If Not Directory.Exists(localAppDataPath + dir) Then MkDir(localAppDataPath + dir)
-                If Not Directory.Exists(localAppDataPath + dir) Then
-                    LocalFileDirectory = localAppDataPath
-                Else
-                    LocalFileDirectory = localAppDataPath + dir
-                End If
+            If FileAccess.HasAccess(localAppDataPath) Then
+                LocalFileDirectory = localAppDataPath + "\"
             ElseIf FileAccess.HasAccess(tempPath) Then
-                If Not Directory.Exists(tempPath + dir) Then MkDir(tempPath + dir & "\")
-                If Not Directory.Exists(tempPath + dir) Then
-                    LocalFileDirectory = tempPath
-                Else
-                    LocalFileDirectory = tempPath + dir
-                End If
+                LocalFileDirectory = tempPath + "\"
+            ElseIf FileAccess.HasAccess(exeStartupPath) Then
+                LocalFileDirectory = exeStartupPath + "\"
             End If
-            Console.WriteLine("Download path: " & LocalFileDirectory & "\")
+
+            If Not Directory.Exists(LocalFileDirectory + dir + "\") Then
+                MkDir(LocalFileDirectory + dir + "\")
+            End If
+
+            LocalFileDirectory = LocalFileDirectory + dir + "\"
+
+            Console.WriteLine("Download path: " & LocalFileDirectory)
         End If
 
         Return LocalFileDirectory
@@ -72,8 +64,8 @@ Public Class Downloader
     ''' <param name="checkDelay">String of 3 numbers that will set a delay before downloading the file again, 1st value for hours, 2nd value for days, 3rd value for months { 000: No delay, ?00: Hours delay, 0?0: Days delay, 00?: Months delay }</param>
     Private Shared Sub DownloadFile(URL As String, fileName As String, Optional checkIfExists As Boolean = False, Optional overwrite As Boolean = True,
                                     Optional checkDelay As String = "000")
-        Dim fullPath As String = Path.Combine(GetLocalFileDirectory(), fileName)
 
+        Dim fullPath As String = Path.Combine(GetLocalFileDirectory(), fileName)
 
         If (checkIfExists = False) OrElse (checkIfExists AndAlso My.Computer.FileSystem.FileExists(fullPath) = False) Then
             Console.WriteLine("Downloading File: " & URL & " to " & fullPath)
@@ -137,28 +129,29 @@ Public Class Downloader
 
 
 
-    Public Shared Function DownloadJSONSchedule(startDate As DateTime) As JObject
+    Public Shared Function DownloadJSONSchedule(startDate As DateTime, refreshing As Boolean) As JObject
 
         Console.WriteLine("Checking: Fetching game schedule for " & startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
 
         Dim returnValue As New JObject
 
-        Dim IsTodaysSchedule = (startDate.Date.Ticks = DateHelper.GetPacificTime.Date.Ticks)
         Dim dateTimeString As String = startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
         Dim fileName As String = dateTimeString & ".json"
         Dim URL As String = String.Format(ScheduleAPIURL, dateTimeString, dateTimeString)
 
         Dim data As String = ""
 
-        If IsTodaysSchedule Then
+        If startDate.Date.ToShortDateString >= DateHelper.GetPacificTime.ToShortDateString Then
             Console.WriteLine("Status: Downloading todays current schedule from " & URL)
             data = DownloadContents(URL)
         Else
-            DownloadFile(URL, fileName, False, True)
-            data = ReadFileContents(fileName)
+            If LookOldJsonFiles(fileName) And Not refreshing Then
+                data = ReadFileContents(fileName)
+            Else
+                DownloadFile(URL, fileName, False, True)
+                data = ReadFileContents(fileName)
+            End If
         End If
-
-        'returnValue = JObject.Parse(fileContent) 'Don't use above, so we can manually parse out datetime since there may be some issues there with different regions
 
         Dim reader As New JsonTextReader(New StringReader(data))
         reader.DateParseHandling = DateParseHandling.None
@@ -168,14 +161,13 @@ Public Class Downloader
 
     End Function
 
-    Public Shared Sub CleanRepertoryForOldJsonFiles()
-        Dim dir As String = GetLocalFileDirectory()
-        Dim files As String() = Directory.GetFiles(dir)
-        For Each f In files
-            If f.Contains(".json") Then 'And File.GetLastWriteTime(f).AddDays(1) <= Now 
-                File.Delete(f)
-            End If
-        Next
-    End Sub
+    Public Shared Function LookOldJsonFiles(filename As String) As Boolean
+
+        If File.Exists(GetLocalFileDirectory() & filename) Then
+            Return File.GetLastAccessTime(filename).AddDays(1) <= Now
+        End If
+
+        Return False
+    End Function
 
 End Class

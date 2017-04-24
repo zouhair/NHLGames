@@ -69,7 +69,6 @@ Public Class Game
                 RaiseEvent GameStatusChanged(Me, _StatusID)
                 RaiseEvent GameUpdated(Me)
             End If
-
         End Set
     End Property
 
@@ -182,7 +181,6 @@ Public Class Game
         Dim progressStep As Integer = NHLGamesMetro.m_progressMaxValue / 4
         Dim lstKeywords As New List(Of String) From {"Found matching plugin stream", "Available streams", "Opening stream", "Starting player"}
         NHLGamesMetro.m_StreamStarted = True
-        'NHLGamesMetro.FormInstance.SetLoading(True)
         NHLGamesMetro.m_progressVisible = True
         Dim t As Task = New Task(Function()
                                      Console.WriteLine("Starting: " & args.LiveStreamerPath & " " & args.ToString(True))
@@ -211,8 +209,7 @@ Public Class Game
                                              Console.WriteLine(line)
                                              Threading.Thread.Sleep(100)
                                              If line.Contains(lstKeywords(3)) Then
-                                                 'NHLGamesMetro.FormInstance.SetLoading(False)
-                                                 Threading.Thread.Sleep(1000)
+                                                 Threading.Thread.Sleep(200)
                                                  NHLGamesMetro.m_StreamStarted = False
                                              End If
                                          End While

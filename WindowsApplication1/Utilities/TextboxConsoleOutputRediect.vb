@@ -89,7 +89,7 @@ Public Class TextboxConsoleOutputRediect
         If NHLGamesMetro.FormInstance.InvokeRequired Then
             NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String)(AddressOf ShowMessageErrorToForm), MessageError)
         Else
-            MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, "An error happened :" + vbCrLf + MessageError + vbCrLf + "See the console for more details.", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, "An error happened :" & vbCrLf & MessageError & vbCrLf & "See the console for more details.", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
 

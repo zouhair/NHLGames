@@ -310,7 +310,7 @@ Public Class NHLGamesMetro
         End If
 
         VersionCheck()
-        Downloader.CleanRepertoryForOldJsonFiles()
+
         IntitializeApplicationSettings()
     End Sub
 
@@ -319,9 +319,9 @@ Public Class NHLGamesMetro
     ''' Wrapper for LoadGames to stop UI locking and slow startup
     ''' </summary>
     ''' <param name="dateTime"></param>
-    Private Sub LoadGamesAsync(dateTime As DateTime)
-        Dim LoadGamesFunc As New Action(Of DateTime)(Sub(dt As DateTime) LoadGames(dt))
-        LoadGamesFunc.BeginInvoke(dateTime, Nothing, Nothing)
+    Private Sub LoadGamesAsync(dateTime As DateTime, Optional refreshing As Boolean = False)
+        Dim LoadGamesFunc As New Action(Of DateTime, Boolean)(Sub(dt As DateTime, rf As Boolean) LoadGames(dt, rf))
+        LoadGamesFunc.BeginInvoke(dateTime, refreshing, Nothing, Nothing)
     End Sub
 
     Private Sub ClearGamePanel()
@@ -334,7 +334,7 @@ Public Class NHLGamesMetro
 
     End Sub
 
-    Private Sub LoadGames(dateTime As DateTime)
+    Private Sub LoadGames(dateTime As DateTime, refreshing As Boolean)
         Try
             SetLoading(True)
             SetFormStatusLabel("Loading Games")
@@ -342,7 +342,7 @@ Public Class NHLGamesMetro
             GameManager.ClearGames()
             ClearGamePanel()
 
-            Dim JSONSchedule As JObject = Downloader.DownloadJSONSchedule(dateTime)
+            Dim JSONSchedule As JObject = Downloader.DownloadJSONSchedule(dateTime, refreshing)
             AvailableGames = Downloader.DownloadAvailableGames()
             GameManager.RefreshGames(dateTime, JSONSchedule, AvailableGames)
 
@@ -354,7 +354,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        LoadGamesAsync(m_Date)
+        LoadGamesAsync(m_Date, True)
     End Sub
 
     Private Sub RichTextBox_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox.TextChanged
