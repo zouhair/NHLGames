@@ -11,6 +11,7 @@ Partial Class NHLGamesMetro
         Try
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
+                LoadingTimer.Dispose()
             End If
         Finally
             MyBase.Dispose(disposing)
@@ -188,7 +189,7 @@ Partial Class NHLGamesMetro
         Me.RichTextBox.Location = New System.Drawing.Point(3, 20)
         Me.RichTextBox.Name = "RichTextBox"
         Me.RichTextBox.ReadOnly = True
-        Me.RichTextBox.Size = New System.Drawing.Size(1016, 401)
+        Me.RichTextBox.Size = New System.Drawing.Size(1016, 398)
         Me.RichTextBox.TabIndex = 0
         Me.RichTextBox.Text = ""
         '
@@ -365,9 +366,9 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel.AutoScroll = True
         Me.FlowLayoutPanel.BackColor = System.Drawing.Color.White
         Me.FlowLayoutPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.FlowLayoutPanel.Location = New System.Drawing.Point(-10, 53)
+        Me.FlowLayoutPanel.Location = New System.Drawing.Point(-4, 53)
         Me.FlowLayoutPanel.Name = "FlowLayoutPanel"
-        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1040, 402)
+        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1034, 446)
         Me.FlowLayoutPanel.TabIndex = 1
         '
         'SettingTab
@@ -857,7 +858,7 @@ Partial Class NHLGamesMetro
         Me.MetroLabel4.Location = New System.Drawing.Point(14, 154)
         Me.MetroLabel4.Margin = New System.Windows.Forms.Padding(0, 0, 3, 0)
         Me.MetroLabel4.Name = "MetroLabel4"
-        Me.MetroLabel4.Size = New System.Drawing.Size(125, 19)
+        Me.MetroLabel4.Size = New System.Drawing.Size(108, 19)
         Me.MetroLabel4.TabIndex = 47
         Me.MetroLabel4.Text = "* streamlink Path"
         '
@@ -972,10 +973,10 @@ Partial Class NHLGamesMetro
         Me.ConsoleTab.HorizontalScrollbarBarColor = True
         Me.ConsoleTab.HorizontalScrollbarHighlightOnWheel = False
         Me.ConsoleTab.HorizontalScrollbarSize = 10
-        Me.ConsoleTab.Location = New System.Drawing.Point(4, 38)
+        Me.ConsoleTab.Location = New System.Drawing.Point(4, 35)
         Me.ConsoleTab.Name = "ConsoleTab"
         Me.ConsoleTab.Padding = New System.Windows.Forms.Padding(0, 0, 0, 30)
-        Me.ConsoleTab.Size = New System.Drawing.Size(1029, 498)
+        Me.ConsoleTab.Size = New System.Drawing.Size(1029, 501)
         Me.ConsoleTab.TabIndex = 2
         Me.ConsoleTab.Text = "Console      "
         Me.ConsoleTab.VerticalScrollbarBarColor = True
@@ -985,7 +986,7 @@ Partial Class NHLGamesMetro
         'btnClearConsole
         '
         Me.btnClearConsole.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClearConsole.Location = New System.Drawing.Point(916, 424)
+        Me.btnClearConsole.Location = New System.Drawing.Point(916, 421)
         Me.btnClearConsole.Name = "btnClearConsole"
         Me.btnClearConsole.Size = New System.Drawing.Size(103, 23)
         Me.btnClearConsole.TabIndex = 2

@@ -87,7 +87,7 @@ Partial Class GameControl
         Me.BorderPanel1.Controls.Add(Me.lblTime)
         Me.BorderPanel1.Controls.Add(Me.lblNotInSeason)
         Me.BorderPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BorderPanel1.Location = New System.Drawing.Point(10, 10)
+        Me.BorderPanel1.Location = New System.Drawing.Point(5, 5)
         Me.BorderPanel1.Name = "BorderPanel1"
         Me.BorderPanel1.Size = New System.Drawing.Size(310, 160)
         Me.BorderPanel1.TabIndex = 9
@@ -419,8 +419,8 @@ Partial Class GameControl
         Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.BorderPanel1)
         Me.Name = "GameControl"
-        Me.Padding = New System.Windows.Forms.Padding(10)
-        Me.Size = New System.Drawing.Size(330, 180)
+        Me.Padding = New System.Windows.Forms.Padding(5)
+        Me.Size = New System.Drawing.Size(320, 170)
         Me.BorderPanel1.ResumeLayout(False)
         CType(Me.live2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.live1, System.ComponentModel.ISupportInitialize).EndInit()

@@ -226,9 +226,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="streamlink-0.5.0\README.txt" />
-    <Content Include="streamlink-0.5.0\streamlink.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="streamlink-0.5.0\streamlink.exe" />
     <Content Include="streamlink-0.5.0\VERSION.txt" />
     <EmbeddedResource Include="Logos\Oilers.gif" />
     <EmbeddedResource Include="Logos\Panthers.gif" />
