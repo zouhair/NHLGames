@@ -4,7 +4,7 @@ Public Class GameManager
 
     Public Shared Event NewGameFound(gameObj As Game)
     Public Shared Event GamesLoaded(gameObj As List(Of Game))
-
+    Public Shared MessageError As String = Nothing
     Shared _GamesList As New Dictionary(Of String, Game)
 
     Public Shared Property GamesListDate As DateTime = DateTime.MinValue
@@ -19,7 +19,6 @@ Public Class GameManager
         GamesListDate = DateTime.MinValue
     End Sub
 
-
     Public Shared Sub RefreshGames(dateTime As DateTime, jsonObj As JToken, availableGames As HashSet(Of String))
 
         Dim tempList As New List(Of Game)
@@ -30,7 +29,11 @@ Public Class GameManager
                 If o.Path = "dates" Then
                     For Each game As JObject In o.Children.Item(0)("games").Children(Of JObject)
                         tempList.Add(New Game(game, availableGames, progress))
+                        Threading.Thread.Sleep(100)
                     Next
+                    If MessageError <> Nothing Then
+                        Console.WriteLine("Error: " + MessageError)
+                    End If
                 End If
             Next
         Catch ex As Exception
@@ -44,14 +47,10 @@ Public Class GameManager
                 _GamesList(game.GameID).Update(game)
             Else
                 _GamesList.Add(game.GameID, game)
-                'AddHandler game.GameUpdated, AddressOf GameUpdatedHandler
                 RaiseEvent NewGameFound(game)
             End If
         Next
 
     End Sub
 
-    'Private Shared Sub GameUpdatedHandler(game As Game)
-    '    RaiseEvent GameUpdated(game)
-    'End Sub
 End Class

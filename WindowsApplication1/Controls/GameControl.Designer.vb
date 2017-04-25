@@ -23,12 +23,14 @@ Partial Class GameControl
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.TeamToolTip = New MetroFramework.Components.MetroToolTip()
-        Me.BorderPanel1 = New BorderPanel()
+        Me.FeedToolTip = New MetroFramework.Components.MetroToolTip()
+        Me.BorderPanel1 = New NHLGames.BorderPanel()
+        Me.live2 = New System.Windows.Forms.PictureBox()
+        Me.live1 = New System.Windows.Forms.PictureBox()
         Me.lblAwayTeam = New MetroFramework.Controls.MetroLabel()
         Me.picAway = New System.Windows.Forms.PictureBox()
         Me.picHome = New System.Windows.Forms.PictureBox()
         Me.lblHomeTeam = New MetroFramework.Controls.MetroLabel()
-        Me.lblLive = New System.Windows.Forms.Label()
         Me.lblPeriod = New MetroFramework.Controls.MetroLabel()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.lblNoStream = New System.Windows.Forms.Label()
@@ -46,8 +48,9 @@ Partial Class GameControl
         Me.lblVS = New MetroFramework.Controls.MetroLabel()
         Me.lblTime = New MetroFramework.Controls.MetroLabel()
         Me.lblNotInSeason = New MetroFramework.Controls.MetroLabel()
-        Me.FeedToolTip = New MetroFramework.Components.MetroToolTip()
         Me.BorderPanel1.SuspendLayout()
+        CType(Me.live2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.live1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picAway, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picHome, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FlowLayoutPanel1.SuspendLayout()
@@ -59,16 +62,23 @@ Partial Class GameControl
         Me.TeamToolTip.StyleManager = Nothing
         Me.TeamToolTip.Theme = MetroFramework.MetroThemeStyle.Light
         '
+        'FeedToolTip
+        '
+        Me.FeedToolTip.Style = MetroFramework.MetroColorStyle.[Default]
+        Me.FeedToolTip.StyleManager = Nothing
+        Me.FeedToolTip.Theme = MetroFramework.MetroThemeStyle.Light
+        '
         'BorderPanel1
         '
         Me.BorderPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.BorderPanel1.BorderColour = System.Drawing.Color.LightGray
         Me.BorderPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.BorderPanel1.Controls.Add(Me.live2)
+        Me.BorderPanel1.Controls.Add(Me.live1)
         Me.BorderPanel1.Controls.Add(Me.lblAwayTeam)
         Me.BorderPanel1.Controls.Add(Me.picAway)
         Me.BorderPanel1.Controls.Add(Me.picHome)
         Me.BorderPanel1.Controls.Add(Me.lblHomeTeam)
-        Me.BorderPanel1.Controls.Add(Me.lblLive)
         Me.BorderPanel1.Controls.Add(Me.lblPeriod)
         Me.BorderPanel1.Controls.Add(Me.FlowLayoutPanel1)
         Me.BorderPanel1.Controls.Add(Me.lblHomeScore)
@@ -81,6 +91,26 @@ Partial Class GameControl
         Me.BorderPanel1.Name = "BorderPanel1"
         Me.BorderPanel1.Size = New System.Drawing.Size(310, 160)
         Me.BorderPanel1.TabIndex = 9
+        '
+        'live2
+        '
+        Me.live2.BackgroundImage = Global.NHLGames.My.Resources.Resources.live
+        Me.live2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.live2.Location = New System.Drawing.Point(286, 5)
+        Me.live2.Name = "live2"
+        Me.live2.Size = New System.Drawing.Size(16, 16)
+        Me.live2.TabIndex = 15
+        Me.live2.TabStop = False
+        '
+        'live1
+        '
+        Me.live1.BackgroundImage = Global.NHLGames.My.Resources.Resources.live
+        Me.live1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.live1.Location = New System.Drawing.Point(5, 5)
+        Me.live1.Name = "live1"
+        Me.live1.Size = New System.Drawing.Size(16, 16)
+        Me.live1.TabIndex = 14
+        Me.live1.TabStop = False
         '
         'lblAwayTeam
         '
@@ -117,19 +147,6 @@ Partial Class GameControl
         Me.lblHomeTeam.TabIndex = 4
         Me.lblHomeTeam.Text = "Home"
         Me.lblHomeTeam.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblLive
-        '
-        Me.lblLive.BackColor = System.Drawing.Color.Transparent
-        Me.lblLive.Font = New System.Drawing.Font("Verdana", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLive.ForeColor = System.Drawing.Color.Red
-        Me.lblLive.Location = New System.Drawing.Point(280, -6)
-        Me.lblLive.Name = "lblLive"
-        Me.lblLive.Size = New System.Drawing.Size(30, 30)
-        Me.lblLive.TabIndex = 12
-        Me.lblLive.Text = "•"
-        Me.lblLive.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.lblLive.Visible = False
         '
         'lblPeriod
         '
@@ -395,12 +412,6 @@ Partial Class GameControl
         Me.lblNotInSeason.Text = "NotInSeason"
         Me.lblNotInSeason.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'FeedToolTip
-        '
-        Me.FeedToolTip.Style = MetroFramework.MetroColorStyle.[Default]
-        Me.FeedToolTip.StyleManager = Nothing
-        Me.FeedToolTip.Theme = MetroFramework.MetroThemeStyle.Light
-        '
         'GameControl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -411,6 +422,8 @@ Partial Class GameControl
         Me.Padding = New System.Windows.Forms.Padding(10)
         Me.Size = New System.Drawing.Size(330, 180)
         Me.BorderPanel1.ResumeLayout(False)
+        CType(Me.live2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.live1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picAway, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picHome, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FlowLayoutPanel1.ResumeLayout(False)
@@ -438,10 +451,11 @@ Partial Class GameControl
     Friend WithEvents lblRefCam As LinkLabel
     Friend WithEvents lblEndzoneCam1 As LinkLabel
     Friend WithEvents lblEndzoneCam2 As LinkLabel
-    Friend WithEvents lblLive As Label
     Friend WithEvents lblPeriod As MetroFramework.Controls.MetroLabel
     Friend WithEvents lblNoStream As Label
     Friend WithEvents lblNotInSeason As MetroFramework.Controls.MetroLabel
     Friend WithEvents picHome As PictureBox
     Friend WithEvents FeedToolTip As MetroFramework.Components.MetroToolTip
+    Friend WithEvents live1 As PictureBox
+    Friend WithEvents live2 As PictureBox
 End Class

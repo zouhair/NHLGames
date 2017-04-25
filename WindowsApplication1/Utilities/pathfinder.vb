@@ -1,5 +1,4 @@
 ﻿Imports System.IO
-Imports Microsoft.Win32
 
 Public Class PathFinder
     Private Shared Function _ProgramFiles(ProgramPath As String) As String

@@ -28,7 +28,6 @@ Public Class GameStream
             If IsAvailable Then
                 Return "Watch"
             Else
-                'Return "Unavailable"
                 Return ""
             End If
         End Get
@@ -86,7 +85,6 @@ Public Class GameStream
     End Sub
 
     Public Sub CheckVOD(ByVal strCDN As String)
-
         Try
             Dim myHttpWebRequest As HttpWebRequest = CType(WebRequest.Create(Me.VODURL.Replace("CDN", strCDN)), HttpWebRequest)
             myHttpWebRequest.CookieContainer = New CookieContainer()
@@ -99,31 +97,7 @@ Public Class GameStream
             End If
             myHttpWebResponse.Close()
         Catch e As Exception
-            Console.WriteLine("Trying VOD : {0}", e.Message)
-        End Try
-    End Sub
-
-    Public Sub CheckDuplicate(ByVal strCDN As String)
-        Dim duplicate As String = If(IsVOD, VODURL.Replace("CDN", strCDN), GameURL.Replace("CDN", strCDN))
-        duplicate = duplicate.Substring(0, duplicate.LastIndexOf("/")) & "_1" & duplicate.Substring(duplicate.LastIndexOf("/"), duplicate.Length - duplicate.LastIndexOf("/"))
-
-        Try
-            Dim myHttpWebRequest As HttpWebRequest = CType(WebRequest.Create(duplicate), HttpWebRequest)
-            myHttpWebRequest.CookieContainer = New CookieContainer()
-            myHttpWebRequest.CookieContainer.Add(New Cookie("mediaAuth", Common.GetRandomString(240), String.Empty, "nhl.com"))
-            myHttpWebRequest.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316"
-
-            Dim myHttpWebResponse As HttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
-            If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
-                If IsVOD Then
-                    VODURL = duplicate
-                Else
-                    GameURL = duplicate
-                End If
-            End If
-            myHttpWebResponse.Close()
-        Catch e As Exception
-            Console.WriteLine("Trying Duplicate : {0}", e.Message)
+            Console.WriteLine("VOD Status: {0}", e.Message)
         End Try
     End Sub
 
