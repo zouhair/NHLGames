@@ -368,7 +368,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.FlowLayoutPanel.Location = New System.Drawing.Point(-4, 53)
         Me.FlowLayoutPanel.Name = "FlowLayoutPanel"
-        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1034, 446)
+        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1034, 443)
         Me.FlowLayoutPanel.TabIndex = 1
         '
         'SettingTab
