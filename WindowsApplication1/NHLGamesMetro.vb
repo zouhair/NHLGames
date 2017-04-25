@@ -323,7 +323,6 @@ Public Class NHLGamesMetro
             BeginInvoke(New Action(AddressOf ClearGamePanel))
         Else
             FlowLayoutPanel.Controls.Clear()
-            FlowLayoutPanel.Height = 400
         End If
     End Sub
 

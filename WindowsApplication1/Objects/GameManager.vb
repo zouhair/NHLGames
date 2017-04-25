@@ -2,8 +2,8 @@
 
 Public Class GameManager
 
-    Public Shared Event NewGameFound(gameObj As Game)
-    Public Shared Event GamesLoaded(gameObj As List(Of Game))
+    Public Shared Event NewGameFound(gameObj As Object)
+    Public Shared Event GamesLoaded(gameObj As List(Of Object))
     Public Shared MessageError As String = Nothing
     Shared _GamesList As New Dictionary(Of String, Game)
 

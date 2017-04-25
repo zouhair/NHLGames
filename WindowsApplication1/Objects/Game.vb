@@ -13,10 +13,10 @@ End Enum
 <DebuggerDisplay("{HomeTeam} vs. {AwayTeam} at {[Date]}")>
 Public Class Game
 
-    Public Event GameUpdated(sender As Game)
-    Public Event HomeTeamScoreChanged(sender As Game, newScore As String)
-    Public Event AwayTeamScoreChanged(sender As Game, newScore As String)
-    Public Event GameStatusChanged(sender As Game, isActive As Boolean)
+    Public Event GameUpdated(sender As Object)
+    Public Event HomeTeamScoreChanged(sender As Object, newScore As String)
+    Public Event AwayTeamScoreChanged(sender As Object, newScore As String)
+    Public Event GameStatusChanged(sender As Object, isActive As Boolean)
 
     Private _GameObj As JObject
     Private _StatusID As String = ""
