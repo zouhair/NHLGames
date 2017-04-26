@@ -104,7 +104,7 @@ Namespace Objects
             End Try
         End Sub
 
-        Private Function CheckURL(ByVal address As String)
+        Private Shared Function CheckUrl(ByVal address As String)
             Try
                 Dim myHttpWebRequest As HttpWebRequest = CType(WebRequest.Create(address), HttpWebRequest)
                 myHttpWebRequest.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316"

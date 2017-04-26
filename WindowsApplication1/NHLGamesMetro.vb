@@ -330,6 +330,7 @@ Public Class NHLGamesMetro
     Private Sub LoadGames(dateTime As DateTime, refreshing As Boolean)
         Dim availableGames As HashSet(Of String) = New HashSet(Of String)
         Try
+            ProgressValue = 0
             SetLoading(True)
             SetFormStatusLabel("Loading Games")
 
@@ -615,7 +616,6 @@ Public Class NHLGamesMetro
             btnYesterday.Enabled = False
             NoGames.Visible = False
         Else
-            ProgressValue = 0
             btnDate.Enabled = True
             btnTomorrow.Enabled = True
             btnYesterday.Enabled = True
@@ -643,6 +643,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub TabControl_MouseClick(sender As Object, e As MouseEventArgs) Handles TabControl.MouseClick
+        ProgressVisible = False
         flpCalender.Visible = False
     End Sub
 

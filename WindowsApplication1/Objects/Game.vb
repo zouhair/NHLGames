@@ -185,6 +185,7 @@ Namespace Objects
             Dim lstKeywords As New List(Of String) From {"Found matching plugin stream", "Available streams", "Opening stream", "Starting player"}
             NHLGamesMetro.StreamStarted = True
             NHLGamesMetro.ProgressVisible = True
+            NHLGamesMetro.ProgressValue = 0
             Dim t As Task = New Task(Function()
                                          Console.WriteLine("Starting: {0} {1}", args.StreamlinkPath, args.ToString(True))
 
