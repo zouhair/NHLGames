@@ -107,9 +107,9 @@ Public Class NHLGamesMetro
         Dim mpvPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpvPath, Nothing)
         If mpvPath = Nothing Then
             mpvPath = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
-            If Not File.Exists(mpvPath) Then
-                Console.WriteLine("Error: Can't find mpv.exe. It came with NHLGames. You probably moved it or deleted it." +
-                                  "However, NHLGames can run without it, as long as you have VLC or mpc installed and set.")
+            If Not File.Exists(mpvPath) And vlcPath = String.Empty And mpcPath = String.Empty Then
+                Console.WriteLine("Error: Can't find mpv.exe : mpv is a media player that we shipped with NHLGames. You probably moved it or deleted it." +
+                                  "Please set a player, NHLGames needs one.")
                 mpvPath = String.Empty
             End If
             ApplicationSettings.SetValue(ApplicationSettings.Settings.MpvPath, mpvPath)
@@ -125,9 +125,10 @@ Public Class NHLGamesMetro
         If streamlinkPath = Nothing Then
             streamlinkPath = Path.Combine(Application.StartupPath, "streamlink-0.5.0\streamlink.exe")
             If Not File.Exists(streamlinkPath) Then
-                Console.WriteLine("Error:  Can't find streamlink.exe. It came with NHLGames. You probably moved it or deleted it and " +
-                                  "NHLGames needs it to send the stream to your media player. If you don't set any custom path, you will " +
-                                  "have to put it back there, just drop the folder 'streamlink-0.5.0' next to NHLGames.exe.")
+                Console.WriteLine("Error:  Can't find streamlink.exe. Streamlink is a tool that NHLGames uses to send streams to your media player, " +
+                                   "we shipped it with NHLGames. You probably moved it Or deleted it And " +
+                                  "If you don't set any custom path, you will have to put it back there, " +
+                                  "just drop the folder 'streamlink-0.5.0' next to NHLGames.exe.")
                 streamlinkPath = String.Empty
             End If
             ApplicationSettings.SetValue(ApplicationSettings.Settings.StreamlinkPath, streamlinkPath)
