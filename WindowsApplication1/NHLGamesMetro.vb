@@ -82,40 +82,38 @@ Public Class NHLGamesMetro
         SettingsToolTip.SetToolTip(rbQual6, "1.8Go/hr")
         SettingsToolTip.SetToolTip(chk60, "+700Mo/hr (+40%)")
 
-        Dim mpcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpcPath, "")
-        If mpcPath = "" Then
-            Dim mpc As String = PathFinder.GetPathOfMpc
-            If mpc <> "" Then
-                mpcPath = mpc
-            End If
-            ApplicationSettings.SetValue(ApplicationSettings.Settings.MpcPath, mpcPath)
-        ElseIf mpcPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpcPath, "") Then
-            ApplicationSettings.SetValue(ApplicationSettings.Settings.MpcPath, mpcPath)
+        Dim mpcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpcPath, Nothing)
+        Dim mpcPathCurrent As String = PathFinder.GetPathOfMpc
+        If mpcPath = Nothing Then
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.MpcPath, mpcPathCurrent)
+            mpcPath = mpcPathCurrent
+        ElseIf mpcPath <> mpcPathCurrent Then
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.MpcPath, mpcPathCurrent)
+            mpcPath = mpcPathCurrent
         End If
         txtMPCPath.Text = mpcPath
 
-        Dim vlcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VlcPath, "")
-        If vlcPath = "" Then
-            Dim vlc As String = PathFinder.GetPathOfVlc
-            If vlc <> "" Then
-                vlcPath = vlc
-            End If
-        ElseIf vlcPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VlcPath, "") Then
-            ApplicationSettings.SetValue(ApplicationSettings.Settings.VlcPath, vlcPath)
+        Dim vlcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VlcPath, Nothing)
+        Dim vlcPathCurrent As String = PathFinder.GetPathOfVlc
+        If vlcPath = Nothing Then
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.VlcPath, vlcPathCurrent)
+            vlcPath = vlcPathCurrent
+        ElseIf vlcPath <> vlcPathCurrent Then
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.VlcPath, vlcPathCurrent)
+            vlcPath = vlcPathCurrent
         End If
         txtVLCPath.Text = vlcPath
 
-        Dim mpvPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpvPath, "")
-        If mpvPath = "" Then
-            ' First check inside app folder
+        Dim mpvPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpvPath, Nothing)
+        If mpvPath = Nothing Then
             mpvPath = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
             If Not File.Exists(mpvPath) Then
                 Console.WriteLine("Error: Can't find mpv.exe. It came with NHLGames. You probably moved it or deleted it." +
                                   "However, NHLGames can run without it, as long as you have VLC or mpc installed and set.")
-                mpvPath = ""
+                mpvPath = String.Empty
             End If
             ApplicationSettings.SetValue(ApplicationSettings.Settings.MpvPath, mpvPath)
-        ElseIf mpvPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpvPath, "") Then
+        ElseIf mpvPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpvPath, Nothing) Then
             If File.Exists(mpvPath) Then
                 ApplicationSettings.SetValue(ApplicationSettings.Settings.MpvPath, mpvPath)
             End If
@@ -123,18 +121,17 @@ Public Class NHLGamesMetro
         txtMpvPath.Text = mpvPath
 
 
-        Dim streamlinkPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.StreamlinkPath, "")
-        If streamlinkPath = "" Then
-            ' First check inside app folder
+        Dim streamlinkPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.StreamlinkPath, Nothing)
+        If streamlinkPath = Nothing Then
             streamlinkPath = Path.Combine(Application.StartupPath, "streamlink-0.5.0\streamlink.exe")
             If Not File.Exists(streamlinkPath) Then
                 Console.WriteLine("Error:  Can't find streamlink.exe. It came with NHLGames. You probably moved it or deleted it and " +
                                   "NHLGames needs it to send the stream to your media player. If you don't set any custom path, you will " +
                                   "have to put it back there, just drop the folder 'streamlink-0.5.0' next to NHLGames.exe.")
-                streamlinkPath = ""
+                streamlinkPath = String.Empty
             End If
             ApplicationSettings.SetValue(ApplicationSettings.Settings.StreamlinkPath, streamlinkPath)
-        ElseIf streamlinkPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.StreamlinkPath, "") Then
+        ElseIf streamlinkPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.StreamlinkPath, Nothing) Then
             If File.Exists(streamlinkPath) Then
                 ApplicationSettings.SetValue(ApplicationSettings.Settings.StreamlinkPath, streamlinkPath)
             End If

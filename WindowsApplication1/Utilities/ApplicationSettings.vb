@@ -51,7 +51,7 @@ Namespace Utilities
         End Function
 
 
-        Public Shared Sub SetValue(key As Settings, value As String)
+        Public Shared Sub SetValue(key As Object, value As Object)
             Try
                 Dim configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
                 Dim settings = configFile.AppSettings.Settings

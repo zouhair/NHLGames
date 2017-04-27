@@ -16,14 +16,8 @@ Namespace Utilities
                 Catch
                 End Try
             Next
-            For Each DirFound In dirPrgFiles
-                If DirFound.Length <> 0 Then
-                    If My.Computer.FileSystem.FileExists(DirFound(0) + programPath) Then
-                        Return DirFound(0) + programPath
-                    End If
-                End If
-            Next
-            Return Nothing
+            Return (From dirFound As Object In dirPrgFiles Where dirFound.Length <> 0 Where My.Computer.FileSystem.FileExists(dirFound(0) + programPath)
+                    Select dirFound(0) + programPath).FirstOrDefault()
         End Function
 
         Private Shared Function _is64bits() As Boolean
@@ -35,9 +29,7 @@ Namespace Utilities
             If path = Nothing Then
                 path = _ProgramFiles("\VideoLAN\VLC\vlc.exe")
             End If
-            If path = Nothing Then
-                path = ""
-            End If
+            If path = Nothing Then path = String.Empty
             Return path
         End Function
 
@@ -45,11 +37,9 @@ Namespace Utilities
             Dim path = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\MPC-HC\MPC-HC", "ExePath", Nothing)
             If path = Nothing Then
                 Dim x64 As String = If(_is64bits(), "64", "")
-                path = _ProgramFiles("\MPC-HC\mpc-hc" + x64 + ".exe")
+                path = _ProgramFiles(String.Format("\MPC-HC\mpc-hc{0}.exe", x64))
             End If
-            If path = Nothing Then
-                path = ""
-            End If
+            If path = Nothing Then path = String.Empty
             Return path
         End Function
 
