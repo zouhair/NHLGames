@@ -86,7 +86,7 @@ Partial Class NHLGamesMetro
         Me.btnVLCPath = New MetroFramework.Controls.MetroButton()
         Me.MetroLabel4 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel11 = New MetroFramework.Controls.MetroLabel()
-        Me.txtLiveStreamPath = New System.Windows.Forms.TextBox()
+        Me.txtStreamlinkPath = New System.Windows.Forms.TextBox()
         Me.MetroLabel7 = New MetroFramework.Controls.MetroLabel()
         Me.txtMPCPath = New System.Windows.Forms.TextBox()
         Me.MetroLabel3 = New MetroFramework.Controls.MetroLabel()
@@ -203,7 +203,7 @@ Partial Class NHLGamesMetro
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl.Location = New System.Drawing.Point(10, 60)
         Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 0
+        Me.TabControl.SelectedIndex = 1
         Me.TabControl.Size = New System.Drawing.Size(1030, 540)
         Me.TabControl.TabIndex = 22
         Me.TabControl.UseSelectable = True
@@ -369,7 +369,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.FlowLayoutPanel.Location = New System.Drawing.Point(-4, 53)
         Me.FlowLayoutPanel.Name = "FlowLayoutPanel"
-        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1027, 404)
+        Me.FlowLayoutPanel.Size = New System.Drawing.Size(1027, 401)
         Me.FlowLayoutPanel.TabIndex = 1
         '
         'SettingTab
@@ -402,7 +402,7 @@ Partial Class NHLGamesMetro
         Me.SettingTab.Controls.Add(Me.btnVLCPath)
         Me.SettingTab.Controls.Add(Me.MetroLabel4)
         Me.SettingTab.Controls.Add(Me.MetroLabel11)
-        Me.SettingTab.Controls.Add(Me.txtLiveStreamPath)
+        Me.SettingTab.Controls.Add(Me.txtStreamlinkPath)
         Me.SettingTab.Controls.Add(Me.MetroLabel7)
         Me.SettingTab.Controls.Add(Me.txtMPCPath)
         Me.SettingTab.Controls.Add(Me.MetroLabel3)
@@ -414,9 +414,9 @@ Partial Class NHLGamesMetro
         Me.SettingTab.HorizontalScrollbarBarColor = True
         Me.SettingTab.HorizontalScrollbarHighlightOnWheel = False
         Me.SettingTab.HorizontalScrollbarSize = 10
-        Me.SettingTab.Location = New System.Drawing.Point(4, 35)
+        Me.SettingTab.Location = New System.Drawing.Point(4, 38)
         Me.SettingTab.Name = "SettingTab"
-        Me.SettingTab.Size = New System.Drawing.Size(1022, 501)
+        Me.SettingTab.Size = New System.Drawing.Size(1022, 498)
         Me.SettingTab.TabIndex = 1
         Me.SettingTab.Text = "Settings      "
         Me.SettingTab.VerticalScrollbarBarColor = True
@@ -873,17 +873,17 @@ Partial Class NHLGamesMetro
         Me.MetroLabel11.TabIndex = 3
         Me.MetroLabel11.Text = "* CDN"
         '
-        'txtLiveStreamPath
+        'txtStreamlinkPath
         '
-        Me.txtLiveStreamPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.txtStreamlinkPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtLiveStreamPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtLiveStreamPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLiveStreamPath.Location = New System.Drawing.Point(161, 154)
-        Me.txtLiveStreamPath.Name = "txtLiveStreamPath"
-        Me.txtLiveStreamPath.ReadOnly = True
-        Me.txtLiveStreamPath.Size = New System.Drawing.Size(486, 22)
-        Me.txtLiveStreamPath.TabIndex = 46
+        Me.txtStreamlinkPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtStreamlinkPath.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStreamlinkPath.Location = New System.Drawing.Point(161, 154)
+        Me.txtStreamlinkPath.Name = "txtStreamlinkPath"
+        Me.txtStreamlinkPath.ReadOnly = True
+        Me.txtStreamlinkPath.Size = New System.Drawing.Size(486, 22)
+        Me.txtStreamlinkPath.TabIndex = 46
         '
         'MetroLabel7
         '
@@ -1142,7 +1142,7 @@ Partial Class NHLGamesMetro
     Friend WithEvents MetroLabel2 As MetroLabel
     Friend WithEvents txtVLCPath As TextBox
     Friend WithEvents MetroLabel4 As MetroLabel
-    Friend WithEvents txtLiveStreamPath As TextBox
+    Friend WithEvents txtStreamlinkPath As TextBox
     Friend WithEvents btnstreamlinkPath As MetroButton
     Friend WithEvents btnMPCPath As MetroButton
     Friend WithEvents btnVLCPath As MetroButton

@@ -7,7 +7,7 @@ Namespace Utilities
 
         Public Class TextBoxStreamWriter
             Inherits TextWriter
-            Private _output As RichTextBox = Nothing
+            Private ReadOnly _output As RichTextBox = Nothing
 
             Public Sub New(output As RichTextBox)
                 _output = output
