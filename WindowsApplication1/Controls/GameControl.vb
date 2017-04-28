@@ -91,9 +91,13 @@ Namespace Controls
             If Not game.GameIsInSeason Then
                 If game.GameIsInPlayoff Then
                     If game.GameIsLive Or game.GameIsPreGame Then
-                        lblNotInSeason.Text = "GM " + game.SeriesGameNumber + ": " + game.SeriesGameStatus
+                        If game.SeriesGameNumber <> 1 Then
+                            lblNotInSeason.Text = "GM " + game.SeriesGameNumber + ": " + game.SeriesGameStatus
+                        Else
+                            lblNotInSeason.Text = "Game " + game.SeriesGameNumber
+                        End If
                     Else
-                        lblNotInSeason.Text = game.SeriesGameStatus
+                            lblNotInSeason.Text = game.SeriesGameStatus
                         lblPeriod.Text = "Game " + game.SeriesGameNumber
                     End If
                 Else
