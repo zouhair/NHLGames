@@ -253,7 +253,7 @@ Public Class NHLGamesMetro
 
             rbVLC.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Vlc
             rbMPC.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpc
-            rbMpv.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpc
+            rbMpv.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpv
 
             If rbVLC.Checked AndAlso watchArgs.PlayerPath <> txtVLCPath.Text Then
                 SetEventArgsFromForm()
