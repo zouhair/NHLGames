@@ -129,7 +129,7 @@ NHLGames don't use any Ad Detection modules by default, but you can activate one
 
 
 # Chromecast
-NHL Games don't support Chromecast, by Google Chrome does. Follow those steps if you want to play the game on your TV.
+NHL Games don't support Chromecast, but Google Chrome does. Follow these steps if you want to play the game on your TV.
 
 ![image](https://cloud.githubusercontent.com/assets/23088305/25557771/3570cf2a-2ce6-11e7-980a-b605b93c66dc.png)
 
