@@ -32,7 +32,7 @@ Tool to watch NHL games in High Definition
 
 # First use
 ## Message about the hosts file
-First time you start NHLGames it will ask you if you wish to view the Hosts file. That's mean the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [hosts file](#host-file) section.
+First time you start NHLGames it will ask you if you wish to view the Hosts file. That's mean the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [hosts file](#hosts-file) section.
 
 ## Setup
 To be able to play streams properly, you have to choose a media player in the ![image](https://cloud.githubusercontent.com/assets/23088305/25557243/ce306f64-2cdb-11e7-9fa3-a4a73161c3ea.png) tab. Make sure the player that you choose has a valid path to the EXE file.
@@ -87,7 +87,7 @@ If you don't have one of these players installed and you want to install it, use
 Streamlink is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The path to streamlink.exe is inside NHLGames directory and it should not move, otherwise you will have to get the new path to it or you will get a message box that NHLGames lost the path and won't be able to play streams.
 
 ### Hosts
-See the [hosts file](#host-file) section.
+See the [hosts file](#hosts-file) section.
 
 ### Resolution
 The selected value will defined which quality will be sent to your media player, from the lowest (224p) to the highest quality (720p at 60fps). Selecting the highest quality also means bigger files to download :
