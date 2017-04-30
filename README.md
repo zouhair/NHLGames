@@ -75,7 +75,7 @@ Here are 5 differents game panels that you will see while using NHLGames.
 NHLGames gives you some options to change how a game panel will appear.
 - Final Scores : If on, it shows final score of all past games.
 - Live Scores : If on, it shows live score of all current games.
-- Series Record : If on, it shows serie records of all playoffs games.
+- Series Record : If on, it shows serie records of all upcoming playoffs games.
 
 ### Players
 NHLGames supports 3 media players:
