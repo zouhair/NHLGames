@@ -147,6 +147,7 @@ Public Class NHLGamesMetro
 
         MetroCheckBox1.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True)
         MetroCheckBox2.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores, True)
+        MetroCheckBox3.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowSeriesRecord, True)
 
         Dim watchArgs As Game.GameWatchArguments = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
         If watchArgs Is Nothing OrElse watchArgs.StreamlinkPath <> streamlinkPath Then
@@ -315,7 +316,8 @@ Public Class NHLGamesMetro
             BeginInvoke(New Action(Of Game)(AddressOf NewGameFoundHandler), gameObj)
         Else
             Dim gameControl As New GameControl(gameObj, ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores),
-                ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores, True))
+                ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores),
+                ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowSeriesRecord))
             FlowLayoutPanel.Controls.Add(gameControl)
         End If
 
@@ -673,6 +675,10 @@ Public Class NHLGamesMetro
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
+    End Sub
+
+    Private Sub MetroCheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles MetroCheckBox3.CheckedChanged
+        ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowSeriesRecord, MetroCheckBox3.Checked)
     End Sub
 
 #End Region

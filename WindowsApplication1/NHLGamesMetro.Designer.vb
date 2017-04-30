@@ -107,6 +107,7 @@ Partial Class NHLGamesMetro
         Me.SettingsToolTip = New MetroFramework.Components.MetroToolTip()
         Me.lnkDownload = New MetroFramework.Controls.MetroLink()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.MetroCheckBox3 = New MetroFramework.Controls.MetroCheckBox()
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl.SuspendLayout()
         Me.GamesTab.SuspendLayout()
@@ -223,9 +224,9 @@ Partial Class NHLGamesMetro
         Me.GamesTab.HorizontalScrollbarBarColor = True
         Me.GamesTab.HorizontalScrollbarHighlightOnWheel = False
         Me.GamesTab.HorizontalScrollbarSize = 10
-        Me.GamesTab.Location = New System.Drawing.Point(4, 38)
+        Me.GamesTab.Location = New System.Drawing.Point(4, 35)
         Me.GamesTab.Name = "GamesTab"
-        Me.GamesTab.Size = New System.Drawing.Size(1022, 498)
+        Me.GamesTab.Size = New System.Drawing.Size(1022, 501)
         Me.GamesTab.TabIndex = 0
         Me.GamesTab.Text = "Games      "
         Me.GamesTab.VerticalScrollbarBarColor = True
@@ -374,6 +375,7 @@ Partial Class NHLGamesMetro
         '
         'SettingTab
         '
+        Me.SettingTab.Controls.Add(Me.MetroCheckBox3)
         Me.SettingTab.Controls.Add(Me.lnkVLCDownload)
         Me.SettingTab.Controls.Add(Me.lnkMPCDownload)
         Me.SettingTab.Controls.Add(Me.MetroCheckBox2)
@@ -1087,6 +1089,16 @@ Partial Class NHLGamesMetro
         Me.btnClose.Text = "X"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'MetroCheckBox3
+        '
+        Me.MetroCheckBox3.AutoSize = True
+        Me.MetroCheckBox3.Location = New System.Drawing.Point(366, 26)
+        Me.MetroCheckBox3.Name = "MetroCheckBox3"
+        Me.MetroCheckBox3.Size = New System.Drawing.Size(90, 15)
+        Me.MetroCheckBox3.TabIndex = 59
+        Me.MetroCheckBox3.Text = "Series record"
+        Me.MetroCheckBox3.UseSelectable = True
+        '
         'NHLGamesMetro
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1204,4 +1216,5 @@ Partial Class NHLGamesMetro
     Friend WithEvents progress As ProgressBar
     Friend WithEvents NoGames As Label
     Friend WithEvents btnClose As Button
+    Friend WithEvents MetroCheckBox3 As MetroCheckBox
 End Class
