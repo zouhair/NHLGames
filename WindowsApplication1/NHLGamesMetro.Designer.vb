@@ -957,7 +957,7 @@ Partial Class NHLGamesMetro
         Me.btnOpenHostsFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnOpenHostsFile.Location = New System.Drawing.Point(380, 189)
         Me.btnOpenHostsFile.Name = "btnOpenHostsFile"
-        Me.btnOpenHostsFile.Size = New System.Drawing.Size(92, 24)
+        Me.btnOpenHostsFile.Size = New System.Drawing.Size(93, 24)
         Me.btnOpenHostsFile.TabIndex = 39
         Me.btnOpenHostsFile.Text = "Open Hosts File"
         Me.btnOpenHostsFile.UseSelectable = True
@@ -975,9 +975,9 @@ Partial Class NHLGamesMetro
         'btnHosts
         '
         Me.btnHosts.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnHosts.Location = New System.Drawing.Point(560, 189)
+        Me.btnHosts.Location = New System.Drawing.Point(559, 189)
         Me.btnHosts.Name = "btnHosts"
-        Me.btnHosts.Size = New System.Drawing.Size(87, 24)
+        Me.btnHosts.Size = New System.Drawing.Size(88, 24)
         Me.btnHosts.TabIndex = 27
         Me.btnHosts.Text = "Test Hosts File"
         Me.btnHosts.UseSelectable = True
@@ -1105,11 +1105,11 @@ Partial Class NHLGamesMetro
         'btnDisplayEntry
         '
         Me.btnDisplayEntry.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDisplayEntry.Location = New System.Drawing.Point(478, 189)
+        Me.btnDisplayEntry.Location = New System.Drawing.Point(479, 189)
         Me.btnDisplayEntry.Name = "btnDisplayEntry"
-        Me.btnDisplayEntry.Size = New System.Drawing.Size(76, 24)
+        Me.btnDisplayEntry.Size = New System.Drawing.Size(75, 24)
         Me.btnDisplayEntry.TabIndex = 60
-        Me.btnDisplayEntry.Text = "Show Steps"
+        Me.btnDisplayEntry.Text = "DIY Steps"
         Me.btnDisplayEntry.UseSelectable = True
         '
         'btnHelp
