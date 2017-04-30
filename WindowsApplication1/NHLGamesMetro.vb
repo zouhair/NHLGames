@@ -681,5 +681,21 @@ Public Class NHLGamesMetro
         ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowSeriesRecord, MetroCheckBox3.Checked)
     End Sub
 
+    Private Sub btnDisplayEntry_Click(sender As Object, e As EventArgs) Handles btnDisplayEntry.Click
+        Dim result As DialogResult
+        result = MetroMessageBox.Show(Me, String.Format("This line needs to be insert in your hosts file : {0}{1} {2}{3}" &
+            "Do you want to copy this entry line to your clipboard ?{4}If yes, open your Hosts file and paste this line at the end of the file.{5}" &
+            "Use 'Open Hosts File' button to open the hosts file with Notepad",
+            vbCrLf, DomainName, _serverIp, vbCrLf, vbCrLf, vbCrLf), "Display hosts entry line", MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
+        If result = System.Windows.Forms.DialogResult.OK Then
+            Clipboard.SetText(DomainName & " " & _serverIp)
+        End If
+    End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://github.com/NHLGames/NHLGames")
+        Process.Start(sInfo)
+    End Sub
+
 #End Region
 End Class
