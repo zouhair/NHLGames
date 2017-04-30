@@ -60,11 +60,11 @@ Use the refresh button (at the right) to refresh the current day games.
 
 ### Game panel
 Here are 5 differents game panels that you will see while using NHLGames.
-  1. Dark Grey : Upcoming games
+  1. Dark Gray : Upcoming games
   2. Blue : Today's games
   3. Green : Pre game
   4. Red : In progress
-  5. Grey : Final games
+  5. Gray : Final games
   
   Note : 6th picture shows the possibility to add live score or final score to the panel. You can turn it on/off in Settings tab.
   
