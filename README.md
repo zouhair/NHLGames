@@ -1,8 +1,8 @@
 # NHLGames
 Tool to watch NHL games in High Definition
-- Choose a date using the calendar or the left/right arrow.
-- Choose a game you want to watch.
-- Click on a stream link inside the game frame.
+- Choose a date by using the calendar or the nav arrows.
+- Choose a game that you want to watch.
+- Click on a stream link inside the game panel.
 - Enjoy the game.
 
 ![image](https://cloud.githubusercontent.com/assets/23088305/25556664/43f875b0-2cce-11e7-8ca9-9f6d9d1b2121.png)
@@ -16,7 +16,7 @@ Tool to watch NHL games in High Definition
  * [User interface](#user-interface)
    * [Games](#games)
       * [Navigation bar](#navigation-bar)
-      * [Game frame](#game-frame)
+      * [Game panel](#game-panel)
    * [Settings](#settings)
      * [Players](#players)
      * [Streamlink](#streamlink)
@@ -32,22 +32,22 @@ Tool to watch NHL games in High Definition
 
 # First use
 ## Message about the hosts file
-First time you start NHLGames it will ask you if you wish to view the Hosts file. That's mean the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [hosts file](#hosts-file) section.
+First time you start NHLGames it will ask if you wish to view the Hosts file. That means the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [hosts file](#hosts-file) section.
 
 ## Setup
 To be able to play streams properly, you have to choose a media player in the ![image](https://cloud.githubusercontent.com/assets/23088305/25557243/ce306f64-2cdb-11e7-9fa3-a4a73161c3ea.png) tab. Make sure the player that you choose has a valid path to the EXE file.
 
-MPV player comes with NHLGames. So if you don't have or want VLC/MPC players, just use our default media player to stream games. Make sure you select mpv as the default player.
+MPV player comes with NHLGames. So if you don't have or want VLC/MPC players, just use our default media player to watch games. Make sure you select mpv as the default player.
 
-If you want to changes some settings, see the [Settings](#settings) section.
+If you want to change some settings, see the [Settings](#settings) section.
 
 ### Hosts file
-To test your hosts file, go to Settings and press on `Test Hosts File` button. It should tell you if everything is fine.
+To test your hosts file, go to Settings and click on `Test Hosts File` button. It should tells you if everything is fine.
 
-If NHLGames is not set properly, press on `Open Hosts File` and select Notepad to open it, or go to `C:\Windows\System32\Drivers\etc` and open `hosts` using Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab next to the Hosts buttons. If you don't find it, you will have to add it manually (if NHLGames don't have access to it) or try `Add Hosts entry` button.
+If NHLGames is not set properly, click on `Open Hosts File` and select Notepad to open it, or go to `C:\Windows\System32\Drivers\etc` and open `hosts` by using Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, next to the Hosts buttons. If you don't find it, you will have to add it manually (if NHLGames doesn't have access to it) or try `Add Hosts entry` button.
 
 ## Requirements
-NHLGames is an app builded on .Net Framework 4.6. So, it's only available on Windows. If you run NHLGames on a Windows older than Windows 8 you will probably need to install [.Net Framework 4.6](https://www.microsoft.com/en-ca/download/details.aspx?id=30653)
+NHLGames is an app built on .Net Framework 4.6. So, it's only available on Windows. If you run NHLGames on Windows 7 or older you will probably need to install [.Net Framework 4.6](https://www.microsoft.com/en-ca/download/details.aspx?id=30653)
 
 # User interface
 Everytime you launch NHLGames it will search for today's games. 
@@ -58,26 +58,32 @@ If you want to watch past games, use the calendar or use the arrows to navigate 
 ![image](https://cloud.githubusercontent.com/assets/23088305/25556865/0f4cc51e-2cd3-11e7-96db-b875a4ab716c.png)
 Use the refresh button (at the right) to refresh the current day games.
 
-### Game frame
-Here are 5 differents game frame colors that you will see while using NHLGames.
+### Game panel
+Here are 5 differents game panels that you will see while using NHLGames.
   1. Dark Grey : Upcoming games
   2. Blue : Today's games
   3. Green : Pre game
   4. Red : In progress
   5. Grey : Final games
   
-  Note : 6th image shows the possibility to add live score or final score to the frame. You can turn it on/off in Settings tab.
+  Note : 6th picture shows the possibility to add live score or final score to the panel. You can turn it on/off in Settings tab.
   
 ![image](https://cloud.githubusercontent.com/assets/23088305/25557145/66d2a94c-2cd9-11e7-90ef-7e04e740f5a7.png)
 
 ## Settings
+### Show Scores
+NHLGames gives you some options to change how a game panel will appear.
+- Final Scores : If on, it shows final score of all past games.
+- Live Scores : If on, it shows live score of all current games.
+- Series Record : If on, it shows serie records of all playoffs games.
+
 ### Players
 NHLGames supports 3 media players:
 - MPV (default player, comes with NHLGames)
 - MPC 
 - VLC (version 2.2.4, 64 bits recommended)
 
-If you don't have or want VLC/MPC players, use our default media player to stream games. Make sure you select mpv as the default player.
+If you don't have or want VLC/MPC players, use our default media player to watch games. Make sure you select mpv as the default player.
 
 If you had previously installed VLC or MPC, NHLGames should find it automatically if you installed it in the default folder `Program Files`, otherwise you will have to browse ![image](https://cloud.githubusercontent.com/assets/23088305/25557239/b99ec37a-2cdb-11e7-8c27-d8b563128e8d.png) your computer and get the path to the EXE file. 
 
