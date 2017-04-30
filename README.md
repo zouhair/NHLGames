@@ -98,13 +98,13 @@ See the [hosts file](#hosts-file) section.
 ### Resolution
 The selected value will defined which quality will be sent to your media player, from the lowest (224p) to the highest quality (720p at 60fps). Selecting the highest quality also means bigger files to download :
 
-- 224p is about 300 Mo per hour
-- 228p is about 500 Mo per hour
-- 360p is about 700 Mo per hour
-- 504p is about 950 Mo per hour
-- 540p is about 1.30 Go per hour
-- 720p is about 1.80 Go per hour
-- 720p at 60fps is about 2.50 Go per hour
+- 224p is about 300 MB per hour
+- 228p is about 500 MB per hour
+- 360p is about 700 MB per hour
+- 504p is about 950 MB per hour
+- 540p is about 1.30 GB per hour
+- 720p is about 1.80 GB per hour
+- 720p at 60fps is about 2.50 GB per hour
 
 ### Content Delivery Network (CDN)
 Level 3 :
