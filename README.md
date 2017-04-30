@@ -141,11 +141,11 @@ NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps 
 
 3. Select a pc monitor you want to share. Make sure audio share is checked.
 
-![image](https://cloud.githubusercontent.com/assets/23088305/25556591/3145542a-2ccd-11e7-8ba4-d4947e2bb84f.png)
+<img src="https://cloud.githubusercontent.com/assets/23088305/25556591/3145542a-2ccd-11e7-8ba4-d4947e2bb84f.png" width="460"/>
 
 4. Use NHLGames to get a stream, once the game plays, move the media player window to the right monitor and enjoy the show.
 
-![image](https://cloud.githubusercontent.com/assets/23088305/25556617/a6caab1e-2ccd-11e7-89d3-c9177a997ed1.png)
+<img src="https://cloud.githubusercontent.com/assets/23088305/25556617/a6caab1e-2ccd-11e7-89d3-c9177a997ed1.png" width="300"/>
 
 # Contribute
 NHLGames is written in Visual Basic. Ad Detection modules are written in C#. We use Visual Studio to code. 
