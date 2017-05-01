@@ -31,7 +31,6 @@ Tool to watch NHL games in High Definition
 
 
 # First use
-
 ## Requirements
 NHLGames is an app built on .NET Framework 4.5. So, it's only available on Windows and works on any CPU (x86/x64). If you run NHLGames on Windows 7 or older you will probably need to install [.NET Framework 4.5](https://www.microsoft.com/en-ca/download/details.aspx?id=30653), but we can't garantee it will run on XP since Microsoft ended support on XP.
 
@@ -49,6 +48,7 @@ If you want to change some settings, see the [Settings](#settings) section.
 To test your hosts file, go to Settings and click on `Test Hosts File` button. It should tells you if everything is fine.
 
 If NHLGames is not set properly, click on `Open Hosts File` and select Notepad to open it, or go to `C:\Windows\System32\Drivers\etc` and open `hosts` by using Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, next to the Hosts buttons. If you don't find it, you will have to add it manually (if NHLGames doesn't have access to it) or try `Add Hosts entry` button.
+
 
 # User interface
 Everytime you launch NHLGames it will search for today's games. 
@@ -147,6 +147,7 @@ NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps 
 4. Use NHLGames to get a stream, once the game plays, move the media player window to the right monitor and enjoy the show.
 
 <img src="https://cloud.githubusercontent.com/assets/23088305/25556617/a6caab1e-2ccd-11e7-89d3-c9177a997ed1.png" width="300"/>
+
 
 # Contribute
 NHLGames is written in Visual Basic. Ad Detection modules are written in C#. We use Visual Studio to code. 
