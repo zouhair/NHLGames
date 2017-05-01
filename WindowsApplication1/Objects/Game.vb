@@ -355,10 +355,9 @@ Namespace Objects
             Public Property Quality As String = ""
             Public Property Is60Fps As Boolean = True
             Public Property Cdn As String = ""
-            Public Property Server As String = ""
+
             Public Property Stream As GameStream
             Public Property IsVod As Boolean = False
-            Public Property IsMpc As Boolean = False
 
             Public Property GameTitle As String = ""
 

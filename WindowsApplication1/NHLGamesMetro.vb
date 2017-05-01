@@ -82,71 +82,74 @@ Public Class NHLGamesMetro
         SettingsToolTip.SetToolTip(rbQual6, "1.8Go/hr")
         SettingsToolTip.SetToolTip(chk60, "+700Mo/hr (+40%)")
 
-        Dim mpcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpcPath, "")
-        If mpcPath = "" Then
-            Dim mpc As String = PathFinder.GetPathOfMpc
-            If mpc <> "" Then
-                mpcPath = mpc
-            End If
-            ApplicationSettings.SetValue(ApplicationSettings.Settings.MpcPath, mpcPath)
-        ElseIf mpcPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpcPath, "") Then
-            ApplicationSettings.SetValue(ApplicationSettings.Settings.MpcPath, mpcPath)
+        Dim mpcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpcPath, String.Empty)
+        Dim mpcPathCurrent As String = PathFinder.GetPathOfMpc
+        If mpcPath = String.Empty Then
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.MpcPath, mpcPathCurrent)
+            mpcPath = mpcPathCurrent
+        ElseIf mpcPath <> mpcPathCurrent And mpcPathCurrent <> String.Empty Then
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.MpcPath, mpcPathCurrent)
+            mpcPath = mpcPathCurrent
         End If
         txtMPCPath.Text = mpcPath
+        ' If watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpc Then playerPath = mpcPath
 
-        Dim vlcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VlcPath, "")
-        If vlcPath = "" Then
-            Dim vlc As String = PathFinder.GetPathOfVlc
-            If vlc <> "" Then
-                vlcPath = vlc
-            End If
-        ElseIf vlcPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VlcPath, "") Then
-            ApplicationSettings.SetValue(ApplicationSettings.Settings.VlcPath, vlcPath)
+        Dim vlcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VlcPath, String.Empty)
+        Dim vlcPathCurrent As String = PathFinder.GetPathOfVlc
+        If vlcPath = String.Empty Then
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.VlcPath, vlcPathCurrent)
+            vlcPath = vlcPathCurrent
+        ElseIf vlcPath <> vlcPathCurrent And vlcPathCurrent <> String.Empty Then
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.VlcPath, vlcPathCurrent)
+            vlcPath = vlcPathCurrent
         End If
         txtVLCPath.Text = vlcPath
+        'If watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Vlc Then playerPath = vlcPath
 
-        Dim mpvPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpvPath, "")
-        If mpvPath = "" Then
-            ' First check inside app folder
-            mpvPath = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
-            If Not File.Exists(mpvPath) Then
-                Console.WriteLine("Error: Can't find mpv.exe. It came with NHLGames. You probably moved it or deleted it." +
-                                  "However, NHLGames can run without it, as long as you have VLC or mpc installed and set.")
-                mpvPath = ""
+        Dim mpvPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpvPath, String.Empty)
+        Dim mpvPathCurrent As String = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
+        If mpvPath = String.Empty Then
+            If (Not File.Exists(mpvPathCurrent)) AndAlso vlcPath Is String.Empty AndAlso mpcPath Is String.Empty Then
+                Console.WriteLine("Error: Can't find mpv.exe : mpv is a media player that we shipped with NHLGames. You probably moved it or deleted it." &
+                                "Please set a player, NHLGames needs one.")
+                mpvPathCurrent = String.Empty
             End If
-            ApplicationSettings.SetValue(ApplicationSettings.Settings.MpvPath, mpvPath)
-        ElseIf mpvPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpvPath, "") Then
-            If File.Exists(mpvPath) Then
-                ApplicationSettings.SetValue(ApplicationSettings.Settings.MpvPath, mpvPath)
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.MpvPath, mpvPathCurrent)
+            mpvPath = mpvPathCurrent
+        ElseIf mpvPath <> mpvPathCurrent Then
+            If File.Exists(mpvPathCurrent) Then
+                ApplicationSettings.SetValue(ApplicationSettings.Settings.MpvPath, mpvPathCurrent)
+                mpvPath = mpvPathCurrent
             End If
         End If
         txtMpvPath.Text = mpvPath
+        'If watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpv Then playerPath = mpvPath
 
-
-        Dim streamlinkPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.StreamlinkPath, "")
-        If streamlinkPath = "" Then
-            ' First check inside app folder
-            streamlinkPath = Path.Combine(Application.StartupPath, "streamlink-0.5.0\streamlink.exe")
-            If Not File.Exists(streamlinkPath) Then
-                Console.WriteLine("Error:  Can't find streamlink.exe. It came with NHLGames. You probably moved it or deleted it and " +
-                                  "NHLGames needs it to send the stream to your media player. If you don't set any custom path, you will " +
-                                  "have to put it back there, just drop the folder 'streamlink-0.5.0' next to NHLGames.exe.")
-                streamlinkPath = ""
+        Dim streamlinkPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.StreamlinkPath, String.Empty)
+        Dim streamlinkPathCurrent As String = Path.Combine(Application.StartupPath, "streamlink-0.5.0\streamlink.exe")
+        If streamlinkPath = String.Empty Then
+            If Not File.Exists(streamlinkPathCurrent) Then
+                Console.WriteLine("Error:  Can't find streamlink.exe. Streamlink is a tool that NHLGames uses to send streams to your media player, " &
+                                "we shipped it with NHLGames. You probably moved it or deleted it and " &
+                                "if you don't set any custom path, you will have to put it back there, " &
+                                "just drop the folder 'streamlink-0.5.0' next to NHLGames.exe.")
+                streamlinkPathCurrent = String.Empty
             End If
-            ApplicationSettings.SetValue(ApplicationSettings.Settings.StreamlinkPath, streamlinkPath)
-        ElseIf streamlinkPath <> ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.StreamlinkPath, "") Then
-            If File.Exists(streamlinkPath) Then
-                ApplicationSettings.SetValue(ApplicationSettings.Settings.StreamlinkPath, streamlinkPath)
+            ApplicationSettings.SetValue(ApplicationSettings.Settings.StreamlinkPath, streamlinkPathCurrent)
+            streamlinkPath = streamlinkPathCurrent
+        ElseIf streamlinkPath <> streamlinkPathCurrent Then
+            If File.Exists(streamlinkPathCurrent) Then
+                ApplicationSettings.SetValue(ApplicationSettings.Settings.StreamlinkPath, streamlinkPathCurrent)
+                streamlinkPath = streamlinkPathCurrent
             End If
         End If
-        txtLiveStreamPath.Text = streamlinkPath
+        txtStreamlinkPath.Text = streamlinkPath
 
         MetroCheckBox1.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True)
         MetroCheckBox2.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores, True)
 
         Dim watchArgs As Game.GameWatchArguments = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
-
-        If watchArgs Is Nothing Then
+        If watchArgs Is Nothing OrElse watchArgs.StreamlinkPath <> streamlinkPath Then
             SetEventArgsFromForm(True)
             watchArgs = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
         End If
@@ -202,7 +205,7 @@ Public Class NHLGamesMetro
                 watchArgs.PlayerPath = txtVLCPath.Text
             End If
 
-            watchArgs.StreamlinkPath = txtLiveStreamPath.Text
+            watchArgs.StreamlinkPath = txtStreamlinkPath.Text
 
             If rbAkamai.Checked Then
                 watchArgs.Cdn = "akc"
@@ -250,6 +253,15 @@ Public Class NHLGamesMetro
 
             rbVLC.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Vlc
             rbMPC.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpc
+            rbMpv.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpv
+
+            If rbVLC.Checked AndAlso watchArgs.PlayerPath <> txtVLCPath.Text Then
+                SetEventArgsFromForm()
+            ElseIf rbMPC.Checked AndAlso watchArgs.PlayerPath <> txtMPCPath.Text Then
+                SetEventArgsFromForm()
+            ElseIf rbMpv.Checked AndAlso watchArgs.PlayerPath <> txtMpvPath.Text Then
+                SetEventArgsFromForm()
+            End If
 
             chkEnablePlayerArgs.Checked = watchArgs.UsePlayerArgs
             txtPlayerArgs.Enabled = watchArgs.UsePlayerArgs
@@ -410,9 +422,9 @@ Public Class NHLGamesMetro
 
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
 
-            If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtLiveStreamPath.Text <> OpenFileDialog.FileName Then
+            If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtStreamlinkPath.Text <> OpenFileDialog.FileName Then
                 ApplicationSettings.SetValue(ApplicationSettings.Settings.StreamlinkPath, OpenFileDialog.FileName)
-                txtLiveStreamPath.Text = OpenFileDialog.FileName
+                txtStreamlinkPath.Text = OpenFileDialog.FileName
             End If
 
         End If
@@ -457,7 +469,7 @@ Public Class NHLGamesMetro
         SetEventArgsFromForm()
     End Sub
 
-    Private Sub txtLiveStreamPath_TextChanged(sender As Object, e As EventArgs) Handles txtLiveStreamPath.TextChanged
+    Private Sub txtLiveStreamPath_TextChanged(sender As Object, e As EventArgs) Handles txtStreamlinkPath.TextChanged
         SetEventArgsFromForm()
     End Sub
 
@@ -657,6 +669,10 @@ Public Class NHLGamesMetro
 
     Private Sub txtMpvPath_TextChanged(sender As Object, e As EventArgs) Handles txtMpvPath.TextChanged
         SetEventArgsFromForm()
+    End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.Close()
     End Sub
 
 #End Region
