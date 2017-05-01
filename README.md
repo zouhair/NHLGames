@@ -9,10 +9,10 @@ Tool to watch NHL games in High Definition
 
 ## Index
 * [First use](#first-use)
+  * [Requirements](#requirements)
   * [Message about the hosts file](#message-about-the-hosts-file)
   * [Setup](#setup)
-     * [Hosts file](#hosts-file)
-  * [Requirements](#requirements)
+     * [Hosts file](#hosts-file)  
  * [User interface](#user-interface)
    * [Games](#games)
       * [Navigation bar](#navigation-bar)
@@ -31,6 +31,10 @@ Tool to watch NHL games in High Definition
 
 
 # First use
+
+## Requirements
+NHLGames is an app built on .NET Framework 4.5. So, it's only available on Windows and works on any CPU (x86/x64). If you run NHLGames on Windows 7 or older you will probably need to install [.NET Framework 4.5](https://www.microsoft.com/en-ca/download/details.aspx?id=30653), but we can't garantee it will run on XP since Microsoft ended support on XP.
+
 ## Message about the hosts file
 First time you start NHLGames it will ask if you wish to view the Hosts file. That means the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [hosts file](#hosts-file) section.
 
@@ -45,9 +49,6 @@ If you want to change some settings, see the [Settings](#settings) section.
 To test your hosts file, go to Settings and click on `Test Hosts File` button. It should tells you if everything is fine.
 
 If NHLGames is not set properly, click on `Open Hosts File` and select Notepad to open it, or go to `C:\Windows\System32\Drivers\etc` and open `hosts` by using Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, next to the Hosts buttons. If you don't find it, you will have to add it manually (if NHLGames doesn't have access to it) or try `Add Hosts entry` button.
-
-## Requirements
-NHLGames is an app built on .Net Framework 4.6. So, it's only available on Windows. If you run NHLGames on Windows 7 or older you will probably need to install [.Net Framework 4.6](https://www.microsoft.com/en-ca/download/details.aspx?id=30653)
 
 # User interface
 Everytime you launch NHLGames it will search for today's games. 
