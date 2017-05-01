@@ -74,13 +74,13 @@ Public Class NHLGamesMetro
 
     Private Sub IntitializeApplicationSettings()
 
-        SettingsToolTip.SetToolTip(rbQual1, "300Mo/hr")
-        SettingsToolTip.SetToolTip(rbQual2, "500Mo/hr")
-        SettingsToolTip.SetToolTip(rbQual3, "700Mo/hr")
-        SettingsToolTip.SetToolTip(rbQual4, "950Mo/hr")
-        SettingsToolTip.SetToolTip(rbQual5, "1.3Go/hr")
-        SettingsToolTip.SetToolTip(rbQual6, "1.8Go/hr")
-        SettingsToolTip.SetToolTip(chk60, "+700Mo/hr (+40%)")
+        SettingsToolTip.SetToolTip(rbQual1, "300 MB/hr")
+        SettingsToolTip.SetToolTip(rbQual2, "500 MB/hr")
+        SettingsToolTip.SetToolTip(rbQual3, "700 MB/hr")
+        SettingsToolTip.SetToolTip(rbQual4, "950 MB/hr")
+        SettingsToolTip.SetToolTip(rbQual5, "1.3 GB/hr")
+        SettingsToolTip.SetToolTip(rbQual6, "1.8 GB/hr")
+        SettingsToolTip.SetToolTip(chk60, "+700 MB/hr (+40%)")
 
         Dim mpcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpcPath, String.Empty)
         Dim mpcPathCurrent As String = PathFinder.GetPathOfMpc
