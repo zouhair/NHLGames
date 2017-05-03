@@ -45,6 +45,7 @@ Partial Class NHLGamesMetro
         Me.lblDate = New System.Windows.Forms.Label()
         Me.FlowLayoutPanel = New System.Windows.Forms.FlowLayoutPanel()
         Me.SettingTab = New MetroFramework.Controls.MetroTabPage()
+        Me.MetroCheckBox3 = New MetroFramework.Controls.MetroCheckBox()
         Me.lnkVLCDownload = New MetroFramework.Controls.MetroLink()
         Me.lnkMPCDownload = New MetroFramework.Controls.MetroLink()
         Me.MetroCheckBox2 = New MetroFramework.Controls.MetroCheckBox()
@@ -107,6 +108,8 @@ Partial Class NHLGamesMetro
         Me.SettingsToolTip = New MetroFramework.Components.MetroToolTip()
         Me.lnkDownload = New MetroFramework.Controls.MetroLink()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.btnDisplayEntry = New MetroFramework.Controls.MetroButton()
+        Me.btnHelp = New System.Windows.Forms.Button()
         CType(Me.gridGames, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl.SuspendLayout()
         Me.GamesTab.SuspendLayout()
@@ -223,9 +226,9 @@ Partial Class NHLGamesMetro
         Me.GamesTab.HorizontalScrollbarBarColor = True
         Me.GamesTab.HorizontalScrollbarHighlightOnWheel = False
         Me.GamesTab.HorizontalScrollbarSize = 10
-        Me.GamesTab.Location = New System.Drawing.Point(4, 38)
+        Me.GamesTab.Location = New System.Drawing.Point(4, 35)
         Me.GamesTab.Name = "GamesTab"
-        Me.GamesTab.Size = New System.Drawing.Size(1022, 498)
+        Me.GamesTab.Size = New System.Drawing.Size(1022, 501)
         Me.GamesTab.TabIndex = 0
         Me.GamesTab.Text = "Games      "
         Me.GamesTab.VerticalScrollbarBarColor = True
@@ -374,6 +377,8 @@ Partial Class NHLGamesMetro
         '
         'SettingTab
         '
+        Me.SettingTab.Controls.Add(Me.btnDisplayEntry)
+        Me.SettingTab.Controls.Add(Me.MetroCheckBox3)
         Me.SettingTab.Controls.Add(Me.lnkVLCDownload)
         Me.SettingTab.Controls.Add(Me.lnkMPCDownload)
         Me.SettingTab.Controls.Add(Me.MetroCheckBox2)
@@ -422,6 +427,16 @@ Partial Class NHLGamesMetro
         Me.SettingTab.VerticalScrollbarBarColor = True
         Me.SettingTab.VerticalScrollbarHighlightOnWheel = False
         Me.SettingTab.VerticalScrollbarSize = 10
+        '
+        'MetroCheckBox3
+        '
+        Me.MetroCheckBox3.AutoSize = True
+        Me.MetroCheckBox3.Location = New System.Drawing.Point(366, 26)
+        Me.MetroCheckBox3.Name = "MetroCheckBox3"
+        Me.MetroCheckBox3.Size = New System.Drawing.Size(90, 15)
+        Me.MetroCheckBox3.TabIndex = 59
+        Me.MetroCheckBox3.Text = "Series record"
+        Me.MetroCheckBox3.UseSelectable = True
         '
         'lnkVLCDownload
         '
@@ -483,7 +498,7 @@ Partial Class NHLGamesMetro
         Me.btnClean.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClean.Location = New System.Drawing.Point(259, 189)
         Me.btnClean.Name = "btnClean"
-        Me.btnClean.Size = New System.Drawing.Size(118, 24)
+        Me.btnClean.Size = New System.Drawing.Size(115, 24)
         Me.btnClean.TabIndex = 55
         Me.btnClean.Text = "Remove Hosts Entry"
         Me.btnClean.UseSelectable = True
@@ -940,9 +955,9 @@ Partial Class NHLGamesMetro
         'btnOpenHostsFile
         '
         Me.btnOpenHostsFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnOpenHostsFile.Location = New System.Drawing.Point(383, 189)
+        Me.btnOpenHostsFile.Location = New System.Drawing.Point(380, 189)
         Me.btnOpenHostsFile.Name = "btnOpenHostsFile"
-        Me.btnOpenHostsFile.Size = New System.Drawing.Size(92, 24)
+        Me.btnOpenHostsFile.Size = New System.Drawing.Size(93, 24)
         Me.btnOpenHostsFile.TabIndex = 39
         Me.btnOpenHostsFile.Text = "Open Hosts File"
         Me.btnOpenHostsFile.UseSelectable = True
@@ -960,9 +975,9 @@ Partial Class NHLGamesMetro
         'btnHosts
         '
         Me.btnHosts.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnHosts.Location = New System.Drawing.Point(481, 189)
+        Me.btnHosts.Location = New System.Drawing.Point(559, 189)
         Me.btnHosts.Name = "btnHosts"
-        Me.btnHosts.Size = New System.Drawing.Size(92, 24)
+        Me.btnHosts.Size = New System.Drawing.Size(88, 24)
         Me.btnHosts.TabIndex = 27
         Me.btnHosts.Text = "Test Hosts File"
         Me.btnHosts.UseSelectable = True
@@ -1066,7 +1081,7 @@ Partial Class NHLGamesMetro
         Me.lnkDownload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.lnkDownload.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lnkDownload.ForeColor = System.Drawing.Color.Black
-        Me.lnkDownload.Location = New System.Drawing.Point(975, 44)
+        Me.lnkDownload.Location = New System.Drawing.Point(975, 43)
         Me.lnkDownload.Name = "lnkDownload"
         Me.lnkDownload.Size = New System.Drawing.Size(65, 23)
         Me.lnkDownload.TabIndex = 59
@@ -1087,10 +1102,34 @@ Partial Class NHLGamesMetro
         Me.btnClose.Text = "X"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'btnDisplayEntry
+        '
+        Me.btnDisplayEntry.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDisplayEntry.Location = New System.Drawing.Point(479, 189)
+        Me.btnDisplayEntry.Name = "btnDisplayEntry"
+        Me.btnDisplayEntry.Size = New System.Drawing.Size(75, 24)
+        Me.btnDisplayEntry.TabIndex = 60
+        Me.btnDisplayEntry.Text = "DIY Steps"
+        Me.btnDisplayEntry.UseSelectable = True
+        '
+        'btnHelp
+        '
+        Me.btnHelp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnHelp.FlatAppearance.BorderSize = 0
+        Me.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnHelp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnHelp.Location = New System.Drawing.Point(946, 5)
+        Me.btnHelp.Name = "btnHelp"
+        Me.btnHelp.Size = New System.Drawing.Size(25, 25)
+        Me.btnHelp.TabIndex = 62
+        Me.btnHelp.Text = "?"
+        Me.btnHelp.UseVisualStyleBackColor = True
+        '
         'NHLGamesMetro
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1050, 600)
+        Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.lnkDownload)
@@ -1204,4 +1243,7 @@ Partial Class NHLGamesMetro
     Friend WithEvents progress As ProgressBar
     Friend WithEvents NoGames As Label
     Friend WithEvents btnClose As Button
+    Friend WithEvents MetroCheckBox3 As MetroCheckBox
+    Friend WithEvents btnDisplayEntry As MetroButton
+    Friend WithEvents btnHelp As Button
 End Class

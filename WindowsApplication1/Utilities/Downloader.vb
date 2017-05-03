@@ -100,8 +100,8 @@ Namespace Utilities
         Public Shared Function DownloadApplicationVersion() As String
             Dim appVers As String
             Console.WriteLine("Checking: Application version")
-            'checking every month "001" for a new version
-            DownloadFile(ApplicationVersionUrl, ApplicationVersionFileName, True, True, "001")
+            'checking every week "070" for a new version
+            DownloadFile(ApplicationVersionUrl, ApplicationVersionFileName, True, True, "070")
             appVers = ReadFileContents(ApplicationVersionFileName).Trim()
             If Not appVers.Contains("<html>") Then
                 Return appVers
@@ -112,7 +112,7 @@ Namespace Utilities
 
         Public Shared Function DownloadChangelog() As String
             Dim appChangelog As String
-            DownloadFile(ChangelogUrl, ChangelogFileName, True, True, "010")
+            DownloadFile(ChangelogUrl, ChangelogFileName, True, True)
             appChangelog = ReadFileContents(ChangelogFileName).Trim()
             If Not appChangelog.Contains("<html>") Then
                 Return appChangelog
