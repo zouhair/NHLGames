@@ -74,13 +74,13 @@ Public Class NHLGamesMetro
 
     Private Sub IntitializeApplicationSettings()
 
-        SettingsToolTip.SetToolTip(rbQual1, "300Mo/hr")
-        SettingsToolTip.SetToolTip(rbQual2, "500Mo/hr")
-        SettingsToolTip.SetToolTip(rbQual3, "700Mo/hr")
-        SettingsToolTip.SetToolTip(rbQual4, "950Mo/hr")
-        SettingsToolTip.SetToolTip(rbQual5, "1.3Go/hr")
-        SettingsToolTip.SetToolTip(rbQual6, "1.8Go/hr")
-        SettingsToolTip.SetToolTip(chk60, "+700Mo/hr (+40%)")
+        SettingsToolTip.SetToolTip(rbQual1, "300 MB/hr")
+        SettingsToolTip.SetToolTip(rbQual2, "500 MB/hr")
+        SettingsToolTip.SetToolTip(rbQual3, "700 MB/hr")
+        SettingsToolTip.SetToolTip(rbQual4, "950 MB/hr")
+        SettingsToolTip.SetToolTip(rbQual5, "1.3 GB/hr")
+        SettingsToolTip.SetToolTip(rbQual6, "1.8 GB/hr")
+        SettingsToolTip.SetToolTip(chk60, "+700 MB/hr (+40%)")
 
         Dim mpcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpcPath, String.Empty)
         Dim mpcPathCurrent As String = PathFinder.GetPathOfMpc
@@ -147,6 +147,7 @@ Public Class NHLGamesMetro
 
         MetroCheckBox1.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True)
         MetroCheckBox2.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores, True)
+        MetroCheckBox3.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowSeriesRecord, True)
 
         Dim watchArgs As Game.GameWatchArguments = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
         If watchArgs Is Nothing OrElse watchArgs.StreamlinkPath <> streamlinkPath Then
@@ -315,7 +316,8 @@ Public Class NHLGamesMetro
             BeginInvoke(New Action(Of Game)(AddressOf NewGameFoundHandler), gameObj)
         Else
             Dim gameControl As New GameControl(gameObj, ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores),
-                ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores, True))
+                ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores),
+                ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowSeriesRecord))
             FlowLayoutPanel.Controls.Add(gameControl)
         End If
 
@@ -558,7 +560,7 @@ Public Class NHLGamesMetro
             GameDate.Day.ToString + ", " + GameDate.Year.ToString
     End Sub
 
-    Private Sub lblVersion_Click(sender As Object, e As EventArgs) 
+    Private Sub lblVersion_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -673,6 +675,27 @@ Public Class NHLGamesMetro
         txtOutputPath.Enabled = tgOutput.Checked
         SetEventArgsFromForm()
         _writeToConsoleSettingsChanged("Output Enable", tgOutput.Checked)
+    End Sub
+
+    Private Sub MetroCheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles MetroCheckBox3.CheckedChanged
+        ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowSeriesRecord, MetroCheckBox3.Checked)
+    End Sub
+
+    Private Sub btnDisplayEntry_Click(sender As Object, e As EventArgs) Handles btnDisplayEntry.Click
+        Dim result As DialogResult
+        result = MetroMessageBox.Show(Me, String.Format("This line needs to be insert in your hosts file : {0}{1} {2}{3}" &
+            "Copy and paste that entry line at the end of your Hosts file.{4}" &
+            "You can use 'Open Hosts File' button with Notepad to open the Hosts file quickly.{5}" &
+            "Do you want to copy that entry line to your clipboard ?",
+            vbCrLf, DomainName, _serverIp, vbCrLf, vbCrLf, vbCrLf), "Do It Yourself steps", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+        If result = System.Windows.Forms.DialogResult.Yes Then
+            Clipboard.SetText(DomainName & " " & _serverIp)
+        End If
+    End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://github.com/NHLGames/NHLGames")
+        Process.Start(sInfo)
     End Sub
 
 #End Region

@@ -10,7 +10,7 @@ Namespace Controls
         Private _game As Game
 
 
-        Public Sub New(game As Game, showScores As Boolean, showLiveScores As Boolean)
+        Public Sub New(game As Game, showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean)
             InitializeComponent()
 
             _game = game
@@ -21,7 +21,7 @@ Namespace Controls
             If game.GameIsLive Then
                 lblHomeScore.Visible = showLiveScores
                 lblAwayScore.Visible = showLiveScores
-                If Not showLiveScores And game.GameIsInPlayoff And game.Date.ToLocalTime() = Date.Today Then
+                If ((Not showLiveScores And game.Date.ToLocalTime() = Date.Today) OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
                     lblNotInSeason.Text = "Playoffs"
                 End If
             Else
@@ -30,7 +30,7 @@ Namespace Controls
                 If showScores And game.GameIsFinal And game.GamePeriod <> "3rd" Then
                     lblTime.Text += If(game.GamePeriod <> "", "/" + game.GamePeriod, "")
                 End If
-                If Not showScores And game.GameIsInPlayoff And game.GameIsFinal Then
+                If ((Not showScores And game.GameIsFinal) OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
                     lblNotInSeason.Text = "Playoffs"
                 End If
             End If

@@ -16,6 +16,7 @@ Namespace Utilities
             RefreshIntervalInMin = 9
             ShowAdvancedWatchPanel = 10
             ShowLiveScores = 11
+            ShowSeriesRecord = 12
         End Enum
 
         Public Shared Function Read(Of T)(key As Settings, Optional defaultReturnValue As Object = Nothing) As T
