@@ -213,13 +213,13 @@ Public Class NHLGamesMetro
                 watchArgs.Cdn = "l3c"
             End If
 
-            watchArgs.UsePlayerArgs = chkEnablePlayerArgs.Checked
+            watchArgs.UsePlayerArgs = tgPlayer.Checked
             watchArgs.PlayerArgs = txtPlayerArgs.Text
 
-            watchArgs.UsestreamlinkArgs = chkEnableStreamArgs.Checked
+            watchArgs.UsestreamlinkArgs = tgStreamer.Checked
             watchArgs.StreamlinkArgs = txtStreamerArgs.Text
 
-            watchArgs.UseOutputArgs = chkEnableOutput.Checked
+            watchArgs.UseOutputArgs = tgOutput.Checked
             watchArgs.PlayerOutputPath = txtOutputPath.Text
             ApplicationSettings.SetValue(ApplicationSettings.Settings.DefaultWatchArgs, Serialization.SerializeObject(Of Game.GameWatchArguments)(watchArgs))
         End If
@@ -263,17 +263,17 @@ Public Class NHLGamesMetro
                 SetEventArgsFromForm()
             End If
 
-            chkEnablePlayerArgs.Checked = watchArgs.UsePlayerArgs
+            tgPlayer.Checked = watchArgs.UsePlayerArgs
             txtPlayerArgs.Enabled = watchArgs.UsePlayerArgs
             txtPlayerArgs.Text = watchArgs.PlayerArgs
 
-            chkEnableStreamArgs.Checked = watchArgs.UsestreamlinkArgs
+            tgStreamer.Checked = watchArgs.UsestreamlinkArgs
             txtStreamerArgs.Enabled = watchArgs.UsestreamlinkArgs
             txtStreamerArgs.Text = watchArgs.StreamlinkArgs
 
             txtOutputPath.Text = watchArgs.PlayerOutputPath
             txtOutputPath.Enabled = watchArgs.UseOutputArgs
-            chkEnableOutput.Checked = watchArgs.UseOutputArgs
+            tgOutput.Checked = watchArgs.UseOutputArgs
         End If
     End Sub
 
@@ -523,24 +523,6 @@ Public Class NHLGamesMetro
         _writeToConsoleSettingsChanged("Streamer args", txtStreamerArgs.Text)
     End Sub
 
-    Private Sub chkEnableOutput_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableOutput.CheckedChanged
-        txtOutputPath.Enabled = chkEnableOutput.Checked
-        SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged("Output Enable", chkEnableOutput.Checked)
-    End Sub
-
-    Private Sub chkEnablePlayerArgs_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnablePlayerArgs.CheckedChanged
-        txtPlayerArgs.Enabled = chkEnablePlayerArgs.Checked
-        SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged("Player args Enable", chkEnablePlayerArgs.Checked)
-    End Sub
-
-    Private Sub chkEnableStreamArgs_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableStreamArgs.CheckedChanged
-        txtStreamerArgs.Enabled = chkEnableStreamArgs.Checked
-        SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged("Streamer args Enable", chkEnableStreamArgs.Checked)
-    End Sub
-
     Private Sub MetroButton1_Click(sender As Object, e As EventArgs) Handles MetroButton1.Click
         SaveFileDialog.CheckPathExists = True
 
@@ -576,7 +558,7 @@ Public Class NHLGamesMetro
             GameDate.Day.ToString + ", " + GameDate.Year.ToString
     End Sub
 
-    Private Sub lblVersion_Click(sender As Object, e As EventArgs) Handles lblVersion.Click
+    Private Sub lblVersion_Click(sender As Object, e As EventArgs) 
 
     End Sub
 
@@ -673,6 +655,24 @@ Public Class NHLGamesMetro
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
+    End Sub
+
+    Private Sub tgStreamer_CheckedChanged(sender As Object, e As EventArgs) Handles tgStreamer.CheckedChanged
+        txtStreamerArgs.Enabled = tgStreamer.Checked
+        SetEventArgsFromForm()
+        _writeToConsoleSettingsChanged("Streamer args Enable", tgStreamer.Checked)
+    End Sub
+
+    Private Sub tgPlayer_CheckedChanged(sender As Object, e As EventArgs) Handles tgPlayer.CheckedChanged
+        txtPlayerArgs.Enabled = tgPlayer.Checked
+        SetEventArgsFromForm()
+        _writeToConsoleSettingsChanged("Player args Enable", tgPlayer.Checked)
+    End Sub
+
+    Private Sub tgOutput_CheckedChanged(sender As Object, e As EventArgs) Handles tgOutput.CheckedChanged
+        txtOutputPath.Enabled = tgOutput.Checked
+        SetEventArgsFromForm()
+        _writeToConsoleSettingsChanged("Output Enable", tgOutput.Checked)
     End Sub
 
 #End Region

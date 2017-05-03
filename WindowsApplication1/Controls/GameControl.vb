@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports MetroFramework.Controls
 Imports NHLGames.Objects
 Imports NHLGames.Utilities
 
@@ -76,14 +77,14 @@ Namespace Controls
             picAway.SizeMode = PictureBoxSizeMode.StretchImage
             If String.IsNullOrEmpty(game.HomeTeam) = False Then
                 picAway.Image = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.AwayTeam).Replace(" ", "").Replace(".", ""))
-                TeamToolTip.SetToolTip(picAway, "Away Team: " & game.AwayTeamName)
+                ToolTip.SetToolTip(picAway, "Away Team: " & game.AwayTeamName)
             End If
 
             live2.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
             picHome.SizeMode = PictureBoxSizeMode.StretchImage
             If String.IsNullOrEmpty(game.AwayTeam) = False Then
                 picHome.Image = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.HomeTeam).Replace(" ", "").Replace(".", ""))
-                TeamToolTip.SetToolTip(picHome, "Home Team: " & game.HomeTeamName)
+                ToolTip.SetToolTip(picHome, "Home Team: " & game.HomeTeamName)
             End If
 
             lblPeriod.Text = ""
@@ -97,7 +98,7 @@ Namespace Controls
                             lblNotInSeason.Text = "Game " + game.SeriesGameNumber
                         End If
                     Else
-                            lblNotInSeason.Text = game.SeriesGameStatus
+                        lblNotInSeason.Text = game.SeriesGameStatus
                         lblPeriod.Text = "Game " + game.SeriesGameNumber
                     End If
                 Else
@@ -124,55 +125,55 @@ Namespace Controls
 
             Dim tip As String
 
-            lblAwayStream.Visible = game.AwayStream.IsAvailable
+            lnkAway.Visible = game.AwayStream.IsAvailable
             If game.AwayStream.IsAvailable Then
                 tip = game.AwayTeamName + " stream"
                 If game.AwayStream.Network <> String.Empty Then
-                    lblAwayStream.Text += " (" & game.AwayStream.Network & ")"
+                    lnkAway.Text += " (" & game.AwayStream.Network & ")"
                     tip += " on " + game.AwayStream.Network
                 End If
-                TeamToolTip.SetToolTip(lblAwayStream, tip)
+                ToolTip.SetToolTip(lnkAway, tip)
             End If
 
-            lblHomeStream.Visible = game.HomeStream.IsAvailable
+            lnkHome.Visible = game.HomeStream.IsAvailable
             If game.HomeStream.IsAvailable Then
                 tip = game.HomeTeamName + " stream"
                 If game.HomeStream.Network <> String.Empty Then
-                    lblHomeStream.Text += " (" & game.HomeStream.Network & ")"
+                    lnkHome.Text += " (" & game.HomeStream.Network & ")"
                     tip += " on " + game.HomeStream.Network
                 End If
-                TeamToolTip.SetToolTip(lblHomeStream, tip)
+                ToolTip.SetToolTip(lnkHome, tip)
             End If
 
-            lblFrenchStream.Visible = game.FrenchStream.IsAvailable
+            lnkFrench.Visible = game.FrenchStream.IsAvailable
             If game.FrenchStream.IsAvailable Then
                 tip = "French canadians stream"
                 If game.FrenchStream.Network <> String.Empty Then
-                    lblFrenchStream.Text += " (" & game.FrenchStream.Network & ")"
+                    lnkFrench.Text += " (" & game.FrenchStream.Network & ")"
                     tip += " on " + game.FrenchStream.Network
                 End If
-                TeamToolTip.SetToolTip(lblFrenchStream, tip)
+                ToolTip.SetToolTip(lnkFrench, tip)
             End If
 
-            lblNationalStream.Visible = game.NationalStream.IsAvailable
+            lnkNational.Visible = game.NationalStream.IsAvailable
             If game.NationalStream.IsAvailable Then
                 tip = "National stream"
                 If game.NationalStream.Network <> String.Empty Then
-                    lblNationalStream.Text += " (" & game.NationalStream.Network & ")"
+                    lnkNational.Text += " (" & game.NationalStream.Network & ")"
                     tip += " on " + game.NationalStream.Network
                 End If
-                TeamToolTip.SetToolTip(lblNationalStream, tip)
+                ToolTip.SetToolTip(lnkNational, tip)
             End If
 
-            lblMultiCam1.Visible = game.MultiCam1Stream.IsAvailable
+            lnkThree.Visible = game.MultiCam1Stream.IsAvailable
 
-            lblMultiCam2.Visible = game.MultiCam2Stream.IsAvailable
+            lnkSix.Visible = game.MultiCam2Stream.IsAvailable
 
-            lblRefCam.Visible = game.RefCamStream.IsAvailable
+            lnkRef.Visible = game.RefCamStream.IsAvailable
 
-            lblEndzoneCam1.Visible = game.EndzoneCam1Stream.IsAvailable
+            lnkEnd1.Visible = game.EndzoneCam1Stream.IsAvailable
 
-            lblEndzoneCam2.Visible = game.EndzoneCam2Stream.IsAvailable
+            lnkEnd2.Visible = game.EndzoneCam2Stream.IsAvailable
         End Sub
 
         Private Sub GameUpdatedHandler(game As Game)
@@ -180,117 +181,119 @@ Namespace Controls
             UpdateGameStatusProperties(game)
         End Sub
 
-        Private Sub lblHomeStream_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblHomeStream.LinkClicked
+        Private Function WatchArgs() As Game.GameWatchArguments
+            Dim args = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
+            args.GameTitle = _game.AwayAbbrev & " @ " & _game.HomeAbbrev
+            Return args
+        End Function
+
+        Private Sub lnkAway_Click(sender As Object, e As EventArgs) Handles lnkAway.Click
             Dim args = WatchArgs()
 
             If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.HomeStream.CheckVOD(args.CDN)
-                args.IsVOD = _game.HomeStream.IsVOD
-            End If
-
-            args.Stream = _game.HomeStream
-            _game.Watch(args)
-        End Sub
-
-        Private Sub lblAwayStream_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblAwayStream.LinkClicked
-            Dim args = WatchArgs()
-
-            If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.AwayStream.CheckVOD(args.CDN)
-                args.IsVOD = _game.AwayStream.IsVOD
+                _game.AwayStream.CheckVod(args.Cdn)
+                args.IsVod = _game.AwayStream.IsVod
             End If
 
             args.Stream = _game.AwayStream
             _game.Watch(args)
         End Sub
 
-        Private Sub lblFrenchStream_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblFrenchStream.LinkClicked
+        Private Sub lnkFrench_Click(sender As Object, e As EventArgs) Handles lnkFrench.Click
             Dim args = WatchArgs()
 
             If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.FrenchStream.CheckVOD(args.CDN)
-                args.IsVOD = _game.FrenchStream.IsVOD
+                _game.FrenchStream.CheckVod(args.Cdn)
+                args.IsVod = _game.FrenchStream.IsVod
             End If
 
             args.Stream = _game.FrenchStream
             _game.Watch(args)
         End Sub
 
-        Private Sub lblNationalStream_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblNationalStream.LinkClicked
+        Private Sub lnkNational_Click(sender As Object, e As EventArgs) Handles lnkNational.Click
             Dim args = WatchArgs()
 
             If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.NationalStream.CheckVOD(args.CDN)
-                args.IsVOD = _game.NationalStream.IsVOD
+                _game.NationalStream.CheckVod(args.Cdn)
+                args.IsVod = _game.NationalStream.IsVod
             End If
 
             args.Stream = _game.NationalStream
             _game.Watch(args)
         End Sub
 
-        Private Sub lblMultiCam1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblMultiCam1.LinkClicked
+        Private Sub lnkHome_Click(sender As Object, e As EventArgs) Handles lnkHome.Click
             Dim args = WatchArgs()
 
             If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.MultiCam1Stream.CheckVOD(args.CDN)
-                args.IsVOD = _game.MultiCam1Stream.IsVOD
+                _game.HomeStream.CheckVod(args.Cdn)
+                args.IsVod = _game.HomeStream.IsVod
             End If
 
-            args.Stream = _game.MultiCam1Stream
+            args.Stream = _game.HomeStream
             _game.Watch(args)
         End Sub
 
-        Private Sub lblMultiCam2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblMultiCam2.LinkClicked
+        Private Sub lnkEnd1_Click(sender As Object, e As EventArgs) Handles lnkEnd1.Click
             Dim args = WatchArgs()
 
             If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.MultiCam2Stream.CheckVOD(args.CDN)
-                args.IsVOD = _game.MultiCam2Stream.IsVOD
+                _game.EndzoneCam1Stream.CheckVod(args.Cdn)
+                args.IsVod = _game.EndzoneCam1Stream.IsVod
             End If
 
-            args.Stream = _game.MultiCam2Stream
+            args.Stream = _game.EndzoneCam1Stream
             _game.Watch(args)
         End Sub
 
-        Private Sub lblRefCam_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblRefCam.LinkClicked
+        Private Sub lnkRef_Click(sender As Object, e As EventArgs) Handles lnkRef.Click
             Dim args = WatchArgs()
 
             If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.RefCamStream.CheckVOD(args.CDN)
-                args.IsVOD = _game.RefCamStream.IsVOD
+                _game.RefCamStream.CheckVod(args.Cdn)
+                args.IsVod = _game.RefCamStream.IsVod
             End If
 
             args.Stream = _game.RefCamStream
             _game.Watch(args)
         End Sub
 
-        Private Sub lblEndzoneCam1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblEndzoneCam1.LinkClicked
+        Private Sub lnkThree_Click(sender As Object, e As EventArgs) Handles lnkThree.Click
             Dim args = WatchArgs()
 
             If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.EndzoneCam1Stream.CheckVOD(args.CDN)
-                args.IsVOD = _game.EndzoneCam1Stream.IsVOD
+                _game.MultiCam1Stream.CheckVod(args.Cdn)
+                args.IsVod = _game.MultiCam1Stream.IsVod
             End If
 
-            args.Stream = _game.EndzoneCam1Stream
+            args.Stream = _game.MultiCam1Stream
             _game.Watch(args)
         End Sub
-        Private Sub lblEndzoneCam2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblEndzoneCam2.LinkClicked
+
+        Private Sub lnkSix_Click(sender As Object, e As EventArgs) Handles lnkSix.Click
             Dim args = WatchArgs()
 
             If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.EndzoneCam2Stream.CheckVOD(args.CDN)
-                args.IsVOD = _game.EndzoneCam2Stream.IsVOD
+                _game.MultiCam2Stream.CheckVod(args.Cdn)
+                args.IsVod = _game.MultiCam2Stream.IsVod
+            End If
+
+            args.Stream = _game.MultiCam2Stream
+            _game.Watch(args)
+        End Sub
+
+        Private Sub lnkEnd2_Click(sender As Object, e As EventArgs) Handles lnkEnd2.Click
+            Dim args = WatchArgs()
+
+            If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
+                _game.EndzoneCam2Stream.CheckVod(args.Cdn)
+                args.IsVod = _game.EndzoneCam2Stream.IsVod
             End If
 
             args.Stream = _game.EndzoneCam2Stream
             _game.Watch(args)
         End Sub
 
-        Private Function WatchArgs() As Game.GameWatchArguments
-            Dim args = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
-            args.GameTitle = _game.AwayAbbrev & " @ " & _game.HomeAbbrev
-            Return args
-        End Function
     End Class
 End Namespace
