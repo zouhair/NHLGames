@@ -6,7 +6,7 @@ Imports NHLGames.Utilities
 Namespace Controls
 
     Public Class GameControl
-
+        Private _broadcasters As New Dictionary(Of String, String)
         Private _game As Game
 
 
@@ -14,6 +14,7 @@ Namespace Controls
             InitializeComponent()
 
             _game = game
+            _getAllBroadcasters()
 
             SetInitialProperties(game)
             UpdateGameStatusProperties(game)
@@ -74,16 +75,18 @@ Namespace Controls
         End Function
 
         Private Sub SetInitialProperties(game As Game)
-            picAway.SizeMode = PictureBoxSizeMode.StretchImage
+            picAway.SizeMode = PictureBoxSizeMode.Zoom
             If String.IsNullOrEmpty(game.HomeTeam) = False Then
-                picAway.Image = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.AwayTeam).Replace(" ", "").Replace(".", ""))
+                Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.AwayTeam).Replace(" ", "").Replace(".", ""))
+                If Not img Is Nothing Then picAway.BackgroundImage = img
                 ToolTip.SetToolTip(picAway, "Away Team: " & game.AwayTeamName)
             End If
 
+            picHome.SizeMode = PictureBoxSizeMode.Zoom
             live2.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
-            picHome.SizeMode = PictureBoxSizeMode.StretchImage
             If String.IsNullOrEmpty(game.AwayTeam) = False Then
-                picHome.Image = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.HomeTeam).Replace(" ", "").Replace(".", ""))
+                Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.HomeTeam).Replace(" ", "").Replace(".", ""))
+                If Not img Is Nothing Then picHome.BackgroundImage = img
                 ToolTip.SetToolTip(picHome, "Home Team: " & game.HomeTeamName)
             End If
 
@@ -118,9 +121,13 @@ Namespace Controls
                 lblTime.Text = game.Date.ToLocalTime().ToString("h:mm tt")
             End If
 
-            lblNoStream.Visible = Not game.AreAnyStreamsAvailable And game.Date.ToLocalTime <= Date.Today.AddDays(1)
-            If Not game.AreAnyStreamsAvailable And game.Date.ToLocalTime >= Date.Today And game.GameState < 5 Then
-                lblNoStream.Text = "Streams available during pregame"
+            If Not game.AreAnyStreamsAvailable Then
+                If game.Date.ToLocalTime >= Date.Today And game.GameState < 5 Then
+                    lblStreamStatus.Text = "Streams available during pregame"
+                Else
+                    lblStreamStatus.Text = "No stream available"
+                End If
+                FlowLayoutPanel1.Visible = False
             End If
 
             Dim tip As String
@@ -129,7 +136,8 @@ Namespace Controls
             If game.AwayStream.IsAvailable Then
                 tip = game.AwayTeamName + " stream"
                 If game.AwayStream.Network <> String.Empty Then
-                    lnkAway.Text += " (" & game.AwayStream.Network & ")"
+                    Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(_getBroadcasterPicFor(game.AwayStream.Network))
+                    If Not img Is Nothing Then lnkAway.BackgroundImage = img
                     tip += " on " + game.AwayStream.Network
                 End If
                 ToolTip.SetToolTip(lnkAway, tip)
@@ -139,7 +147,8 @@ Namespace Controls
             If game.HomeStream.IsAvailable Then
                 tip = game.HomeTeamName + " stream"
                 If game.HomeStream.Network <> String.Empty Then
-                    lnkHome.Text += " (" & game.HomeStream.Network & ")"
+                    Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(_getBroadcasterPicFor(game.HomeStream.Network))
+                    If Not img Is Nothing Then lnkHome.BackgroundImage = img
                     tip += " on " + game.HomeStream.Network
                 End If
                 ToolTip.SetToolTip(lnkHome, tip)
@@ -149,7 +158,8 @@ Namespace Controls
             If game.FrenchStream.IsAvailable Then
                 tip = "French canadians stream"
                 If game.FrenchStream.Network <> String.Empty Then
-                    lnkFrench.Text += " (" & game.FrenchStream.Network & ")"
+                    Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(_getBroadcasterPicFor(game.FrenchStream.Network))
+                    If Not img Is Nothing Then lnkFrench.BackgroundImage = img
                     tip += " on " + game.FrenchStream.Network
                 End If
                 ToolTip.SetToolTip(lnkFrench, tip)
@@ -159,7 +169,8 @@ Namespace Controls
             If game.NationalStream.IsAvailable Then
                 tip = "National stream"
                 If game.NationalStream.Network <> String.Empty Then
-                    lnkNational.Text += " (" & game.NationalStream.Network & ")"
+                    Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(_getBroadcasterPicFor(game.NationalStream.Network))
+                    If Not img Is Nothing Then lnkNational.BackgroundImage = img
                     tip += " on " + game.NationalStream.Network
                 End If
                 ToolTip.SetToolTip(lnkNational, tip)
@@ -172,9 +183,18 @@ Namespace Controls
             lnkRef.Visible = game.RefCamStream.IsAvailable
 
             lnkEnd1.Visible = game.EndzoneCam1Stream.IsAvailable
+            ToolTip.SetToolTip(lnkEnd1, game.AwayAbbrev & " endzone camera")
 
             lnkEnd2.Visible = game.EndzoneCam2Stream.IsAvailable
+            ToolTip.SetToolTip(lnkEnd2, game.HomeAbbrev & " endzone camera")
         End Sub
+
+        Private Function _getBroadcasterPicFor(network As String)
+
+            Dim value As String = _broadcasters.Where(Function(kvp) network.StartsWith(kvp.Key.ToString())).Select(Function(kvp) kvp.Value).FirstOrDefault()
+            Return If(value <> Nothing, value.ToLower, "")
+
+        End Function
 
         Private Sub GameUpdatedHandler(game As Game)
             _game = game
@@ -295,5 +315,24 @@ Namespace Controls
             _game.Watch(args)
         End Sub
 
+        Private Sub _getAllBroadcasters()
+            _broadcasters.Add("ALT", "ALT")
+            _broadcasters.Add("CBC", "CBC")
+            _broadcasters.Add("CSN", "CSN")
+            _broadcasters.Add("ESPN", "ESPN")
+            _broadcasters.Add("FS", "FS")
+            _broadcasters.Add("MSG", "MSG")
+            _broadcasters.Add("NBC", "NBC")
+            _broadcasters.Add("NESN", "NESN")
+            _broadcasters.Add("RDS", "RDS")
+            _broadcasters.Add("ROOT", "ROOT")
+            _broadcasters.Add("SN", "SN")
+            _broadcasters.Add("TSN", "TSN")
+            _broadcasters.Add("TVAS", "TVAS")
+            _broadcasters.Add("SUN", "FS")
+            _broadcasters.Add("CITY", "CBC")
+            _broadcasters.Add("WGN", "WGN")
+            _broadcasters.Add("PRIM", "FS")
+        End Sub
     End Class
 End Namespace

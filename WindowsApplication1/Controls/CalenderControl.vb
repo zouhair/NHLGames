@@ -27,7 +27,7 @@ Namespace Controls
                 getButton(fdate, row).BackColor = Color.White
                 If idate = selected And ldate.Month = Date.Today.Month And ldate.Year = Date.Today.Year Then
                     getButton(fdate, row).ForeColor = Color.White
-                    getButton(fdate, row).BackColor = Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
+                    GetButton(fdate, row).BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(230, Byte), Integer))
                 End If
                 If fdate = DayOfWeek.Saturday Then
                     row += 1

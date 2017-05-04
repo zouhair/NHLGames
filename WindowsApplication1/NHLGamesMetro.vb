@@ -157,8 +157,8 @@ Public Class NHLGamesMetro
 
         BindWatchArgsToForm(watchArgs)
 
-        progress.Location = New Point((FlowLayoutPanel.Width - progress.Width) / 2, FlowLayoutPanel.Location.Y + 150)
-        NoGames.Location = New Point((FlowLayoutPanel.Width - NoGames.Width) / 2, FlowLayoutPanel.Location.Y + 148)
+        progress.Location = New Point((flpGames.Width - progress.Width) / 2, flpGames.Location.Y + 150)
+        NoGames.Location = New Point((flpGames.Width - NoGames.Width) / 2, flpGames.Location.Y + 148)
 
         lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(GameDate.DayOfWeek).Substring(0, 3) + ", " +
         CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(GameDate.Month).Substring(0, 3) + " " +
@@ -297,16 +297,12 @@ Public Class NHLGamesMetro
         Dim versionFromSettings = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version, "")
 
         If strLatest > versionFromSettings Then
-            lblVersion.Text = String.Format("Version {0} available! You are running {1}.", strLatest, versionFromSettings)
-            lblVersion.ForeColor = Color.Red
+            lnkDownload.Text = String.Format("A new version is available, click here to download the latest version v{0}", strLatest)
             lnkDownload.Visible = True
             Dim strChangeLog = Downloader.DownloadChangelog()
             MetroMessageBox.Show(Me, String.Format("Version {0} is available! Changes: {1}{2}{3}", strLatest, vbCrLf, vbCrLf, strChangeLog), "New Version Available", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Else
-            lblVersion.Text = String.Format("Version: {0}", ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version))
-            lblVersion.ForeColor = Color.Gray
-            lblVersion.Padding = New Padding(0, 0, 0, 0)
         End If
+        lblVersion.Text = String.Format("v{0}", ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version))
 
     End Sub
 
@@ -318,7 +314,7 @@ Public Class NHLGamesMetro
             Dim gameControl As New GameControl(gameObj, ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores),
                 ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores),
                 ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowSeriesRecord))
-            FlowLayoutPanel.Controls.Add(gameControl)
+            flpGames.Controls.Add(gameControl)
         End If
 
     End Sub
@@ -337,7 +333,7 @@ Public Class NHLGamesMetro
         If InvokeRequired Then
             BeginInvoke(New Action(AddressOf ClearGamePanel))
         Else
-            FlowLayoutPanel.Controls.Clear()
+            flpGames.Controls.Clear()
         End If
     End Sub
 
@@ -479,7 +475,7 @@ Public Class NHLGamesMetro
         If InvokeRequired Then
             BeginInvoke(New Action(Of String)(AddressOf SetFormStatusLabel), msg)
         Else
-            StatusLabel.Text = msg
+            Status.Text = msg
         End If
     End Sub
 
@@ -594,10 +590,10 @@ Public Class NHLGamesMetro
     Private Sub tmrAnimate_Tick(sender As Object, e As EventArgs) Handles tmrAnimate.Tick
         If StreamStarted Then
             progress.Visible = ProgressVisible
-            FlowLayoutPanel.Enabled = False
-            FlowLayoutPanel.Focus()
+            flpGames.Enabled = False
+            flpGames.Focus()
         Else
-            FlowLayoutPanel.Enabled = True
+            flpGames.Enabled = True
         End If
 
         If ProgressValue < progress.Maximum Then
@@ -615,14 +611,14 @@ Public Class NHLGamesMetro
             btnDate.Enabled = True
             btnTomorrow.Enabled = True
             btnYesterday.Enabled = True
-            If (FlowLayoutPanel.Controls.Count = 0) Then
+            If (flpGames.Controls.Count = 0) Then
                 NoGames.Visible = True
             Else
                 NoGames.Visible = False
             End If
         End If
 
-        If FlowLayoutPanel.Controls.Count <> 0 And (progress.Visible Or NoGames.Visible) Then
+        If flpGames.Controls.Count <> 0 And (progress.Visible Or NoGames.Visible) Then
             If Not StreamStarted Then progress.Visible = False
             NoGames.Visible = False
         End If
@@ -647,16 +643,12 @@ Public Class NHLGamesMetro
         flpCalender.Visible = False
     End Sub
 
-    Private Sub FlowLayoutPanel_Click(sender As Object, e As EventArgs) Handles FlowLayoutPanel.Click
+    Private Sub FlowLayoutPanel_Click(sender As Object, e As EventArgs) Handles flpGames.Click
         flpCalender.Visible = False
     End Sub
 
     Private Sub txtMpvPath_TextChanged(sender As Object, e As EventArgs) Handles txtMpvPath.TextChanged
         SetEventArgsFromForm()
-    End Sub
-
-    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
     End Sub
 
     Private Sub tgStreamer_CheckedChanged(sender As Object, e As EventArgs) Handles tgStreamer.CheckedChanged
@@ -694,8 +686,28 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://github.com/NHLGames/NHLGames")
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://github.com/NHLGames/NHLGames#nhlgames")
         Process.Start(sInfo)
+    End Sub
+
+    Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
+        Me.WindowState = FormWindowState.Maximized
+        btnMaximize.Visible = False
+        btnNormal.Visible = True
+    End Sub
+
+    Private Sub btnMinimize_Click(sender As Object, e As EventArgs) Handles btnMinimize.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnNormal_Click(sender As Object, e As EventArgs) Handles btnNormal.Click
+        Me.WindowState = FormWindowState.Normal
+        btnMaximize.Visible = True
+        btnNormal.Visible = False
     End Sub
 
 #End Region
