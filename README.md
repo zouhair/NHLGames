@@ -68,8 +68,8 @@ Here are 5 differents game panels that you will see while using NHLGames.
   5. Gray : Final games
   
   Note : 6th picture shows the possibility to add live score or final score to the panel. You can turn it on/off in Settings tab.
-  
-![image](https://cloud.githubusercontent.com/assets/23088305/25733772/8b570614-312a-11e7-996b-4590d89d52bb.png)
+
+![image](https://cloud.githubusercontent.com/assets/23088305/25744794/b7e037f2-3169-11e7-89d6-98fe61684158.png)
 
 ## Settings
 ### Show Scores
