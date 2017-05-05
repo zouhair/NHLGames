@@ -26,7 +26,7 @@ Public Class NHLGamesMetro
     Public Shared ProgressVisible As Boolean = False
     Public Shared GamesDownloadedTime As Date
     Public Shared LabelDate As Label
-    Public Shared downloadLink As String = "https://www.reddit.com/r/nhl_games/"
+    Public Shared DownloadLink As String = "https://www.reddit.com/r/nhl_games/"
     Public Shared GameDate As Date = DateHelper.GetPacificTime()
 
     ' Starts the application. -- See: https://msdn.microsoft.com/en-us/library/system.windows.forms.application.threadexception(v=vs.110).aspx
@@ -93,7 +93,6 @@ Public Class NHLGamesMetro
             mpcPath = mpcPathCurrent
         End If
         txtMPCPath.Text = mpcPath
-        ' If watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpc Then playerPath = mpcPath
 
         Dim vlcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VlcPath, String.Empty)
         Dim vlcPathCurrent As String = PathFinder.GetPathOfVlc
@@ -105,7 +104,6 @@ Public Class NHLGamesMetro
             vlcPath = vlcPathCurrent
         End If
         txtVLCPath.Text = vlcPath
-        'If watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Vlc Then playerPath = vlcPath
 
         Dim mpvPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpvPath, String.Empty)
         Dim mpvPathCurrent As String = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
@@ -124,7 +122,6 @@ Public Class NHLGamesMetro
             End If
         End If
         txtMpvPath.Text = mpvPath
-        'If watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpv Then playerPath = mpvPath
 
         Dim streamlinkPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.StreamlinkPath, String.Empty)
         Dim streamlinkPathCurrent As String = Path.Combine(Application.StartupPath, "streamlink-0.5.0\streamlink.exe")
@@ -304,7 +301,6 @@ Public Class NHLGamesMetro
         If strLatest > versionFromSettings Then
             lnkDownload.Text = String.Format("A new version is available, download the latest version v{0} on /r/nhl_games", strLatest)
             downloadLink += "wiki/downloads"
-            'lnkDownload.Visible = True
             Dim strChangeLog = Downloader.DownloadChangelog()
             MetroMessageBox.Show(Me, String.Format("Version {0} is available! Changes: {1}{2}{3}", strLatest, vbCrLf, vbCrLf, strChangeLog), "New Version Available", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else
@@ -564,9 +560,6 @@ Public Class NHLGamesMetro
             GameDate.Day.ToString + ", " + GameDate.Year.ToString
     End Sub
 
-    Private Sub lblVersion_Click(sender As Object, e As EventArgs)
-
-    End Sub
 
     Private Sub btnClean_Click(sender As Object, e As EventArgs) Handles btnClean.Click
         HostsFile.CleanHosts(DomainName, True)

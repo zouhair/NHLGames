@@ -77,18 +77,16 @@ Namespace Controls
         Private Sub SetInitialProperties(game As Game)
             picAway.SizeMode = PictureBoxSizeMode.Zoom
             If String.IsNullOrEmpty(game.HomeTeam) = False Then
-                'Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.AwayTeam).Replace(" ", "").Replace(".", ""))
-                'If Not img Is Nothing Then picAway.BackgroundImage = img
-                picAway.BackgroundImage = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.AwayTeam).Replace(" ", "").Replace(".", ""))
+                Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.AwayTeam).Replace(" ", "").Replace(".", ""))
+                If Not img Is Nothing Then picAway.BackgroundImage = img
                 ToolTip.SetToolTip(picAway, "Away Team: " & game.AwayTeamName)
             End If
 
             picHome.SizeMode = PictureBoxSizeMode.Zoom
             live2.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
             If String.IsNullOrEmpty(game.AwayTeam) = False Then
-                'Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.HomeTeam).Replace(" ", "").Replace(".", ""))
-                'If Not img Is Nothing Then picHome.BackgroundImage = img
-                picHome.BackgroundImage = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.HomeTeam).Replace(" ", "").Replace(".", ""))
+                Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.HomeTeam).Replace(" ", "").Replace(".", ""))
+                If Not img Is Nothing Then picHome.BackgroundImage = img
                 ToolTip.SetToolTip(picHome, "Home Team: " & game.HomeTeamName)
             End If
 
@@ -138,9 +136,8 @@ Namespace Controls
             If game.AwayStream.IsAvailable Then
                 tip = game.AwayTeamName + " stream"
                 If game.AwayStream.Network <> String.Empty Then
-                    'Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(_getBroadcasterPicFor(game.AwayStream.Network))
-                    'If Not img Is Nothing Then lnkAway.BackgroundImage = img
-                    lnkAway.BackgroundImage = ImageFetcher.GetEmbeddedImage(_getBroadcasterPicFor(game.AwayStream.Network))
+                    Dim img As String = _getBroadcasterPicFor(game.AwayStream.Network)
+                    If img <> "" Then lnkAway.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
                     tip += " on " + game.AwayStream.Network
                 End If
                 ToolTip.SetToolTip(lnkAway, tip)
@@ -150,9 +147,8 @@ Namespace Controls
             If game.HomeStream.IsAvailable Then
                 tip = game.HomeTeamName + " stream"
                 If game.HomeStream.Network <> String.Empty Then
-                    'Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(_getBroadcasterPicFor(game.HomeStream.Network))
-                    'If Not img Is Nothing Then lnkHome.BackgroundImage = img
-                    lnkHome.BackgroundImage = ImageFetcher.GetEmbeddedImage(_getBroadcasterPicFor(game.HomeStream.Network))
+                    Dim img As String = _getBroadcasterPicFor(game.HomeStream.Network)
+                    If img <> "" Then lnkHome.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
                     tip += " on " + game.HomeStream.Network
                 End If
                 ToolTip.SetToolTip(lnkHome, tip)
@@ -162,9 +158,8 @@ Namespace Controls
             If game.FrenchStream.IsAvailable Then
                 tip = "French canadians stream"
                 If game.FrenchStream.Network <> String.Empty Then
-                    'Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(_getBroadcasterPicFor(game.FrenchStream.Network))
-                    'If Not img Is Nothing Then lnkFrench.BackgroundImage = img
-                    lnkFrench.BackgroundImage = ImageFetcher.GetEmbeddedImage(_getBroadcasterPicFor(game.FrenchStream.Network))
+                    Dim img As String = _getBroadcasterPicFor(game.FrenchStream.Network)
+                    If img <> "" Then lnkFrench.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
                     tip += " on " + game.FrenchStream.Network
                 End If
                 ToolTip.SetToolTip(lnkFrench, tip)
@@ -174,9 +169,8 @@ Namespace Controls
             If game.NationalStream.IsAvailable Then
                 tip = "National stream"
                 If game.NationalStream.Network <> String.Empty Then
-                    'Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(_getBroadcasterPicFor(game.NationalStream.Network))
-                    'If Not img Is Nothing Then lnkNational.BackgroundImage = img
-                    lnkNational.BackgroundImage = ImageFetcher.GetEmbeddedImage(_getBroadcasterPicFor(game.NationalStream.Network))
+                    Dim img As String = _getBroadcasterPicFor(game.NationalStream.Network)
+                    If img <> "" Then lnkNational.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
                     tip += " on " + game.NationalStream.Network
                 End If
                 ToolTip.SetToolTip(lnkNational, tip)
