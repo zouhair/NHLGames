@@ -5,7 +5,7 @@ Tool to watch NHL games in High Definition
 - Click on a stream link inside the game panel.
 - Enjoy the game.
 
-![image](https://cloud.githubusercontent.com/assets/23088305/25556664/43f875b0-2cce-11e7-8ca9-9f6d9d1b2121.png)
+![image](https://cloud.githubusercontent.com/assets/23088305/25733593/aa1c8648-3128-11e7-8407-2a4e51a9fddc.png)
 
 ## Index
 * [First use](#first-use)
@@ -69,7 +69,7 @@ Here are 5 differents game panels that you will see while using NHLGames.
   
   Note : 6th picture shows the possibility to add live score or final score to the panel. You can turn it on/off in Settings tab.
   
-![image](https://cloud.githubusercontent.com/assets/23088305/25557145/66d2a94c-2cd9-11e7-90ef-7e04e740f5a7.png)
+![image](https://cloud.githubusercontent.com/assets/23088305/25733772/8b570614-312a-11e7-996b-4590d89d52bb.png)
 
 ## Settings
 ### Show Scores
