@@ -161,9 +161,13 @@ Public Class NHLGamesMetro
         progress.Location = New Point((flpGames.Width - progress.Width) / 2, flpGames.Location.Y + 150)
         NoGames.Location = New Point((flpGames.Width - NoGames.Width) / 2, flpGames.Location.Y + 148)
 
-        lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(GameDate.DayOfWeek).Substring(0, 3) + ", " +
-        CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(GameDate.Month).Substring(0, 3) + " " +
-        Date.Today.Day.ToString + ", " + GameDate.Year.ToString
+        lblDate.Text = If(CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(GameDate.DayOfWeek).Length >= 3,
+                            CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(GameDate.DayOfWeek).Substring(0, 3),
+                            CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(GameDate.DayOfWeek).ToString()) + ", " +
+                        If(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(GameDate.Month).Length >= 3,
+                            CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(GameDate.Month).Substring(0, 3),
+                            CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(GameDate.Month).ToString()) + " " +
+                        Date.Today.Day.ToString + ", " + GameDate.Year.ToString
 
         LabelDate = lblDate
         GamesDownloadedTime = Now
