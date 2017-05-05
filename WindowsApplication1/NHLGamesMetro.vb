@@ -26,6 +26,7 @@ Public Class NHLGamesMetro
     Public Shared ProgressVisible As Boolean = False
     Public Shared GamesDownloadedTime As Date
     Public Shared LabelDate As Label
+    Public Shared downloadLink As String = "https://www.reddit.com/r/nhl_games/"
     Public Shared GameDate As Date = DateHelper.GetPacificTime()
 
     ' Starts the application. -- See: https://msdn.microsoft.com/en-us/library/system.windows.forms.application.threadexception(v=vs.110).aspx
@@ -297,10 +298,13 @@ Public Class NHLGamesMetro
         Dim versionFromSettings = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version, "")
 
         If strLatest > versionFromSettings Then
-            lnkDownload.Text = String.Format("A new version is available, click here to download the latest version v{0}", strLatest)
-            lnkDownload.Visible = True
+            lnkDownload.Text = String.Format("A new version is available, download the latest version v{0} on /r/nhl_games", strLatest)
+            downloadLink += "wiki/downloads"
+            'lnkDownload.Visible = True
             Dim strChangeLog = Downloader.DownloadChangelog()
             MetroMessageBox.Show(Me, String.Format("Version {0} is available! Changes: {1}{2}{3}", strLatest, vbCrLf, vbCrLf, strChangeLog), "New Version Available", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            lnkDownload.Text = "/r/nhl_games"
         End If
         lblVersion.Text = String.Format("v{0}", ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version))
 
@@ -630,7 +634,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub lnkDownload_Click(sender As Object, e As EventArgs) Handles lnkDownload.Click
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://www.reddit.com/r/nhl_games/wiki/downloads")
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo(downloadLink)
         Process.Start(sInfo)
     End Sub
 

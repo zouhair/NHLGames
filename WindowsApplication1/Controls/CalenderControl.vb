@@ -244,7 +244,7 @@ Namespace Controls
             ReloadCal(_currentDate.AddMonths(1), _currentDate.AddMonths(1).Day)
         End Sub
 
-        Private Sub btnToday_Click(sender As Object, e As EventArgs) Handles btnToday.Click
+        Private Sub btnToday_Click(sender As Object, e As EventArgs) Handles lnkToday.Click
             ReloadCal(Date.Today, Date.Today.Day)
             NHLGamesMetro.GameDate = Date.Today
             NHLGamesMetro.LabelDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(Date.Today.DayOfWeek).Substring(0, 3) + ", " +

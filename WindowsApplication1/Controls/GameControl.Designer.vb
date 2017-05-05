@@ -400,8 +400,7 @@
             '
             'GameControl
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
             Me.BackColor = System.Drawing.Color.White
             Me.Controls.Add(Me.BorderPanel1)
             Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))

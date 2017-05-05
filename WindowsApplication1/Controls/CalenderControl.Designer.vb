@@ -24,9 +24,7 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CalenderControl))
-            Me.btnToday = New System.Windows.Forms.Button()
-            Me.lblDate = New System.Windows.Forms.Label()
-            Me.Sun = New System.Windows.Forms.Label()
+            Me.lnkToday = New System.Windows.Forms.Button()
             Me.Su1 = New System.Windows.Forms.Button()
             Me.Mo1 = New System.Windows.Forms.Button()
             Me.Tu1 = New System.Windows.Forms.Button()
@@ -69,59 +67,37 @@
             Me.Th6 = New System.Windows.Forms.Button()
             Me.Fr6 = New System.Windows.Forms.Button()
             Me.Sa6 = New System.Windows.Forms.Button()
-            Me.Mon = New System.Windows.Forms.Label()
-            Me.Tue = New System.Windows.Forms.Label()
-            Me.Wed = New System.Windows.Forms.Label()
-            Me.Thu = New System.Windows.Forms.Label()
-            Me.Fri = New System.Windows.Forms.Label()
-            Me.Sat = New System.Windows.Forms.Label()
             Me.Label1 = New System.Windows.Forms.Label()
             Me.btnBeforeMonth = New System.Windows.Forms.Button()
             Me.btnBeforeYear = New System.Windows.Forms.Button()
             Me.btnNextMonth = New System.Windows.Forms.Button()
             Me.btnNextYear = New System.Windows.Forms.Button()
+            Me.lblDate = New MetroFramework.Controls.MetroLabel()
+            Me.Sun = New MetroFramework.Controls.MetroLabel()
+            Me.Mon = New MetroFramework.Controls.MetroLabel()
+            Me.Tue = New MetroFramework.Controls.MetroLabel()
+            Me.Wed = New MetroFramework.Controls.MetroLabel()
+            Me.Thu = New MetroFramework.Controls.MetroLabel()
+            Me.Fri = New MetroFramework.Controls.MetroLabel()
+            Me.Sat = New MetroFramework.Controls.MetroLabel()
             Me.SuspendLayout()
             '
-            'btnToday
+            'lnkToday
             '
-            Me.btnToday.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Me.lnkToday.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.btnToday.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(230, Byte), Integer))
-            Me.btnToday.FlatAppearance.BorderSize = 0
-            Me.btnToday.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray
-            Me.btnToday.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.btnToday.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.btnToday.ForeColor = System.Drawing.Color.White
-            Me.btnToday.Location = New System.Drawing.Point(3, 275)
-            Me.btnToday.Name = "btnToday"
-            Me.btnToday.Size = New System.Drawing.Size(272, 40)
-            Me.btnToday.TabIndex = 1
-            Me.btnToday.Text = "Today"
-            Me.btnToday.UseVisualStyleBackColor = False
-            '
-            'lblDate
-            '
-            Me.lblDate.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblDate.ForeColor = System.Drawing.Color.DimGray
-            Me.lblDate.Location = New System.Drawing.Point(32, 0)
-            Me.lblDate.Name = "lblDate"
-            Me.lblDate.Padding = New System.Windows.Forms.Padding(40, 0, 0, 0)
-            Me.lblDate.Size = New System.Drawing.Size(188, 59)
-            Me.lblDate.TabIndex = 1
-            Me.lblDate.Text = "Month Year"
-            Me.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-            '
-            'Sun
-            '
-            Me.Sun.BackColor = System.Drawing.Color.DarkGray
-            Me.Sun.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.Sun.ForeColor = System.Drawing.Color.White
-            Me.Sun.Location = New System.Drawing.Point(2, 59)
-            Me.Sun.Name = "Sun"
-            Me.Sun.Size = New System.Drawing.Size(34, 21)
-            Me.Sun.TabIndex = 2
-            Me.Sun.Text = "Sun"
-            Me.Sun.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.lnkToday.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(230, Byte), Integer))
+            Me.lnkToday.FlatAppearance.BorderSize = 0
+            Me.lnkToday.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray
+            Me.lnkToday.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.lnkToday.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lnkToday.ForeColor = System.Drawing.Color.White
+            Me.lnkToday.Location = New System.Drawing.Point(3, 275)
+            Me.lnkToday.Name = "lnkToday"
+            Me.lnkToday.Size = New System.Drawing.Size(272, 40)
+            Me.lnkToday.TabIndex = 1
+            Me.lnkToday.Text = "Today"
+            Me.lnkToday.UseVisualStyleBackColor = False
             '
             'Su1
             '
@@ -753,78 +729,6 @@
             Me.Sa6.Text = "00"
             Me.Sa6.UseVisualStyleBackColor = False
             '
-            'Mon
-            '
-            Me.Mon.BackColor = System.Drawing.Color.DarkGray
-            Me.Mon.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.Mon.ForeColor = System.Drawing.Color.White
-            Me.Mon.Location = New System.Drawing.Point(42, 59)
-            Me.Mon.Name = "Mon"
-            Me.Mon.Size = New System.Drawing.Size(34, 21)
-            Me.Mon.TabIndex = 2
-            Me.Mon.Text = "Mon"
-            Me.Mon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-            '
-            'Tue
-            '
-            Me.Tue.BackColor = System.Drawing.Color.DarkGray
-            Me.Tue.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.Tue.ForeColor = System.Drawing.Color.White
-            Me.Tue.Location = New System.Drawing.Point(82, 59)
-            Me.Tue.Name = "Tue"
-            Me.Tue.Size = New System.Drawing.Size(34, 21)
-            Me.Tue.TabIndex = 2
-            Me.Tue.Text = "Tue"
-            Me.Tue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-            '
-            'Wed
-            '
-            Me.Wed.BackColor = System.Drawing.Color.DarkGray
-            Me.Wed.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.Wed.ForeColor = System.Drawing.Color.White
-            Me.Wed.Location = New System.Drawing.Point(122, 59)
-            Me.Wed.Name = "Wed"
-            Me.Wed.Size = New System.Drawing.Size(34, 21)
-            Me.Wed.TabIndex = 2
-            Me.Wed.Text = "Wed"
-            Me.Wed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-            '
-            'Thu
-            '
-            Me.Thu.BackColor = System.Drawing.Color.DarkGray
-            Me.Thu.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.Thu.ForeColor = System.Drawing.Color.White
-            Me.Thu.Location = New System.Drawing.Point(162, 59)
-            Me.Thu.Name = "Thu"
-            Me.Thu.Size = New System.Drawing.Size(34, 21)
-            Me.Thu.TabIndex = 2
-            Me.Thu.Text = "Thu"
-            Me.Thu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-            '
-            'Fri
-            '
-            Me.Fri.BackColor = System.Drawing.Color.DarkGray
-            Me.Fri.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.Fri.ForeColor = System.Drawing.Color.White
-            Me.Fri.Location = New System.Drawing.Point(202, 59)
-            Me.Fri.Name = "Fri"
-            Me.Fri.Size = New System.Drawing.Size(34, 21)
-            Me.Fri.TabIndex = 2
-            Me.Fri.Text = "Fri"
-            Me.Fri.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-            '
-            'Sat
-            '
-            Me.Sat.BackColor = System.Drawing.Color.DarkGray
-            Me.Sat.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.Sat.ForeColor = System.Drawing.Color.White
-            Me.Sat.Location = New System.Drawing.Point(242, 59)
-            Me.Sat.Name = "Sat"
-            Me.Sat.Size = New System.Drawing.Size(34, 21)
-            Me.Sat.TabIndex = 2
-            Me.Sat.Text = "Sat"
-            Me.Sat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-            '
             'Label1
             '
             Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -851,9 +755,9 @@
             Me.btnBeforeMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnBeforeMonth.Font = New System.Drawing.Font("Verdana", 20.0!, System.Drawing.FontStyle.Bold)
             Me.btnBeforeMonth.ForeColor = System.Drawing.Color.DimGray
-            Me.btnBeforeMonth.Location = New System.Drawing.Point(0, 16)
+            Me.btnBeforeMonth.Location = New System.Drawing.Point(0, 18)
             Me.btnBeforeMonth.Name = "btnBeforeMonth"
-            Me.btnBeforeMonth.Size = New System.Drawing.Size(26, 26)
+            Me.btnBeforeMonth.Size = New System.Drawing.Size(20, 20)
             Me.btnBeforeMonth.TabIndex = 17
             Me.btnBeforeMonth.UseVisualStyleBackColor = False
             '
@@ -870,9 +774,9 @@
             Me.btnBeforeYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnBeforeYear.Font = New System.Drawing.Font("Verdana", 7.0!)
             Me.btnBeforeYear.ForeColor = System.Drawing.Color.DimGray
-            Me.btnBeforeYear.Location = New System.Drawing.Point(226, 12)
+            Me.btnBeforeYear.Location = New System.Drawing.Point(232, 14)
             Me.btnBeforeYear.Name = "btnBeforeYear"
-            Me.btnBeforeYear.Size = New System.Drawing.Size(17, 13)
+            Me.btnBeforeYear.Size = New System.Drawing.Size(14, 12)
             Me.btnBeforeYear.TabIndex = 18
             Me.btnBeforeYear.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.btnBeforeYear.UseVisualStyleBackColor = False
@@ -892,9 +796,9 @@
             Me.btnNextMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnNextMonth.Font = New System.Drawing.Font("Verdana", 20.0!, System.Drawing.FontStyle.Bold)
             Me.btnNextMonth.ForeColor = System.Drawing.Color.DimGray
-            Me.btnNextMonth.Location = New System.Drawing.Point(249, 16)
+            Me.btnNextMonth.Location = New System.Drawing.Point(258, 18)
             Me.btnNextMonth.Name = "btnNextMonth"
-            Me.btnNextMonth.Size = New System.Drawing.Size(26, 26)
+            Me.btnNextMonth.Size = New System.Drawing.Size(20, 20)
             Me.btnNextMonth.TabIndex = 16
             Me.btnNextMonth.UseVisualStyleBackColor = False
             '
@@ -911,18 +815,142 @@
             Me.btnNextYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnNextYear.Font = New System.Drawing.Font("Verdana", 7.0!)
             Me.btnNextYear.ForeColor = System.Drawing.Color.DimGray
-            Me.btnNextYear.Location = New System.Drawing.Point(226, 31)
+            Me.btnNextYear.Location = New System.Drawing.Point(232, 28)
             Me.btnNextYear.Name = "btnNextYear"
-            Me.btnNextYear.Size = New System.Drawing.Size(17, 13)
+            Me.btnNextYear.Size = New System.Drawing.Size(14, 12)
             Me.btnNextYear.TabIndex = 18
             Me.btnNextYear.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.btnNextYear.UseVisualStyleBackColor = False
             '
+            'lblDate
+            '
+            Me.lblDate.FontSize = MetroFramework.MetroLabelSize.Tall
+            Me.lblDate.FontWeight = MetroFramework.MetroLabelWeight.Regular
+            Me.lblDate.ForeColor = System.Drawing.Color.DimGray
+            Me.lblDate.Location = New System.Drawing.Point(26, 0)
+            Me.lblDate.Name = "lblDate"
+            Me.lblDate.Size = New System.Drawing.Size(226, 59)
+            Me.lblDate.TabIndex = 21
+            Me.lblDate.Text = "Month Year"
+            Me.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.lblDate.UseCustomForeColor = True
+            '
+            'Sun
+            '
+            Me.Sun.BackColor = System.Drawing.Color.DarkGray
+            Me.Sun.FontSize = MetroFramework.MetroLabelSize.Small
+            Me.Sun.FontWeight = MetroFramework.MetroLabelWeight.Regular
+            Me.Sun.ForeColor = System.Drawing.Color.White
+            Me.Sun.Location = New System.Drawing.Point(6, 59)
+            Me.Sun.Name = "Sun"
+            Me.Sun.Size = New System.Drawing.Size(30, 21)
+            Me.Sun.TabIndex = 22
+            Me.Sun.Text = "Sun"
+            Me.Sun.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.Sun.UseCustomBackColor = True
+            Me.Sun.UseCustomForeColor = True
+            '
+            'Mon
+            '
+            Me.Mon.BackColor = System.Drawing.Color.DarkGray
+            Me.Mon.FontSize = MetroFramework.MetroLabelSize.Small
+            Me.Mon.FontWeight = MetroFramework.MetroLabelWeight.Regular
+            Me.Mon.ForeColor = System.Drawing.Color.White
+            Me.Mon.Location = New System.Drawing.Point(42, 59)
+            Me.Mon.Name = "Mon"
+            Me.Mon.Size = New System.Drawing.Size(34, 21)
+            Me.Mon.TabIndex = 23
+            Me.Mon.Text = "Mon"
+            Me.Mon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.Mon.UseCustomBackColor = True
+            Me.Mon.UseCustomForeColor = True
+            '
+            'Tue
+            '
+            Me.Tue.BackColor = System.Drawing.Color.DarkGray
+            Me.Tue.FontSize = MetroFramework.MetroLabelSize.Small
+            Me.Tue.FontWeight = MetroFramework.MetroLabelWeight.Regular
+            Me.Tue.ForeColor = System.Drawing.Color.White
+            Me.Tue.Location = New System.Drawing.Point(82, 59)
+            Me.Tue.Name = "Tue"
+            Me.Tue.Size = New System.Drawing.Size(34, 21)
+            Me.Tue.TabIndex = 24
+            Me.Tue.Text = "Tue"
+            Me.Tue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.Tue.UseCustomBackColor = True
+            Me.Tue.UseCustomForeColor = True
+            '
+            'Wed
+            '
+            Me.Wed.BackColor = System.Drawing.Color.DarkGray
+            Me.Wed.FontSize = MetroFramework.MetroLabelSize.Small
+            Me.Wed.FontWeight = MetroFramework.MetroLabelWeight.Regular
+            Me.Wed.ForeColor = System.Drawing.Color.White
+            Me.Wed.Location = New System.Drawing.Point(122, 59)
+            Me.Wed.Name = "Wed"
+            Me.Wed.Size = New System.Drawing.Size(34, 21)
+            Me.Wed.TabIndex = 25
+            Me.Wed.Text = "Wed"
+            Me.Wed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.Wed.UseCustomBackColor = True
+            Me.Wed.UseCustomForeColor = True
+            '
+            'Thu
+            '
+            Me.Thu.BackColor = System.Drawing.Color.DarkGray
+            Me.Thu.FontSize = MetroFramework.MetroLabelSize.Small
+            Me.Thu.FontWeight = MetroFramework.MetroLabelWeight.Regular
+            Me.Thu.ForeColor = System.Drawing.Color.White
+            Me.Thu.Location = New System.Drawing.Point(162, 59)
+            Me.Thu.Name = "Thu"
+            Me.Thu.Size = New System.Drawing.Size(34, 21)
+            Me.Thu.TabIndex = 26
+            Me.Thu.Text = "Thu"
+            Me.Thu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.Thu.UseCustomBackColor = True
+            Me.Thu.UseCustomForeColor = True
+            '
+            'Fri
+            '
+            Me.Fri.BackColor = System.Drawing.Color.DarkGray
+            Me.Fri.FontSize = MetroFramework.MetroLabelSize.Small
+            Me.Fri.FontWeight = MetroFramework.MetroLabelWeight.Regular
+            Me.Fri.ForeColor = System.Drawing.Color.White
+            Me.Fri.Location = New System.Drawing.Point(202, 59)
+            Me.Fri.Name = "Fri"
+            Me.Fri.Size = New System.Drawing.Size(34, 21)
+            Me.Fri.TabIndex = 27
+            Me.Fri.Text = "Fri"
+            Me.Fri.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.Fri.UseCustomBackColor = True
+            Me.Fri.UseCustomForeColor = True
+            '
+            'Sat
+            '
+            Me.Sat.BackColor = System.Drawing.Color.DarkGray
+            Me.Sat.FontSize = MetroFramework.MetroLabelSize.Small
+            Me.Sat.FontWeight = MetroFramework.MetroLabelWeight.Regular
+            Me.Sat.ForeColor = System.Drawing.Color.White
+            Me.Sat.Location = New System.Drawing.Point(242, 59)
+            Me.Sat.Name = "Sat"
+            Me.Sat.Size = New System.Drawing.Size(34, 21)
+            Me.Sat.TabIndex = 28
+            Me.Sat.Text = "Sat"
+            Me.Sat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.Sat.UseCustomBackColor = True
+            Me.Sat.UseCustomForeColor = True
+            '
             'CalenderControl
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
             Me.BackColor = System.Drawing.SystemColors.ControlLightLight
+            Me.Controls.Add(Me.Sat)
+            Me.Controls.Add(Me.Fri)
+            Me.Controls.Add(Me.Thu)
+            Me.Controls.Add(Me.Wed)
+            Me.Controls.Add(Me.Tue)
+            Me.Controls.Add(Me.Mon)
+            Me.Controls.Add(Me.Sun)
             Me.Controls.Add(Me.btnBeforeMonth)
             Me.Controls.Add(Me.btnBeforeYear)
             Me.Controls.Add(Me.btnNextMonth)
@@ -969,16 +997,9 @@
             Me.Controls.Add(Me.Su3)
             Me.Controls.Add(Me.Su2)
             Me.Controls.Add(Me.Su1)
-            Me.Controls.Add(Me.Sat)
-            Me.Controls.Add(Me.Fri)
-            Me.Controls.Add(Me.Thu)
-            Me.Controls.Add(Me.Wed)
-            Me.Controls.Add(Me.Tue)
-            Me.Controls.Add(Me.Mon)
-            Me.Controls.Add(Me.Sun)
-            Me.Controls.Add(Me.lblDate)
-            Me.Controls.Add(Me.btnToday)
+            Me.Controls.Add(Me.lnkToday)
             Me.Controls.Add(Me.Label1)
+            Me.Controls.Add(Me.lblDate)
             Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.Margin = New System.Windows.Forms.Padding(1)
             Me.Name = "CalenderControl"
@@ -986,9 +1007,7 @@
             Me.ResumeLayout(False)
 
         End Sub
-        Friend WithEvents btnToday As Button
-        Friend WithEvents lblDate As Label
-        Friend WithEvents Sun As Label
+        Friend WithEvents lnkToday As Button
         Friend WithEvents Su1 As Button
         Friend WithEvents Mo1 As Button
         Friend WithEvents Tu1 As Button
@@ -1031,16 +1050,18 @@
         Friend WithEvents Th6 As Button
         Friend WithEvents Fr6 As Button
         Friend WithEvents Sa6 As Button
-        Friend WithEvents Mon As Label
-        Friend WithEvents Tue As Label
-        Friend WithEvents Wed As Label
-        Friend WithEvents Thu As Label
-        Friend WithEvents Fri As Label
-        Friend WithEvents Sat As Label
         Friend WithEvents btnBeforeYear As Button
         Friend WithEvents btnNextYear As Button
         Friend WithEvents Label1 As Label
         Friend WithEvents btnNextMonth As Button
         Friend WithEvents btnBeforeMonth As Button
+        Friend WithEvents lblDate As MetroFramework.Controls.MetroLabel
+        Friend WithEvents Sun As MetroFramework.Controls.MetroLabel
+        Friend WithEvents Mon As MetroFramework.Controls.MetroLabel
+        Friend WithEvents Tue As MetroFramework.Controls.MetroLabel
+        Friend WithEvents Wed As MetroFramework.Controls.MetroLabel
+        Friend WithEvents Thu As MetroFramework.Controls.MetroLabel
+        Friend WithEvents Fri As MetroFramework.Controls.MetroLabel
+        Friend WithEvents Sat As MetroFramework.Controls.MetroLabel
     End Class
 End Namespace
