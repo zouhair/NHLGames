@@ -81,12 +81,14 @@ NHLGames gives you some options to change how a game panel will appear.
 ### Players
 NHLGames supports 3 media players:
 - MPV (default player, comes with NHLGames)
-- MPC 
+- MPC (increase Stream Analysis Duration to 3000)
 - VLC (version 2.2.4, 64 bits recommended)
 
 If you don't have or want VLC/MPC players, use our default media player to watch games. Make sure you select mpv as the default player.
 
 If you had previously installed VLC or MPC, NHLGames should find it automatically if you installed it in the default folder `Program Files`, otherwise you will have to browse ![image](https://cloud.githubusercontent.com/assets/23088305/25557239/b99ec37a-2cdb-11e7-8c27-d8b563128e8d.png) your computer and get the path to the EXE file. 
+
+If you choose MPC, you have to increase Stream Analysis Duration to 3000. Go to Options > Internal Filters > Splitter.
 
 If you don't have one of these players installed and you want to install it, use the links on the right to download it.
 
