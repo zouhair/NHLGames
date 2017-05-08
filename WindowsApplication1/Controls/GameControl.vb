@@ -134,7 +134,7 @@ Namespace Controls
 
             lnkAway.Visible = game.AwayStream.IsAvailable
             If game.AwayStream.IsAvailable Then
-                tip = game.AwayTeamName & " stream"
+                tip = game.AwayAbbrev & " stream"
                 If game.AwayStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.AwayStream.Network)
                     If img <> "" Then lnkAway.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
@@ -145,7 +145,7 @@ Namespace Controls
 
             lnkHome.Visible = game.HomeStream.IsAvailable
             If game.HomeStream.IsAvailable Then
-                tip = game.HomeTeamName & " stream"
+                tip = game.HomeAbbrev & " stream"
                 If game.HomeStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.HomeStream.Network)
                     If img <> "" Then lnkHome.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
@@ -156,7 +156,7 @@ Namespace Controls
 
             lnkFrench.Visible = game.FrenchStream.IsAvailable
             If game.FrenchStream.IsAvailable Then
-                tip = "French canadians stream"
+                tip = "French Canadian stream"
                 If game.FrenchStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.FrenchStream.Network)
                     If img <> "" Then lnkFrench.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
