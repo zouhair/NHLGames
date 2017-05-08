@@ -1176,13 +1176,14 @@ Partial Class NHLGamesMetro
         '
         Me.cbServers.BackColor = System.Drawing.SystemColors.Window
         Me.cbServers.DropDownHeight = 80
+        Me.cbServers.FontSize = MetroFramework.MetroComboBoxSize.Small
         Me.cbServers.FormattingEnabled = True
         Me.cbServers.IntegralHeight = False
-        Me.cbServers.ItemHeight = 23
+        Me.cbServers.ItemHeight = 19
         Me.cbServers.Location = New System.Drawing.Point(3, 3)
         Me.cbServers.Name = "cbServers"
         Me.cbServers.PromptText = "Select an hostname"
-        Me.cbServers.Size = New System.Drawing.Size(486, 29)
+        Me.cbServers.Size = New System.Drawing.Size(486, 25)
         Me.cbServers.TabIndex = 67
         Me.cbServers.UseSelectable = True
         '
