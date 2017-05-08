@@ -8,7 +8,7 @@ Imports Newtonsoft.Json.Linq
 Namespace Utilities
 
     Public Class Downloader
-        Private ReadOnly _gamesTxtUrl As String = String.Format("http://{0}/static/ids.txt", NHLGamesMetro.HostName)
+        Private Shared ReadOnly _gamesTxtUrl As String = String.Format("http://{0}/static/ids.txt", NHLGamesMetro.HostName)
         Private Const ScheduleApiurl As String = "http://statsapi.web.nhl.com/api/v1/schedule?startDate={0}&endDate={1}&expand=schedule.teams,schedule.linescore,schedule.game.seriesSummary,schedule.game.content.media.epg"
         Private Const ApplicationVersionUrl As String = "https://showtimes.ninja/static/version.txt"
         Private Const ChangelogUrl As String = "https://showtimes.ninja/static/changelog.txt"

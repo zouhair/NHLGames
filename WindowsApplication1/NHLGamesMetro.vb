@@ -85,8 +85,9 @@ Public Class NHLGamesMetro
         TabControl.SelectedIndex = 0
         flpCalender.Controls.Add(New CalenderControl())
 
-        VersionCheck()
+
         IntitializeApplicationSettings()
+        VersionCheck()
 
     End Sub
 
@@ -175,6 +176,8 @@ Public Class NHLGamesMetro
         If (HostsFile.TestEntry(DomainName, _serverIp) = False) Then
             If MetroFramework.MetroMessageBox.Show(Me, "NHLGames can't work without having its hostname set in your Windows Hosts file. Do you want to let NHLGames adds an entry to your Hosts file, so Windows can resolve NHLGames hostname and connect to its server's IP address?", "Add Hosts Entry", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
                 HostsFile.AddEntry(_serverIp, DomainName, True)
+            Else
+                TabControl.SelectedIndex = 1
             End If
         End If
 
@@ -285,7 +288,7 @@ Public Class NHLGamesMetro
 
             cbServers.SelectedItem = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.SelectedServer, String.Empty)
 
-            If cbServers.SelectedItem <> Nothing Then
+            If cbServers.SelectedItem Is Nothing Then
                 cbServers.SelectedItem = cbServers.Items(0)
             End If
 
