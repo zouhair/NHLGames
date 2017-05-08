@@ -5,14 +5,14 @@ Tool to watch NHL games in High Definition
 - Click on a stream link inside the game panel.
 - Enjoy the game.
 
-![image](https://cloud.githubusercontent.com/assets/23088305/25556664/43f875b0-2cce-11e7-8ca9-9f6d9d1b2121.png)
+![image](https://cloud.githubusercontent.com/assets/23088305/25733593/aa1c8648-3128-11e7-8407-2a4e51a9fddc.png)
 
 ## Index
 * [First use](#first-use)
+  * [Requirements](#requirements)
   * [Message about the hosts file](#message-about-the-hosts-file)
   * [Setup](#setup)
-     * [Hosts file](#hosts-file)
-  * [Requirements](#requirements)
+     * [Hosts file](#hosts-file)  
  * [User interface](#user-interface)
    * [Games](#games)
       * [Navigation bar](#navigation-bar)
@@ -31,6 +31,9 @@ Tool to watch NHL games in High Definition
 
 
 # First use
+## Requirements
+NHLGames is an app built on .NET Framework 4.5. So, it's only available on Windows and works on any CPU (x86/x64). If you run NHLGames on Windows 7 or older you will probably need to install [.NET Framework 4.5](https://www.microsoft.com/en-ca/download/details.aspx?id=30653), but we can't garantee it will run on XP since Microsoft ended support on XP.
+
 ## Message about the hosts file
 First time you start NHLGames it will ask if you wish to view the Hosts file. That means the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [hosts file](#hosts-file) section.
 
@@ -42,12 +45,14 @@ MPV player comes with NHLGames. So if you don't have or want VLC/MPC players, ju
 If you want to change some settings, see the [Settings](#settings) section.
 
 ### Hosts file
-To test your hosts file, go to Settings and click on `Test Hosts File` button. It should tells you if everything is fine.
+To test your hosts file, go to Settings and click on `Test` button. It should tells you if everything is fine.
 
-If NHLGames is not set properly, click on `Open Hosts File` and select Notepad to open it, or go to `C:\Windows\System32\Drivers\etc` and open `hosts` by using Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, next to the Hosts buttons. If you don't find it, you will have to add it manually (if NHLGames doesn't have access to it) or try `Add Hosts entry` button.
+If NHLGames is not set properly, click on `View Hosts` and select Notepad to open it. If you can't open it: Go to `C:\Windows\System32\Drivers\etc` and right click on `hosts`, choose `Run as an administrator` and open it with Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, there is a button called `DIY Steps`, click on it and you will see the line, you can copy the line to your clipboard by clicking on 'Yes'. 
 
-## Requirements
-NHLGames is an app built on .Net Framework 4.6. So, it's only available on Windows. If you run NHLGames on Windows 7 or older you will probably need to install [.Net Framework 4.6](https://www.microsoft.com/en-ca/download/details.aspx?id=30653)
+If you dont't find the entry line in the Hosts file and if the `Add Entry` button does not work. You can paste the line from your clipboard (that you copied earlier) or you can type it manually.
+
+Note: If you need to remove NHLGames entries, just click on `Remove Entries` or open it with `View Hosts` and remove our entries.
+
 
 # User interface
 Everytime you launch NHLGames it will search for today's games. 
@@ -67,8 +72,8 @@ Here are 5 differents game panels that you will see while using NHLGames.
   5. Gray : Final games
   
   Note : 6th picture shows the possibility to add live score or final score to the panel. You can turn it on/off in Settings tab.
-  
-![image](https://cloud.githubusercontent.com/assets/23088305/25557145/66d2a94c-2cd9-11e7-90ef-7e04e740f5a7.png)
+
+![image](https://cloud.githubusercontent.com/assets/23088305/25744794/b7e037f2-3169-11e7-89d6-98fe61684158.png)
 
 ## Settings
 ### Show Scores
@@ -80,12 +85,14 @@ NHLGames gives you some options to change how a game panel will appear.
 ### Players
 NHLGames supports 3 media players:
 - MPV (default player, comes with NHLGames)
-- MPC 
+- MPC (increase Stream Analysis Duration to 3000)
 - VLC (version 2.2.4, 64 bits recommended)
 
 If you don't have or want VLC/MPC players, use our default media player to watch games. Make sure you select mpv as the default player.
 
 If you had previously installed VLC or MPC, NHLGames should find it automatically if you installed it in the default folder `Program Files`, otherwise you will have to browse ![image](https://cloud.githubusercontent.com/assets/23088305/25557239/b99ec37a-2cdb-11e7-8c27-d8b563128e8d.png) your computer and get the path to the EXE file. 
+
+If you choose MPC, you have to increase Stream Analysis Duration to 3000. Go to Options > Internal Filters > Splitter.
 
 If you don't have one of these players installed and you want to install it, use the links on the right to download it.
 
@@ -146,6 +153,7 @@ NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps 
 4. Use NHLGames to get a stream, once the game plays, move the media player window to the right monitor and enjoy the show.
 
 <img src="https://cloud.githubusercontent.com/assets/23088305/25556617/a6caab1e-2ccd-11e7-89d3-c9177a997ed1.png" width="300"/>
+
 
 # Contribute
 NHLGames is written in Visual Basic. Ad Detection modules are written in C#. We use Visual Studio to code. 
