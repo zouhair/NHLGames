@@ -45,9 +45,13 @@ MPV player comes with NHLGames. So if you don't have or want VLC/MPC players, ju
 If you want to change some settings, see the [Settings](#settings) section.
 
 ### Hosts file
-To test your hosts file, go to Settings and click on `Test Hosts File` button. It should tells you if everything is fine.
+To test your hosts file, go to Settings and click on `Test` button. It should tells you if everything is fine.
 
-If NHLGames is not set properly, click on `Open Hosts File` and select Notepad to open it, or go to `C:\Windows\System32\Drivers\etc` and open `hosts` by using Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, next to the Hosts buttons. If you don't find it, you will have to add it manually (if NHLGames doesn't have access to it) or try `Add Hosts entry` button.
+If NHLGames is not set properly, click on `View Hosts` and select Notepad to open it. If you can't open it: Go to `C:\Windows\System32\Drivers\etc` and right click on `hosts`, choose `Run as a administrator` and open it with Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, there is a button called `DIY Steps`, click on it and you will see the line, you can copy the line to your clipboard by clicking on 'Yes'. 
+
+If you dont't find the entry line in the Hosts file and if the `Add Entry` button does not work. You can paste the line from your clipboard (that you copied earlier) or you can type it manually.
+
+Note: If you need to remove NHLGames entries, just click on `Remove Entries` or open it with `View Hosts` and remove our entries.
 
 
 # User interface
