@@ -11,10 +11,10 @@ Namespace Utilities
             MpcPath = 4
             MpvPath = 5
             StreamlinkPath = 6
-            ServiioPath = 7
+            ServerList = 7
             ShowScores = 8
-            RefreshIntervalInMin = 9
-            ShowAdvancedWatchPanel = 10
+            SelectedServer = 9
+            'ShowAdvancedWatchPanel = 10
             ShowLiveScores = 11
             ShowSeriesRecord = 12
         End Enum

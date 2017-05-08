@@ -23,9 +23,17 @@
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-            Me.TeamToolTip = New MetroFramework.Components.MetroToolTip()
-            Me.FeedToolTip = New MetroFramework.Components.MetroToolTip()
-            Me.BorderPanel1 = New BorderPanel()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GameControl))
+            Me.ToolTip = New MetroFramework.Components.MetroToolTip()
+            Me.lnkThree = New System.Windows.Forms.Button()
+            Me.lnkSix = New System.Windows.Forms.Button()
+            Me.lnkEnd1 = New System.Windows.Forms.Button()
+            Me.lnkEnd2 = New System.Windows.Forms.Button()
+            Me.lnkRef = New System.Windows.Forms.Button()
+            Me.BorderPanel1 = New NHLGames.Controls.BorderPanel()
+            Me.vs = New MetroFramework.Controls.MetroLabel()
+            Me.lblHomeScore = New MetroFramework.Controls.MetroLabel()
+            Me.lblAwayScore = New MetroFramework.Controls.MetroLabel()
             Me.live2 = New System.Windows.Forms.PictureBox()
             Me.live1 = New System.Windows.Forms.PictureBox()
             Me.lblAwayTeam = New MetroFramework.Controls.MetroLabel()
@@ -33,22 +41,14 @@
             Me.picHome = New System.Windows.Forms.PictureBox()
             Me.lblHomeTeam = New MetroFramework.Controls.MetroLabel()
             Me.lblPeriod = New MetroFramework.Controls.MetroLabel()
-            Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
-            Me.lblNoStream = New System.Windows.Forms.Label()
-            Me.lblHomeStream = New System.Windows.Forms.LinkLabel()
-            Me.lblAwayStream = New System.Windows.Forms.LinkLabel()
-            Me.lblFrenchStream = New System.Windows.Forms.LinkLabel()
-            Me.lblNationalStream = New System.Windows.Forms.LinkLabel()
-            Me.lblMultiCam1 = New System.Windows.Forms.LinkLabel()
-            Me.lblMultiCam2 = New System.Windows.Forms.LinkLabel()
-            Me.lblRefCam = New System.Windows.Forms.LinkLabel()
-            Me.lblEndzoneCam1 = New System.Windows.Forms.LinkLabel()
-            Me.lblEndzoneCam2 = New System.Windows.Forms.LinkLabel()
-            Me.lblHomeScore = New MetroFramework.Controls.MetroLabel()
-            Me.lblAwayScore = New MetroFramework.Controls.MetroLabel()
-            Me.lblVS = New MetroFramework.Controls.MetroLabel()
             Me.lblTime = New MetroFramework.Controls.MetroLabel()
+            Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+            Me.lnkHome = New System.Windows.Forms.Button()
+            Me.lnkAway = New System.Windows.Forms.Button()
+            Me.lnkNational = New System.Windows.Forms.Button()
+            Me.lnkFrench = New System.Windows.Forms.Button()
             Me.lblNotInSeason = New MetroFramework.Controls.MetroLabel()
+            Me.lblStreamStatus = New MetroFramework.Controls.MetroLabel()
             Me.BorderPanel1.SuspendLayout()
             CType(Me.live2, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.live1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,23 +57,100 @@
             Me.FlowLayoutPanel1.SuspendLayout()
             Me.SuspendLayout()
             '
-            'TeamToolTip
+            'ToolTip
             '
-            Me.TeamToolTip.Style = MetroFramework.MetroColorStyle.[Default]
-            Me.TeamToolTip.StyleManager = Nothing
-            Me.TeamToolTip.Theme = MetroFramework.MetroThemeStyle.Light
+            Me.ToolTip.Style = MetroFramework.MetroColorStyle.[Default]
+            Me.ToolTip.StyleManager = Nothing
+            Me.ToolTip.Theme = MetroFramework.MetroThemeStyle.Light
             '
-            'FeedToolTip
+            'lnkThree
             '
-            Me.FeedToolTip.Style = MetroFramework.MetroColorStyle.[Default]
-            Me.FeedToolTip.StyleManager = Nothing
-            Me.FeedToolTip.Theme = MetroFramework.MetroThemeStyle.Light
+            Me.lnkThree.BackgroundImage = Global.NHLGames.My.Resources.Resources.threec
+            Me.lnkThree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+            Me.lnkThree.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+            Me.lnkThree.FlatAppearance.BorderSize = 0
+            Me.lnkThree.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+            Me.lnkThree.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.lnkThree.Location = New System.Drawing.Point(140, 6)
+            Me.lnkThree.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+            Me.lnkThree.Name = "lnkThree"
+            Me.lnkThree.Size = New System.Drawing.Size(26, 26)
+            Me.lnkThree.TabIndex = 29
+            Me.ToolTip.SetToolTip(Me.lnkThree, "3 camera views")
+            Me.lnkThree.UseVisualStyleBackColor = True
+            '
+            'lnkSix
+            '
+            Me.lnkSix.BackgroundImage = Global.NHLGames.My.Resources.Resources.sixc
+            Me.lnkSix.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+            Me.lnkSix.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+            Me.lnkSix.FlatAppearance.BorderSize = 0
+            Me.lnkSix.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+            Me.lnkSix.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.lnkSix.Location = New System.Drawing.Point(174, 6)
+            Me.lnkSix.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+            Me.lnkSix.Name = "lnkSix"
+            Me.lnkSix.Size = New System.Drawing.Size(26, 26)
+            Me.lnkSix.TabIndex = 29
+            Me.ToolTip.SetToolTip(Me.lnkSix, "6 camera views")
+            Me.lnkSix.UseVisualStyleBackColor = True
+            '
+            'lnkEnd1
+            '
+            Me.lnkEnd1.BackgroundImage = Global.NHLGames.My.Resources.Resources.endz1
+            Me.lnkEnd1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+            Me.lnkEnd1.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+            Me.lnkEnd1.FlatAppearance.BorderSize = 0
+            Me.lnkEnd1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+            Me.lnkEnd1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.lnkEnd1.Location = New System.Drawing.Point(208, 6)
+            Me.lnkEnd1.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+            Me.lnkEnd1.Name = "lnkEnd1"
+            Me.lnkEnd1.Size = New System.Drawing.Size(26, 26)
+            Me.lnkEnd1.TabIndex = 29
+            Me.ToolTip.SetToolTip(Me.lnkEnd1, "Endzone camera (away)")
+            Me.lnkEnd1.UseVisualStyleBackColor = True
+            '
+            'lnkEnd2
+            '
+            Me.lnkEnd2.BackgroundImage = Global.NHLGames.My.Resources.Resources.endz2
+            Me.lnkEnd2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+            Me.lnkEnd2.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+            Me.lnkEnd2.FlatAppearance.BorderSize = 0
+            Me.lnkEnd2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+            Me.lnkEnd2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.lnkEnd2.Location = New System.Drawing.Point(242, 6)
+            Me.lnkEnd2.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+            Me.lnkEnd2.Name = "lnkEnd2"
+            Me.lnkEnd2.Size = New System.Drawing.Size(26, 26)
+            Me.lnkEnd2.TabIndex = 29
+            Me.ToolTip.SetToolTip(Me.lnkEnd2, "Endzone camera (home)")
+            Me.lnkEnd2.UseVisualStyleBackColor = True
+            '
+            'lnkRef
+            '
+            Me.lnkRef.BackgroundImage = Global.NHLGames.My.Resources.Resources.refc
+            Me.lnkRef.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+            Me.lnkRef.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+            Me.lnkRef.FlatAppearance.BorderSize = 0
+            Me.lnkRef.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+            Me.lnkRef.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.lnkRef.Location = New System.Drawing.Point(276, 6)
+            Me.lnkRef.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+            Me.lnkRef.Name = "lnkRef"
+            Me.lnkRef.Size = New System.Drawing.Size(26, 26)
+            Me.lnkRef.TabIndex = 29
+            Me.ToolTip.SetToolTip(Me.lnkRef, "Referee camera")
+            Me.lnkRef.UseVisualStyleBackColor = True
             '
             'BorderPanel1
             '
             Me.BorderPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
             Me.BorderPanel1.BorderColour = System.Drawing.Color.LightGray
             Me.BorderPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.BorderPanel1.Controls.Add(Me.vs)
+            Me.BorderPanel1.Controls.Add(Me.lblHomeScore)
+            Me.BorderPanel1.Controls.Add(Me.lblAwayScore)
             Me.BorderPanel1.Controls.Add(Me.live2)
             Me.BorderPanel1.Controls.Add(Me.live1)
             Me.BorderPanel1.Controls.Add(Me.lblAwayTeam)
@@ -81,383 +158,290 @@
             Me.BorderPanel1.Controls.Add(Me.picHome)
             Me.BorderPanel1.Controls.Add(Me.lblHomeTeam)
             Me.BorderPanel1.Controls.Add(Me.lblPeriod)
-            Me.BorderPanel1.Controls.Add(Me.FlowLayoutPanel1)
-            Me.BorderPanel1.Controls.Add(Me.lblHomeScore)
-            Me.BorderPanel1.Controls.Add(Me.lblAwayScore)
-            Me.BorderPanel1.Controls.Add(Me.lblVS)
             Me.BorderPanel1.Controls.Add(Me.lblTime)
+            Me.BorderPanel1.Controls.Add(Me.FlowLayoutPanel1)
             Me.BorderPanel1.Controls.Add(Me.lblNotInSeason)
+            Me.BorderPanel1.Controls.Add(Me.lblStreamStatus)
             Me.BorderPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.BorderPanel1.Location = New System.Drawing.Point(5, 5)
+            Me.BorderPanel1.Location = New System.Drawing.Point(6, 6)
             Me.BorderPanel1.Name = "BorderPanel1"
-            Me.BorderPanel1.Size = New System.Drawing.Size(310, 160)
+            Me.BorderPanel1.Size = New System.Drawing.Size(312, 151)
             Me.BorderPanel1.TabIndex = 9
+            '
+            'vs
+            '
+            Me.vs.AutoSize = True
+            Me.vs.BackColor = System.Drawing.Color.Transparent
+            Me.vs.FontWeight = MetroFramework.MetroLabelWeight.Bold
+            Me.vs.Location = New System.Drawing.Point(140, 57)
+            Me.vs.Name = "vs"
+            Me.vs.Size = New System.Drawing.Size(26, 19)
+            Me.vs.TabIndex = 25
+            Me.vs.Text = "VS"
+            Me.vs.UseCustomBackColor = True
+            '
+            'lblHomeScore
+            '
+            Me.lblHomeScore.AutoSize = True
+            Me.lblHomeScore.BackColor = System.Drawing.Color.Transparent
+            Me.lblHomeScore.FontSize = MetroFramework.MetroLabelSize.Tall
+            Me.lblHomeScore.FontWeight = MetroFramework.MetroLabelWeight.Bold
+            Me.lblHomeScore.Location = New System.Drawing.Point(189, 52)
+            Me.lblHomeScore.Name = "lblHomeScore"
+            Me.lblHomeScore.Size = New System.Drawing.Size(22, 25)
+            Me.lblHomeScore.TabIndex = 24
+            Me.lblHomeScore.Text = "0"
+            Me.lblHomeScore.UseCustomBackColor = True
+            '
+            'lblAwayScore
+            '
+            Me.lblAwayScore.AutoSize = True
+            Me.lblAwayScore.BackColor = System.Drawing.Color.Transparent
+            Me.lblAwayScore.FontSize = MetroFramework.MetroLabelSize.Tall
+            Me.lblAwayScore.FontWeight = MetroFramework.MetroLabelWeight.Bold
+            Me.lblAwayScore.Location = New System.Drawing.Point(98, 52)
+            Me.lblAwayScore.Name = "lblAwayScore"
+            Me.lblAwayScore.Size = New System.Drawing.Size(22, 25)
+            Me.lblAwayScore.TabIndex = 23
+            Me.lblAwayScore.Text = "0"
+            Me.lblAwayScore.UseCustomBackColor = True
             '
             'live2
             '
-            Me.live2.BackgroundImage = Global.NHLGames.My.Resources.Resources.live
+            Me.live2.BackgroundImage = CType(resources.GetObject("live2.BackgroundImage"), System.Drawing.Image)
             Me.live2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-            Me.live2.Location = New System.Drawing.Point(286, 5)
+            Me.live2.Location = New System.Drawing.Point(287, 3)
             Me.live2.Name = "live2"
-            Me.live2.Size = New System.Drawing.Size(16, 16)
+            Me.live2.Size = New System.Drawing.Size(19, 18)
             Me.live2.TabIndex = 15
             Me.live2.TabStop = False
             '
             'live1
             '
-            Me.live1.BackgroundImage = Global.NHLGames.My.Resources.Resources.live
+            Me.live1.BackgroundImage = CType(resources.GetObject("live1.BackgroundImage"), System.Drawing.Image)
             Me.live1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-            Me.live1.Location = New System.Drawing.Point(5, 5)
+            Me.live1.Location = New System.Drawing.Point(3, 3)
             Me.live1.Name = "live1"
-            Me.live1.Size = New System.Drawing.Size(16, 16)
+            Me.live1.Size = New System.Drawing.Size(19, 18)
             Me.live1.TabIndex = 14
             Me.live1.TabStop = False
             '
             'lblAwayTeam
             '
-            Me.lblAwayTeam.Location = New System.Drawing.Point(28, 53)
+            Me.lblAwayTeam.BackColor = System.Drawing.Color.Transparent
+            Me.lblAwayTeam.Location = New System.Drawing.Point(24, 66)
             Me.lblAwayTeam.Name = "lblAwayTeam"
-            Me.lblAwayTeam.Size = New System.Drawing.Size(55, 19)
+            Me.lblAwayTeam.Size = New System.Drawing.Size(55, 22)
             Me.lblAwayTeam.TabIndex = 4
             Me.lblAwayTeam.Text = "Away"
             Me.lblAwayTeam.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.lblAwayTeam.UseCustomBackColor = True
             '
             'picAway
             '
+            Me.picAway.BackgroundImage = CType(resources.GetObject("picAway.BackgroundImage"), System.Drawing.Image)
             Me.picAway.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-            Me.picAway.Location = New System.Drawing.Point(28, 16)
+            Me.picAway.Location = New System.Drawing.Point(24, 27)
             Me.picAway.Name = "picAway"
-            Me.picAway.Size = New System.Drawing.Size(55, 34)
+            Me.picAway.Size = New System.Drawing.Size(55, 36)
             Me.picAway.TabIndex = 0
             Me.picAway.TabStop = False
             '
             'picHome
             '
+            Me.picHome.BackgroundImage = CType(resources.GetObject("picHome.BackgroundImage"), System.Drawing.Image)
             Me.picHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-            Me.picHome.Location = New System.Drawing.Point(220, 16)
+            Me.picHome.Location = New System.Drawing.Point(232, 27)
             Me.picHome.Name = "picHome"
-            Me.picHome.Size = New System.Drawing.Size(55, 34)
+            Me.picHome.Size = New System.Drawing.Size(55, 36)
             Me.picHome.TabIndex = 1
             Me.picHome.TabStop = False
             '
             'lblHomeTeam
             '
-            Me.lblHomeTeam.Location = New System.Drawing.Point(220, 53)
+            Me.lblHomeTeam.BackColor = System.Drawing.Color.Transparent
+            Me.lblHomeTeam.Location = New System.Drawing.Point(232, 66)
             Me.lblHomeTeam.Name = "lblHomeTeam"
-            Me.lblHomeTeam.Size = New System.Drawing.Size(55, 19)
+            Me.lblHomeTeam.Size = New System.Drawing.Size(55, 22)
             Me.lblHomeTeam.TabIndex = 4
             Me.lblHomeTeam.Text = "Home"
             Me.lblHomeTeam.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.lblHomeTeam.UseCustomBackColor = True
             '
             'lblPeriod
             '
-            Me.lblPeriod.FontSize = MetroFramework.MetroLabelSize.Small
-            Me.lblPeriod.Location = New System.Drawing.Point(2, 5)
+            Me.lblPeriod.BackColor = System.Drawing.Color.Transparent
+            Me.lblPeriod.Location = New System.Drawing.Point(98, 11)
             Me.lblPeriod.Name = "lblPeriod"
-            Me.lblPeriod.Size = New System.Drawing.Size(303, 24)
+            Me.lblPeriod.Size = New System.Drawing.Size(110, 28)
             Me.lblPeriod.TabIndex = 11
             Me.lblPeriod.Text = "Period"
             Me.lblPeriod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-            '
-            'FlowLayoutPanel1
-            '
-            Me.FlowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
-            Me.FlowLayoutPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-            Me.FlowLayoutPanel1.Controls.Add(Me.lblNoStream)
-            Me.FlowLayoutPanel1.Controls.Add(Me.lblHomeStream)
-            Me.FlowLayoutPanel1.Controls.Add(Me.lblAwayStream)
-            Me.FlowLayoutPanel1.Controls.Add(Me.lblFrenchStream)
-            Me.FlowLayoutPanel1.Controls.Add(Me.lblNationalStream)
-            Me.FlowLayoutPanel1.Controls.Add(Me.lblMultiCam1)
-            Me.FlowLayoutPanel1.Controls.Add(Me.lblMultiCam2)
-            Me.FlowLayoutPanel1.Controls.Add(Me.lblRefCam)
-            Me.FlowLayoutPanel1.Controls.Add(Me.lblEndzoneCam1)
-            Me.FlowLayoutPanel1.Controls.Add(Me.lblEndzoneCam2)
-            Me.FlowLayoutPanel1.Location = New System.Drawing.Point(2, 85)
-            Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-            Me.FlowLayoutPanel1.Padding = New System.Windows.Forms.Padding(5, 5, 5, 0)
-            Me.FlowLayoutPanel1.Size = New System.Drawing.Size(303, 70)
-            Me.FlowLayoutPanel1.TabIndex = 10
-            '
-            'lblNoStream
-            '
-            Me.lblNoStream.AutoSize = True
-            Me.lblNoStream.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
-            Me.lblNoStream.ForeColor = System.Drawing.Color.Black
-            Me.lblNoStream.Location = New System.Drawing.Point(8, 5)
-            Me.lblNoStream.Name = "lblNoStream"
-            Me.lblNoStream.Size = New System.Drawing.Size(111, 15)
-            Me.lblNoStream.TabIndex = 17
-            Me.lblNoStream.Text = "No stream available"
-            '
-            'lblHomeStream
-            '
-            Me.lblHomeStream.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblHomeStream.Anchor = System.Windows.Forms.AnchorStyles.None
-            Me.lblHomeStream.AutoSize = True
-            Me.lblHomeStream.BackColor = System.Drawing.Color.Transparent
-            Me.lblHomeStream.Cursor = System.Windows.Forms.Cursors.Hand
-            Me.lblHomeStream.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblHomeStream.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblHomeStream.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-            Me.lblHomeStream.LinkColor = System.Drawing.Color.Black
-            Me.lblHomeStream.Location = New System.Drawing.Point(125, 5)
-            Me.lblHomeStream.Name = "lblHomeStream"
-            Me.lblHomeStream.Size = New System.Drawing.Size(40, 15)
-            Me.lblHomeStream.TabIndex = 11
-            Me.lblHomeStream.TabStop = True
-            Me.lblHomeStream.Text = "Home"
-            Me.lblHomeStream.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            '
-            'lblAwayStream
-            '
-            Me.lblAwayStream.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblAwayStream.Anchor = System.Windows.Forms.AnchorStyles.None
-            Me.lblAwayStream.AutoSize = True
-            Me.lblAwayStream.BackColor = System.Drawing.Color.Transparent
-            Me.lblAwayStream.Cursor = System.Windows.Forms.Cursors.Hand
-            Me.lblAwayStream.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblAwayStream.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblAwayStream.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-            Me.lblAwayStream.LinkColor = System.Drawing.Color.Black
-            Me.lblAwayStream.Location = New System.Drawing.Point(171, 5)
-            Me.lblAwayStream.Name = "lblAwayStream"
-            Me.lblAwayStream.Size = New System.Drawing.Size(36, 15)
-            Me.lblAwayStream.TabIndex = 8
-            Me.lblAwayStream.TabStop = True
-            Me.lblAwayStream.Text = "Away"
-            Me.lblAwayStream.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            '
-            'lblFrenchStream
-            '
-            Me.lblFrenchStream.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblFrenchStream.Anchor = System.Windows.Forms.AnchorStyles.None
-            Me.lblFrenchStream.AutoSize = True
-            Me.lblFrenchStream.BackColor = System.Drawing.Color.Transparent
-            Me.lblFrenchStream.Cursor = System.Windows.Forms.Cursors.Hand
-            Me.lblFrenchStream.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblFrenchStream.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblFrenchStream.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-            Me.lblFrenchStream.LinkColor = System.Drawing.Color.Black
-            Me.lblFrenchStream.Location = New System.Drawing.Point(213, 5)
-            Me.lblFrenchStream.Name = "lblFrenchStream"
-            Me.lblFrenchStream.Size = New System.Drawing.Size(43, 15)
-            Me.lblFrenchStream.TabIndex = 9
-            Me.lblFrenchStream.TabStop = True
-            Me.lblFrenchStream.Text = "French"
-            Me.lblFrenchStream.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            '
-            'lblNationalStream
-            '
-            Me.lblNationalStream.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblNationalStream.Anchor = System.Windows.Forms.AnchorStyles.None
-            Me.lblNationalStream.AutoSize = True
-            Me.lblNationalStream.BackColor = System.Drawing.Color.Transparent
-            Me.lblNationalStream.Cursor = System.Windows.Forms.Cursors.Hand
-            Me.lblNationalStream.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblNationalStream.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblNationalStream.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-            Me.lblNationalStream.LinkColor = System.Drawing.Color.Black
-            Me.lblNationalStream.Location = New System.Drawing.Point(8, 20)
-            Me.lblNationalStream.Name = "lblNationalStream"
-            Me.lblNationalStream.Size = New System.Drawing.Size(52, 15)
-            Me.lblNationalStream.TabIndex = 10
-            Me.lblNationalStream.TabStop = True
-            Me.lblNationalStream.Text = "National"
-            Me.lblNationalStream.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            '
-            'lblMultiCam1
-            '
-            Me.lblMultiCam1.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblMultiCam1.Anchor = System.Windows.Forms.AnchorStyles.None
-            Me.lblMultiCam1.AutoSize = True
-            Me.lblMultiCam1.BackColor = System.Drawing.Color.Transparent
-            Me.lblMultiCam1.Cursor = System.Windows.Forms.Cursors.Hand
-            Me.lblMultiCam1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblMultiCam1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblMultiCam1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-            Me.lblMultiCam1.LinkColor = System.Drawing.Color.Black
-            Me.lblMultiCam1.Location = New System.Drawing.Point(66, 20)
-            Me.lblMultiCam1.Name = "lblMultiCam1"
-            Me.lblMultiCam1.Size = New System.Drawing.Size(85, 15)
-            Me.lblMultiCam1.TabIndex = 12
-            Me.lblMultiCam1.TabStop = True
-            Me.lblMultiCam1.Text = "3 Camera View"
-            Me.lblMultiCam1.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            '
-            'lblMultiCam2
-            '
-            Me.lblMultiCam2.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblMultiCam2.Anchor = System.Windows.Forms.AnchorStyles.None
-            Me.lblMultiCam2.AutoSize = True
-            Me.lblMultiCam2.BackColor = System.Drawing.Color.Transparent
-            Me.lblMultiCam2.Cursor = System.Windows.Forms.Cursors.Hand
-            Me.lblMultiCam2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblMultiCam2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblMultiCam2.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-            Me.lblMultiCam2.LinkColor = System.Drawing.Color.Black
-            Me.lblMultiCam2.Location = New System.Drawing.Point(157, 20)
-            Me.lblMultiCam2.Name = "lblMultiCam2"
-            Me.lblMultiCam2.Size = New System.Drawing.Size(85, 15)
-            Me.lblMultiCam2.TabIndex = 13
-            Me.lblMultiCam2.TabStop = True
-            Me.lblMultiCam2.Text = "6 Camera View"
-            Me.lblMultiCam2.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            '
-            'lblRefCam
-            '
-            Me.lblRefCam.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblRefCam.Anchor = System.Windows.Forms.AnchorStyles.None
-            Me.lblRefCam.AutoSize = True
-            Me.lblRefCam.BackColor = System.Drawing.Color.Transparent
-            Me.lblRefCam.Cursor = System.Windows.Forms.Cursors.Hand
-            Me.lblRefCam.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblRefCam.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblRefCam.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-            Me.lblRefCam.LinkColor = System.Drawing.Color.Black
-            Me.lblRefCam.Location = New System.Drawing.Point(8, 35)
-            Me.lblRefCam.Name = "lblRefCam"
-            Me.lblRefCam.Size = New System.Drawing.Size(52, 15)
-            Me.lblRefCam.TabIndex = 14
-            Me.lblRefCam.TabStop = True
-            Me.lblRefCam.Text = "Ref Cam"
-            Me.lblRefCam.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            '
-            'lblEndzoneCam1
-            '
-            Me.lblEndzoneCam1.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblEndzoneCam1.Anchor = System.Windows.Forms.AnchorStyles.None
-            Me.lblEndzoneCam1.AutoSize = True
-            Me.lblEndzoneCam1.BackColor = System.Drawing.Color.Transparent
-            Me.lblEndzoneCam1.Cursor = System.Windows.Forms.Cursors.Hand
-            Me.lblEndzoneCam1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblEndzoneCam1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblEndzoneCam1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-            Me.lblEndzoneCam1.LinkColor = System.Drawing.Color.Black
-            Me.lblEndzoneCam1.Location = New System.Drawing.Point(66, 35)
-            Me.lblEndzoneCam1.Name = "lblEndzoneCam1"
-            Me.lblEndzoneCam1.Size = New System.Drawing.Size(89, 15)
-            Me.lblEndzoneCam1.TabIndex = 15
-            Me.lblEndzoneCam1.TabStop = True
-            Me.lblEndzoneCam1.Text = "Endzone Cam 1"
-            Me.lblEndzoneCam1.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            '
-            'lblEndzoneCam2
-            '
-            Me.lblEndzoneCam2.ActiveLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblEndzoneCam2.Anchor = System.Windows.Forms.AnchorStyles.None
-            Me.lblEndzoneCam2.AutoSize = True
-            Me.lblEndzoneCam2.BackColor = System.Drawing.Color.Transparent
-            Me.lblEndzoneCam2.Cursor = System.Windows.Forms.Cursors.Hand
-            Me.lblEndzoneCam2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblEndzoneCam2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            Me.lblEndzoneCam2.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-            Me.lblEndzoneCam2.LinkColor = System.Drawing.Color.Black
-            Me.lblEndzoneCam2.Location = New System.Drawing.Point(161, 35)
-            Me.lblEndzoneCam2.Name = "lblEndzoneCam2"
-            Me.lblEndzoneCam2.Size = New System.Drawing.Size(89, 15)
-            Me.lblEndzoneCam2.TabIndex = 16
-            Me.lblEndzoneCam2.TabStop = True
-            Me.lblEndzoneCam2.Text = "Endzone Cam 2"
-            Me.lblEndzoneCam2.VisitedLinkColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-            '
-            'lblHomeScore
-            '
-            Me.lblHomeScore.FontSize = MetroFramework.MetroLabelSize.Tall
-            Me.lblHomeScore.FontWeight = MetroFramework.MetroLabelWeight.Bold
-            Me.lblHomeScore.Location = New System.Drawing.Point(179, 36)
-            Me.lblHomeScore.Name = "lblHomeScore"
-            Me.lblHomeScore.Size = New System.Drawing.Size(126, 25)
-            Me.lblHomeScore.TabIndex = 5
-            Me.lblHomeScore.Text = "0"
-            '
-            'lblAwayScore
-            '
-            Me.lblAwayScore.FontSize = MetroFramework.MetroLabelSize.Tall
-            Me.lblAwayScore.FontWeight = MetroFramework.MetroLabelWeight.Bold
-            Me.lblAwayScore.Location = New System.Drawing.Point(2, 36)
-            Me.lblAwayScore.Margin = New System.Windows.Forms.Padding(0)
-            Me.lblAwayScore.Name = "lblAwayScore"
-            Me.lblAwayScore.Size = New System.Drawing.Size(126, 25)
-            Me.lblAwayScore.TabIndex = 5
-            Me.lblAwayScore.Text = "0"
-            Me.lblAwayScore.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            '
-            'lblVS
-            '
-            Me.lblVS.FontWeight = MetroFramework.MetroLabelWeight.Bold
-            Me.lblVS.Location = New System.Drawing.Point(2, 40)
-            Me.lblVS.Name = "lblVS"
-            Me.lblVS.Size = New System.Drawing.Size(303, 19)
-            Me.lblVS.TabIndex = 2
-            Me.lblVS.Text = "VS"
-            Me.lblVS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.lblPeriod.UseCustomBackColor = True
             '
             'lblTime
             '
-            Me.lblTime.FontSize = MetroFramework.MetroLabelSize.Small
-            Me.lblTime.Location = New System.Drawing.Point(2, 24)
+            Me.lblTime.BackColor = System.Drawing.Color.Transparent
+            Me.lblTime.Location = New System.Drawing.Point(98, 36)
             Me.lblTime.Name = "lblTime"
-            Me.lblTime.Size = New System.Drawing.Size(303, 18)
+            Me.lblTime.Size = New System.Drawing.Size(110, 21)
             Me.lblTime.TabIndex = 8
             Me.lblTime.Text = "7:30 PM"
             Me.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.lblTime.UseCustomBackColor = True
+            '
+            'FlowLayoutPanel1
+            '
+            Me.FlowLayoutPanel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Me.FlowLayoutPanel1.BackColor = System.Drawing.Color.WhiteSmoke
+            Me.FlowLayoutPanel1.Controls.Add(Me.lnkHome)
+            Me.FlowLayoutPanel1.Controls.Add(Me.lnkAway)
+            Me.FlowLayoutPanel1.Controls.Add(Me.lnkNational)
+            Me.FlowLayoutPanel1.Controls.Add(Me.lnkFrench)
+            Me.FlowLayoutPanel1.Controls.Add(Me.lnkThree)
+            Me.FlowLayoutPanel1.Controls.Add(Me.lnkSix)
+            Me.FlowLayoutPanel1.Controls.Add(Me.lnkEnd1)
+            Me.FlowLayoutPanel1.Controls.Add(Me.lnkEnd2)
+            Me.FlowLayoutPanel1.Controls.Add(Me.lnkRef)
+            Me.FlowLayoutPanel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.FlowLayoutPanel1.Location = New System.Drawing.Point(2, 108)
+            Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+            Me.FlowLayoutPanel1.Size = New System.Drawing.Size(305, 38)
+            Me.FlowLayoutPanel1.TabIndex = 10
+            Me.FlowLayoutPanel1.WrapContents = False
+            '
+            'lnkHome
+            '
+            Me.lnkHome.BackgroundImage = CType(resources.GetObject("lnkHome.BackgroundImage"), System.Drawing.Image)
+            Me.lnkHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+            Me.lnkHome.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+            Me.lnkHome.FlatAppearance.BorderSize = 0
+            Me.lnkHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+            Me.lnkHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.lnkHome.Location = New System.Drawing.Point(4, 6)
+            Me.lnkHome.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+            Me.lnkHome.Name = "lnkHome"
+            Me.lnkHome.Size = New System.Drawing.Size(26, 26)
+            Me.lnkHome.TabIndex = 29
+            Me.lnkHome.UseVisualStyleBackColor = True
+            '
+            'lnkAway
+            '
+            Me.lnkAway.BackgroundImage = CType(resources.GetObject("lnkAway.BackgroundImage"), System.Drawing.Image)
+            Me.lnkAway.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+            Me.lnkAway.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+            Me.lnkAway.FlatAppearance.BorderSize = 0
+            Me.lnkAway.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+            Me.lnkAway.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.lnkAway.Location = New System.Drawing.Point(38, 6)
+            Me.lnkAway.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+            Me.lnkAway.Name = "lnkAway"
+            Me.lnkAway.Size = New System.Drawing.Size(26, 26)
+            Me.lnkAway.TabIndex = 28
+            Me.lnkAway.UseVisualStyleBackColor = True
+            '
+            'lnkNational
+            '
+            Me.lnkNational.BackgroundImage = CType(resources.GetObject("lnkNational.BackgroundImage"), System.Drawing.Image)
+            Me.lnkNational.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+            Me.lnkNational.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+            Me.lnkNational.FlatAppearance.BorderSize = 0
+            Me.lnkNational.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+            Me.lnkNational.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.lnkNational.Location = New System.Drawing.Point(72, 6)
+            Me.lnkNational.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+            Me.lnkNational.Name = "lnkNational"
+            Me.lnkNational.Size = New System.Drawing.Size(26, 26)
+            Me.lnkNational.TabIndex = 29
+            Me.lnkNational.UseVisualStyleBackColor = True
+            '
+            'lnkFrench
+            '
+            Me.lnkFrench.BackgroundImage = CType(resources.GetObject("lnkFrench.BackgroundImage"), System.Drawing.Image)
+            Me.lnkFrench.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+            Me.lnkFrench.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+            Me.lnkFrench.FlatAppearance.BorderSize = 0
+            Me.lnkFrench.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+            Me.lnkFrench.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.lnkFrench.Location = New System.Drawing.Point(106, 6)
+            Me.lnkFrench.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+            Me.lnkFrench.Name = "lnkFrench"
+            Me.lnkFrench.Size = New System.Drawing.Size(26, 26)
+            Me.lnkFrench.TabIndex = 29
+            Me.lnkFrench.UseVisualStyleBackColor = True
             '
             'lblNotInSeason
             '
-            Me.lblNotInSeason.FontSize = MetroFramework.MetroLabelSize.Small
-            Me.lblNotInSeason.Location = New System.Drawing.Point(2, 56)
+            Me.lblNotInSeason.BackColor = System.Drawing.Color.Transparent
+            Me.lblNotInSeason.Location = New System.Drawing.Point(3, 76)
             Me.lblNotInSeason.Name = "lblNotInSeason"
-            Me.lblNotInSeason.Size = New System.Drawing.Size(303, 19)
+            Me.lblNotInSeason.Size = New System.Drawing.Size(303, 22)
             Me.lblNotInSeason.TabIndex = 13
             Me.lblNotInSeason.Text = "NotInSeason"
             Me.lblNotInSeason.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.lblNotInSeason.UseCustomBackColor = True
+            '
+            'lblStreamStatus
+            '
+            Me.lblStreamStatus.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Me.lblStreamStatus.BackColor = System.Drawing.Color.WhiteSmoke
+            Me.lblStreamStatus.FontWeight = MetroFramework.MetroLabelWeight.Regular
+            Me.lblStreamStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+            Me.lblStreamStatus.Location = New System.Drawing.Point(2, 108)
+            Me.lblStreamStatus.Name = "lblStreamStatus"
+            Me.lblStreamStatus.Size = New System.Drawing.Size(305, 38)
+            Me.lblStreamStatus.TabIndex = 27
+            Me.lblStreamStatus.Text = "Select a stream to watch"
+            Me.lblStreamStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.lblStreamStatus.UseCustomBackColor = True
+            Me.lblStreamStatus.UseCustomForeColor = True
             '
             'GameControl
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
             Me.BackColor = System.Drawing.Color.White
             Me.Controls.Add(Me.BorderPanel1)
+            Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.Name = "GameControl"
-            Me.Padding = New System.Windows.Forms.Padding(5)
-            Me.Size = New System.Drawing.Size(320, 170)
+            Me.Padding = New System.Windows.Forms.Padding(6)
+            Me.Size = New System.Drawing.Size(324, 163)
             Me.BorderPanel1.ResumeLayout(False)
+            Me.BorderPanel1.PerformLayout()
             CType(Me.live2, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.live1, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.picAway, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.picHome, System.ComponentModel.ISupportInitialize).EndInit()
             Me.FlowLayoutPanel1.ResumeLayout(False)
-            Me.FlowLayoutPanel1.PerformLayout()
             Me.ResumeLayout(False)
 
         End Sub
 
         Friend WithEvents picAway As PictureBox
-        Friend WithEvents lblVS As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblAwayTeam As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblHomeTeam As MetroFramework.Controls.MetroLabel
-        Friend WithEvents lblAwayScore As MetroFramework.Controls.MetroLabel
-        Friend WithEvents lblHomeScore As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblTime As MetroFramework.Controls.MetroLabel
         Friend WithEvents BorderPanel1 As BorderPanel
-        Friend WithEvents TeamToolTip As MetroFramework.Components.MetroToolTip
+        Friend WithEvents ToolTip As MetroFramework.Components.MetroToolTip
         Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
-        Friend WithEvents lblAwayStream As LinkLabel
-        Friend WithEvents lblFrenchStream As LinkLabel
-        Friend WithEvents lblNationalStream As LinkLabel
-        Friend WithEvents lblHomeStream As LinkLabel
-        Friend WithEvents lblMultiCam1 As LinkLabel
-        Friend WithEvents lblMultiCam2 As LinkLabel
-        Friend WithEvents lblRefCam As LinkLabel
-        Friend WithEvents lblEndzoneCam1 As LinkLabel
-        Friend WithEvents lblEndzoneCam2 As LinkLabel
         Friend WithEvents lblPeriod As MetroFramework.Controls.MetroLabel
-        Friend WithEvents lblNoStream As Label
         Friend WithEvents lblNotInSeason As MetroFramework.Controls.MetroLabel
         Friend WithEvents picHome As PictureBox
-        Friend WithEvents FeedToolTip As MetroFramework.Components.MetroToolTip
         Friend WithEvents live1 As PictureBox
         Friend WithEvents live2 As PictureBox
+        Friend WithEvents vs As MetroFramework.Controls.MetroLabel
+        Friend WithEvents lblHomeScore As MetroFramework.Controls.MetroLabel
+        Friend WithEvents lblAwayScore As MetroFramework.Controls.MetroLabel
+        Friend WithEvents lblStreamStatus As MetroFramework.Controls.MetroLabel
+        Friend WithEvents lnkHome As Button
+        Friend WithEvents lnkAway As Button
+        Friend WithEvents lnkNational As Button
+        Friend WithEvents lnkFrench As Button
+        Friend WithEvents lnkEnd1 As Button
+        Friend WithEvents lnkEnd2 As Button
+        Friend WithEvents lnkThree As Button
+        Friend WithEvents lnkSix As Button
+        Friend WithEvents lnkRef As Button
     End Class
 End Namespace

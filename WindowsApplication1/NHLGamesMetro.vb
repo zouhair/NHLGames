@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Net
+Imports System.Runtime.InteropServices
 Imports MetroFramework
 Imports Newtonsoft.Json.Linq
 Imports NHLGames.AdDetection
@@ -15,6 +16,7 @@ Public Class NHLGamesMetro
 
     Private _serverIp As String
     Private Const DomainName As String = "mf.svc.nhl.com"
+    Public Shared HostName As String
     Private Shared _settingsLoaded As Boolean = False
     Public Shared FormInstance As NHLGamesMetro = Nothing
     Private _adDetectorViewModel As AdDetectorViewModel = Nothing
@@ -26,7 +28,28 @@ Public Class NHLGamesMetro
     Public Shared ProgressVisible As Boolean = False
     Public Shared GamesDownloadedTime As Date
     Public Shared LabelDate As Label
+    Public Shared DownloadLink As String = "https://www.reddit.com/r/nhl_games/"
     Public Shared GameDate As Date = DateHelper.GetPacificTime()
+    Private _resizeDirection As Integer = -1
+    Private Const ResizeBorderWidth As Integer = 3
+
+    <DllImport("user32.dll")>
+    Public Shared Function ReleaseCapture() As Boolean
+    End Function
+
+    <DllImport("user32.dll")>
+    Public Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal Msg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Integer
+    End Function
+
+    Private Const WM_NCLBUTTONDOWN As Integer = &HA1
+    Private Const HTBOTTOM As Integer = 15
+    Private Const HTBOTTOMLEFT As Integer = 16
+    Private Const HTBOTTOMRIGHT As Integer = 17
+    Private Const HTLEFT As Integer = 10
+    Private Const HTRIGHT As Integer = 11
+    Private Const HTTOP As Integer = 12
+    Private Const HTTOPLEFT As Integer = 13
+    Private Const HTTOPRIGHT As Integer = 14
 
     ' Starts the application. -- See: https://msdn.microsoft.com/en-us/library/system.windows.forms.application.threadexception(v=vs.110).aspx
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
@@ -61,14 +84,10 @@ Public Class NHLGamesMetro
 
         TabControl.SelectedIndex = 0
         flpCalender.Controls.Add(New CalenderControl())
-        _serverIp = Dns.GetHostEntry("nhl.freegamez.gq").AddressList.First.ToString()
 
-        If (HostsFile.TestEntry(DomainName, _serverIp) = False) Then
-            HostsFile.AddEntry(_serverIp, DomainName, True)
-        End If
 
-        VersionCheck()
         IntitializeApplicationSettings()
+        VersionCheck()
 
     End Sub
 
@@ -92,7 +111,6 @@ Public Class NHLGamesMetro
             mpcPath = mpcPathCurrent
         End If
         txtMPCPath.Text = mpcPath
-        ' If watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpc Then playerPath = mpcPath
 
         Dim vlcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VlcPath, String.Empty)
         Dim vlcPathCurrent As String = PathFinder.GetPathOfVlc
@@ -104,7 +122,6 @@ Public Class NHLGamesMetro
             vlcPath = vlcPathCurrent
         End If
         txtVLCPath.Text = vlcPath
-        'If watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Vlc Then playerPath = vlcPath
 
         Dim mpvPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpvPath, String.Empty)
         Dim mpvPathCurrent As String = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
@@ -123,7 +140,6 @@ Public Class NHLGamesMetro
             End If
         End If
         txtMpvPath.Text = mpvPath
-        'If watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpv Then playerPath = mpvPath
 
         Dim streamlinkPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.StreamlinkPath, String.Empty)
         Dim streamlinkPathCurrent As String = Path.Combine(Application.StartupPath, "streamlink-0.5.0\streamlink.exe")
@@ -145,9 +161,9 @@ Public Class NHLGamesMetro
         End If
         txtStreamlinkPath.Text = streamlinkPath
 
-        MetroCheckBox1.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True)
-        MetroCheckBox2.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores, True)
-        MetroCheckBox3.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowSeriesRecord, True)
+        chkShowFinalScores.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores, True)
+        chkShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores, True)
+        chkShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowSeriesRecord, True)
 
         Dim watchArgs As Game.GameWatchArguments = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
         If watchArgs Is Nothing OrElse watchArgs.StreamlinkPath <> streamlinkPath Then
@@ -157,12 +173,18 @@ Public Class NHLGamesMetro
 
         BindWatchArgsToForm(watchArgs)
 
-        progress.Location = New Point((FlowLayoutPanel.Width - progress.Width) / 2, FlowLayoutPanel.Location.Y + 150)
-        NoGames.Location = New Point((FlowLayoutPanel.Width - NoGames.Width) / 2, FlowLayoutPanel.Location.Y + 148)
+        If (HostsFile.TestEntry(DomainName, _serverIp) = False) Then
+            If MetroFramework.MetroMessageBox.Show(Me, "NHLGames can't work without having its hostname set in your Windows Hosts file. Do you want to let NHLGames adds an entry to your Hosts file, so Windows can resolve NHLGames hostname and connect to its server's IP address?", "Add Hosts Entry", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+                HostsFile.AddEntry(_serverIp, DomainName, True)
+            Else
+                TabControl.SelectedIndex = 1
+            End If
+        End If
 
-        lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(GameDate.DayOfWeek).Substring(0, 3) + ", " +
-        CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(GameDate.Month).Substring(0, 3) + " " +
-        Date.Today.Day.ToString + ", " + GameDate.Year.ToString
+        progress.Location = New Point((flpGames.Width - progress.Width) / 2, flpGames.Location.Y + 150)
+        NoGames.Location = New Point((flpGames.Width - NoGames.Width) / 2, flpGames.Location.Y + 148)
+
+        lblDate.Text = DateHelper.GetFormattedDate(GameDate)
 
         LabelDate = lblDate
         GamesDownloadedTime = Now
@@ -214,13 +236,13 @@ Public Class NHLGamesMetro
                 watchArgs.Cdn = "l3c"
             End If
 
-            watchArgs.UsePlayerArgs = chkEnablePlayerArgs.Checked
+            watchArgs.UsePlayerArgs = tgPlayer.Checked
             watchArgs.PlayerArgs = txtPlayerArgs.Text
 
-            watchArgs.UsestreamlinkArgs = chkEnableStreamArgs.Checked
+            watchArgs.UsestreamlinkArgs = tgStreamer.Checked
             watchArgs.StreamlinkArgs = txtStreamerArgs.Text
 
-            watchArgs.UseOutputArgs = chkEnableOutput.Checked
+            watchArgs.UseOutputArgs = tgOutput.Checked
             watchArgs.PlayerOutputPath = txtOutputPath.Text
             ApplicationSettings.SetValue(ApplicationSettings.Settings.DefaultWatchArgs, Serialization.SerializeObject(Of Game.GameWatchArguments)(watchArgs))
         End If
@@ -252,6 +274,21 @@ Public Class NHLGamesMetro
                 rbLevel3.Checked = True
             End If
 
+            Dim serverListFromConfig As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.ServerList, String.Empty)
+            Dim serverList As String() = serverListFromConfig.Split(";")
+            For Each server In serverList
+                cbServers.Items.Add(server)
+            Next
+
+            cbServers.SelectedItem = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.SelectedServer, String.Empty)
+
+            If cbServers.SelectedItem Is Nothing Then
+                cbServers.SelectedItem = cbServers.Items(0)
+            End If
+
+            _serverIp = Dns.GetHostEntry(cbServers.SelectedItem.ToString()).AddressList.First.ToString()
+            HostName = cbServers.SelectedItem.ToString()
+
             rbVLC.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Vlc
             rbMPC.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpc
             rbMpv.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpv
@@ -264,17 +301,18 @@ Public Class NHLGamesMetro
                 SetEventArgsFromForm()
             End If
 
-            chkEnablePlayerArgs.Checked = watchArgs.UsePlayerArgs
+            tgPlayer.Checked = watchArgs.UsePlayerArgs
             txtPlayerArgs.Enabled = watchArgs.UsePlayerArgs
             txtPlayerArgs.Text = watchArgs.PlayerArgs
 
-            chkEnableStreamArgs.Checked = watchArgs.UsestreamlinkArgs
+            tgStreamer.Checked = watchArgs.UsestreamlinkArgs
             txtStreamerArgs.Enabled = watchArgs.UsestreamlinkArgs
             txtStreamerArgs.Text = watchArgs.StreamlinkArgs
 
             txtOutputPath.Text = watchArgs.PlayerOutputPath
             txtOutputPath.Enabled = watchArgs.UseOutputArgs
-            chkEnableOutput.Checked = watchArgs.UseOutputArgs
+            tgOutput.Checked = watchArgs.UseOutputArgs
+
         End If
     End Sub
 
@@ -297,16 +335,15 @@ Public Class NHLGamesMetro
         Dim versionFromSettings = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version, "")
 
         If strLatest > versionFromSettings Then
-            lblVersion.Text = String.Format("Version {0} available! You are running {1}.", strLatest, versionFromSettings)
-            lblVersion.ForeColor = Color.Red
-            lnkDownload.Visible = True
+            lnkDownload.Text = String.Format("A new version is available, download the latest version v{0} on /r/nhl_games", strLatest)
+            DownloadLink &= "wiki/downloads"
             Dim strChangeLog = Downloader.DownloadChangelog()
             MetroMessageBox.Show(Me, String.Format("Version {0} is available! Changes: {1}{2}{3}", strLatest, vbCrLf, vbCrLf, strChangeLog), "New Version Available", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else
-            lblVersion.Text = String.Format("Version: {0}", ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version))
-            lblVersion.ForeColor = Color.Gray
-            lblVersion.Padding = New Padding(0, 0, 0, 0)
+            lnkDownload.Text = "/r/nhl_games"
+            lnkDownload.Width = 100
         End If
+        lblVersion.Text = String.Format("v{0}", ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version))
 
     End Sub
 
@@ -318,7 +355,7 @@ Public Class NHLGamesMetro
             Dim gameControl As New GameControl(gameObj, ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowScores),
                 ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowLiveScores),
                 ApplicationSettings.Read(Of Boolean)(ApplicationSettings.Settings.ShowSeriesRecord))
-            FlowLayoutPanel.Controls.Add(gameControl)
+            flpGames.Controls.Add(gameControl)
         End If
 
     End Sub
@@ -337,7 +374,7 @@ Public Class NHLGamesMetro
         If InvokeRequired Then
             BeginInvoke(New Action(AddressOf ClearGamePanel))
         Else
-            FlowLayoutPanel.Controls.Clear()
+            flpGames.Controls.Clear()
         End If
     End Sub
 
@@ -355,7 +392,7 @@ Public Class NHLGamesMetro
             availableGames = Downloader.DownloadAvailableGames()
             GameManager.RefreshGames(dateTime, jsonSchedule, availableGames)
 
-            SetFormStatusLabel("Games Found : " + GameManager.GamesList.Count.ToString())
+            SetFormStatusLabel("Games Found : " & GameManager.GamesList.Count.ToString())
             SetLoading(False)
         Catch ex As Exception
             Console.WriteLine(ex.ToString())
@@ -364,6 +401,7 @@ Public Class NHLGamesMetro
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         LoadGamesAsync(GameDate, True)
+        flpGames.Focus()
     End Sub
 
     Private Sub RichTextBox_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox.TextChanged
@@ -432,8 +470,8 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub MetroCheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles MetroCheckBox1.CheckedChanged
-        ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowScores, MetroCheckBox1.Checked)
+    Private Sub chkShowFinalScores_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowFinalScores.CheckedChanged
+        ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowScores, chkShowFinalScores.Checked)
     End Sub
 
     Private Sub btnClearConsole_Click(sender As Object, e As EventArgs) Handles btnClearConsole.Click
@@ -479,7 +517,7 @@ Public Class NHLGamesMetro
         If InvokeRequired Then
             BeginInvoke(New Action(Of String)(AddressOf SetFormStatusLabel), msg)
         Else
-            StatusLabel.Text = msg
+            Status.Text = msg
         End If
     End Sub
 
@@ -525,25 +563,7 @@ Public Class NHLGamesMetro
         _writeToConsoleSettingsChanged("Streamer args", txtStreamerArgs.Text)
     End Sub
 
-    Private Sub chkEnableOutput_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableOutput.CheckedChanged
-        txtOutputPath.Enabled = chkEnableOutput.Checked
-        SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged("Output Enable", chkEnableOutput.Checked)
-    End Sub
-
-    Private Sub chkEnablePlayerArgs_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnablePlayerArgs.CheckedChanged
-        txtPlayerArgs.Enabled = chkEnablePlayerArgs.Checked
-        SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged("Player args Enable", chkEnablePlayerArgs.Checked)
-    End Sub
-
-    Private Sub chkEnableStreamArgs_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableStreamArgs.CheckedChanged
-        txtStreamerArgs.Enabled = chkEnableStreamArgs.Checked
-        SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged("Streamer args Enable", chkEnableStreamArgs.Checked)
-    End Sub
-
-    Private Sub MetroButton1_Click(sender As Object, e As EventArgs) Handles MetroButton1.Click
+    Private Sub btnOuput_Click(sender As Object, e As EventArgs) Handles btnOuput.Click
         SaveFileDialog.CheckPathExists = True
 
         If txtOutputPath.Text.Count > 0 Then
@@ -566,21 +586,14 @@ Public Class NHLGamesMetro
 
     Private Sub btnYesterday_Click(sender As Object, e As EventArgs) Handles btnYesterday.Click
         GameDate = GameDate.AddDays(-1)
-        lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(GameDate.DayOfWeek).Substring(0, 3) + ", " +
-            CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(GameDate.Month).Substring(0, 3) + " " +
-            GameDate.Day.ToString + ", " + GameDate.Year.ToString
+        lblDate.Text = DateHelper.GetFormattedDate(GameDate)
     End Sub
 
     Private Sub btnTomorrow_Click(sender As Object, e As EventArgs) Handles btnTomorrow.Click
         GameDate = GameDate.AddDays(1)
-        lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(GameDate.DayOfWeek).Substring(0, 3) + ", " +
-            CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(GameDate.Month).Substring(0, 3) + " " +
-            GameDate.Day.ToString + ", " + GameDate.Year.ToString
+        lblDate.Text = DateHelper.GetFormattedDate(GameDate)
     End Sub
 
-    Private Sub lblVersion_Click(sender As Object, e As EventArgs) Handles lblVersion.Click
-
-    End Sub
 
     Private Sub btnClean_Click(sender As Object, e As EventArgs) Handles btnClean.Click
         HostsFile.CleanHosts(DomainName, True)
@@ -607,15 +620,16 @@ Public Class NHLGamesMetro
 
     Private Sub lblDate_TextChanged(sender As Object, e As EventArgs) Handles lblDate.TextChanged
         LoadGamesAsync(GameDate)
+        flpGames.Focus()
     End Sub
 
     Private Sub tmrAnimate_Tick(sender As Object, e As EventArgs) Handles tmrAnimate.Tick
         If StreamStarted Then
             progress.Visible = ProgressVisible
-            FlowLayoutPanel.Enabled = False
-            FlowLayoutPanel.Focus()
+            flpGames.Enabled = False
+            flpGames.Focus()
         Else
-            FlowLayoutPanel.Enabled = True
+            flpGames.Enabled = True
         End If
 
         If ProgressValue < progress.Maximum Then
@@ -633,26 +647,26 @@ Public Class NHLGamesMetro
             btnDate.Enabled = True
             btnTomorrow.Enabled = True
             btnYesterday.Enabled = True
-            If (FlowLayoutPanel.Controls.Count = 0) Then
+            If (flpGames.Controls.Count = 0) Then
                 NoGames.Visible = True
             Else
                 NoGames.Visible = False
             End If
         End If
 
-        If FlowLayoutPanel.Controls.Count <> 0 And (progress.Visible Or NoGames.Visible) Then
+        If flpGames.Controls.Count <> 0 And (progress.Visible Or NoGames.Visible) Then
             If Not StreamStarted Then progress.Visible = False
             NoGames.Visible = False
         End If
 
     End Sub
 
-    Private Sub MetroCheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles MetroCheckBox2.CheckedChanged
-        ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowLiveScores, MetroCheckBox2.Checked)
+    Private Sub chkShowLiveScores_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowLiveScores.CheckedChanged
+        ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowLiveScores, chkShowLiveScores.Checked)
     End Sub
 
     Private Sub lnkDownload_Click(sender As Object, e As EventArgs) Handles lnkDownload.Click
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://www.reddit.com/r/nhl_games/wiki/downloads")
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo(DownloadLink)
         Process.Start(sInfo)
     End Sub
 
@@ -665,7 +679,7 @@ Public Class NHLGamesMetro
         flpCalender.Visible = False
     End Sub
 
-    Private Sub FlowLayoutPanel_Click(sender As Object, e As EventArgs) Handles FlowLayoutPanel.Click
+    Private Sub FlowLayoutPanel_Click(sender As Object, e As EventArgs) Handles flpGames.Click
         flpCalender.Visible = False
     End Sub
 
@@ -673,30 +687,141 @@ Public Class NHLGamesMetro
         SetEventArgsFromForm()
     End Sub
 
-    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
+    Private Sub tgStreamer_CheckedChanged(sender As Object, e As EventArgs) Handles tgStreamer.CheckedChanged
+        txtStreamerArgs.Enabled = tgStreamer.Checked
+        SetEventArgsFromForm()
+        _writeToConsoleSettingsChanged("Streamer args Enable", tgStreamer.Checked)
     End Sub
 
-    Private Sub MetroCheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles MetroCheckBox3.CheckedChanged
-        ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowSeriesRecord, MetroCheckBox3.Checked)
+    Private Sub tgPlayer_CheckedChanged(sender As Object, e As EventArgs) Handles tgPlayer.CheckedChanged
+        txtPlayerArgs.Enabled = tgPlayer.Checked
+        SetEventArgsFromForm()
+        _writeToConsoleSettingsChanged("Player args Enable", tgPlayer.Checked)
+    End Sub
+
+    Private Sub tgOutput_CheckedChanged(sender As Object, e As EventArgs) Handles tgOutput.CheckedChanged
+        txtOutputPath.Enabled = tgOutput.Checked
+        SetEventArgsFromForm()
+        _writeToConsoleSettingsChanged("Output Enable", tgOutput.Checked)
+    End Sub
+
+    Private Sub chkShowSeriesRecord_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowSeriesRecord.CheckedChanged
+        ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowSeriesRecord, chkShowSeriesRecord.Checked)
     End Sub
 
     Private Sub btnDisplayEntry_Click(sender As Object, e As EventArgs) Handles btnDisplayEntry.Click
         Dim result As DialogResult
-        result = MetroMessageBox.Show(Me, String.Format("This line needs to be insert in your hosts file : {0}{1} {2}{3}" &
-            "Copy and paste that entry line at the end of your Hosts file.{4}" &
-            "You can use 'Open Hosts File' button with Notepad to open the Hosts file quickly.{5}" &
+        result = MetroMessageBox.Show(Me, String.Format("This line needs to be insert in your hosts file : {0}{1} {2}{0}" &
+            "Copy and paste that entry line at the end of your Hosts file.{0}" &
+            "You can use 'Open Hosts File' button with Notepad to open the Hosts file quickly.{0}" &
             "Do you want to copy that entry line to your clipboard ?",
-            vbCrLf, DomainName, _serverIp, vbCrLf, vbCrLf, vbCrLf), "Do It Yourself steps", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+            vbCrLf, _serverIp, DomainName), "Do It Yourself steps", MessageBoxButtons.YesNo)
         If result = System.Windows.Forms.DialogResult.Yes Then
-            Clipboard.SetText(DomainName & " " & _serverIp)
+            Clipboard.SetText(_serverIp & " " & DomainName)
         End If
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://github.com/NHLGames/NHLGames")
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://github.com/NHLGames/NHLGames#nhlgames")
         Process.Start(sInfo)
+    End Sub
+
+    Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
+        Me.WindowState = FormWindowState.Maximized
+        btnMaximize.Visible = False
+        btnNormal.Visible = True
+    End Sub
+
+    Private Sub btnMinimize_Click(sender As Object, e As EventArgs) Handles btnMinimize.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnNormal_Click(sender As Object, e As EventArgs) Handles btnNormal.Click
+        Me.WindowState = FormWindowState.Normal
+        btnMaximize.Visible = True
+        btnNormal.Visible = False
+    End Sub
+
+    Private Sub TabControl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl.SelectedIndexChanged
+        Dim tc As TabControl = sender
+        If tc.SelectedIndex = 0 Then
+            'Games tab selected
+            flpGames.Focus()
+        ElseIf tc.SelectedIndex = 1 Then
+            'Settings tab selected
+            flpSettings.Focus()
+        ElseIf tc.SelectedIndex = 2 Then
+            'Console tab selected
+            RichTextBox.Focus()
+        Else
+            'Ad detector tab selected
+            flpAdDetector.Focus()
+        End If
+    End Sub
+
+    Private Sub NHLGamesMetro_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        Me.Refresh()
+        flpGames.Focus()
+    End Sub
+
+    Private Sub NHLGamesMetro_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
+        'Calculate which direction to resize based on mouse position
+        _resizeDirection = -1
+        If e.Location.X < ResizeBorderWidth And e.Location.Y < ResizeBorderWidth Then
+            Me.Cursor = Cursors.SizeNWSE
+            _resizeDirection = HTTOPLEFT
+        ElseIf e.Location.X < ResizeBorderWidth And e.Location.Y > MyBase.Height - ResizeBorderWidth Then
+            Me.Cursor = Cursors.SizeNESW
+            _resizeDirection = HTBOTTOMLEFT
+        ElseIf e.Location.X > MyBase.Width - ResizeBorderWidth And e.Location.Y > MyBase.Height - ResizeBorderWidth Then
+            Me.Cursor = Cursors.SizeNWSE
+            _resizeDirection = HTBOTTOMRIGHT
+        ElseIf e.Location.X > MyBase.Width - ResizeBorderWidth And e.Location.Y < ResizeBorderWidth Then
+            Me.Cursor = Cursors.SizeNESW
+            _resizeDirection = HTTOPRIGHT
+        ElseIf e.Location.X < ResizeBorderWidth Then
+            Me.Cursor = Cursors.SizeWE
+            _resizeDirection = HTLEFT
+        ElseIf e.Location.X > MyBase.Width - ResizeBorderWidth Then
+            Me.Cursor = Cursors.SizeWE
+            _resizeDirection = HTRIGHT
+        ElseIf e.Location.Y < ResizeBorderWidth Then
+            Me.Cursor = Cursors.SizeNS
+            _resizeDirection = HTTOP
+        ElseIf e.Location.Y > MyBase.Height - ResizeBorderWidth Then
+            Me.Cursor = Cursors.SizeNS
+            _resizeDirection = HTBOTTOM
+        Else
+            Me.Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub NHLGamesMetro_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
+        If e.Button = Windows.Forms.MouseButtons.Left And Me.WindowState <> FormWindowState.Maximized Then
+            ResizeForm()
+        End If
+    End Sub
+
+    Private Sub ResizeForm()
+        If _resizeDirection <> -1 Then
+            ReleaseCapture()
+            SendMessage(Me.Handle, WM_NCLBUTTONDOWN, _resizeDirection, 0)
+        End If
+    End Sub
+
+    Private Sub NHLGamesMetro_MouseLeave(sender As Object, e As EventArgs) Handles MyBase.MouseLeave
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub cbServers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbServers.SelectedIndexChanged
+        flpSettings.Focus()
+        ApplicationSettings.SetValue(ApplicationSettings.Settings.SelectedServer, cbServers.SelectedItem.ToString())
     End Sub
 
 #End Region
 End Class
+

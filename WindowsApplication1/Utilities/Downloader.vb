@@ -8,7 +8,7 @@ Imports Newtonsoft.Json.Linq
 Namespace Utilities
 
     Public Class Downloader
-        Private Const GamesTxtUrl As String = "http://nhl.freegamez.gq/static/ids.txt"
+        Private Shared ReadOnly _gamesTxtUrl As String = String.Format("http://{0}/static/ids.txt", NHLGamesMetro.HostName)
         Private Const ScheduleApiurl As String = "http://statsapi.web.nhl.com/api/v1/schedule?startDate={0}&endDate={1}&expand=schedule.teams,schedule.linescore,schedule.game.seriesSummary,schedule.game.content.media.epg"
         Private Const ApplicationVersionUrl As String = "https://showtimes.ninja/static/version.txt"
         Private Const ChangelogUrl As String = "https://showtimes.ninja/static/changelog.txt"
@@ -26,21 +26,21 @@ Namespace Utilities
                 Dim exeStartupPath As String = Application.StartupPath
                 Dim localAppDataPath As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                 Dim tempPath As String = Path.GetTempPath()
-                Dim dir As String = "NHLGames"
+                Const dir As String = "NHLGames"
 
                 If FileAccess.HasAccess(localAppDataPath) Then
-                    _localFileDirectory = localAppDataPath + Backslash
+                    _localFileDirectory = localAppDataPath & Backslash
                 ElseIf FileAccess.HasAccess(tempPath) Then
-                    _localFileDirectory = tempPath + Backslash
+                    _localFileDirectory = tempPath & Backslash
                 ElseIf FileAccess.HasAccess(exeStartupPath) Then
-                    _localFileDirectory = exeStartupPath + Backslash
+                    _localFileDirectory = exeStartupPath & Backslash
                 End If
 
-                If Not Directory.Exists(_localFileDirectory + dir + Backslash) Then
-                    MkDir(_localFileDirectory + dir + Backslash)
+                If Not Directory.Exists(_localFileDirectory & dir & Backslash) Then
+                    MkDir(_localFileDirectory & dir & Backslash)
                 End If
 
-                _localFileDirectory = _localFileDirectory + dir + Backslash
+                _localFileDirectory = _localFileDirectory & dir & Backslash
 
                 Console.WriteLine("Download path: {0}", _localFileDirectory)
             End If
@@ -124,7 +124,7 @@ Namespace Utilities
         Public Shared Function DownloadAvailableGames() As HashSet(Of String)
 
             Console.WriteLine("Checking: Available games")
-            DownloadFile(GamesTxtUrl, GamesTextFileName)
+            DownloadFile(_gamesTxtUrl, GamesTextFileName)
             Return New HashSet(Of String)(ReadFileContents(GamesTextFileName).Split(New Char() {vbLf}))
         End Function
 

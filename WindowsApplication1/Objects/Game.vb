@@ -281,12 +281,12 @@ Namespace Objects
             Home = game("teams")("home")("team")("locationName").ToString()
             HomeAbbrev = game("teams")("home")("team")("abbreviation").ToString()
             HomeTeam = game("teams")("home")("team")("teamName").ToString()
-            HomeTeamName = Home + " " + HomeTeam
+            HomeTeamName = Home & " " & HomeTeam
 
             Away = game("teams")("away")("team")("locationName").ToString()
             AwayAbbrev = game("teams")("away")("team")("abbreviation").ToString()
             AwayTeam = game("teams")("away")("team")("teamName").ToString()
-            AwayTeamName = Away + " " + AwayTeam
+            AwayTeamName = Away & " " & AwayTeam
 
             If (status >= 3) Then
                 GamePeriod = game("linescore")("currentPeriodOrdinal").ToString() '1st 2nd 3rd OT 2OT ...
@@ -399,13 +399,13 @@ Namespace Objects
 
                 Dim titleArg As String = literalPlayerArgs
                 If PlayerType = PlayerTypeEnum.Vlc Then
-                    titleArg = String.Format("--meta-title{0}{1}{2}{3}{4}", space, dblQuot2, GameTitle, dblQuot2, space)
+                    titleArg = String.Format("--meta-title{0}{1}{2}{1}{0}", space, dblQuot2, GameTitle)
                 ElseIf PlayerType = PlayerTypeEnum.Mpv Then
-                    titleArg = String.Format("--title{0}{1}{2}{3}{4}--user-agent=User-Agent={5}Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316{6}{7}", space, dblQuot2, GameTitle, dblQuot2, space, dblQuot2, dblQuot2, space)
+                    titleArg = String.Format("--title{0}{1}{2}{1}{0}--user-agent=User-Agent={1}Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316{1}{0}", space, dblQuot2, GameTitle)
                 End If
 
                 If String.IsNullOrEmpty(PlayerPath) = False Then
-                    returnValue &= String.Format("--player{0}{1}{2}{3}{4}{5}{6}{7}{8}", space, dblQuot, PlayerPath, space, titleArg, literalPlayerArgs, space, dblQuot, space)
+                    returnValue &= String.Format("--player{0}{1}{2}{0}{3}{4}{0}{1}{0}", space, dblQuot, PlayerPath, titleArg, literalPlayerArgs)
                 Else
                     Console.WriteLine("Error: Player path is empty")
                 End If
@@ -415,10 +415,10 @@ Namespace Objects
                 End If
 
                 If safeOutput = False Then
-                    returnValue &= String.Format("--http-cookie={0}mediaAuth={1}{2}{3}{4}", dblQuot, Common.GetRandomString(240), space, dblQuot, space)
+                    returnValue &= String.Format("--http-cookie={0}mediaAuth={1}{2}{0}{2}", dblQuot, Common.GetRandomString(240), space)
                 End If
 
-                returnValue &= String.Format("--http-header={0}User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316{1}{2}", dblQuot, dblQuot, space)
+                returnValue &= String.Format("--http-header={0}User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316{0}{1}", dblQuot, space)
 
                 If safeOutput = False Then
                     returnValue &= String.Format("{0}hlsvariant://", dblQuot)

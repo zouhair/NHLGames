@@ -42,7 +42,7 @@
 
         <TextBlock FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Left"
                Grid.Column="2" Margin="5" Foreground="Red"
-               Text="Note: You must reset for changes to take effect (working on it...)." />
+               Text="Note: You must reset for changes to take effect." />
 
 
         <TextBlock FontWeight="Bold" Grid.Row="1" Grid.Column="0" Text="Detection Type: " HorizontalAlignment="Right" Margin="5" />
@@ -90,10 +90,11 @@
 
 
         <!--Enabled or Disabled Modules-->
-        <Grid Grid.Row="5" Grid.Column="0" ColumnSpan="3" Margin="0,10,0,0">
+        <Grid Grid.Row="5" Grid.Column="0" ColumnSpan="3" Margin="20,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
+                <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -105,9 +106,9 @@
             <ListBox Grid.Row="1" Grid.Column="0" Height="150" VerticalAlignment="Top" 
                      ItemsSource="{Binding DisabledModules}" DisplayMemberPath="Title"
                      SelectedItem="{Binding SelectedModule}"
-                     SelectionMode="Single" />
+                     SelectionMode="Single" Grid.RowSpan="2" />
 
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,13,0,43" >
                 <Button Content="&gt;&gt;&gt;" Width="40" Margin="10" Command="{Binding  EnableModuleCommand}" CommandParameter="{Binding SelectedModule}" />
                 <Button Content="&lt;&lt;&lt;" Width="40" Command="{Binding DisableModuleCommand}" CommandParameter="{Binding SelectedModule}" />
             </StackPanel>
@@ -116,10 +117,10 @@
             <ListBox Grid.Row="1" Grid.Column="2" Height="150" VerticalAlignment="Top" 
                      ItemsSource="{Binding EnabledModules}" DisplayMemberPath="Title"
                      SelectedItem="{Binding SelectedModule}"
-                     SelectionMode="Single" />
+                     SelectionMode="Single" Grid.RowSpan="2" />
 
             <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Vertical" Margin="5,0,5,5" Visibility="{Binding SelectedModule, Converter={StaticResource NullToVisibilityConverter}}"
-                        Grid.RowSpan="2">
+                        Grid.RowSpan="3">
                 <StackPanel Orientation="Horizontal" >
                     <TextBlock Text="{Binding SelectedModule.Title, StringFormat='\{0} Description:'}" FontWeight="Bold" Style="{StaticResource marginStyle}" />
                 </StackPanel>

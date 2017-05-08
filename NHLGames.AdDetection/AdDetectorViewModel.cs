@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
@@ -72,6 +73,8 @@ namespace NHLGames.AdDetection
                     m_currentEngine = new VolumeAdDetectionEngine();
                     m_currentEngine.Start(m_modules.Where(x => m_settings.EnabledModules.Contains(x.Key)).Select(x => x.Value).ToList());
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
