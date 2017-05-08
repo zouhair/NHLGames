@@ -16,6 +16,7 @@ Public Class NHLGamesMetro
 
     Private _serverIp As String
     Private Const DomainName As String = "mf.svc.nhl.com"
+    Public Shared HostName As String
     Private Shared _settingsLoaded As Boolean = False
     Public Shared FormInstance As NHLGamesMetro = Nothing
     Private _adDetectorViewModel As AdDetectorViewModel = Nothing
@@ -285,10 +286,11 @@ Public Class NHLGamesMetro
             cbServers.SelectedItem = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.SelectedServer, String.Empty)
 
             If cbServers.SelectedItem <> Nothing Then
-                _serverIp = Dns.GetHostEntry(cbServers.SelectedItem.ToString()).AddressList.First.ToString()
-            Else
-                _serverIp = Dns.GetHostEntry(cbServers.Items(0).ToString()).AddressList.First.ToString()
+                cbServers.SelectedItem = cbServers.Items(0)
             End If
+
+            _serverIp = Dns.GetHostEntry(cbServers.SelectedItem.ToString()).AddressList.First.ToString()
+            HostName = cbServers.SelectedItem.ToString()
 
             rbVLC.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Vlc
             rbMPC.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpc

@@ -59,8 +59,8 @@ Namespace Objects
             End If
 
             Dim args = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
-            Dim address As String = String.Format("http://nhl.freegamez.gq/m3u8/{0}/{1}{2}", GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, args.Cdn)
-            Dim legacyAddress As String = String.Format("http://nhl.freegamez.gq/m3u8/{0}/{1}", GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId)
+            Dim address As String = String.Format("http://{0}/m3u8/{1}/{2}{3}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, args.Cdn)
+            Dim legacyAddress As String = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId)
 
             If IsAvailable Then
                 If CheckURL(address) Then
