@@ -64,10 +64,14 @@ Namespace Utilities
                     FileAccess.AddReadonly(hostsFilePath)
                 End If
 
-                If MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, "Do you wish to view the Hosts file confim the changes?", "Open Hosts File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                    Process.Start(hostsFilePath)
-                End If
+                MessageOpenHostsFile(hostsFilePath)
 
+            End If
+        End Sub
+
+        Private Shared Sub MessageOpenHostsFile(hostsFilePath As String)
+            If MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, "Do you wish to view the changes NHLGames made to your Hosts file?", "Open Hosts File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                Process.Start(hostsFilePath)
             End If
         End Sub
 
@@ -92,7 +96,7 @@ Namespace Utilities
 
                 Dim output As String = RemoveOldEntries(host, input)
 
-                output = output + vbNewLine + ip & " " & host
+                output = output & vbNewLine & ip & " " & host
 
                 Using sw As New StreamWriter(hostsFilePath)
                     sw.Write(output)
@@ -103,10 +107,7 @@ Namespace Utilities
                     FileAccess.AddReadonly(hostsFilePath)
                 End If
 
-
-                If MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, "Do you wish to view the Hosts file confim the changes?", "Open Hosts File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                    Process.Start(hostsFilePath)
-                End If
+                MessageOpenHostsFile(hostsFilePath)
 
             End If
 
@@ -116,7 +117,7 @@ Namespace Utilities
 
             If IsAdministrator() = False Then
 
-                If MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, "This application is missing the required hosts file entry. Do you want to restart this this application as an Administrator and add the required entry?", "Admin Access Required", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                If MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, "This application is missing the required hosts file entry. Do you want to restart this application as an Administrator and add the required entry?", "Admin Access Required", MessageBoxButtons.YesNo) = DialogResult.Yes Then
 
                     'ApplicationSettings.SetValue(ApplicationSettings.Settings.InAdminModeToSetHostsEntry, True)
                     ' Restart program And run as admin
@@ -137,6 +138,7 @@ Namespace Utilities
             Return True
 
         End Function
+
         Public Shared Function IsAdministrator() As Boolean
             Dim identity As WindowsIdentity = WindowsIdentity.GetCurrent()
             Dim principal As WindowsPrincipal = New WindowsPrincipal(identity)

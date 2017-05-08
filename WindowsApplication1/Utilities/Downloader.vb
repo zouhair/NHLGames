@@ -29,18 +29,18 @@ Namespace Utilities
                 Dim dir As String = "NHLGames"
 
                 If FileAccess.HasAccess(localAppDataPath) Then
-                    _localFileDirectory = localAppDataPath + Backslash
+                    _localFileDirectory = localAppDataPath & Backslash
                 ElseIf FileAccess.HasAccess(tempPath) Then
-                    _localFileDirectory = tempPath + Backslash
+                    _localFileDirectory = tempPath & Backslash
                 ElseIf FileAccess.HasAccess(exeStartupPath) Then
-                    _localFileDirectory = exeStartupPath + Backslash
+                    _localFileDirectory = exeStartupPath & Backslash
                 End If
 
-                If Not Directory.Exists(_localFileDirectory + dir + Backslash) Then
-                    MkDir(_localFileDirectory + dir + Backslash)
+                If Not Directory.Exists(_localFileDirectory & dir & Backslash) Then
+                    MkDir(_localFileDirectory & dir & Backslash)
                 End If
 
-                _localFileDirectory = _localFileDirectory + dir + Backslash
+                _localFileDirectory = _localFileDirectory & dir & Backslash
 
                 Console.WriteLine("Download path: {0}", _localFileDirectory)
             End If

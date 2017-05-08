@@ -6,7 +6,7 @@ Imports NHLGames.Utilities
 Namespace Controls
 
     Public Class GameControl
-        Private _broadcasters As New Dictionary(Of String, String)
+        Private ReadOnly _broadcasters As New Dictionary(Of String, String)
         Private _game As Game
 
 
@@ -29,7 +29,7 @@ Namespace Controls
                 lblHomeScore.Visible = showScores
                 lblAwayScore.Visible = showScores
                 If showScores And game.GameIsFinal And game.GamePeriod <> "3rd" Then
-                    lblTime.Text += If(game.GamePeriod <> "", "/" + game.GamePeriod, "")
+                    lblTime.Text &= If(game.GamePeriod <> "", "/" & game.GamePeriod, "")
                 End If
                 If ((Not showScores And game.GameIsFinal) OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
                     lblNotInSeason.Text = "Playoffs"
@@ -96,13 +96,13 @@ Namespace Controls
                 If game.GameIsInPlayoff Then
                     If game.GameIsLive Or game.GameIsPreGame Then
                         If game.SeriesGameNumber <> 1 Then
-                            lblNotInSeason.Text = "GM " + game.SeriesGameNumber + ": " + game.SeriesGameStatus
+                            lblNotInSeason.Text = "GM " & game.SeriesGameNumber & ": " & game.SeriesGameStatus
                         Else
-                            lblNotInSeason.Text = "Game " + game.SeriesGameNumber
+                            lblNotInSeason.Text = "Game " & game.SeriesGameNumber
                         End If
                     Else
                         lblNotInSeason.Text = game.SeriesGameStatus
-                        lblPeriod.Text = "Game " + game.SeriesGameNumber
+                        lblPeriod.Text = "Game " & game.SeriesGameNumber
                     End If
                 Else
                     lblNotInSeason.Text = "Preseason"
@@ -134,22 +134,22 @@ Namespace Controls
 
             lnkAway.Visible = game.AwayStream.IsAvailable
             If game.AwayStream.IsAvailable Then
-                tip = game.AwayTeamName + " stream"
+                tip = game.AwayTeamName & " stream"
                 If game.AwayStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.AwayStream.Network)
                     If img <> "" Then lnkAway.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
-                    tip += " on " + game.AwayStream.Network
+                    tip &= " on " & game.AwayStream.Network
                 End If
                 ToolTip.SetToolTip(lnkAway, tip)
             End If
 
             lnkHome.Visible = game.HomeStream.IsAvailable
             If game.HomeStream.IsAvailable Then
-                tip = game.HomeTeamName + " stream"
+                tip = game.HomeTeamName & " stream"
                 If game.HomeStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.HomeStream.Network)
                     If img <> "" Then lnkHome.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
-                    tip += " on " + game.HomeStream.Network
+                    tip &= " on " & game.HomeStream.Network
                 End If
                 ToolTip.SetToolTip(lnkHome, tip)
             End If
@@ -160,7 +160,7 @@ Namespace Controls
                 If game.FrenchStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.FrenchStream.Network)
                     If img <> "" Then lnkFrench.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
-                    tip += " on " + game.FrenchStream.Network
+                    tip &= " on " & game.FrenchStream.Network
                 End If
                 ToolTip.SetToolTip(lnkFrench, tip)
             End If
@@ -171,7 +171,7 @@ Namespace Controls
                 If game.NationalStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.NationalStream.Network)
                     If img <> "" Then lnkNational.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
-                    tip += " on " + game.NationalStream.Network
+                    tip &= " on " & game.NationalStream.Network
                 End If
                 ToolTip.SetToolTip(lnkNational, tip)
             End If
@@ -333,6 +333,10 @@ Namespace Controls
             _broadcasters.Add("CITY", "CBC")
             _broadcasters.Add("WGN", "WGN")
             _broadcasters.Add("PRIM", "FS")
+            _broadcasters.Add("CNBC", "NBC")
+            _broadcasters.Add("KCOP", "FS")
+            _broadcasters.Add("TCN", "CSN")
+            _broadcasters.Add("USA", "NBC")
         End Sub
     End Class
 End Namespace

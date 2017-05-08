@@ -65,7 +65,7 @@ Namespace Objects
             If IsAvailable Then
                 If CheckURL(address) Then
                     Dim client As WebClient = New WebClient()
-                    client.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316")
+                    'client.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316")
                     Dim reader As StreamReader = New StreamReader(client.OpenRead(address))
                     GameUrl = reader.ReadToEnd()
                 Else

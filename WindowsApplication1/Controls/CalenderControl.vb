@@ -9,7 +9,7 @@ Namespace Controls
         Public Sub ReloadCal(ByVal ldate As Date, ByVal selected As Integer)
             _currentDate = ldate
             Clearall()
-            lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(ldate.Month) + " " + ldate.Year.ToString
+            lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(ldate.Month) & " " & ldate.Year.ToString
             Dim fdate As DayOfWeek = GetFirstOfMonthDay(ldate)
             Dim idate As Integer = 1
             Dim row As Integer = 1
@@ -247,20 +247,20 @@ Namespace Controls
         Private Sub btnToday_Click(sender As Object, e As EventArgs) Handles lnkToday.Click
             ReloadCal(Date.Today, Date.Today.Day)
             NHLGamesMetro.GameDate = Date.Today
-            NHLGamesMetro.LabelDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(Date.Today.DayOfWeek).Substring(0, 3) + ", " +
-                                           CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Date.Today.Month).Substring(0, 3) + " " +
-                                           Date.Today.Day.ToString + ", " + Date.Today.Year.ToString
+            NHLGamesMetro.LabelDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(Date.Today.DayOfWeek).Substring(0, 3) & ", " &
+                                           CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Date.Today.Month).Substring(0, 3) & " " &
+                                           Date.Today.Day.ToString & ", " & Date.Today.Year.ToString
             NHLGamesMetro.FlpCalendar.Visible = False
         End Sub
 
         Private Sub Day_Click(sender As Object, e As EventArgs) Handles We6.Click, We5.Click, We4.Click, We3.Click, We2.Click, We1.Click, Tu6.Click, Tu5.Click, Tu4.Click, Tu3.Click, Tu2.Click, Tu1.Click, Th6.Click, Th5.Click, Th4.Click, Th3.Click, Th2.Click, Th1.Click, Su6.Click, Su5.Click, Su4.Click, Su3.Click, Su2.Click, Su1.Click, Sa6.Click, Sa5.Click, Sa4.Click, Sa3.Click, Sa2.Click, Sa1.Click, Mo6.Click, Mo5.Click, Mo4.Click, Mo3.Click, Mo2.Click, Mo1.Click, Fr6.Click, Fr5.Click, Fr4.Click, Fr3.Click, Fr2.Click, Fr1.Click
             Dim btn As Button
             btn = sender
-            Dim myDate = _currentDate.AddDays(-_currentDate.Day + btn.Text)
-            NHLGamesMetro.GameDate = _currentDate.AddDays(-_currentDate.Day + btn.Text)
-            NHLGamesMetro.LabelDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(myDate.DayOfWeek).Substring(0, 3) + ", " +
-                                           CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(myDate.Month).Substring(0, 3) + " " +
-                                           myDate.Day.ToString + ", " + myDate.Year.ToString
+            Dim myDate = _currentDate.AddDays(-_currentDate.Day & btn.Text)
+            NHLGamesMetro.GameDate = _currentDate.AddDays(-_currentDate.Day & btn.Text)
+            NHLGamesMetro.LabelDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(myDate.DayOfWeek).Substring(0, 3) & ", " &
+                                           CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(myDate.Month).Substring(0, 3) & " " &
+                                           myDate.Day.ToString & ", " & myDate.Year.ToString
             NHLGamesMetro.FlpCalendar.Visible = False
         End Sub
 
