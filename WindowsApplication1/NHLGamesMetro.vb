@@ -184,13 +184,7 @@ Public Class NHLGamesMetro
         progress.Location = New Point((flpGames.Width - progress.Width) / 2, flpGames.Location.Y + 150)
         NoGames.Location = New Point((flpGames.Width - NoGames.Width) / 2, flpGames.Location.Y + 148)
 
-        lblDate.Text = If(CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(GameDate.DayOfWeek).Length >= 3,
-                            CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(GameDate.DayOfWeek).Substring(0, 3),
-                            CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(GameDate.DayOfWeek).ToString()) & ", " &
-                        If(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(GameDate.Month).Length >= 3,
-                            CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(GameDate.Month).Substring(0, 3),
-                            CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(GameDate.Month).ToString()) & " " &
-                        Date.Today.Day.ToString & ", " & GameDate.Year.ToString
+        lblDate.Text = DateHelper.GetFormattedDate(GameDate)
 
         LabelDate = lblDate
         GamesDownloadedTime = Now
@@ -592,16 +586,12 @@ Public Class NHLGamesMetro
 
     Private Sub btnYesterday_Click(sender As Object, e As EventArgs) Handles btnYesterday.Click
         GameDate = GameDate.AddDays(-1)
-        lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(GameDate.DayOfWeek).Substring(0, 3) & ", " &
-            CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(GameDate.Month).Substring(0, 3) & " " &
-            GameDate.Day.ToString & ", " & GameDate.Year.ToString
+        lblDate.Text = DateHelper.GetFormattedDate(GameDate)
     End Sub
 
     Private Sub btnTomorrow_Click(sender As Object, e As EventArgs) Handles btnTomorrow.Click
         GameDate = GameDate.AddDays(1)
-        lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(GameDate.DayOfWeek).Substring(0, 3) & ", " &
-            CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(GameDate.Month).Substring(0, 3) & " " &
-            GameDate.Day.ToString & ", " & GameDate.Year.ToString
+        lblDate.Text = DateHelper.GetFormattedDate(GameDate)
     End Sub
 
 
