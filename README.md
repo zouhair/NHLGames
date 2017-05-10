@@ -18,11 +18,13 @@ Tool to watch NHL games in High Definition
       * [Navigation bar](#navigation-bar)
       * [Game panel](#game-panel)
    * [Settings](#settings)
+     * [Show Scores](#show-scores)
      * [Players](#players)
-     * [Streamlink](#streamlink)
-     * [Hosts](#hosts)
-     * [Resolution](#resolution)
+     * [Stream Quality](#stream-quality)
      * [Content Delivery Network (CDN)](#content-delivery-network-cdn)
+     * [Server's Hostname](#servers-hostname)
+     * [Server Hosts Entry](#server-hosts-entry)
+     * [Streamlink](#streamlink)
      * [Other options](#other-options)
    * [Console](#console)
    * [Ad Detection Modules](#ad-detection-modules)
@@ -38,7 +40,7 @@ Tool to watch NHL games in High Definition
 NHLGames is an app built on .NET Framework 4.5. So, it's only available on Windows and works on any CPU (x86/x64). If you run NHLGames on Windows 7 or older you will probably need to install [.NET Framework 4.5](https://www.microsoft.com/en-ca/download/details.aspx?id=30653), but we can't garantee it will run on XP since Microsoft ended support on XP.
 
 ## Message about the hosts file
-First time you start NHLGames it will ask if you wish to view the Hosts file. That means the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [hosts file](#hosts-file) section.
+First time you start NHLGames it will ask if you wish to view the Hosts file. That means the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [Server Hosts Entry](#server-hosts-entry) section.
 
 ## Setup
 To be able to play streams properly, you have to choose a media player in the ![image](https://cloud.githubusercontent.com/assets/23088305/25557243/ce306f64-2cdb-11e7-9fa3-a4a73161c3ea.png) tab. Make sure the player that you choose has a valid path to the EXE file.
@@ -48,14 +50,7 @@ MPV player comes with NHLGames. So if you don't have or want VLC/MPC players, ju
 If you want to change some settings, see the [Settings](#settings) section.
 
 ### Hosts file
-To test your hosts file, go to Settings and click on `Test` button. It should tells you if everything is fine.
-
-If NHLGames is not set properly, click on `View Hosts` and select Notepad to open it. If you can't open it: Go to `C:\Windows\System32\Drivers\etc` and right click on `hosts`, choose `Run as an administrator` and open it with Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, there is a button called `DIY Steps`, click on it and you will see the line, you can copy the line to your clipboard by clicking on 'Yes'. 
-
-If you dont't find the entry line in the Hosts file and if the `Add Entry` button does not work. You can paste the line from your clipboard (that you copied earlier) or you can type it manually.
-
-Note: If you need to remove NHLGames entries, just click on `Remove Entries` or open it with `View Hosts` and remove our entries.
-
+See the [Server Hosts Entry](#server-hosts-entry) section.
 
 # User interface
 Everytime you launch NHLGames it will search for today's games. 
@@ -88,24 +83,16 @@ NHLGames gives you some options to change how a game panel will appear.
 ### Players
 NHLGames supports 3 media players:
 - MPV (default player, comes with NHLGames)
-- MPC (increase Stream Analysis Duration to 3000)
-- VLC (version 2.2.4, 64 bits recommended)
+- MPC
+- VLC
 
-If you don't have or want VLC/MPC players, use our default media player to watch games. Make sure you select mpv as the default player.
+If you don't have or want VLC/MPC players, use our default media player to watch games. Make sure you select `MPV` as the default player.
 
 If you had previously installed VLC or MPC, NHLGames should find it automatically if you installed it in the default folder `Program Files`, otherwise you will have to browse ![image](https://cloud.githubusercontent.com/assets/23088305/25557239/b99ec37a-2cdb-11e7-8c27-d8b563128e8d.png) your computer and get the path to the EXE file. 
 
-If you choose MPC, you have to increase Stream Analysis Duration to 3000. Go to Options > Internal Filters > Splitter.
-
 If you don't have one of these players installed and you want to install it, use the links on the right to download it.
 
-### Streamlink
-Streamlink is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The path to streamlink.exe is inside NHLGames directory and it should not move, otherwise you will have to get the new path to it or you will get a message box that NHLGames lost the path and won't be able to play streams.
-
-### Hosts
-See the [hosts file](#hosts-file) section.
-
-### Resolution
+### Stream Quality
 The selected value will defined which quality will be sent to your media player, from the lowest (224p) to the highest quality (720p at 60fps). Selecting the highest quality also means bigger files to download :
 
 - 224p is about 300 MB per hour
@@ -131,8 +118,25 @@ They have 'servers everywhere' and a wide range of products and services.
 The company is actively involved in Let's Encrypt and is pushing HTTP/2 adoption.
 ```
 
+### Server's Hostname
+This drop down list shows all NHLGames server hostname, so if you can't play games, try another hostname.
+
+### Server Hosts Entry
+If the selected hostname (above) can be resolve by your network, it will get and save the related IP adress into the Windows Hosts file. 
+
+To test your Hosts file, go to Settings and click on `Test` button. It should tells you if everything is fine.
+
+If NHLGames is not set properly, click on `View Hosts` and select Notepad to open it. If you can't open it: Go to `C:\Windows\System32\Drivers\etc` and right click on `hosts`, choose `Run as an administrator` and open it with Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, there is a button called `DIY Steps`, click on it and you will see the line, you can copy the line to your clipboard by clicking on 'Yes'. 
+
+If you dont't find the entry line in the Hosts file and if the `Add Entry` button does not work. You can paste the line from your clipboard (that you copied earlier) or you can type it manually.
+
+Note: If you need to remove NHLGames entries, just click on `Remove Entries` or open it with `View Hosts` and remove our entries.
+
+### Streamlink
+Streamlink is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The path to streamlink.exe is inside NHLGames directory and it should not move, otherwise you will have to get the new path to it or you will get a message box that NHLGames lost the path and won't be able to play streams.
+
 ### Other options
-If you wish to use these other options make sur you check `Enable` first.
+If you wish to use these other options make sure to use the ON/OFF switch first.
 - Output : Path where you want to save games as .mp4 files.
 - Player args : If you want to add more arguments (commands) to be sent to your media player with the default args that NHLGames send.
 - Streamer args :  If you want to add more arguments (commands) to be sent to streamlink with the default args that NHLGames send.
