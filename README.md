@@ -154,13 +154,13 @@ First of all, if you have issues with one player you can try another player at a
 
 #### VLC 3.0 Lagging --> use 2.2.4
 If you run VLC 3.0 and it's stuttering, lagging or not rendering well, go back to the most stable version 2.2.4 :
-- [x86 (VLC 2.2.4 32bits exe) (best)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win32/vlc-2.2.4-win32.exe)
+- [x86 (VLC 2.2.4 32bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win32/vlc-2.2.4-win32.exe)
 - [x64 (VLC 2.2.4 64bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win64/vlc-2.2.4-win64.exe)
 - [VLC 2.2.4 path](https://download.videolan.org/pub/videolan/vlc/2.2.4/)
 
 #### VLC 64 bits No playback --> use 32 bits
 If you run VLC 64 bits version and VLC hangs when buffering and no playback starts or you don't have audio, use the 32 bits version (x86) instead. Since we use Streamlink, some versions of 64-bit VLC seem to be unable to read the stream. Using the 32 bits version of VLC might help.
-- [x86 (VLC 2.2.4 32bits exe) (best)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win32/vlc-2.2.4-win32.exe)
+- [x86 (VLC 2.2.4 32bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win32/vlc-2.2.4-win32.exe)
 - [VLC 2.2.4 path](https://download.videolan.org/pub/videolan/vlc/2.2.4/)
 
 #### MPC No audio --> Increase stream analysis duration
