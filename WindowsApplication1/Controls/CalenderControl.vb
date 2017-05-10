@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports NHLGames.Utilities
 
 Namespace Controls
 
@@ -9,7 +10,7 @@ Namespace Controls
         Public Sub ReloadCal(ByVal ldate As Date, ByVal selected As Integer)
             _currentDate = ldate
             Clearall()
-            lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(ldate.Month) + " " + ldate.Year.ToString
+            lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(ldate.Month) & " " & ldate.Year.ToString
             Dim fdate As DayOfWeek = GetFirstOfMonthDay(ldate)
             Dim idate As Integer = 1
             Dim row As Integer = 1
@@ -18,16 +19,16 @@ Namespace Controls
                 If col >= fdate Then
                     Exit Do
                 End If
-                getButton(col, row).Visible = False
+                GetButton(col, row).Visible = False
                 col += 1
             Loop
             Do
-                getButton(fdate, row).Text = idate
-                getButton(fdate, row).ForeColor = Color.Black
-                getButton(fdate, row).BackColor = Color.White
+                GetButton(fdate, row).Text = idate
+                GetButton(fdate, row).ForeColor = Color.Black
+                GetButton(fdate, row).BackColor = Color.White
                 If idate = selected And ldate.Month = Date.Today.Month And ldate.Year = Date.Today.Year Then
-                    getButton(fdate, row).ForeColor = Color.White
-                    getButton(fdate, row).BackColor = Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
+                    GetButton(fdate, row).ForeColor = Color.White
+                    GetButton(fdate, row).BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(230, Byte), Integer))
                 End If
                 If fdate = DayOfWeek.Saturday Then
                     row += 1
@@ -42,7 +43,7 @@ Namespace Controls
                 If (idate + GetFirstOfMonthDay(ldate)) > 42 Then
                     Exit Do
                 End If
-                getButton(fdate, row).Visible = False
+                GetButton(fdate, row).Visible = False
                 If fdate = DayOfWeek.Saturday Then
                     row += 1
                 End If
@@ -244,12 +245,10 @@ Namespace Controls
             ReloadCal(_currentDate.AddMonths(1), _currentDate.AddMonths(1).Day)
         End Sub
 
-        Private Sub btnToday_Click(sender As Object, e As EventArgs) Handles btnToday.Click
+        Private Sub btnToday_Click(sender As Object, e As EventArgs) Handles lnkToday.Click
             ReloadCal(Date.Today, Date.Today.Day)
             NHLGamesMetro.GameDate = Date.Today
-            NHLGamesMetro.LabelDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(Date.Today.DayOfWeek).Substring(0, 3) + ", " +
-                                           CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Date.Today.Month).Substring(0, 3) + " " +
-                                           Date.Today.Day.ToString + ", " + Date.Today.Year.ToString
+            NHLGamesMetro.LabelDate.Text = DateHelper.GetFormattedDate(Date.Today)
             NHLGamesMetro.FlpCalendar.Visible = False
         End Sub
 
@@ -258,9 +257,7 @@ Namespace Controls
             btn = sender
             Dim myDate = _currentDate.AddDays(-_currentDate.Day + btn.Text)
             NHLGamesMetro.GameDate = _currentDate.AddDays(-_currentDate.Day + btn.Text)
-            NHLGamesMetro.LabelDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(myDate.DayOfWeek).Substring(0, 3) + ", " +
-                                           CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(myDate.Month).Substring(0, 3) + " " +
-                                           myDate.Day.ToString + ", " + myDate.Year.ToString
+            NHLGamesMetro.LabelDate.Text = DateHelper.GetFormattedDate(myDate)
             NHLGamesMetro.FlpCalendar.Visible = False
         End Sub
 

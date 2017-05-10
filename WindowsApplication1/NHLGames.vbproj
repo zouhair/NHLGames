@@ -82,16 +82,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MetroFramework, Version=1.3.5.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.3.5.0\lib\net45\MetroFramework.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
     </Reference>
     <Reference Include="MetroFramework.Design, Version=1.3.5.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.3.5.0\lib\net45\MetroFramework.Design.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
     </Reference>
     <Reference Include="MetroFramework.Fonts, Version=1.3.5.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.3.5.0\lib\net45\MetroFramework.Fonts.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -242,8 +242,6 @@
     <EmbeddedResource Include="Logos\nhl-icon.png" />
     <None Include="DeveloperReadme.txt" />
     <None Include="Icons\bdown.png" />
-    <None Include="Icons\bleft.png" />
-    <None Include="Icons\bright.png" />
     <None Include="Icons\bup.png" />
     <None Include="Icons\wdate.png" />
     <None Include="Icons\wleft.png" />
@@ -269,7 +267,39 @@
     <EmbeddedResource Include="Logos\Kings.gif" />
     <EmbeddedResource Include="Logos\Lightning.gif" />
     <EmbeddedResource Include="Logos\MapleLeafs.gif" />
+    <EmbeddedResource Include="broadcasters\alt.gif" />
+    <EmbeddedResource Include="broadcasters\cbc.gif" />
+    <EmbeddedResource Include="broadcasters\csn.gif" />
+    <EmbeddedResource Include="broadcasters\espn.gif" />
+    <EmbeddedResource Include="broadcasters\fs.gif" />
+    <EmbeddedResource Include="broadcasters\msg.gif" />
+    <EmbeddedResource Include="broadcasters\nbc.gif" />
+    <EmbeddedResource Include="broadcasters\nesn.gif" />
+    <EmbeddedResource Include="broadcasters\rds.gif" />
+    <EmbeddedResource Include="broadcasters\root.gif" />
+    <EmbeddedResource Include="broadcasters\sn.gif" />
+    <EmbeddedResource Include="broadcasters\tsn.gif" />
+    <EmbeddedResource Include="broadcasters\tvas.gif" />
+    <None Include="Icons\endz1.gif" />
+    <None Include="Icons\endz2.gif" />
+    <EmbeddedResource Include="broadcasters\wgn.gif" />
+    <None Include="Icons\clos.gif" />
+    <None Include="Icons\close.gif" />
+    <Content Include="Icons\git.gif" />
+    <None Include="Icons\help.gif" />
+    <None Include="Icons\helpgit.gif" />
     <Content Include="Icons\live.gif" />
+    <None Include="Icons\nhltv.gif" />
+    <None Include="Icons\refc.gif" />
+    <None Include="Icons\sixc.gif" />
+    <None Include="Icons\threec.gif" />
+    <None Include="Icons\max.gif" />
+    <None Include="Icons\min.gif" />
+    <None Include="Icons\norm.gif" />
+    <None Include="Icons\maximize.gif" />
+    <None Include="Icons\minimize.gif" />
+    <None Include="Icons\normal.gif" />
+    <Content Include="Icons\reddit.gif" />
     <Content Include="Logos\nhl_icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

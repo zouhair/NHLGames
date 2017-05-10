@@ -59,13 +59,13 @@ Namespace Objects
             End If
 
             Dim args = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
-            Dim address As String = String.Format("http://nhl.freegamez.gq/m3u8/{0}/{1}{2}", GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, args.Cdn)
-            Dim legacyAddress As String = String.Format("http://nhl.freegamez.gq/m3u8/{0}/{1}", GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId)
+            Dim address As String = String.Format("http://{0}/m3u8/{1}/{2}{3}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, args.Cdn)
+            Dim legacyAddress As String = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId)
 
             If IsAvailable Then
                 If CheckURL(address) Then
                     Dim client As WebClient = New WebClient()
-                    client.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316")
+                    'client.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316")
                     Dim reader As StreamReader = New StreamReader(client.OpenRead(address))
                     GameUrl = reader.ReadToEnd()
                 Else

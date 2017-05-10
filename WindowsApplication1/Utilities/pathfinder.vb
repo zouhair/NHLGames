@@ -16,8 +16,8 @@ Namespace Utilities
                 Catch
                 End Try
             Next
-            Return (From dirFound As Object In dirPrgFiles Where dirFound.Length <> 0 Where My.Computer.FileSystem.FileExists(dirFound(0) + programPath)
-                    Select dirFound(0) + programPath).FirstOrDefault()
+            Return (From dirFound As Object In dirPrgFiles Where dirFound.Length <> 0 Where My.Computer.FileSystem.FileExists(dirFound(0) & programPath)
+                    Select dirFound(0) & programPath).FirstOrDefault()
         End Function
 
         Private Shared Function _is64bits() As Boolean

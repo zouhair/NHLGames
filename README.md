@@ -5,34 +5,42 @@ Tool to watch NHL games in High Definition
 - Click on a stream link inside the game panel.
 - Enjoy the game.
 
-![image](https://cloud.githubusercontent.com/assets/23088305/25556664/43f875b0-2cce-11e7-8ca9-9f6d9d1b2121.png)
+![image](https://cloud.githubusercontent.com/assets/23088305/25733593/aa1c8648-3128-11e7-8407-2a4e51a9fddc.png)
 
 ## Index
 * [First use](#first-use)
+  * [Requirements](#requirements)
   * [Message about the hosts file](#message-about-the-hosts-file)
   * [Setup](#setup)
-     * [Hosts file](#hosts-file)
-  * [Requirements](#requirements)
+     * [Hosts file](#hosts-file)  
  * [User interface](#user-interface)
    * [Games](#games)
       * [Navigation bar](#navigation-bar)
       * [Game panel](#game-panel)
    * [Settings](#settings)
+     * [Show Scores](#show-scores)
      * [Players](#players)
-     * [Streamlink](#streamlink)
-     * [Hosts](#hosts)
-     * [Resolution](#resolution)
+     * [Stream Quality](#stream-quality)
      * [Content Delivery Network (CDN)](#content-delivery-network-cdn)
+     * [Server's Hostname](#servers-hostname)
+     * [Server Hosts Entry](#server-hosts-entry)
+     * [Streamlink](#streamlink)
      * [Other options](#other-options)
    * [Console](#console)
    * [Ad Detection Modules](#ad-detection-modules)
+* [Support](#support)
+  * [Players issues](#players-issues)
+  * [App issues](#app-issues)
 * [Chromecast](#chromecast)
 * [Contribute](#contribute)
 
 
 # First use
+## Requirements
+NHLGames is an app built on .NET Framework 4.5. So, it's only available on Windows and works on any CPU (x86/x64). If you run NHLGames on Windows 7 or older you will probably need to install [.NET Framework 4.5](https://www.microsoft.com/en-ca/download/details.aspx?id=30653), but we can't garantee it will run on XP since Microsoft ended support on XP.
+
 ## Message about the hosts file
-First time you start NHLGames it will ask if you wish to view the Hosts file. That means the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [hosts file](#hosts-file) section.
+First time you start NHLGames it will ask if you wish to view the Hosts file. That means the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [Server Hosts Entry](#server-hosts-entry) section.
 
 ## Setup
 To be able to play streams properly, you have to choose a media player in the ![image](https://cloud.githubusercontent.com/assets/23088305/25557243/ce306f64-2cdb-11e7-9fa3-a4a73161c3ea.png) tab. Make sure the player that you choose has a valid path to the EXE file.
@@ -42,12 +50,7 @@ MPV player comes with NHLGames. So if you don't have or want VLC/MPC players, ju
 If you want to change some settings, see the [Settings](#settings) section.
 
 ### Hosts file
-To test your hosts file, go to Settings and click on `Test Hosts File` button. It should tells you if everything is fine.
-
-If NHLGames is not set properly, click on `Open Hosts File` and select Notepad to open it, or go to `C:\Windows\System32\Drivers\etc` and open `hosts` by using Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, next to the Hosts buttons. If you don't find it, you will have to add it manually (if NHLGames doesn't have access to it) or try `Add Hosts entry` button.
-
-## Requirements
-NHLGames is an app built on .Net Framework 4.6. So, it's only available on Windows. If you run NHLGames on Windows 7 or older you will probably need to install [.Net Framework 4.6](https://www.microsoft.com/en-ca/download/details.aspx?id=30653)
+See the [Server Hosts Entry](#server-hosts-entry) section.
 
 # User interface
 Everytime you launch NHLGames it will search for today's games. 
@@ -67,8 +70,8 @@ Here are 5 differents game panels that you will see while using NHLGames.
   5. Gray : Final games
   
   Note : 6th picture shows the possibility to add live score or final score to the panel. You can turn it on/off in Settings tab.
-  
-![image](https://cloud.githubusercontent.com/assets/23088305/25557145/66d2a94c-2cd9-11e7-90ef-7e04e740f5a7.png)
+
+![image](https://cloud.githubusercontent.com/assets/23088305/25744794/b7e037f2-3169-11e7-89d6-98fe61684158.png)
 
 ## Settings
 ### Show Scores
@@ -80,22 +83,16 @@ NHLGames gives you some options to change how a game panel will appear.
 ### Players
 NHLGames supports 3 media players:
 - MPV (default player, comes with NHLGames)
-- MPC 
-- VLC (version 2.2.4, 64 bits recommended)
+- MPC
+- VLC
 
-If you don't have or want VLC/MPC players, use our default media player to watch games. Make sure you select mpv as the default player.
+If you don't have or want VLC/MPC players, use our default media player to watch games. Make sure you select `MPV` as the default player.
 
 If you had previously installed VLC or MPC, NHLGames should find it automatically if you installed it in the default folder `Program Files`, otherwise you will have to browse ![image](https://cloud.githubusercontent.com/assets/23088305/25557239/b99ec37a-2cdb-11e7-8c27-d8b563128e8d.png) your computer and get the path to the EXE file. 
 
 If you don't have one of these players installed and you want to install it, use the links on the right to download it.
 
-### Streamlink
-Streamlink is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The path to streamlink.exe is inside NHLGames directory and it should not move, otherwise you will have to get the new path to it or you will get a message box that NHLGames lost the path and won't be able to play streams.
-
-### Hosts
-See the [hosts file](#hosts-file) section.
-
-### Resolution
+### Stream Quality
 The selected value will defined which quality will be sent to your media player, from the lowest (224p) to the highest quality (720p at 60fps). Selecting the highest quality also means bigger files to download :
 
 - 224p is about 300 MB per hour
@@ -121,8 +118,25 @@ They have 'servers everywhere' and a wide range of products and services.
 The company is actively involved in Let's Encrypt and is pushing HTTP/2 adoption.
 ```
 
+### Server's Hostname
+This drop down list shows all NHLGames server hostname, so if you can't play games, try another hostname.
+
+### Server Hosts Entry
+If the selected hostname (above) can be resolve by your network, it will get and save the related IP adress into the Windows Hosts file. 
+
+To test your Hosts file, go to Settings and click on `Test` button. It should tells you if everything is fine.
+
+If NHLGames is not set properly, click on `View Hosts` and select Notepad to open it. If you can't open it: Go to `C:\Windows\System32\Drivers\etc` and right click on `hosts`, choose `Run as an administrator` and open it with Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, there is a button called `DIY Steps`, click on it and you will see the line, you can copy the line to your clipboard by clicking on 'Yes'. 
+
+If you dont't find the entry line in the Hosts file and if the `Add Entry` button does not work. You can paste the line from your clipboard (that you copied earlier) or you can type it manually.
+
+Note: If you need to remove NHLGames entries, just click on `Remove Entries` or open it with `View Hosts` and remove our entries.
+
+### Streamlink
+Streamlink is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The path to streamlink.exe is inside NHLGames directory and it should not move, otherwise you will have to get the new path to it or you will get a message box that NHLGames lost the path and won't be able to play streams.
+
 ### Other options
-If you wish to use these other options make sur you check `Enable` first.
+If you wish to use these other options make sure to use the ON/OFF switch first.
 - Output : Path where you want to save games as .mp4 files.
 - Player args : If you want to add more arguments (commands) to be sent to your media player with the default args that NHLGames send.
 - Streamer args :  If you want to add more arguments (commands) to be sent to streamlink with the default args that NHLGames send.
@@ -132,6 +146,67 @@ Go to this section to inspect everything that NHLGames does. Also, any error or 
 
 ## Ad Detection Modules
 NHLGames don't use any Ad Detection modules by default, but you can activate one by checking `Enabled` and by moving a module from the left box to the right. Select one and use the `>>>` arrow button to activate it, use the `<<<` arrow button to desactivate it. If you don't use any, it's better if you disable the Ad Detection module. 
+
+
+# Support
+## Players issues
+First of all, if you have issues with one player you can try another player at any time by choosing another player in the `Settings` tab in the app under the `Players` section. Just make sure your choosen player is installed and the path is set in the settings tab. No need to download MPV, it comes with NHLGames and should work.
+
+#### VLC 3.0 Lagging --> use 2.2.4
+If you run VLC 3.0 and it's stuttering, lagging or not rendering well, go back to the most stable version 2.2.4 :
+- [x86 (VLC 2.2.4 32bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win32/vlc-2.2.4-win32.exe)
+- [x64 (VLC 2.2.4 64bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win64/vlc-2.2.4-win64.exe)
+- [VLC 2.2.4 path](https://download.videolan.org/pub/videolan/vlc/2.2.4/)
+
+#### VLC 64 bits No playback --> use 32 bits
+If you run VLC 64 bits version and VLC hangs when buffering and no playback starts or you don't have audio, use the 32 bits version (x86) instead. Since we use Streamlink, some versions of 64-bit VLC seem to be unable to read the stream. Using the 32 bits version of VLC might help.
+- [x86 (VLC 2.2.4 32bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win32/vlc-2.2.4-win32.exe)
+- [VLC 2.2.4 path](https://download.videolan.org/pub/videolan/vlc/2.2.4/)
+
+#### MPC No audio --> Increase stream analysis duration
+You will need to do the following to fix audio:
+
+`Options > Internal Filters > Splitter`
+
+Increase `stream analysis duration` (eg. 3000)
+
+#### Player is lagging and i'm using a laptop -> Are you on power saver mode ?
+Streaming games needs processor time and network bandwidth, so your laptop has to be set to High Performance mode.
+
+#### Buffering issue, timeout every 10 secs -> Try to disable Windows auto tuning level
+Open Command Prompt :
+
+`netsh int tcp set global autotuninglevel=disabled`
+
+If this impacts your connection and you want to return to the default value
+
+`netsh int tcp set global autotuninglevel=normal`
+
+#### Player used to open, but it does not anymore --> Kill old processes of this player
+Sometimes a player process can still runs even if the stream ended and an old process of the same name can affect another from starting. So right click on your Windows taskbar and click on `Start Task Manager` (CTRL + Shift + ESC), go to `Processes` tab and right click on all of your player processes (.exe) that are running and click on `End Process`.
+
+
+## App issues
+#### Can't play games from past two or three days --> Wait for it to become available (week)
+NHLGames get streams from NHL GameCenter Live and it gets issues with some past games that are not archived yet. So until we fix this issue, you will have to wait for the game to be archived.
+
+#### Game won't start after clicking on a stream --> Check your Hosts file
+If you clicked on a stream and nothing starts after the loading bar has disappeared, go to `Settings` and click on `Test` button to check if your Hosts file has been modified by NHLGames. If you get a red message box that means you won't be able to see a stream until you fix your Windows Hosts file. See the [Hosts](#hosts) section.
+
+#### Windows can't find Hosts file --> Do it yourself
+NHLGames can't have access to the Hosts file, so you will have to add the entry line from `Settings` tab > `DIY Steps` button and paste it to your Hosts file in `C:\Windows\System32\Drivers\etc`. See the [Hosts](#hosts) section.
+
+#### Forbidden 403, Unauthorized 401 or Not Found 404 Error --> Use another NHLGames domain in Settings
+If you can't get any games from NHLGames, try using another domain in the `Settings` tab. Use the drop down list.
+
+#### Timeout error when trying to load games --> Restart the app
+At the moment we did not find the source of this issue, but we think that the server might be busy. Restarting the app might help.
+
+#### Display scaling issue on high DPI settings --> Disable DPI for NHLGames
+A high DPI display (other than 100%) can cause controls to be cut off. Right click on NHLGames.exe and check this option: `Properties > Compatibility > Display scaling on high DPI settings`.
+
+#### Ad Detection Module Tab not showing up --> Unblock DLLs
+Right click on the DLL's in the Spotify/OBS folders then in `Properties` check the `unblock` button at the bottom of the `General` tab, that should get them to show up.
 
 
 # Chromecast
@@ -146,6 +221,7 @@ NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps 
 4. Use NHLGames to get a stream, once the game plays, move the media player window to the right monitor and enjoy the show.
 
 <img src="https://cloud.githubusercontent.com/assets/23088305/25556617/a6caab1e-2ccd-11e7-89d3-c9177a997ed1.png" width="300"/>
+
 
 # Contribute
 NHLGames is written in Visual Basic. Ad Detection modules are written in C#. We use Visual Studio to code. 
