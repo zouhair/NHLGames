@@ -712,8 +712,9 @@ Public Class NHLGamesMetro
     Private Sub btnDisplayEntry_Click(sender As Object, e As EventArgs) Handles btnDisplayEntry.Click
         Dim result As DialogResult
         result = MetroMessageBox.Show(Me, String.Format("This line needs to be insert in your hosts file : {0}{1} {2}{0}" &
-            "Copy and paste that entry line at the end of your Hosts file.{0}" &
-            "You can use 'Open Hosts File' button with Notepad to open the Hosts file quickly.{0}" &
+            "Use 'Open Hosts File' button to open the Hosts file quickly or go to : {0}" &
+            "C:\Windows\System32\drivers\etc\hosts{0}" &
+            "Use Notepad to edit it and paste (Ctrl+V) our entry line at the end of your Hosts file.{0}" &
             "Do you want to copy that entry line to your clipboard ?",
             vbCrLf, _serverIp, DomainName), "Do It Yourself steps", MessageBoxButtons.YesNo)
         If result = System.Windows.Forms.DialogResult.Yes Then
