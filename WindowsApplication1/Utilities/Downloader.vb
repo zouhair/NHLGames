@@ -101,7 +101,7 @@ Namespace Utilities
             Dim appVers As String
             Console.WriteLine("Checking: Application version")
             'checking every week "070" for a new version
-            DownloadFile(ApplicationVersionUrl, ApplicationVersionFileName, True, True, "070")
+            DownloadFile(ApplicationVersionUrl, ApplicationVersionFileName, True, True)
             appVers = ReadFileContents(ApplicationVersionFileName).Trim()
             If Not appVers.Contains("<html>") Then
                 Return appVers
