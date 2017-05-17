@@ -463,7 +463,7 @@ Namespace Objects
                         suffix += 1
                     End While
 
-                    returnValue &= "-o" & space & dblQuot & outputPath & dblQuot & space
+                    returnValue &= "-f -o" & space & dblQuot & outputPath & dblQuot & space
                 End If
 
                 If UsestreamlinkArgs Then

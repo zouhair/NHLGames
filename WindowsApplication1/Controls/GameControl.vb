@@ -191,7 +191,7 @@ Namespace Controls
 
         Private Function _getBroadcasterPicFor(network As String)
 
-            Dim value As String = _broadcasters.Where(Function(kvp) network.StartsWith(kvp.Key.ToString())).Select(Function(kvp) kvp.Value).FirstOrDefault()
+            Dim value As String = _broadcasters.Where(Function(kvp) network.ToUpper().StartsWith(kvp.Key.ToString())).Select(Function(kvp) kvp.Value).FirstOrDefault()
             Return If(value <> Nothing, value.ToLower, "")
 
         End Function
