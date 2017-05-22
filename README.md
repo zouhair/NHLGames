@@ -34,6 +34,7 @@ Tool to watch NHL games in High Definition
     * [No audio](#no-audio)
     * [Player is lagging](#player-is-lagging)
   * [App issues](#app-issues)
+    * [App won't start](#app-wont-start)
     * [Display issues](#display-issues)
     * [Games won't load](#games-wont-load)
     * [Games won't start](#games-wont-start)
