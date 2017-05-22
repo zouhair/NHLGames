@@ -205,6 +205,15 @@ If you run VLC 3.0 and it's stuttering, lagging or not rendering well, go back t
 
 ## App issues
 
+### App won't start
+#### Application error --> Download Microsoft .NET Framework 4.5
+If you get an error like [this one](https://cloud.githubusercontent.com/assets/23088305/26311601/e75d6f9c-3ed2-11e7-8755-12075a888704.png) when trying to open NHLGames that means : 
+- You have to download and install [Microsoft .NET Framework 4.5](https://www.microsoft.com/en-ca/download/details.aspx?id=30653) (at least).
+- You have to run an Windows Operating System older than XP : Windows Vista, 7, 8, 10.
+
+#### Windows protected your PC --> Run anyway
+If you get an error like [this one](https://cloud.githubusercontent.com/assets/23088305/26286664/b2a00c14-3e1f-11e7-82b8-641bebb90d1f.png) that means Windows 10 wants to stop NHLGames from running because it is not an official publisher from Windows Store. Click on More Infos and click on Run anyway.
+
 ### Display issues
 #### Display scaling issue on high DPI settings --> Disable DPI for NHLGames
 A high DPI display (other than 100%) can cause controls to be cut off. Right click on NHLGames.exe and check this option: `Properties > Compatibility > Display scaling on high DPI settings`.
