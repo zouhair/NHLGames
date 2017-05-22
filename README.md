@@ -153,7 +153,7 @@ If you wish to use these other options make sure to use the ON/OFF switch first.
 Go to this section to inspect everything that NHLGames does. Also, any error or warning will show here.
 
 ## Modules
-NHLGames don't use any Ad Detection modules by default, but you can activate one by checking `Enabled` and by moving a module from the left box to the right. Select one and use the `>>>` arrow button to activate it, use the `<<<` arrow button to desactivate it. If you don't use any, it's better if you disable the Ad Detection module. 
+NHLGames doesn't use any Ad Detection modules by default, but you can activate one by checking `Enabled` and by moving a module from the left box to the right. Select one and use the `>>>` arrow button to activate it, use the `<<<` arrow button to desactivate it. If you don't use any, it's better if you disable the Ad Detection module. 
 
 
 # Support
