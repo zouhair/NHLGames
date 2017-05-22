@@ -27,7 +27,7 @@ Tool to watch NHL games in High Definition
      * [Streamlink](#streamlink)
      * [Other options](#other-options)
    * [Console](#console)
-   * [Ad Detection Modules](#ad-detection-modules)
+   * [Modules](#modules)
 * [Support](#support)
   * [Players issues](#players-issues)
     * [No playback](#no-playback)
@@ -152,7 +152,7 @@ If you wish to use these other options make sure to use the ON/OFF switch first.
 ## Console
 Go to this section to inspect everything that NHLGames does. Also, any error or warning will show here.
 
-## Ad Detection Modules
+## Modules
 NHLGames don't use any Ad Detection modules by default, but you can activate one by checking `Enabled` and by moving a module from the left box to the right. Select one and use the `>>>` arrow button to activate it, use the `<<<` arrow button to desactivate it. If you don't use any, it's better if you disable the Ad Detection module. 
 
 
