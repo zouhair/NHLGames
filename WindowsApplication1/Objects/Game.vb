@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports System.IO
 Imports Newtonsoft.Json.Linq
+Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
 
 Namespace Objects
@@ -41,12 +42,11 @@ Namespace Objects
         Public Away As String = ""
         Public AwayAbbrev As String = ""
         Public AwayTeam As String = ""
-        Public AwayTeamName As String = ""
+
 
         Public Home As String = ""
         Public HomeAbbrev As String = ""
         Public HomeTeam As String = ""
-        Public HomeTeamName As String = ""
 
         Public AwayStream As GameStream = New GameStream()
         Public HomeStream As GameStream = New GameStream()
@@ -187,7 +187,7 @@ Namespace Objects
             NHLGamesMetro.ProgressVisible = True
             NHLGamesMetro.ProgressValue = 0
             Dim t As Task = New Task(Function()
-                                         Console.WriteLine(NHLGamesMetro.RmText.GetString("msgStartingApp"), args.StreamlinkPath, args.ToString(True))
+                                         Console.WriteLine(English.msgStartingApp, args.StreamlinkPath, args.ToString(True))
 
                                          Dim proc = New Process() With {.StartInfo =
                                                  New ProcessStartInfo With {
@@ -222,7 +222,7 @@ Namespace Objects
                                                  NHLGamesMetro.StreamStarted = False
                                              End If
                                          Catch ex As Exception
-                                             Console.WriteLine(NHLGamesMetro.RmText.GetString("errorGeneral"), ex.Message.ToString())
+                                             Console.WriteLine(English.errorGeneral, ex.Message.ToString())
                                              NHLGamesMetro.ProgressVisible = False
                                              NHLGamesMetro.StreamStarted = False
                                          End Try
@@ -281,12 +281,10 @@ Namespace Objects
             Home = game("teams")("home")("team")("locationName").ToString()
             HomeAbbrev = game("teams")("home")("team")("abbreviation").ToString()
             HomeTeam = game("teams")("home")("team")("teamName").ToString()
-            HomeTeamName = Home & " " & HomeTeam
 
             Away = game("teams")("away")("team")("locationName").ToString()
             AwayAbbrev = game("teams")("away")("team")("abbreviation").ToString()
             AwayTeam = game("teams")("away")("team")("teamName").ToString()
-            AwayTeamName = Away & " " & AwayTeam
 
             If (status >= 3) Then
                 GamePeriod = game("linescore")("currentPeriodOrdinal").ToString().
@@ -418,7 +416,7 @@ Namespace Objects
                 If String.IsNullOrEmpty(PlayerPath) = False Then
                     returnValue &= String.Format("--player{0}{1}{2}{0}{3}{4}{0}{1}{0}", space, dblQuot, PlayerPath, titleArg, literalPlayerArgs)
                 Else
-                    Console.WriteLine(NHLGamesMetro.RmText.GetString("errorPlayerPathEmpty"))
+                    Console.WriteLine(English.errorPlayerPathEmpty)
                 End If
 
                 If PlayerType = PlayerTypeEnum.Mpv Then

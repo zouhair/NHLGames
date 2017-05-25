@@ -191,6 +191,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à [cli].
+        '''</summary>
+        Friend Shared ReadOnly Property errorCliStreamlink() As String
+            Get
+                Return ResourceManager.GetString("errorCliStreamlink", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Error: Can&apos;t find NHLGames config file. You will have to reinstall NHLGames..
         '''</summary>
         Friend Shared ReadOnly Property errorConfigFile() As String
@@ -218,20 +227,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à :.
+        '''</summary>
+        Friend Shared ReadOnly Property errorDoubleDot() As String
+            Get
+                Return ResourceManager.GetString("errorDoubleDot", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à exception.
+        '''</summary>
+        Friend Shared ReadOnly Property errorExceptionDetection() As String
+            Get
+                Return ResourceManager.GetString("errorExceptionDetection", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Error: {0}.
         '''</summary>
         Friend Shared ReadOnly Property errorGeneral() As String
             Get
                 Return ResourceManager.GetString("errorGeneral", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à NHLGames can&apos;t work without having its hostname set in your Windows Hosts file. Do you want to let NHLGames adds an entry to your Hosts file, so Windows can resolve NHLGames hostname and connect to its server&apos;s IP address?.
-        '''</summary>
-        Friend Shared ReadOnly Property errorHostnameSet() As String
-            Get
-                Return ResourceManager.GetString("errorHostnameSet", resourceCulture)
             End Get
         End Property
         
@@ -286,6 +304,33 @@ Namespace My.Resources
         Friend Shared ReadOnly Property errorWritingSettings() As String
             Get
                 Return ResourceManager.GetString("errorWritingSettings", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à GB/Hour.
+        '''</summary>
+        Friend Shared ReadOnly Property formatGbHour() As String
+            Get
+                Return ResourceManager.GetString("formatGbHour", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à MB/Hour.
+        '''</summary>
+        Friend Shared ReadOnly Property formatMbHour() As String
+            Get
+                Return ResourceManager.GetString("formatMbHour", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à {0}, {1} {2}, {3}.
+        '''</summary>
+        Friend Shared ReadOnly Property formatWeekMonthDayYear() As String
+            Get
+                Return ResourceManager.GetString("formatWeekMonthDayYear", resourceCulture)
             End Get
         End Property
         
@@ -362,11 +407,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Away Team : {0}.
+        '''  Recherche une chaîne localisée semblable à Away Team : {0} {1}.
         '''</summary>
         Friend Shared ReadOnly Property lblAwayTeam() As String
             Get
                 Return ResourceManager.GetString("lblAwayTeam", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à {0} camera views.
+        '''</summary>
+        Friend Shared ReadOnly Property lblCamViews() As String
+            Get
+                Return ResourceManager.GetString("lblCamViews", resourceCulture)
             End Get
         End Property
         
@@ -452,7 +506,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Home Team : {0}.
+        '''  Recherche une chaîne localisée semblable à Home Team : {0} {1}.
         '''</summary>
         Friend Shared ReadOnly Property lblHomeTeam() As String
             Get
@@ -605,6 +659,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Referee camera.
+        '''</summary>
+        Friend Shared ReadOnly Property lblRefCam() As String
+            Get
+                Return ResourceManager.GetString("lblRefCam", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Show Scores.
         '''</summary>
         Friend Shared ReadOnly Property lblShowScores() As String
@@ -740,6 +803,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à [{0}] .
+        '''</summary>
+        Friend Shared ReadOnly Property msgDateTimeNow() As String
+            Get
+                Return ResourceManager.GetString("msgDateTimeNow", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Need help?.
         '''</summary>
         Friend Shared ReadOnly Property msgDiySteps() As String
@@ -826,6 +898,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgGamesFound() As String
             Get
                 Return ResourceManager.GetString("msgGamesFound", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à NHLGames can&apos;t work without having its hostname set in your Windows Hosts file. Do you want to let NHLGames adds an entry to your Hosts file, so Windows can resolve NHLGames hostname and connect to its server&apos;s IP address?.
+        '''</summary>
+        Friend Shared ReadOnly Property msgHostnameSet() As String
+            Get
+                Return ResourceManager.GetString("msgHostnameSet", resourceCulture)
             End Get
         End Property
         
@@ -943,15 +1024,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgStartingApp() As String
             Get
                 Return ResourceManager.GetString("msgStartingApp", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Status:.
-        '''</summary>
-        Friend Shared ReadOnly Property msgStatus() As String
-            Get
-                Return ResourceManager.GetString("msgStatus", resourceCulture)
             End Get
         End Property
         
@@ -1078,24 +1150,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property textCopyConsole() As String
             Get
                 Return ResourceManager.GetString("textCopyConsole", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à GB/Hour.
-        '''</summary>
-        Friend Shared ReadOnly Property unitGbHour() As String
-            Get
-                Return ResourceManager.GetString("unitGbHour", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à MB/Hour.
-        '''</summary>
-        Friend Shared ReadOnly Property unitMbHour() As String
-            Get
-                Return ResourceManager.GetString("unitMbHour", resourceCulture)
             End Get
         End Property
     End Class

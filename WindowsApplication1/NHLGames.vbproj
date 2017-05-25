@@ -264,7 +264,6 @@
     <EmbeddedResource Include="Logos\Stars.gif" />
     <EmbeddedResource Include="Logos\Wild.gif" />
     <EmbeddedResource Include="Logos\nhl-icon.png" />
-    <None Include="DeveloperReadme.txt" />
     <None Include="Icons\bdown.png" />
     <None Include="Icons\bup.png" />
     <None Include="Icons\wdate.png" />

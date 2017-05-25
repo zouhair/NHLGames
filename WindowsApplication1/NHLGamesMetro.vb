@@ -4,12 +4,11 @@ Imports System.Threading
 Imports System.Net
 Imports System.Resources
 Imports System.Runtime.InteropServices
-Imports System.Web.UI.WebControls.Expressions
-Imports System.Windows.Controls
 Imports MetroFramework
 Imports Newtonsoft.Json.Linq
 Imports NHLGames.AdDetection
 Imports NHLGames.Controls
+Imports NHLGames.My.Resources
 Imports NHLGames.Objects
 Imports NHLGames.Utilities.TextboxConsoleOutputRediect
 Imports NHLGames.Utilities
@@ -29,13 +28,12 @@ Public Class NHLGamesMetro
     Public Shared StreamStarted As Boolean = False
     Public Shared ProgressVisible As Boolean = False
     Public Shared GamesDownloadedTime As Date
-    Public Shared LabelDate As System.Windows.Forms.Label
+    Public Shared LabelDate As Label
     Public Shared DownloadLink As String = "https://www.reddit.com/r/nhl_games/"
     Public Shared GameDate As Date = DateHelper.GetPacificTime()
     Private _resizeDirection As Integer = -1
     Private Const ResizeBorderWidth As Integer = 3
-    Public Shared RmText As Resources.ResourceManager  = My.Resources.English.ResourceManager
-    Public Shared RmTextErrorString As String = "error:"
+    Public Shared RmText As ResourceManager  = English.ResourceManager
 
     <DllImport("user32.dll")>
     Public Shared Function ReleaseCapture() As Boolean
@@ -89,14 +87,14 @@ Public Class NHLGamesMetro
 
     Private Sub FatalErrorAndMsgBox(message As String, title As String)
         If MetroMessageBox.Show(Me, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error) = DialogResult.OK Then
-            Me.close
+            Close
         End If
     End Sub
 
     Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If Not File.Exists("NHLGames.exe.config") then
-            Console.WriteLine(RmText.GetString("errorConfigFile"))
+            Console.WriteLine(English.errorConfigFile)
             FatalErrorAndMsgBox(RmText.GetString("errorConfigFile"),RmText.GetString("msgFailure"))
         End If
 
@@ -106,18 +104,16 @@ Public Class NHLGamesMetro
 
         Dim lang = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.SelectedLanguage, String.Empty)
         If String.IsNullOrEmpty(lang) OrElse lang = RmText.GetString("lblEnglish") Then
-            RmText = My.Resources.English.ResourceManager
-            RmTextErrorString = My.Resources.English.errorDetection
+            RmText = English.ResourceManager
         ElseIf lang = RmText.GetString("lblFrench") Then
-            RmText = My.Resources.French.ResourceManager
-            RmTextErrorString = My.Resources.French.errorDetection
+            RmText = French.ResourceManager
         End If
 
         Try
             _adDetectorViewModel = New AdDetectorViewModel()
             AdDetectionSettingsElementHost.Child = _adDetectorViewModel.SettingsControl
         catch ex As Exception
-            Console.WriteLine(RmText.GetString("errorSetAdModule"),ex.Message)
+            Console.WriteLine(English.errorSetAdModule,ex.Message)
             FatalErrorAndMsgBox(RmText.GetString("errorSetAdModule"),RmText.GetString("msgFailure"))
         end Try
 
@@ -132,13 +128,13 @@ Public Class NHLGamesMetro
 
     Private Sub IntitializeApplicationSettings()
 
-        SettingsToolTip.SetToolTip(rbQual1, "300" & RmText.GetString("unitMbHour"))
-        SettingsToolTip.SetToolTip(rbQual2, "500" & RmText.GetString("unitMbHour"))
-        SettingsToolTip.SetToolTip(rbQual3, "700" & RmText.GetString("unitMbHour"))
-        SettingsToolTip.SetToolTip(rbQual4, "950" & RmText.GetString("unitMbHour"))
-        SettingsToolTip.SetToolTip(rbQual5, "1.3" & RmText.GetString("unitGbHour"))
-        SettingsToolTip.SetToolTip(rbQual6, "1.8" & RmText.GetString("unitGbHour"))
-        SettingsToolTip.SetToolTip(chk60, "+700" & RmText.GetString("unitMbHour") &" (+40%)")
+        SettingsToolTip.SetToolTip(rbQual1, "300" & RmText.GetString("formatMbHour"))
+        SettingsToolTip.SetToolTip(rbQual2, "500" & RmText.GetString("formatMbHour"))
+        SettingsToolTip.SetToolTip(rbQual3, "700" & RmText.GetString("formatMbHour"))
+        SettingsToolTip.SetToolTip(rbQual4, "950" & RmText.GetString("formatMbHour"))
+        SettingsToolTip.SetToolTip(rbQual5, "1.3" & RmText.GetString("formatGbHour"))
+        SettingsToolTip.SetToolTip(rbQual6, "1.8" & RmText.GetString("formatGbHour"))
+        SettingsToolTip.SetToolTip(chk60, "+700" & RmText.GetString("formatMbHour") &" (+40%)")
 
         Dim mpcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpcPath, String.Empty)
         Dim mpcPathCurrent As String = PathFinder.GetPathOfMpc
@@ -166,7 +162,7 @@ Public Class NHLGamesMetro
         Dim mpvPathCurrent As String = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
         If mpvPath = String.Empty Then
             If (Not File.Exists(mpvPathCurrent)) AndAlso vlcPath Is String.Empty AndAlso mpcPath Is String.Empty Then
-                Console.WriteLine(RmText.GetString("errorMpvExe"))
+                Console.WriteLine(English.errorMpvExe)
                 mpvPathCurrent = String.Empty
             End If
             ApplicationSettings.SetValue(ApplicationSettings.Settings.MpvPath, mpvPathCurrent)
@@ -183,7 +179,7 @@ Public Class NHLGamesMetro
         Dim streamlinkPathCurrent As String = Path.Combine(Application.StartupPath, "streamlink-0.5.0\streamlink.exe")
         If streamlinkPath = String.Empty Then
             If Not File.Exists(streamlinkPathCurrent) Then
-                Console.WriteLine(RmText.GetString("errorStreamlinkExe"))
+                Console.WriteLine(English.errorStreamlinkExe)
                 streamlinkPathCurrent = String.Empty
             End If
             ApplicationSettings.SetValue(ApplicationSettings.Settings.StreamlinkPath, streamlinkPathCurrent)
@@ -231,7 +227,7 @@ Public Class NHLGamesMetro
         BindWatchArgsToForm(watchArgs)
 
         If (HostsFile.TestEntry(DomainName, _serverIp) = False) Then
-            If MetroMessageBox.Show(Me, RmText.GetString("errorHostnameSet"), RmText.GetString("msgAddHost"), MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+            If MetroMessageBox.Show(Me, RmText.GetString("msgHostnameSet"), RmText.GetString("msgAddHost"), MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
                 HostsFile.AddEntry(_serverIp, DomainName, True)
             Else
                 TabControl.SelectedIndex = 1
@@ -362,7 +358,7 @@ Public Class NHLGamesMetro
     ' Handle the UI exceptions by showing a dialog box, and asking the user whether
     ' or not they wish to abort execution.
     Private Shared Sub Form1_UIThreadException(ByVal sender As Object, ByVal t As ThreadExceptionEventArgs)
-        Console.WriteLine(RmText.GetString("errorGeneral"), t.Exception.ToString())
+        Console.WriteLine(English.errorGeneral, t.Exception.ToString())
     End Sub
 
     Private Shared Sub CurrentDomain_UnhandledException(ByVal sender As Object, ByVal e As UnhandledExceptionEventArgs)
@@ -374,7 +370,7 @@ Public Class NHLGamesMetro
     End Sub
     Private Sub VersionCheck()
         Dim strLatest = Downloader.DownloadApplicationVersion()
-        Console.WriteLine(RmText.GetString("msgCurrentVersion"), strLatest)
+        Console.WriteLine(English.msgCurrentVersion, strLatest)
         Dim versionFromSettings = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version, "")
 
         If strLatest > versionFromSettings Then
@@ -539,7 +535,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub _writeToConsoleSettingsChanged(key As String, value As String)
-        Console.WriteLine(String.Format(RmText.GetString("msgSettingUpdated"), key, value))
+        Console.WriteLine(String.Format(English.msgSettingUpdated, key, value))
     End Sub
 
     Private Sub txtVLCPath_TextChanged(sender As Object, e As EventArgs) Handles txtVLCPath.TextChanged
@@ -574,19 +570,19 @@ Public Class NHLGamesMetro
 
     Private Sub quality_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual6.CheckedChanged, rbQual5.CheckedChanged, rbQual4.CheckedChanged, rbQual3.CheckedChanged, rbQual2.CheckedChanged, rbQual1.CheckedChanged
         SetEventArgsFromForm()
-        Dim rb As System.Windows.Forms.RadioButton = sender
+        Dim rb As RadioButton = sender
         If (Not chk60.Checked And rb.Checked) Then _writeToConsoleSettingsChanged(lblQuality.Text, rb.Text)
     End Sub
 
     Private Sub player_CheckedChanged(sender As Object, e As EventArgs) Handles rbVLC.CheckedChanged, rbMPC.CheckedChanged, rbMpv.CheckedChanged
         SetEventArgsFromForm()
-        Dim rb As System.Windows.Forms.RadioButton = sender
+        Dim rb As RadioButton = sender
         If (rb.Checked) Then _writeToConsoleSettingsChanged(lblPlayer.Text, rb.Text)
     End Sub
 
     Private Sub rbCDN_CheckedChanged(sender As Object, e As EventArgs) Handles rbLevel3.CheckedChanged, rbAkamai.CheckedChanged
         SetEventArgsFromForm()
-        Dim rb As System.Windows.Forms.RadioButton = sender
+        Dim rb As RadioButton = sender
         If (rb.Checked) Then _writeToConsoleSettingsChanged(lblCdn.Text, rb.Text)
     End Sub
 
@@ -732,22 +728,22 @@ Public Class NHLGamesMetro
     Private Sub tgStreamer_CheckedChanged(sender As Object, e As EventArgs) Handles tgStreamer.CheckedChanged
         txtStreamerArgs.Enabled = tgStreamer.Checked
         SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged(String.Format(RmText.GetString("msgThisEnable"), lblStreamerArgs.Text), 
-                                       if(tgStreamer.Checked, RmText.GetString("msgOn"), RmText.GetString("msgOff")))
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblStreamerArgs.Text), 
+                                       if(tgStreamer.Checked, English.msgOn, English.msgOff))
     End Sub
 
     Private Sub tgPlayer_CheckedChanged(sender As Object, e As EventArgs) Handles tgPlayer.CheckedChanged
         txtPlayerArgs.Enabled = tgPlayer.Checked
         SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged(String.Format(RmText.GetString("msgThisEnable"),lblPlayerArgs.Text), 
-                                       if(tgPlayer.Checked, RmText.GetString("msgOn"), RmText.GetString("msgOff")))
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblPlayerArgs.Text), 
+                                       if(tgPlayer.Checked, English.msgOn, English.msgOff))
     End Sub
 
     Private Sub tgOutput_CheckedChanged(sender As Object, e As EventArgs) Handles tgOutput.CheckedChanged
         txtOutputArgs.Enabled = tgOutput.Checked
         SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged(String.Format(RmText.GetString("msgThisEnable"),lblOutput.Text),
-                                       if(tgOutput.Checked, RmText.GetString("msgOn"), RmText.GetString("msgOff")))
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblOutput.Text),
+                                       if(tgOutput.Checked, English.msgOn, English.msgOff))
     End Sub
 
     Private Sub chkShowSeriesRecord_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowSeriesRecord.CheckedChanged
@@ -780,7 +776,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub TabControl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl.SelectedIndexChanged
-        Dim tc As System.Windows.Forms.TabControl = sender
+        Dim tc As TabControl = sender
         If tc.SelectedIndex = 0 Then
             'Games tab selected
             flpGames.Focus()
@@ -858,7 +854,7 @@ Public Class NHLGamesMetro
     Private Sub btnCopyConsole_Click(sender As Object, e As EventArgs) Handles btnCopyConsole.Click
         dim player As String = if (rbMpv.Checked,"MPV",If(rbMPC.Checked,"MPC",If(rbVLC.Checked,"VLC","none")))
         Dim x64 As String = if(Environment.Is64BitOperatingSystem,"64 Bits","32 Bits")
-        Clipboard.SetText(String.Format(RmText.GetString("textCopyConsole"),
+        Clipboard.SetText(String.Format(English.textCopyConsole,
                                         vbCrLf,lblVersion.Text,
                                         My.Computer.Info.OSFullName.ToString(), x64.ToString(), 
                                         (Not String.IsNullOrEmpty(lblDate.Text)).ToString(),

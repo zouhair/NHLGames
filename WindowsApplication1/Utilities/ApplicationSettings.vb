@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports NHLGames.My.Resources
 
 Namespace Utilities
 
@@ -42,12 +43,12 @@ Namespace Utilities
                 Try
                     Return Serialization.DeserializeObject(Of T)(result)
                 Catch ex As Exception
-                    Console.WriteLine(NHLGamesMetro.RmText.GetString("errorDeserialize"), key.ToString(), GetType(T).ToString())
+                    Console.WriteLine(English.errorDeserialize, key.ToString(), GetType(T).ToString())
                     Return defaultReturnValue
                 End Try
 
             Catch e As ConfigurationErrorsException
-                Console.WriteLine(NHLGamesMetro.RmText.GetString("errorReadingSettings"), key)
+                Console.WriteLine(English.errorReadingSettings, key)
                 Return defaultReturnValue
             End Try
         End Function
@@ -64,15 +65,15 @@ Namespace Utilities
                 End If
 
                 If value.Length > 200 Then
-                    value = NHLGamesMetro.RmText.GetString("msgValueTooLarge")
+                    value = English.msgValueTooLarge
                 End If
                 If key <> ApplicationSettings.Settings.DefaultWatchArgs Then
-                    Console.WriteLine(NHLGamesMetro.RmText.GetString("msgSettingUpdated"), key.ToString(), value)
+                    Console.WriteLine(English.msgSettingUpdated, key.ToString(), value)
                 End If
                 configFile.Save(ConfigurationSaveMode.Modified)
                 ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name)
             Catch e As ConfigurationErrorsException
-                Console.WriteLine(NHLGamesMetro.RmText.GetString("errorWritingSettings"))
+                Console.WriteLine(English.errorWritingSettings)
             End Try
         End Sub
 

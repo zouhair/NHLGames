@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Security.Principal
+Imports NHLGames.My.Resources
 
 Namespace Utilities
 
@@ -18,7 +19,7 @@ Namespace Utilities
         Private Shared Function RemoveOldEntries(host As String, contents As String) As String
             Dim newContents As String = String.Empty
 
-            Console.WriteLine(NHLGamesMetro.RmText.GetString("msgCleanHostsFile"))
+            Console.WriteLine(English.msgCleanHostsFile)
 
             Dim hostsFile = contents.Split(vbCrLf)
 
@@ -35,7 +36,7 @@ Namespace Utilities
         End Function
 
         Private Shared Sub Backup(path As String)
-            Console.WriteLine(NHLGamesMetro.RmText.GetString("msgBackingHostsFile"), path)
+            Console.WriteLine(English.msgBackingHostsFile, path)
             File.Copy(path, path & ".bak", True)
         End Sub
 

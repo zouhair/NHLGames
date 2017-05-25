@@ -12,13 +12,7 @@ Namespace Utilities
         End Function
 
         Public Shared Function GetFormattedDate(dt As Date) As String
-            Return If(CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek).Length >= 3,
-                            CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek).Substring(0, 3),
-                            CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek).ToString()) & ", " &
-                        If(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dt.Month).Length >= 3,
-                            CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dt.Month).Substring(0, 3),
-                            CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dt.Month).ToString()) & " " &
-                       dt.Day.ToString & ", " & dt.Year.ToString
+            Return String.Format(NHLGamesMetro.RmText.GetString("formatWeekMonthDayYear"), dt.ToString("ddd"), dt.ToString("MMM"), dt.Day.ToString, dt.Year.ToString)
         End Function
 
         Public Shared Function GetFormattedWeek(number As DayOfWeek) As String

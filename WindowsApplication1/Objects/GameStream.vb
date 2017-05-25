@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Net
 Imports Newtonsoft.Json.Linq
+Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
 
 Namespace Objects
@@ -90,7 +91,7 @@ Namespace Objects
                 End If
                 myHttpWebResponse.Close()
             Catch e As Exception
-                Console.WriteLine(NHLGamesMetro.RmText.GetString("msgVOD"), e.Message)
+                Console.WriteLine(English.msgVOD, e.Message)
             End Try
         End Sub
 

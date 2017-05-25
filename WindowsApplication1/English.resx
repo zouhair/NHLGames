@@ -165,7 +165,7 @@
     <value>Error: {0}</value>
     <comment>Message</comment>
   </data>
-  <data name="errorHostnameSet" xml:space="preserve">
+  <data name="msgHostnameSet" xml:space="preserve">
     <value>NHLGames can't work without having its hostname set in your Windows Hosts file. Do you want to let NHLGames adds an entry to your Hosts file, so Windows can resolve NHLGames hostname and connect to its server's IP address?</value>
     <comment>Message</comment>
   </data>
@@ -194,7 +194,7 @@
     <comment>Message</comment>
   </data>
   <data name="lblAwayTeam" xml:space="preserve">
-    <value>Away Team : {0}</value>
+    <value>Away Team : {0} {1}</value>
     <comment>Game panel</comment>
   </data>
   <data name="lblCdn" xml:space="preserve">
@@ -234,7 +234,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblHomeTeam" xml:space="preserve">
-    <value>Home Team : {0}</value>
+    <value>Home Team : {0} {1}</value>
     <comment>Game panel</comment>
   </data>
   <data name="lblHostname" xml:space="preserve">
@@ -441,8 +441,8 @@
     <value>Starting: {0} {1}</value>
     <comment>Message</comment>
   </data>
-  <data name="msgStatus" xml:space="preserve">
-    <value>Status:</value>
+  <data name="errorDoubleDot" xml:space="preserve">
+    <value>:</value>
     <comment>Console tab</comment>
   </data>
   <data name="msgSuccess" xml:space="preserve">
@@ -497,11 +497,11 @@
     <value>NHLGames Official Bug Report {1}{0}{0}OS : {2} {3}{0}{0}UI loaded : {4}{0}{0}Domain resolved : {5}{0}{0}Server IP found : {6}{0}{0}Selected hostname : {7}{0}{0}Selected player : {8}{0}{0}Streamlink path : {9} [=UI:{10}]{0}{0}VLC path : {11} [=UI:{12}]{0}{0}MPC path : {13} [=UI:{14}]{0}{0}MPV path : {15} [=UI:{16}]{0}{0}Console log : {0}{0}{17}</value>
     <comment>Clipboard</comment>
   </data>
-  <data name="unitGbHour" xml:space="preserve">
+  <data name="formatGbHour" xml:space="preserve">
     <value>GB/Hour</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="unitMbHour" xml:space="preserve">
+  <data name="formatMbHour" xml:space="preserve">
     <value>MB/Hour</value>
     <comment>Settings tab</comment>
   </data>
@@ -576,5 +576,29 @@
   <data name="msgTestHosts" xml:space="preserve">
     <value>Test the hosts file</value>
     <comment>Settings tab</comment>
+  </data>
+  <data name="errorExceptionDetection" xml:space="preserve">
+    <value>exception</value>
+    <comment>Console</comment>
+  </data>
+  <data name="errorCliStreamlink" xml:space="preserve">
+    <value>[cli]</value>
+    <comment>Console tab</comment>
+  </data>
+  <data name="msgDateTimeNow" xml:space="preserve">
+    <value>[{0}] </value>
+    <comment>Console tab</comment>
+  </data>
+  <data name="formatWeekMonthDayYear" xml:space="preserve">
+    <value>{0}, {1} {2}, {3}</value>
+    <comment>Games tab</comment>
+  </data>
+  <data name="lblCamViews" xml:space="preserve">
+    <value>{0} camera views</value>
+    <comment>Game panel</comment>
+  </data>
+  <data name="lblRefCam" xml:space="preserve">
+    <value>Referee camera</value>
+    <comment>Game panel</comment>
   </data>
 </root>

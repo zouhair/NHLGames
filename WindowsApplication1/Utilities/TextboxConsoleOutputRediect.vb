@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Text
+Imports NHLGames.My.Resources
 
 Namespace Utilities
 
@@ -28,17 +29,16 @@ Namespace Utilities
                                                    Dim startIndex As Integer = -1
                                                    Dim length As Integer = -1
                                                    Dim type As OutputType = OutputType.Normal
-                                                   Dim timestamp As String = "[" & DateTime.Now.ToString("HH:mm:ss") & "] "
+                                                   Dim timestamp As String = String.Format(English.msgDateTimeNow,Now.ToString("HH:mm:ss"))
 
 
-                                                   If value.ToLower().IndexOf(NHLGamesMetro.RmTextErrorString, StringComparison.Ordinal) = 0 OrElse
-                                                       value.ToLower().IndexOf("error:", StringComparison.Ordinal) = 0 OrElse
-                                                   value.ToLower().IndexOf("exception:", StringComparison.Ordinal) = 0 Then
+                                                   If value.ToLower().IndexOf(English.errorDetection, StringComparison.Ordinal) = 0 OrElse
+                                                       value.ToLower().IndexOf(English.errorExceptionDetection, StringComparison.Ordinal) = 0 Then
                                                        type = OutputType.Error
                                                        startIndex = _output.TextLength
-                                                       length = value.IndexOf(":", StringComparison.Ordinal) + 2
+                                                       length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
                                                        _output.AppendText(vbCr)
-                                                   ElseIf value.IndexOf("[cli]", StringComparison.Ordinal) = 0 Then
+                                                   ElseIf value.IndexOf(English.errorCliStreamlink, StringComparison.Ordinal) = 0 Then
                                                        type = OutputType.Cli
                                                        startIndex = _output.TextLength
                                                        length = 6
@@ -46,7 +46,7 @@ Namespace Utilities
                                                    ElseIf value.IndexOf(":", StringComparison.Ordinal) > -1 Then
                                                        type = OutputType.Status
                                                        startIndex = _output.TextLength
-                                                       length = value.IndexOf(":", StringComparison.Ordinal) + 2
+                                                       length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
                                                        _output.AppendText(vbCr)
                                                    End If
 

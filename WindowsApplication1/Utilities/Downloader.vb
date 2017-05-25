@@ -4,6 +4,7 @@ Imports System.Net
 Imports System.Text
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
+Imports NHLGames.My.Resources
 
 Namespace Utilities
 
@@ -42,7 +43,7 @@ Namespace Utilities
 
                 _localFileDirectory = _localFileDirectory & dir & Backslash
 
-                Console.WriteLine(NHLGamesMetro.RmText.GetString("msgDownloadPath"), _localFileDirectory)
+                Console.WriteLine(English.msgDownloadPath, _localFileDirectory)
             End If
 
             Return _localFileDirectory
@@ -69,16 +70,16 @@ Namespace Utilities
             Dim fullPath As String = Path.Combine(GetLocalFileDirectory(), fileName)
 
             If (checkIfExists = False) OrElse (checkIfExists AndAlso My.Computer.FileSystem.FileExists(fullPath) = False) Then
-                Console.WriteLine(NHLGamesMetro.RmText.GetString("msgDownloadingFile"), url, fullPath)
+                Console.WriteLine(English.msgDownloadingFile, url, fullPath)
                 My.Computer.Network.DownloadFile(url, fullPath, "", "", False, 10000, overwrite)
             Else
                 If (File.GetLastWriteTime(fullPath).AddHours(Convert.ToInt32(checkDelay(0)) - 48) <= Now) AndAlso
                    (File.GetLastWriteTime(fullPath).AddDays(Convert.ToInt32(checkDelay(1)) - 48) <= Now) AndAlso
                    (File.GetLastWriteTime(fullPath).AddMonths(Convert.ToInt32(checkDelay(2)) - 48) <= Now) Then
-                    Console.WriteLine(NHLGamesMetro.RmText.GetString("msgDownloadingFile"), url, fullPath)
+                    Console.WriteLine(English.msgDownloadingFile, url, fullPath)
                     My.Computer.Network.DownloadFile(url, fullPath, "", "", False, 10000, overwrite)
                 Else
-                    Console.WriteLine(NHLGamesMetro.RmText.GetString("msgFileExists"), fullPath)
+                    Console.WriteLine(English.msgFileExists, fullPath)
                 End If
             End If
         End Sub
@@ -91,7 +92,7 @@ Namespace Utilities
                     returnValue = streamReader.ReadToEnd()
                 End Using
             Catch ex As Exception
-                Console.WriteLine(NHLGamesMetro.RmText.GetString("errorGeneral"), ex.Message.ToString())
+                Console.WriteLine(English.errorGeneral, ex.Message.ToString())
             End Try
 
             Return returnValue
@@ -99,7 +100,7 @@ Namespace Utilities
 
         Public Shared Function DownloadApplicationVersion() As String
             Dim appVers As String
-            Console.WriteLine(NHLGamesMetro.RmText.GetString("msgCheckingVersion"))
+            Console.WriteLine(English.msgCheckingVersion)
             'checking every week "070" for a new version
             DownloadFile(ApplicationVersionUrl, ApplicationVersionFileName, True, True)
             appVers = ReadFileContents(ApplicationVersionFileName).Trim()
@@ -123,7 +124,7 @@ Namespace Utilities
 
         Public Shared Function DownloadAvailableGames() As HashSet(Of String)
 
-            Console.WriteLine(NHLGamesMetro.RmText.GetString("msgCheckingGames"))
+            Console.WriteLine(English.msgCheckingGames)
             DownloadFile(GamesTxtUrl, GamesTextFileName)
             Return New HashSet(Of String)(ReadFileContents(GamesTextFileName).Split(New Char() {vbLf}))
         End Function
@@ -132,7 +133,7 @@ Namespace Utilities
 
         Public Shared Function DownloadJsonSchedule(startDate As DateTime, Optional refreshing As Boolean = False) As JObject
 
-            Console.WriteLine(NHLGamesMetro.RmText.GetString("msgFetchingSchedule"), startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
+            Console.WriteLine(English.msgFetchingSchedule, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
 
             Dim returnValue As JObject
 
@@ -143,7 +144,7 @@ Namespace Utilities
             Dim data As String
 
             If startDate.Date.ToShortDateString >= DateHelper.GetPacificTime.ToShortDateString Then
-                Console.WriteLine(NHLGamesMetro.RmText.GetString("msgDownloadingSchedule"), url)
+                Console.WriteLine(English.msgDownloadingSchedule, url)
                 data = DownloadContents(url)
             Else
                 If LookOldJsonFiles(fileName) And Not refreshing Then

@@ -25,6 +25,11 @@
         Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GameControl))
         Me.ToolTip = New MetroFramework.Components.MetroToolTip()
+        Me.lnkThree = New System.Windows.Forms.Button()
+        Me.lnkSix = New System.Windows.Forms.Button()
+        Me.lnkEnd1 = New System.Windows.Forms.Button()
+        Me.lnkEnd2 = New System.Windows.Forms.Button()
+        Me.lnkRef = New System.Windows.Forms.Button()
         Me.BorderPanel1 = New NHLGames.Controls.BorderPanel()
         Me.vs = New MetroFramework.Controls.MetroLabel()
         Me.lblHomeScore = New MetroFramework.Controls.MetroLabel()
@@ -42,11 +47,6 @@
         Me.lnkAway = New System.Windows.Forms.Button()
         Me.lnkNational = New System.Windows.Forms.Button()
         Me.lnkFrench = New System.Windows.Forms.Button()
-        Me.lnkThree = New System.Windows.Forms.Button()
-        Me.lnkSix = New System.Windows.Forms.Button()
-        Me.lnkEnd1 = New System.Windows.Forms.Button()
-        Me.lnkEnd2 = New System.Windows.Forms.Button()
-        Me.lnkRef = New System.Windows.Forms.Button()
         Me.lblNotInSeason = New MetroFramework.Controls.MetroLabel()
         Me.lblStreamStatus = New MetroFramework.Controls.MetroLabel()
         Me.BorderPanel1.SuspendLayout
@@ -62,6 +62,81 @@
         Me.ToolTip.Style = MetroFramework.MetroColorStyle.[Default]
         Me.ToolTip.StyleManager = Nothing
         Me.ToolTip.Theme = MetroFramework.MetroThemeStyle.Light
+        '
+        'lnkThree
+        '
+        Me.lnkThree.BackgroundImage = Global.NHLGames.My.Resources.Resources.threec
+        Me.lnkThree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.lnkThree.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+        Me.lnkThree.FlatAppearance.BorderSize = 0
+        Me.lnkThree.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkThree.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lnkThree.Location = New System.Drawing.Point(140, 6)
+        Me.lnkThree.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.lnkThree.Name = "lnkThree"
+        Me.lnkThree.Size = New System.Drawing.Size(26, 26)
+        Me.lnkThree.TabIndex = 29
+        Me.lnkThree.UseVisualStyleBackColor = true
+        '
+        'lnkSix
+        '
+        Me.lnkSix.BackgroundImage = Global.NHLGames.My.Resources.Resources.sixc
+        Me.lnkSix.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.lnkSix.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+        Me.lnkSix.FlatAppearance.BorderSize = 0
+        Me.lnkSix.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkSix.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lnkSix.Location = New System.Drawing.Point(174, 6)
+        Me.lnkSix.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.lnkSix.Name = "lnkSix"
+        Me.lnkSix.Size = New System.Drawing.Size(26, 26)
+        Me.lnkSix.TabIndex = 29
+        Me.lnkSix.UseVisualStyleBackColor = true
+        '
+        'lnkEnd1
+        '
+        Me.lnkEnd1.BackgroundImage = Global.NHLGames.My.Resources.Resources.endz1
+        Me.lnkEnd1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.lnkEnd1.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+        Me.lnkEnd1.FlatAppearance.BorderSize = 0
+        Me.lnkEnd1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkEnd1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lnkEnd1.Location = New System.Drawing.Point(208, 6)
+        Me.lnkEnd1.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.lnkEnd1.Name = "lnkEnd1"
+        Me.lnkEnd1.Size = New System.Drawing.Size(26, 26)
+        Me.lnkEnd1.TabIndex = 29
+        Me.lnkEnd1.UseVisualStyleBackColor = true
+        '
+        'lnkEnd2
+        '
+        Me.lnkEnd2.BackgroundImage = Global.NHLGames.My.Resources.Resources.endz2
+        Me.lnkEnd2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.lnkEnd2.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+        Me.lnkEnd2.FlatAppearance.BorderSize = 0
+        Me.lnkEnd2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkEnd2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lnkEnd2.Location = New System.Drawing.Point(242, 6)
+        Me.lnkEnd2.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.lnkEnd2.Name = "lnkEnd2"
+        Me.lnkEnd2.Size = New System.Drawing.Size(26, 26)
+        Me.lnkEnd2.TabIndex = 29
+        Me.lnkEnd2.UseVisualStyleBackColor = true
+        '
+        'lnkRef
+        '
+        Me.lnkRef.BackgroundImage = Global.NHLGames.My.Resources.Resources.refc
+        Me.lnkRef.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.lnkRef.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
+        Me.lnkRef.FlatAppearance.BorderSize = 0
+        Me.lnkRef.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkRef.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lnkRef.Location = New System.Drawing.Point(276, 6)
+        Me.lnkRef.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.lnkRef.Name = "lnkRef"
+        Me.lnkRef.Size = New System.Drawing.Size(26, 26)
+        Me.lnkRef.TabIndex = 29
+        Me.lnkRef.UseVisualStyleBackColor = true
         '
         'BorderPanel1
         '
@@ -291,86 +366,6 @@
         Me.lnkFrench.Size = New System.Drawing.Size(26, 26)
         Me.lnkFrench.TabIndex = 29
         Me.lnkFrench.UseVisualStyleBackColor = true
-        '
-        'lnkThree
-        '
-        Me.lnkThree.BackgroundImage = Global.NHLGames.My.Resources.Resources.threec
-        Me.lnkThree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkThree.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
-        Me.lnkThree.FlatAppearance.BorderSize = 0
-        Me.lnkThree.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        Me.lnkThree.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.lnkThree.Location = New System.Drawing.Point(140, 6)
-        Me.lnkThree.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-        Me.lnkThree.Name = "lnkThree"
-        Me.lnkThree.Size = New System.Drawing.Size(26, 26)
-        Me.lnkThree.TabIndex = 29
-        Me.ToolTip.SetToolTip(Me.lnkThree, "3 camera views")
-        Me.lnkThree.UseVisualStyleBackColor = true
-        '
-        'lnkSix
-        '
-        Me.lnkSix.BackgroundImage = Global.NHLGames.My.Resources.Resources.sixc
-        Me.lnkSix.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkSix.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
-        Me.lnkSix.FlatAppearance.BorderSize = 0
-        Me.lnkSix.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        Me.lnkSix.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.lnkSix.Location = New System.Drawing.Point(174, 6)
-        Me.lnkSix.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-        Me.lnkSix.Name = "lnkSix"
-        Me.lnkSix.Size = New System.Drawing.Size(26, 26)
-        Me.lnkSix.TabIndex = 29
-        Me.ToolTip.SetToolTip(Me.lnkSix, "6 camera views")
-        Me.lnkSix.UseVisualStyleBackColor = true
-        '
-        'lnkEnd1
-        '
-        Me.lnkEnd1.BackgroundImage = Global.NHLGames.My.Resources.Resources.endz1
-        Me.lnkEnd1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkEnd1.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
-        Me.lnkEnd1.FlatAppearance.BorderSize = 0
-        Me.lnkEnd1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        Me.lnkEnd1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.lnkEnd1.Location = New System.Drawing.Point(208, 6)
-        Me.lnkEnd1.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-        Me.lnkEnd1.Name = "lnkEnd1"
-        Me.lnkEnd1.Size = New System.Drawing.Size(26, 26)
-        Me.lnkEnd1.TabIndex = 29
-        Me.ToolTip.SetToolTip(Me.lnkEnd1, "Endzone camera (away)")
-        Me.lnkEnd1.UseVisualStyleBackColor = true
-        '
-        'lnkEnd2
-        '
-        Me.lnkEnd2.BackgroundImage = Global.NHLGames.My.Resources.Resources.endz2
-        Me.lnkEnd2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkEnd2.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
-        Me.lnkEnd2.FlatAppearance.BorderSize = 0
-        Me.lnkEnd2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        Me.lnkEnd2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.lnkEnd2.Location = New System.Drawing.Point(242, 6)
-        Me.lnkEnd2.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-        Me.lnkEnd2.Name = "lnkEnd2"
-        Me.lnkEnd2.Size = New System.Drawing.Size(26, 26)
-        Me.lnkEnd2.TabIndex = 29
-        Me.ToolTip.SetToolTip(Me.lnkEnd2, "Endzone camera (home)")
-        Me.lnkEnd2.UseVisualStyleBackColor = true
-        '
-        'lnkRef
-        '
-        Me.lnkRef.BackgroundImage = Global.NHLGames.My.Resources.Resources.refc
-        Me.lnkRef.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkRef.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
-        Me.lnkRef.FlatAppearance.BorderSize = 0
-        Me.lnkRef.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        Me.lnkRef.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.lnkRef.Location = New System.Drawing.Point(276, 6)
-        Me.lnkRef.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-        Me.lnkRef.Name = "lnkRef"
-        Me.lnkRef.Size = New System.Drawing.Size(26, 26)
-        Me.lnkRef.TabIndex = 29
-        Me.ToolTip.SetToolTip(Me.lnkRef, "Referee camera")
-        Me.lnkRef.UseVisualStyleBackColor = true
         '
         'lblNotInSeason
         '

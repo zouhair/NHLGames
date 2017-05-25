@@ -37,6 +37,7 @@ Namespace Controls
 
             live1.Visible = game.GameIsLive
             live2.Visible = game.GameIsLive
+
             AddHandler _game.GameUpdated, AddressOf GameUpdatedHandler
 
         End Sub
@@ -78,7 +79,7 @@ Namespace Controls
             If String.IsNullOrEmpty(game.HomeTeam) = False Then
                 Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.AwayTeam).Replace(" ", "").Replace(".", ""))
                 If Not img Is Nothing Then picAway.BackgroundImage = img
-                ToolTip.SetToolTip(picAway, String.Format(NHLGamesMetro.RmText.GetString("lblAwayTeam"),game.AwayTeamName))
+                ToolTip.SetToolTip(picAway, String.Format(NHLGamesMetro.RmText.GetString("lblAwayTeam"),game.Away,game.AwayTeam))
             End If
 
             picHome.SizeMode = PictureBoxSizeMode.Zoom
@@ -86,7 +87,7 @@ Namespace Controls
             If String.IsNullOrEmpty(game.AwayTeam) = False Then
                 Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.HomeTeam).Replace(" ", "").Replace(".", ""))
                 If Not img Is Nothing Then picHome.BackgroundImage = img
-                ToolTip.SetToolTip(picHome, String.Format(NHLGamesMetro.RmText.GetString("lblHomeTeam"),game.HomeTeamName))
+                ToolTip.SetToolTip(picHome, String.Format(NHLGamesMetro.RmText.GetString("lblHomeTeam"),game.Home,game.HomeTeam))
             End If
 
             lblPeriod.Text = ""
@@ -175,17 +176,18 @@ Namespace Controls
                 ToolTip.SetToolTip(lnkNational, tip)
             End If
 
-            lnkThree.Visible = game.MultiCam1Stream.IsAvailable
-
-            lnkSix.Visible = game.MultiCam2Stream.IsAvailable
-
-            lnkRef.Visible = game.RefCamStream.IsAvailable
-
-            lnkEnd1.Visible = game.EndzoneCam1Stream.IsAvailable
+            ToolTip.SetToolTip(lnkRef, NHLGamesMetro.RmText.GetString("lblRefCam"))
+            ToolTip.SetToolTip(lnkThree,String.Format( NHLGamesMetro.RmText.GetString("lblCamViews"), 3))
+            ToolTip.SetToolTip(lnkSix, String.Format(NHLGamesMetro.RmText.GetString("lblCamViews"), 6))
             ToolTip.SetToolTip(lnkEnd1, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.AwayAbbrev))
-
-            lnkEnd2.Visible = game.EndzoneCam2Stream.IsAvailable
             ToolTip.SetToolTip(lnkEnd2, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.HomeAbbrev))
+
+            lnkThree.Visible = game.MultiCam1Stream.IsAvailable
+            lnkSix.Visible = game.MultiCam2Stream.IsAvailable
+            lnkRef.Visible = game.RefCamStream.IsAvailable
+            lnkEnd1.Visible = game.EndzoneCam1Stream.IsAvailable
+            lnkEnd2.Visible = game.EndzoneCam2Stream.IsAvailable
+            
         End Sub
 
         Private Function _getBroadcasterPicFor(network As String)
