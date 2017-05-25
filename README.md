@@ -27,7 +27,7 @@ Tool to watch NHL games in High Definition
      * [Streamlink](#streamlink)
      * [Other options](#other-options)
    * [Console](#console)
-   * [Ad Detection Modules](#ad-detection-modules)
+   * [Modules](#modules)
 * [Support](#support)
   * [Players issues](#players-issues)
   * [App issues](#app-issues)
@@ -144,7 +144,7 @@ If you wish to use these other options make sure to use the ON/OFF switch first.
 ## Console
 Go to this section to inspect everything that NHLGames does. Also, any error or warning will show here.
 
-## Ad Detection Modules
+## Modules
 NHLGames don't use any Ad Detection modules by default, but you can activate one by checking `Enabled` and by moving a module from the left box to the right. Select one and use the `>>>` arrow button to activate it, use the `<<<` arrow button to desactivate it. If you don't use any, it's better if you disable the Ad Detection module. 
 
 
@@ -205,7 +205,7 @@ At the moment we did not find the source of this issue, but we think that the se
 #### Display scaling issue on high DPI settings --> Disable DPI for NHLGames
 A high DPI display (other than 100%) can cause controls to be cut off. Right click on NHLGames.exe and check this option: `Properties > Compatibility > Display scaling on high DPI settings`.
 
-#### Ad Detection Module Tab not showing up --> Unblock DLLs
+#### Modules Tab not showing up --> Unblock DLLs
 Right click on the DLL's in the Spotify/OBS folders then in `Properties` check the `unblock` button at the bottom of the `General` tab, that should get them to show up.
 
 
