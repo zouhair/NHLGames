@@ -272,7 +272,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Égale.
+        '''  Recherche une chaîne localisée semblable à égale.
         '''</summary>
         Public Shared ReadOnly Property gameSeriesTied() As String
             Get

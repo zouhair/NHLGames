@@ -426,7 +426,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="gameSeriesTied" xml:space="preserve">
-    <value>Égale</value>
+    <value>égale</value>
     <comment>Game panel</comment>
   </data>
   <data name="gameSeriesWin" xml:space="preserve">

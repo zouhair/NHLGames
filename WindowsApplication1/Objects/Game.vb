@@ -300,7 +300,7 @@ Namespace Objects
 
             If _gameType = 3 Then
                 SeriesGameNumber = game("seriesSummary")("gameNumber").ToString()
-                SeriesGameStatus = game("seriesSummary")("seriesStatusShort").ToString().
+                SeriesGameStatus = game("seriesSummary")("seriesStatusShort").ToString().ToLower().
                     Replace("tied",NHLGamesMetro.RmText.GetString("gameSeriesTied")).
                     Replace("wins",NHLGamesMetro.RmText.GetString("gameSeriesWin")).
                     Replace("leads",NHLGamesMetro.RmText.GetString("gameSeriesLead")).

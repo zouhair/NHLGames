@@ -27,7 +27,7 @@ Namespace Controls
             Else
                 lblHomeScore.Visible = showScores
                 lblAwayScore.Visible = showScores
-                If showScores And game.GameIsFinal And game.GamePeriod <> NHLGamesMetro.RmText.GetString("gamePeriod3") Then
+                If showScores And game.GameIsFinal And Not [String].Equals(game.GamePeriod, NHLGamesMetro.RmText.GetString("gamePeriod3"), StringComparison.CurrentCultureIgnoreCase) Then
                     lblTime.Text &= If(game.GamePeriod <> "", "/" & game.GamePeriod, "")
                 End If
                 If ((Not showScores And game.GameIsFinal) OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
