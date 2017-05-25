@@ -14,9 +14,10 @@ Namespace Utilities
             ServerList = 7
             ShowScores = 8
             SelectedServer = 9
-            'ShowAdvancedWatchPanel = 10
+            SelectedLanguage = 10
             ShowLiveScores = 11
             ShowSeriesRecord = 12
+            LanguageList = 13
         End Enum
 
         Public Shared Function Read(Of T)(key As Settings, Optional defaultReturnValue As Object = Nothing) As T
@@ -41,12 +42,12 @@ Namespace Utilities
                 Try
                     Return Serialization.DeserializeObject(Of T)(result)
                 Catch ex As Exception
-                    Console.WriteLine("Failed to deserialize setting value of {0} to type: {1}", key.ToString(), GetType(T).ToString())
+                    Console.WriteLine(NHLGamesMetro.RmText.GetString("errorDeserialize"), key.ToString(), GetType(T).ToString())
                     Return defaultReturnValue
                 End Try
 
             Catch e As ConfigurationErrorsException
-                Console.WriteLine("Error reading app setting: {0}", key)
+                Console.WriteLine(NHLGamesMetro.RmText.GetString("errorReadingSettings"), key)
                 Return defaultReturnValue
             End Try
         End Function
@@ -63,15 +64,15 @@ Namespace Utilities
                 End If
 
                 If value.Length > 200 Then
-                    value = "[Value too large for display]"
+                    value = NHLGamesMetro.RmText.GetString("msgValueTooLarge")
                 End If
                 If key <> ApplicationSettings.Settings.DefaultWatchArgs Then
-                    Console.WriteLine("Status: Setting updated for '{0}' to '{1}'", key.ToString(), value)
+                    Console.WriteLine(NHLGamesMetro.RmText.GetString("msgSettingUpdated"), key.ToString(), value)
                 End If
                 configFile.Save(ConfigurationSaveMode.Modified)
                 ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name)
             Catch e As ConfigurationErrorsException
-                Console.WriteLine("Error writing app settings")
+                Console.WriteLine(NHLGamesMetro.RmText.GetString("errorWritingSettings"))
             End Try
         End Sub
 

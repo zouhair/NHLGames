@@ -59,7 +59,7 @@ Namespace Objects
         Public EndzoneCam2Stream As GameStream = New GameStream()
 
         Public Overrides Function ToString() As String
-            Return HomeTeam & " vs " & AwayTeam
+            Return String.Format(NHLGamesMetro.RmText.GetString("msgTeamVsTeam"),HomeTeam,AwayTeam)
         End Function
 
         Public Property StatusId As String
@@ -187,7 +187,7 @@ Namespace Objects
             NHLGamesMetro.ProgressVisible = True
             NHLGamesMetro.ProgressValue = 0
             Dim t As Task = New Task(Function()
-                                         Console.WriteLine("Starting: {0} {1}", args.StreamlinkPath, args.ToString(True))
+                                         Console.WriteLine(NHLGamesMetro.RmText.GetString("msgStartingApp"), args.StreamlinkPath, args.ToString(True))
 
                                          Dim proc = New Process() With {.StartInfo =
                                                  New ProcessStartInfo With {
@@ -222,7 +222,7 @@ Namespace Objects
                                                  NHLGamesMetro.StreamStarted = False
                                              End If
                                          Catch ex As Exception
-                                             Console.WriteLine("Error: {0}", ex.Message.ToString())
+                                             Console.WriteLine(NHLGamesMetro.RmText.GetString("errorGeneral"), ex.Message.ToString())
                                              NHLGamesMetro.ProgressVisible = False
                                              NHLGamesMetro.StreamStarted = False
                                          End Try
@@ -289,13 +289,24 @@ Namespace Objects
             AwayTeamName = Away & " " & AwayTeam
 
             If (status >= 3) Then
-                GamePeriod = game("linescore")("currentPeriodOrdinal").ToString() '1st 2nd 3rd OT 2OT ...
-                GameTimeLeft = game("linescore")("currentPeriodTimeRemaining").ToString() 'Final, 12:34, 20:00
+                GamePeriod = game("linescore")("currentPeriodOrdinal").ToString().
+                    Replace("1st",NHLGamesMetro.RmText.GetString("gamePeriod1")).
+                    Replace("2nd",NHLGamesMetro.RmText.GetString("gamePeriod2")).
+                    Replace("3rd",NHLGamesMetro.RmText.GetString("gamePeriod3")).
+                    Replace("OT",NHLGamesMetro.RmText.GetString("gamePeriodOt")).
+                    ToUpper() '1st 2nd 3rd OT 2OT ...
+                GameTimeLeft = game("linescore")("currentPeriodTimeRemaining").ToString().
+                    Replace("Final",NHLGamesMetro.RmText.GetString("gamePeriodFinal")).
+                    ToUpper()'Final, 12:34, 20:00
             End If
 
             If _gameType = 3 Then
                 SeriesGameNumber = game("seriesSummary")("gameNumber").ToString()
-                SeriesGameStatus = game("seriesSummary")("seriesStatusShort").ToString()
+                SeriesGameStatus = game("seriesSummary")("seriesStatusShort").ToString().
+                    Replace("tied",NHLGamesMetro.RmText.GetString("gameSeriesTied")).
+                    Replace("wins",NHLGamesMetro.RmText.GetString("gameSeriesWin")).
+                    Replace("leads",NHLGamesMetro.RmText.GetString("gameSeriesLead")).
+                    ToUpper()'Team wins 4-2, Tied 2-2, Team leads 1-0
             End If
 
             If [Date] <= DateTime.Now.ToUniversalTime() Then
@@ -407,7 +418,7 @@ Namespace Objects
                 If String.IsNullOrEmpty(PlayerPath) = False Then
                     returnValue &= String.Format("--player{0}{1}{2}{0}{3}{4}{0}{1}{0}", space, dblQuot, PlayerPath, titleArg, literalPlayerArgs)
                 Else
-                    Console.WriteLine("Error: Player path is empty")
+                    Console.WriteLine(NHLGamesMetro.RmText.GetString("errorPlayerPathEmpty"))
                 End If
 
                 If PlayerType = PlayerTypeEnum.Mpv Then

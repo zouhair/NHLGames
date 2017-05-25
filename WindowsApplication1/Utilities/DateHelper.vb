@@ -21,5 +21,11 @@ Namespace Utilities
                        dt.Day.ToString & ", " & dt.Year.ToString
         End Function
 
+        Public Shared Function GetFormattedWeek(number As DayOfWeek) As String
+           Return If(CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(number).Length >=2,
+                    CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(number).Substring(0,2),
+                    CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(number).ToString())
+        End Function
+
     End Class
 End Namespace

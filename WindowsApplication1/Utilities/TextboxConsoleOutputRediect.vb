@@ -31,7 +31,8 @@ Namespace Utilities
                                                    Dim timestamp As String = "[" & DateTime.Now.ToString("HH:mm:ss") & "] "
 
 
-                                                   If value.ToLower().IndexOf("error:", StringComparison.Ordinal) = 0 OrElse
+                                                   If value.ToLower().IndexOf(NHLGamesMetro.RmTextErrorString, StringComparison.Ordinal) = 0 OrElse
+                                                       value.ToLower().IndexOf("error:", StringComparison.Ordinal) = 0 OrElse
                                                    value.ToLower().IndexOf("exception:", StringComparison.Ordinal) = 0 Then
                                                        type = OutputType.Error
                                                        startIndex = _output.TextLength
@@ -94,8 +95,9 @@ Namespace Utilities
             Else
                 MetroFramework.MetroMessageBox.Show(
                     NHLGamesMetro.FormInstance,
-                    String.Format("An error happened :{0}{1}{2}See the console for more details.", vbCrLf, messageError, vbCrLf), "Failure",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    String.Format(NHLGamesMetro.RmText.GetString("msgErrorGeneralText"), 
+                                  vbCrLf, messageError), NHLGamesMetro.RmText.GetString("msgFailure"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                NHLGamesMetro.FormInstance.TabControl.SelectedIndex = 2
             End If
         End Sub
 

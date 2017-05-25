@@ -33,7 +33,7 @@ Namespace Objects
                             Threading.Thread.Sleep(100)
                         Next
                         If MessageError <> Nothing Then
-                            Console.WriteLine("Error: {0}", MessageError)
+                            Console.WriteLine(NHLGamesMetro.RmText.GetString("errorGeneral"), MessageError)
                         End If
                     End If
                 Next

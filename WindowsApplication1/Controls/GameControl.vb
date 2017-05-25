@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports MetroFramework.Controls
 Imports NHLGames.Objects
 Imports NHLGames.Utilities
 
@@ -23,16 +22,16 @@ Namespace Controls
                 lblHomeScore.Visible = showLiveScores
                 lblAwayScore.Visible = showLiveScores
                 If ((Not showLiveScores And game.Date.ToLocalTime() = Date.Today) OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
-                    lblNotInSeason.Text = "Playoffs"
+                    lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
                 End If
             Else
                 lblHomeScore.Visible = showScores
                 lblAwayScore.Visible = showScores
-                If showScores And game.GameIsFinal And game.GamePeriod <> "3rd" Then
+                If showScores And game.GameIsFinal And game.GamePeriod <> NHLGamesMetro.RmText.GetString("gamePeriod3") Then
                     lblTime.Text &= If(game.GamePeriod <> "", "/" & game.GamePeriod, "")
                 End If
                 If ((Not showScores And game.GameIsFinal) OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
-                    lblNotInSeason.Text = "Playoffs"
+                    lblNotInSeason.Text =  NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
                 End If
             End If
 
@@ -79,7 +78,7 @@ Namespace Controls
             If String.IsNullOrEmpty(game.HomeTeam) = False Then
                 Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.AwayTeam).Replace(" ", "").Replace(".", ""))
                 If Not img Is Nothing Then picAway.BackgroundImage = img
-                ToolTip.SetToolTip(picAway, "Away Team: " & game.AwayTeamName)
+                ToolTip.SetToolTip(picAway, String.Format(NHLGamesMetro.RmText.GetString("lblAwayTeam"),game.AwayTeamName))
             End If
 
             picHome.SizeMode = PictureBoxSizeMode.Zoom
@@ -87,7 +86,7 @@ Namespace Controls
             If String.IsNullOrEmpty(game.AwayTeam) = False Then
                 Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.HomeTeam).Replace(" ", "").Replace(".", ""))
                 If Not img Is Nothing Then picHome.BackgroundImage = img
-                ToolTip.SetToolTip(picHome, "Home Team: " & game.HomeTeamName)
+                ToolTip.SetToolTip(picHome, String.Format(NHLGamesMetro.RmText.GetString("lblHomeTeam"),game.HomeTeamName))
             End If
 
             lblPeriod.Text = ""
@@ -96,36 +95,36 @@ Namespace Controls
                 If game.GameIsInPlayoff Then
                     If game.GameIsLive Or game.GameIsPreGame Then
                         If game.SeriesGameNumber <> 1 Then
-                            lblNotInSeason.Text = "GM " & game.SeriesGameNumber & ": " & game.SeriesGameStatus
+                            lblNotInSeason.Text = String.Format(NHLGamesMetro.RmText.GetString("lblGameAbv"),game.SeriesGameNumber.ToString(), game.SeriesGameStatus.ToString()).ToUpper()
                         Else
-                            lblNotInSeason.Text = "Game " & game.SeriesGameNumber
+                            lblNotInSeason.Text = String.Format(NHLGamesMetro.RmText.GetString("lblGame"), game.SeriesGameNumber.ToString()).ToUpper()
                         End If
                     Else
-                        lblNotInSeason.Text = game.SeriesGameStatus
-                        lblPeriod.Text = "Game " & game.SeriesGameNumber
+                        lblNotInSeason.Text = game.SeriesGameStatus.ToString()
+                        lblPeriod.Text = String.Format(NHLGamesMetro.RmText.GetString("lblGame"), game.SeriesGameNumber.ToString()).ToUpper()
                     End If
                 Else
-                    lblNotInSeason.Text = "Preseason"
+                    lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPreseason").ToUpper()
                 End If
             End If
 
             If game.GameIsLive Then
-                lblTime.Text = game.GameTimeLeft.ToString()
-                lblPeriod.Text = game.GamePeriod.ToString()
+                lblTime.Text = game.GameTimeLeft.ToString().ToUpper()
+                lblPeriod.Text = game.GamePeriod.ToString().ToUpper()
             ElseIf game.GameIsFinal Then
-                lblTime.Text = game.GameState.ToString
+                lblTime.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
             ElseIf game.GameIsPreGame Then
                 lblTime.Text = game.Date.ToLocalTime().ToString("h:mm tt")
-                lblPeriod.Text = game.GameState.ToString
+                lblPeriod.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
             Else
                 lblTime.Text = game.Date.ToLocalTime().ToString("h:mm tt")
             End If
 
             If Not game.AreAnyStreamsAvailable Then
                 If game.Date.ToLocalTime >= Date.Today And game.GameState < 5 Then
-                    lblStreamStatus.Text = "Streams available during pregame"
+                    lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblStreamAvailableDuringPregame")
                 Else
-                    lblStreamStatus.Text = "No stream available"
+                    lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblNoStreamAvailable")
                 End If
                 FlowLayoutPanel1.Visible = False
             End If
@@ -134,44 +133,44 @@ Namespace Controls
 
             lnkAway.Visible = game.AwayStream.IsAvailable
             If game.AwayStream.IsAvailable Then
-                tip = game.AwayAbbrev & " stream"
+                tip = String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"),game.AwayAbbrev)
                 If game.AwayStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.AwayStream.Network)
                     If img <> "" Then lnkAway.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
-                    tip &= " on " & game.AwayStream.Network
+                    tip &= String.Format(NHLGamesMetro.RmText.GetString("lblOnNetwork"), game.AwayStream.Network)
                 End If
                 ToolTip.SetToolTip(lnkAway, tip)
             End If
 
             lnkHome.Visible = game.HomeStream.IsAvailable
             If game.HomeStream.IsAvailable Then
-                tip = game.HomeAbbrev & " stream"
+                tip =  String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"), game.HomeAbbrev)
                 If game.HomeStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.HomeStream.Network)
                     If img <> "" Then lnkHome.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
-                    tip &= " on " & game.HomeStream.Network
+                    tip &= String.Format(NHLGamesMetro.RmText.GetString("lblOnNetwork"), game.HomeStream.Network)
                 End If
                 ToolTip.SetToolTip(lnkHome, tip)
             End If
 
             lnkFrench.Visible = game.FrenchStream.IsAvailable
             If game.FrenchStream.IsAvailable Then
-                tip = "French Canadian stream"
+                tip = NHLGamesMetro.RmText.GetString("lblFrenchNetwork")
                 If game.FrenchStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.FrenchStream.Network)
                     If img <> "" Then lnkFrench.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
-                    tip &= " on " & game.FrenchStream.Network
+                    tip &= String.Format(NHLGamesMetro.RmText.GetString("lblOnNetwork"), game.FrenchStream.Network)
                 End If
                 ToolTip.SetToolTip(lnkFrench, tip)
             End If
 
             lnkNational.Visible = game.NationalStream.IsAvailable
             If game.NationalStream.IsAvailable Then
-                tip = "National stream"
+                tip = NHLGamesMetro.RmText.GetString("lblNationalNetwork")
                 If game.NationalStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.NationalStream.Network)
                     If img <> "" Then lnkNational.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
-                    tip &= " on " & game.NationalStream.Network
+                    tip &= String.Format(NHLGamesMetro.RmText.GetString("lblOnNetwork"),  game.NationalStream.Network)
                 End If
                 ToolTip.SetToolTip(lnkNational, tip)
             End If
@@ -183,10 +182,10 @@ Namespace Controls
             lnkRef.Visible = game.RefCamStream.IsAvailable
 
             lnkEnd1.Visible = game.EndzoneCam1Stream.IsAvailable
-            ToolTip.SetToolTip(lnkEnd1, game.AwayAbbrev & " endzone camera")
+            ToolTip.SetToolTip(lnkEnd1, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.AwayAbbrev))
 
             lnkEnd2.Visible = game.EndzoneCam2Stream.IsAvailable
-            ToolTip.SetToolTip(lnkEnd2, game.HomeAbbrev & " endzone camera")
+            ToolTip.SetToolTip(lnkEnd2, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.HomeAbbrev))
         End Sub
 
         Private Function _getBroadcasterPicFor(network As String)

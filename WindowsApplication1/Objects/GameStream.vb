@@ -26,16 +26,6 @@ Namespace Objects
             EndzoneCam2
         End Enum
 
-        Public ReadOnly Property Availability As String
-            Get
-                If IsAvailable Then
-                    Return "Watch"
-                Else
-                    Return ""
-                End If
-            End Get
-        End Property
-
         Public Property IsAvailable As Boolean = False
 
         Public Property IsVod As Boolean = False
@@ -100,7 +90,7 @@ Namespace Objects
                 End If
                 myHttpWebResponse.Close()
             Catch e As Exception
-                Console.WriteLine("VOD Status: {0}", e.Message)
+                Console.WriteLine(NHLGamesMetro.RmText.GetString("msgVOD"), e.Message)
             End Try
         End Sub
 

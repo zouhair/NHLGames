@@ -54,14 +54,14 @@ Namespace Utilities
                 ' Make the file RW
                 attributes = RemoveAttribute(attributes, FileAttributes.[ReadOnly])
                 File.SetAttributes(path, attributes)
-                Console.WriteLine("The {0} file is no longer Read Only", path)
+                Console.WriteLine(NHLGamesMetro.RmText.GetString("msgRemoveReadOnly"), path)
             End If
 
         End Sub
 
         Public Shared Sub AddReadonly(path As String)
             File.SetAttributes(path, File.GetAttributes(path) Or FileAttributes.ReadOnly)
-            Console.WriteLine("The {0} file is now set back to Read Only", path)
+            Console.WriteLine(NHLGamesMetro.RmText.GetString("msgAddReadOnly"), path)
         End Sub
 
         Public Shared Function RemoveAttribute(attributes As FileAttributes, attributesToRemove As FileAttributes) As FileAttributes
@@ -72,7 +72,7 @@ Namespace Utilities
         Public Shared Function HasAccess(ByVal ltFullPath As String)
             Try
                 Dim filePath As String = Path.Combine(ltFullPath, "test.txt")
-                File.WriteAllText(filePath, "Test ability to write to this directory")
+                File.WriteAllText(filePath, NHLGamesMetro.RmText.GetString("msgTextTxtContent"))
                 Using inputstreamreader As New StreamReader(filePath)
                     inputstreamreader.Close()
                 End Using
