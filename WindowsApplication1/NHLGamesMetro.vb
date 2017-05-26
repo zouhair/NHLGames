@@ -448,7 +448,7 @@ Public Class NHLGamesMetro
 
     Private Sub btnOpenHostsFile_Click(sender As Object, e As EventArgs) Handles btnOpenHostsFile.Click
         Dim hostsFilePath As String = Environment.SystemDirectory & "\drivers\etc\hosts"
-        Process.Start(hostsFilePath)
+        Process.Start("NOTEPAD", hostsFilePath)
     End Sub
 
     Private Sub btnVLCPath_Click(sender As Object, e As EventArgs) Handles btnVLCPath.Click

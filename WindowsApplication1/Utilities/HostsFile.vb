@@ -21,16 +21,18 @@ Namespace Utilities
 
             Console.WriteLine(English.msgCleanHostsFile)
 
-            Dim hostsFile = contents.Split(vbCrLf)
+            Dim hostsFile = contents.Replace(vbCr, String.Empty).Split(vbLf)
 
             For lineCount As Integer = 0 To hostsFile.Length - 1
                 If hostsFile(lineCount).Contains(host) = False Then
-                    newContents &= hostsFile(lineCount).Replace(vbCrLf, String.Empty)
+                    newContents &= hostsFile(lineCount).Replace(vbLf, String.Empty)
                     If lineCount < hostsFile.Length - 1 Then
                         newContents &= vbCrLf
                     End If
                 End If
             Next
+
+            newContents = newContents.TrimEnd()
 
             Return newContents
         End Function
@@ -77,7 +79,7 @@ Namespace Utilities
         Private Shared Sub MessageOpenHostsFile(hostsFilePath As String)
             If MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, NHLGamesMetro.RmText.GetString("msgViewHostsText"), 
                                                    NHLGamesMetro.RmText.GetString("msgViewHosts"), MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
-                Process.Start(hostsFilePath)
+                Process.Start("NOTEPAD", hostsFilePath)
             End If
         End Sub
 
@@ -102,7 +104,7 @@ Namespace Utilities
 
                 Dim output As String = RemoveOldEntries(host, input)
 
-                output = output & vbNewLine & ip & " " & host
+                output = output & vbNewLine & ip & vbTab & host
 
                 Using sw As New StreamWriter(hostsFilePath)
                     sw.Write(output)
