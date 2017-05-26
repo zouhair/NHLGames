@@ -293,6 +293,11 @@ Namespace Objects
                     Replace("3rd",NHLGamesMetro.RmText.GetString("gamePeriod3")).
                     Replace("OT",NHLGamesMetro.RmText.GetString("gamePeriodOt")).
                     ToUpper() '1st 2nd 3rd OT 2OT ...
+                If GamePeriod.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt"))
+                    If IsNumeric(GamePeriod(0)) Then
+                        GamePeriod = String.Format(NHLGamesMetro.RmText.GetString("gamePeriodOtMore"), GamePeriod(0))
+                    End If
+                End If
                 GameTimeLeft = game("linescore")("currentPeriodTimeRemaining").ToString().
                     Replace("Final",NHLGamesMetro.RmText.GetString("gamePeriodFinal")).
                     ToUpper()'Final, 12:34, 20:00

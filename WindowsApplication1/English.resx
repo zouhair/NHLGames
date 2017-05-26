@@ -601,4 +601,8 @@
     <value>Referee camera</value>
     <comment>Game panel</comment>
   </data>
+  <data name="gamePeriodOtMore" xml:space="preserve">
+    <value>{0}OT</value>
+    <comment>Game panel</comment>
+  </data>
 </root>

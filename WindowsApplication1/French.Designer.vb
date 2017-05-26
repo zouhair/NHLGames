@@ -254,11 +254,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à OT.
+        '''  Recherche une chaîne localisée semblable à P.
         '''</summary>
         Public Shared ReadOnly Property gamePeriodOt() As String
             Get
                 Return ResourceManager.GetString("gamePeriodOt", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à {0}E P.
+        '''</summary>
+        Public Shared ReadOnly Property gamePeriodOtMore() As String
+            Get
+                Return ResourceManager.GetString("gamePeriodOtMore", resourceCulture)
             End Get
         End Property
         

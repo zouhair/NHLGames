@@ -418,7 +418,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="gamePeriodOt" xml:space="preserve">
-    <value>OT</value>
+    <value>P</value>
     <comment>Game panel</comment>
   </data>
   <data name="gameSeriesLead" xml:space="preserve">
@@ -459,6 +459,10 @@
   </data>
   <data name="lblRefCam" xml:space="preserve">
     <value>Camera de l'arbitre</value>
+    <comment>Game panel</comment>
+  </data>
+  <data name="gamePeriodOtMore" xml:space="preserve">
+    <value>{0}E P</value>
     <comment>Game panel</comment>
   </data>
 </root>
