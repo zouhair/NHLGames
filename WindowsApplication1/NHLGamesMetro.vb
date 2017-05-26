@@ -231,6 +231,7 @@ Public Class NHLGamesMetro
                 HostsFile.AddEntry(_serverIp, DomainName, True)
             Else
                 TabControl.SelectedIndex = 1
+                diySteps()
             End If
         End If
 
@@ -935,12 +936,16 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub lnkDiySteps_Click(sender As Object, e As EventArgs) Handles lnkDiySteps.Click
+        diySteps()
+    End Sub
+
+    Private sub diySteps()
         Dim result As DialogResult
         result = MetroMessageBox.Show(Me, String.Format(RmText.GetString("msgDiyStepsText"),
             vbCrLf, _serverIp, DomainName), RmText.GetString("msgDiySteps"), MessageBoxButtons.YesNo, MessageBoxIcon.Information)
         If result = DialogResult.Yes Then
             Clipboard.SetText(_serverIp & " " & DomainName)
         End If
-    End Sub
+    End sub
 End Class
 
