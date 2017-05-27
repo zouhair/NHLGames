@@ -230,9 +230,6 @@ Restarting the app might help, until we fix the issue related to our downloader.
 #### Nothing happens after clicking on a stream --> Check your Hosts file
 If you clicked on a stream and nothing starts after the loading bar has disappeared, go to `Settings` and click on `Test` button to check if your Hosts file has been modified by NHLGames. If you get a red message box that means you won't be able to see a stream until you fix your Windows Hosts file. See the [Hosts](#hosts) section.
 
-#### Can't play games from past two or three days --> Wait for it to become available (week)
-NHLGames get streams from NHL GameCenter Live and it gets issues with some past games that are not archived yet. So until we fix this issue, you will have to wait for the game to be archived.
-
 ### Hosts file issues
 #### Windows can't find Hosts file --> Do it yourself
 NHLGames can't have access to the Hosts file, so you will have to add the entry line from `Settings` tab > `DIY Steps` button and paste it to your Hosts file in `C:\Windows\System32\Drivers\etc`. See the [Hosts](#hosts) section.
