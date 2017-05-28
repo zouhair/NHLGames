@@ -4,11 +4,12 @@ Imports System.Net
 Imports System.Text
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
+Imports NHLGames.My.Resources
 
 Namespace Utilities
 
     Public Class Downloader
-        Private Shared ReadOnly _gamesTxtUrl As String = String.Format("http://{0}/static/ids.txt", NHLGamesMetro.HostName)
+        Private Shared ReadOnly GamesTxtUrl As String = String.Format("http://{0}/static/ids.txt", NHLGamesMetro.HostName)
         Private Const ScheduleApiurl As String = "http://statsapi.web.nhl.com/api/v1/schedule?startDate={0}&endDate={1}&expand=schedule.teams,schedule.linescore,schedule.game.seriesSummary,schedule.game.content.media.epg"
         Private Const ApplicationVersionUrl As String = "https://showtimes.ninja/static/version.txt"
         Private Const ChangelogUrl As String = "https://showtimes.ninja/static/changelog.txt"
@@ -31,7 +32,7 @@ Namespace Utilities
                 If FileAccess.HasAccess(localAppDataPath) Then
                     _localFileDirectory = localAppDataPath & Backslash
                 ElseIf FileAccess.HasAccess(tempPath) Then
-                    _localFileDirectory = tempPath & Backslash
+                    _localFileDirectory = tempPath
                 ElseIf FileAccess.HasAccess(exeStartupPath) Then
                     _localFileDirectory = exeStartupPath & Backslash
                 End If
@@ -42,7 +43,7 @@ Namespace Utilities
 
                 _localFileDirectory = _localFileDirectory & dir & Backslash
 
-                Console.WriteLine("Download path: {0}", _localFileDirectory)
+                Console.WriteLine(English.msgDownloadPath, _localFileDirectory)
             End If
 
             Return _localFileDirectory
@@ -69,16 +70,16 @@ Namespace Utilities
             Dim fullPath As String = Path.Combine(GetLocalFileDirectory(), fileName)
 
             If (checkIfExists = False) OrElse (checkIfExists AndAlso My.Computer.FileSystem.FileExists(fullPath) = False) Then
-                Console.WriteLine("Downloading File: {0} to {1}", url, fullPath)
+                Console.WriteLine(English.msgDownloadingFile, url, fullPath)
                 My.Computer.Network.DownloadFile(url, fullPath, "", "", False, 10000, overwrite)
             Else
                 If (File.GetLastWriteTime(fullPath).AddHours(Convert.ToInt32(checkDelay(0)) - 48) <= Now) AndAlso
                    (File.GetLastWriteTime(fullPath).AddDays(Convert.ToInt32(checkDelay(1)) - 48) <= Now) AndAlso
                    (File.GetLastWriteTime(fullPath).AddMonths(Convert.ToInt32(checkDelay(2)) - 48) <= Now) Then
-                    Console.WriteLine("Downloading File: {0} to {1}", url, fullPath)
+                    Console.WriteLine(English.msgDownloadingFile, url, fullPath)
                     My.Computer.Network.DownloadFile(url, fullPath, "", "", False, 10000, overwrite)
                 Else
-                    Console.WriteLine("Status: File aready exists at {0}", fullPath)
+                    Console.WriteLine(English.msgFileExists, fullPath)
                 End If
             End If
         End Sub
@@ -91,7 +92,7 @@ Namespace Utilities
                     returnValue = streamReader.ReadToEnd()
                 End Using
             Catch ex As Exception
-                Console.WriteLine("Error: {0}", ex.Message.ToString())
+                Console.WriteLine(English.errorGeneral, ex.Message.ToString())
             End Try
 
             Return returnValue
@@ -99,7 +100,7 @@ Namespace Utilities
 
         Public Shared Function DownloadApplicationVersion() As String
             Dim appVers As String
-            Console.WriteLine("Checking: Application version")
+            Console.WriteLine(English.msgCheckingVersion)
             'checking every week "070" for a new version
             DownloadFile(ApplicationVersionUrl, ApplicationVersionFileName, True, True)
             appVers = ReadFileContents(ApplicationVersionFileName).Trim()
@@ -123,8 +124,8 @@ Namespace Utilities
 
         Public Shared Function DownloadAvailableGames() As HashSet(Of String)
 
-            Console.WriteLine("Checking: Available games")
-            DownloadFile(_gamesTxtUrl, GamesTextFileName)
+            Console.WriteLine(English.msgCheckingGames)
+            DownloadFile(GamesTxtUrl, GamesTextFileName)
             Return New HashSet(Of String)(ReadFileContents(GamesTextFileName).Split(New Char() {vbLf}))
         End Function
 
@@ -132,7 +133,7 @@ Namespace Utilities
 
         Public Shared Function DownloadJsonSchedule(startDate As DateTime, Optional refreshing As Boolean = False) As JObject
 
-            Console.WriteLine("Checking: Fetching game schedule for {0}", startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
+            Console.WriteLine(English.msgFetchingSchedule, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
 
             Dim returnValue As JObject
 
@@ -143,7 +144,7 @@ Namespace Utilities
             Dim data As String
 
             If startDate.Date.ToShortDateString >= DateHelper.GetPacificTime.ToShortDateString Then
-                Console.WriteLine("Status: Downloading todays current schedule from {0}", url)
+                Console.WriteLine(English.msgDownloadingSchedule, url)
                 data = DownloadContents(url)
             Else
                 If LookOldJsonFiles(fileName) And Not refreshing Then

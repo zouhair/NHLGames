@@ -6,6 +6,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using System.Windows.Controls;
 using NHLGames.AdDetection.AdDetectors;
 using NHLGames.AdDetection.Common;

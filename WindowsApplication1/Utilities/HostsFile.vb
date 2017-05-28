@@ -1,37 +1,44 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Security.Principal
+Imports NHLGames.My.Resources
 
 Namespace Utilities
 
     Public Class HostsFile
 
         Public Shared Function TestEntry(domain As String, ip As String) As Boolean
-            Dim resolvedIp As String = Dns.GetHostAddresses(domain)(0).ToString()
+            Dim resolvedIp As String = ""
+            Try
+                resolvedIp = Dns.GetHostAddresses(domain)(0).ToString()
+            Catch ex As Exception
+            End Try
             Return ip = resolvedIp
         End Function
 
         Private Shared Function RemoveOldEntries(host As String, contents As String) As String
             Dim newContents As String = String.Empty
 
-            Console.WriteLine("Removing existing entries from hosts file")
+            Console.WriteLine(English.msgCleanHostsFile)
 
-            Dim hostsFile = contents.Split(vbCrLf)
+            Dim hostsFile = contents.Replace(vbCr, String.Empty).Split(vbLf)
 
             For lineCount As Integer = 0 To hostsFile.Length - 1
                 If hostsFile(lineCount).Contains(host) = False Then
-                    newContents &= hostsFile(lineCount).Replace(vbCrLf, String.Empty)
+                    newContents &= hostsFile(lineCount).Replace(vbLf, String.Empty)
                     If lineCount < hostsFile.Length - 1 Then
                         newContents &= vbCrLf
                     End If
                 End If
             Next
 
+            newContents = newContents.TrimEnd()
+
             Return newContents
         End Function
 
         Private Shared Sub Backup(path As String)
-            Console.WriteLine("Backing up file: {0}", path)
+            Console.WriteLine(English.msgBackingHostsFile, path)
             File.Copy(path, path & ".bak", True)
         End Sub
 
@@ -70,8 +77,9 @@ Namespace Utilities
         End Sub
 
         Private Shared Sub MessageOpenHostsFile(hostsFilePath As String)
-            If MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, "Do you wish to view the changes NHLGames made to your Hosts file?", "Open Hosts File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                Process.Start(hostsFilePath)
+            If MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, NHLGamesMetro.RmText.GetString("msgViewHostsText"), 
+                                                   NHLGamesMetro.RmText.GetString("msgViewHosts"), MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+                Process.Start("NOTEPAD", hostsFilePath)
             End If
         End Sub
 
@@ -96,7 +104,7 @@ Namespace Utilities
 
                 Dim output As String = RemoveOldEntries(host, input)
 
-                output = output & vbNewLine & ip & " " & host
+                output = output & vbNewLine & ip & vbTab & host
 
                 Using sw As New StreamWriter(hostsFilePath)
                     sw.Write(output)
@@ -117,7 +125,8 @@ Namespace Utilities
 
             If IsAdministrator() = False Then
 
-                If MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, "This application is missing the required hosts file entry. Do you want to restart this application as an Administrator and add the required entry?", "Admin Access Required", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                If MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, NHLGamesMetro.RmText.GetString("msgRunAsAdminText"), 
+                                                       NHLGamesMetro.RmText.GetString("msgRunAsAdmin"), MessageBoxButtons.YesNo) = DialogResult.Yes Then
 
                     'ApplicationSettings.SetValue(ApplicationSettings.Settings.InAdminModeToSetHostsEntry, True)
                     ' Restart program And run as admin

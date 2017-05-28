@@ -9,8 +9,16 @@ Namespace Controls
 
         Public Sub ReloadCal(ByVal ldate As Date, ByVal selected As Integer)
             _currentDate = ldate
+            lnkToday.Text = NHLGamesMetro.RmText.GetString("lnkCalendarToday")
             Clearall()
-            lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(ldate.Month) & " " & ldate.Year.ToString
+            lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(ldate.Month) & $" " & ldate.Year.ToString
+            Sun.Text = DateHelper.GetFormattedWeek(0)
+            Mon.Text = DateHelper.GetFormattedWeek(1)
+            Tue.Text = DateHelper.GetFormattedWeek(2)
+            Wed.Text = DateHelper.GetFormattedWeek(3)
+            Thu.Text = DateHelper.GetFormattedWeek(4)
+            Fri.Text = DateHelper.GetFormattedWeek(5)
+            Sat.Text = DateHelper.GetFormattedWeek(6)
             Dim fdate As DayOfWeek = GetFirstOfMonthDay(ldate)
             Dim idate As Integer = 1
             Dim row As Integer = 1
@@ -28,7 +36,7 @@ Namespace Controls
                 GetButton(fdate, row).BackColor = Color.White
                 If idate = selected And ldate.Month = Date.Today.Month And ldate.Year = Date.Today.Year Then
                     GetButton(fdate, row).ForeColor = Color.White
-                    GetButton(fdate, row).BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(230, Byte), Integer))
+                    GetButton(fdate, row).BackColor = Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(230, Byte), Integer))
                 End If
                 If fdate = DayOfWeek.Saturday Then
                     row += 1

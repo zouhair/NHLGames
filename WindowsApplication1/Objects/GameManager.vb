@@ -1,4 +1,5 @@
 ﻿Imports Newtonsoft.Json.Linq
+Imports NHLGames.My.Resources
 
 Namespace Objects
 
@@ -33,7 +34,7 @@ Namespace Objects
                             Threading.Thread.Sleep(100)
                         Next
                         If MessageError <> Nothing Then
-                            Console.WriteLine("Error: {0}", MessageError)
+                            Console.WriteLine(English.errorGeneral, MessageError)
                         End If
                     End If
                 Next
