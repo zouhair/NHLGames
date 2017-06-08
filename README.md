@@ -265,3 +265,4 @@ NHLGames use also these NuGet packages:
 - CSCore
 - Newtonsoft JSON .NET
 - Prism.Core
+- SpotifyAPI-NET
