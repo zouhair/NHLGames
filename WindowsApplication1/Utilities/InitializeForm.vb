@@ -90,30 +90,42 @@ Namespace Utilities
 
             Dim mpcPath As String = ApplicationSettings.Read(Of String)(SettingsEnum.MpcPath, String.Empty)
             Dim mpcPathCurrent As String = PathFinder.GetPathOfMpc
-            If mpcPath = String.Empty Then
+            If mpcPath.Equals(String.Empty) And Not mpcPathCurrent.Equals(String.Empty) Then
                 ApplicationSettings.SetValue(SettingsEnum.MpcPath, mpcPathCurrent)
                 mpcPath = mpcPathCurrent
-            ElseIf mpcPath <> mpcPathCurrent And mpcPathCurrent <> String.Empty Then
+            ElseIf mpcPath <> mpcPathCurrent And Not mpcPathCurrent.Equals(String.Empty) Then
                 ApplicationSettings.SetValue(SettingsEnum.MpcPath, mpcPathCurrent)
                 mpcPath = mpcPathCurrent
+            End If
+            If Not File.Exists(mpcPath) Then
+                mpcPath = String.Empty
+                ApplicationSettings.SetValue(SettingsEnum.MpcPath, mpcPath)
+                Form.rbMPC.Enabled = False
+                Form.rbMPC.Checked = False
             End If
             Form.txtMPCPath.Text = mpcPath
 
             Dim vlcPath As String = ApplicationSettings.Read(Of String)(SettingsEnum.VlcPath, String.Empty)
             Dim vlcPathCurrent As String = PathFinder.GetPathOfVlc
-            If vlcPath = String.Empty Then
+            If vlcPath.Equals(String.Empty) And Not vlcPathCurrent.Equals(String.Empty) Then
                 ApplicationSettings.SetValue(SettingsEnum.VlcPath, vlcPathCurrent)
                 vlcPath = vlcPathCurrent
-            ElseIf vlcPath <> vlcPathCurrent And vlcPathCurrent <> String.Empty Then
+            ElseIf vlcPath <> vlcPathCurrent And Not vlcPathCurrent.Equals(String.Empty) Then
                 ApplicationSettings.SetValue(SettingsEnum.VlcPath, vlcPathCurrent)
                 vlcPath = vlcPathCurrent
+            End If
+            If Not File.Exists(vlcPath) Then
+                vlcPath = String.Empty
+                ApplicationSettings.SetValue(SettingsEnum.VlcPath, vlcPath)
+                Form.rbVLC.Enabled = False
+                Form.rbVLC.Checked = False
             End If
             Form.txtVLCPath.Text = vlcPath
 
             Dim mpvPath As String = ApplicationSettings.Read(Of String)(SettingsEnum.MpvPath, String.Empty)
             Dim mpvPathCurrent As String = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
-            If mpvPath = String.Empty Then
-                If (Not File.Exists(mpvPathCurrent)) AndAlso vlcPath Is String.Empty AndAlso mpcPath Is String.Empty Then
+            If mpvPath.Equals(String.Empty) Then
+                If (Not File.Exists(mpvPathCurrent)) AndAlso vlcPath.Equals(String.Empty) AndAlso mpcPath.Equals(String.Empty) Then
                     Console.WriteLine(English.errorMpvExe)
                     mpvPathCurrent = String.Empty
                 End If
@@ -125,11 +137,17 @@ Namespace Utilities
                     mpvPath = mpvPathCurrent
                 End If
             End If
+            If Not File.Exists(mpvPath) Then
+                mpvPath = String.Empty
+                ApplicationSettings.SetValue(SettingsEnum.MpvPath, mpvPath)
+                Form.rbMpv.Enabled = False
+                Form.rbMpv.Checked = False
+            End If
             Form.txtMpvPath.Text = mpvPath
 
             Dim streamlinkPath As String = ApplicationSettings.Read(Of String)(SettingsEnum.StreamlinkPath, String.Empty)
             Dim streamlinkPathCurrent As String = Path.Combine(Application.StartupPath, "streamlink-0.6.0\streamlink.exe")
-            If streamlinkPath = String.Empty Then
+            If streamlinkPath.Equals(String.Empty) Then
                 If Not File.Exists(streamlinkPathCurrent) Then
                     Console.WriteLine(English.errorStreamlinkExe)
                     streamlinkPathCurrent = String.Empty
@@ -142,14 +160,23 @@ Namespace Utilities
                     streamlinkPath = streamlinkPathCurrent
                 End If
             End If
+            If Not File.Exists(streamlinkPath) Then
+                streamlinkPath = String.Empty
+                ApplicationSettings.SetValue(SettingsEnum.StreamlinkPath, streamlinkPath)
+            End If
             Form.txtStreamlinkPath.Text = streamlinkPath
 
             Form.chkShowFinalScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, True)
             Form.chkShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, True)
             Form.chkShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, True)
 
+            Dim playersPath As String() = New String() {mpvPath, mpcPath, vlcPath}
             Dim watchArgs As GameWatchArguments = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
-            If watchArgs Is Nothing OrElse watchArgs.StreamlinkPath <> streamlinkPath Then
+
+            If watchArgs Is Nothing OrElse 
+                watchArgs.StreamlinkPath <> streamlinkPath OrElse 
+                Not playersPath.Any(Function(x) x = watchArgs.PlayerPath) OrElse 
+                Not watchArgs.StreamlinkPath.Equals(streamlinkPath) Then
                 Player.RenewArgs(True)
                 watchArgs = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
             End If
@@ -233,8 +260,8 @@ Namespace Utilities
                     Form.rbLevel3.Checked = True
                 End If
 
-                Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc
-                Form.rbMPC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpc
+                Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc = Not watchArgs.PlayerPath.Equals(String.Empty)
+                Form.rbMPC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpc = Not watchArgs.PlayerPath.Equals(String.Empty)
                 Form.rbMpv.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpv
 
                 If Form.rbVLC.Checked AndAlso watchArgs.PlayerPath <> Form.txtVLCPath.Text Then

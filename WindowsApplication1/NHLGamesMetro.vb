@@ -229,14 +229,17 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub txtVLCPath_TextChanged(sender As Object, e As EventArgs) Handles txtVLCPath.TextChanged
+        rbVLC.Enabled = True
         Player.RenewArgs()
     End Sub
 
     Private Sub txtMPCPath_TextChanged(sender As Object, e As EventArgs) Handles txtMPCPath.TextChanged
+        rbMPC.Enabled = True
         Player.RenewArgs()
     End Sub
 
     Private Sub txtLiveStreamPath_TextChanged(sender As Object, e As EventArgs) Handles txtStreamlinkPath.TextChanged
+        rbMpv.Enabled = True
         Player.RenewArgs()
     End Sub
 

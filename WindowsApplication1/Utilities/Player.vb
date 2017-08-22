@@ -6,6 +6,11 @@ Namespace Utilities
     Public Class Player
         Public Shared Sub Watch(args As GameWatchArguments)
 
+            If args.PlayerPath.Equals(String.Empty) Then
+                Console.WriteLine(English.errorPlayerPathEmpty)
+                Return
+            End If
+
             'current strings StreamLink shows into console, keep it updated to make sure the progress bar moves.
             Dim lstKeywords As New List(Of String) From {"Found matching plugin stream", "Available streams", "Opening stream", "Starting player"}
             Dim progressStep As Integer = (NHLGamesMetro.ProgressMaxValue) / (lstKeywords.Count +1)
