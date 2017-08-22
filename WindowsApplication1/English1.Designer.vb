@@ -308,6 +308,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à unknown (server is not available).
+        '''</summary>
+        Friend Shared ReadOnly Property errorUnknownServerDown() As String
+            Get
+                Return ResourceManager.GetString("errorUnknownServerDown", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Error: Failed to write app settings.
         '''</summary>
         Friend Shared ReadOnly Property errorWritingSettings() As String

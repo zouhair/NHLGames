@@ -613,4 +613,8 @@
     <value>Downloading : {0}</value>
     <comment>Message</comment>
   </data>
+  <data name="errorUnknownServerDown" xml:space="preserve">
+    <value>unknown (server is not available)</value>
+    <comment>Message</comment>
+  </data>
 </root>

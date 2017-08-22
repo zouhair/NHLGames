@@ -9,7 +9,7 @@ Namespace Utilities
 
         Public Shared Sub VersionCheck()
             Dim strLatest = Downloader.DownloadApplicationVersion()
-            Console.WriteLine(English.msgCurrentVersion, strLatest)
+            Console.WriteLine(English.msgCurrentVersion, If(strLatest.Equals(String.Empty), English.errorUnknownServerDown, strLatest))
             Dim versionFromSettings = ApplicationSettings.Read(Of String)(SettingsEnum.Version, "")
 
             If strLatest > versionFromSettings Then

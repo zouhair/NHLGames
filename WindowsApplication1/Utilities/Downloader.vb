@@ -58,7 +58,9 @@ Namespace Utilities
             Try
                 content = client.DownloadString(url).Trim().ToString()
             Catch ex As Exception
-                Console.WriteLine(English.errorServersDown, server)
+                If Not server = AppUrl Then
+                    Console.WriteLine(English.errorServersDown, server)
+                End If
             End Try
             Return content
         End Function
@@ -95,18 +97,17 @@ Namespace Utilities
             Dim appVers As String
             Console.WriteLine(English.msgCheckingVersion)
             appVers = DownloadContents(AppUrl, AppVersionUrl)
-            If Not appVers.Contains("<html>") Then
-                Return appVers
-            Else
-                Return appVers = ""
+            If appVers.Contains("<html>") Then
+                appVers = String.Empty
             End If
+            Return appVers
         End Function
 
         Public Shared Function DownloadChangelog() As String
             Dim appChangelog As String
             appChangelog = DownloadContents(AppUrl, AppChangelogUrl)
             If appChangelog.Contains("<html>") Then
-                appChangelog = ""
+                appChangelog = String.Empty
             End If
             Return appChangelog
         End Function
