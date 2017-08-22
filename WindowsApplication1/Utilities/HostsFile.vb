@@ -77,8 +77,9 @@ Namespace Utilities
         End Sub
 
         Private Shared Sub MessageOpenHostsFile(hostsFilePath As String)
-            If MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, NHLGamesMetro.RmText.GetString("msgViewHostsText"), 
-                                                   NHLGamesMetro.RmText.GetString("msgViewHosts"), MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+            If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgViewHostsText"),
+                                        NHLGamesMetro.RmText.GetString("msgViewHosts"),
+                                        MessageBoxButtons.YesNo) = DialogResult.Yes Then
                 Process.Start("NOTEPAD", hostsFilePath)
             End If
         End Sub
@@ -124,9 +125,9 @@ Namespace Utilities
         Public Shared Function EnsureAdmin() As Boolean
 
             If IsAdministrator() = False Then
-
-                If MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance, NHLGamesMetro.RmText.GetString("msgRunAsAdminText"), 
-                                                       NHLGamesMetro.RmText.GetString("msgRunAsAdmin"), MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgRunAsAdminText"), 
+                                            NHLGamesMetro.RmText.GetString("msgRunAsAdmin"),
+                                            MessageBoxButtons.YesNo) = DialogResult.Yes Then
 
                     'ApplicationSettings.SetValue(ApplicationSettings.Settings.InAdminModeToSetHostsEntry, True)
                     ' Restart program And run as admin

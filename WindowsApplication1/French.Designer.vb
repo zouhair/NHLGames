@@ -317,7 +317,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à * Réseau de diffusion.
+        '''  Recherche une chaîne localisée semblable à Réseau de diffusion.
         '''</summary>
         Public Shared ReadOnly Property lblCdn() As String
             Get
@@ -506,7 +506,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à * Lecteur par défaut.
+        '''  Recherche une chaîne localisée semblable à Lecteur par défaut.
         '''</summary>
         Public Shared ReadOnly Property lblPlayer() As String
             Get
@@ -542,7 +542,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à * Qualité vidéo.
+        '''  Recherche une chaîne localisée semblable à Qualité vidéo.
         '''</summary>
         Public Shared ReadOnly Property lblQuality() As String
             Get
@@ -569,7 +569,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à * Emplacement Streamlink.
+        '''  Recherche une chaîne localisée semblable à Emplacement Streamlink.
         '''</summary>
         Public Shared ReadOnly Property lblSlPath() As String
             Get

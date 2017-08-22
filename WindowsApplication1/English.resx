@@ -198,7 +198,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="lblCdn" xml:space="preserve">
-    <value>* CDN</value>
+    <value>CDN</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblEndzoneCam" xml:space="preserve">
@@ -274,7 +274,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblPlayer" xml:space="preserve">
-    <value>* Default Player</value>
+    <value>Default Player</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblPlayerArgs" xml:space="preserve">
@@ -290,7 +290,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="lblQuality" xml:space="preserve">
-    <value>* Stream Quality</value>
+    <value>Stream Quality</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblShowScores" xml:space="preserve">
@@ -298,7 +298,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblSlPath" xml:space="preserve">
-    <value>* Streamlink Path</value>
+    <value>Streamlink Path</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblStreamAvailableDuringPregame" xml:space="preserve">
@@ -604,5 +604,13 @@
   <data name="gamePeriodOtMore" xml:space="preserve">
     <value>{0}OT</value>
     <comment>Game panel</comment>
+  </data>
+  <data name="errorServersDown" xml:space="preserve">
+    <value>Error: Server {0} is down</value>
+    <comment>Message</comment>
+  </data>
+  <data name="msgDownloading" xml:space="preserve">
+    <value>Downloading : {0}</value>
+    <comment>Message</comment>
   </data>
 </root>

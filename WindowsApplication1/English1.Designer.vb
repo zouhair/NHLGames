@@ -281,6 +281,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Error: Server {0} is down.
+        '''</summary>
+        Friend Shared ReadOnly Property errorServersDown() As String
+            Get
+                Return ResourceManager.GetString("errorServersDown", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Error: Can&apos;t set Ad Detection Modules : {0}.
         '''</summary>
         Friend Shared ReadOnly Property errorSetAdModule() As String
@@ -434,7 +443,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à * CDN.
+        '''  Recherche une chaîne localisée semblable à CDN.
         '''</summary>
         Friend Shared ReadOnly Property lblCdn() As String
             Get
@@ -623,7 +632,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à * Default Player.
+        '''  Recherche une chaîne localisée semblable à Default Player.
         '''</summary>
         Friend Shared ReadOnly Property lblPlayer() As String
             Get
@@ -659,7 +668,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à * Stream Quality.
+        '''  Recherche une chaîne localisée semblable à Stream Quality.
         '''</summary>
         Friend Shared ReadOnly Property lblQuality() As String
             Get
@@ -686,7 +695,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à * Streamlink Path.
+        '''  Recherche une chaîne localisée semblable à Streamlink Path.
         '''</summary>
         Friend Shared ReadOnly Property lblSlPath() As String
             Get
@@ -835,6 +844,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgDiyStepsText() As String
             Get
                 Return ResourceManager.GetString("msgDiyStepsText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Downloading : {0}.
+        '''</summary>
+        Friend Shared ReadOnly Property msgDownloading() As String
+            Get
+                Return ResourceManager.GetString("msgDownloading", resourceCulture)
             End Get
         End Property
         

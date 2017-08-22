@@ -162,7 +162,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="lblCdn" xml:space="preserve">
-    <value>* Réseau de diffusion</value>
+    <value>Réseau de diffusion</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblEndzoneCam" xml:space="preserve">
@@ -238,7 +238,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblPlayer" xml:space="preserve">
-    <value>* Lecteur par défaut</value>
+    <value>Lecteur par défaut</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblPlayerArgs" xml:space="preserve">
@@ -254,7 +254,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="lblQuality" xml:space="preserve">
-    <value>* Qualité vidéo</value>
+    <value>Qualité vidéo</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblShowScores" xml:space="preserve">
@@ -262,7 +262,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblSlPath" xml:space="preserve">
-    <value>* Emplacement Streamlink</value>
+    <value>Emplacement Streamlink</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblStreamAvailableDuringPregame" xml:space="preserve">
