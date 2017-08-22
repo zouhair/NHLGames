@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Net
 Imports Newtonsoft.Json.Linq
+Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
 
 Namespace Objects
@@ -25,16 +26,6 @@ Namespace Objects
             EndzoneCam1
             EndzoneCam2
         End Enum
-
-        Public ReadOnly Property Availability As String
-            Get
-                If IsAvailable Then
-                    Return "Watch"
-                Else
-                    Return ""
-                End If
-            End Get
-        End Property
 
         Public Property IsAvailable As Boolean = False
 
@@ -81,7 +72,18 @@ Namespace Objects
                 End If
             End If
 
-            Vodurl = String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/{0}/NHL_GAME_VIDEO_{1}{2}_M2_{3}_{4}/master_wired60.m3u8", dateString, game.AwayAbbrev, game.HomeAbbrev, feedType, dateString2)
+            'ugly fix looking if we receive a hlslive link, since hlslive links are not working i convert it to a hlsvod link and get the exp id from it. thats it.
+                    If GameUrl.Contains("http://hlslive") Then
+                        Dim spliter = GameUrl.Split("/")
+                        For Each split As String In spliter
+                            If split.StartsWith("NHL_GAME_VIDEO_") Then
+                                Vodurl = String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/{0}/{1}/master_wired60.m3u8", dateString, split)
+                            End If
+                        Next
+                    End If
+                    'ugly fix end, this ugly fix concerns only games that are 2 to 7 days old, older than that they become archived and newest games are live games.
+
+            'Vodurl = String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/{0}/NHL_GAME_VIDEO_{1}{2}_M2_{3}_{4}/master_wired60.m3u8", dateString, game.AwayAbbrev, game.HomeAbbrev, feedType, dateString2)
 
             Me.Type = type
             Network = stream.Property("callLetters")
@@ -100,7 +102,7 @@ Namespace Objects
                 End If
                 myHttpWebResponse.Close()
             Catch e As Exception
-                Console.WriteLine("VOD Status: {0}", e.Message)
+                Console.WriteLine(English.msgVOD, e.Message)
             End Try
         End Sub
 

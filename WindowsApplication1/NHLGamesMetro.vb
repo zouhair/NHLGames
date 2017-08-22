@@ -1,13 +1,14 @@
-﻿Imports System.Globalization
-Imports System.IO
+﻿Imports System.IO
 Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Net
+Imports System.Resources
 Imports System.Runtime.InteropServices
 Imports MetroFramework
 Imports Newtonsoft.Json.Linq
 Imports NHLGames.AdDetection
 Imports NHLGames.Controls
+Imports NHLGames.My.Resources
 Imports NHLGames.Objects
 Imports NHLGames.Utilities.TextboxConsoleOutputRediect
 Imports NHLGames.Utilities
@@ -32,23 +33,33 @@ Public Class NHLGamesMetro
     Public Shared GameDate As Date = DateHelper.GetPacificTime()
     Private _resizeDirection As Integer = -1
     Private Const ResizeBorderWidth As Integer = 3
+    Public Shared RmText As ResourceManager  = English.ResourceManager
 
     <DllImport("user32.dll")>
     Public Shared Function ReleaseCapture() As Boolean
     End Function
 
     <DllImport("user32.dll")>
-    Public Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal Msg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Integer
+    Public Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Integer
     End Function
 
+    ' ReSharper disable once InconsistentNaming
     Private Const WM_NCLBUTTONDOWN As Integer = &HA1
+    ' ReSharper disable once InconsistentNaming
     Private Const HTBOTTOM As Integer = 15
+    ' ReSharper disable once InconsistentNaming
     Private Const HTBOTTOMLEFT As Integer = 16
+    ' ReSharper disable once InconsistentNaming
     Private Const HTBOTTOMRIGHT As Integer = 17
+    ' ReSharper disable once InconsistentNaming
     Private Const HTLEFT As Integer = 10
+    ' ReSharper disable once InconsistentNaming
     Private Const HTRIGHT As Integer = 11
+    ' ReSharper disable once InconsistentNaming
     Private Const HTTOP As Integer = 12
+    ' ReSharper disable once InconsistentNaming
     Private Const HTTOPLEFT As Integer = 13
+    ' ReSharper disable once InconsistentNaming
     Private Const HTTOPRIGHT As Integer = 14
 
     ' Starts the application. -- See: https://msdn.microsoft.com/en-us/library/system.windows.forms.application.threadexception(v=vs.110).aspx
@@ -74,18 +85,42 @@ Public Class NHLGamesMetro
         Application.Run(form)
     End Sub
 
+    Private Sub FatalErrorAndMsgBox(message As String, title As String)
+        If MetroMessageBox.Show(Me, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error) = DialogResult.OK Then
+            Close
+        End If
+    End Sub
+
     Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        AddHandler GameManager.NewGameFound, AddressOf NewGameFoundHandler
-        FlpCalendar = flpCalender
+        If Not File.Exists("NHLGames.exe.config") then
+            Console.WriteLine(English.errorConfigFile)
+            FatalErrorAndMsgBox(RmText.GetString("errorConfigFile"),RmText.GetString("msgFailure"))
+        End If
 
-        _adDetectorViewModel = New AdDetectorViewModel()
-        AdDetectionSettingsElementHost.Child = _adDetectorViewModel.SettingsControl
+        AddHandler GameManager.NewGameFound, AddressOf NewGameFoundHandler
 
         TabControl.SelectedIndex = 0
+
+        Dim lang = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.SelectedLanguage, String.Empty)
+        If String.IsNullOrEmpty(lang) OrElse lang = RmText.GetString("lblEnglish") Then
+            RmText = English.ResourceManager
+        ElseIf lang = RmText.GetString("lblFrench") Then
+            RmText = French.ResourceManager
+        End If
+
+        Try
+            _adDetectorViewModel = New AdDetectorViewModel()
+            AdDetectionSettingsElementHost.Child = _adDetectorViewModel.SettingsControl
+        catch ex As Exception
+            Console.WriteLine(English.errorSetAdModule,ex.Message)
+            FatalErrorAndMsgBox(RmText.GetString("errorSetAdModule"),RmText.GetString("msgFailure"))
+        end Try
+
+        FlpCalendar = flpCalender
         flpCalender.Controls.Add(New CalenderControl())
 
-
+        setLanguageOnFrom()
         IntitializeApplicationSettings()
         VersionCheck()
 
@@ -93,13 +128,13 @@ Public Class NHLGamesMetro
 
     Private Sub IntitializeApplicationSettings()
 
-        SettingsToolTip.SetToolTip(rbQual1, "300 MB/hr")
-        SettingsToolTip.SetToolTip(rbQual2, "500 MB/hr")
-        SettingsToolTip.SetToolTip(rbQual3, "700 MB/hr")
-        SettingsToolTip.SetToolTip(rbQual4, "950 MB/hr")
-        SettingsToolTip.SetToolTip(rbQual5, "1.3 GB/hr")
-        SettingsToolTip.SetToolTip(rbQual6, "1.8 GB/hr")
-        SettingsToolTip.SetToolTip(chk60, "+700 MB/hr (+40%)")
+        SettingsToolTip.SetToolTip(rbQual1, "300" & RmText.GetString("formatMbHour"))
+        SettingsToolTip.SetToolTip(rbQual2, "500" & RmText.GetString("formatMbHour"))
+        SettingsToolTip.SetToolTip(rbQual3, "700" & RmText.GetString("formatMbHour"))
+        SettingsToolTip.SetToolTip(rbQual4, "950" & RmText.GetString("formatMbHour"))
+        SettingsToolTip.SetToolTip(rbQual5, "1.3" & RmText.GetString("formatGbHour"))
+        SettingsToolTip.SetToolTip(rbQual6, "1.8" & RmText.GetString("formatGbHour"))
+        SettingsToolTip.SetToolTip(chk60, "+700" & RmText.GetString("formatMbHour") &" (+40%)")
 
         Dim mpcPath As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpcPath, String.Empty)
         Dim mpcPathCurrent As String = PathFinder.GetPathOfMpc
@@ -127,8 +162,7 @@ Public Class NHLGamesMetro
         Dim mpvPathCurrent As String = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
         If mpvPath = String.Empty Then
             If (Not File.Exists(mpvPathCurrent)) AndAlso vlcPath Is String.Empty AndAlso mpcPath Is String.Empty Then
-                Console.WriteLine("Error: Can't find mpv.exe : mpv is a media player that we shipped with NHLGames. You probably moved it or deleted it." &
-                                "Please set a player, NHLGames needs one.")
+                Console.WriteLine(English.errorMpvExe)
                 mpvPathCurrent = String.Empty
             End If
             ApplicationSettings.SetValue(ApplicationSettings.Settings.MpvPath, mpvPathCurrent)
@@ -145,10 +179,7 @@ Public Class NHLGamesMetro
         Dim streamlinkPathCurrent As String = Path.Combine(Application.StartupPath, "streamlink-0.5.0\streamlink.exe")
         If streamlinkPath = String.Empty Then
             If Not File.Exists(streamlinkPathCurrent) Then
-                Console.WriteLine("Error:  Can't find streamlink.exe. Streamlink is a tool that NHLGames uses to send streams to your media player, " &
-                                "we shipped it with NHLGames. You probably moved it or deleted it and " &
-                                "if you don't set any custom path, you will have to put it back there, " &
-                                "just drop the folder 'streamlink-0.5.0' next to NHLGames.exe.")
+                Console.WriteLine(English.errorStreamlinkExe)
                 streamlinkPathCurrent = String.Empty
             End If
             ApplicationSettings.SetValue(ApplicationSettings.Settings.StreamlinkPath, streamlinkPathCurrent)
@@ -171,13 +202,36 @@ Public Class NHLGamesMetro
             watchArgs = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
         End If
 
+        Dim languageListFromConfig As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.LanguageList, String.Empty)
+        Dim languageList As String() = languageListFromConfig.Split(";")
+        For Each lang In languageList
+            cbLanguage.Items.Add(lang)
+        Next
+        cbLanguage.SelectedItem = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.SelectedLanguage, String.Empty)
+        If cbLanguage.SelectedItem Is Nothing Then
+            cbLanguage.SelectedItem = cbLanguage.Items(0)
+        End If
+
+        Dim serverListFromConfig As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.ServerList, String.Empty)
+        Dim serverList As String() = serverListFromConfig.Split(";")
+        For Each server In serverList
+            cbServers.Items.Add(server)
+        Next
+        cbServers.SelectedItem = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.SelectedServer, String.Empty)
+        If cbServers.SelectedItem Is Nothing Then
+            cbServers.SelectedItem = cbServers.Items(0)
+        End If
+        _serverIp = Dns.GetHostEntry(cbServers.SelectedItem.ToString()).AddressList.First.ToString()
+        HostName = cbServers.SelectedItem.ToString()
+
         BindWatchArgsToForm(watchArgs)
 
         If (HostsFile.TestEntry(DomainName, _serverIp) = False) Then
-            If MetroFramework.MetroMessageBox.Show(Me, "NHLGames can't work without having its hostname set in your Windows Hosts file. Do you want to let NHLGames adds an entry to your Hosts file, so Windows can resolve NHLGames hostname and connect to its server's IP address?", "Add Hosts Entry", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+            If MetroMessageBox.Show(Me, RmText.GetString("msgHostnameSet"), RmText.GetString("msgAddHost"), MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
                 HostsFile.AddEntry(_serverIp, DomainName, True)
             Else
                 TabControl.SelectedIndex = 1
+                DiySteps()
             End If
         End If
 
@@ -189,6 +243,7 @@ Public Class NHLGamesMetro
         LabelDate = lblDate
         GamesDownloadedTime = Now
         _settingsLoaded = True
+
     End Sub
 
     Private Sub SetEventArgsFromForm(Optional forceSet As Boolean = False)
@@ -243,7 +298,7 @@ Public Class NHLGamesMetro
             watchArgs.StreamlinkArgs = txtStreamerArgs.Text
 
             watchArgs.UseOutputArgs = tgOutput.Checked
-            watchArgs.PlayerOutputPath = txtOutputPath.Text
+            watchArgs.PlayerOutputPath = txtOutputArgs.Text
             ApplicationSettings.SetValue(ApplicationSettings.Settings.DefaultWatchArgs, Serialization.SerializeObject(Of Game.GameWatchArguments)(watchArgs))
         End If
     End Sub
@@ -274,21 +329,6 @@ Public Class NHLGamesMetro
                 rbLevel3.Checked = True
             End If
 
-            Dim serverListFromConfig As String = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.ServerList, String.Empty)
-            Dim serverList As String() = serverListFromConfig.Split(";")
-            For Each server In serverList
-                cbServers.Items.Add(server)
-            Next
-
-            cbServers.SelectedItem = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.SelectedServer, String.Empty)
-
-            If cbServers.SelectedItem Is Nothing Then
-                cbServers.SelectedItem = cbServers.Items(0)
-            End If
-
-            _serverIp = Dns.GetHostEntry(cbServers.SelectedItem.ToString()).AddressList.First.ToString()
-            HostName = cbServers.SelectedItem.ToString()
-
             rbVLC.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Vlc
             rbMPC.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpc
             rbMpv.Checked = watchArgs.PlayerType = Game.GameWatchArguments.PlayerTypeEnum.Mpv
@@ -309,8 +349,8 @@ Public Class NHLGamesMetro
             txtStreamerArgs.Enabled = watchArgs.UsestreamlinkArgs
             txtStreamerArgs.Text = watchArgs.StreamlinkArgs
 
-            txtOutputPath.Text = watchArgs.PlayerOutputPath
-            txtOutputPath.Enabled = watchArgs.UseOutputArgs
+            txtOutputArgs.Text = watchArgs.PlayerOutputPath
+            txtOutputArgs.Enabled = watchArgs.UseOutputArgs
             tgOutput.Checked = watchArgs.UseOutputArgs
 
         End If
@@ -319,7 +359,7 @@ Public Class NHLGamesMetro
     ' Handle the UI exceptions by showing a dialog box, and asking the user whether
     ' or not they wish to abort execution.
     Private Shared Sub Form1_UIThreadException(ByVal sender As Object, ByVal t As ThreadExceptionEventArgs)
-        Console.WriteLine("Error: {0}", t.Exception.ToString())
+        Console.WriteLine(English.errorGeneral, t.Exception.ToString())
     End Sub
 
     Private Shared Sub CurrentDomain_UnhandledException(ByVal sender As Object, ByVal e As UnhandledExceptionEventArgs)
@@ -331,17 +371,15 @@ Public Class NHLGamesMetro
     End Sub
     Private Sub VersionCheck()
         Dim strLatest = Downloader.DownloadApplicationVersion()
-        Console.WriteLine("Status: Current version is {0}", strLatest)
+        Console.WriteLine(English.msgCurrentVersion, strLatest)
         Dim versionFromSettings = ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version, "")
 
         If strLatest > versionFromSettings Then
-            lnkDownload.Text = String.Format("A new version is available, download the latest version v{0} on /r/nhl_games", strLatest)
-            DownloadLink &= "wiki/downloads"
+            lnkDownload.Text = String.Format(RmText.GetString("msgNewVersionText"), strLatest)
+            'DownloadLink &= "wiki/downloads"
+             lnkDownload.Width = 500
             Dim strChangeLog = Downloader.DownloadChangelog()
-            MetroMessageBox.Show(Me, String.Format("Version {0} is available! Changes: {1}{2}{3}", strLatest, vbCrLf, vbCrLf, strChangeLog), "New Version Available", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Else
-            lnkDownload.Text = "/r/nhl_games"
-            lnkDownload.Width = 100
+            MetroMessageBox.Show(Me, String.Format(RmText.GetString("msgChangeLog"), strLatest, vbCrLf, vbCrLf, strChangeLog), RmText.GetString("msgNewVersionAvailable"), MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
         lblVersion.Text = String.Format("v{0}", ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.Version))
 
@@ -379,11 +417,11 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub LoadGames(dateTime As DateTime, refreshing As Boolean)
-        Dim availableGames As HashSet(Of String) = New HashSet(Of String)
+        Dim availableGames As HashSet(Of String)
         Try
             ProgressValue = 0
             SetLoading(True)
-            SetFormStatusLabel("Loading Games")
+            SetFormStatusLabel(RmText.GetString("msgLoadingGames"))
 
             GameManager.ClearGames()
             ClearGamePanel()
@@ -392,7 +430,7 @@ Public Class NHLGamesMetro
             availableGames = Downloader.DownloadAvailableGames()
             GameManager.RefreshGames(dateTime, jsonSchedule, availableGames)
 
-            SetFormStatusLabel("Games Found : " & GameManager.GamesList.Count.ToString())
+            SetFormStatusLabel(String.Format(RmText.GetString("msgGamesFound"),GameManager.GamesList.Count.ToString()))
             SetLoading(False)
         Catch ex As Exception
             Console.WriteLine(ex.ToString())
@@ -411,11 +449,11 @@ Public Class NHLGamesMetro
 
     Private Sub btnOpenHostsFile_Click(sender As Object, e As EventArgs) Handles btnOpenHostsFile.Click
         Dim hostsFilePath As String = Environment.SystemDirectory & "\drivers\etc\hosts"
-        Process.Start(hostsFilePath)
+        Process.Start("NOTEPAD", hostsFilePath)
     End Sub
 
     Private Sub btnVLCPath_Click(sender As Object, e As EventArgs) Handles btnVLCPath.Click
-        OpenFileDialog.Filter = "VLC|vlc.exe|All files (*.*)|*.*"
+        OpenFileDialog.Filter = $"VLC|vlc.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
 
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
@@ -429,7 +467,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnMPCPath_Click(sender As Object, e As EventArgs) Handles btnMPCPath.Click
-        OpenFileDialog.Filter = "MPC|mpc-hc64.exe;mpc-hc.exe|All files (*.*)|*.*"
+        OpenFileDialog.Filter = $"MPC|mpc-hc64.exe;mpc-hc.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
 
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
@@ -443,7 +481,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnMpvPath_Click(sender As Object, e As EventArgs) Handles btnMpvPath.Click
-        OpenFileDialog.Filter = "MPC|mpv.exe|All files (*.*)|*.*"
+        OpenFileDialog.Filter = $"MPC|mpv.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
 
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
@@ -457,7 +495,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnstreamlinkPath_Click(sender As Object, e As EventArgs) Handles btnstreamlinkPath.Click
-        OpenFileDialog.Filter = "streamlink|streamlink.exe|All files (*.*)|*.*"
+        OpenFileDialog.Filter = $"streamlink|streamlink.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
 
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
@@ -478,11 +516,11 @@ Public Class NHLGamesMetro
         RichTextBox.Clear()
     End Sub
 
-    Private Sub btnHosts_Click(sender As Object, e As EventArgs) Handles btnHosts.Click
+    Private Sub btnHosts_Click(sender As Object, e As EventArgs) Handles btnTestHosts.Click
         If HostsFile.TestEntry(DomainName, _serverIp) Then
-            MetroMessageBox.Show(Me, "Hosts file looks good!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MetroMessageBox.Show(Me, RmText.GetString("msgHostsSuccess"), RmText.GetString("msgSuccess"), MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else
-            MetroMessageBox.Show(Me, "Hosts entry doesn't seem to be working :(", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MetroMessageBox.Show(Me, RmText.GetString("msgHostsFailure"), RmText.GetString("msgFailure"), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
 
@@ -490,15 +528,15 @@ Public Class NHLGamesMetro
     Private Sub chk60_CheckedChanged(sender As Object, e As EventArgs) Handles chk60.CheckedChanged
         If chk60.Checked Then
             rbQual6.Checked = True
-            _writeToConsoleSettingsChanged("Quality", rbQual6.Text & " @ " & chk60.Text)
+            _writeToConsoleSettingsChanged(lblQuality.Text, rbQual6.Text & " @ " & chk60.Text)
         ElseIf rbQual6.Checked Then
-            _writeToConsoleSettingsChanged("Quality", rbQual6.Text)
+            _writeToConsoleSettingsChanged(lblQuality.Text, rbQual6.Text)
         End If
         SetEventArgsFromForm()
     End Sub
 
     Private Sub _writeToConsoleSettingsChanged(key As String, value As String)
-        Console.WriteLine("Status: Setting updated for '{0}' to '{1}'", key, value)
+        Console.WriteLine(String.Format(English.msgSettingUpdated, key, value))
     End Sub
 
     Private Sub txtVLCPath_TextChanged(sender As Object, e As EventArgs) Handles txtVLCPath.TextChanged
@@ -521,6 +559,7 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
+' ReSharper disable once ParameterHidesMember
     Private Sub SetLoading(status As Boolean)
         If InvokeRequired Then
             BeginInvoke(New Action(Of Boolean)(AddressOf SetLoading), status)
@@ -533,53 +572,53 @@ Public Class NHLGamesMetro
     Private Sub quality_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual6.CheckedChanged, rbQual5.CheckedChanged, rbQual4.CheckedChanged, rbQual3.CheckedChanged, rbQual2.CheckedChanged, rbQual1.CheckedChanged
         SetEventArgsFromForm()
         Dim rb As RadioButton = sender
-        If (Not chk60.Checked And rb.Checked) Then _writeToConsoleSettingsChanged("Quality", rb.Text)
+        If (Not chk60.Checked And rb.Checked) Then _writeToConsoleSettingsChanged(lblQuality.Text, rb.Text)
     End Sub
 
     Private Sub player_CheckedChanged(sender As Object, e As EventArgs) Handles rbVLC.CheckedChanged, rbMPC.CheckedChanged, rbMpv.CheckedChanged
         SetEventArgsFromForm()
         Dim rb As RadioButton = sender
-        If (rb.Checked) Then _writeToConsoleSettingsChanged("Player", rb.Text)
+        If (rb.Checked) Then _writeToConsoleSettingsChanged(lblPlayer.Text, rb.Text)
     End Sub
 
     Private Sub rbCDN_CheckedChanged(sender As Object, e As EventArgs) Handles rbLevel3.CheckedChanged, rbAkamai.CheckedChanged
         SetEventArgsFromForm()
         Dim rb As RadioButton = sender
-        If (rb.Checked) Then _writeToConsoleSettingsChanged("CDN", rb.Text)
+        If (rb.Checked) Then _writeToConsoleSettingsChanged(lblCdn.Text, rb.Text)
     End Sub
 
-    Private Sub txtOutputPath_TextChanged(sender As Object, e As EventArgs) Handles txtOutputPath.TextChanged
+    Private Sub txtOutputPath_TextChanged(sender As Object, e As EventArgs) Handles txtOutputArgs.TextChanged
         SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged("Output", txtOutputPath.Text)
+        _writeToConsoleSettingsChanged(lblOutput.Text, txtOutputArgs.Text)
     End Sub
 
     Private Sub txtPlayerArgs_TextChanged(sender As Object, e As EventArgs) Handles txtPlayerArgs.TextChanged
         SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged("Player args", txtPlayerArgs.Text)
+        _writeToConsoleSettingsChanged(lblPlayerArgs.Text, txtPlayerArgs.Text)
     End Sub
 
     Private Sub txtStreamerArgs_TextChanged(sender As Object, e As EventArgs) Handles txtStreamerArgs.TextChanged
         SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged("Streamer args", txtStreamerArgs.Text)
+        _writeToConsoleSettingsChanged(lblStreamerArgs.Text, txtStreamerArgs.Text)
     End Sub
 
     Private Sub btnOuput_Click(sender As Object, e As EventArgs) Handles btnOuput.Click
         SaveFileDialog.CheckPathExists = True
 
-        If txtOutputPath.Text.Count > 0 Then
-            SaveFileDialog.InitialDirectory = Path.GetDirectoryName(txtOutputPath.Text)
-            SaveFileDialog.FileName = Path.GetFileName(txtOutputPath.Text)
+        If txtOutputArgs.Text.Count > 0 Then
+            SaveFileDialog.InitialDirectory = Path.GetDirectoryName(txtOutputArgs.Text)
+            SaveFileDialog.FileName = Path.GetFileName(txtOutputArgs.Text)
         Else
             SaveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
             SaveFileDialog.FileName = "(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(QUAL)"
         End If
 
-        SaveFileDialog.Filter = "MP4 Files (*.mp4)|*.MP4"
+        SaveFileDialog.Filter = $"MP4 Files (*.mp4)|*.MP4"
         SaveFileDialog.DefaultExt = "mp4"
         SaveFileDialog.AddExtension = True
 
         If SaveFileDialog.ShowDialog() = DialogResult.OK Then
-            txtOutputPath.Text = SaveFileDialog.FileName
+            txtOutputArgs.Text = SaveFileDialog.FileName
             SetEventArgsFromForm()
         End If
     End Sub
@@ -595,16 +634,16 @@ Public Class NHLGamesMetro
     End Sub
 
 
-    Private Sub btnClean_Click(sender As Object, e As EventArgs) Handles btnClean.Click
+    Private Sub btnClean_Click(sender As Object, e As EventArgs) Handles btnCleanHosts.Click
         HostsFile.CleanHosts(DomainName, True)
     End Sub
 
-    Private Sub lnkVLCDownload_Click(sender As Object, e As EventArgs) Handles lnkVLCDownload.Click
+    Private Sub lnkVLCDownload_Click(sender As Object, e As EventArgs) Handles lblGetVlc.Click
         Dim sInfo As ProcessStartInfo = New ProcessStartInfo("http://www.videolan.org/vlc/download-windows.html")
         Process.Start(sInfo)
     End Sub
 
-    Private Sub lnkMPCDownload_Click(sender As Object, e As EventArgs) Handles lnkMPCDownload.Click
+    Private Sub lnkMPCDownload_Click(sender As Object, e As EventArgs) Handles lblGetMpc.Click
         Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://mpc-hc.org/downloads/")
         Process.Start(sInfo)
     End Sub
@@ -690,58 +729,49 @@ Public Class NHLGamesMetro
     Private Sub tgStreamer_CheckedChanged(sender As Object, e As EventArgs) Handles tgStreamer.CheckedChanged
         txtStreamerArgs.Enabled = tgStreamer.Checked
         SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged("Streamer args Enable", tgStreamer.Checked)
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblStreamerArgs.Text), 
+                                       if(tgStreamer.Checked, English.msgOn, English.msgOff))
     End Sub
 
     Private Sub tgPlayer_CheckedChanged(sender As Object, e As EventArgs) Handles tgPlayer.CheckedChanged
         txtPlayerArgs.Enabled = tgPlayer.Checked
         SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged("Player args Enable", tgPlayer.Checked)
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblPlayerArgs.Text), 
+                                       if(tgPlayer.Checked, English.msgOn, English.msgOff))
     End Sub
 
     Private Sub tgOutput_CheckedChanged(sender As Object, e As EventArgs) Handles tgOutput.CheckedChanged
-        txtOutputPath.Enabled = tgOutput.Checked
+        txtOutputArgs.Enabled = tgOutput.Checked
         SetEventArgsFromForm()
-        _writeToConsoleSettingsChanged("Output Enable", tgOutput.Checked)
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblOutput.Text),
+                                       if(tgOutput.Checked, English.msgOn, English.msgOff))
     End Sub
 
     Private Sub chkShowSeriesRecord_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowSeriesRecord.CheckedChanged
         ApplicationSettings.SetValue(ApplicationSettings.Settings.ShowSeriesRecord, chkShowSeriesRecord.Checked)
     End Sub
 
-    Private Sub btnDisplayEntry_Click(sender As Object, e As EventArgs) Handles btnDisplayEntry.Click
-        Dim result As DialogResult
-        result = MetroMessageBox.Show(Me, String.Format("This line needs to be insert in your hosts file : {0}{1} {2}{0}" &
-            "Copy and paste that entry line at the end of your Hosts file.{0}" &
-            "You can use 'Open Hosts File' button with Notepad to open the Hosts file quickly.{0}" &
-            "Do you want to copy that entry line to your clipboard ?",
-            vbCrLf, _serverIp, DomainName), "Do It Yourself steps", MessageBoxButtons.YesNo)
-        If result = System.Windows.Forms.DialogResult.Yes Then
-            Clipboard.SetText(_serverIp & " " & DomainName)
-        End If
-    End Sub
-
-    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+    Private Shared Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://github.com/NHLGames/NHLGames#nhlgames")
         Process.Start(sInfo)
     End Sub
 
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
-        Me.WindowState = FormWindowState.Maximized
+        WindowState = FormWindowState.Maximized
         btnMaximize.Visible = False
         btnNormal.Visible = True
     End Sub
 
     Private Sub btnMinimize_Click(sender As Object, e As EventArgs) Handles btnMinimize.Click
-        Me.WindowState = FormWindowState.Minimized
+        WindowState = FormWindowState.Minimized
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
+        Close()
     End Sub
 
     Private Sub btnNormal_Click(sender As Object, e As EventArgs) Handles btnNormal.Click
-        Me.WindowState = FormWindowState.Normal
+        WindowState = FormWindowState.Normal
         btnMaximize.Visible = True
         btnNormal.Visible = False
     End Sub
@@ -764,7 +794,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub NHLGamesMetro_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
-        Me.Refresh()
+        Refresh()
         flpGames.Focus()
     End Sub
 
@@ -772,36 +802,36 @@ Public Class NHLGamesMetro
         'Calculate which direction to resize based on mouse position
         _resizeDirection = -1
         If e.Location.X < ResizeBorderWidth And e.Location.Y < ResizeBorderWidth Then
-            Me.Cursor = Cursors.SizeNWSE
+            Cursor = Cursors.SizeNWSE
             _resizeDirection = HTTOPLEFT
-        ElseIf e.Location.X < ResizeBorderWidth And e.Location.Y > MyBase.Height - ResizeBorderWidth Then
-            Me.Cursor = Cursors.SizeNESW
+        ElseIf e.Location.X < ResizeBorderWidth And e.Location.Y > Height - ResizeBorderWidth Then
+            Cursor = Cursors.SizeNESW
             _resizeDirection = HTBOTTOMLEFT
-        ElseIf e.Location.X > MyBase.Width - ResizeBorderWidth And e.Location.Y > MyBase.Height - ResizeBorderWidth Then
-            Me.Cursor = Cursors.SizeNWSE
+        ElseIf e.Location.X > Width - ResizeBorderWidth And e.Location.Y > Height - ResizeBorderWidth Then
+            Cursor = Cursors.SizeNWSE
             _resizeDirection = HTBOTTOMRIGHT
-        ElseIf e.Location.X > MyBase.Width - ResizeBorderWidth And e.Location.Y < ResizeBorderWidth Then
-            Me.Cursor = Cursors.SizeNESW
+        ElseIf e.Location.X > Width - ResizeBorderWidth And e.Location.Y < ResizeBorderWidth Then
+            Cursor = Cursors.SizeNESW
             _resizeDirection = HTTOPRIGHT
         ElseIf e.Location.X < ResizeBorderWidth Then
-            Me.Cursor = Cursors.SizeWE
+            Cursor = Cursors.SizeWE
             _resizeDirection = HTLEFT
-        ElseIf e.Location.X > MyBase.Width - ResizeBorderWidth Then
-            Me.Cursor = Cursors.SizeWE
+        ElseIf e.Location.X > Width - ResizeBorderWidth Then
+            Cursor = Cursors.SizeWE
             _resizeDirection = HTRIGHT
         ElseIf e.Location.Y < ResizeBorderWidth Then
-            Me.Cursor = Cursors.SizeNS
+            Cursor = Cursors.SizeNS
             _resizeDirection = HTTOP
-        ElseIf e.Location.Y > MyBase.Height - ResizeBorderWidth Then
-            Me.Cursor = Cursors.SizeNS
+        ElseIf e.Location.Y > Height - ResizeBorderWidth Then
+            Cursor = Cursors.SizeNS
             _resizeDirection = HTBOTTOM
         Else
-            Me.Cursor = Cursors.Default
+            Cursor = Cursors.Default
         End If
     End Sub
 
     Private Sub NHLGamesMetro_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
-        If e.Button = Windows.Forms.MouseButtons.Left And Me.WindowState <> FormWindowState.Maximized Then
+        If e.Button = MouseButtons.Left And WindowState <> FormWindowState.Maximized Then
             ResizeForm()
         End If
     End Sub
@@ -809,12 +839,12 @@ Public Class NHLGamesMetro
     Private Sub ResizeForm()
         If _resizeDirection <> -1 Then
             ReleaseCapture()
-            SendMessage(Me.Handle, WM_NCLBUTTONDOWN, _resizeDirection, 0)
+            SendMessage(Handle, WM_NCLBUTTONDOWN, _resizeDirection, 0)
         End If
     End Sub
 
     Private Sub NHLGamesMetro_MouseLeave(sender As Object, e As EventArgs) Handles MyBase.MouseLeave
-        Me.Cursor = Cursors.Default
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub cbServers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbServers.SelectedIndexChanged
@@ -822,6 +852,100 @@ Public Class NHLGamesMetro
         ApplicationSettings.SetValue(ApplicationSettings.Settings.SelectedServer, cbServers.SelectedItem.ToString())
     End Sub
 
+    Private Sub btnCopyConsole_Click(sender As Object, e As EventArgs) Handles btnCopyConsole.Click
+        dim player As String = if (rbMpv.Checked,"MPV",If(rbMPC.Checked,"MPC",If(rbVLC.Checked,"VLC","none")))
+        Dim x64 As String = if(Environment.Is64BitOperatingSystem,"64 Bits","32 Bits")
+        Clipboard.SetText(String.Format(English.textCopyConsole,
+                                        vbCrLf,lblVersion.Text,
+                                        My.Computer.Info.OSFullName.ToString(), x64.ToString(), 
+                                        (Not String.IsNullOrEmpty(lblDate.Text)).ToString(),
+                                        HostsFile.TestEntry(DomainName,_serverIp).ToString(),
+                                        My.Computer.Network.Ping(_serverIp).ToString(),
+                                        cbServers.SelectedItem.ToString(),
+                                        player.ToString(),
+                                        ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.StreamlinkPath, String.Empty).ToString(),
+                                        (ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.StreamlinkPath, String.Empty)=txtStreamlinkPath.Text).ToString(),
+                                        ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VlcPath, String.Empty).ToString(),
+                                        (ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.VlcPath, String.Empty)=txtVLCPath.Text).ToString(),
+                                        ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpcPath, String.Empty).ToString(),
+                                        (ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpcPath, String.Empty)=txtMPCPath.Text).ToString(),
+                                        ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpvPath, String.Empty).ToString(),
+                                        (ApplicationSettings.Read(Of String)(ApplicationSettings.Settings.MpvPath, String.Empty)=txtMpvPath.Text).ToString(),
+                                        RichTextBox.Text))
+    End Sub
+
+
 #End Region
+
+    Private Sub SetLanguageOnFrom()
+        'Main
+        TabControl.TabPages.Item(0).Text = RmText.GetString("tabGames")
+        TabControl.TabPages.Item(1).Text = RmText.GetString("tabSettings")
+        TabControl.TabPages.Item(2).Text = RmText.GetString("tabConsole")
+        TabControl.TabPages.Item(3).Text = RmText.GetString("tabModules")
+
+        NoGames.Text = RmText.GetString("lblNoGames")
+       
+        'Games
+
+        'Settings
+        lblShowScores.Text = RmText.GetString("lblShowScores")
+        lblPlayer.Text = RmText.GetString("lblPlayer")
+        lblQuality.Text = RmText.GetString("lblQuality")
+        lblCdn.Text = RmText.GetString("lblCdn")
+        lblHostname.Text = RmText.GetString("lblHostname")
+        lblHosts.Text = RmText.GetString("lblHosts")
+        lblVlcPath.Text = RmText.GetString("lblVlcPath")
+        lblMpcPath.Text = RmText.GetString("lblMpcPath")
+        lblMpvPath.Text = RmText.GetString("lblMpvPath")
+        lblSlPath.Text = RmText.GetString("lblSlPath")
+        lblOutput.Text = RmText.GetString("lblOutput")
+        lblPlayerArgs.Text = RmText.GetString("lblPlayerArgs")
+        lblStreamerArgs.Text = RmText.GetString("lblStreamerArgs")
+        lblLanguage.Text = RmText.GetString("lblLanguage")
+
+        lblGetVlc.Text = RmText.GetString("lblGetVlc")
+        lblGetMpc.Text = RmText.GetString("lblGetMpc")
+        lblNoteCdn.Text = RmText.GetString("lblNoteCdn")
+
+        chkShowFinalScores.Text = RmText.GetString("chkShowFinalScores")
+        chkShowLiveScores.Text = RmText.GetString("chkShowLiveScores")
+        chkShowSeriesRecord.Text = RmText.GetString("chkShowSeriesRecord")
+
+        btnTestHosts.Text = RmText.GetString("btnTestHosts")
+        btnOpenHostsFile.Text = RmText.GetString("btnOpenHostsFile")
+        btnAddHosts.Text = RmText.GetString("btnAddHosts")
+        btnCleanHosts.Text = RmText.GetString("btnCleanHosts")
+
+        lnkDiySteps.Text = RmText.GetString("msgDiySteps")
+
+        SettingsToolTip.SetToolTip(btnTestHosts, RmText.GetString("msgTestHosts"))
+        SettingsToolTip.SetToolTip(btnOpenHostsFile, RmText.GetString("msgViewHosts"))
+        SettingsToolTip.SetToolTip(btnAddHosts, RmText.GetString("msgAddHost"))
+        SettingsToolTip.SetToolTip(btnCleanHosts, RmText.GetString("msgRemoveHost"))
+        
+        'Console
+        btnCopyConsole.Text = RmText.GetString("btnCopyConsole")
+        btnClearConsole.Text = RmText.GetString("btnClearConsole")
+        
+    End Sub
+
+    Private Sub cbLanguage_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLanguage.SelectedIndexChanged
+        flpSettings.Focus()
+        ApplicationSettings.SetValue(ApplicationSettings.Settings.SelectedLanguage, cbLanguage.SelectedItem.ToString())
+    End Sub
+
+    Private Sub lnkDiySteps_Click(sender As Object, e As EventArgs) Handles lnkDiySteps.Click
+        DiySteps()
+    End Sub
+
+    Private sub DiySteps()
+        Dim result As DialogResult
+        result = MetroMessageBox.Show(Me, String.Format(RmText.GetString("msgDiyStepsText"),
+            vbCrLf, _serverIp, DomainName), RmText.GetString("msgDiySteps"), MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+        If result = DialogResult.Yes Then
+            Clipboard.SetText(_serverIp & " " & DomainName)
+        End If
+    End sub
 End Class
 

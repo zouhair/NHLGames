@@ -27,10 +27,19 @@ Tool to watch NHL games in High Definition
      * [Streamlink](#streamlink)
      * [Other options](#other-options)
    * [Console](#console)
-   * [Ad Detection Modules](#ad-detection-modules)
+   * [Modules](#modules)
 * [Support](#support)
   * [Players issues](#players-issues)
+    * [No playback](#no-playback)
+    * [No audio](#no-audio)
+    * [Player is lagging](#player-is-lagging)
   * [App issues](#app-issues)
+    * [App won't start](#app-wont-start)
+    * [Display issues](#display-issues)
+    * [Games won't load](#games-wont-load)
+    * [Games won't start](#games-wont-start)
+    * [Hosts file issues](#hosts-file-issues)
+    * [Ad Detection Modules](#ad-detection-modules)
 * [Chromecast](#chromecast)
 * [Contribute](#contribute)
 
@@ -144,25 +153,24 @@ If you wish to use these other options make sure to use the ON/OFF switch first.
 ## Console
 Go to this section to inspect everything that NHLGames does. Also, any error or warning will show here.
 
-## Ad Detection Modules
-NHLGames don't use any Ad Detection modules by default, but you can activate one by checking `Enabled` and by moving a module from the left box to the right. Select one and use the `>>>` arrow button to activate it, use the `<<<` arrow button to desactivate it. If you don't use any, it's better if you disable the Ad Detection module. 
+## Modules
+NHLGames doesn't use any Ad Detection modules by default, but you can activate one by checking `Enabled` and by moving a module from the left box to the right. Select one and use the `>>>` arrow button to activate it, use the `<<<` arrow button to desactivate it. If you don't use any, it's better if you disable the Ad Detection module. 
 
 
 # Support
 ## Players issues
 First of all, if you have issues with one player you can try another player at any time by choosing another player in the `Settings` tab in the app under the `Players` section. Just make sure your choosen player is installed and the path is set in the settings tab. No need to download MPV, it comes with NHLGames and should work.
 
-#### VLC 3.0 Lagging --> use 2.2.4
-If you run VLC 3.0 and it's stuttering, lagging or not rendering well, go back to the most stable version 2.2.4 :
-- [x86 (VLC 2.2.4 32bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win32/vlc-2.2.4-win32.exe)
-- [x64 (VLC 2.2.4 64bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win64/vlc-2.2.4-win64.exe)
-- [VLC 2.2.4 path](https://download.videolan.org/pub/videolan/vlc/2.2.4/)
+### No playback
+#### Player used to open, but it does not anymore --> Kill old processes of this player
+Sometimes a player process can still runs even if the stream ended and an old process of the same name can affect another from starting. So right click on your Windows taskbar and click on `Start Task Manager` (CTRL + Shift + ESC), go to `Processes` tab and right click on all of your player processes (.exe) that are running and click on `End Process`.
 
 #### VLC 64 bits No playback --> use 32 bits
 If you run VLC 64 bits version and VLC hangs when buffering and no playback starts or you don't have audio, use the 32 bits version (x86) instead. Since we use Streamlink, some versions of 64-bit VLC seem to be unable to read the stream. Using the 32 bits version of VLC might help.
 - [x86 (VLC 2.2.4 32bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win32/vlc-2.2.4-win32.exe)
 - [VLC 2.2.4 path](https://download.videolan.org/pub/videolan/vlc/2.2.4/)
 
+### No Audio
 #### MPC No audio --> Increase stream analysis duration
 You will need to do the following to fix audio:
 
@@ -170,10 +178,17 @@ You will need to do the following to fix audio:
 
 Increase `stream analysis duration` (eg. 3000)
 
-#### Player is lagging and i'm using a laptop -> Are you on power saver mode ?
+### Player is lagging
+#### Are you using a laptop on power saver mode ? --> use Performance mode
 Streaming games needs processor time and network bandwidth, so your laptop has to be set to High Performance mode.
 
-#### Buffering issue, timeout every 10 secs -> Try to disable Windows auto tuning level
+#### Enable caching in your player
+Go to NHLGames Settings and Enable Players args, then add this line `--cache XXXX` inside the text box. Value `XXXX` is a value in KB. It goes from 1024, 2048, 4096 to 8192.
+
+#### Enable multi-threaded streaming
+Go to NHLGames Settings and Enable Streamer args, then add this line `--hls-segment-threads X` inside the text box.  Value `X` goes from 1 to 10, 2 or 4 should be enough.
+
+#### Try to disable Windows auto tuning level
 Open Command Prompt :
 
 `netsh int tcp set global autotuninglevel=disabled`
@@ -182,30 +197,45 @@ If this impacts your connection and you want to return to the default value
 
 `netsh int tcp set global autotuninglevel=normal`
 
-#### Player used to open, but it does not anymore --> Kill old processes of this player
-Sometimes a player process can still runs even if the stream ended and an old process of the same name can affect another from starting. So right click on your Windows taskbar and click on `Start Task Manager` (CTRL + Shift + ESC), go to `Processes` tab and right click on all of your player processes (.exe) that are running and click on `End Process`.
+#### Are you using VLC 3.0 ? --> use 2.2.4
+If you run VLC 3.0 and it's stuttering, lagging or not rendering well, go back to the most stable version 2.2.4 :
+- [x86 (VLC 2.2.4 32bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win32/vlc-2.2.4-win32.exe)
+- [x64 (VLC 2.2.4 64bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win64/vlc-2.2.4-win64.exe)
+- [VLC 2.2.4 path](https://download.videolan.org/pub/videolan/vlc/2.2.4/)
 
 
 ## App issues
-#### Can't play games from past two or three days --> Wait for it to become available (week)
-NHLGames get streams from NHL GameCenter Live and it gets issues with some past games that are not archived yet. So until we fix this issue, you will have to wait for the game to be archived.
 
-#### Game won't start after clicking on a stream --> Check your Hosts file
-If you clicked on a stream and nothing starts after the loading bar has disappeared, go to `Settings` and click on `Test` button to check if your Hosts file has been modified by NHLGames. If you get a red message box that means you won't be able to see a stream until you fix your Windows Hosts file. See the [Hosts](#hosts) section.
+### App won't start
+#### Application error --> Download Microsoft .NET Framework 4.5
+If you get an error like [this one](https://cloud.githubusercontent.com/assets/23088305/26311601/e75d6f9c-3ed2-11e7-8755-12075a888704.png) when trying to open NHLGames that means : 
+- You have to download and install [Microsoft .NET Framework 4.5](https://www.microsoft.com/en-ca/download/details.aspx?id=30653) (at least).
+- You have to run an Windows Operating System older than XP : Windows Vista, 7, 8, 10.
 
-#### Windows can't find Hosts file --> Do it yourself
-NHLGames can't have access to the Hosts file, so you will have to add the entry line from `Settings` tab > `DIY Steps` button and paste it to your Hosts file in `C:\Windows\System32\Drivers\etc`. See the [Hosts](#hosts) section.
+#### Windows protected your PC --> Run anyway
+If you get an error like [this one](https://cloud.githubusercontent.com/assets/23088305/26286664/b2a00c14-3e1f-11e7-82b8-641bebb90d1f.png) that means Windows 10 wants to stop NHLGames from running because it is not an official publisher from Windows Store. Click on More Infos and click on Run anyway.
 
+### Display issues
+#### Display scaling issue on high DPI settings --> Disable DPI for NHLGames
+A high DPI display (other than 100%) can cause controls to be cut off. Right click on NHLGames.exe and check this option: `Properties > Compatibility > Display scaling on high DPI settings`.
+
+### Games won't load
 #### Forbidden 403, Unauthorized 401 or Not Found 404 Error --> Use another NHLGames domain in Settings
 If you can't get any games from NHLGames, try using another domain in the `Settings` tab. Use the drop down list.
 
 #### Timeout error when trying to load games --> Restart the app
-At the moment we did not find the source of this issue, but we think that the server might be busy. Restarting the app might help.
+Restarting the app might help, until we fix the issue related to our downloader.
 
-#### Display scaling issue on high DPI settings --> Disable DPI for NHLGames
-A high DPI display (other than 100%) can cause controls to be cut off. Right click on NHLGames.exe and check this option: `Properties > Compatibility > Display scaling on high DPI settings`.
+### Games won't start
+#### Nothing happens after clicking on a stream --> Check your Hosts file
+If you clicked on a stream and nothing starts after the loading bar has disappeared, go to `Settings` and click on `Test` button to check if your Hosts file has been modified by NHLGames. If you get a red message box that means you won't be able to see a stream until you fix your Windows Hosts file. See the [Hosts](#hosts) section.
 
-#### Ad Detection Module Tab not showing up --> Unblock DLLs
+### Hosts file issues
+#### Windows can't find Hosts file --> Do it yourself
+NHLGames can't have access to the Hosts file, so you will have to add the entry line from `Settings` tab > `DIY Steps` button and paste it to your Hosts file in `C:\Windows\System32\Drivers\etc`. See the [Hosts](#hosts) section.
+
+### Ad Detection Modules
+#### Tab not showing up --> Unblock DLLs
 Right click on the DLL's in the Spotify/OBS folders then in `Properties` check the `unblock` button at the bottom of the `General` tab, that should get them to show up.
 
 
@@ -235,3 +265,4 @@ NHLGames use also these NuGet packages:
 - CSCore
 - Newtonsoft JSON .NET
 - Prism.Core
+- SpotifyAPI-NET
