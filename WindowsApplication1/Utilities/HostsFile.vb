@@ -129,7 +129,6 @@ Namespace Utilities
                                             NHLGamesMetro.RmText.GetString("msgRunAsAdmin"),
                                             MessageBoxButtons.YesNo) = DialogResult.Yes Then
 
-                    'ApplicationSettings.SetValue(ApplicationSettings.Settings.InAdminModeToSetHostsEntry, True)
                     ' Restart program And run as admin
                     Dim exeName = Process.GetCurrentProcess().MainModule.FileName
                     Dim startInfo As ProcessStartInfo = New ProcessStartInfo(exeName)

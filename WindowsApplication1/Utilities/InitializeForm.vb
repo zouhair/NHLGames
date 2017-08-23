@@ -201,10 +201,10 @@ Namespace Utilities
 
             Form.lblNoGames.Location = New Point(
                 (Form.flpGames.Width - Form.lblNoGames.Width) / 2, 
-                Form.flpGames.Location.Y + 145)
+                Form.flpGames.Location.Y + 175)
             Form.spnLoading.Location = New Point( 
                 ((Form.flpGames.Width - Form.lblNoGames.Width) / 2) + 30, 
-                Form.flpGames.Location.Y + 120)
+                Form.flpGames.Location.Y + 150)
 
             Form.spnLoading.Value = NHLGamesMetro.ProgressValue
             Form.spnLoading.Maximum = NHLGamesMetro.ProgressMaxValue

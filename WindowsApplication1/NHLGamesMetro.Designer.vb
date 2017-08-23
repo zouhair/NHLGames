@@ -184,7 +184,7 @@ Partial Class NHLGamesMetro
         Me.TabControl.ItemSize = New System.Drawing.Size(90, 34)
         Me.TabControl.Location = New System.Drawing.Point(3, 60)
         Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 1
+        Me.TabControl.SelectedIndex = 0
         Me.TabControl.Size = New System.Drawing.Size(1044, 537)
         Me.TabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.TabControl.Style = MetroFramework.MetroColorStyle.Blue
@@ -217,6 +217,7 @@ Partial Class NHLGamesMetro
         '
         'spnLoading
         '
+        Me.spnLoading.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.spnLoading.Backwards = true
         Me.spnLoading.Location = New System.Drawing.Point(317, 461)
         Me.spnLoading.Maximum = 1000
@@ -1419,7 +1420,7 @@ Partial Class NHLGamesMetro
         Me.ImeMode = System.Windows.Forms.ImeMode.Close
         Me.MaximizeBox = false
         Me.MinimizeBox = false
-        Me.MinimumSize = New System.Drawing.Size(1050, 600)
+        Me.MinimumSize = New System.Drawing.Size(800, 500)
         Me.Name = "NHLGamesMetro"
         Me.Padding = New System.Windows.Forms.Padding(3, 60, 3, 3)
         Me.Resizable = false
