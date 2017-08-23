@@ -203,10 +203,10 @@ Namespace Utilities
             End If
 
             Form.lblNoGames.Location = New Point(
-                (Form.flpGames.Width - Form.lblNoGames.Width) / 2, 
+                ((Form.flpGames.Width - Form.lblNoGames.Width) / 2), 
                 Form.flpGames.Location.Y + 175)
             Form.spnLoading.Location = New Point( 
-                ((Form.flpGames.Width - Form.lblNoGames.Width) / 2) + 30, 
+                ((Form.flpGames.Width - Form.lblNoGames.Width) / 2) + 42, 
                 Form.flpGames.Location.Y + 150)
 
             Form.spnLoading.Value = NHLGamesMetro.ProgressValue
