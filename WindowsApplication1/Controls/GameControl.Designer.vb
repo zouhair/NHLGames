@@ -26,13 +26,13 @@
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GameControl))
         Me.ToolTip = New MetroFramework.Components.MetroToolTip()
         Me.BorderPanel1 = New NHLGames.Controls.BorderPanel()
+        Me.picAway = New System.Windows.Forms.PictureBox()
         Me.vs = New MetroFramework.Controls.MetroLabel()
         Me.lblHomeScore = New MetroFramework.Controls.MetroLabel()
         Me.lblAwayScore = New MetroFramework.Controls.MetroLabel()
         Me.live2 = New System.Windows.Forms.PictureBox()
         Me.live1 = New System.Windows.Forms.PictureBox()
         Me.lblAwayTeam = New MetroFramework.Controls.MetroLabel()
-        Me.picAway = New System.Windows.Forms.PictureBox()
         Me.picHome = New System.Windows.Forms.PictureBox()
         Me.lblHomeTeam = New MetroFramework.Controls.MetroLabel()
         Me.lblPeriod = New MetroFramework.Controls.MetroLabel()
@@ -50,9 +50,9 @@
         Me.lblNotInSeason = New MetroFramework.Controls.MetroLabel()
         Me.lblStreamStatus = New MetroFramework.Controls.MetroLabel()
         Me.BorderPanel1.SuspendLayout
+        CType(Me.picAway,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.live2,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.live1,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picAway,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.picHome,System.ComponentModel.ISupportInitialize).BeginInit
         Me.FlowLayoutPanel1.SuspendLayout
         Me.SuspendLayout
@@ -83,10 +83,20 @@
         Me.BorderPanel1.Controls.Add(Me.lblNotInSeason)
         Me.BorderPanel1.Controls.Add(Me.lblStreamStatus)
         Me.BorderPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BorderPanel1.Location = New System.Drawing.Point(6, 6)
+        Me.BorderPanel1.Location = New System.Drawing.Point(2, 2)
         Me.BorderPanel1.Name = "BorderPanel1"
         Me.BorderPanel1.Size = New System.Drawing.Size(312, 151)
         Me.BorderPanel1.TabIndex = 9
+        '
+        'picAway
+        '
+        Me.picAway.BackgroundImage = CType(resources.GetObject("picAway.BackgroundImage"),System.Drawing.Image)
+        Me.picAway.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.picAway.Location = New System.Drawing.Point(31, 23)
+        Me.picAway.Name = "picAway"
+        Me.picAway.Size = New System.Drawing.Size(60, 50)
+        Me.picAway.TabIndex = 0
+        Me.picAway.TabStop = false
         '
         'vs
         '
@@ -156,16 +166,6 @@
         Me.lblAwayTeam.Text = "Away"
         Me.lblAwayTeam.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblAwayTeam.UseCustomBackColor = true
-        '
-        'picAway
-        '
-        Me.picAway.BackgroundImage = CType(resources.GetObject("picAway.BackgroundImage"),System.Drawing.Image)
-        Me.picAway.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picAway.Location = New System.Drawing.Point(31, 23)
-        Me.picAway.Name = "picAway"
-        Me.picAway.Size = New System.Drawing.Size(60, 50)
-        Me.picAway.TabIndex = 0
-        Me.picAway.TabStop = false
         '
         'picHome
         '
@@ -390,14 +390,14 @@
         '
         'lblStreamStatus
         '
-        Me.lblStreamStatus.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+        Me.lblStreamStatus.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left)  _
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblStreamStatus.BackColor = System.Drawing.Color.WhiteSmoke
         Me.lblStreamStatus.FontWeight = MetroFramework.MetroLabelWeight.Regular
         Me.lblStreamStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
         Me.lblStreamStatus.Location = New System.Drawing.Point(2, 108)
         Me.lblStreamStatus.Name = "lblStreamStatus"
-        Me.lblStreamStatus.Size = New System.Drawing.Size(305, 38)
+        Me.lblStreamStatus.Size = New System.Drawing.Size(306, 38)
         Me.lblStreamStatus.TabIndex = 27
         Me.lblStreamStatus.Text = "Select a stream to watch"
         Me.lblStreamStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -410,14 +410,15 @@
         Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.BorderPanel1)
         Me.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "GameControl"
-        Me.Padding = New System.Windows.Forms.Padding(6)
-        Me.Size = New System.Drawing.Size(324, 163)
+        Me.Padding = New System.Windows.Forms.Padding(2)
+        Me.Size = New System.Drawing.Size(316, 155)
         Me.BorderPanel1.ResumeLayout(false)
         Me.BorderPanel1.PerformLayout
+        CType(Me.picAway,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.live2,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.live1,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picAway,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.picHome,System.ComponentModel.ISupportInitialize).EndInit
         Me.FlowLayoutPanel1.ResumeLayout(false)
         Me.ResumeLayout(false)
