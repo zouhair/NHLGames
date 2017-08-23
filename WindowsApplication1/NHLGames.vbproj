@@ -312,23 +312,19 @@
     <None Include="Icons\endz1.gif" />
     <None Include="Icons\endz2.gif" />
     <EmbeddedResource Include="broadcasters\wgn.gif" />
-    <None Include="Icons\clos.gif" />
     <None Include="Icons\close.gif" />
-    <Content Include="Icons\git.gif" />
-    <None Include="Icons\help.gif" />
+    <None Include="Icons\git.gif" />
     <None Include="Icons\helpgit.gif" />
-    <Content Include="Icons\live.gif" />
+    <None Include="Icons\live.gif" />
     <None Include="Icons\nhltv.gif" />
     <None Include="Icons\refc.gif" />
     <None Include="Icons\sixc.gif" />
     <None Include="Icons\threec.gif" />
-    <None Include="Icons\max.gif" />
-    <None Include="Icons\min.gif" />
-    <None Include="Icons\norm.gif" />
     <None Include="Icons\maximize.gif" />
     <None Include="Icons\minimize.gif" />
     <None Include="Icons\normal.gif" />
-    <Content Include="Icons\reddit.gif" />
+    <None Include="Icons\reddit.gif" />
+    <None Include="Icons\download.gif" />
     <Content Include="Logos\nhl_icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

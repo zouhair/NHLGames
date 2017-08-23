@@ -51,9 +51,6 @@ Namespace Utilities
             Form.lblPlayerArgs.Text = NHLGamesMetro.RmText.GetString("lblPlayerArgs")
             Form.lblStreamerArgs.Text = NHLGamesMetro.RmText.GetString("lblStreamerArgs")
             Form.lblLanguage.Text = NHLGamesMetro.RmText.GetString("lblLanguage")
-
-            Form.lblGetVlc.Text = NHLGamesMetro.RmText.GetString("lblGetVlc")
-            Form.lblGetMpc.Text = NHLGamesMetro.RmText.GetString("lblGetMpc")
             Form.lblNoteCdn.Text = NHLGamesMetro.RmText.GetString("lblNoteCdn")
 
             Form.chkShowFinalScores.Text = NHLGamesMetro.RmText.GetString("chkShowFinalScores")
@@ -65,8 +62,9 @@ Namespace Utilities
             Form.btnAddHosts.Text = NHLGamesMetro.RmText.GetString("btnAddHosts")
             Form.btnCleanHosts.Text = NHLGamesMetro.RmText.GetString("btnCleanHosts")
 
-            Form.lnkDiySteps.Text = NHLGamesMetro.RmText.GetString("msgDiySteps")
-
+            Form.SettingsToolTip.SetToolTip(Form.lnkDiySteps, NHLGamesMetro.RmText.GetString("msgDiySteps"))
+            Form.SettingsToolTip.SetToolTip(Form.lnkGetVlc, NHLGamesMetro.RmText.GetString("lblGetVlc"))
+            Form.SettingsToolTip.SetToolTip(Form.lnkGetMpc, NHLGamesMetro.RmText.GetString("lblGetMpc"))
             Form.SettingsToolTip.SetToolTip(Form.btnTestHosts, NHLGamesMetro.RmText.GetString("msgTestHosts"))
             Form.SettingsToolTip.SetToolTip(Form.btnOpenHostsFile, NHLGamesMetro.RmText.GetString("msgViewHosts"))
             Form.SettingsToolTip.SetToolTip(Form.btnAddHosts, NHLGamesMetro.RmText.GetString("msgAddHost"))
