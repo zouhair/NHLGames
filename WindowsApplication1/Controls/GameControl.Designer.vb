@@ -83,7 +83,7 @@
         Me.BorderPanel1.Controls.Add(Me.lblNotInSeason)
         Me.BorderPanel1.Controls.Add(Me.lblStreamStatus)
         Me.BorderPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BorderPanel1.Location = New System.Drawing.Point(2, 2)
+        Me.BorderPanel1.Location = New System.Drawing.Point(3, 3)
         Me.BorderPanel1.Name = "BorderPanel1"
         Me.BorderPanel1.Size = New System.Drawing.Size(312, 151)
         Me.BorderPanel1.TabIndex = 9
@@ -412,8 +412,8 @@
         Me.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "GameControl"
-        Me.Padding = New System.Windows.Forms.Padding(2)
-        Me.Size = New System.Drawing.Size(316, 155)
+        Me.Padding = New System.Windows.Forms.Padding(3)
+        Me.Size = New System.Drawing.Size(318, 157)
         Me.BorderPanel1.ResumeLayout(false)
         Me.BorderPanel1.PerformLayout
         CType(Me.picAway,System.ComponentModel.ISupportInitialize).EndInit
