@@ -298,7 +298,7 @@
     <comment>Message</comment>
   </data>
   <data name="msgDiyStepsText" xml:space="preserve">
-    <value>Cette ligne doit se retrouver dans votre fichier Hosts : {0}{1} {2}{0}Utiliser le bouton 'Ouvrir Hosts' pour ouvrir le fichier Hosts rapidement ou aller à l'emplacement : {0}C:\Windows\System32\drivers\etc\hosts{0}Utiliser le Bloc Notes pour modifier le fichier Hosts et coller (Ctrl+V) la ligne copiée à la fin du fichier Hosts.{0}Désirez-vous copier cette ligne d'entrée au presse-papier?</value>
+    <value>Cette ligne doit se trouver dans votre fichier Hosts : {0}{1} {2}{0}Cliquez sur 'Ouvrir Hosts' pour accéder au fichier Hosts et ajouter (Ctrl+V) la ligne copiée à la fin du fichier Hosts.{0}Désirez-vous copier cette ligne d'entrée au presse-papier?</value>
     <comment>Message</comment>
   </data>
   <data name="msgErrorGeneralText" xml:space="preserve">

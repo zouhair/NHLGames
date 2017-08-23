@@ -456,16 +456,16 @@ Partial Class NHLGamesMetro
         '
         Me.chkShowFinalScores.Location = New System.Drawing.Point(3, 3)
         Me.chkShowFinalScores.Name = "chkShowFinalScores"
-        Me.chkShowFinalScores.Size = New System.Drawing.Size(125, 15)
+        Me.chkShowFinalScores.Size = New System.Drawing.Size(150, 15)
         Me.chkShowFinalScores.TabIndex = 110
         Me.chkShowFinalScores.Text = "Final Scores"
         Me.chkShowFinalScores.UseSelectable = true
         '
         'chkShowLiveScores
         '
-        Me.chkShowLiveScores.Location = New System.Drawing.Point(134, 3)
+        Me.chkShowLiveScores.Location = New System.Drawing.Point(159, 3)
         Me.chkShowLiveScores.Name = "chkShowLiveScores"
-        Me.chkShowLiveScores.Size = New System.Drawing.Size(125, 15)
+        Me.chkShowLiveScores.Size = New System.Drawing.Size(150, 15)
         Me.chkShowLiveScores.TabIndex = 120
         Me.chkShowLiveScores.Text = "Live Scores"
         Me.chkShowLiveScores.UseSelectable = true
@@ -474,9 +474,9 @@ Partial Class NHLGamesMetro
         '
         Me.chkShowSeriesRecord.Checked = true
         Me.chkShowSeriesRecord.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkShowSeriesRecord.Location = New System.Drawing.Point(265, 3)
+        Me.chkShowSeriesRecord.Location = New System.Drawing.Point(315, 3)
         Me.chkShowSeriesRecord.Name = "chkShowSeriesRecord"
-        Me.chkShowSeriesRecord.Size = New System.Drawing.Size(125, 15)
+        Me.chkShowSeriesRecord.Size = New System.Drawing.Size(170, 15)
         Me.chkShowSeriesRecord.TabIndex = 130
         Me.chkShowSeriesRecord.Text = "Series record"
         Me.chkShowSeriesRecord.UseSelectable = true
@@ -647,7 +647,7 @@ Partial Class NHLGamesMetro
         Me.lblNoteCdn.FontSize = MetroFramework.MetroLabelSize.Small
         Me.lblNoteCdn.Location = New System.Drawing.Point(151, 3)
         Me.lblNoteCdn.Name = "lblNoteCdn"
-        Me.lblNoteCdn.Size = New System.Drawing.Size(575, 15)
+        Me.lblNoteCdn.Size = New System.Drawing.Size(622, 15)
         Me.lblNoteCdn.TabIndex = 13
         Me.lblNoteCdn.Text = "Note: Refreshing games is required for CDN change to take effect"
         '

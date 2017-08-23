@@ -1,5 +1,6 @@
 ﻿Imports MetroFramework.Controls
 Imports Newtonsoft.Json.Linq
+Imports NHLGames.My.Resources
 Imports NHLGames.Objects
 
 Namespace Utilities
@@ -58,14 +59,18 @@ Namespace Utilities
                 InvokeElement.ClearGamePanel()
 
                 Dim jsonSchedule As JObject = Downloader.DownloadJsonSchedule(dateTime, refreshing)
-                NHLGamesMetro.AvailableGames = Downloader.DownloadAvailableGames()
-                GameManager.RefreshGames(dateTime, jsonSchedule, NHLGamesMetro.AvailableGames)
-                Common.WaitForGameThreads()
-                NHLGamesMetro.ProgressValue = NHLGamesMetro.ProgressMaxValue - 1
-                Threading.Thread.Sleep(100)
-                InvokeElement.NewGamesFound(GameManager.GamesDict)
-                InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"),GameManager.GamesList.Count.ToString()))
-                NHLGamesMetro.ProgressVisible = False
+                If jsonSchedule.HasValues Then
+                    NHLGamesMetro.AvailableGames = Downloader.DownloadAvailableGames()
+                    GameManager.RefreshGames(dateTime, jsonSchedule, NHLGamesMetro.AvailableGames)
+                    Common.WaitForGameThreads()
+                    NHLGamesMetro.ProgressValue = NHLGamesMetro.ProgressMaxValue - 1
+                    Threading.Thread.Sleep(100)
+                    InvokeElement.NewGamesFound(GameManager.GamesDict)
+                    InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"),GameManager.GamesList.Count.ToString()))
+                    NHLGamesMetro.ProgressVisible = False
+                Else 
+                    Console.WriteLine(English.errorFetchingGames)
+                End If
             Catch ex As Exception
                 Console.WriteLine(ex.ToString())
             End Try

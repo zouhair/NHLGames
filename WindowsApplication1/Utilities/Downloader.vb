@@ -59,7 +59,7 @@ Namespace Utilities
                 content = client.DownloadString(url).Trim().ToString()
             Catch ex As Exception
                 If Not server = AppUrl Then
-                    Console.WriteLine(English.errorServersDown, server)
+                    Console.WriteLine(English.msgServerSeemsDown, server)
                 End If
             End Try
             Return content
@@ -73,7 +73,7 @@ Namespace Utilities
             Try
                 client.DownloadFile(url, filePath)
             Catch ex As Exception
-                Console.WriteLine(English.errorServersDown, server)
+                Console.WriteLine(English.msgServerNoRespondTryingAgain, server)
                 Return False
             End Try
             Return True
@@ -141,9 +141,10 @@ Namespace Utilities
                 End If
             End If
 
+            If data.Equals(String.Empty) Then Return New JObject()
             Dim reader As New JsonTextReader(New StringReader(data))
             reader.DateParseHandling = DateParseHandling.None
-            returnValue = JObject.Load(reader)
+            returnValue = If(reader Is Nothing, New JObject(), JObject.Load(reader))
 
             Return returnValue
 

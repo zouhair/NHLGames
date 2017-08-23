@@ -23,7 +23,7 @@ Namespace Utilities
             Dim lstKeywords As New List(Of String) From {"Found matching plugin stream", "Available streams", "Opening stream", "Starting player"}
             Dim progressStep As Integer = (NHLGamesMetro.ProgressMaxValue) / (lstKeywords.Count +1)
 
-            Dim threadLaunchingStream As Task = New Task(Sub()
+            Dim taskLaunchingStream As Task = New Task(Sub()
                 NHLGamesMetro.ProgressValue = 0
                 NHLGamesMetro.StreamStarted = True
                 NHLGamesMetro.ProgressVisible = True
@@ -39,7 +39,7 @@ Namespace Utilities
                         }
                 procStreaming.EnableRaisingEvents = True
 
-                Dim threadPlayerWatcher As Task = New Task(Sub()
+                Dim taskPlayerWatcher As Task = New Task(Sub()
                     Dim processes As Process() = Process.GetProcesses()
                     Dim i As Integer = 0
                     While Not processes.Any(Function(p) p.ProcessName.ToLower().Contains(args.PlayerType.ToString().ToLower()) OrElse NHLGamesMetro.StreamStarted = False OrElse i = 10)
@@ -67,7 +67,7 @@ Namespace Utilities
                             NHLGamesMetro.ProgressValue += progressStep
                         End If
                         If line.Contains(lstKeywords(3)) Then
-                            threadPlayerWatcher.Start()
+                            taskPlayerWatcher.Start()
                         End If
                         Console.WriteLine(line)
                         Thread.Sleep(100) 'to let some time for the progress bar to move
@@ -80,7 +80,7 @@ Namespace Utilities
                 End Try
             End Sub)
 
-            threadLaunchingStream.Start()
+            taskLaunchingStream.Start()
 
         End Sub
 

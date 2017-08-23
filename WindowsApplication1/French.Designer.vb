@@ -650,7 +650,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Cette ligne doit se retrouver dans votre fichier Hosts : {0}{1} {2}{0}Utiliser le bouton &apos;Ouvrir Hosts&apos; pour ouvrir le fichier Hosts rapidement ou aller à l&apos;emplacement : {0}C:\Windows\System32\drivers\etc\hosts{0}Utiliser le Bloc Notes pour modifier le fichier Hosts et coller (Ctrl+V) la ligne copiée à la fin du fichier Hosts.{0}Désirez-vous copier cette ligne d&apos;entrée au presse-papier?.
+        '''  Recherche une chaîne localisée semblable à Cette ligne doit se trouver dans votre fichier Hosts : {0}{1} {2}{0}Cliquez sur &apos;Ouvrir Hosts&apos; pour accéder au fichier Hosts et ajouter (Ctrl+V) la ligne copiée à la fin du fichier Hosts.{0}Désirez-vous copier cette ligne d&apos;entrée au presse-papier?.
         '''</summary>
         Public Shared ReadOnly Property msgDiyStepsText() As String
             Get
