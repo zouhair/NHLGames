@@ -409,7 +409,7 @@ Partial Class NHLGamesMetro
         Me.tlpSettings.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize
         Me.tlpSettings.Location = New System.Drawing.Point(3, 3)
         Me.tlpSettings.Name = "tlpSettings"
-        Me.tlpSettings.Padding = New System.Windows.Forms.Padding(3)
+        Me.tlpSettings.Padding = New System.Windows.Forms.Padding(3, 3, 15, 3)
         Me.tlpSettings.RowCount = 20
         Me.tlpSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10!))
         Me.tlpSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
@@ -443,7 +443,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(223, 13)
         Me.FlowLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(737, 30)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(725, 30)
         Me.FlowLayoutPanel1.TabIndex = 64
         '
         'chkShowFinalScores
@@ -487,7 +487,7 @@ Partial Class NHLGamesMetro
         Me.MetroPanel2.Location = New System.Drawing.Point(223, 43)
         Me.MetroPanel2.Margin = New System.Windows.Forms.Padding(0)
         Me.MetroPanel2.Name = "MetroPanel2"
-        Me.MetroPanel2.Size = New System.Drawing.Size(737, 30)
+        Me.MetroPanel2.Size = New System.Drawing.Size(725, 30)
         Me.MetroPanel2.TabIndex = 7
         Me.MetroPanel2.VerticalScrollbarBarColor = true
         Me.MetroPanel2.VerticalScrollbarHighlightOnWheel = false
@@ -541,7 +541,7 @@ Partial Class NHLGamesMetro
         Me.MetroPanel1.Location = New System.Drawing.Point(223, 73)
         Me.MetroPanel1.Margin = New System.Windows.Forms.Padding(0)
         Me.MetroPanel1.Name = "MetroPanel1"
-        Me.MetroPanel1.Size = New System.Drawing.Size(737, 30)
+        Me.MetroPanel1.Size = New System.Drawing.Size(725, 30)
         Me.MetroPanel1.TabIndex = 6
         Me.MetroPanel1.VerticalScrollbarBarColor = true
         Me.MetroPanel1.VerticalScrollbarHighlightOnWheel = false
@@ -633,7 +633,7 @@ Partial Class NHLGamesMetro
         Me.MetroPanel5.Location = New System.Drawing.Point(223, 103)
         Me.MetroPanel5.Margin = New System.Windows.Forms.Padding(0)
         Me.MetroPanel5.Name = "MetroPanel5"
-        Me.MetroPanel5.Size = New System.Drawing.Size(737, 35)
+        Me.MetroPanel5.Size = New System.Drawing.Size(725, 35)
         Me.MetroPanel5.TabIndex = 13
         Me.MetroPanel5.VerticalScrollbarBarColor = true
         Me.MetroPanel5.VerticalScrollbarHighlightOnWheel = false
@@ -709,7 +709,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel9.Location = New System.Drawing.Point(223, 523)
         Me.FlowLayoutPanel9.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel9.Name = "FlowLayoutPanel9"
-        Me.FlowLayoutPanel9.Size = New System.Drawing.Size(737, 35)
+        Me.FlowLayoutPanel9.Size = New System.Drawing.Size(725, 35)
         Me.FlowLayoutPanel9.TabIndex = 64
         '
         'txtStreamerArgs
@@ -742,7 +742,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel8.Location = New System.Drawing.Point(223, 488)
         Me.FlowLayoutPanel8.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel8.Name = "FlowLayoutPanel8"
-        Me.FlowLayoutPanel8.Size = New System.Drawing.Size(737, 35)
+        Me.FlowLayoutPanel8.Size = New System.Drawing.Size(725, 35)
         Me.FlowLayoutPanel8.TabIndex = 64
         '
         'txtPlayerArgs
@@ -776,7 +776,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel7.Location = New System.Drawing.Point(223, 453)
         Me.FlowLayoutPanel7.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel7.Name = "FlowLayoutPanel7"
-        Me.FlowLayoutPanel7.Size = New System.Drawing.Size(737, 35)
+        Me.FlowLayoutPanel7.Size = New System.Drawing.Size(725, 35)
         Me.FlowLayoutPanel7.TabIndex = 64
         '
         'txtOutputArgs
@@ -820,7 +820,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel6.Location = New System.Drawing.Point(223, 383)
         Me.FlowLayoutPanel6.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel6.Name = "FlowLayoutPanel6"
-        Me.FlowLayoutPanel6.Size = New System.Drawing.Size(737, 35)
+        Me.FlowLayoutPanel6.Size = New System.Drawing.Size(725, 35)
         Me.FlowLayoutPanel6.TabIndex = 64
         '
         'txtStreamlinkPath
@@ -853,7 +853,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel5.Location = New System.Drawing.Point(223, 348)
         Me.FlowLayoutPanel5.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel5.Name = "FlowLayoutPanel5"
-        Me.FlowLayoutPanel5.Size = New System.Drawing.Size(737, 35)
+        Me.FlowLayoutPanel5.Size = New System.Drawing.Size(725, 35)
         Me.FlowLayoutPanel5.TabIndex = 64
         '
         'txtMpvPath
@@ -887,7 +887,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel4.Location = New System.Drawing.Point(223, 313)
         Me.FlowLayoutPanel4.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel4.Name = "FlowLayoutPanel4"
-        Me.FlowLayoutPanel4.Size = New System.Drawing.Size(737, 35)
+        Me.FlowLayoutPanel4.Size = New System.Drawing.Size(725, 35)
         Me.FlowLayoutPanel4.TabIndex = 64
         '
         'txtMPCPath
@@ -935,7 +935,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel3.Location = New System.Drawing.Point(223, 278)
         Me.FlowLayoutPanel3.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel3.Name = "FlowLayoutPanel3"
-        Me.FlowLayoutPanel3.Size = New System.Drawing.Size(737, 35)
+        Me.FlowLayoutPanel3.Size = New System.Drawing.Size(725, 35)
         Me.FlowLayoutPanel3.TabIndex = 64
         '
         'txtVLCPath
@@ -986,7 +986,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel2.Location = New System.Drawing.Point(223, 208)
         Me.FlowLayoutPanel2.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(737, 35)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(725, 35)
         Me.FlowLayoutPanel2.TabIndex = 64
         '
         'btnTestHosts
@@ -1049,7 +1049,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel10.Location = New System.Drawing.Point(223, 173)
         Me.FlowLayoutPanel10.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel10.Name = "FlowLayoutPanel10"
-        Me.FlowLayoutPanel10.Size = New System.Drawing.Size(737, 35)
+        Me.FlowLayoutPanel10.Size = New System.Drawing.Size(725, 35)
         Me.FlowLayoutPanel10.TabIndex = 68
         '
         'cbServers
@@ -1083,7 +1083,7 @@ Partial Class NHLGamesMetro
         Me.FlowLayoutPanel11.Location = New System.Drawing.Point(223, 593)
         Me.FlowLayoutPanel11.Margin = New System.Windows.Forms.Padding(0)
         Me.FlowLayoutPanel11.Name = "FlowLayoutPanel11"
-        Me.FlowLayoutPanel11.Size = New System.Drawing.Size(737, 35)
+        Me.FlowLayoutPanel11.Size = New System.Drawing.Size(725, 35)
         Me.FlowLayoutPanel11.TabIndex = 70
         '
         'cbLanguage
