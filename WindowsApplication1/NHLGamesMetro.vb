@@ -531,6 +531,7 @@ Public Class NHLGamesMetro
 
 
     Private Sub cbLanguage_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLanguage.SelectedIndexChanged 
+        tlpSettings.Focus()
         ApplicationSettings.SetValue(SettingsEnum.SelectedLanguage, cbLanguage.SelectedItem.ToString())
         Common.GetLanguage()
         InitializeForm.SetLanguage()
