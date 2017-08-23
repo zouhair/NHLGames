@@ -263,7 +263,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: Player path is empty.
+        '''  Recherche une chaîne localisée semblable à Error: No media player selected in settings..
         '''</summary>
         Friend Shared ReadOnly Property errorPlayerPathEmpty() As String
             Get

@@ -5,9 +5,17 @@ Imports NHLGames.Objects
 Namespace Utilities
     Public Class Player
         Public Shared Sub Watch(args As GameWatchArguments)
+            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
 
-            If args.PlayerPath.Equals(String.Empty) Then
-                Console.WriteLine(English.errorPlayerPathEmpty)
+            If args.PlayerPath.Equals(String.Empty) OrElse args.StreamlinkPath.Equals(String.Empty) Then
+                If form.txtStreamlinkPath.Text.Equals(String.Empty) Then
+                    Console.WriteLine(English.errorStreamlinkExe)
+                ElseIf form.txtMpvPath.Text.Equals(String.Empty) AndAlso form.txtVLCPath.Text.Equals(String.Empty) AndAlso form.txtMPCPath.Text.Equals(String.Empty) Then
+                    Console.WriteLine(English.errorMpvExe)
+                Else 
+                    Console.WriteLine(English.errorPlayerPathEmpty)
+                End If
+                
                 Return
             End If
 
@@ -103,15 +111,16 @@ Namespace Utilities
                     form.chk60.Checked = False
                 End If
 
-                If form.rbMPC.Checked Then
-                    watchArgs.PlayerType = PlayerTypeEnum.Mpc
-                    watchArgs.PlayerPath = form.txtMPCPath.Text
-                ElseIf form.rbMpv.Checked Then
+                If form.rbMpv.Checked Then
                     watchArgs.PlayerType = PlayerTypeEnum.Mpv
                     watchArgs.PlayerPath = form.txtMpvPath.Text
-                Else
+                ElseIf form.rbMPC.Checked Then
+                    watchArgs.PlayerType = PlayerTypeEnum.Mpc
+                    watchArgs.PlayerPath = form.txtMPCPath.Text
+                ElseIf form.rbVLC.Checked Then
                     watchArgs.PlayerType = PlayerTypeEnum.Vlc
                     watchArgs.PlayerPath = form.txtVLCPath.Text
+                
                 End If
 
                 watchArgs.StreamlinkPath = form.txtStreamlinkPath.Text

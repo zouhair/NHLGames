@@ -169,7 +169,7 @@ Partial Class NHLGamesMetro
         Me.RichTextBox.Name = "RichTextBox"
         Me.RichTextBox.ReadOnly = true
         Me.RichTextBox.Size = New System.Drawing.Size(1020, 407)
-        Me.RichTextBox.TabIndex = 0
+        Me.RichTextBox.TabIndex = 110
         Me.RichTextBox.Text = ""
         '
         'TabControl
@@ -184,11 +184,11 @@ Partial Class NHLGamesMetro
         Me.TabControl.ItemSize = New System.Drawing.Size(90, 34)
         Me.TabControl.Location = New System.Drawing.Point(3, 60)
         Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 0
+        Me.TabControl.SelectedIndex = 1
         Me.TabControl.Size = New System.Drawing.Size(1044, 537)
         Me.TabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.TabControl.Style = MetroFramework.MetroColorStyle.Blue
-        Me.TabControl.TabIndex = 22
+        Me.TabControl.TabIndex = 10
         Me.TabControl.UseSelectable = true
         '
         'GamesTab
@@ -286,7 +286,7 @@ Partial Class NHLGamesMetro
         Me.btnRefresh.Location = New System.Drawing.Point(994, 15)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(24, 24)
-        Me.btnRefresh.TabIndex = 15
+        Me.btnRefresh.TabIndex = 140
         Me.btnRefresh.UseVisualStyleBackColor = false
         '
         'btnYesterday
@@ -302,7 +302,7 @@ Partial Class NHLGamesMetro
         Me.btnYesterday.Location = New System.Drawing.Point(15, 18)
         Me.btnYesterday.Name = "btnYesterday"
         Me.btnYesterday.Size = New System.Drawing.Size(20, 20)
-        Me.btnYesterday.TabIndex = 14
+        Me.btnYesterday.TabIndex = 110
         Me.btnYesterday.UseVisualStyleBackColor = false
         '
         'btnTomorrow
@@ -318,7 +318,7 @@ Partial Class NHLGamesMetro
         Me.btnTomorrow.Location = New System.Drawing.Point(308, 18)
         Me.btnTomorrow.Name = "btnTomorrow"
         Me.btnTomorrow.Size = New System.Drawing.Size(20, 20)
-        Me.btnTomorrow.TabIndex = 13
+        Me.btnTomorrow.TabIndex = 130
         Me.btnTomorrow.UseVisualStyleBackColor = false
         '
         'btnDate
@@ -336,7 +336,7 @@ Partial Class NHLGamesMetro
         Me.btnDate.Location = New System.Drawing.Point(262, 15)
         Me.btnDate.Name = "btnDate"
         Me.btnDate.Size = New System.Drawing.Size(24, 24)
-        Me.btnDate.TabIndex = 12
+        Me.btnDate.TabIndex = 120
         Me.btnDate.UseVisualStyleBackColor = false
         '
         'flpGames
@@ -457,7 +457,7 @@ Partial Class NHLGamesMetro
         Me.chkShowFinalScores.Location = New System.Drawing.Point(3, 3)
         Me.chkShowFinalScores.Name = "chkShowFinalScores"
         Me.chkShowFinalScores.Size = New System.Drawing.Size(125, 15)
-        Me.chkShowFinalScores.TabIndex = 28
+        Me.chkShowFinalScores.TabIndex = 110
         Me.chkShowFinalScores.Text = "Final Scores"
         Me.chkShowFinalScores.UseSelectable = true
         '
@@ -466,7 +466,7 @@ Partial Class NHLGamesMetro
         Me.chkShowLiveScores.Location = New System.Drawing.Point(134, 3)
         Me.chkShowLiveScores.Name = "chkShowLiveScores"
         Me.chkShowLiveScores.Size = New System.Drawing.Size(125, 15)
-        Me.chkShowLiveScores.TabIndex = 58
+        Me.chkShowLiveScores.TabIndex = 120
         Me.chkShowLiveScores.Text = "Live Scores"
         Me.chkShowLiveScores.UseSelectable = true
         '
@@ -475,7 +475,7 @@ Partial Class NHLGamesMetro
         Me.chkShowSeriesRecord.Location = New System.Drawing.Point(265, 3)
         Me.chkShowSeriesRecord.Name = "chkShowSeriesRecord"
         Me.chkShowSeriesRecord.Size = New System.Drawing.Size(125, 15)
-        Me.chkShowSeriesRecord.TabIndex = 59
+        Me.chkShowSeriesRecord.TabIndex = 130
         Me.chkShowSeriesRecord.Text = "Series record"
         Me.chkShowSeriesRecord.UseSelectable = true
         '
@@ -499,11 +499,10 @@ Partial Class NHLGamesMetro
         'rbMpv
         '
         Me.rbMpv.AutoSize = true
-        Me.rbMpv.Checked = true
         Me.rbMpv.Location = New System.Drawing.Point(111, 4)
         Me.rbMpv.Name = "rbMpv"
         Me.rbMpv.Size = New System.Drawing.Size(48, 15)
-        Me.rbMpv.TabIndex = 19
+        Me.rbMpv.TabIndex = 230
         Me.rbMpv.TabStop = true
         Me.rbMpv.Text = "MPV"
         Me.rbMpv.UseSelectable = true
@@ -514,7 +513,7 @@ Partial Class NHLGamesMetro
         Me.rbMPC.Location = New System.Drawing.Point(57, 3)
         Me.rbMPC.Name = "rbMPC"
         Me.rbMPC.Size = New System.Drawing.Size(49, 15)
-        Me.rbMPC.TabIndex = 16
+        Me.rbMPC.TabIndex = 220
         Me.rbMPC.Text = "MPC"
         Me.rbMPC.UseSelectable = true
         '
@@ -524,7 +523,7 @@ Partial Class NHLGamesMetro
         Me.rbVLC.Location = New System.Drawing.Point(3, 3)
         Me.rbVLC.Name = "rbVLC"
         Me.rbVLC.Size = New System.Drawing.Size(44, 15)
-        Me.rbVLC.TabIndex = 15
+        Me.rbVLC.TabIndex = 210
         Me.rbVLC.Text = "VLC"
         Me.rbVLC.UseSelectable = true
         '
@@ -556,7 +555,7 @@ Partial Class NHLGamesMetro
         Me.rbQual6.Location = New System.Drawing.Point(273, 4)
         Me.rbQual6.Name = "rbQual6"
         Me.rbQual6.Size = New System.Drawing.Size(48, 15)
-        Me.rbQual6.TabIndex = 10
+        Me.rbQual6.TabIndex = 360
         Me.rbQual6.TabStop = true
         Me.rbQual6.Text = "720p"
         Me.rbQual6.UseSelectable = true
@@ -567,7 +566,7 @@ Partial Class NHLGamesMetro
         Me.rbQual5.Location = New System.Drawing.Point(219, 4)
         Me.rbQual5.Name = "rbQual5"
         Me.rbQual5.Size = New System.Drawing.Size(48, 15)
-        Me.rbQual5.TabIndex = 11
+        Me.rbQual5.TabIndex = 350
         Me.rbQual5.Text = "540p"
         Me.rbQual5.UseSelectable = true
         '
@@ -577,7 +576,7 @@ Partial Class NHLGamesMetro
         Me.rbQual4.Location = New System.Drawing.Point(165, 4)
         Me.rbQual4.Name = "rbQual4"
         Me.rbQual4.Size = New System.Drawing.Size(48, 15)
-        Me.rbQual4.TabIndex = 12
+        Me.rbQual4.TabIndex = 340
         Me.rbQual4.Text = "504p"
         Me.rbQual4.UseSelectable = true
         '
@@ -587,7 +586,7 @@ Partial Class NHLGamesMetro
         Me.rbQual3.Location = New System.Drawing.Point(111, 4)
         Me.rbQual3.Name = "rbQual3"
         Me.rbQual3.Size = New System.Drawing.Size(48, 15)
-        Me.rbQual3.TabIndex = 13
+        Me.rbQual3.TabIndex = 330
         Me.rbQual3.Text = "360p"
         Me.rbQual3.UseSelectable = true
         '
@@ -597,7 +596,7 @@ Partial Class NHLGamesMetro
         Me.rbQual2.Location = New System.Drawing.Point(57, 4)
         Me.rbQual2.Name = "rbQual2"
         Me.rbQual2.Size = New System.Drawing.Size(48, 15)
-        Me.rbQual2.TabIndex = 14
+        Me.rbQual2.TabIndex = 320
         Me.rbQual2.Text = "228p"
         Me.rbQual2.UseSelectable = true
         '
@@ -609,7 +608,7 @@ Partial Class NHLGamesMetro
         Me.chk60.Location = New System.Drawing.Point(327, 4)
         Me.chk60.Name = "chk60"
         Me.chk60.Size = New System.Drawing.Size(54, 15)
-        Me.chk60.TabIndex = 2
+        Me.chk60.TabIndex = 370
         Me.chk60.Text = "60 fps"
         Me.chk60.UseSelectable = true
         '
@@ -619,7 +618,7 @@ Partial Class NHLGamesMetro
         Me.rbQual1.Location = New System.Drawing.Point(3, 4)
         Me.rbQual1.Name = "rbQual1"
         Me.rbQual1.Size = New System.Drawing.Size(48, 15)
-        Me.rbQual1.TabIndex = 9
+        Me.rbQual1.TabIndex = 310
         Me.rbQual1.Text = "224p"
         Me.rbQual1.UseSelectable = true
         '
@@ -656,7 +655,7 @@ Partial Class NHLGamesMetro
         Me.rbAkamai.Location = New System.Drawing.Point(68, 3)
         Me.rbAkamai.Name = "rbAkamai"
         Me.rbAkamai.Size = New System.Drawing.Size(63, 15)
-        Me.rbAkamai.TabIndex = 12
+        Me.rbAkamai.TabIndex = 420
         Me.rbAkamai.TabStop = true
         Me.rbAkamai.Text = "Akamai"
         Me.rbAkamai.UseSelectable = true
@@ -667,7 +666,7 @@ Partial Class NHLGamesMetro
         Me.rbLevel3.Location = New System.Drawing.Point(3, 3)
         Me.rbLevel3.Name = "rbLevel3"
         Me.rbLevel3.Size = New System.Drawing.Size(59, 15)
-        Me.rbLevel3.TabIndex = 11
+        Me.rbLevel3.TabIndex = 410
         Me.rbLevel3.Text = "Level 3"
         Me.rbLevel3.UseSelectable = true
         '
@@ -717,7 +716,7 @@ Partial Class NHLGamesMetro
         Me.txtStreamerArgs.Location = New System.Drawing.Point(3, 3)
         Me.txtStreamerArgs.Name = "txtStreamerArgs"
         Me.txtStreamerArgs.Size = New System.Drawing.Size(486, 22)
-        Me.txtStreamerArgs.TabIndex = 16
+        Me.txtStreamerArgs.TabIndex = 1310
         '
         'tgStreamer
         '
@@ -726,7 +725,7 @@ Partial Class NHLGamesMetro
         Me.tgStreamer.Location = New System.Drawing.Point(495, 3)
         Me.tgStreamer.Name = "tgStreamer"
         Me.tgStreamer.Size = New System.Drawing.Size(80, 19)
-        Me.tgStreamer.TabIndex = 61
+        Me.tgStreamer.TabIndex = 1320
         Me.tgStreamer.Text = "Off"
         Me.tgStreamer.UseSelectable = true
         '
@@ -749,7 +748,7 @@ Partial Class NHLGamesMetro
         Me.txtPlayerArgs.Location = New System.Drawing.Point(3, 3)
         Me.txtPlayerArgs.Name = "txtPlayerArgs"
         Me.txtPlayerArgs.Size = New System.Drawing.Size(486, 22)
-        Me.txtPlayerArgs.TabIndex = 15
+        Me.txtPlayerArgs.TabIndex = 1210
         '
         'tgPlayer
         '
@@ -758,7 +757,7 @@ Partial Class NHLGamesMetro
         Me.tgPlayer.Location = New System.Drawing.Point(495, 3)
         Me.tgPlayer.Name = "tgPlayer"
         Me.tgPlayer.Size = New System.Drawing.Size(80, 19)
-        Me.tgPlayer.TabIndex = 60
+        Me.tgPlayer.TabIndex = 1220
         Me.tgPlayer.Text = "Off"
         Me.tgPlayer.UseSelectable = true
         '
@@ -783,7 +782,7 @@ Partial Class NHLGamesMetro
         Me.txtOutputArgs.Location = New System.Drawing.Point(3, 3)
         Me.txtOutputArgs.Name = "txtOutputArgs"
         Me.txtOutputArgs.Size = New System.Drawing.Size(451, 22)
-        Me.txtOutputArgs.TabIndex = 14
+        Me.txtOutputArgs.TabIndex = 1110
         '
         'btnOuput
         '
@@ -791,7 +790,7 @@ Partial Class NHLGamesMetro
         Me.btnOuput.Location = New System.Drawing.Point(460, 3)
         Me.btnOuput.Name = "btnOuput"
         Me.btnOuput.Size = New System.Drawing.Size(28, 20)
-        Me.btnOuput.TabIndex = 51
+        Me.btnOuput.TabIndex = 1120
         Me.btnOuput.Text = "..."
         Me.btnOuput.UseSelectable = true
         '
@@ -802,7 +801,7 @@ Partial Class NHLGamesMetro
         Me.tgOutput.Location = New System.Drawing.Point(494, 3)
         Me.tgOutput.Name = "tgOutput"
         Me.tgOutput.Size = New System.Drawing.Size(80, 19)
-        Me.tgOutput.TabIndex = 59
+        Me.tgOutput.TabIndex = 1130
         Me.tgOutput.Text = "Off"
         Me.tgOutput.UseSelectable = true
         '
@@ -826,7 +825,7 @@ Partial Class NHLGamesMetro
         Me.txtStreamlinkPath.Name = "txtStreamlinkPath"
         Me.txtStreamlinkPath.ReadOnly = true
         Me.txtStreamlinkPath.Size = New System.Drawing.Size(486, 22)
-        Me.txtStreamlinkPath.TabIndex = 46
+        Me.txtStreamlinkPath.TabIndex = 1010
         '
         'btnstreamlinkPath
         '
@@ -834,7 +833,7 @@ Partial Class NHLGamesMetro
         Me.btnstreamlinkPath.Location = New System.Drawing.Point(495, 3)
         Me.btnstreamlinkPath.Name = "btnstreamlinkPath"
         Me.btnstreamlinkPath.Size = New System.Drawing.Size(28, 20)
-        Me.btnstreamlinkPath.TabIndex = 50
+        Me.btnstreamlinkPath.TabIndex = 1020
         Me.btnstreamlinkPath.Text = "..."
         Me.btnstreamlinkPath.UseSelectable = true
         '
@@ -858,7 +857,7 @@ Partial Class NHLGamesMetro
         Me.txtMpvPath.Name = "txtMpvPath"
         Me.txtMpvPath.ReadOnly = true
         Me.txtMpvPath.Size = New System.Drawing.Size(486, 22)
-        Me.txtMpvPath.TabIndex = 53
+        Me.txtMpvPath.TabIndex = 910
         '
         'btnMpvPath
         '
@@ -866,7 +865,7 @@ Partial Class NHLGamesMetro
         Me.btnMpvPath.Location = New System.Drawing.Point(495, 3)
         Me.btnMpvPath.Name = "btnMpvPath"
         Me.btnMpvPath.Size = New System.Drawing.Size(28, 20)
-        Me.btnMpvPath.TabIndex = 54
+        Me.btnMpvPath.TabIndex = 920
         Me.btnMpvPath.Text = "..."
         Me.btnMpvPath.UseSelectable = true
         '
@@ -891,7 +890,7 @@ Partial Class NHLGamesMetro
         Me.txtMPCPath.Name = "txtMPCPath"
         Me.txtMPCPath.ReadOnly = true
         Me.txtMPCPath.Size = New System.Drawing.Size(486, 22)
-        Me.txtMPCPath.TabIndex = 45
+        Me.txtMPCPath.TabIndex = 810
         '
         'btnMPCPath
         '
@@ -899,7 +898,7 @@ Partial Class NHLGamesMetro
         Me.btnMPCPath.Location = New System.Drawing.Point(495, 3)
         Me.btnMPCPath.Name = "btnMPCPath"
         Me.btnMPCPath.Size = New System.Drawing.Size(28, 20)
-        Me.btnMPCPath.TabIndex = 49
+        Me.btnMPCPath.TabIndex = 820
         Me.btnMPCPath.Text = "..."
         Me.btnMPCPath.UseSelectable = true
         '
@@ -913,7 +912,7 @@ Partial Class NHLGamesMetro
         Me.lblGetMpc.Location = New System.Drawing.Point(529, 3)
         Me.lblGetMpc.Name = "lblGetMpc"
         Me.lblGetMpc.Size = New System.Drawing.Size(217, 20)
-        Me.lblGetMpc.TabIndex = 18
+        Me.lblGetMpc.TabIndex = 830
         Me.lblGetMpc.Text = "Download MPC"
         Me.lblGetMpc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblGetMpc.UseSelectable = true
@@ -939,7 +938,7 @@ Partial Class NHLGamesMetro
         Me.txtVLCPath.Name = "txtVLCPath"
         Me.txtVLCPath.ReadOnly = true
         Me.txtVLCPath.Size = New System.Drawing.Size(486, 22)
-        Me.txtVLCPath.TabIndex = 42
+        Me.txtVLCPath.TabIndex = 710
         '
         'btnVLCPath
         '
@@ -947,7 +946,7 @@ Partial Class NHLGamesMetro
         Me.btnVLCPath.Location = New System.Drawing.Point(495, 3)
         Me.btnVLCPath.Name = "btnVLCPath"
         Me.btnVLCPath.Size = New System.Drawing.Size(28, 20)
-        Me.btnVLCPath.TabIndex = 48
+        Me.btnVLCPath.TabIndex = 720
         Me.btnVLCPath.Text = "..."
         Me.btnVLCPath.UseSelectable = true
         '
@@ -960,7 +959,7 @@ Partial Class NHLGamesMetro
         Me.lblGetVlc.Location = New System.Drawing.Point(529, 3)
         Me.lblGetVlc.Name = "lblGetVlc"
         Me.lblGetVlc.Size = New System.Drawing.Size(217, 29)
-        Me.lblGetVlc.TabIndex = 17
+        Me.lblGetVlc.TabIndex = 730
         Me.lblGetVlc.Text = "Download VLC"
         Me.lblGetVlc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblGetVlc.UseSelectable = true
@@ -983,7 +982,7 @@ Partial Class NHLGamesMetro
         Me.btnTestHosts.Location = New System.Drawing.Point(3, 3)
         Me.btnTestHosts.Name = "btnTestHosts"
         Me.btnTestHosts.Size = New System.Drawing.Size(110, 24)
-        Me.btnTestHosts.TabIndex = 27
+        Me.btnTestHosts.TabIndex = 610
         Me.btnTestHosts.Text = "1) Test"
         Me.SettingsToolTip.SetToolTip(Me.btnTestHosts, "Test the hosts file")
         Me.btnTestHosts.UseSelectable = true
@@ -993,7 +992,7 @@ Partial Class NHLGamesMetro
         Me.btnOpenHostsFile.Location = New System.Drawing.Point(119, 3)
         Me.btnOpenHostsFile.Name = "btnOpenHostsFile"
         Me.btnOpenHostsFile.Size = New System.Drawing.Size(120, 24)
-        Me.btnOpenHostsFile.TabIndex = 39
+        Me.btnOpenHostsFile.TabIndex = 620
         Me.btnOpenHostsFile.Text = "2) View"
         Me.SettingsToolTip.SetToolTip(Me.btnOpenHostsFile, "View your hosts file")
         Me.btnOpenHostsFile.UseSelectable = true
@@ -1003,7 +1002,7 @@ Partial Class NHLGamesMetro
         Me.btnAddHosts.Location = New System.Drawing.Point(245, 3)
         Me.btnAddHosts.Name = "btnAddHosts"
         Me.btnAddHosts.Size = New System.Drawing.Size(120, 24)
-        Me.btnAddHosts.TabIndex = 56
+        Me.btnAddHosts.TabIndex = 630
         Me.btnAddHosts.Text = "3) Add"
         Me.SettingsToolTip.SetToolTip(Me.btnAddHosts, "Add our server to your hosts file")
         Me.btnAddHosts.UseSelectable = true
@@ -1013,7 +1012,7 @@ Partial Class NHLGamesMetro
         Me.btnCleanHosts.Location = New System.Drawing.Point(371, 3)
         Me.btnCleanHosts.Name = "btnCleanHosts"
         Me.btnCleanHosts.Size = New System.Drawing.Size(120, 24)
-        Me.btnCleanHosts.TabIndex = 55
+        Me.btnCleanHosts.TabIndex = 640
         Me.btnCleanHosts.Text = "3) Clean"
         Me.SettingsToolTip.SetToolTip(Me.btnCleanHosts, "Remove our server from your hosts file")
         Me.btnCleanHosts.UseSelectable = true
@@ -1052,7 +1051,7 @@ Partial Class NHLGamesMetro
         Me.cbServers.Location = New System.Drawing.Point(3, 3)
         Me.cbServers.Name = "cbServers"
         Me.cbServers.Size = New System.Drawing.Size(486, 25)
-        Me.cbServers.TabIndex = 67
+        Me.cbServers.TabIndex = 510
         Me.cbServers.UseSelectable = true
         '
         'lblLanguage
@@ -1084,7 +1083,7 @@ Partial Class NHLGamesMetro
         Me.cbLanguage.Location = New System.Drawing.Point(3, 3)
         Me.cbLanguage.Name = "cbLanguage"
         Me.cbLanguage.Size = New System.Drawing.Size(486, 25)
-        Me.cbLanguage.TabIndex = 67
+        Me.cbLanguage.TabIndex = 1410
         Me.cbLanguage.UseSelectable = true
         '
         'lblSlPath
@@ -1204,7 +1203,7 @@ Partial Class NHLGamesMetro
         Me.btnCopyConsole.Location = New System.Drawing.Point(691, 425)
         Me.btnCopyConsole.Name = "btnCopyConsole"
         Me.btnCopyConsole.Size = New System.Drawing.Size(200, 23)
-        Me.btnCopyConsole.TabIndex = 3
+        Me.btnCopyConsole.TabIndex = 120
         Me.btnCopyConsole.Text = "Copy to clipboard"
         Me.btnCopyConsole.UseSelectable = true
         '
@@ -1214,7 +1213,7 @@ Partial Class NHLGamesMetro
         Me.btnClearConsole.Location = New System.Drawing.Point(897, 425)
         Me.btnClearConsole.Name = "btnClearConsole"
         Me.btnClearConsole.Size = New System.Drawing.Size(129, 23)
-        Me.btnClearConsole.TabIndex = 2
+        Me.btnClearConsole.TabIndex = 130
         Me.btnClearConsole.Text = "Clear"
         Me.btnClearConsole.UseSelectable = true
         '
@@ -1284,7 +1283,7 @@ Partial Class NHLGamesMetro
         Me.btnHelp.Location = New System.Drawing.Point(937, 5)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(28, 24)
-        Me.btnHelp.TabIndex = 68
+        Me.btnHelp.TabIndex = 9999
         Me.btnHelp.UseSelectable = true
         '
         'btnMinimize
@@ -1295,7 +1294,7 @@ Partial Class NHLGamesMetro
         Me.btnMinimize.Location = New System.Drawing.Point(965, 5)
         Me.btnMinimize.Name = "btnMinimize"
         Me.btnMinimize.Size = New System.Drawing.Size(28, 24)
-        Me.btnMinimize.TabIndex = 67
+        Me.btnMinimize.TabIndex = 9999
         Me.btnMinimize.UseCustomBackColor = true
         Me.btnMinimize.UseSelectable = true
         '
@@ -1308,7 +1307,7 @@ Partial Class NHLGamesMetro
         Me.btnMaximize.Margin = New System.Windows.Forms.Padding(6)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(28, 24)
-        Me.btnMaximize.TabIndex = 66
+        Me.btnMaximize.TabIndex = 9999
         Me.btnMaximize.UseSelectable = true
         '
         'btnClose
@@ -1319,7 +1318,7 @@ Partial Class NHLGamesMetro
         Me.btnClose.Location = New System.Drawing.Point(1017, 5)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(30, 24)
-        Me.btnClose.TabIndex = 65
+        Me.btnClose.TabIndex = 9999
         Me.btnClose.UseSelectable = true
         '
         'pnlBottom
@@ -1350,7 +1349,7 @@ Partial Class NHLGamesMetro
         Me.lnkDownload.Location = New System.Drawing.Point(65, 3)
         Me.lnkDownload.Name = "lnkDownload"
         Me.lnkDownload.Size = New System.Drawing.Size(148, 35)
-        Me.lnkDownload.TabIndex = 59
+        Me.lnkDownload.TabIndex = 20
         Me.lnkDownload.Text = "/r/nhl_games"
         Me.lnkDownload.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lnkDownload.UseCustomBackColor = true
@@ -1463,8 +1462,6 @@ Partial Class NHLGamesMetro
         Me.ResumeLayout(false)
 
 End Sub
-    Friend WithEvents gbPlayer As GroupBox
-    Friend WithEvents gbServer As GroupBox
     Friend WithEvents RichTextBox As RichTextBox
     Friend WithEvents TabControl As MetroFramework.Controls.MetroTabControl
     Friend WithEvents GamesTab As MetroFramework.Controls.MetroTabPage

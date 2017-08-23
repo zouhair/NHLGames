@@ -148,6 +148,7 @@ Public Class NHLGamesMetro
     Private Sub btnVLCPath_Click(sender As Object, e As EventArgs) Handles btnVLCPath.Click
         OpenFileDialog.Filter = $"VLC|vlc.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
+        OpenFileDialog.InitialDirectory = If(txtVLCPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtVLCPath.Text))
 
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
             If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtVLCPath.Text <> OpenFileDialog.FileName Then
@@ -160,6 +161,7 @@ Public Class NHLGamesMetro
     Private Sub btnMPCPath_Click(sender As Object, e As EventArgs) Handles btnMPCPath.Click
         OpenFileDialog.Filter = $"MPC|mpc-hc64.exe;mpc-hc.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
+        OpenFileDialog.InitialDirectory = If(txtMPCPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtMPCPath.Text))
 
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
 
@@ -172,8 +174,9 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnMpvPath_Click(sender As Object, e As EventArgs) Handles btnMpvPath.Click
-        OpenFileDialog.Filter = $"MPC|mpv.exe|All files (*.*)|*.*"
+        OpenFileDialog.Filter = $"mpv|mpv.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
+        OpenFileDialog.InitialDirectory = If(txtMpvPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtMpvPath.Text))
 
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
 
@@ -188,6 +191,7 @@ Public Class NHLGamesMetro
     Private Sub btnstreamlinkPath_Click(sender As Object, e As EventArgs) Handles btnstreamlinkPath.Click
         OpenFileDialog.Filter = $"streamlink|streamlink.exe|All files (*.*)|*.*"
         OpenFileDialog.Multiselect = False
+        OpenFileDialog.InitialDirectory = If(txtStreamlinkPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtStreamlinkPath.Text))
 
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
 
@@ -238,8 +242,12 @@ Public Class NHLGamesMetro
         Player.RenewArgs()
     End Sub
 
-    Private Sub txtLiveStreamPath_TextChanged(sender As Object, e As EventArgs) Handles txtStreamlinkPath.TextChanged
+    Private Sub txtMpvPath_TextChanged(sender As Object, e As EventArgs) Handles txtMpvPath.TextChanged
         rbMpv.Enabled = True
+        Player.RenewArgs()
+    End Sub
+
+    Private Sub txtStreamlinkPath_TextChanged(sender As Object, e As EventArgs) Handles txtStreamlinkPath.TextChanged
         Player.RenewArgs()
     End Sub
 
@@ -363,10 +371,6 @@ Public Class NHLGamesMetro
 
     Private Sub FlowLayoutPanel_Click(sender As Object, e As EventArgs) Handles flpGames.Click
         flpCalender.Visible = False
-    End Sub
-
-    Private Sub txtMpvPath_TextChanged(sender As Object, e As EventArgs) Handles txtMpvPath.TextChanged
-        Player.RenewArgs()
     End Sub
 
     Private Sub tgStreamer_CheckedChanged(sender As Object, e As EventArgs) Handles tgStreamer.CheckedChanged

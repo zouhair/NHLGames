@@ -174,7 +174,7 @@
     <comment>Message</comment>
   </data>
   <data name="errorPlayerPathEmpty" xml:space="preserve">
-    <value>Error: Player path is empty</value>
+    <value>Error: No media player selected in settings.</value>
     <comment>Message</comment>
   </data>
   <data name="errorReadingSettings" xml:space="preserve">
