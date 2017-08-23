@@ -100,10 +100,6 @@ Namespace Utilities
             If Not File.Exists(mpcPath) Then
                 mpcPath = String.Empty
                 ApplicationSettings.SetValue(SettingsEnum.MpcPath, mpcPath)
-                Form.rbMPC.Enabled = False
-                Form.rbMPC.Checked = False
-            Else 
-                Form.rbMPC.Checked = True
             End If
             Form.txtMPCPath.Text = mpcPath
 
@@ -119,10 +115,6 @@ Namespace Utilities
             If Not File.Exists(vlcPath) Then
                 vlcPath = String.Empty
                 ApplicationSettings.SetValue(SettingsEnum.VlcPath, vlcPath)
-                Form.rbVLC.Enabled = False
-                Form.rbVLC.Checked = False
-            Else 
-                Form.rbVLC.Checked = True
             End If
             Form.txtVLCPath.Text = vlcPath
 
@@ -140,10 +132,6 @@ Namespace Utilities
             If Not File.Exists(mpvPath) Then
                 mpvPath = String.Empty
                 ApplicationSettings.SetValue(SettingsEnum.MpvPath, mpvPath)
-                Form.rbMpv.Checked = False
-                Form.rbMpv.Enabled = False
-            Else 
-                Form.rbMpv.Checked = True
             End If
             Form.txtMpvPath.Text = mpvPath
 
@@ -233,11 +221,13 @@ Namespace Utilities
             If watchArgs Is Nothing Then Return True
 
             Dim hasPlayerSet As Boolean = playersPath.Any(Function(x) x = watchArgs.PlayerPath)
-            If watchArgs.StreamlinkPath <> streamlinkPath Then Return True
-            If watchArgs.StreamlinkPath.Equals(streamlinkPath) Then Return True
+            If Not watchArgs.StreamlinkPath.Equals(streamlinkPath) Then Return True
             If Not hasPlayerSet Then
                 watchArgs.PlayerType = PlayerTypeEnum.None
                 watchArgs.PlayerPath = String.Empty
+                Form.rbMPC.Enabled = False
+                Form.rbVLC.Enabled = False
+                Form.rbMpv.Enabled = False
                 Return True
             End If
 
@@ -270,9 +260,9 @@ Namespace Utilities
                     Form.rbLevel3.Checked = True
                 End If
 
-                Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc = Not watchArgs.PlayerPath.Equals(String.Empty)
-                Form.rbMPC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpc = Not watchArgs.PlayerPath.Equals(String.Empty)
-                Form.rbMpv.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpv = Not watchArgs.PlayerPath.Equals(String.Empty)
+                Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc
+                Form.rbMPC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpc
+                Form.rbMpv.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpv
 
                 If Form.rbVLC.Checked AndAlso watchArgs.PlayerPath <> Form.txtVLCPath.Text Then
                     Player.RenewArgs()

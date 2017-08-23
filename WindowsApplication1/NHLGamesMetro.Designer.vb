@@ -472,6 +472,8 @@ Partial Class NHLGamesMetro
         '
         'chkShowSeriesRecord
         '
+        Me.chkShowSeriesRecord.Checked = true
+        Me.chkShowSeriesRecord.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkShowSeriesRecord.Location = New System.Drawing.Point(265, 3)
         Me.chkShowSeriesRecord.Name = "chkShowSeriesRecord"
         Me.chkShowSeriesRecord.Size = New System.Drawing.Size(125, 15)
@@ -499,6 +501,7 @@ Partial Class NHLGamesMetro
         'rbMpv
         '
         Me.rbMpv.AutoSize = true
+        Me.rbMpv.Checked = true
         Me.rbMpv.Location = New System.Drawing.Point(111, 4)
         Me.rbMpv.Name = "rbMpv"
         Me.rbMpv.Size = New System.Drawing.Size(48, 15)
