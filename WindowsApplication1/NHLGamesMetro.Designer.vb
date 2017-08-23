@@ -642,7 +642,7 @@ Partial Class NHLGamesMetro
         'lblNoteCdn
         '
         Me.lblNoteCdn.FontSize = MetroFramework.MetroLabelSize.Small
-        Me.lblNoteCdn.Location = New System.Drawing.Point(151, 3)
+        Me.lblNoteCdn.Location = New System.Drawing.Point(134, 3)
         Me.lblNoteCdn.Margin = New System.Windows.Forms.Padding(0)
         Me.lblNoteCdn.Name = "lblNoteCdn"
         Me.lblNoteCdn.Size = New System.Drawing.Size(693, 15)
@@ -1036,7 +1036,7 @@ Partial Class NHLGamesMetro
         Me.lnkDiySteps.Image = Global.NHLGames.My.Resources.Resources.helpgit
         Me.lnkDiySteps.Location = New System.Drawing.Point(497, 3)
         Me.lnkDiySteps.Name = "lnkDiySteps"
-        Me.lnkDiySteps.Size = New System.Drawing.Size(23, 23)
+        Me.lnkDiySteps.Size = New System.Drawing.Size(20, 20)
         Me.lnkDiySteps.TabIndex = 61
         Me.lnkDiySteps.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.SettingsToolTip.SetToolTip(Me.lnkDiySteps, "DIY Steps")
