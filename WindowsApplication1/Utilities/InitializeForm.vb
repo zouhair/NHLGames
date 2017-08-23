@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Globalization
+Imports System.IO
 Imports System.Net
 Imports NHLGames.My.Resources
 Imports NHLGames.Objects
@@ -73,6 +74,10 @@ Namespace Utilities
             'Console
             Form.btnCopyConsole.Text = NHLGamesMetro.RmText.GetString("btnCopyConsole")
             Form.btnClearConsole.Text = NHLGamesMetro.RmText.GetString("btnClearConsole")
+
+            'Calendar
+            Form.flpCalender.Controls.Clear()
+            Form.flpCalender.Controls.Add(New NHLGames.Controls.CalenderControl)
         
         End Sub
 
