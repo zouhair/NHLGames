@@ -50,7 +50,7 @@ Namespace Utilities
             If form.InvokeRequired Then
                 form.BeginInvoke(New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxRed), message, title, buttons)
             Else
-                form.TabControl.SelectedIndex = 2
+                form.tabMenu.SelectedIndex = 2
                 result = MetroFramework.MetroMessageBox.Show(form,
                                                            message,
                                                            title, 

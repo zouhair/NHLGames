@@ -28,10 +28,10 @@ Namespace Utilities
 
         Public Shared Sub SetLanguage()
             'Main
-            Form.TabControl.TabPages.Item(0).Text = NHLGamesMetro.RmText.GetString("tabGames")
-            Form.TabControl.TabPages.Item(1).Text = NHLGamesMetro.RmText.GetString("tabSettings")
-            Form.TabControl.TabPages.Item(2).Text = NHLGamesMetro.RmText.GetString("tabConsole")
-            Form.TabControl.TabPages.Item(3).Text = NHLGamesMetro.RmText.GetString("tabModules")
+            Form.tabMenu.TabPages.Item(0).Text = NHLGamesMetro.RmText.GetString("tabGames")
+            Form.tabMenu.TabPages.Item(1).Text = NHLGamesMetro.RmText.GetString("tabSettings")
+            Form.tabMenu.TabPages.Item(2).Text = NHLGamesMetro.RmText.GetString("tabConsole")
+            Form.tabMenu.TabPages.Item(3).Text = NHLGamesMetro.RmText.GetString("tabModules")
 
             Form.lblNoGames.Text = NHLGamesMetro.RmText.GetString("lblNoGames")
        
@@ -197,7 +197,7 @@ Namespace Utilities
                                             MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     HostsFile.AddEntry(NHLGamesMetro.ServerIp,  NHLGamesMetro.DomainName, True)
                 Else
-                    Form.TabControl.SelectedIndex = 1
+                    Form.tabMenu.SelectedIndex = 1
                     NHLGamesMetro.DiySteps()
                 End If
             End If

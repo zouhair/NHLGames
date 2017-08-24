@@ -234,7 +234,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="lblOutput" xml:space="preserve">
-    <value>Emplacement de sauvegarde</value>
+    <value>Enregistrement</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblPlayer" xml:space="preserve">

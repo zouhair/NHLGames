@@ -497,7 +497,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Emplacement de sauvegarde.
+        '''  Recherche une chaîne localisée semblable à Enregistrement.
         '''</summary>
         Public Shared ReadOnly Property lblOutput() As String
             Get

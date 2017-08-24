@@ -91,7 +91,7 @@ Public Class NHLGamesMetro
             FatalError()
         End If
 
-        TabControl.SelectedIndex = 0
+        tabMenu.SelectedIndex = 0
         Common.GetLanguage()
 
         Try
@@ -360,12 +360,12 @@ Public Class NHLGamesMetro
         Process.Start(sInfo)
     End Sub
 
-    Private Sub TabControl_MouseClick(sender As Object, e As MouseEventArgs) Handles TabControl.MouseClick
+    Private Sub TabControl_MouseClick(sender As Object, e As MouseEventArgs) Handles tabMenu.MouseClick
         ProgressVisible = False
         flpCalender.Visible = False
     End Sub
 
-    Private Sub GamesTab_Click(sender As Object, e As EventArgs) Handles GamesTab.Click
+    Private Sub GamesTab_Click(sender As Object, e As EventArgs) Handles tabGames.Click
         flpCalender.Visible = False
     End Sub
 
@@ -435,20 +435,20 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub RefreshFocus()
-        If GamesTab.Visible Then 
+        If tabGames.Visible Then 
             flpGames.Focus()
-        ElseIf SettingTab.Visible Then
+        ElseIf tabSettings.Visible Then
             tlpSettings.Focus()
-        ElseIf ConsoleTab.Visible Then
+        ElseIf tabConsole.Visible Then
             RichTextBox.Focus()
-        ElseIf AdDetectionSettingsTab.Visible Then
+        ElseIf tabAdDetectionModules.Visible Then
             flpAdDetector.Focus()
         Else 
-            TabControl.Focus()
+            tabMenu.Focus()
         End If
     End Sub
 
-    Private Sub TabControl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl.SelectedIndexChanged
+    Private Sub TabControl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabMenu.SelectedIndexChanged
         RefreshFocus()
     End Sub
 
