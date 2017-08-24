@@ -231,7 +231,7 @@ Partial Class NHLGamesMetro
         Me.tabMenu.ItemSize = New System.Drawing.Size(90, 34)
         Me.tabMenu.Location = New System.Drawing.Point(3, 60)
         Me.tabMenu.Name = "tabMenu"
-        Me.tabMenu.SelectedIndex = 0
+        Me.tabMenu.SelectedIndex = 4
         Me.tabMenu.Size = New System.Drawing.Size(994, 495)
         Me.tabMenu.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabMenu.Style = MetroFramework.MetroColorStyle.Blue
@@ -1645,7 +1645,6 @@ Partial Class NHLGamesMetro
         Me.txtGameKey.MaxLength = 1
         Me.txtGameKey.Name = "txtGameKey"
         Me.txtGameKey.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtGameKey.PromptText = "G"
         Me.txtGameKey.ScrollBars = System.Windows.Forms.ScrollBars.None
         Me.txtGameKey.SelectedText = ""
         Me.txtGameKey.SelectionLength = 0
@@ -1655,9 +1654,8 @@ Partial Class NHLGamesMetro
         Me.txtGameKey.TabIndex = 2
         Me.txtGameKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtGameKey.UseSelectable = true
-        Me.txtGameKey.WaterMark = "G"
-        Me.txtGameKey.WaterMarkColor = System.Drawing.Color.Silver
-        Me.txtGameKey.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel, CType(0,Byte))
+        Me.txtGameKey.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtGameKey.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'MetroLabel6
         '
@@ -1761,7 +1759,6 @@ Partial Class NHLGamesMetro
         Me.txtAdKey.MaxLength = 1
         Me.txtAdKey.Name = "txtAdKey"
         Me.txtAdKey.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtAdKey.PromptText = "A"
         Me.txtAdKey.ScrollBars = System.Windows.Forms.ScrollBars.None
         Me.txtAdKey.SelectedText = ""
         Me.txtAdKey.SelectionLength = 0
@@ -1771,8 +1768,7 @@ Partial Class NHLGamesMetro
         Me.txtAdKey.TabIndex = 3
         Me.txtAdKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtAdKey.UseSelectable = true
-        Me.txtAdKey.WaterMark = "A"
-        Me.txtAdKey.WaterMarkColor = System.Drawing.Color.Silver
+        Me.txtAdKey.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
         Me.txtAdKey.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'MetroLabel3
