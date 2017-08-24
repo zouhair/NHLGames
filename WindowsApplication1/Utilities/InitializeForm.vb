@@ -214,9 +214,12 @@ Namespace Utilities
             Form.spnStreaming.Value = NHLGamesMetro.ProgressValue
             Form.spnStreaming.Maximum = NHLGamesMetro.ProgressMaxValue
             Form.lblDate.Text = DateHelper.GetFormattedDate(NHLGamesMetro.GameDate)
-
+            
             NHLGamesMetro.LabelDate = Form.lblDate
             NHLGamesMetro.GamesDownloadedTime = Now
+
+            'remove wip tab modules
+            Form.tabMenu.TabPages.RemoveAt(4) 
 
         End Sub
 
