@@ -14,79 +14,27 @@ Namespace Objects
         Public PlayBackId As String = ""
         Public Type As StreamType
         Public Game As Game
-
-        Public Enum StreamType
-            Away
-            Home
-            National
-            French
-            MultiCam1
-            MultiCam2
-            RefCam
-            EndzoneCam1
-            EndzoneCam2
-        End Enum
-
+        Private ReadOnly _stream As JObject = New JObject()
+        Private ReadOnly _availableGameIds As HashSet(Of String)
+        
         Public Property IsAvailable As Boolean = False
+
+        Public Property IsDefined As Boolean = False
 
         Public Property IsVod As Boolean = False
 
         Public Property Network As String
 
         Public Sub New()
-
+            
         End Sub
+
         Public Sub New(game As Game, stream As JObject, availableGameIds As HashSet(Of String), type As StreamType)
             Me.Game = game
-            Dim dateString As String = game.Date.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture).Replace("-", "/")
-            Dim dateString2 As String = game.Date.ToString("yyyyMMdd", CultureInfo.InvariantCulture)
-            Dim feedType As String = stream.Property("mediaFeedType").Value.ToString().Replace("AWAY", "VISIT")
-
-            PlayBackId = stream.Property("mediaPlaybackId").Value.ToString()
-            'GameURL = "http://hlslive-CDN.med2.med.nhl.com/ls04/nhl/" & dateString & "/NHL_GAME_VIDEO_" & game.AwayAbbrev & game.HomeAbbrev & "_M2_" & feedType & "_" & dateString2 & "/master_wired60.m3u8"
-
-            If availableGameIds.Contains(PlayBackID) OrElse availableGameIds.Contains(PlayBackID & "akc") OrElse availableGameIds.Contains(PlayBackID & "l3c") Then
-                IsAvailable = True
-            End If
-
-            Dim args = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
-            Dim address As String = String.Format("http://{0}/m3u8/{1}/{2}{3}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, args.Cdn)
-            Dim legacyAddress As String = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId)
-
-            If IsAvailable Then
-                If CheckURL(address) Then
-                    Dim client As WebClient = New WebClient()
-                    'client.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316")
-                    Dim reader As StreamReader = New StreamReader(client.OpenRead(address))
-                    GameUrl = reader.ReadToEnd()
-                Else
-                    IsAvailable = False
-                End If
-
-                If IsAvailable = False AndAlso CheckURL(legacyAddress) Then
-                    Dim client As WebClient = New WebClient()
-                    client.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316")
-                    Dim reader As StreamReader = New StreamReader(client.OpenRead(legacyAddress))
-                    GameUrl = reader.ReadToEnd()
-                    IsAvailable = True
-                End If
-            End If
-
-            'ugly fix looking if we receive a hlslive link, since hlslive links are not working i convert it to a hlsvod link and get the exp id from it. thats it.
-                    If GameUrl.Contains("http://hlslive") Then
-                        Dim spliter = GameUrl.Split("/")
-                        For Each split As String In spliter
-                            If split.StartsWith("NHL_GAME_VIDEO_") Then
-                                Vodurl = String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/{0}/{1}/master_wired60.m3u8", dateString, split)
-                            End If
-                        Next
-                    End If
-                    'ugly fix end, this ugly fix concerns only games that are 2 to 7 days old, older than that they become archived and newest games are live games.
-
-            'Vodurl = String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/{0}/NHL_GAME_VIDEO_{1}{2}_M2_{3}_{4}/master_wired60.m3u8", dateString, game.AwayAbbrev, game.HomeAbbrev, feedType, dateString2)
-
+            IsDefined = True
+            _stream = stream
+            _availableGameIds = availableGameIds
             Me.Type = type
-            Network = stream.Property("callLetters")
         End Sub
 
         Public Sub CheckVod(ByVal strCdn As String)
@@ -95,33 +43,61 @@ Namespace Objects
                 myHttpWebRequest.CookieContainer = New CookieContainer()
                 myHttpWebRequest.CookieContainer.Add(New Cookie("mediaAuth", Common.GetRandomString(240), String.Empty, "nhl.com"))
                 myHttpWebRequest.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316"
-
-                Dim myHttpWebResponse As HttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
-                If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
-                    IsVod = True
-                End If
-                myHttpWebResponse.Close()
+                IsVod = Common.CheckURL(Vodurl.Replace("CDN", strCdn), myHttpWebRequest)
             Catch e As Exception
                 Console.WriteLine(English.msgVOD, e.Message)
             End Try
         End Sub
 
-        Private Shared Function CheckUrl(ByVal address As String)
-            Try
-                Dim myHttpWebRequest As HttpWebRequest = CType(WebRequest.Create(address), HttpWebRequest)
-                myHttpWebRequest.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316"
-                Dim myHttpWebResponse As HttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
-                myHttpWebResponse.Close()
+        Public Sub GetRightGameStream()
+            Dim client As WebClient = New WebClient()
+            Dim reader As StreamReader
+            Dim dateString As String = Game.Date.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture).Replace("-", "/")
 
-                If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
-                    Return True
-                End If
+            client.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316")
+            PlayBackId = _stream.Property("mediaPlaybackId").Value.ToString()
+            Network = _stream.Property("callLetters")
 
-                Return False
-            Catch e As Exception
-                Return False
-            End Try
-        End Function
+            Dim args = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
+            Dim address As String = String.Format("http://{0}/m3u8/{1}/{2}{3}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, args.Cdn)
+            Dim legacyAddress As String = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId)
 
+            IsAvailable = (_availableGameIds.Contains(PlayBackID) OrElse _availableGameIds.Contains(PlayBackID & "akc") OrElse _availableGameIds.Contains(PlayBackID & "l3c"))
+
+            If Not IsAvailable Then Return
+
+            If Common.CheckURL(address) Then
+                Try
+                    reader = New StreamReader(client.OpenRead(address))
+                    GameUrl = reader.ReadToEnd()
+                Catch ex As Exception
+                    Console.WriteLine(String.Format(NHLGamesMetro.RmText.GetString("errorGeneral"),ex.Message))
+                End Try
+            Else
+                IsAvailable = False
+            End If
+
+            If IsAvailable = False AndAlso Common.CheckURL(legacyAddress) Then
+                Try
+                    reader = New StreamReader(client.OpenRead(legacyAddress))
+                    GameUrl = reader.ReadToEnd()
+                Catch ex As Exception
+                    Console.WriteLine(String.Format(NHLGamesMetro.RmText.GetString("errorGeneral"),ex.Message))
+                End Try
+                IsAvailable = True
+            End If
+
+            'fix that concerns only games that are 2 to 7 days old, older than that they become archived and newest games are live games.
+            'looking if we receive a hlslive link, since hlslive links are not working i convert it to a hlsvod link and get the exp id from it. thats it.
+            If IsAvailable And GameUrl.Contains("http://hlslive") Then
+                Dim spliter = GameUrl.Split("/")
+                For Each split As String In spliter
+                    If split.StartsWith("NHL_GAME_VIDEO_") Then
+                        Vodurl = String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/{0}/{1}/master_wired60.m3u8", dateString, split)
+                    End If
+                Next
+            End If
+
+        End Sub
     End Class
 End Namespace

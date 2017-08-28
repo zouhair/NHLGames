@@ -245,6 +245,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Error: Failed to fetch games schedule..
+        '''</summary>
+        Friend Shared ReadOnly Property errorFetchingGames() As String
+            Get
+                Return ResourceManager.GetString("errorFetchingGames", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Error: {0}.
         '''</summary>
         Friend Shared ReadOnly Property errorGeneral() As String
@@ -263,7 +272,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: Player path is empty.
+        '''  Recherche une chaîne localisée semblable à Error: No media player selected in settings..
         '''</summary>
         Friend Shared ReadOnly Property errorPlayerPathEmpty() As String
             Get
@@ -295,6 +304,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property errorStreamlinkExe() As String
             Get
                 Return ResourceManager.GetString("errorStreamlinkExe", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à unknown (server is not available).
+        '''</summary>
+        Friend Shared ReadOnly Property errorUnknownServerDown() As String
+            Get
+                Return ResourceManager.GetString("errorUnknownServerDown", resourceCulture)
             End Get
         End Property
         
@@ -434,7 +452,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à * CDN.
+        '''  Recherche une chaîne localisée semblable à CDN.
         '''</summary>
         Friend Shared ReadOnly Property lblCdn() As String
             Get
@@ -623,7 +641,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à * Default Player.
+        '''  Recherche une chaîne localisée semblable à Default Player.
         '''</summary>
         Friend Shared ReadOnly Property lblPlayer() As String
             Get
@@ -659,7 +677,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à * Stream Quality.
+        '''  Recherche une chaîne localisée semblable à Stream Quality.
         '''</summary>
         Friend Shared ReadOnly Property lblQuality() As String
             Get
@@ -686,7 +704,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à * Streamlink Path.
+        '''  Recherche une chaîne localisée semblable à Streamlink Path.
         '''</summary>
         Friend Shared ReadOnly Property lblSlPath() As String
             Get
@@ -830,11 +848,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à This line needs to be insert in your hosts file : {0}{1} {2}{0}Use &apos;Open Hosts File&apos; button to open the Hosts file quickly or go to : {0}C:\Windows\System32\drivers\etc\hosts{0}Use Notepad to edit it and paste (Ctrl+V) our entry line at the end of your Hosts file.{0}Do you want to copy that entry line to your clipboard ?.
+        '''  Recherche une chaîne localisée semblable à This line needs to be insert in your hosts file : {0}{1} {2}{0}Click on &apos;Open Hosts File&apos; to open the Hosts file and paste (Ctrl+V) that entry line at the end of your Hosts file.{0}Do you want to copy that entry line to your clipboard ?.
         '''</summary>
         Friend Shared ReadOnly Property msgDiyStepsText() As String
             Get
                 Return ResourceManager.GetString("msgDiyStepsText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Downloading : {0}.
+        '''</summary>
+        Friend Shared ReadOnly Property msgDownloading() As String
+            Get
+                Return ResourceManager.GetString("msgDownloading", resourceCulture)
             End Get
         End Property
         
@@ -1015,6 +1042,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgRunAsAdminText() As String
             Get
                 Return ResourceManager.GetString("msgRunAsAdminText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Status: Failed to download the game schedule file from {0}. Second attempt..
+        '''</summary>
+        Friend Shared ReadOnly Property msgServerNoRespondTryingAgain() As String
+            Get
+                Return ResourceManager.GetString("msgServerNoRespondTryingAgain", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Status: Server {0} seems down.
+        '''</summary>
+        Friend Shared ReadOnly Property msgServerSeemsDown() As String
+            Get
+                Return ResourceManager.GetString("msgServerSeemsDown", resourceCulture)
             End Get
         End Property
         
