@@ -182,7 +182,7 @@
     <comment>Console</comment>
   </data>
   <data name="errorSetAdModule" xml:space="preserve">
-    <value>Error: Can't set Ad Detection Modules : {0}</value>
+    <value>Error: Can't set Ad Detection Modules. Verify if a Nugget package has a dependency of an older nugget package that you have installed (ex: Spotify and Json): {0}</value>
     <comment>Console</comment>
   </data>
   <data name="errorStreamlinkExe" xml:space="preserve">

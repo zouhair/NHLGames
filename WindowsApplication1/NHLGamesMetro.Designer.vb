@@ -231,7 +231,7 @@ Partial Class NHLGamesMetro
         Me.tabMenu.ItemSize = New System.Drawing.Size(90, 34)
         Me.tabMenu.Location = New System.Drawing.Point(3, 60)
         Me.tabMenu.Name = "tabMenu"
-        Me.tabMenu.SelectedIndex = 4
+        Me.tabMenu.SelectedIndex = 1
         Me.tabMenu.Size = New System.Drawing.Size(994, 495)
         Me.tabMenu.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabMenu.Style = MetroFramework.MetroColorStyle.Blue

@@ -3,7 +3,6 @@ Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Resources
 Imports System.Runtime.InteropServices
-Imports System.Web.UI.WebControls.Expressions
 Imports NHLGames.AdDetection
 Imports NHLGames.Controls
 Imports NHLGames.My.Resources
@@ -86,20 +85,20 @@ Public Class NHLGamesMetro
     Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
         SuspendLayout()
 
-        If Not File.Exists("NHLGames.exe.config") then
+        Common.GetLanguage()
+
+        If Not File.Exists("NHLGames.exe.Config") then
             Console.WriteLine(English.errorConfigFile)
-            FatalError()
+            FatalError(RmText.GetString("errorConfigFile"))
         End If
 
         tabMenu.SelectedIndex = 0
-        Common.GetLanguage()
 
         Try
             _adDetectorViewModel = New AdDetectorViewModel()
             AdDetectionSettingsElementHost.Child = _adDetectorViewModel.SettingsControl
         catch ex As Exception
-            Console.WriteLine(English.errorSetAdModule,ex.Message)
-            FatalError()
+           Console.WriteLine(English.errorSetAdModule, ex.Message)
         end Try
 
         FlpCalendar = flpCalender
@@ -111,8 +110,8 @@ Public Class NHLGamesMetro
         FormLoaded = True
     End Sub
 
-    Private Sub FatalError()
-        If InvokeElement.MsgBoxRed(RmText.GetString("errorConfigFile"),RmText.GetString("msgFailure"), MessageBoxButtons.OK) = DialogResult.OK Then
+    Private Sub FatalError(message As String)
+        If InvokeElement.MsgBoxRed(message,RmText.GetString("msgFailure"), MessageBoxButtons.OK) = DialogResult.OK Then
             Me.Close
         End If
     End Sub

@@ -290,7 +290,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: Can&apos;t set Ad Detection Modules : {0}.
+        '''  Recherche une chaîne localisée semblable à Error: Can&apos;t set Ad Detection Modules. Verify if a Nugget package has a dependency of an older nugget package that you have installed (ex: Spotify and Json): {0}.
         '''</summary>
         Friend Shared ReadOnly Property errorSetAdModule() As String
             Get

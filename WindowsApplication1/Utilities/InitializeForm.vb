@@ -1,5 +1,4 @@
-﻿Imports System.Globalization
-Imports System.IO
+﻿Imports System.IO
 Imports System.Net
 Imports NHLGames.My.Resources
 Imports NHLGames.Objects
@@ -77,7 +76,7 @@ Namespace Utilities
 
             'Calendar
             Form.flpCalender.Controls.Clear()
-            Form.flpCalender.Controls.Add(New NHLGames.Controls.CalenderControl)
+            Form.flpCalender.Controls.Add(New Controls.CalenderControl)
         
         End Sub
 
@@ -219,7 +218,7 @@ Namespace Utilities
             NHLGamesMetro.GamesDownloadedTime = Now
 
             'remove wip tab modules
-            Form.tabMenu.TabPages.RemoveAt(4) 
+            'Form.tabMenu.TabPages.RemoveAt(4)
 
         End Sub
 
