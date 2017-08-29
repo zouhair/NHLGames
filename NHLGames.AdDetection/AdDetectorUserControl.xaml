@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <converters:NullVisibilityConverter x:Key="NullToVisibilityConverter"/>
 
-        <Style x:Key="marginStyle" TargetType="TextBlock">
+        <Style x:Key="MarginStyle" TargetType="TextBlock">
             <Setter Property="Margin" Value="3"/>
         </Style>
     </UserControl.Resources>
@@ -102,7 +102,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Disabled Modules" FontWeight="Bold" Style="{StaticResource marginStyle}" />
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Disabled Modules" FontWeight="Bold" Style="{StaticResource MarginStyle}" />
             <ListBox Grid.Row="1" Grid.Column="0" Height="150" VerticalAlignment="Top" 
                      ItemsSource="{Binding DisabledModules}" DisplayMemberPath="Title"
                      SelectedItem="{Binding SelectedModule}"
@@ -113,7 +113,7 @@
                 <Button Content="&lt;&lt;&lt;" Width="40" Command="{Binding DisableModuleCommand}" CommandParameter="{Binding SelectedModule}" />
             </StackPanel>
 
-            <TextBlock Grid.Row="0" Grid.Column="2" Text="Enabled Modules" FontWeight="Bold" Style="{StaticResource marginStyle}" />
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Enabled Modules" FontWeight="Bold" Style="{StaticResource MarginStyle}" />
             <ListBox Grid.Row="1" Grid.Column="2" Height="150" VerticalAlignment="Top" 
                      ItemsSource="{Binding EnabledModules}" DisplayMemberPath="Title"
                      SelectedItem="{Binding SelectedModule}"
@@ -122,10 +122,10 @@
             <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Vertical" Margin="5,0,5,5" Visibility="{Binding SelectedModule, Converter={StaticResource NullToVisibilityConverter}}"
                         Grid.RowSpan="3">
                 <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="{Binding SelectedModule.Title, StringFormat='\{0} Description:'}" FontWeight="Bold" Style="{StaticResource marginStyle}" />
+                    <TextBlock Text="{Binding SelectedModule.Title, StringFormat='\{0} Description:'}" FontWeight="Bold" Style="{StaticResource MarginStyle}" />
                 </StackPanel>
 
-                <TextBlock Style="{StaticResource marginStyle}"
+                <TextBlock Style="{StaticResource MarginStyle}"
                        Width="300" TextWrapping="Wrap"
                        Margin="5" Text="{Binding SelectedModule.Description}" />
             </StackPanel>
