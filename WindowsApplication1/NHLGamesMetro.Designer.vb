@@ -231,7 +231,7 @@ Partial Class NHLGamesMetro
         Me.tabMenu.ItemSize = New System.Drawing.Size(90, 34)
         Me.tabMenu.Location = New System.Drawing.Point(3, 60)
         Me.tabMenu.Name = "tabMenu"
-        Me.tabMenu.SelectedIndex = 1
+        Me.tabMenu.SelectedIndex = 0
         Me.tabMenu.Size = New System.Drawing.Size(994, 495)
         Me.tabMenu.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabMenu.Style = MetroFramework.MetroColorStyle.Blue
@@ -1986,6 +1986,9 @@ Partial Class NHLGamesMetro
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.BackImage = Global.NHLGames.My.Resources.Resources.bg
+        Me.BackImagePadding = New System.Windows.Forms.Padding(12, 12, 0, 0)
+        Me.BackMaxSize = 150
         Me.ClientSize = New System.Drawing.Size(1000, 600)
         Me.Controls.Add(Me.spnStreaming)
         Me.Controls.Add(Me.pnlBottom)
@@ -2003,10 +2006,7 @@ Partial Class NHLGamesMetro
         Me.MinimumSize = New System.Drawing.Size(800, 500)
         Me.Name = "NHLGamesMetro"
         Me.Padding = New System.Windows.Forms.Padding(3, 60, 3, 3)
-        Me.Resizable = false
-        Me.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
-        Me.Text = "NHL Games"
         Me.tabMenu.ResumeLayout(false)
         Me.tabGames.ResumeLayout(false)
         Me.tabGames.PerformLayout

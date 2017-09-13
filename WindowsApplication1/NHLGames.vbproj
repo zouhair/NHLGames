@@ -63,7 +63,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
-    <ApplicationIcon>Logos\nhl_icon.ico</ApplicationIcon>
+    <ApplicationIcon>Icons\logo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>E3288C8884A4E9425CB92E7E90BECB75F15FA222</ManifestCertificateThumbprint>
@@ -278,7 +278,6 @@
     <EmbeddedResource Include="Logos\Sharks.gif" />
     <EmbeddedResource Include="Logos\Stars.gif" />
     <EmbeddedResource Include="Logos\Wild.gif" />
-    <EmbeddedResource Include="Logos\nhl-icon.png" />
     <None Include="Icons\bdown.png" />
     <None Include="Icons\bup.png" />
     <None Include="Icons\wdate.png" />
@@ -334,9 +333,11 @@
     <None Include="Icons\normal.gif" />
     <None Include="Icons\reddit.gif" />
     <None Include="Icons\download.gif" />
-    <Content Include="Logos\nhl_icon.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="Icons\bg.png" />
+    <None Include="Icons\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\logo2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

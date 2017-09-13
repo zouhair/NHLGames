@@ -218,7 +218,7 @@ Namespace Utilities
             NHLGamesMetro.GamesDownloadedTime = Now
 
             'remove wip tab modules
-            'Form.tabMenu.TabPages.RemoveAt(4)
+            Form.tabMenu.TabPages.RemoveAt(4)
 
         End Sub
 
