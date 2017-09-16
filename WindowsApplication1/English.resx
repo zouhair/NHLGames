@@ -337,10 +337,6 @@
     <value>Version {0} is available! Changes: {1}{2}{3}</value>
     <comment>Version</comment>
   </data>
-  <data name="msgCheckingGames" xml:space="preserve">
-    <value>Checking: Available games</value>
-    <comment>Console</comment>
-  </data>
   <data name="msgCheckingVersion" xml:space="preserve">
     <value>Checking: Application version</value>
     <comment>Console</comment>

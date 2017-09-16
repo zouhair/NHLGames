@@ -794,15 +794,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Checking: Available games.
-        '''</summary>
-        Friend Shared ReadOnly Property msgCheckingGames() As String
-            Get
-                Return ResourceManager.GetString("msgCheckingGames", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Checking: Application version.
         '''</summary>
         Friend Shared ReadOnly Property msgCheckingVersion() As String
