@@ -186,10 +186,10 @@ Namespace Objects
             Next 
         End Sub
 
-        Public Sub New(game As JObject, availableGameIds As HashSet(Of String), maxprogress As Integer)
+        Public Sub New(game As JObject, maxprogress As Integer)
             Me.New()
             _gameObj = game
-            Dim messageError As String = LoadGameData(game, availableGameIds, maxprogress)
+            Dim messageError As String = LoadGameData(game, maxprogress)
             GameManager.MessageError = messageError
         End Sub
 
@@ -221,7 +221,7 @@ Namespace Objects
 
         End Sub
 
-        Private Function LoadGameData(game As JObject, availableGameIds As HashSet(Of String), maxprogressize As Integer)
+        Private Function LoadGameData(game As JObject, maxprogressize As Integer)
             Dim messageError As String = Nothing
             Dim dateTimeStr As String = game.Property("gameDate").Value.ToString() '"2016-03-20T21:00:00Z"
             Dim dateTimeVal As DateTime
@@ -301,26 +301,26 @@ Namespace Objects
                             For Each innerStream As JObject In item.Children(Of JObject)
                                 Dim strType As String = innerStream.Property("mediaFeedType")
                                 If strType = "AWAY" Then
-                                    _streams.Item(StreamType.Away) = New GameStream(Me,innerStream,availableGameIds,StreamType.Away)
+                                    _streams.Item(StreamType.Away) = New GameStream(Me,innerStream,StreamType.Away)
                                 ElseIf strType = "HOME" Then
-                                    _streams.Item(StreamType.Home) = New GameStream(Me,innerStream,availableGameIds,StreamType.Home)
+                                    _streams.Item(StreamType.Home) = New GameStream(Me,innerStream,StreamType.Home)
                                 ElseIf strType = "NATIONAL" Then
-                                    _streams.Item(StreamType.National) = New GameStream(Me,innerStream,availableGameIds,StreamType.National)
+                                    _streams.Item(StreamType.National) = New GameStream(Me,innerStream,StreamType.National)
                                 ElseIf strType = "FRENCH" Then
-                                    _streams.Item(StreamType.French) = New GameStream(Me,innerStream,availableGameIds,StreamType.French)
+                                    _streams.Item(StreamType.French) = New GameStream(Me,innerStream,StreamType.French)
                                 ElseIf strType = "COMPOSITE" Then
                                     If innerStream.Property("feedName").Value.ToString().Equals("Multi-Cam 1") Then
-                                        _streams.Item(StreamType.MultiCam1) = New GameStream(Me,innerStream,availableGameIds,StreamType.MultiCam1)
+                                        _streams.Item(StreamType.MultiCam1) = New GameStream(Me,innerStream,StreamType.MultiCam1)
                                     ElseIf innerStream.Property("feedName").Value.ToString().Equals("Multi-Cam 2") Then
-                                        _streams.Item(StreamType.MultiCam2) = New GameStream(Me,innerStream,availableGameIds,StreamType.MultiCam2)
+                                        _streams.Item(StreamType.MultiCam2) = New GameStream(Me,innerStream,StreamType.MultiCam2)
                                     End If
                                 ElseIf strType = "ISO" Then
                                     If innerStream.Property("feedName").Value.ToString().Equals("Endzone Cam 1") Then
-                                        _streams.Item(StreamType.EndzoneCam1) = New GameStream(Me,innerStream,availableGameIds,StreamType.EndzoneCam1)
+                                        _streams.Item(StreamType.EndzoneCam1) = New GameStream(Me,innerStream,StreamType.EndzoneCam1)
                                     ElseIf innerStream.Property("feedName").Value.ToString().Equals("Endzone Cam 2") Then
-                                        _streams.Item(StreamType.EndzoneCam2) = New GameStream(Me,innerStream,availableGameIds,StreamType.EndzoneCam2)
+                                        _streams.Item(StreamType.EndzoneCam2) = New GameStream(Me,innerStream,StreamType.EndzoneCam2)
                                     ElseIf innerStream.Property("feedName").Value.ToString().Equals("Ref Cam") Then
-                                        _streams.Item(StreamType.RefCam) = New GameStream(Me,innerStream,availableGameIds,StreamType.RefCam)
+                                        _streams.Item(StreamType.RefCam) = New GameStream(Me,innerStream,StreamType.RefCam)
                                     End If
                                 End If
                             Next

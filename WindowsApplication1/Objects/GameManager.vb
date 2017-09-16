@@ -21,7 +21,7 @@ Namespace Objects
             GamesListDate = DateTime.MinValue
         End Sub
 
-        Public Shared Sub RefreshGames(dateTime As DateTime, jsonObj As JToken, availableGames As HashSet(Of String))
+        Public Shared Sub RefreshGames(dateTime As DateTime, jsonObj As JToken)
 
             TempList = New List(Of Game)
             GamesListDate = dateTime
@@ -30,7 +30,7 @@ Namespace Objects
                 For Each o As JToken In jsonObj.Children(Of JToken)
                     If o.Path = "dates" Then
                         For Each game As JObject In o.Children.Item(0)("games").Children(Of JObject)
-                            tempList.Add(New Game(game, availableGames, progress))        
+                            tempList.Add(New Game(game, progress))        
                         Next
                         If MessageError <> Nothing Then
                             Console.WriteLine(English.errorGeneral, MessageError)

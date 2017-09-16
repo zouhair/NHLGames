@@ -231,7 +231,7 @@ Partial Class NHLGamesMetro
         Me.tabMenu.ItemSize = New System.Drawing.Size(90, 34)
         Me.tabMenu.Location = New System.Drawing.Point(3, 60)
         Me.tabMenu.Name = "tabMenu"
-        Me.tabMenu.SelectedIndex = 0
+        Me.tabMenu.SelectedIndex = 4
         Me.tabMenu.Size = New System.Drawing.Size(994, 495)
         Me.tabMenu.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabMenu.Style = MetroFramework.MetroColorStyle.Blue
@@ -1076,7 +1076,7 @@ Partial Class NHLGamesMetro
         Me.btnCleanHosts.Name = "btnCleanHosts"
         Me.btnCleanHosts.Size = New System.Drawing.Size(120, 24)
         Me.btnCleanHosts.TabIndex = 640
-        Me.btnCleanHosts.Text = "3) Clean"
+        Me.btnCleanHosts.Text = "4) Clean"
         Me.SettingsToolTip.SetToolTip(Me.btnCleanHosts, "Remove our server from your hosts file")
         Me.btnCleanHosts.UseSelectable = true
         '

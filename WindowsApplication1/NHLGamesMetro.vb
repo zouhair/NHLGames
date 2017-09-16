@@ -28,7 +28,6 @@ Public Class NHLGamesMetro
     Private _resizeDirection As Integer = -1
     Private Const ResizeBorderWidth As Integer = 3
     Public Shared RmText As ResourceManager = English.ResourceManager
-    Public Shared AvailableGames As HashSet(Of String)
     Public LstGameControls As List(Of GameControl) = New List(Of GameControl)
     Public Shared LstThreads As List(Of Thread) = New List(Of Thread)()
     Public Shared FormLoaded As Boolean = False

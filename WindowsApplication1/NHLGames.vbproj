@@ -321,7 +321,6 @@
     <None Include="Icons\endz2.gif" />
     <EmbeddedResource Include="broadcasters\wgn.gif" />
     <None Include="Icons\close.gif" />
-    <None Include="Icons\git.gif" />
     <None Include="Icons\helpgit.gif" />
     <None Include="Icons\live.gif" />
     <None Include="Icons\nhltv.gif" />
@@ -331,13 +330,9 @@
     <None Include="Icons\maximize.gif" />
     <None Include="Icons\minimize.gif" />
     <None Include="Icons\normal.gif" />
-    <None Include="Icons\reddit.gif" />
     <None Include="Icons\download.gif" />
     <None Include="Icons\bg.png" />
     <None Include="Icons\logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Icons\logo2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -60,8 +60,7 @@ Namespace Utilities
 
                 Dim jsonSchedule As JObject = Downloader.DownloadJsonSchedule(dateTime, refreshing)
                 If jsonSchedule.HasValues Then
-                    NHLGamesMetro.AvailableGames = Downloader.DownloadAvailableGames()
-                    GameManager.RefreshGames(dateTime, jsonSchedule, NHLGamesMetro.AvailableGames)
+                    GameManager.RefreshGames(dateTime, jsonSchedule)
                     Common.WaitForGameThreads()
                     NHLGamesMetro.ProgressValue = NHLGamesMetro.ProgressMaxValue - 1
                     Threading.Thread.Sleep(100)
