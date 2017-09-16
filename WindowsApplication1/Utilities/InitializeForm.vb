@@ -194,7 +194,7 @@ Namespace Utilities
                 If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgHostnameSet"), 
                                             NHLGamesMetro.RmText.GetString("msgAddHost"), 
                                             MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                    HostsFile.AddEntry(NHLGamesMetro.ServerIp,  NHLGamesMetro.DomainName, True)
+                    HostsFile.AddEntry(NHLGamesMetro.ServerIp,  NHLGamesMetro.DomainName)
                 Else
                     Form.tabMenu.SelectedIndex = 1
                     NHLGamesMetro.DiySteps()

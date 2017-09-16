@@ -216,7 +216,7 @@ Public Class NHLGamesMetro
         If HostsFile.TestEntry(DomainName, ServerIp) Then
             InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsSuccess"), RmText.GetString("msgSuccess"), MessageBoxButtons.OK)
         Else
-            InvokeElement.MsgBoxRed(RmText.GetString("msgHostsFailure"), RmText.GetString("msgFailure"), MessageBoxButtons.OK)
+            InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsFailure"), RmText.GetString("msgFailure"), MessageBoxButtons.OK)
         End If
     End Sub
 
@@ -319,7 +319,7 @@ Public Class NHLGamesMetro
 
 
     Private Sub btnClean_Click(sender As Object, e As EventArgs) Handles btnCleanHosts.Click 
-        HostsFile.CleanHosts(DomainName, True)
+        HostsFile.CleanHosts(DomainName)
     End Sub
 
     Private Sub lnkVLCDownload_Click(sender As Object, e As EventArgs) Handles lnkGetVlc.Click 
@@ -333,7 +333,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnAddHosts_Click(sender As Object, e As EventArgs) Handles  btnAddHosts.Click 
-        HostsFile.AddEntry(ServerIp, DomainName, True)
+        HostsFile.AddEntry(ServerIp, DomainName)
     End Sub
 
     Private Sub btnDate_Click(sender As Object, e As EventArgs) Handles btnDate.Click

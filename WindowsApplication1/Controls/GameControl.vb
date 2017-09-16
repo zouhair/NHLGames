@@ -142,7 +142,7 @@ Namespace Controls
             End If
 
             If Not game.AreAnyStreamsAvailable Then
-                If game.Date.ToLocalTime >= Date.Today And game.GameState < 5 Then
+                If game.Date.ToLocalTime >= Date.Today And game.GameState < GameStateEnum.InProgress Then
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblStreamAvailableDuringPregame")
                 Else
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblNoStreamAvailable")
