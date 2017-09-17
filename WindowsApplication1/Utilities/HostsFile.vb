@@ -39,26 +39,9 @@ Namespace Utilities
             Return newContents
         End Function
 
-        Private Shared Function HasAccess() As Boolean
-            
-            Try
-                Using inputstreamreader As New StreamReader(HostsFilePath)
-                    inputstreamreader.Close()
-                End Using
-                Using inputStream As FileStream = File.Open(HostsFilePath, FileMode.Open, IO.FileAccess.ReadWrite, FileShare.None)
-                    inputStream.Close()
-                    Return True
-                End Using
-            Catch ex As Exception
-                Console.WriteLine(String.Format(English.errorGeneral, ex.Message))
-                Return False
-            End Try
-
-        End Function
-
         Public Shared Sub CleanHosts(host As String)
 
-            If HasAccess() Then
+            If FileAccess.HasAccess(HostsFilePath, false, true) Then
                 Dim fileIsReadonly As Boolean = FileAccess.IsFileReadonly(HostsFilePath)
 
                 If fileIsReadonly Then
@@ -90,9 +73,10 @@ Namespace Utilities
         End Sub
 
         Private Shared Sub MessageOpenHostsFile()
-            If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgViewHostsText"),
-                                        NHLGamesMetro.RmText.GetString("msgViewHosts"),
-                                        MessageBoxButtons.YesNo) = DialogResult.Yes AndAlso HasAccess() Then
+            If InvokeElement.MsgBoxBlue(
+                NHLGamesMetro.RmText.GetString("msgViewHostsText"),
+                NHLGamesMetro.RmText.GetString("msgViewHosts"),
+                MessageBoxButtons.YesNo) = DialogResult.Yes AndAlso FileAccess.HasAccess(HostsFilePath, false, true) Then
                 Process.Start("NOTEPAD", HostsFilePath)
             End If
         End Sub
@@ -134,11 +118,12 @@ Namespace Utilities
 
         Public Shared Function EnsureAdmin() As Boolean
 
-            If HasAccess() Then
+            If FileAccess.HasAccess(HostsFilePath, false, true) Then
                 If IsAdministrator() Then
-                    If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgRunAsAdminText"), 
-                                                NHLGamesMetro.RmText.GetString("msgRunAsAdmin"),
-                                                MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                    If InvokeElement.MsgBoxBlue(
+                        NHLGamesMetro.RmText.GetString("msgRunAsAdminText"), 
+                        NHLGamesMetro.RmText.GetString("msgRunAsAdmin"),
+                        MessageBoxButtons.YesNo) = DialogResult.Yes Then
 
                         ' Restart program And run as admin
                         Dim exeName = Process.GetCurrentProcess().MainModule.FileName

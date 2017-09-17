@@ -16,19 +16,20 @@ Namespace Utilities
 
             Dim pending As New Stack(Of String)()
             pending.Push(root)
+
             While pending.Count <> 0
                 Dim path = pending.Pop()
-                Dim [next] As String() = Nothing
+                Dim nextDir As String() = Nothing
                 Try
-                    [next] = Directory.GetFiles(path, searchPattern)
+                    nextDir = Directory.GetFiles(path, searchPattern)
                 Catch
                 End Try
-                If [next] IsNot Nothing AndAlso [next].Length <> 0 Then
-                    result.AddRange([next])
+                If nextDir IsNot Nothing AndAlso nextDir.Length <> 0 Then
+                    result.AddRange(nextDir)
                 End If
                 Try
-                    [next] = Directory.GetDirectories(path)
-                    For Each subdir As String In [next]
+                    nextDir = Directory.GetDirectories(path)
+                    For Each subdir As String In nextDir
                         pending.Push(subdir)
                     Next
                 Catch
@@ -69,19 +70,23 @@ Namespace Utilities
             Return attributes And Not attributesToRemove
         End Function
 
-
-        Public Shared Function HasAccess(ByVal ltFullPath As String)
+        Public Shared Function HasAccess(filePath As String, Optional createIt As Boolean = true, Optional reportException As Boolean = false)
             Try
-                Dim filePath As String = Path.Combine(ltFullPath, "test.txt")
-                File.WriteAllText(filePath, English.msgTestTxtContent)
+                If createIt Then File.WriteAllText(filePath, English.msgTestTxtContent)
+
                 Using inputstreamreader As New StreamReader(filePath)
                     inputstreamreader.Close()
                 End Using
                 Using inputStream As FileStream = File.Open(filePath, FileMode.Open, IO.FileAccess.ReadWrite, FileShare.None)
                     inputStream.Close()
-                    Return True
                 End Using
+
+                If createIt Then File.Delete(filePath)
+                Return True
             Catch ex As Exception
+                If reportException Then 
+                    Console.WriteLine(String.Format(English.errorGeneral, ex.Message))
+                End If
                 Return False
             End Try
         End Function

@@ -362,11 +362,7 @@
     <comment>Console</comment>
   </data>
   <data name="msgDownloadingSchedule" xml:space="preserve">
-    <value>Status: Downloading todays current schedule from {0}</value>
-    <comment>Console</comment>
-  </data>
-  <data name="msgDownloadPath" xml:space="preserve">
-    <value>Download path: {0}</value>
+    <value>Status: Fetching {0} schedule from NHL.tv</value>
     <comment>Console</comment>
   </data>
   <data name="msgErrorGeneralText" xml:space="preserve">
@@ -623,6 +619,10 @@
   </data>
   <data name="errorUnableToDecodeJson" xml:space="preserve">
     <value>Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this.</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgSavingJsonFile" xml:space="preserve">
+    <value>Status: Saving schedule: {0}\\{1}</value>
     <comment>Console</comment>
   </data>
 </root>
