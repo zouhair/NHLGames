@@ -308,6 +308,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this..
+        '''</summary>
+        Friend Shared ReadOnly Property errorUnableToDecodeJson() As String
+            Get
+                Return ResourceManager.GetString("errorUnableToDecodeJson", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à unknown (server is not available).
         '''</summary>
         Friend Shared ReadOnly Property errorUnknownServerDown() As String
@@ -794,15 +803,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Checking: Available games.
-        '''</summary>
-        Friend Shared ReadOnly Property msgCheckingGames() As String
-            Get
-                Return ResourceManager.GetString("msgCheckingGames", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Checking: Application version.
         '''</summary>
         Friend Shared ReadOnly Property msgCheckingVersion() As String
@@ -875,20 +875,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Status: Downloading todays current schedule from {0}.
+        '''  Recherche une chaîne localisée semblable à Status: Fetching {0} schedule from NHL.tv.
         '''</summary>
         Friend Shared ReadOnly Property msgDownloadingSchedule() As String
             Get
                 Return ResourceManager.GetString("msgDownloadingSchedule", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Download path: {0}.
-        '''</summary>
-        Friend Shared ReadOnly Property msgDownloadPath() As String
-            Get
-                Return ResourceManager.GetString("msgDownloadPath", resourceCulture)
             End Get
         End Property
         
@@ -1042,6 +1033,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgRunAsAdminText() As String
             Get
                 Return ResourceManager.GetString("msgRunAsAdminText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Status: Saving schedule: {0}\\{1}.
+        '''</summary>
+        Friend Shared ReadOnly Property msgSavingJsonFile() As String
+            Get
+                Return ResourceManager.GetString("msgSavingJsonFile", resourceCulture)
             End Get
         End Property
         

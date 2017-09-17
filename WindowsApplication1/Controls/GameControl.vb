@@ -18,7 +18,7 @@ Namespace Controls
             If game.GameIsLive Then
                 lblHomeScore.Visible = showLiveScores
                 lblAwayScore.Visible = showLiveScores
-                If ((Not showLiveScores And game.Date.ToLocalTime() = Date.Today) OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
+                If ((Not showLiveScores And game.GameDate.ToLocalTime() = Date.Today) OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
                     lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
                 End If
             Else
@@ -59,13 +59,40 @@ Namespace Controls
         End Sub
 
         Private Sub UpdateGameStatusProperties(game As Game)
+            lblPeriod.Text = ""
+            lblNotInSeason.Text = ""
+
+            _gameTitle(game)
+
+            If game.GameIsLive Then
+                lblTime.Text = game.GameTimeLeft.ToString().ToUpper()
+                lblPeriod.Text = game.GamePeriod.ToString().ToUpper()
+            ElseIf game.GameIsFinal Then
+                lblTime.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
+            ElseIf game.GameIsPreGame Then
+                lblTime.Text = game.GameDate.ToLocalTime().ToString("h:mm tt")
+                lblPeriod.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
+            Else
+                lblTime.Text = game.GameDate.ToLocalTime().ToString("h:mm tt")
+            End If
+
             lblHomeScore.Text = game.HomeScore
             lblHomeTeam.Text = game.HomeAbbrev
 
             lblAwayScore.Text = game.AwayScore
             lblAwayTeam.Text = game.AwayAbbrev
 
-            If game.GameIsScheduled And game.Date.ToLocalTime() <= Date.Today.AddDays(1) Then
+            lnkAway.Visible = game.AwayStream.IsAvailable
+            lnkHome.Visible = game.HomeStream.IsAvailable
+            lnkFrench.Visible = game.FrenchStream.IsAvailable
+            lnkNational.Visible = game.NationalStream.IsAvailable
+            lnkThree.Visible = game.MultiCam1Stream.IsAvailable
+            lnkSix.Visible = game.MultiCam2Stream.IsAvailable
+            lnkRef.Visible = game.RefCamStream.IsAvailable
+            lnkEnd1.Visible = game.EndzoneCam1Stream.IsAvailable
+            lnkEnd2.Visible = game.EndzoneCam2Stream.IsAvailable
+
+            If game.GameIsScheduled And game.GameDate.ToLocalTime() <= Date.Today.AddDays(1) Then
                 BorderPanel1.BorderColour = Color.FromArgb(255, 0, 175, 220)
             ElseIf game.GameIsPreGame Then
                 BorderPanel1.BorderColour = Color.Lime
@@ -110,6 +137,8 @@ Namespace Controls
         End Sub
 
         Private Sub SetInitialProperties(game As Game)
+            Dim tip As String
+
             picAway.SizeMode = PictureBoxSizeMode.Zoom
             If String.IsNullOrEmpty(game.HomeTeam) = False Then
                 Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.AwayTeam).Replace(" ", "").Replace(".", ""))
@@ -125,34 +154,15 @@ Namespace Controls
                 ToolTip.SetToolTip(picHome, String.Format(NHLGamesMetro.RmText.GetString("lblHomeTeam"), game.Home, game.HomeTeam))
             End If
 
-            lblPeriod.Text = ""
-            lblNotInSeason.Text = ""
-            _gameTitle(game)
-
-            If game.GameIsLive Then
-                lblTime.Text = game.GameTimeLeft.ToString().ToUpper()
-                lblPeriod.Text = game.GamePeriod.ToString().ToUpper()
-            ElseIf game.GameIsFinal Then
-                lblTime.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
-            ElseIf game.GameIsPreGame Then
-                lblTime.Text = game.Date.ToLocalTime().ToString("h:mm tt")
-                lblPeriod.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
-            Else
-                lblTime.Text = game.Date.ToLocalTime().ToString("h:mm tt")
-            End If
-
             If Not game.AreAnyStreamsAvailable Then
-                If game.Date.ToLocalTime >= Date.Today And game.GameState < 5 Then
+                If game.GameDate.ToLocalTime >= Date.Today And game.GameState < GameStateEnum.InProgress Then
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblStreamAvailableDuringPregame")
                 Else
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblNoStreamAvailable")
                 End If
                 FlowLayoutPanel1.Visible = False
             End If
-
-            Dim tip As String
-
-            lnkAway.Visible = game.AwayStream.IsAvailable
+            
             If game.AwayStream.IsAvailable Then
                 tip = String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"), game.AwayAbbrev)
                 If game.AwayStream.Network <> String.Empty Then
@@ -162,8 +172,7 @@ Namespace Controls
                 End If
                 ToolTip.SetToolTip(lnkAway, tip)
             End If
-
-            lnkHome.Visible = game.HomeStream.IsAvailable
+            
             If game.HomeStream.IsAvailable Then
                 tip = String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"), game.HomeAbbrev)
                 If game.HomeStream.Network <> String.Empty Then
@@ -173,8 +182,7 @@ Namespace Controls
                 End If
                 ToolTip.SetToolTip(lnkHome, tip)
             End If
-
-            lnkFrench.Visible = game.FrenchStream.IsAvailable
+            
             If game.FrenchStream.IsAvailable Then
                 tip = NHLGamesMetro.RmText.GetString("lblFrenchNetwork")
                 If game.FrenchStream.Network <> String.Empty Then
@@ -184,8 +192,7 @@ Namespace Controls
                 End If
                 ToolTip.SetToolTip(lnkFrench, tip)
             End If
-
-            lnkNational.Visible = game.NationalStream.IsAvailable
+            
             If game.NationalStream.IsAvailable Then
                 tip = NHLGamesMetro.RmText.GetString("lblNationalNetwork")
                 If game.NationalStream.Network <> String.Empty Then
@@ -201,12 +208,6 @@ Namespace Controls
             ToolTip.SetToolTip(lnkSix, String.Format(NHLGamesMetro.RmText.GetString("lblCamViews"), 6))
             ToolTip.SetToolTip(lnkEnd1, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.AwayAbbrev))
             ToolTip.SetToolTip(lnkEnd2, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.HomeAbbrev))
-
-            lnkThree.Visible = game.MultiCam1Stream.IsAvailable
-            lnkSix.Visible = game.MultiCam2Stream.IsAvailable
-            lnkRef.Visible = game.RefCamStream.IsAvailable
-            lnkEnd1.Visible = game.EndzoneCam1Stream.IsAvailable
-            lnkEnd2.Visible = game.EndzoneCam2Stream.IsAvailable
             
         End Sub
 
@@ -216,8 +217,12 @@ Namespace Controls
         End Function
 
         Private Sub GameUpdatedHandler(game As Game)
-            _game = game
-            UpdateGameStatusProperties(game)
+            If InvokeRequired Then
+                BeginInvoke(New Action(Of Game)(AddressOf GameUpdatedHandler), game)
+            Else
+                _game = game
+                UpdateGameStatusProperties(game)
+            End If
         End Sub
 
         Private Function WatchArgs() As GameWatchArguments
@@ -228,7 +233,7 @@ Namespace Controls
 
         Private Function IsGameVod(stream As GameStream, cdn As String) As Boolean
             Dim isVod As Boolean = False
-            If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
+            If DateHelper.GetPacificTime(_game.GameDate).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
                 If Not stream.Vodurl Is String.Empty Then
                     stream.CheckVod(cdn)
                     isVod = stream.IsVod

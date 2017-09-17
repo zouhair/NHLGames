@@ -9,7 +9,6 @@ Imports NHLGames.My.Resources
 Namespace Utilities
 
     Public Class Downloader
-        Private Shared ReadOnly GamesTxtUrl As String = String.Format("http://{0}/static/ids.txt", NHLGamesMetro.HostName)
 
         Private Const AppUrl As String = "https://showtimes.ninja/"
         Private Const ApiUrl As String = "http://statsapi.web.nhl.com/api/v1/schedule"
@@ -22,19 +21,20 @@ Namespace Utilities
         Private Shared _localFileDirectory As String = ""
 
         Private Shared Function GetLocalFileDirectory() As String
-            If String.IsNullOrEmpty(_localFileDirectory) Then
-
-                Dim exeStartupPath As String = Application.StartupPath
-                Dim localAppDataPath As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                Dim tempPath As String = Path.GetTempPath()
+            If true Then
                 Const dir As String = "NHLGames"
+                Const file As String = "test.txt"
 
-                If FileAccess.HasAccess(localAppDataPath) Then
-                    _localFileDirectory = localAppDataPath & Backslash
+                Dim exeStartupPath As String = Application.StartupPath & Backslash 
+                Dim localAppDataPath As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & Backslash 
+                Dim tempPath As String = Path.GetTempPath()
+
+                If FileAccess.HasAccess(localAppDataPath & file) Then
+                    _localFileDirectory = localAppDataPath
                 ElseIf FileAccess.HasAccess(tempPath) Then
                     _localFileDirectory = tempPath
-                ElseIf FileAccess.HasAccess(exeStartupPath) Then
-                    _localFileDirectory = exeStartupPath & Backslash
+                Else
+                    _localFileDirectory = exeStartupPath
                 End If
 
                 If Not Directory.Exists(_localFileDirectory & dir & Backslash) Then
@@ -42,8 +42,6 @@ Namespace Utilities
                 End If
 
                 _localFileDirectory = _localFileDirectory & dir & Backslash
-
-                Console.WriteLine(English.msgDownloadPath, _localFileDirectory)
             End If
 
             Return _localFileDirectory
@@ -53,7 +51,7 @@ Namespace Utilities
         Private Shared Function DownloadContents(server As String, url As String) As String
             Dim client As New WebClient
             Dim content As String = String.Empty
-            Console.WriteLine(English.msgDownloading, url)
+            If ApiUrl <> server Then Console.WriteLine(English.msgDownloading, url)
             client.Encoding = Encoding.UTF8
             Try
                 content = client.DownloadString(url).Trim().ToString()
@@ -65,13 +63,14 @@ Namespace Utilities
             Return content
         End Function
 
-        Private Shared Function DownloadFile(server As String, url As String, fileName As String) As Boolean
+        Private Shared Function DownloadJsonFile(server As String, url As String, fileName As String) As Boolean
             Dim client As New WebClient
             Dim filePath As String = Path.Combine(GetLocalFileDirectory(), fileName)
             Console.WriteLine(English.msgDownloadingFile, url, filePath)
             client.Encoding = Encoding.UTF8
             Try
                 client.DownloadFile(url, filePath)
+                Console.WriteLine(English.msgSavingJsonFile, filePath, fileName)
             Catch ex As Exception
                 Console.WriteLine(English.msgServerNoRespondTryingAgain, server)
                 Return False
@@ -112,11 +111,6 @@ Namespace Utilities
             Return appChangelog
         End Function
 
-        Public Shared Function DownloadAvailableGames() As HashSet(Of String)
-            Console.WriteLine(English.msgCheckingGames)
-            Return New HashSet(Of String)((DownloadContents(NHLGamesMetro.HostName, GamesTxtUrl).Split(New Char() {vbLf})))
-        End Function
-
         Public Shared Function DownloadJsonSchedule(startDate As DateTime, Optional refreshing As Boolean = False) As JObject
 
             Console.WriteLine(English.msgFetchingSchedule, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
@@ -127,13 +121,13 @@ Namespace Utilities
             Dim data As String
 
             If startDate.Date.ToShortDateString >= DateHelper.GetPacificTime.ToShortDateString Then
-                Console.WriteLine(English.msgDownloadingSchedule, ApiUrl & url)
+                Console.WriteLine(English.msgFetchingSchedule, dateTimeString)
                 data = DownloadContents(ApiUrl, url)
             Else
                 If LookOldJsonFiles(fileName) And Not refreshing Then
                     data = ReadFileContents(fileName)
                 Else
-                    If DownloadFile(ApiUrl, url, fileName) Then
+                    If DownloadJsonFile(ApiUrl, url, fileName) Then
                         data = ReadFileContents(fileName)
                     Else 
                         data = DownloadContents(ApiUrl, url)

@@ -98,7 +98,7 @@ Namespace Objects
 
             If UseOutputArgs Then
                 Dim outputPath As String = PlayerOutputPath.
-                        Replace("(DATE)", DateHelper.GetPacificTime(Stream.Game.Date).ToString("yyyy-MM-dd")).
+                        Replace("(DATE)", DateHelper.GetPacificTime(Stream.Game.GameDate).ToString("yyyy-MM-dd")).
                         Replace("(HOME)", Stream.Game.HomeAbbrev).
                         Replace("(AWAY)", Stream.Game.AwayAbbrev).
                         Replace("(TYPE)", Stream.Type.ToString()).

@@ -337,10 +337,6 @@
     <value>Version {0} is available! Changes: {1}{2}{3}</value>
     <comment>Version</comment>
   </data>
-  <data name="msgCheckingGames" xml:space="preserve">
-    <value>Checking: Available games</value>
-    <comment>Console</comment>
-  </data>
   <data name="msgCheckingVersion" xml:space="preserve">
     <value>Checking: Application version</value>
     <comment>Console</comment>
@@ -366,11 +362,7 @@
     <comment>Console</comment>
   </data>
   <data name="msgDownloadingSchedule" xml:space="preserve">
-    <value>Status: Downloading todays current schedule from {0}</value>
-    <comment>Console</comment>
-  </data>
-  <data name="msgDownloadPath" xml:space="preserve">
-    <value>Download path: {0}</value>
+    <value>Status: Fetching {0} schedule from NHL.tv</value>
     <comment>Console</comment>
   </data>
   <data name="msgErrorGeneralText" xml:space="preserve">
@@ -495,7 +487,7 @@
   </data>
   <data name="textCopyConsole" xml:space="preserve">
     <value>NHLGames Official Bug Report {1}{0}{0}OS : {2} {3}{0}{0}UI loaded : {4}{0}{0}Domain resolved : {5}{0}{0}Server IP found : {6}{0}{0}Selected hostname : {7}{0}{0}Selected player : {8}{0}{0}Streamlink path : {9} [=UI:{10}]{0}{0}VLC path : {11} [=UI:{12}]{0}{0}MPC path : {13} [=UI:{14}]{0}{0}MPV path : {15} [=UI:{16}]{0}{0}Console log : {0}{0}{17}</value>
-    <comment>Clipboard</comment>
+    <comment>Console</comment>
   </data>
   <data name="formatGbHour" xml:space="preserve">
     <value>GB/Hour</value>
@@ -623,6 +615,14 @@
   </data>
   <data name="errorFetchingGames" xml:space="preserve">
     <value>Error: Failed to fetch games schedule.</value>
+    <comment>Console</comment>
+  </data>
+  <data name="errorUnableToDecodeJson" xml:space="preserve">
+    <value>Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this.</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgSavingJsonFile" xml:space="preserve">
+    <value>Status: Saving schedule: {0}\\{1}</value>
     <comment>Console</comment>
   </data>
 </root>

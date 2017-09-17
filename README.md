@@ -5,7 +5,7 @@ Tool to watch NHL games in High Definition
 - Click on a stream link inside the game panel.
 - Enjoy the game.
 
-![image](https://cloud.githubusercontent.com/assets/23088305/25733593/aa1c8648-3128-11e7-8407-2a4e51a9fddc.png)
+![image](https://user-images.githubusercontent.com/23088305/30517831-7276e442-9b39-11e7-8faa-e8960df24e8c.png)
 
 ## Index
 * [First use](#first-use)
@@ -135,11 +135,11 @@ If the selected hostname (above) can be resolve by your network, it will get and
 
 To test your Hosts file, go to Settings and click on `Test` button. It should tells you if everything is fine.
 
-If NHLGames is not set properly, click on `View Hosts` and select Notepad to open it. If you can't open it: Go to `C:\Windows\System32\Drivers\etc` and right click on `hosts`, choose `Run as an administrator` and open it with Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, there is a button called `DIY Steps`, click on it and you will see the line, you can copy the line to your clipboard by clicking on 'Yes'. 
+If NHLGames is not set properly, try the following options:
+- Right click on NHLGames.exe and select `Run as an administrator`.
+- Click on `View Hosts` or go to `C:\Windows\System32\Drivers\etc` and right click on `hosts` file, choose open it with Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, there is a help button `?` on the 'Server Hosts Entry' line, click on it and you will see the line that you need to copy to your clipboard (click on 'Yes'). If you don't find the entry line in the Hosts file and if the `Add Entry` button does not work. You can paste the line from your clipboard (that you copied earlier) or you can type it manually. Hit `Ctrl+S` to save it, if a save dialog pops, make sure the file name is `hosts` and not hosts.txt, also the file type should be set to `All Files (*.*)`.
 
-If you dont't find the entry line in the Hosts file and if the `Add Entry` button does not work. You can paste the line from your clipboard (that you copied earlier) or you can type it manually.
-
-Note: If you need to remove NHLGames entries, just click on `Remove Entries` or open it with `View Hosts` and remove our entries.
+Note: If you need to remove NHLGames entry, just click on `Remove Entries` or open it with `View Hosts` and remove our entry.
 
 ### Streamlink
 Streamlink is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The path to streamlink.exe is inside NHLGames directory and it should not move, otherwise you will have to get the new path to it or you will get a message box that NHLGames lost the path and won't be able to play streams.
