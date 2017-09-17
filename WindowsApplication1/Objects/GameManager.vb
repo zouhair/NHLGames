@@ -21,30 +21,35 @@ Namespace Objects
             GamesListDate = DateTime.MinValue
         End Sub
 
-        Public Shared Sub RefreshGames(dateTime As DateTime, jsonObj As JToken)
+        Public Shared Sub GetGames(dateTime As DateTime, jsonObj As JToken, refreshing As Boolean)
 
-            TempList = New List(Of Game)
+            If Not refreshing Then TempList = New List(Of Game)
+
             GamesListDate = dateTime
             Try
                 Dim progress = Convert.ToInt32(((NHLGamesMetro.ProgressMaxValue - 1) - NHLGamesMetro.ProgressValue) / (Convert.ToInt32(jsonObj("totalGames").ToString())))
                 For Each o As JToken In jsonObj.Children(Of JToken)
                     If o.Path = "dates" Then
                         For Each game As JObject In o.Children.Item(0)("games").Children(Of JObject)
-                            tempList.Add(New Game(game, progress))        
+                            If refreshing Then
+                                Dim rGame = tempList.Find(Function(g) g.GameId = game.Property("gamePk").ToString())
+                                rGame.Update(game, progress)
+                            Else
+                                tempList.Add(New Game(game, progress))        
+                            End If
                         Next
                         If MessageError <> Nothing Then
                             Console.WriteLine(English.errorGeneral, MessageError)
                         End If
                     End If
                 Next
-            Catch ex As Exception
-                'do nothing (avoid clogging console with IndexOutOfRangeExceptions for dates with no games)
+            Catch
             End Try
 
-            TempList = TempList.OrderBy(Of Long)(Function(val) val.Date.Ticks).ToList()
+            TempList = TempList.OrderBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
 
             For Each game As Game In TempList
-                If (GamesDict.ContainsKey(game.GameId)) Then
+                If GamesDict.ContainsKey(game.GameId) Then
                     GamesDict(game.GameId).Update(game)
                 Else
                     GamesDict.Add(game.GameId, game)

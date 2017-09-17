@@ -112,11 +112,6 @@ Namespace Utilities
             Return appChangelog
         End Function
 
-        Public Shared Function DownloadAvailableGames() As HashSet(Of String)
-            Console.WriteLine(English.msgCheckingGames)
-            Return New HashSet(Of String)((DownloadContents(NHLGamesMetro.HostName, GamesTxtUrl).Split(New Char() {vbLf})))
-        End Function
-
         Public Shared Function DownloadJsonSchedule(startDate As DateTime, Optional refreshing As Boolean = False) As JObject
 
             Console.WriteLine(English.msgFetchingSchedule, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))

@@ -8,6 +8,12 @@
         Final = 5
     End Enum
 
+    Public Enum GameTypeEnum
+        Preseason = 1
+        Season = 2
+        Series = 3
+    End Enum
+
     Public Enum StreamType
         Away
         Home

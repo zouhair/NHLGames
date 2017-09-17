@@ -621,4 +621,8 @@
     <value>Error: Failed to fetch games schedule.</value>
     <comment>Console</comment>
   </data>
+  <data name="errorUnableToDecodeJson" xml:space="preserve">
+    <value>Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this.</value>
+    <comment>Console</comment>
+  </data>
 </root>

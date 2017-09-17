@@ -9,33 +9,28 @@ Namespace Objects
 
     Public Class GameStream
 
-        Public GameUrl As String = ""
-        Public Vodurl As String = ""
-        Public PlayBackId As String = ""
-        Public Type As StreamType
-        Public Game As Game
-        Private ReadOnly _stream As JObject = New JObject()
-        
+        Public ReadOnly Property Type As StreamType
+        Public ReadOnly Property Game As Game
+        Public ReadOnly Property IsDefined As Boolean = False
+        Public Property IsVod As Boolean = False
+        Public ReadOnly Property Network As String
+        Public ReadOnly Property PlayBackId As String
+        Public Property GameUrl As String = ""
+        Public Property Vodurl As String = ""
         Public ReadOnly Property IsAvailable As Boolean
             Get
                 return GameUrl <> ""
             End Get
         End Property
 
-        Public Property IsDefined As Boolean = False
-
-        Public Property IsVod As Boolean = False
-
-        Public Property Network As String
-
         Public Sub New()
-            
         End Sub
 
         Public Sub New(game As Game, stream As JObject, type As StreamType)
             Me.Game = game
             IsDefined = True
-            _stream = stream
+            Network = stream.Property("callLetters")
+            PlayBackId = stream.Property("mediaPlaybackId").Value.ToString()
             Me.Type = type
         End Sub
 
@@ -53,13 +48,10 @@ Namespace Objects
 
 
         Public Sub GetRightGameStream()
-            Dim client As WebClient = New WebClient()
+            Dim client = New WebClient()
             Dim reader As StreamReader
-            Dim dateString As String = Game.Date.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture).Replace("-", "/")
 
             client.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316")
-            PlayBackId = _stream.Property("mediaPlaybackId").Value.ToString()
-            Network = _stream.Property("callLetters")
 
             Dim args = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
             Dim address As String = String.Format("http://{0}/m3u8/{1}/{2}{3}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, args.Cdn)
@@ -81,10 +73,12 @@ Namespace Objects
                 Console.WriteLine(String.Format(NHLGamesMetro.RmText.GetString("errorGeneral"), ex.Message))
             Finally
                 client.Dispose()
+                SetVideoOnDemandLink()
             End Try
 
-            'fix that concerns only games that are 2 to 7 days old, older than that they become archived and newest games are live games.
-            'looking if we receive a hlslive link, since hlslive links are not working i convert it to a hlsvod link and get the exp id from it. thats it.
+        End Sub
+
+        Private Sub SetVideoOnDemandLink()
             If GameUrl.Contains("http://hlslive") Then
                 Dim spliter = GameUrl.Split("/")
                 For Each split As String In spliter
@@ -93,7 +87,6 @@ Namespace Objects
                     End If
                 Next
             End If
-
         End Sub
     End Class
 End Namespace

@@ -308,6 +308,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this..
+        '''</summary>
+        Friend Shared ReadOnly Property errorUnableToDecodeJson() As String
+            Get
+                Return ResourceManager.GetString("errorUnableToDecodeJson", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à unknown (server is not available).
         '''</summary>
         Friend Shared ReadOnly Property errorUnknownServerDown() As String
