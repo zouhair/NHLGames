@@ -99,7 +99,7 @@ Namespace Objects
 
         Public ReadOnly Property GameIsPreGame As Boolean
             Get
-                Return GameState = GameStateEnum.InProgress
+                Return GameState = GameStateEnum.Pregame
             End Get
         End Property
 

@@ -329,6 +329,7 @@ Namespace Controls
             _broadcasters.Add("KCOP", "FS")
             _broadcasters.Add("TCN", "CSN")
             _broadcasters.Add("USA", "NBC")
+            _broadcasters.Add("ATT", "ATT")
         End Sub
 
     End Class
