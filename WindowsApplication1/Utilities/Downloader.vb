@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Net
 Imports System.Text
+Imports System.Web.UI.WebControls.Expressions
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 Imports NHLGames.My.Resources
@@ -18,7 +19,7 @@ Namespace Utilities
 
         Private Const Backslash As Char = "\"
 
-        Private Shared _localFileDirectory As String = ""
+        Private Shared _localFileDirectory As String = GetLocalFileDirectory()
 
         Private Shared Function GetLocalFileDirectory() As String
             If true Then
@@ -51,7 +52,6 @@ Namespace Utilities
         Private Shared Function DownloadContents(server As String, url As String) As String
             Dim client As New WebClient
             Dim content As String = String.Empty
-            If ApiUrl <> server Then Console.WriteLine(English.msgDownloading, url)
             client.Encoding = Encoding.UTF8
             Try
                 content = client.DownloadString(url).Trim().ToString()
@@ -65,12 +65,10 @@ Namespace Utilities
 
         Private Shared Function DownloadJsonFile(server As String, url As String, fileName As String) As Boolean
             Dim client As New WebClient
-            Dim filePath As String = Path.Combine(GetLocalFileDirectory(), fileName)
-            Console.WriteLine(English.msgDownloadingFile, url, filePath)
+            Dim filePath As String = Path.Combine(_localFileDirectory, fileName)
             client.Encoding = Encoding.UTF8
             Try
                 client.DownloadFile(url, filePath)
-                Console.WriteLine(English.msgSavingJsonFile, filePath, fileName)
             Catch ex As Exception
                 Console.WriteLine(English.msgServerNoRespondTryingAgain, server)
                 Return False
@@ -80,7 +78,7 @@ Namespace Utilities
 
         Private Shared Function ReadFileContents(fileName As String) As String
             Dim returnValue As String = ""
-            Dim filePath As String = Path.Combine(GetLocalFileDirectory(), fileName)
+            Dim filePath As String = Path.Combine(_localFileDirectory, fileName)
             Try
                 Using streamReader As IO.StreamReader = New StreamReader(filePath)
                     returnValue = streamReader.ReadToEnd()
@@ -94,7 +92,6 @@ Namespace Utilities
 
         Public Shared Function DownloadApplicationVersion() As String
             Dim appVers As String
-            Console.WriteLine(English.msgCheckingVersion)
             appVers = DownloadContents(AppUrl, AppVersionUrl)
             If appVers.Contains("<html>") Then
                 appVers = String.Empty
@@ -117,17 +114,22 @@ Namespace Utilities
             Dim fileName As String = dateTimeString & ".json"
             Dim url As String = String.Format(ScheduleApiurl, dateTimeString, dateTimeString)
             Dim data As String
+            Dim filePath As String = Path.Combine(_localFileDirectory, fileName)
+            Dim gettingTerm As String = If (refreshing, English.msgRefreshing, English.msgFetching)
 
             If startDate.Date.ToShortDateString >= DateHelper.GetPacificTime.ToShortDateString Then
-                Console.WriteLine(English.msgFetchingSchedule, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
+                Console.WriteLine(English.msgGettingSchedule, gettingTerm, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
                 data = DownloadContents(ApiUrl, url)
             Else
                 If LookOldJsonFiles(fileName) And Not refreshing Then
+                    Console.WriteLine(English.msgFetchingSavedSchedule, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), filePath)
                     data = ReadFileContents(fileName)
                 Else
                     If DownloadJsonFile(ApiUrl, url, fileName) Then
+                        Console.WriteLine(English.msgDownloadingJsonFile, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), filePath)
                         data = ReadFileContents(fileName)
                     Else 
+                        Console.WriteLine(English.msgGettingSchedule, gettingTerm, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
                         data = DownloadContents(ApiUrl, url)
                     End If
                 End If
@@ -143,7 +145,7 @@ Namespace Utilities
         End Function
 
         Public Shared Function LookOldJsonFiles(filename As String) As Boolean
-            If File.Exists(GetLocalFileDirectory() & filename) Then
+            If File.Exists(_localFileDirectory & filename) Then
                 Return File.GetLastAccessTime(filename).AddDays(1) <= Now
             End If
             Return False

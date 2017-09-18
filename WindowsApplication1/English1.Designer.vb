@@ -803,29 +803,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Checking: Application version.
-        '''</summary>
-        Friend Shared ReadOnly Property msgCheckingVersion() As String
-            Get
-                Return ResourceManager.GetString("msgCheckingVersion", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Hosts: Removing existing entries from hosts file.
         '''</summary>
         Friend Shared ReadOnly Property msgCleanHostsFile() As String
             Get
                 Return ResourceManager.GetString("msgCleanHostsFile", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Status: Current version is {0}.
-        '''</summary>
-        Friend Shared ReadOnly Property msgCurrentVersion() As String
-            Get
-                Return ResourceManager.GetString("msgCurrentVersion", resourceCulture)
             End Get
         End Property
         
@@ -857,29 +839,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Downloading : {0}.
+        '''  Recherche une chaîne localisée semblable à Downloading: Game schedule for {0} to {1}.
         '''</summary>
-        Friend Shared ReadOnly Property msgDownloading() As String
+        Friend Shared ReadOnly Property msgDownloadingJsonFile() As String
             Get
-                Return ResourceManager.GetString("msgDownloading", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Downloading File: {0} to {1}.
-        '''</summary>
-        Friend Shared ReadOnly Property msgDownloadingFile() As String
-            Get
-                Return ResourceManager.GetString("msgDownloadingFile", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Status: Fetching {0} schedule from NHL.tv.
-        '''</summary>
-        Friend Shared ReadOnly Property msgDownloadingSchedule() As String
-            Get
-                Return ResourceManager.GetString("msgDownloadingSchedule", resourceCulture)
+                Return ResourceManager.GetString("msgDownloadingJsonFile", resourceCulture)
             End Get
         End Property
         
@@ -902,20 +866,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Checking: Fetching game schedule for {0}.
+        '''  Recherche une chaîne localisée semblable à Fetching.
         '''</summary>
-        Friend Shared ReadOnly Property msgFetchingSchedule() As String
+        Friend Shared ReadOnly Property msgFetching() As String
             Get
-                Return ResourceManager.GetString("msgFetchingSchedule", resourceCulture)
+                Return ResourceManager.GetString("msgFetching", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Status: File aready exists at {0}.
+        '''  Recherche une chaîne localisée semblable à Fetching: Saved game schedule for {0} ({1}).
         '''</summary>
-        Friend Shared ReadOnly Property msgFileExists() As String
+        Friend Shared ReadOnly Property msgFetchingSavedSchedule() As String
             Get
-                Return ResourceManager.GetString("msgFileExists", resourceCulture)
+                Return ResourceManager.GetString("msgFetchingSavedSchedule", resourceCulture)
             End Get
         End Property
         
@@ -925,6 +889,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgGamesFound() As String
             Get
                 Return ResourceManager.GetString("msgGamesFound", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à {0}: Game schedule for {1} from NHL.tv.
+        '''</summary>
+        Friend Shared ReadOnly Property msgGettingSchedule() As String
+            Get
+                Return ResourceManager.GetString("msgGettingSchedule", resourceCulture)
             End Get
         End Property
         
@@ -1001,6 +974,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Refreshing.
+        '''</summary>
+        Friend Shared ReadOnly Property msgRefreshing() As String
+            Get
+                Return ResourceManager.GetString("msgRefreshing", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Remove our server from your hosts file.
         '''</summary>
         Friend Shared ReadOnly Property msgRemoveHost() As String
@@ -1010,7 +992,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à The {0} file is no longer Read Only.
+        '''  Recherche une chaîne localisée semblable à Status: The {0} file is no longer Read Only.
         '''</summary>
         Friend Shared ReadOnly Property msgRemoveReadOnly() As String
             Get
@@ -1033,15 +1015,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgRunAsAdminText() As String
             Get
                 Return ResourceManager.GetString("msgRunAsAdminText", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Status: Saving schedule: {0}\\{1}.
-        '''</summary>
-        Friend Shared ReadOnly Property msgSavingJsonFile() As String
-            Get
-                Return ResourceManager.GetString("msgSavingJsonFile", resourceCulture)
             End Get
         End Property
         
