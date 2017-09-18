@@ -33,7 +33,11 @@ Namespace Objects
                         For Each game As JObject In o.Children.Item(0)("games").Children(Of JObject)
                             If refreshing Then
                                 Dim rGame = tempList.Find(Function(g) g.GameId = game.Property("gamePk").ToString())
-                                rGame.Update(game, progress)
+                                If rGame Is Nothing Then
+                                    tempList.Add(New Game(game, progress))
+                                Else 
+                                    rGame.Update(game, progress)
+                                End If
                             Else
                                 tempList.Add(New Game(game, progress))        
                             End If

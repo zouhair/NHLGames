@@ -337,16 +337,8 @@
     <value>Version {0} is available! Changes: {1}{2}{3}</value>
     <comment>Version</comment>
   </data>
-  <data name="msgCheckingVersion" xml:space="preserve">
-    <value>Checking: Application version</value>
-    <comment>Console</comment>
-  </data>
   <data name="msgCleanHostsFile" xml:space="preserve">
     <value>Hosts: Removing existing entries from hosts file</value>
-    <comment>Console</comment>
-  </data>
-  <data name="msgCurrentVersion" xml:space="preserve">
-    <value>Status: Current version is {0}</value>
     <comment>Console</comment>
   </data>
   <data name="msgDiySteps" xml:space="preserve">
@@ -357,12 +349,8 @@
     <value>This line needs to be insert in your hosts file : {0}{1} {2}{0}Click on 'Open Hosts File' to open the Hosts file and paste (Ctrl+V) that entry line at the end of your Hosts file.{0}Do you want to copy that entry line to your clipboard ?</value>
     <comment>Message</comment>
   </data>
-  <data name="msgDownloadingFile" xml:space="preserve">
-    <value>Downloading File: {0} to {1}</value>
-    <comment>Console</comment>
-  </data>
-  <data name="msgDownloadingSchedule" xml:space="preserve">
-    <value>Status: Fetching {0} schedule from NHL.tv</value>
+  <data name="msgDownloadingJsonFile" xml:space="preserve">
+    <value>Downloading: Game schedule for {0} to {1}</value>
     <comment>Console</comment>
   </data>
   <data name="msgErrorGeneralText" xml:space="preserve">
@@ -373,12 +361,12 @@
     <value>Failure</value>
     <comment>Message</comment>
   </data>
-  <data name="msgFetchingSchedule" xml:space="preserve">
-    <value>Checking: Fetching game schedule for {0}</value>
+  <data name="msgGettingSchedule" xml:space="preserve">
+    <value>{0}: Game schedule for {1} from NHL.tv</value>
     <comment>Console</comment>
   </data>
-  <data name="msgFileExists" xml:space="preserve">
-    <value>Status: File aready exists at {0}</value>
+  <data name="msgFetchingSavedSchedule" xml:space="preserve">
+    <value>Fetching: Saved game schedule for {0} ({1})</value>
     <comment>Console</comment>
   </data>
   <data name="msgGamesFound" xml:space="preserve">
@@ -414,7 +402,7 @@
     <comment>Console</comment>
   </data>
   <data name="msgRemoveReadOnly" xml:space="preserve">
-    <value>The {0} file is no longer Read Only</value>
+    <value>Status: The {0} file is no longer Read Only</value>
     <comment>Console</comment>
   </data>
   <data name="msgRunAsAdmin" xml:space="preserve">
@@ -447,7 +435,7 @@
   </data>
   <data name="msgTestTxtContent" xml:space="preserve">
     <value>Test ability to write to this directory</value>
-    <comment>Console</comment>
+    <comment>Console / Writer</comment>
   </data>
   <data name="msgThisEnable" xml:space="preserve">
     <value>{0} enable</value>
@@ -601,10 +589,6 @@
     <value>Status: Server {0} seems down</value>
     <comment>Console</comment>
   </data>
-  <data name="msgDownloading" xml:space="preserve">
-    <value>Downloading : {0}</value>
-    <comment>Console</comment>
-  </data>
   <data name="errorUnknownServerDown" xml:space="preserve">
     <value>unknown (server is not available)</value>
     <comment>Console</comment>
@@ -621,8 +605,12 @@
     <value>Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this.</value>
     <comment>Console</comment>
   </data>
-  <data name="msgSavingJsonFile" xml:space="preserve">
-    <value>Status: Saving schedule: {0}\\{1}</value>
+  <data name="msgFetching" xml:space="preserve">
+    <value>Fetching</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgRefreshing" xml:space="preserve">
+    <value>Refreshing</value>
     <comment>Console</comment>
   </data>
 </root>

@@ -99,7 +99,7 @@ Namespace Objects
 
         Public ReadOnly Property GameIsPreGame As Boolean
             Get
-                Return GameState = GameStateEnum.InProgress
+                Return GameState = GameStateEnum.Pregame
             End Get
         End Property
 
@@ -267,6 +267,7 @@ Namespace Objects
             If game("content")("media") IsNot Nothing Then
                 For Each stream As JObject In game("content")("media")("epg")
                     If stream.Property("title") = "NHLTV" Then
+                        If stream.Property("items").Value.Count = 0 Then Return
                         For Each item As JArray In stream.Property("items")
                             progress = Convert.ToInt32(maxProgressSize / item.Count)
                             For Each innerStream As JObject In item.Children(Of JObject)

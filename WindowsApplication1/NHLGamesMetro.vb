@@ -105,8 +105,10 @@ Public Class NHLGamesMetro
         InitializeForm.SetLanguage()
         InitializeForm.SetSettings()
         InitializeForm.VersionCheck()
+
         ResumeLayout()
         FormLoaded = True
+
     End Sub
 
     Private Sub FatalError(message As String)
@@ -115,11 +117,11 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub _writeToConsoleSettingsChanged(key As String, value As String)
-        Console.WriteLine(String.Format(English.msgSettingUpdated, key, value))
+    Private Shared Sub _writeToConsoleSettingsChanged(key As String, value As String)
+        If FormLoaded Then Console.WriteLine(String.Format(English.msgSettingUpdated, key, value))
     End Sub
 
-    Private Sub tmrAnimate_Tick(sender As Object, e As EventArgs) Handles tmrAnimate.Tick
+    Private Shared Sub tmrAnimate_Tick(sender As Object, e As EventArgs) Handles tmrAnimate.Tick
         If StreamStarted Then
             GameFetcher.StreamingProgress
         Else 
