@@ -112,8 +112,6 @@ Namespace Utilities
         End Function
 
         Public Shared Function DownloadJsonSchedule(startDate As DateTime, Optional refreshing As Boolean = False) As JObject
-
-            Console.WriteLine(English.msgFetchingSchedule, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
             Dim returnValue As JObject
             Dim dateTimeString As String = startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
             Dim fileName As String = dateTimeString & ".json"
@@ -121,7 +119,7 @@ Namespace Utilities
             Dim data As String
 
             If startDate.Date.ToShortDateString >= DateHelper.GetPacificTime.ToShortDateString Then
-                Console.WriteLine(English.msgFetchingSchedule, dateTimeString)
+                Console.WriteLine(English.msgFetchingSchedule, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
                 data = DownloadContents(ApiUrl, url)
             Else
                 If LookOldJsonFiles(fileName) And Not refreshing Then
