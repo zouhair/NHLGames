@@ -175,7 +175,7 @@ Namespace Objects
 
         Public Sub Update(game As JObject, maxProgressSize As Integer)
 
-            If _GameObj.ToString() <> game.ToString() Then
+            If _gameObj.ToString() <> game.ToString() Then
                 _gameObj = game
                 GetGameInfos(game)
                 GetGameStreams(game, maxProgressSize)
@@ -193,10 +193,7 @@ Namespace Objects
             End If
 
             GameDate = dateTimeVal.ToUniversalTime() ' Must use universal time to always get correct date for stream
-
             GameId = game.Property("gamePk").ToString()
-            Dim status = game("status")("statusCode").ToString()
-            Dim statusId = If(status >= 5, 5, Convert.ToInt16(status))
 
             If Not (game.TryGetValue("teams", "home") And game.TryGetValue("teams", "away") And
                     game.TryGetValue("linescore", "currentPeriodOrdinal") And game.TryGetValue("linescore", "currentPeriodTimeRemaining") And
@@ -205,7 +202,6 @@ Namespace Objects
             End If
 
             _gameType = CType(Convert.ToInt16(GetChar(game("gamePk"), 6)) - 48, GameTypeEnum) 'Get type of the game : 1 preseason, 2 regular, 3 series
-            GameState = CType(statusId, GameStateEnum)
 
             If _gameType = GameTypeEnum.Series Then
                 If Not game.TryGetValue("seriesSummary", "gameNumber") And game.TryGetValue("seriesSummary", "seriesStatusShort") Then
@@ -228,6 +224,10 @@ Namespace Objects
         End Function 
 
         Private Sub GetGameInfos(game As JObject)
+            Dim status = game("status")("statusCode").ToString()
+            Dim statusId = If(status >= 5, 5, Convert.ToInt16(status))
+            GameState = CType(statusId, GameStateEnum)
+
             If _gameType = GameTypeEnum.Series Then
                 SeriesGameNumber = game("seriesSummary")("gameNumber").ToString()
                 SeriesGameStatus = game("seriesSummary")("seriesStatusShort").ToString().ToLower().

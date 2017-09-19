@@ -1046,11 +1046,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Starting: {0} {1}.
+        '''  Recherche une chaîne localisée semblable à Starting: Streamlink {0}.
         '''</summary>
-        Friend Shared ReadOnly Property msgStartingApp() As String
+        Friend Shared ReadOnly Property msgStartingStreamlink() As String
             Get
-                Return ResourceManager.GetString("msgStartingApp", resourceCulture)
+                Return ResourceManager.GetString("msgStartingStreamlink", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Streaming: {0} on {1} using {2} player with Streamlink.
+        '''</summary>
+        Friend Shared ReadOnly Property msgStreaming() As String
+            Get
+                Return ResourceManager.GetString("msgStreaming", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Streamlink:.
+        '''</summary>
+        Friend Shared ReadOnly Property msgStreamlink() As String
+            Get
+                Return ResourceManager.GetString("msgStreamlink", resourceCulture)
             End Get
         End Property
         

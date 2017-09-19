@@ -20,14 +20,17 @@ Namespace Utilities
             End If
 
             'current strings StreamLink shows into console, keep it updated to make sure the progress bar moves.
-            Dim lstKeywords As New List(Of String) From {"Found matching plugin stream", "Available streams", "Opening stream", "Starting player"}
-            Dim progressStep As Integer = (NHLGamesMetro.ProgressMaxValue) / (lstKeywords.Count +1)
+            Dim lstLines As New List(Of String) From {"Found matching plugin stream", "Available streams", "Opening stream", "Starting player"}
+            Dim lstLinesToRemove As New List(Of String) From {"[Streamlink for Windows", "[End of Streamlink for Windows]"}
+            Dim progressStep As Integer = (NHLGamesMetro.ProgressMaxValue) / (lstLines.Count +1)
 
             Dim taskLaunchingStream As Task = New Task(Sub()
                 NHLGamesMetro.ProgressValue = 0
                 NHLGamesMetro.StreamStarted = True
                 NHLGamesMetro.ProgressVisible = True
-                Console.WriteLine(English.msgStartingApp, args.StreamlinkPath, args.ToString(True))
+
+                Console.WriteLine(English.msgStreaming, args.GameTitle, args.Stream.Network, args.PlayerType.ToString())
+                Console.WriteLine(English.msgStartingStreamlink, args.ToString(True))
 
                 Dim procStreaming = New Process() With {.StartInfo =
                         New ProcessStartInfo With {
@@ -58,18 +61,20 @@ Namespace Utilities
                     procStreaming.Start()
                     While (procStreaming.StandardOutput.EndOfStream = False)
                         Dim line = procStreaming.StandardOutput.ReadLine()
-                        If line.Contains(lstKeywords(0)) Or line.Contains("Unable to open URL:") Then
+                        If line.Contains(lstLines(0)) Or line.Contains("Unable to open URL:") Then
                             line = line.Substring(0, line.IndexOf("http://", StringComparison.Ordinal)) & 
                                                      "--URL CENSORED--." & 
                                                      line.Substring(line.IndexOf("m3u8", StringComparison.Ordinal))
                         End If
-                        If lstKeywords.Any(Function(x) line.Contains(x)) Then
+                        If lstLines.Any(Function(x) line.Contains(x)) Then
                             NHLGamesMetro.ProgressValue += progressStep
                         End If
-                        If line.Contains(lstKeywords(3)) Then
+                        If line.Contains(lstLines(3)) Then
                             taskPlayerWatcher.Start()
                         End If
-                        Console.WriteLine(line)
+                        If Not lstLinesToRemove.Any(Function(x) line.Contains(x)) Then
+                            Console.WriteLine(line)
+                        End If
                         Thread.Sleep(100) 'to let some time for the progress bar to move
                     End While
                 Catch ex As Exception

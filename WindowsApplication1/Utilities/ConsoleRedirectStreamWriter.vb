@@ -27,7 +27,6 @@ Namespace Utilities
                                                 Dim type As OutputType = OutputType.Normal
                                                 Dim timestamp As String = String.Format(English.msgDateTimeNow,Now.ToString("HH:mm:ss"))
 
-
                                                 If value.ToLower().IndexOf(English.errorDetection, StringComparison.Ordinal) = 0 OrElse
                                                     value.ToLower().IndexOf(English.errorExceptionDetection, StringComparison.Ordinal) = 0 Then
                                                     type = OutputType.Error
@@ -35,9 +34,10 @@ Namespace Utilities
                                                     length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
                                                     _output.AppendText(vbCr)
                                                 ElseIf value.IndexOf(English.errorCliStreamlink, StringComparison.Ordinal) = 0 Then
+                                                    value = English.msgStreamlink & value.Remove(0, 11)
                                                     type = OutputType.Cli
                                                     startIndex = _output.TextLength
-                                                    length = 6
+                                                    length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
                                                     _output.AppendText(vbCr)
                                                 ElseIf value.IndexOf(":", StringComparison.Ordinal) > -1 Then
                                                     type = OutputType.Status
@@ -63,7 +63,7 @@ Namespace Utilities
                                                     ElseIf type = OutputType.Status Then
                                                         _output.SelectionColor = Color.Green
                                                     ElseIf type = OutputType.Cli Then
-                                                        _output.SelectionColor = Color.SkyBlue
+                                                        _output.SelectionColor = Color.DeepSkyBlue
                                                     End If
 
                                                     _output.Select(startIndex, length)

@@ -100,6 +100,8 @@ Namespace Controls
                 BorderPanel1.BorderColour = Color.Red
             ElseIf game.GameIsScheduled Then
                 BorderPanel1.BorderColour = Color.DarkGray
+            Else 
+                BorderPanel1.BorderColour = Color.LightGray
             End If
         End Sub
 
