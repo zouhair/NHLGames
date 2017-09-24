@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Class English
@@ -299,7 +299,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Error:  Can&apos;t find streamlink.exe. Streamlink is a tool that NHLGames uses to send streams to your media player, we shipped it with NHLGames. You probably moved it or deleted it and if you don&apos;t set any custom path, you will have to put it back there, just drop the folder &apos;streamlink-0.6.0&apos; next to NHLGames.exe..
+        '''  Looks up a localized string similar to Error:  Can&apos;t find streamlink.exe. Streamlink is a tool that NHLGames uses to send streams to your media player, we shipped it with NHLGames. You probably moved it or deleted it and if you don&apos;t set any custom path, you will have to put it back there, just drop the folder &apos;streamlink-0.8.1&apos; next to NHLGames.exe..
         '''</summary>
         Friend Shared ReadOnly Property errorStreamlinkExe() As String
             Get

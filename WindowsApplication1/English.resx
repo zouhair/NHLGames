@@ -186,7 +186,7 @@
     <comment>Console</comment>
   </data>
   <data name="errorStreamlinkExe" xml:space="preserve">
-    <value>Error:  Can't find streamlink.exe. Streamlink is a tool that NHLGames uses to send streams to your media player, we shipped it with NHLGames. You probably moved it or deleted it and if you don't set any custom path, you will have to put it back there, just drop the folder 'streamlink-0.6.0' next to NHLGames.exe.</value>
+    <value>Error:  Can't find streamlink.exe. Streamlink is a tool that NHLGames uses to send streams to your media player, we shipped it with NHLGames. You probably moved it or deleted it and if you don't set any custom path, you will have to put it back there, just drop the folder 'streamlink-0.8.1' next to NHLGames.exe.</value>
     <comment>Console</comment>
   </data>
   <data name="errorWritingSettings" xml:space="preserve">

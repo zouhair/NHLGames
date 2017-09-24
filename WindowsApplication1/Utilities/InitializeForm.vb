@@ -137,7 +137,7 @@ Namespace Utilities
             Form.txtMpvPath.Text = mpvPath
 
             Dim streamlinkPath As String = ApplicationSettings.Read(Of String)(SettingsEnum.StreamlinkPath, String.Empty)
-            Dim streamlinkPathCurrent As String = Path.Combine(Application.StartupPath, "streamlink-0.6.0\streamlink.exe")
+            Dim streamlinkPathCurrent As String = Path.Combine(Application.StartupPath, "streamlink-0.8.1\streamlink.exe")
             If streamlinkPath.Equals(String.Empty) Then
                 ApplicationSettings.SetValue(SettingsEnum.StreamlinkPath, streamlinkPathCurrent)
                 streamlinkPath = streamlinkPathCurrent
