@@ -11,6 +11,7 @@ Tool to watch NHL games in High Definition
 * [First use](#first-use)
   * [Requirements](#requirements)
   * [Message about the hosts file](#message-about-the-hosts-file)
+  * [Is this app safe?](#is-this-app-safe)
   * [Setup](#setup)
      * [Hosts file](#hosts-file)  
  * [User interface](#user-interface)
@@ -50,6 +51,9 @@ NHLGames is an app built on .NET Framework 4.5. So, it's only available on Windo
 
 ## Message about the hosts file
 First time you start NHLGames it will ask if you wish to view the Hosts file. That means the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [Server Hosts Entry](#server-hosts-entry) section.
+
+## Is this app safe?
+So, you might wonder if this application is safe. You can look at our code to find out by yourself, you will see the reason why anti-virus don't like us. We modify your hosts file in Windows/System32/drivers/etc/ and we do that to make sure that the app will be able to get the stream links for games that are available. The other reason is that the app sends web request to a server that might be blacklisted. But don't worry, this server only responds with plain text. See if this app is safe by yourself, look at the Code section.
 
 ## Setup
 To be able to play streams properly, you have to choose a media player in the ![image](https://cloud.githubusercontent.com/assets/23088305/25557243/ce306f64-2cdb-11e7-9fa3-a4a73161c3ea.png) tab. Make sure the player that you choose has a valid path to the EXE file.
