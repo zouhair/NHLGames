@@ -231,8 +231,12 @@ If you can't get any games from NHLGames, try using another domain in the `Setti
 Restarting the app might help, until we fix the issue related to our downloader.
 
 ### Games won't start
-#### Nothing happens after clicking on a stream --> Check your Hosts file
-If you clicked on a stream and nothing starts after the loading bar has disappeared, go to `Settings` and click on `Test` button to check if your Hosts file has been modified by NHLGames. If you get a red message box that means you won't be able to see a stream until you fix your Windows Hosts file. See the [Hosts](#hosts) section.
+#### Nothing happens after clicking on a stream --> Check your Hosts file or open the Task Manager
+If you clicked on a stream and nothing starts after the loading bar has disappeared, go to `Settings` and click on `Test` button to check if your Hosts file has been modified by NHLGames. If it says "Failure" you won't be able to see a stream until you fix your Windows Hosts file. See the [Hosts](#hosts) section.
+
+Other option is that a process is running in the background. You will have to terminate those processes. On your keyboard, press all together *CTRL + SHIFT + ESC*, your task manager will open. Go to **Processes** and order processes by name, by clicking on **Image Name**. Search these processes, right click on them and select **End Process** :
+- streamlink.exe
+- mpv.exe (or) mpc.exe (or) vlc.exe (depends on which media player you use)
 
 ### Hosts file issues
 #### Windows can't find Hosts file --> Do it yourself
