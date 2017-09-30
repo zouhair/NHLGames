@@ -18,8 +18,8 @@ namespace NHLGames.AdDetection.Modules.OBS
     ///     Export attribute is required so that it is loaded by the main program.
     ///     You must also output to NhlGames\AdModules\ModuleName folder to be loaded properly.
     /// </remarks>
-    [Export(typeof(IAdModule))]
-    public class ObsModule : IAdModule
+    [Export(typeof(IAdModules))]
+    public class ObsModule : IAdModules
     {
         [DllImport("User32.dll")]
         static extern int SetForegroundWindow(IntPtr point);

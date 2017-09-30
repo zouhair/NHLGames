@@ -117,29 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnAddHosts" xml:space="preserve">
-    <value>3) Ajouter</value>
-    <comment>Settings tab</comment>
-  </data>
-  <data name="btnCleanHosts" xml:space="preserve">
-    <value>4) Nettoyer</value>
-    <comment>Settings tab</comment>
-  </data>
   <data name="btnClearConsole" xml:space="preserve">
     <value>Effacer</value>
-    <comment>Settings tab</comment>
+    <comment>Console tab</comment>
   </data>
   <data name="btnCopyConsole" xml:space="preserve">
     <value>Copier au presse-papier</value>
-    <comment>Settings tab</comment>
-  </data>
-  <data name="btnOpenHostsFile" xml:space="preserve">
-    <value>2) Voir Hosts</value>
-    <comment>Settings tab</comment>
-  </data>
-  <data name="btnTestHosts" xml:space="preserve">
-    <value>1) Tester</value>
-    <comment>Settings tab</comment>
+    <comment>Console tab</comment>
   </data>
   <data name="chkShowFinalScores" xml:space="preserve">
     <value>Résultats finaux</value>
@@ -189,14 +173,6 @@
     <value>M{0}: {1}</value>
     <comment>Game panel</comment>
   </data>
-  <data name="lblGetMpc" xml:space="preserve">
-    <value>Télécharger MPC</value>
-    <comment>Settings tab</comment>
-  </data>
-  <data name="lblGetVlc" xml:space="preserve">
-    <value>Télécharger VLC</value>
-    <comment>Settings tab</comment>
-  </data>
   <data name="lblHomeTeam" xml:space="preserve">
     <value>Locaux : {1} {0}</value>
     <comment>Game panel</comment>
@@ -206,7 +182,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblHosts" xml:space="preserve">
-    <value>Fichier Hosts (entrée)</value>
+    <value>Fichier Hosts</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblMpcPath" xml:space="preserve">
@@ -262,15 +238,15 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblSlPath" xml:space="preserve">
-    <value>Emplacement Streamlink</value>
+    <value>Emplacement du Streamer</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblStreamAvailableDuringPregame" xml:space="preserve">
-    <value>Streams disponible durant l'avant-match</value>
+  <data name="lblStreamAvailableAtGameTime" xml:space="preserve">
+    <value>Streams disponible à l'heure du match</value>
     <comment>Game panel</comment>
   </data>
   <data name="lblStreamerArgs" xml:space="preserve">
-    <value>Streamlink args. supp.</value>
+    <value>Streamer args. supp.</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblTeamStream" xml:space="preserve">
@@ -292,14 +268,6 @@
   <data name="msgChangeLog" xml:space="preserve">
     <value>Version {0} maintenant disponible! Changements: {1}{2}{3}</value>
     <comment>Version</comment>
-  </data>
-  <data name="msgDiySteps" xml:space="preserve">
-    <value>Besoin d'aide?</value>
-    <comment>Message</comment>
-  </data>
-  <data name="msgDiyStepsText" xml:space="preserve">
-    <value>Cette ligne doit se trouver dans votre fichier Hosts : {0}{1} {2}{0}Cliquez sur 'Ouvrir Hosts' pour accéder au fichier Hosts et ajouter (Ctrl+V) la ligne copiée à la fin du fichier Hosts.{0}Désirez-vous copier cette ligne d'entrée au presse-papier?</value>
-    <comment>Message</comment>
   </data>
   <data name="msgErrorGeneralText" xml:space="preserve">
     <value>Une erreur est survenue! Voir la console pour plus de détails.{0}Cliquez sur le bouton [?] dans le coin supérieur droit pour voir la documentation en anglais de NHLGames et obtenir un support rapide dans la section 'Support' (Application et Lecteur){0}Vous pouvez copier le contenu de la console avec le bouton 'Copier au presse-papier' et coller (CTRL+V) dans un nouveau sujet sur reddit /r/NHLGames pour obtenir de l'aide. Utilisez le lien en bas à gauche pour vous y rendre.</value>
@@ -373,11 +341,11 @@
     <value>Paramètres</value>
     <comment>Main</comment>
   </data>
-  <data name="formatGbHour" xml:space="preserve">
+  <data name="lblFormatGbHour" xml:space="preserve">
     <value>GB/Heure</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="formatMbHour" xml:space="preserve">
+  <data name="lblFormatMbHour" xml:space="preserve">
     <value>MB/Heure</value>
     <comment>Settings tab</comment>
   </data>
@@ -437,19 +405,11 @@
     <value>Langue</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="msgRemoveHost" xml:space="preserve">
-    <value>Retirer l'entrée du serveur au fichier Hosts</value>
-    <comment>Settings tab</comment>
-  </data>
-  <data name="msgTestHosts" xml:space="preserve">
-    <value>Tester le fichier Hosts</value>
-    <comment>Settings tab</comment>
-  </data>
   <data name="lblNoGames" xml:space="preserve">
     <value>Aucun match trouvé</value>
     <comment>Games tab</comment>
   </data>
-  <data name="formatWeekMonthDayYear" xml:space="preserve">
+  <data name="lblFormatWeekMonthDayYear" xml:space="preserve">
     <value>{0} {2} {1} {3}</value>
     <comment>Games tab</comment>
   </data>
@@ -464,5 +424,117 @@
   <data name="gamePeriodOtMore" xml:space="preserve">
     <value>{0}E P</value>
     <comment>Game panel</comment>
+  </data>
+  <data name="rbQualityGood" xml:space="preserve">
+    <value>Bonne</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="rbQualityGreat" xml:space="preserve">
+    <value>Géniale</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="rbQualityLow" xml:space="preserve">
+    <value>Basse</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="rbQualityMobile" xml:space="preserve">
+    <value>Mobile</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="rbQualityNormal" xml:space="preserve">
+    <value>Moyenne</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="rbQualitySuperb" xml:space="preserve">
+    <value>Superbe</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbHostsAdd" xml:space="preserve">
+    <value>Ajouter la ligne de redirection de l'authentifcation à NHL.tv au fichier Hosts</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbHostsEntry" xml:space="preserve">
+    <value>Copier dans le presse-papier la ligne de redirection</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbHostsLocation" xml:space="preserve">
+    <value>Ouvrir l'emplacement du fichier Hosts</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbHostsRemove" xml:space="preserve">
+    <value>Retirer la ligne de redirection de l'authentification à NHL.tv au fichier Hosts</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbHostsTest" xml:space="preserve">
+    <value>Tester si le contournement de l'authentification à NHL.tv fonctionne</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbHostsView" xml:space="preserve">
+    <value>Voir le contenu du fichier Hosts dans bloc-notes</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="tipBrowse" xml:space="preserve">
+    <value>Parcourir</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="tipHostsExecuteAction" xml:space="preserve">
+    <value>Exécuter l'action</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="lblDetectionType" xml:space="preserve">
+    <value>Type de détection</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblModules" xml:space="preserve">
+    <value>Détection de publicité</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblObs" xml:space="preserve">
+    <value>OBS</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblObsAdEndingHotkey" xml:space="preserve">
+    <value>Touches clavier de transition fin d'annonce</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblObsAdStartingHotkey" xml:space="preserve">
+    <value>Touches clavier de transition début d'annonce</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblObsDesc" xml:space="preserve">
+    <value>Change la scène selon les touches configurées quand une annonce est détectée</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblSpotify" xml:space="preserve">
+    <value>Spotify</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblSpotifyDesc" xml:space="preserve">
+    <value>Résume/Pause Spotify quand une annonce est détectée</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="rbFullscreenDetection" xml:space="preserve">
+    <value>Plein écran: Détecte les annonces selon les fond d'écran NHL Game Center lors du plein écran</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="rbVolumeDetection" xml:space="preserve">
+    <value>Volume: Détecte les annonces selon le volume de votre lecteur média jouant la partie</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="tipGetMpc" xml:space="preserve">
+    <value>Download MPC</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="tipGetVlc" xml:space="preserve">
+    <value>Download VLC</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="rbQuality60fps" xml:space="preserve">
+    <value>60 fps</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="msgHostsCopyEntry" xml:space="preserve">
+    <value>La ligne de redirection de l'authentifcation à NHL.tv ''{0}'' a été copiée dans votre presse-papier. Utiliser CTRL+V pour la coller dans le fichier Hosts.</value>
+    <comment>Message</comment>
   </data>
 </root>

@@ -12,7 +12,7 @@ Namespace Utilities
         End Function
 
         Public Shared Function GetFormattedDate(dt As Date) As String
-            Return String.Format(NHLGamesMetro.RmText.GetString("formatWeekMonthDayYear"), dt.ToString("ddd"), dt.ToString("MMM"), dt.Day.ToString, dt.Year.ToString)
+            Return String.Format(NHLGamesMetro.RmText.GetString("lblFormatWeekMonthDayYear"), dt.ToString("ddd"), dt.ToString("MMM"), dt.Day.ToString, dt.Year.ToString)
         End Function
 
         Public Shared Function GetFormattedWeek(number As DayOfWeek) As String

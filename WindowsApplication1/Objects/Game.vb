@@ -263,6 +263,7 @@ Namespace Objects
 
         Private Sub GetGameStreams(game As JObject, maxProgressSize As Integer)
             Dim progress As Integer = 0
+            Const mediaOff = "MEDIA_OFF"
 
             If game("content")("media") IsNot Nothing Then
                 For Each stream As JObject In game("content")("media")("epg")
@@ -271,6 +272,7 @@ Namespace Objects
                         For Each item As JArray In stream.Property("items")
                             progress = Convert.ToInt32(maxProgressSize / item.Count)
                             For Each innerStream As JObject In item.Children(Of JObject)
+                                If innerStream.Property("mediaState") = mediaOff Then Continue For
                                 Dim strType As String = innerStream.Property("mediaFeedType")
                                 If strType = "AWAY" Then
                                     _streams.Item(StreamType.Away) = New GameStream(Me,innerStream,StreamType.Away)
@@ -309,7 +311,7 @@ Namespace Objects
                     NHLGamesMetro.lstThreads.Last().Priority = ThreadPriority.Normal
                     NHLGamesMetro.lstThreads.Last().Start()
                     NHLGamesMetro.progressValue += progress
-                    Thread.Sleep(20) 'to let some time for the progress bar to move
+                    Thread.Sleep(30) 'to let some time for the progress bar to move
                 End If
             Next
         End Sub

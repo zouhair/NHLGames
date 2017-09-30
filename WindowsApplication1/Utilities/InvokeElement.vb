@@ -31,6 +31,24 @@ Namespace Utilities
             End If
         End Sub
 
+        Public Shared Sub ModuleSpotifyOff()
+            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
+            If form.InvokeRequired Then
+                form.BeginInvoke(New Action(AddressOf ModuleSpotifyOff))
+            Else
+                form.tgSpotify.Checked = False
+            End If
+        End Sub
+
+        Public Shared Sub ModuleObsOff()
+            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
+            If form.InvokeRequired Then
+                form.BeginInvoke(New Action(AddressOf ModuleObsOff))
+            Else
+                form.tgOBS.Checked = False
+            End If
+        End Sub
+
         Public Shared Sub NewGamesFound(gamesDict As Dictionary(Of String, Game))
             Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
             If form.InvokeRequired Then

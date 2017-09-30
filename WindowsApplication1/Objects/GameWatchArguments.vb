@@ -6,9 +6,9 @@ Namespace Objects
 
     Public Class GameWatchArguments
 
-        Public Property Quality As String = ""
+        Public Property Quality As StreamQuality = StreamQuality.Superb
         Public Property Is60Fps As Boolean = True
-        Public Property Cdn As String = ""
+        Public Property Cdn As CdnType = CdnType.Akc
         Public Property Stream As GameStream = Nothing
         Public Property IsVod As Boolean = False
         Public Property GameTitle As String = ""
@@ -36,6 +36,7 @@ Namespace Objects
             Const dblQuot2 As String = """"""
             Const space As String = " "
             Dim literalPlayerArgs As String = String.Empty
+            Dim streamQuality = Quality & "p"
 
             If UsePlayerArgs Then
                 literalPlayerArgs = PlayerArgs
@@ -49,7 +50,7 @@ Namespace Objects
             If PlayerType = PlayerTypeEnum.Vlc Then
                 titleArg = String.Format("--meta-title{0}{1}{2}{1}{0}", space, dblQuot2, GameTitle)
             ElseIf PlayerType = PlayerTypeEnum.Mpv Then
-                titleArg = String.Format("--title{0}{1}{2}{1}{0}--user-agent=User-Agent={1}Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316{1}{0}", space, dblQuot2, GameTitle)
+                titleArg = String.Format("--title{0}{1}{2}{1}{0}--user-agent=User-Agent={1}{3}{1}{0}", space, dblQuot2, GameTitle, Common.UserAgent)
             End If
 
             If String.IsNullOrEmpty(PlayerPath) = False Then
@@ -66,7 +67,7 @@ Namespace Objects
                 returnValue &= String.Format("--http-cookie={0}mediaAuth={1}{2}{0}{2}", dblQuot, Common.GetRandomString(240), space)
             End If
 
-            returnValue &= String.Format("--http-header={0}User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316{0}{1}", dblQuot, space)
+            returnValue &= String.Format("--http-header={0}User-Agent={2}{0}{1}", dblQuot, space, Common.UserAgent)
 
             If safeOutput = False Then
                 returnValue &= String.Format("{0}hlsvariant://", dblQuot)
@@ -77,9 +78,9 @@ Namespace Objects
                     returnValue &= Stream.GameURL
                 End If
 
-                returnValue = returnValue.Replace("CDN", Cdn) & space
+                returnValue = returnValue.Replace("CDN", Cdn.ToString().ToLower()) & space
             Else
-                returnValue &= String.Format("{0}hlsvariant://--URL CENSORED--{1}", dblQuot, space)
+                returnValue &= String.Format("{0}hlsvariant://{1}{2}", dblQuot, English.msgCensoredStream, space)
             End If
 
             If Is60Fps Then
@@ -91,7 +92,7 @@ Namespace Objects
             If Is60Fps Then
                 returnValue &= String.Format("best{0}", space)
             Else
-                returnValue &= Quality & space
+                returnValue &= streamQuality & space
             End If
 
             returnValue &= String.Format("--http-no-ssl-verify{0}", space)
@@ -102,7 +103,7 @@ Namespace Objects
                         Replace("(HOME)", Stream.Game.HomeAbbrev).
                         Replace("(AWAY)", Stream.Game.AwayAbbrev).
                         Replace("(TYPE)", Stream.Type.ToString()).
-                        Replace("(QUAL)", If(Is60Fps, "720p60", Quality))
+                        Replace("(QUAL)", If(Is60Fps, "720p60", streamQuality))
                 Dim suffix As Integer = 1
                 Dim originalName = Path.GetFileNameWithoutExtension(outputPath)
                 Dim originalExt = Path.GetExtension(outputPath)

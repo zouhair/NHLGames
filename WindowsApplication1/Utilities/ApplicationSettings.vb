@@ -37,7 +37,6 @@ Namespace Utilities
             End Try
         End Function
 
-
         Public Shared Sub SetValue(key As SettingsEnum, value As String)
             Try
                 Dim configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)

@@ -3,10 +3,11 @@ Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Resources
 Imports System.Runtime.InteropServices
-Imports NHLGames.AdDetection
+Imports MetroFramework.Controls
 Imports NHLGames.Controls
 Imports NHLGames.My.Resources
 Imports NHLGames.Objects
+Imports NHLGames.Objects.Modules
 Imports NHLGames.Utilities
 
 Public Class NHLGamesMetro
@@ -15,7 +16,6 @@ Public Class NHLGamesMetro
     Public Const DomainName As String = "mf.svc.nhl.com"
     Public Shared HostName As String
     Public Shared FormInstance As NHLGamesMetro = Nothing
-    Private _adDetectorViewModel As AdDetectorViewModel = Nothing
     Public Shared ProgressValue As Integer = 0
     Public Shared ProgressMaxValue As Integer = 1000
     Public Shared FlpCalendar As FlowLayoutPanel
@@ -31,6 +31,8 @@ Public Class NHLGamesMetro
     Public LstGameControls As List(Of GameControl) = New List(Of GameControl)
     Public Shared LstThreads As List(Of Thread) = New List(Of Thread)()
     Public Shared FormLoaded As Boolean = False
+    Private Shared _adDetectionType As AdDetectionTypeEnum
+    Private Shared _adDetectionEngine As Utilities.AdDetection
 
     <DllImport("user32.dll")>
     Public Shared Function ReleaseCapture() As Boolean
@@ -52,23 +54,18 @@ Public Class NHLGamesMetro
 
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
     Public Shared Sub Main()
-        ' Add the event handler for handling UI thread exceptions to the event.
         AddHandler Application.ThreadException, AddressOf Form1_UIThreadException
-        ' Set the unhandled exception mode to force all Windows Forms errors to go through our handler.
         Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
-        ' Add the event handler for handling non-UI thread exceptions to the event. 
         AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf CurrentDomain_UnhandledException
+
         Dim form As New NHLGamesMetro()
         FormInstance = form
-        'Setup redirecting console.out to 
+
         Dim writer = New ConsoleRedirectStreamWriter(form.RichTextBox)
         Console.SetOut(writer)
-        ' Runs the application.
         Application.Run(form)
     End Sub
 
-    ' Handle the UI exceptions by showing a dialog box, and asking the user whether
-    ' or not they wish to abort execution.
     Private Shared Sub Form1_UIThreadException(ByVal sender As Object, ByVal t As ThreadExceptionEventArgs)
         Console.WriteLine(English.errorGeneral, t.Exception.ToString())
     End Sub
@@ -83,7 +80,6 @@ Public Class NHLGamesMetro
 
     Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
         SuspendLayout()
-
         Common.GetLanguage()
 
         If Not File.Exists("NHLGames.exe.Config") then
@@ -92,23 +88,12 @@ Public Class NHLGamesMetro
         End If
 
         tabMenu.SelectedIndex = 0
-
-        Try
-            _adDetectorViewModel = New AdDetectorViewModel()
-            AdDetectionSettingsElementHost.Child = _adDetectorViewModel.SettingsControl
-        catch ex As Exception
-           Console.WriteLine(English.errorSetAdModule, ex.Message)
-        end Try
-
         FlpCalendar = flpCalender
         flpGames.Controls.AddRange(lstGameControls.ToArray())
-        InitializeForm.SetLanguage()
         InitializeForm.SetSettings()
         InitializeForm.VersionCheck()
-
         ResumeLayout()
         FormLoaded = True
-
     End Sub
 
     Private Sub FatalError(message As String)
@@ -127,7 +112,6 @@ Public Class NHLGamesMetro
         Else 
             GameFetcher.LoadingProgress
         End If
-        
     End Sub
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
@@ -140,64 +124,59 @@ Public Class NHLGamesMetro
         RichTextBox.ScrollToCaret()
     End Sub
 
-    Private Sub btnOpenHostsFile_Click(sender As Object, e As EventArgs) Handles btnOpenHostsFile.Click 
-        Dim hostsFilePath As String = Environment.SystemDirectory & "\drivers\etc\hosts"
-        Process.Start("NOTEPAD", hostsFilePath)
-    End Sub
-
     Private Sub btnVLCPath_Click(sender As Object, e As EventArgs) Handles btnVLCPath.Click 
-        OpenFileDialog.Filter = $"VLC|vlc.exe|All files (*.*)|*.*"
-        OpenFileDialog.Multiselect = False
-        OpenFileDialog.InitialDirectory = If(txtVLCPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtVLCPath.Text))
+        openFileDialog.Filter = $"VLC|vlc.exe|All files (*.*)|*.*"
+        openFileDialog.Multiselect = False
+        openFileDialog.InitialDirectory = If(txtVLCPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtVLCPath.Text))
 
-        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-            If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtVLCPath.Text <> OpenFileDialog.FileName Then
-                ApplicationSettings.SetValue(SettingsEnum.VlcPath, OpenFileDialog.FileName)
-                txtVLCPath.Text = OpenFileDialog.FileName
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            If String.IsNullOrEmpty(openFileDialog.FileName) = False And txtVLCPath.Text <> openFileDialog.FileName Then
+                ApplicationSettings.SetValue(SettingsEnum.VlcPath, openFileDialog.FileName)
+                txtVLCPath.Text = openFileDialog.FileName
             End If
         End If
     End Sub
 
     Private Sub btnMPCPath_Click(sender As Object, e As EventArgs) Handles btnMPCPath.Click 
-        OpenFileDialog.Filter = $"MPC|mpc-hc64.exe;mpc-hc.exe|All files (*.*)|*.*"
-        OpenFileDialog.Multiselect = False
-        OpenFileDialog.InitialDirectory = If(txtMPCPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtMPCPath.Text))
+        openFileDialog.Filter = $"MPC|mpc-hc64.exe;mpc-hc.exe|All files (*.*)|*.*"
+        openFileDialog.Multiselect = False
+        openFileDialog.InitialDirectory = If(txtMPCPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtMPCPath.Text))
 
-        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
 
-            If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtMPCPath.Text <> OpenFileDialog.FileName Then
-                ApplicationSettings.SetValue(SettingsEnum.MpcPath, OpenFileDialog.FileName)
-                txtMPCPath.Text = OpenFileDialog.FileName
+            If String.IsNullOrEmpty(openFileDialog.FileName) = False And txtMPCPath.Text <> openFileDialog.FileName Then
+                ApplicationSettings.SetValue(SettingsEnum.MpcPath, openFileDialog.FileName)
+                txtMPCPath.Text = openFileDialog.FileName
             End If
 
         End If
     End Sub
 
     Private Sub btnMpvPath_Click(sender As Object, e As EventArgs) Handles btnMpvPath.Click 
-        OpenFileDialog.Filter = $"mpv|mpv.exe|All files (*.*)|*.*"
-        OpenFileDialog.Multiselect = False
-        OpenFileDialog.InitialDirectory = If(txtMpvPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtMpvPath.Text))
+        openFileDialog.Filter = $"mpv|mpv.exe|All files (*.*)|*.*"
+        openFileDialog.Multiselect = False
+        openFileDialog.InitialDirectory = If(txtMpvPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtMpvPath.Text))
 
-        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
 
-            If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtMpvPath.Text <> OpenFileDialog.FileName Then
-                ApplicationSettings.SetValue(SettingsEnum.MpvPath, OpenFileDialog.FileName)
-                txtMpvPath.Text = OpenFileDialog.FileName
+            If String.IsNullOrEmpty(openFileDialog.FileName) = False And txtMpvPath.Text <> openFileDialog.FileName Then
+                ApplicationSettings.SetValue(SettingsEnum.MpvPath, openFileDialog.FileName)
+                txtMpvPath.Text = openFileDialog.FileName
             End If
 
         End If
     End Sub
 
     Private Sub btnstreamlinkPath_Click(sender As Object, e As EventArgs) Handles btnstreamlinkPath.Click 
-        OpenFileDialog.Filter = $"streamlink|streamlink.exe|All files (*.*)|*.*"
-        OpenFileDialog.Multiselect = False
-        OpenFileDialog.InitialDirectory = If(txtStreamlinkPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtStreamlinkPath.Text))
+        openFileDialog.Filter = $"streamlink|streamlink.exe|LiveStreamer|livestreamer.exe|All files (*.*)|*.*"
+        openFileDialog.Multiselect = False
+        openFileDialog.InitialDirectory = If(txtStreamlinkPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtStreamlinkPath.Text))
 
-        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
 
-            If String.IsNullOrEmpty(OpenFileDialog.FileName) = False And txtStreamlinkPath.Text <> OpenFileDialog.FileName Then
-                ApplicationSettings.SetValue(SettingsEnum.StreamlinkPath, OpenFileDialog.FileName)
-                txtStreamlinkPath.Text = OpenFileDialog.FileName
+            If String.IsNullOrEmpty(openFileDialog.FileName) = False And txtStreamlinkPath.Text <> openFileDialog.FileName Then
+                ApplicationSettings.SetValue(SettingsEnum.StreamlinkPath, openFileDialog.FileName)
+                txtStreamlinkPath.Text = openFileDialog.FileName
             End If
 
         End If
@@ -212,14 +191,6 @@ Public Class NHLGamesMetro
 
     Private Sub btnClearConsole_Click(sender As Object, e As EventArgs) Handles btnClearConsole.Click
         RichTextBox.Clear()
-    End Sub
-
-    Private Sub btnHosts_Click(sender As Object, e As EventArgs) Handles btnTestHosts.Click 
-        If HostsFile.TestEntry(DomainName, ServerIp) Then
-            InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsSuccess"), RmText.GetString("msgSuccess"), MessageBoxButtons.OK)
-        Else
-            InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsFailure"), RmText.GetString("msgFailure"), MessageBoxButtons.OK)
-        End If
     End Sub
 
     Private Sub chk60_CheckedChanged(sender As Object, e As EventArgs) Handles chk60.CheckedChanged 
@@ -288,23 +259,10 @@ Public Class NHLGamesMetro
         _writeToConsoleSettingsChanged(lblStreamerArgs.Text, txtStreamerArgs.Text)
     End Sub
 
-    Private Sub btnOuput_Click(sender As Object, e As EventArgs) Handles btnOuput.Click 
-        SaveFileDialog.CheckPathExists = True
-
-        If txtOutputArgs.Text.Count > 0 Then
-            SaveFileDialog.InitialDirectory = Path.GetDirectoryName(txtOutputArgs.Text)
-            SaveFileDialog.FileName = Path.GetFileName(txtOutputArgs.Text)
-        Else
-            SaveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
-            SaveFileDialog.FileName = "(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(QUAL)"
-        End If
-
-        SaveFileDialog.Filter = $"MP4 Files (*.mp4)|*.MP4"
-        SaveFileDialog.DefaultExt = "mp4"
-        SaveFileDialog.AddExtension = True
-
-        If SaveFileDialog.ShowDialog() = DialogResult.OK Then
-            txtOutputArgs.Text = SaveFileDialog.FileName
+    Private Sub btnOuput_Click(sender As Object, e As EventArgs) Handles btnOuput.Click
+        folderBrowserDialog.ShowDialog()
+        If folderBrowserDialog.SelectedPath <> txtOutputArgs.Text Then
+            txtOutputArgs.Text = folderBrowserDialog.SelectedPath & $"\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(QUAL).mp4"
             Player.RenewArgs()
         End If
     End Sub
@@ -319,11 +277,6 @@ Public Class NHLGamesMetro
         lblDate.Text = DateHelper.GetFormattedDate(GameDate)
     End Sub
 
-
-    Private Sub btnClean_Click(sender As Object, e As EventArgs) Handles btnCleanHosts.Click 
-        HostsFile.CleanHosts(DomainName)
-    End Sub
-
     Private Sub lnkVLCDownload_Click(sender As Object, e As EventArgs) Handles lnkGetVlc.Click 
         Dim sInfo As ProcessStartInfo = New ProcessStartInfo("http://www.videolan.org/vlc/download-windows.html")
         Process.Start(sInfo)
@@ -332,10 +285,6 @@ Public Class NHLGamesMetro
     Private Sub lnkMPCDownload_Click(sender As Object, e As EventArgs) Handles lnkGetMpc.Click 
         Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://mpc-hc.org/downloads/")
         Process.Start(sInfo)
-    End Sub
-
-    Private Sub btnAddHosts_Click(sender As Object, e As EventArgs) Handles  btnAddHosts.Click 
-        HostsFile.AddEntry(ServerIp, DomainName)
     End Sub
 
     Private Sub btnDate_Click(sender As Object, e As EventArgs) Handles btnDate.Click
@@ -361,7 +310,6 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub TabControl_MouseClick(sender As Object, e As MouseEventArgs) Handles tabMenu.MouseClick
-        ProgressVisible = False
         flpCalender.Visible = False
     End Sub
 
@@ -441,8 +389,8 @@ Public Class NHLGamesMetro
             tlpSettings.Focus()
         ElseIf tabConsole.Visible Then
             RichTextBox.Focus()
-        ElseIf tabAdDetectionModules.Visible Then
-            flpAdDetector.Focus()
+        ElseIf tabModules.Visible Then
+            tlpModules.Focus()
         Else 
             tabMenu.Focus()
         End If
@@ -453,7 +401,6 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub NHLGamesMetro_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
-        'Calculate which direction to resize based on mouse position
         _resizeDirection = -1
         If e.Location.X < ResizeBorderWidth And e.Location.Y < ResizeBorderWidth Then
             Cursor = Cursors.SizeNWSE
@@ -509,26 +456,38 @@ Public Class NHLGamesMetro
     Private Sub btnCopyConsole_Click(sender As Object, e As EventArgs) Handles btnCopyConsole.Click
         dim player As String = if (rbMpv.Checked,"MPV",If(rbMPC.Checked,"MPC",If(rbVLC.Checked,"VLC","none")))
         Dim x64 As String = if(Environment.Is64BitOperatingSystem,"64 Bits","32 Bits")
+        Dim streamlinkPath = ApplicationSettings.Read(Of String)(SettingsEnum.StreamlinkPath, String.Empty).ToString()
+        Dim vlcPath = ApplicationSettings.Read(Of String)(SettingsEnum.VlcPath, String.Empty).ToString()
+        Dim mpcPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpcPath, String.Empty).ToString()
+        Dim mpvPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpvPath, String.Empty).ToString()
+        Dim streamlinkExists = If(streamlinkPath <> "" AndAlso File.Exists(streamlinkPath), English.msgExists, "")
+        Dim vlcExists = If(vlcPath <> "" AndAlso File.Exists(vlcPath), English.msgExists, "")
+        Dim mpcExists = If(mpcPath <> "" AndAlso File.Exists(mpcPath), English.msgExists, "")
+        Dim mpvExists = If(mpvPath <> "" AndAlso File.Exists(mpvPath), English.msgExists, "")
         Clipboard.SetText(String.Format(English.textCopyConsole,
-                                        vbCrLf,lblVersion.Text,
-                                        My.Computer.Info.OSFullName.ToString(), x64.ToString(), 
+                                        vbCrLf,
+                                        lblVersion.Text.ToString(),
+                                        My.Computer.Info.OSFullName.ToString(), 
+                                        x64.ToString(), 
                                         (Not String.IsNullOrEmpty(lblDate.Text)).ToString(),
                                         HostsFile.TestEntry(DomainName,ServerIp).ToString(),
                                         My.Computer.Network.Ping(ServerIp).ToString(),
                                         cbServers.SelectedItem.ToString(),
                                         player.ToString(),
-                                        ApplicationSettings.Read(Of String)(SettingsEnum.StreamlinkPath, String.Empty).ToString(),
-                                        (ApplicationSettings.Read(Of String)(SettingsEnum.StreamlinkPath, String.Empty)=txtStreamlinkPath.Text).ToString(),
-                                        ApplicationSettings.Read(Of String)(SettingsEnum.VlcPath, String.Empty).ToString(),
-                                        (ApplicationSettings.Read(Of String)(SettingsEnum.VlcPath, String.Empty)=txtVLCPath.Text).ToString(),
-                                        ApplicationSettings.Read(Of String)(SettingsEnum.MpcPath, String.Empty).ToString(),
-                                        (ApplicationSettings.Read(Of String)(SettingsEnum.MpcPath, String.Empty)=txtMPCPath.Text).ToString(),
-                                        ApplicationSettings.Read(Of String)(SettingsEnum.MpvPath, String.Empty).ToString(),
-                                        (ApplicationSettings.Read(Of String)(SettingsEnum.MpvPath, String.Empty)=txtMpvPath.Text).ToString(),
-                                        RichTextBox.Text))
+                                        streamlinkPath.ToString(),
+                                        streamlinkPath.Equals(txtStreamlinkPath.Text).ToString(),
+                                        streamlinkExists.ToString(),
+                                        vlcPath.ToString(),
+                                        vlcPath.Equals(txtVLCPath.Text).ToString(),
+                                        vlcExists.ToString(),
+                                        mpcPath.ToString(),
+                                        mpcPath.Equals(txtMPCPath.Text).ToString(),
+                                        mpcExists.ToString(),
+                                        mpvPath.ToString(),
+                                        mpvPath.Equals(txtMpvPath.Text).ToString(),
+                                        mpvExists.ToString(),
+                                        RichTextBox.Text.ToString()))
     End Sub
-
-
 
     Private Sub cbLanguage_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLanguage.SelectedIndexChanged 
         tlpSettings.Focus()
@@ -537,20 +496,81 @@ Public Class NHLGamesMetro
         InitializeForm.SetLanguage()
     End Sub
 
-    Private Sub lnkDiySteps_Click(sender As Object, e As EventArgs) Handles lnkDiySteps.Click 
-        DiySteps()
-    End Sub
-
-    Public sub DiySteps()
-        If InvokeElement.MsgBoxBlue(String.Format(RmText.GetString("msgDiyStepsText"), vbCrLf, ServerIp, DomainName),
-                                    RmText.GetString("msgDiySteps"),
-                                    MessageBoxButtons.YesNo) = DialogResult.Yes Then
-            Clipboard.SetText(ServerIp & vbTab & DomainName)
-        End If
-    End sub
-
     Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Common.WaitForGameThreads()
     End Sub
 
+    Private Sub tgModules_Click(sender As Object, e As EventArgs) Handles tgModules.Click
+        Dim tg As MetroToggle = sender
+
+        Select Case (_adDetectionType)
+            Case AdDetectionTypeEnum.Volume
+                _adDetectionEngine = New AdDetectionByVolume
+            Case AdDetectionTypeEnum.Fullscreen
+                Return
+        End Select
+
+        If Not tg.Checked Then
+            tgSpotify.Checked = False
+            tgOBS.Checked = False
+        End If
+
+        tgOBS.Enabled = tg.Checked
+        tgSpotify.Enabled = tg.Checked
+        tlpOBSSettings.Enabled = tg.Checked
+
+        _adDetectionEngine.IsEnabled = tg.checked
+        If tg.Checked Then _adDetectionEngine.Start(_adDetectionEngine.AdModulesList.ToList())
+    End Sub
+
+    Private Sub tgOBS_CheckedChanged(sender As Object, e As EventArgs) Handles tgOBS.CheckedChanged
+        Dim tg As MetroToggle = sender
+        tlpOBSSettings.Enabled = Not tg.Checked
+    End Sub
+
+    Private Sub tgSpotify_CheckedChanged(sender As Object, e As EventArgs) Handles tgSpotify.CheckedChanged
+        Dim tg As MetroToggle = sender
+        Dim spotify As New Spotify
+
+        If tg.Checked Then
+            _adDetectionEngine.AddModule(spotify)
+        Else 
+            If _adDetectionEngine.IsInAdModulesList(spotify.Title) Then
+                _adDetectionEngine.RemoveModule(spotify.Title)
+            End If
+        End If
+    End Sub
+
+    Private Sub rbDetection_CheckedChanged(sender As Object, e As EventArgs) Handles rbVolumeDetection.CheckedChanged, rbFullscreenDetection.CheckedChanged
+        Dim rb As MetroRadioButton = sender
+        If rb.Checked Then
+            _adDetectionEngine.SelectedDetectionType = CType(rb.Tag, Integer)
+            _adDetectionEngine.DetectionTypeChanged()
+        End If
+    End Sub
+
+    Private Sub cbHostsFileActions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbHostsFileActions.SelectedIndexChanged
+        tlpSettings.Focus()
+    End Sub
+
+    Private Sub btnHostsFileActions_Click(sender As Object, e As EventArgs) Handles btnHostsFileActions.Click
+        If cbHostsFileActions.SelectedIndex = 0 Then
+            If HostsFile.TestEntry(DomainName, ServerIp) Then
+                InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsSuccess"), RmText.GetString("msgSuccess"), MessageBoxButtons.OK)
+            Else
+                InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsFailure"), RmText.GetString("msgFailure"), MessageBoxButtons.OK)
+            End If
+        ElseIf cbHostsFileActions.SelectedIndex = 1 Then
+            HostsFile.AddEntry(ServerIp, DomainName)
+        ElseIf cbHostsFileActions.SelectedIndex = 2 Then
+            HostsFile.CleanHosts(DomainName)
+        ElseIf cbHostsFileActions.SelectedIndex = 3 Then
+            HostsFile.OpenHostsFile()
+        ElseIf cbHostsFileActions.SelectedIndex = 4 Then
+            Clipboard.SetText(ServerIp & vbTab & DomainName)
+            InvokeElement.MsgBoxBlue(String.Format(RmText.GetString("msgHostsCopyEntry"), ServerIp & " " & DomainName), RmText.GetString("msgSuccess"), MessageBoxButtons.OK)
+        Else 
+            HostsFile.OpenHostsFile(false)
+        End If
+    End Sub
 End Class

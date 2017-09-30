@@ -158,7 +158,7 @@ Namespace Controls
 
             If Not game.AreAnyStreamsAvailable Then
                 If game.GameDate.ToLocalTime >= Date.Today And game.GameState < GameStateEnum.InProgress Then
-                    lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblStreamAvailableDuringPregame")
+                    lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblStreamAvailableAtGameTime")
                 Else
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblNoStreamAvailable")
                 End If
@@ -233,11 +233,11 @@ Namespace Controls
             Return args
         End Function
 
-        Private Function IsGameVod(stream As GameStream, cdn As String) As Boolean
+        Private Function IsGameVod(stream As GameStream, cdn As CdnType) As Boolean
             Dim isVod As Boolean = False
             If DateHelper.GetPacificTime(_game.GameDate).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
                 If Not stream.Vodurl Is String.Empty Then
-                    stream.CheckVod(cdn)
+                    stream.CheckVod(cdn.ToString().ToLower())
                     isVod = stream.IsVod
                 Else 
                     isVod = False

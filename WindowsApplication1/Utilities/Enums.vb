@@ -15,7 +15,7 @@
     End Enum
 
     Public Enum StreamType
-        Away
+        Away = 1
         Home
         National
         French
@@ -24,6 +24,20 @@
         RefCam
         EndzoneCam1
         EndzoneCam2
+    End Enum
+
+    Public Enum CdnType
+        Akc = 0
+        L3C
+    End Enum
+
+    Public Enum StreamQuality
+        Mobile = 224
+        Low = 288
+        Normal = 360
+        Good = 504
+        Great = 540
+        Superb = 720
     End Enum
 
     Public Enum PlayerTypeEnum
@@ -47,6 +61,7 @@
         ShowLiveScores = 11
         ShowSeriesRecord = 12
         LanguageList = 13
+        AdDetection = 14
     End Enum
 
     Public Enum OutputType
@@ -56,4 +71,13 @@
         Cli = 3
     End Enum
 
+    Public Enum AdDetectionTypeEnum
+        Volume = 0
+        Fullscreen
+    End Enum
+
+    Public Enum AdModulesEnum
+        Spotify = 1
+        Obs
+    End Enum
 End Namespace

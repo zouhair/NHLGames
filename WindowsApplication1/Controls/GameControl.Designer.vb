@@ -163,7 +163,7 @@
         Me.lblAwayTeam.Name = "lblAwayTeam"
         Me.lblAwayTeam.Size = New System.Drawing.Size(60, 22)
         Me.lblAwayTeam.TabIndex = 4
-        Me.lblAwayTeam.Text = "Away"
+        Me.lblAwayTeam.Text = "AWAY"
         Me.lblAwayTeam.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblAwayTeam.UseCustomBackColor = true
         '
@@ -184,7 +184,7 @@
         Me.lblHomeTeam.Name = "lblHomeTeam"
         Me.lblHomeTeam.Size = New System.Drawing.Size(60, 22)
         Me.lblHomeTeam.TabIndex = 4
-        Me.lblHomeTeam.Text = "Home"
+        Me.lblHomeTeam.Text = "HOME"
         Me.lblHomeTeam.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblHomeTeam.UseCustomBackColor = true
         '
@@ -196,7 +196,7 @@
         Me.lblPeriod.Name = "lblPeriod"
         Me.lblPeriod.Size = New System.Drawing.Size(117, 28)
         Me.lblPeriod.TabIndex = 11
-        Me.lblPeriod.Text = "Period"
+        Me.lblPeriod.Text = "PERIOD_STATUS"
         Me.lblPeriod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblPeriod.UseCustomBackColor = true
         '
@@ -207,7 +207,7 @@
         Me.lblTime.Name = "lblTime"
         Me.lblTime.Size = New System.Drawing.Size(117, 21)
         Me.lblTime.TabIndex = 8
-        Me.lblTime.Text = "7:30 PM"
+        Me.lblTime.Text = "0:00 AM"
         Me.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblTime.UseCustomBackColor = true
         '
@@ -234,6 +234,7 @@
         '
         'lnkHome
         '
+        Me.lnkHome.BackColor = System.Drawing.Color.WhiteSmoke
         Me.lnkHome.BackgroundImage = CType(resources.GetObject("lnkHome.BackgroundImage"),System.Drawing.Image)
         Me.lnkHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkHome.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuHighlight
@@ -245,7 +246,7 @@
         Me.lnkHome.Name = "lnkHome"
         Me.lnkHome.Size = New System.Drawing.Size(26, 26)
         Me.lnkHome.TabIndex = 29
-        Me.lnkHome.UseVisualStyleBackColor = true
+        Me.lnkHome.UseVisualStyleBackColor = false
         Me.lnkHome.Visible = false
         '
         'lnkAway
@@ -384,7 +385,7 @@
         Me.lblNotInSeason.Name = "lblNotInSeason"
         Me.lblNotInSeason.Size = New System.Drawing.Size(303, 22)
         Me.lblNotInSeason.TabIndex = 13
-        Me.lblNotInSeason.Text = "NotInSeason"
+        Me.lblNotInSeason.Text = "NOT_IN_SEASON"
         Me.lblNotInSeason.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblNotInSeason.UseCustomBackColor = true
         '

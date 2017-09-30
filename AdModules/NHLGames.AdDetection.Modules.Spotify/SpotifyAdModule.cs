@@ -7,8 +7,8 @@ using SpotifyAPI.Local;
 
 namespace NHLGames.AdDetection.Modules.Spotify
 {
-    [Export(typeof (IAdModule))]
-    public class SpotifyAdModule : IAdModule
+    [Export(typeof (IAdModules))]
+    public class SpotifyAdModule : IAdModules
     {
         private readonly TimeSpan m_connectSleep = TimeSpan.FromSeconds(5);
 

@@ -95,7 +95,7 @@
         Me.lnkToday.Name = "lnkToday"
         Me.lnkToday.Size = New System.Drawing.Size(272, 40)
         Me.lnkToday.TabIndex = 1
-        Me.lnkToday.Text = "Today"
+        Me.lnkToday.Text = "TODAY"
         Me.lnkToday.UseVisualStyleBackColor = false
         '
         'Su1
@@ -830,7 +830,7 @@
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(226, 59)
         Me.lblDate.TabIndex = 21
-        Me.lblDate.Text = "Month Year"
+        Me.lblDate.Text = "MONTH_YEAR"
         Me.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblDate.UseCustomForeColor = true
         '

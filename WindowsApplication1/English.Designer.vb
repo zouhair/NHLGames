@@ -65,24 +65,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à 3) Add Entry.
-        '''</summary>
-        Friend Shared ReadOnly Property btnAddHosts() As String
-            Get
-                Return ResourceManager.GetString("btnAddHosts", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à 4) Remove Entries.
-        '''</summary>
-        Friend Shared ReadOnly Property btnCleanHosts() As String
-            Get
-                Return ResourceManager.GetString("btnCleanHosts", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Clear.
         '''</summary>
         Friend Shared ReadOnly Property btnClearConsole() As String
@@ -101,20 +83,56 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à 2) View Hosts.
+        '''  Recherche une chaîne localisée semblable à Add the NHL.tv authentication bypass line to Hosts file.
         '''</summary>
-        Friend Shared ReadOnly Property btnOpenHostsFile() As String
+        Friend Shared ReadOnly Property cbHostsAdd() As String
             Get
-                Return ResourceManager.GetString("btnOpenHostsFile", resourceCulture)
+                Return ResourceManager.GetString("cbHostsAdd", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à 1) Test.
+        '''  Recherche une chaîne localisée semblable à Copy to clipboard the authentication bypass line.
         '''</summary>
-        Friend Shared ReadOnly Property btnTestHosts() As String
+        Friend Shared ReadOnly Property cbHostsEntry() As String
             Get
-                Return ResourceManager.GetString("btnTestHosts", resourceCulture)
+                Return ResourceManager.GetString("cbHostsEntry", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Open Hosts file location.
+        '''</summary>
+        Friend Shared ReadOnly Property cbHostsLocation() As String
+            Get
+                Return ResourceManager.GetString("cbHostsLocation", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Remove the NHL.tv authentication bypass line from Hosts file.
+        '''</summary>
+        Friend Shared ReadOnly Property cbHostsRemove() As String
+            Get
+                Return ResourceManager.GetString("cbHostsRemove", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Test if the NHL.tv authentication bypass works.
+        '''</summary>
+        Friend Shared ReadOnly Property cbHostsTest() As String
+            Get
+                Return ResourceManager.GetString("cbHostsTest", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à View Hosts file content in Notepad.
+        '''</summary>
+        Friend Shared ReadOnly Property cbHostsView() As String
+            Get
+                Return ResourceManager.GetString("cbHostsView", resourceCulture)
             End Get
         End Property
         
@@ -335,33 +353,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à GB/Hour.
-        '''</summary>
-        Friend Shared ReadOnly Property formatGbHour() As String
-            Get
-                Return ResourceManager.GetString("formatGbHour", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à MB/Hour.
-        '''</summary>
-        Friend Shared ReadOnly Property formatMbHour() As String
-            Get
-                Return ResourceManager.GetString("formatMbHour", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à {0}, {1} {2}, {3}.
-        '''</summary>
-        Friend Shared ReadOnly Property formatWeekMonthDayYear() As String
-            Get
-                Return ResourceManager.GetString("formatWeekMonthDayYear", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à 1st.
         '''</summary>
         Friend Shared ReadOnly Property gamePeriod1() As String
@@ -470,6 +461,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Detection type.
+        '''</summary>
+        Friend Shared ReadOnly Property lblDetectionType() As String
+            Get
+                Return ResourceManager.GetString("lblDetectionType", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à {0} endzone camera.
         '''</summary>
         Friend Shared ReadOnly Property lblEndzoneCam() As String
@@ -484,6 +484,33 @@ Namespace My.Resources
         Friend Shared ReadOnly Property lblEnglish() As String
             Get
                 Return ResourceManager.GetString("lblEnglish", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à GB/Hour.
+        '''</summary>
+        Friend Shared ReadOnly Property lblFormatGbHour() As String
+            Get
+                Return ResourceManager.GetString("lblFormatGbHour", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à MB/Hour.
+        '''</summary>
+        Friend Shared ReadOnly Property lblFormatMbHour() As String
+            Get
+                Return ResourceManager.GetString("lblFormatMbHour", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à {0}, {1} {2}, {3}.
+        '''</summary>
+        Friend Shared ReadOnly Property lblFormatWeekMonthDayYear() As String
+            Get
+                Return ResourceManager.GetString("lblFormatWeekMonthDayYear", resourceCulture)
             End Get
         End Property
         
@@ -524,24 +551,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Download MPC.
-        '''</summary>
-        Friend Shared ReadOnly Property lblGetMpc() As String
-            Get
-                Return ResourceManager.GetString("lblGetMpc", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Download VLC.
-        '''</summary>
-        Friend Shared ReadOnly Property lblGetVlc() As String
-            Get
-                Return ResourceManager.GetString("lblGetVlc", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Home Team : {0} {1}.
         '''</summary>
         Friend Shared ReadOnly Property lblHomeTeam() As String
@@ -560,7 +569,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Server Hosts Entry.
+        '''  Recherche une chaîne localisée semblable à Hosts file.
         '''</summary>
         Friend Shared ReadOnly Property lblHosts() As String
             Get
@@ -574,6 +583,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property lblLanguage() As String
             Get
                 Return ResourceManager.GetString("lblLanguage", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Ad detection.
+        '''</summary>
+        Friend Shared ReadOnly Property lblModules() As String
+            Get
+                Return ResourceManager.GetString("lblModules", resourceCulture)
             End Get
         End Property
         
@@ -628,6 +646,42 @@ Namespace My.Resources
         Friend Shared ReadOnly Property lblNoteCdn() As String
             Get
                 Return ResourceManager.GetString("lblNoteCdn", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à OBS.
+        '''</summary>
+        Friend Shared ReadOnly Property lblObs() As String
+            Get
+                Return ResourceManager.GetString("lblObs", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Ad ending hotkey.
+        '''</summary>
+        Friend Shared ReadOnly Property lblObsAdEndingHotkey() As String
+            Get
+                Return ResourceManager.GetString("lblObsAdEndingHotkey", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Ad starting hotkey.
+        '''</summary>
+        Friend Shared ReadOnly Property lblObsAdStartingHotkey() As String
+            Get
+                Return ResourceManager.GetString("lblObsAdStartingHotkey", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Switch scenes using binded keys when an Ad is detected.
+        '''</summary>
+        Friend Shared ReadOnly Property lblObsDesc() As String
+            Get
+                Return ResourceManager.GetString("lblObsDesc", resourceCulture)
             End Get
         End Property
         
@@ -713,7 +767,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Streamlink Path.
+        '''  Recherche une chaîne localisée semblable à Streamer Path.
         '''</summary>
         Friend Shared ReadOnly Property lblSlPath() As String
             Get
@@ -722,11 +776,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Streams available during pregame.
+        '''  Recherche une chaîne localisée semblable à Spotify.
         '''</summary>
-        Friend Shared ReadOnly Property lblStreamAvailableDuringPregame() As String
+        Friend Shared ReadOnly Property lblSpotify() As String
             Get
-                Return ResourceManager.GetString("lblStreamAvailableDuringPregame", resourceCulture)
+                Return ResourceManager.GetString("lblSpotify", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Play/Pause Spotify when an Ad is detected.
+        '''</summary>
+        Friend Shared ReadOnly Property lblSpotifyDesc() As String
+            Get
+                Return ResourceManager.GetString("lblSpotifyDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Streams available at game time.
+        '''</summary>
+        Friend Shared ReadOnly Property lblStreamAvailableAtGameTime() As String
+            Get
+                Return ResourceManager.GetString("lblStreamAvailableAtGameTime", resourceCulture)
             End Get
         End Property
         
@@ -794,6 +866,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à [CENSORED_STREAM_URL].
+        '''</summary>
+        Friend Shared ReadOnly Property msgCensoredStream() As String
+            Get
+                Return ResourceManager.GetString("msgCensoredStream", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Version {0} is available! Changes: {1}{2}{3}.
         '''</summary>
         Friend Shared ReadOnly Property msgChangeLog() As String
@@ -821,38 +902,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Need help?.
-        '''</summary>
-        Friend Shared ReadOnly Property msgDiySteps() As String
-            Get
-                Return ResourceManager.GetString("msgDiySteps", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à This line needs to be insert in your hosts file : {0}{1} {2}{0}Click on &apos;Open Hosts File&apos; to open the Hosts file and paste (Ctrl+V) that entry line at the end of your Hosts file.{0}Do you want to copy that entry line to your clipboard ?.
-        '''</summary>
-        Friend Shared ReadOnly Property msgDiyStepsText() As String
-            Get
-                Return ResourceManager.GetString("msgDiyStepsText", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Downloading: Game schedule for {0} to {1}.
-        '''</summary>
-        Friend Shared ReadOnly Property msgDownloadingJsonFile() As String
-            Get
-                Return ResourceManager.GetString("msgDownloadingJsonFile", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à An error happened! See the console for more details.{0}Click on [?] button in the top-right corner to view NHLGames documentation for quick support in the Support section (App and Player).{0}You can also copy the console log using &apos;Copy to clipboard&apos; button and paste it in a new thread on NHLGames subreddit for help. Use the link in the bottom-left corner to get there..
         '''</summary>
         Friend Shared ReadOnly Property msgErrorGeneralText() As String
             Get
                 Return ResourceManager.GetString("msgErrorGeneralText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Exists.
+        '''</summary>
+        Friend Shared ReadOnly Property msgExists() As String
+            Get
+                Return ResourceManager.GetString("msgExists", resourceCulture)
             End Get
         End Property
         
@@ -871,15 +934,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgFetching() As String
             Get
                 Return ResourceManager.GetString("msgFetching", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Fetching: Saved game schedule for {0} ({1}).
-        '''</summary>
-        Friend Shared ReadOnly Property msgFetchingSavedSchedule() As String
-            Get
-                Return ResourceManager.GetString("msgFetchingSavedSchedule", resourceCulture)
             End Get
         End Property
         
@@ -907,6 +961,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgHostnameSet() As String
             Get
                 Return ResourceManager.GetString("msgHostnameSet", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à The NHL.tv authentication bypass line &apos;&apos;{0}&apos;&apos; was copied to your clipboard. Use CTRL+V to paste it in your Hosts file..
+        '''</summary>
+        Friend Shared ReadOnly Property msgHostsCopyEntry() As String
+            Get
+                Return ResourceManager.GetString("msgHostsCopyEntry", resourceCulture)
             End Get
         End Property
         
@@ -979,15 +1042,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgRefreshing() As String
             Get
                 Return ResourceManager.GetString("msgRefreshing", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Remove our server from your hosts file.
-        '''</summary>
-        Friend Shared ReadOnly Property msgRemoveHost() As String
-            Get
-                Return ResourceManager.GetString("msgRemoveHost", resourceCulture)
             End Get
         End Property
         
@@ -1091,15 +1145,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Test the hosts file.
-        '''</summary>
-        Friend Shared ReadOnly Property msgTestHosts() As String
-            Get
-                Return ResourceManager.GetString("msgTestHosts", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Test ability to write to this directory.
         '''</summary>
         Friend Shared ReadOnly Property msgTestTxtContent() As String
@@ -1154,6 +1199,87 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Fullscreen: Detects ads based on NHL Game Center backgrounds while in fullscreen.
+        '''</summary>
+        Friend Shared ReadOnly Property rbFullscreenDetection() As String
+            Get
+                Return ResourceManager.GetString("rbFullscreenDetection", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à 60 fps.
+        '''</summary>
+        Friend Shared ReadOnly Property rbQuality60fps() As String
+            Get
+                Return ResourceManager.GetString("rbQuality60fps", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Good.
+        '''</summary>
+        Friend Shared ReadOnly Property rbQualityGood() As String
+            Get
+                Return ResourceManager.GetString("rbQualityGood", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Great.
+        '''</summary>
+        Friend Shared ReadOnly Property rbQualityGreat() As String
+            Get
+                Return ResourceManager.GetString("rbQualityGreat", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Low.
+        '''</summary>
+        Friend Shared ReadOnly Property rbQualityLow() As String
+            Get
+                Return ResourceManager.GetString("rbQualityLow", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Mobile.
+        '''</summary>
+        Friend Shared ReadOnly Property rbQualityMobile() As String
+            Get
+                Return ResourceManager.GetString("rbQualityMobile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Normal.
+        '''</summary>
+        Friend Shared ReadOnly Property rbQualityNormal() As String
+            Get
+                Return ResourceManager.GetString("rbQualityNormal", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Superb.
+        '''</summary>
+        Friend Shared ReadOnly Property rbQualitySuperb() As String
+            Get
+                Return ResourceManager.GetString("rbQualitySuperb", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Volume: Detects ads based on the volume of your media player playing the game.
+        '''</summary>
+        Friend Shared ReadOnly Property rbVolumeDetection() As String
+            Get
+                Return ResourceManager.GetString("rbVolumeDetection", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Console.
         '''</summary>
         Friend Shared ReadOnly Property tabConsole() As String
@@ -1190,11 +1316,47 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à NHLGames Official Bug Report {1}{0}{0}OS : {2} {3}{0}{0}UI loaded : {4}{0}{0}Domain resolved : {5}{0}{0}Server IP found : {6}{0}{0}Selected hostname : {7}{0}{0}Selected player : {8}{0}{0}Streamlink path : {9} [=UI:{10}]{0}{0}VLC path : {11} [=UI:{12}]{0}{0}MPC path : {13} [=UI:{14}]{0}{0}MPV path : {15} [=UI:{16}]{0}{0}Console log : {0}{0}{17}.
+        '''  Recherche une chaîne localisée semblable à NHLGames Official Bug Report {1}{0}{0}OS : {2} {3}{0}{0}UI loaded : {4}{0}{0}Domain resolved : {5}{0}{0}Server IP found : {6}{0}{0}Selected hostname : {7}{0}{0}Selected player : {8}{0}{0}Streamlink path : {9} [=UI:{10}] [{11}]{0}{0}VLC path : {12} [=UI:{13}] [{14}]{0}{0}MPC path : {15} [=UI:{16}] [{17]{0}{0}MPV path : {18} [=UI:{19}] [{20}]{0}{0}Console log : {0}{0}{21}.
         '''</summary>
         Friend Shared ReadOnly Property textCopyConsole() As String
             Get
                 Return ResourceManager.GetString("textCopyConsole", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Browse.
+        '''</summary>
+        Friend Shared ReadOnly Property tipBrowse() As String
+            Get
+                Return ResourceManager.GetString("tipBrowse", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Download MPC.
+        '''</summary>
+        Friend Shared ReadOnly Property tipGetMpc() As String
+            Get
+                Return ResourceManager.GetString("tipGetMpc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Download VLC.
+        '''</summary>
+        Friend Shared ReadOnly Property tipGetVlc() As String
+            Get
+                Return ResourceManager.GetString("tipGetVlc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Execute action.
+        '''</summary>
+        Friend Shared ReadOnly Property tipHostsExecuteAction() As String
+            Get
+                Return ResourceManager.GetString("tipHostsExecuteAction", resourceCulture)
             End Get
         End Property
     End Class

@@ -4,6 +4,8 @@ Imports NHLGames.My.Resources
 Namespace Utilities
     Public Class Common
 
+        Public Const UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316"
+
         Public Shared Function GetRandomString(ByVal intLength As Integer)
             Const s As String = "abcdefghijklmnopqrstuvwxyz0123456789"
             Dim r As New Random
@@ -21,7 +23,7 @@ Namespace Utilities
                 Dim myHttpWebRequest As HttpWebRequest
                 If httpWebRequest Is Nothing Then
                     myHttpWebRequest = CType(WebRequest.Create(address), HttpWebRequest)
-                    myHttpWebRequest.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316"
+                    myHttpWebRequest.UserAgent = UserAgent
                 Else 
                     myHttpWebRequest = httpWebRequest
                 End If

@@ -1,6 +1,5 @@
 ﻿Imports System.IO
 Imports System.Net
-Imports NHLGames.My.Resources
 Imports NHLGames.Objects
 
 Namespace Utilities
@@ -25,15 +24,23 @@ Namespace Utilities
         End Sub
 
         Public Shared Sub SetLanguage()
+            Dim lstHostsFileAction = New String() {
+                NHLGamesMetro.RmText.GetString("cbHostsTest"),
+                NHLGamesMetro.RmText.GetString("cbHostsAdd"),
+                NHLGamesMetro.RmText.GetString("cbHostsRemove"),
+                NHLGamesMetro.RmText.GetString("cbHostsView"),
+                NHLGamesMetro.RmText.GetString("cbHostsEntry"),
+                NHLGamesMetro.RmText.GetString("cbHostsLocation")
+            }
+
             'Main
             Form.tabMenu.TabPages.Item(0).Text = NHLGamesMetro.RmText.GetString("tabGames")
             Form.tabMenu.TabPages.Item(1).Text = NHLGamesMetro.RmText.GetString("tabSettings")
             Form.tabMenu.TabPages.Item(2).Text = NHLGamesMetro.RmText.GetString("tabConsole")
             Form.tabMenu.TabPages.Item(3).Text = NHLGamesMetro.RmText.GetString("tabModules")
 
+
             Form.lblNoGames.Text = NHLGamesMetro.RmText.GetString("lblNoGames")
-       
-            'Games
 
             'Settings
             Form.lblShowScores.Text = NHLGamesMetro.RmText.GetString("lblShowScores")
@@ -56,134 +63,76 @@ Namespace Utilities
             Form.chkShowLiveScores.Text = NHLGamesMetro.RmText.GetString("chkShowLiveScores")
             Form.chkShowSeriesRecord.Text = NHLGamesMetro.RmText.GetString("chkShowSeriesRecord")
 
-            Form.btnTestHosts.Text = NHLGamesMetro.RmText.GetString("btnTestHosts")
-            Form.btnOpenHostsFile.Text = NHLGamesMetro.RmText.GetString("btnOpenHostsFile")
-            Form.btnAddHosts.Text = NHLGamesMetro.RmText.GetString("btnAddHosts")
-            Form.btnCleanHosts.Text = NHLGamesMetro.RmText.GetString("btnCleanHosts")
+            Form.rbQual1.Text = NHLGamesMetro.RmText.GetString("rbQualityMobile")
+            Form.rbQual2.Text = NHLGamesMetro.RmText.GetString("rbQualityLow")
+            Form.rbQual3.Text = NHLGamesMetro.RmText.GetString("rbQualityNormal")
+            Form.rbQual4.Text = NHLGamesMetro.RmText.GetString("rbQualityGood")
+            Form.rbQual5.Text = NHLGamesMetro.RmText.GetString("rbQualityGreat")
+            Form.rbQual6.Text = NHLGamesMetro.RmText.GetString("rbQualitySuperb")
+            Form.chk60.Text = NHLGamesMetro.RmText.GetString("rbQuality60fps")
 
-            Form.SettingsToolTip.SetToolTip(Form.lnkDiySteps, NHLGamesMetro.RmText.GetString("msgDiySteps"))
-            Form.SettingsToolTip.SetToolTip(Form.lnkGetVlc, NHLGamesMetro.RmText.GetString("lblGetVlc"))
-            Form.SettingsToolTip.SetToolTip(Form.lnkGetMpc, NHLGamesMetro.RmText.GetString("lblGetMpc"))
-            Form.SettingsToolTip.SetToolTip(Form.btnTestHosts, NHLGamesMetro.RmText.GetString("msgTestHosts"))
-            Form.SettingsToolTip.SetToolTip(Form.btnOpenHostsFile, NHLGamesMetro.RmText.GetString("msgViewHosts"))
-            Form.SettingsToolTip.SetToolTip(Form.btnAddHosts, NHLGamesMetro.RmText.GetString("msgAddHost"))
-            Form.SettingsToolTip.SetToolTip(Form.btnCleanHosts, NHLGamesMetro.RmText.GetString("msgRemoveHost"))
+            Form.cbHostsFileActions.Items.Clear()
+            Form.cbHostsFileActions.Items.AddRange(lstHostsFileAction)
+            Form.cbHostsFileActions.SelectedIndex = 0
+
+            Form.SettingsToolTip.SetToolTip(Form.lnkGetVlc, NHLGamesMetro.RmText.GetString("tipGetVlc"))
+            Form.SettingsToolTip.SetToolTip(Form.lnkGetMpc, NHLGamesMetro.RmText.GetString("tipGetMpc"))
+            Form.SettingsToolTip.SetToolTip(Form.btnHostsFileActions, NHLGamesMetro.RmText.GetString("tipHostsExecuteAction"))
+            Form.SettingsToolTip.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.SettingsToolTip.SetToolTip(Form.btnMpvPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.SettingsToolTip.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.SettingsToolTip.SetToolTip(Form.btnstreamlinkPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.SettingsToolTip.SetToolTip(Form.btnOuput, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.SettingsToolTip.SetToolTip(Form.rbQual1, "300" & NHLGamesMetro.RmText.GetString("tipFormatMbHour"))
+            Form.SettingsToolTip.SetToolTip(Form.rbQual2, "500" & NHLGamesMetro.RmText.GetString("tipFormatMbHour"))
+            Form.SettingsToolTip.SetToolTip(Form.rbQual3, "700" & NHLGamesMetro.RmText.GetString("tipFormatMbHour"))
+            Form.SettingsToolTip.SetToolTip(Form.rbQual4, "950" & NHLGamesMetro.RmText.GetString("tipFormatMbHour"))
+            Form.SettingsToolTip.SetToolTip(Form.rbQual5, "1.3" & NHLGamesMetro.RmText.GetString("tipFormatGbHour"))
+            Form.SettingsToolTip.SetToolTip(Form.rbQual6, "1.8" & NHLGamesMetro.RmText.GetString("tipFormatGbHour"))
+            Form.SettingsToolTip.SetToolTip(Form.chk60, "+700" & NHLGamesMetro.RmText.GetString("tipFormatMbHour") &" (+40%)")
         
             'Console
             Form.btnCopyConsole.Text = NHLGamesMetro.RmText.GetString("btnCopyConsole")
             Form.btnClearConsole.Text = NHLGamesMetro.RmText.GetString("btnClearConsole")
 
+            'Modules
+            Form.lblModules.Text = NHLGamesMetro.RmText.GetString("lblModules")
+            Form.lblDetectionType.Text = NHLGamesMetro.RmText.GetString("lblDetectionType")
+            Form.lblSpotify.Text = NHLGamesMetro.RmText.GetString("lblSpotify")
+            Form.lblSpotifyDesc.Text = NHLGamesMetro.RmText.GetString("lblSpotifyDesc")
+            Form.lblOBS.Text = NHLGamesMetro.RmText.GetString("lblObs")
+            Form.lblObsDesc.Text = NHLGamesMetro.RmText.GetString("lblObsDesc")
+            Form.lblObsAdEndingHotkey.Text = NHLGamesMetro.RmText.GetString("lblObsAdEndingHotkey")
+            Form.lblObsAdStartingHotkey.Text = NHLGamesMetro.RmText.GetString("lblObsAdStartingHotkey")
+            Form.rbVolumeDetection.Text = NHLGamesMetro.RmText.GetString("rbVolumeDetection")
+            Form.rbFullscreenDetection.Text = NHLGamesMetro.RmText.GetString("rbFullscreenDetection")
+
             'Calendar
             Form.flpCalender.Controls.Clear()
             Form.flpCalender.Controls.Add(New Controls.CalenderControl)
-        
         End Sub
 
         Public Shared Sub SetSettings()
-
-            Form.SettingsToolTip.SetToolTip(Form.rbQual1, "300" & NHLGamesMetro.RmText.GetString("formatMbHour"))
-            Form.SettingsToolTip.SetToolTip(Form.rbQual2, "500" & NHLGamesMetro.RmText.GetString("formatMbHour"))
-            Form.SettingsToolTip.SetToolTip(Form.rbQual3, "700" & NHLGamesMetro.RmText.GetString("formatMbHour"))
-            Form.SettingsToolTip.SetToolTip(Form.rbQual4, "950" & NHLGamesMetro.RmText.GetString("formatMbHour"))
-            Form.SettingsToolTip.SetToolTip(Form.rbQual5, "1.3" & NHLGamesMetro.RmText.GetString("formatGbHour"))
-            Form.SettingsToolTip.SetToolTip(Form.rbQual6, "1.8" & NHLGamesMetro.RmText.GetString("formatGbHour"))
-            Form.SettingsToolTip.SetToolTip(Form.chk60, "+700" & NHLGamesMetro.RmText.GetString("formatMbHour") &" (+40%)")
-
-            Dim mpcPath As String = ApplicationSettings.Read(Of String)(SettingsEnum.MpcPath, String.Empty)
-            Dim mpcPathCurrent As String = PathFinder.GetPathOfMpc
-            If mpcPath.Equals(String.Empty) And Not mpcPathCurrent.Equals(String.Empty) Then
-                ApplicationSettings.SetValue(SettingsEnum.MpcPath, mpcPathCurrent)
-                mpcPath = mpcPathCurrent
-            ElseIf mpcPath <> mpcPathCurrent And Not mpcPathCurrent.Equals(String.Empty) Then
-                ApplicationSettings.SetValue(SettingsEnum.MpcPath, mpcPathCurrent)
-                mpcPath = mpcPathCurrent
-            End If
-            If Not File.Exists(mpcPath) Then
-                mpcPath = String.Empty
-                ApplicationSettings.SetValue(SettingsEnum.MpcPath, mpcPath)
-            End If
-            Form.txtMPCPath.Text = mpcPath
-
-            Dim vlcPath As String = ApplicationSettings.Read(Of String)(SettingsEnum.VlcPath, String.Empty)
-            Dim vlcPathCurrent As String = PathFinder.GetPathOfVlc
-            If vlcPath.Equals(String.Empty) And Not vlcPathCurrent.Equals(String.Empty) Then
-                ApplicationSettings.SetValue(SettingsEnum.VlcPath, vlcPathCurrent)
-                vlcPath = vlcPathCurrent
-            ElseIf vlcPath <> vlcPathCurrent And Not vlcPathCurrent.Equals(String.Empty) Then
-                ApplicationSettings.SetValue(SettingsEnum.VlcPath, vlcPathCurrent)
-                vlcPath = vlcPathCurrent
-            End If
-            If Not File.Exists(vlcPath) Then
-                vlcPath = String.Empty
-                ApplicationSettings.SetValue(SettingsEnum.VlcPath, vlcPath)
-            End If
-            Form.txtVLCPath.Text = vlcPath
-
-            Dim mpvPath As String = ApplicationSettings.Read(Of String)(SettingsEnum.MpvPath, String.Empty)
-            Dim mpvPathCurrent As String = Path.Combine(Application.StartupPath, "mpv\mpv.exe")
-            If mpvPath.Equals(String.Empty) Then
-                ApplicationSettings.SetValue(SettingsEnum.MpvPath, mpvPathCurrent)
-                mpvPath = mpvPathCurrent
-            ElseIf mpvPath <> mpvPathCurrent Then
-                If File.Exists(mpvPathCurrent) Then
-                    ApplicationSettings.SetValue(SettingsEnum.MpvPath, mpvPathCurrent)
-                    mpvPath = mpvPathCurrent
-                End If
-            End If
-            If Not File.Exists(mpvPath) Then
-                mpvPath = String.Empty
-                ApplicationSettings.SetValue(SettingsEnum.MpvPath, mpvPath)
-            End If
-            Form.txtMpvPath.Text = mpvPath
-
-            Dim streamlinkPath As String = ApplicationSettings.Read(Of String)(SettingsEnum.StreamlinkPath, String.Empty)
-            Dim streamlinkPathCurrent As String = Path.Combine(Application.StartupPath, "streamlink-0.6.0\streamlink.exe")
-            If streamlinkPath.Equals(String.Empty) Then
-                ApplicationSettings.SetValue(SettingsEnum.StreamlinkPath, streamlinkPathCurrent)
-                streamlinkPath = streamlinkPathCurrent
-            ElseIf streamlinkPath <> streamlinkPathCurrent Then
-                If File.Exists(streamlinkPathCurrent) Then
-                    ApplicationSettings.SetValue(SettingsEnum.StreamlinkPath, streamlinkPathCurrent)
-                    streamlinkPath = streamlinkPathCurrent
-                End If
-            End If
-            If Not File.Exists(streamlinkPath) Then
-                streamlinkPath = String.Empty
-                ApplicationSettings.SetValue(SettingsEnum.StreamlinkPath, streamlinkPath)
-            End If
-            Form.txtStreamlinkPath.Text = streamlinkPath
+            Form.txtMPCPath.Text = GetApplication(SettingsEnum.MpcPath, PathFinder.GetPathOfMpc())
+            Form.txtVLCPath.Text = GetApplication(SettingsEnum.VlcPath, PathFinder.GetPathOfVlc())
+            Form.txtMpvPath.Text = GetApplication(SettingsEnum.MpvPath, Path.Combine(Application.StartupPath, "mpv\mpv.exe"))
+            Form.txtStreamlinkPath.Text = GetApplication(SettingsEnum.StreamlinkPath, Path.Combine(Application.StartupPath, "streamlink-0.6.0\streamlink.exe"))
 
             Form.chkShowFinalScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, True)
             Form.chkShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, True)
             Form.chkShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, True)
 
-            Dim playersPath As String() = New String() {mpvPath, mpcPath, vlcPath}
+            Dim playersPath As String() = New String() {Form.txtMpvPath.Text, Form.txtMPCPath.Text, Form.txtVLCPath.Text}
             Dim watchArgs As GameWatchArguments = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
 
-            If ValidWatchArgs(watchArgs, playersPath, streamlinkPath) Then
+            If ValidWatchArgs(watchArgs, playersPath, Form.txtStreamlinkPath.Text) Then
                 Player.RenewArgs(True)
                 watchArgs = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
             End If
 
-            Dim languageListFromConfig As String = ApplicationSettings.Read(Of String)(SettingsEnum.LanguageList, String.Empty)
-            Dim languageList As String() = languageListFromConfig.Split(";")
-            For Each lang In languageList
-                Form.cbLanguage.Items.Add(lang)
-            Next
-            Form.cbLanguage.SelectedItem = ApplicationSettings.Read(Of String)(SettingsEnum.SelectedLanguage, String.Empty)
-            If Form.cbLanguage.SelectedItem Is Nothing Then
-                Form.cbLanguage.SelectedItem = Form.cbLanguage.Items(0)
-            End If
+            PopulateComboBox(Form.cbLanguage, SettingsEnum.SelectedLanguage, SettingsEnum.LanguageList)
+            PopulateComboBox(Form.cbServers, SettingsEnum.SelectedServer, settingsenum.ServerList)
 
-            Dim serverListFromConfig As String = ApplicationSettings.Read(Of String)(SettingsEnum.ServerList, String.Empty)
-            Dim serverList As String() = serverListFromConfig.Split(";")
-            For Each server In serverList
-                Form.cbServers.Items.Add(server)
-            Next
-            Form.cbServers.SelectedItem = ApplicationSettings.Read(Of String)(SettingsEnum.SelectedServer, String.Empty)
-            If Form.cbServers.SelectedItem Is Nothing Then
-                Form.cbServers.SelectedItem = Form.cbServers.Items(0)
-            End If
             NHLGamesMetro.ServerIp = Dns.GetHostEntry(Form.cbServers.SelectedItem.ToString()).AddressList.First.ToString()
             NHLGamesMetro.HostName = Form.cbServers.SelectedItem.ToString()
 
@@ -196,16 +145,11 @@ Namespace Utilities
                     HostsFile.AddEntry(NHLGamesMetro.ServerIp,  NHLGamesMetro.DomainName)
                 Else
                     Form.tabMenu.SelectedIndex = 1
-                    NHLGamesMetro.DiySteps()
                 End If
             End If
 
-            Form.lblNoGames.Location = New Point(
-                ((Form.flpGames.Width - Form.lblNoGames.Width) / 2), 
-                Form.flpGames.Location.Y + 175)
-            Form.spnLoading.Location = New Point( 
-                ((Form.flpGames.Width - Form.lblNoGames.Width) / 2) + 42, 
-                Form.flpGames.Location.Y + 150)
+            Form.lblNoGames.Location = New Point(((Form.flpGames.Width - Form.lblNoGames.Width) / 2),  Form.flpGames.Location.Y + 175)
+            Form.spnLoading.Location = New Point(((Form.flpGames.Width - Form.lblNoGames.Width) / 2) + 42, Form.flpGames.Location.Y + 150)
 
             Form.spnLoading.Value = NHLGamesMetro.ProgressValue
             Form.spnLoading.Maximum = NHLGamesMetro.ProgressMaxValue
@@ -215,10 +159,36 @@ Namespace Utilities
             
             NHLGamesMetro.LabelDate = Form.lblDate
             NHLGamesMetro.GamesDownloadedTime = Now
+        End Sub
 
-            'remove wip tab modules
-            Form.tabMenu.TabPages.RemoveAt(4)
+        Private Shared Function GetApplication(varPath As SettingsEnum, currentPath As String)
+            Dim savedPathFromConfig As String = ApplicationSettings.Read(Of String)(varPath, String.Empty)
+            Dim currentPathIfFound As String = currentPath
 
+            If savedPathFromConfig.Equals(String.Empty) And Not currentPathIfFound.Equals(String.Empty) Then
+                ApplicationSettings.SetValue(varPath, currentPathIfFound)
+                savedPathFromConfig = currentPathIfFound
+            ElseIf savedPathFromConfig <> currentPathIfFound And Not currentPathIfFound.Equals(String.Empty) Then
+                ApplicationSettings.SetValue(varPath, currentPathIfFound)
+                savedPathFromConfig = currentPathIfFound
+            End If
+
+            If Not File.Exists(savedPathFromConfig) Then
+                savedPathFromConfig = String.Empty
+                ApplicationSettings.SetValue(varPath, savedPathFromConfig)
+            End If
+            return savedPathFromConfig
+        End Function
+
+        Private Shared Sub PopulateComboBox(cb As MetroFramework.Controls.MetroComboBox, selectedItem As SettingsEnum, items As SettingsEnum)
+            Dim cbItemsFromConfig As String = ApplicationSettings.Read(Of String)(items, String.Empty)
+
+            cb.Items.AddRange(cbItemsFromConfig.Split(";"))
+
+            cb.SelectedItem = ApplicationSettings.Read(Of String)(selectedItem, String.Empty)
+            If cb.SelectedItem Is Nothing Then
+                cb.SelectedItem = cb.Items(0)
+            End If
         End Sub
 
         Private Shared Function ValidWatchArgs(watchArgs As GameWatchArguments, playersPath As String(), streamLinkPath As String) As Boolean
@@ -239,30 +209,18 @@ Namespace Utilities
         End Function
 
         Private Shared Sub BindWatchArgsToForm(watchArgs As GameWatchArguments)
-
             If watchArgs IsNot Nothing Then
                 Form.chk60.Checked = watchArgs.Is60Fps
 
-                Select Case watchArgs.Quality
-                    Case "720p"
-                        Form.rbQual6.Checked = True
-                    Case "540p"
-                        Form.rbQual5.Checked = True
-                    Case "504p"
-                        Form.rbQual4.Checked = True
-                    Case "360p"
-                        Form.rbQual3.Checked = True
-                    Case "288p"
-                        Form.rbQual2.Checked = True
-                    Case "224p"
-                        Form.rbQual1.Checked = True
-                End Select
+                Form.rbQual6.Checked = watchArgs.Quality = StreamQuality.Superb
+                Form.rbQual5.Checked = watchArgs.Quality = StreamQuality.Great
+                Form.rbQual4.Checked = watchArgs.Quality = StreamQuality.Good
+                Form.rbQual3.Checked = watchArgs.Quality = StreamQuality.Normal
+                Form.rbQual2.Checked = watchArgs.Quality = StreamQuality.Low
+                Form.rbQual1.Checked = watchArgs.Quality = StreamQuality.Mobile
 
-                If watchArgs.Cdn = "akc" Then
-                    Form.rbAkamai.Checked = True
-                ElseIf watchArgs.Cdn = "l3c" Then
-                    Form.rbLevel3.Checked = True
-                End If
+                Form.rbAkamai.Checked = watchArgs.Cdn = CdnType.Akc
+                Form.rbLevel3.Checked = watchArgs.Cdn = CdnType.L3C
 
                 Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc
                 Form.rbMPC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpc

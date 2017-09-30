@@ -117,29 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnAddHosts" xml:space="preserve">
-    <value>3) Add Entry</value>
-    <comment>Settings tab</comment>
-  </data>
-  <data name="btnCleanHosts" xml:space="preserve">
-    <value>4) Remove Entries</value>
-    <comment>Settings tab</comment>
-  </data>
   <data name="btnClearConsole" xml:space="preserve">
     <value>Clear</value>
-    <comment>Settings tab</comment>
+    <comment>Console tab</comment>
   </data>
   <data name="btnCopyConsole" xml:space="preserve">
     <value>Copy to Clipboard</value>
-    <comment>Settings tab</comment>
-  </data>
-  <data name="btnOpenHostsFile" xml:space="preserve">
-    <value>2) View Hosts</value>
-    <comment>Settings tab</comment>
-  </data>
-  <data name="btnTestHosts" xml:space="preserve">
-    <value>1) Test</value>
-    <comment>Settings tab</comment>
+    <comment>Console tab</comment>
   </data>
   <data name="chkShowFinalScores" xml:space="preserve">
     <value>Final Scores</value>
@@ -225,11 +209,11 @@
     <value>GM {0}: {1}</value>
     <comment>Game panel</comment>
   </data>
-  <data name="lblGetMpc" xml:space="preserve">
+  <data name="tipGetMpc" xml:space="preserve">
     <value>Download MPC</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblGetVlc" xml:space="preserve">
+  <data name="tipGetVlc" xml:space="preserve">
     <value>Download VLC</value>
     <comment>Settings tab</comment>
   </data>
@@ -242,7 +226,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblHosts" xml:space="preserve">
-    <value>Server Hosts Entry</value>
+    <value>Hosts file</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblMpcPath" xml:space="preserve">
@@ -298,11 +282,11 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblSlPath" xml:space="preserve">
-    <value>Streamlink Path</value>
+    <value>Streamer Path</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblStreamAvailableDuringPregame" xml:space="preserve">
-    <value>Streams available during pregame</value>
+  <data name="lblStreamAvailableAtGameTime" xml:space="preserve">
+    <value>Streams available at game time</value>
     <comment>Game panel</comment>
   </data>
   <data name="lblStreamerArgs" xml:space="preserve">
@@ -335,22 +319,10 @@
   </data>
   <data name="msgChangeLog" xml:space="preserve">
     <value>Version {0} is available! Changes: {1}{2}{3}</value>
-    <comment>Version</comment>
+    <comment>Message</comment>
   </data>
   <data name="msgCleanHostsFile" xml:space="preserve">
     <value>Hosts: Removing existing entries from hosts file</value>
-    <comment>Console</comment>
-  </data>
-  <data name="msgDiySteps" xml:space="preserve">
-    <value>Need help?</value>
-    <comment>Message</comment>
-  </data>
-  <data name="msgDiyStepsText" xml:space="preserve">
-    <value>This line needs to be insert in your hosts file : {0}{1} {2}{0}Click on 'Open Hosts File' to open the Hosts file and paste (Ctrl+V) that entry line at the end of your Hosts file.{0}Do you want to copy that entry line to your clipboard ?</value>
-    <comment>Message</comment>
-  </data>
-  <data name="msgDownloadingJsonFile" xml:space="preserve">
-    <value>Downloading: Game schedule for {0} to {1}</value>
     <comment>Console</comment>
   </data>
   <data name="msgErrorGeneralText" xml:space="preserve">
@@ -363,10 +335,6 @@
   </data>
   <data name="msgGettingSchedule" xml:space="preserve">
     <value>{0}: Game schedule for {1} from NHL.tv</value>
-    <comment>Console</comment>
-  </data>
-  <data name="msgFetchingSavedSchedule" xml:space="preserve">
-    <value>Fetching: Saved game schedule for {0} ({1})</value>
     <comment>Console</comment>
   </data>
   <data name="msgGamesFound" xml:space="preserve">
@@ -474,14 +442,14 @@
     <comment>Main</comment>
   </data>
   <data name="textCopyConsole" xml:space="preserve">
-    <value>NHLGames Official Bug Report {1}{0}{0}OS : {2} {3}{0}{0}UI loaded : {4}{0}{0}Domain resolved : {5}{0}{0}Server IP found : {6}{0}{0}Selected hostname : {7}{0}{0}Selected player : {8}{0}{0}Streamlink path : {9} [=UI:{10}]{0}{0}VLC path : {11} [=UI:{12}]{0}{0}MPC path : {13} [=UI:{14}]{0}{0}MPV path : {15} [=UI:{16}]{0}{0}Console log : {0}{0}{17}</value>
+    <value>NHLGames Official Bug Report {1}{0}{0}OS : {2} {3}{0}{0}UI loaded : {4}{0}{0}Domain resolved : {5}{0}{0}Server IP found : {6}{0}{0}Selected hostname : {7}{0}{0}Selected player : {8}{0}{0}Streamlink path : {9} [=UI:{10}] [{11}]{0}{0}VLC path : {12} [=UI:{13}] [{14}]{0}{0}MPC path : {15} [=UI:{16}] [{17]{0}{0}MPV path : {18} [=UI:{19}] [{20}]{0}{0}Console log : {0}{0}{21}</value>
     <comment>Console</comment>
   </data>
-  <data name="formatGbHour" xml:space="preserve">
+  <data name="lblFormatGbHour" xml:space="preserve">
     <value>GB/Hour</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="formatMbHour" xml:space="preserve">
+  <data name="lblFormatMbHour" xml:space="preserve">
     <value>MB/Hour</value>
     <comment>Settings tab</comment>
   </data>
@@ -549,14 +517,6 @@
     <value>No game found</value>
     <comment>Games tab</comment>
   </data>
-  <data name="msgRemoveHost" xml:space="preserve">
-    <value>Remove our server from your hosts file</value>
-    <comment>Settings</comment>
-  </data>
-  <data name="msgTestHosts" xml:space="preserve">
-    <value>Test the hosts file</value>
-    <comment>Settings</comment>
-  </data>
   <data name="errorExceptionDetection" xml:space="preserve">
     <value>exception</value>
     <comment>Console</comment>
@@ -569,7 +529,7 @@
     <value>[{0}] </value>
     <comment>Console</comment>
   </data>
-  <data name="formatWeekMonthDayYear" xml:space="preserve">
+  <data name="lblFormatWeekMonthDayYear" xml:space="preserve">
     <value>{0}, {1} {2}, {3}</value>
     <comment>Games tab</comment>
   </data>
@@ -605,10 +565,6 @@
     <value>Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this.</value>
     <comment>Console</comment>
   </data>
-  <data name="msgFetching" xml:space="preserve">
-    <value>Fetching</value>
-    <comment>Console</comment>
-  </data>
   <data name="msgRefreshing" xml:space="preserve">
     <value>Refreshing</value>
     <comment>Console</comment>
@@ -619,5 +575,121 @@
   </data>
   <data name="msgStartingStreamlink" xml:space="preserve">
     <value>Starting: Streamlink {0}</value>
+  </data>
+  <data name="msgExists" xml:space="preserve">
+    <value>Exists</value>
+    <comment>Console</comment>
+  </data>
+  <data name="rbQualityGood" xml:space="preserve">
+    <value>Good</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="rbQualityGreat" xml:space="preserve">
+    <value>Great</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="rbQualityLow" xml:space="preserve">
+    <value>Low</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="rbQualityMobile" xml:space="preserve">
+    <value>Mobile</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="rbQualityNormal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="rbQualitySuperb" xml:space="preserve">
+    <value>Superb</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="msgCensoredStream" xml:space="preserve">
+    <value>[CENSORED_STREAM_URL]</value>
+    <comment>Console</comment>
+  </data>
+  <data name="cbHostsAdd" xml:space="preserve">
+    <value>Add the NHL.tv authentication bypass line to Hosts file</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbHostsEntry" xml:space="preserve">
+    <value>Copy to clipboard the authentication bypass line</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbHostsLocation" xml:space="preserve">
+    <value>Open Hosts file location</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbHostsRemove" xml:space="preserve">
+    <value>Remove the NHL.tv authentication bypass line from Hosts file</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbHostsTest" xml:space="preserve">
+    <value>Test if the NHL.tv authentication bypass works</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbHostsView" xml:space="preserve">
+    <value>View Hosts file content in Notepad</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="lblDetectionType" xml:space="preserve">
+    <value>Detection type</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblModules" xml:space="preserve">
+    <value>Ad detection</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblObs" xml:space="preserve">
+    <value>OBS</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblObsAdEndingHotkey" xml:space="preserve">
+    <value>Ad ending hotkey</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblObsAdStartingHotkey" xml:space="preserve">
+    <value>Ad starting hotkey</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblObsDesc" xml:space="preserve">
+    <value>Switch scenes using binded keys when an Ad is detected</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblSpotify" xml:space="preserve">
+    <value>Spotify</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblSpotifyDesc" xml:space="preserve">
+    <value>Play/Pause Spotify when an Ad is detected</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="msgFetching" xml:space="preserve">
+    <value>Fetching</value>
+    <comment>Console</comment>
+  </data>
+  <data name="rbFullscreenDetection" xml:space="preserve">
+    <value>Fullscreen: Detects ads based on NHL Game Center backgrounds while in fullscreen</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="rbQuality60fps" xml:space="preserve">
+    <value>60 fps</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="rbVolumeDetection" xml:space="preserve">
+    <value>Volume: Detects ads based on the volume of your media player playing the game</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="tipBrowse" xml:space="preserve">
+    <value>Browse</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="tipHostsExecuteAction" xml:space="preserve">
+    <value>Execute action</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="msgHostsCopyEntry" xml:space="preserve">
+    <value>The NHL.tv authentication bypass line ''{0}'' was copied to your clipboard. Use CTRL+V to paste it in your Hosts file.</value>
+    <comment>Message</comment>
   </data>
 </root>

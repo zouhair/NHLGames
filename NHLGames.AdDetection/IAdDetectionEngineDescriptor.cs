@@ -14,3 +14,4 @@ namespace NHLGames.AdDetection
         UserControl SettingsControl { get; }
     }
 }
+  

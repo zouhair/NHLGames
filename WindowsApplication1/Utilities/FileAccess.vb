@@ -5,51 +5,12 @@ Namespace Utilities
 
     Public Class FileAccess
 
-        ''' <summary>
-        ''' DirectoryInfo.GetFiles can cause AuthorizationException Errors, hence this function
-        ''' </summary>
-        ''' <param name="root">Root folder to search (eg. "C:\Program Files")</param>
-        ''' <param name="searchPattern">Pattern to search for (eg. "vlc.exe" or "*.exe")</param>
-        ''' <returns>List of paths</returns>
-        Public Shared Function GetFiles(root As String, searchPattern As String) As List(Of String)
-            Dim result As New List(Of String)()
-
-            Dim pending As New Stack(Of String)()
-            pending.Push(root)
-
-            While pending.Count <> 0
-                Dim path = pending.Pop()
-                Dim nextDir As String() = Nothing
-                Try
-                    nextDir = Directory.GetFiles(path, searchPattern)
-                Catch
-                End Try
-                If nextDir IsNot Nothing AndAlso nextDir.Length <> 0 Then
-                    result.AddRange(nextDir)
-                End If
-                Try
-                    nextDir = Directory.GetDirectories(path)
-                    For Each subdir As String In nextDir
-                        pending.Push(subdir)
-                    Next
-                Catch
-                End Try
-            End While
-
-            Return result
-        End Function
-
-
         Public Shared Function IsFileReadonly(path As String) As Boolean
-
             Dim attributes As FileAttributes = File.GetAttributes(path)
             Return (attributes And FileAttributes.[ReadOnly]) = FileAttributes.[ReadOnly]
-
         End Function
 
-
         Public Shared Sub RemoveReadOnly(path As String)
-
             Dim attributes As FileAttributes = File.GetAttributes(path)
 
             If (attributes And FileAttributes.[ReadOnly]) = FileAttributes.[ReadOnly] Then
@@ -58,7 +19,6 @@ Namespace Utilities
                 File.SetAttributes(path, attributes)
                 Console.WriteLine(English.msgRemoveReadOnly, path)
             End If
-
         End Sub
 
         Public Shared Sub AddReadonly(path As String)

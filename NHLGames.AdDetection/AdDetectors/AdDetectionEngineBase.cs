@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -13,7 +13,7 @@ namespace NHLGames.AdDetection.AdDetectors
 
         private List<int> _mediaPlayerProcesses;
 
-        private readonly List<IAdModule> _modules = new List<IAdModule>();
+        private readonly List<IAdModules> _modules = new List<IAdModules>();
 
         protected abstract int PollPeriodMilliseconds { get; }
 
@@ -23,7 +23,9 @@ namespace NHLGames.AdDetection.AdDetectors
 
         protected ReadOnlyCollection<int> MediaPlayerProcesses => new ReadOnlyCollection<int>(_mediaPlayerProcesses);
 
-        internal Task AddModule(IAdModule module)
+        protected abstract bool IsAdCurrentlyPlaying();
+
+        internal Task AddModule(IAdModules module)
         {
             lock (_modules)
             {
@@ -45,7 +47,7 @@ namespace NHLGames.AdDetection.AdDetectors
             }
         }
 
-        internal void Start(List<IAdModule> modules)
+        internal void Start(List<IAdModules> modules)
         {
             _previousAdPlayingState = false;
             _firstAdCheck = true;
@@ -94,7 +96,6 @@ namespace NHLGames.AdDetection.AdDetectors
             }
         }
 
-        protected abstract bool IsAdCurrentlyPlaying();
 
         private bool MediaPlayerIsPlaying()
         {

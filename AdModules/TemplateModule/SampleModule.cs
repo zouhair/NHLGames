@@ -12,8 +12,8 @@ namespace TemplateModule
     ///     Export attribute is required so that it is loaded by the main program.
     ///     You must also output to NhlGames\AdModules\ModuleName folder to be loaded properly.
     /// </remarks>
-    [Export(typeof (IAdModule))]
-    public class SampleModule : IAdModule
+    [Export(typeof (IAdModules))]
+    public class SampleModule : IAdModules
     {
         /// <summary>
         ///     The title of your module.

@@ -2,7 +2,7 @@
 
 namespace NHLGames.AdDetection.Common
 {
-    public interface IAdModule
+    public interface IAdModules
     {
         /// <summary>
         ///     The title of your module. Shows up in the drop down list.

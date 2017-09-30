@@ -152,5 +152,14 @@ Namespace Utilities
             Return Not principal.IsInRole(WindowsBuiltInRole.Administrator)
         End Function
 
+        Public Shared Sub OpenHostsFile(Optional viewContent As Boolean = True)
+            Dim path = Environment.SystemDirectory & "\drivers\etc\"
+            If viewContent Then
+                Process.Start("NOTEPAD", path & "hosts")
+            Else
+                Process.Start(path)
+            End If
+        End Sub
+
     End Class
 End Namespace
