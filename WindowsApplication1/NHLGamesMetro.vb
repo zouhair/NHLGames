@@ -81,11 +81,7 @@ Public Class NHLGamesMetro
     Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
         SuspendLayout()
         Common.GetLanguage()
-
-        If Not File.Exists("NHLGames.exe.Config") then
-            Console.WriteLine(English.errorConfigFile)
-            FatalError(RmText.GetString("errorConfigFile"))
-        End If
+        Common.CheckAppCanRun()
 
         tabMenu.SelectedIndex = 0
         FlpCalendar = flpCalender
@@ -94,12 +90,6 @@ Public Class NHLGamesMetro
         InitializeForm.VersionCheck()
         ResumeLayout()
         FormLoaded = True
-    End Sub
-
-    Private Sub FatalError(message As String)
-        If InvokeElement.MsgBoxRed(message,RmText.GetString("msgFailure"), MessageBoxButtons.OK) = DialogResult.OK Then
-            Me.Close
-        End If
     End Sub
 
     Private Shared Sub _writeToConsoleSettingsChanged(key As String, value As String)
@@ -503,14 +493,14 @@ Public Class NHLGamesMetro
     Private Sub tgModules_Click(sender As Object, e As EventArgs) Handles tgModules.Click
         Dim tg As MetroToggle = sender
 
-        Select Case (_adDetectionType)
-            Case AdDetectionTypeEnum.Volume
-                _adDetectionEngine = New AdDetectionByVolume
-            Case AdDetectionTypeEnum.Fullscreen
-                Return
-        End Select
-
-        If Not tg.Checked Then
+        If tg.Checked Then
+            Select Case (_adDetectionType)
+                Case AdDetectionTypeEnum.Volume
+                    _adDetectionEngine = New AdDetectionByVolume
+                Case AdDetectionTypeEnum.Fullscreen
+                    Return
+            End Select
+        Else
             tgSpotify.Checked = False
             tgOBS.Checked = False
         End If
@@ -518,9 +508,10 @@ Public Class NHLGamesMetro
         tgOBS.Enabled = tg.Checked
         tgSpotify.Enabled = tg.Checked
         tlpOBSSettings.Enabled = tg.Checked
+        flpSpotifyParameters.Enabled = tg.Checked
 
         _adDetectionEngine.IsEnabled = tg.checked
-        If tg.Checked Then _adDetectionEngine.Start(_adDetectionEngine.AdModulesList.ToList())
+        If tg.Checked Then _adDetectionEngine.Start()
     End Sub
 
     Private Sub tgOBS_CheckedChanged(sender As Object, e As EventArgs) Handles tgOBS.CheckedChanged
@@ -532,13 +523,18 @@ Public Class NHLGamesMetro
         Dim tg As MetroToggle = sender
         Dim spotify As New Spotify
 
+        flpSpotifyParameters.Enabled = Not tg.Checked
+
         If tg.Checked Then
+            spotify.ForceToOpen = chkSpotifyForceToStart.Checked
+            spotify.PlayNextSongWhenResuming = chkSpotifyPlayNextSong.Checked
             _adDetectionEngine.AddModule(spotify)
         Else 
             If _adDetectionEngine.IsInAdModulesList(spotify.Title) Then
                 _adDetectionEngine.RemoveModule(spotify.Title)
             End If
         End If
+        
     End Sub
 
     Private Sub rbDetection_CheckedChanged(sender As Object, e As EventArgs) Handles rbVolumeDetection.CheckedChanged, rbFullscreenDetection.CheckedChanged
@@ -573,4 +569,5 @@ Public Class NHLGamesMetro
             HostsFile.OpenHostsFile(false)
         End If
     End Sub
+
 End Class

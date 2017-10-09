@@ -6,7 +6,7 @@ Namespace Utilities
 
         Private ReadOnly _lastSoundTime As Dictionary(Of Integer, DateTime) = new Dictionary(Of Integer, DateTime)
         Private Property RequiredSilenceMilliseconds As Integer = 500
-        Protected Overrides ReadOnly Property PollPeriodMilliseconds As Integer = 100
+        Protected Overrides ReadOnly Property PollPeriodMilliseconds As Integer = 500
         Public Overrides Property SelectedDetectionType As AdDetectionTypeEnum = AdDetectionTypeEnum.Volume
 
         Protected Overrides Function IsAdCurrentlyPlaying() As Boolean

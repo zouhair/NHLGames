@@ -20,7 +20,12 @@ Namespace Utilities
                                          NHLGamesMetro.RmText.GetString("msgNewVersionAvailable"),
                                          MessageBoxButtons.OK)
             End If
-            Form.lblVersion.Text = String.Format("v{0}", ApplicationSettings.Read(Of String)(SettingsEnum.Version))
+            Form.lblVersion.Text = String.Format("v{0}.{1}.{2}.{3}", 
+                                                 My.Application.Info.Version.Major, 
+                                                 My.Application.Info.Version.Minor, 
+                                                 My.Application.Info.Version.Build, 
+                                                 My.Application.Info.Version.Revision)
+                'String.Format("v{0}", ApplicationSettings.Read(Of String)(SettingsEnum.Version))
         End Sub
 
         Public Shared Sub SetLanguage()

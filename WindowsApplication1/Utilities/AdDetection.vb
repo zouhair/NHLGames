@@ -1,4 +1,5 @@
 ﻿Imports System.Collections.ObjectModel
+Imports System.Threading
 Imports NHLGames.Objects.Modules
 
 Namespace Utilities
@@ -9,21 +10,18 @@ Namespace Utilities
         Private _previousAdPlayingState As Boolean
         Private _firstAdCheck As Boolean
         Private _initializationTasks As List(Of Task)
-
-        Private _detectionEnabled As Boolean
         Private _settings As AdDetectionConfigs
 
         Protected MustOverride ReadOnly Property PollPeriodMilliseconds As Integer
         Public MustOverride Property SelectedDetectionType As AdDetectionTypeEnum
         Protected MustOverride Function IsAdCurrentlyPlaying() As Boolean
+        Protected Property DetectionEnabled() As Boolean
 
         Protected ReadOnly Property MediaPlayerProcesses As ReadOnlyCollection(Of Integer)
             Get
                 Return new ReadOnlyCollection(of Integer)(_mediaPlayerProcesses)
             End Get
         End Property
-
-        Public Property IsStoped As Boolean
 
         Public Property AdModulesList As List(Of IAdModule)
             Get
@@ -45,10 +43,10 @@ Namespace Utilities
 
         Public Property IsEnabled As Boolean
             Get
-                Return _detectionEnabled
+                Return DetectionEnabled
             End Get
             Set(value As Boolean)
-                _detectionEnabled = value
+                DetectionEnabled = value
                 EnableChanged()
             End Set
         End Property
@@ -58,53 +56,19 @@ Namespace Utilities
                 SettingsEnum.AdDetection, Serialization.SerializeObject(Of AdDetectionConfigs)(_settings))
         End Sub
 
-        'Public Sub LoadSettings()
-        '    _settings = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection)
-        '    _detectionEnabled = _settings.IsEnabled
-        '    Modules = New ObservableCollection(Of IAdModule)(
-        '        _adModules.Where(Function(x) _settings.EnabledModules.Contains(x.Title)))
-        'End Sub
-
         Public Sub DetectionTypeChanged()
             If SelectedDetectionType.Equals(_settings.DetectionType) Then Return
             _settings.DetectionType = SelectedDetectionType
             SaveSettings()
         End Sub
 
-        'Public Function CanDisableModuleExecute(x As IAdModule) As Boolean
-        '    Return Not x Is Nothing AndAlso Modules.Contains(x)
-        'End Function
-
-        'Public Function CanEnableModuleExecute(x As IAdModule) As Boolean
-        '    Return Not x Is Nothing AndAlso Not Modules.Contains(x)
-        'End Function
-
-        'Public Sub EnableModule(x As IAdModule)
-        '    Modules.Add(x)
-        '    _settings.EnabledModules = Modules.Select(Function(y) y.Title).ToList()
-        '    SaveSettings()
-        'End Sub
-
-        'Public Sub DisableModule(x As IAdModule)
-        '    Modules.Remove(x)
-        '    _settings.EnabledModules = Modules.Select(Function(y) y.Title).ToList()
-        '    SaveSettings()
-        'End Sub
-
-        'Public Sub RemoveUnusedModulesFromSettings()
-        '    Dim removedModules = _settings.EnabledModules.Where(
-        '        Function(x) Not _adModules.Exists(Function(y) y.Title = x)).ToList()
-        '    _settings.EnabledModules.RemoveAll(Function(z) removedModules.Contains(z))
-        '    SaveSettings()
-        'End Sub
-
         Private Sub EnableChanged
             _settings = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection)
 
             If _settings Is Nothing Then _settings = New AdDetectionConfigs()
-            If _settings.IsEnabled = _detectionEnabled Then Return
+            If _settings.IsEnabled = DetectionEnabled Then Return
 
-            _settings.IsEnabled = _detectionEnabled
+            _settings.IsEnabled = DetectionEnabled
 
             SaveSettings()
         End Sub
@@ -133,15 +97,11 @@ Namespace Utilities
             End SyncLock
         End Sub
 
-        Public Sub Start(adModules As List(Of IAdModule))
+        Public Sub Start()
             _previousAdPlayingState = False
             _firstAdCheck = True
-            _initializationTasks = adModules.Select(Function(x) AddModule(x)).ToList()
-            Task.Run(AddressOf TaskLoop)
-        End Sub
-
-        Private Async Sub TaskLoop()
-            Await LoopForever(_initializationTasks)
+            _initializationTasks = _adModules.Select(Function(x) AddModule(x)).ToList()
+            Task.Run(AddressOf LoopForever)
         End Sub
 
         Private Sub NotifyModules(Optional stillNoGames As Boolean = False)
@@ -160,13 +120,13 @@ Namespace Utilities
             End SyncLock
         End Sub
 
-        Private Async Function LoopForever(initializationTaks As List(Of Task)) As Task
+        Private Async Sub LoopForever()
             Try
-                Task.WaitAll(initializationTaks.ToArray(), TimeSpan.FromSeconds(5))
+                Task.WaitAll(_initializationTasks.ToArray(), TimeSpan.FromSeconds(5))
             Catch ex As Exception
                 Console.WriteLine($"Problem initializing tasks: {ex.Message}")
             End Try
-            While _detectionEnabled
+            While DetectionEnabled
                 Try
                     If Not IsMediaPlayerCurrentlyPlaying()
                         Await Task.Delay(TimeSpan.FromSeconds(2))
@@ -184,7 +144,7 @@ Namespace Utilities
                 End Try
                 Await Task.Delay(PollPeriodMilliseconds)
             End While
-        End Function
+        End Sub
   
         Private Function IsMediaPlayerCurrentlyPlaying() As Boolean
             Dim vlcProcesses = Process.GetProcessesByName("vlc").Where(Function(x) x.MainWindowTitle = "fd://0 - VLC media player" OrElse x.MainWindowTitle.ToLower().Contains(" @ ")).Select(Function(x) x.Id)

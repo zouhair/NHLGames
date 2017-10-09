@@ -55,5 +55,19 @@ Namespace Utilities
             End If
         End Sub
 
+        Public Shared Sub CheckAppCanRun()
+            If Not IO.File.Exists("NHLGames.exe.Config") then
+                FatalError(NHLGamesMetro.RmText.GetString("noConfigFile"))
+            Else If Not CheckUrl("http://www.google.com") Then
+                FatalError(NHLGamesMetro.RmText.GetString("noWebAccess"))
+            End If
+        End Sub
+
+        Private Shared Sub FatalError(message As String)
+            If InvokeElement.MsgBoxRed(message, NHLGamesMetro.RmText.GetString("msgFailure"), MessageBoxButtons.OK) = DialogResult.OK Then
+                NHLGamesMetro.FormInstance.Close
+            End If
+        End Sub
+
     End Class
 End Namespace

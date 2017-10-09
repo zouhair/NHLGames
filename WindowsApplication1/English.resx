@@ -137,9 +137,9 @@
     <value>Series Record</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="errorConfigFile" xml:space="preserve">
-    <value>Error: Can't find NHLGames config file. You will have to reinstall NHLGames.</value>
-    <comment>Console</comment>
+  <data name="noConfigFile" xml:space="preserve">
+    <value>Can't find NHLGames config file. You will have to reinstall NHLGames.</value>
+    <comment>Message</comment>
   </data>
   <data name="errorDeserialize" xml:space="preserve">
     <value>Error : Failed to deserialize setting value of '{0}' to type '{1}'</value>
@@ -690,6 +690,10 @@
   </data>
   <data name="msgHostsCopyEntry" xml:space="preserve">
     <value>The NHL.tv authentication bypass line ''{0}'' was copied to your clipboard. Use CTRL+V to paste it in your Hosts file.</value>
+    <comment>Message</comment>
+  </data>
+  <data name="noWebAccess" xml:space="preserve">
+    <value>No Internet connection</value>
     <comment>Message</comment>
   </data>
 </root>

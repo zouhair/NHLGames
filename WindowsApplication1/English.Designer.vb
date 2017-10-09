@@ -218,15 +218,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: Can&apos;t find NHLGames config file. You will have to reinstall NHLGames..
-        '''</summary>
-        Friend Shared ReadOnly Property errorConfigFile() As String
-            Get
-                Return ResourceManager.GetString("errorConfigFile", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Error : Failed to deserialize setting value of &apos;{0}&apos; to type &apos;{1}&apos;.
         '''</summary>
         Friend Shared ReadOnly Property errorDeserialize() As String
@@ -1195,6 +1186,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgVOD() As String
             Get
                 Return ResourceManager.GetString("msgVOD", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Can&apos;t find NHLGames config file. You will have to reinstall NHLGames..
+        '''</summary>
+        Friend Shared ReadOnly Property noConfigFile() As String
+            Get
+                Return ResourceManager.GetString("noConfigFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à No Internet connection.
+        '''</summary>
+        Friend Shared ReadOnly Property noWebAccess() As String
+            Get
+                Return ResourceManager.GetString("noWebAccess", resourceCulture)
             End Get
         End Property
         

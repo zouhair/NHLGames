@@ -537,4 +537,12 @@
     <value>La ligne de redirection de l'authentifcation à NHL.tv ''{0}'' a été copiée dans votre presse-papier. Utiliser CTRL+V pour la coller dans le fichier Hosts.</value>
     <comment>Message</comment>
   </data>
+  <data name="noConfigFile" xml:space="preserve">
+    <value>Fichier de configuration NHLGames introuvable. Vous devez réinstaller NHLGames.</value>
+    <comment>Message</comment>
+  </data>
+  <data name="noWebAccess" xml:space="preserve">
+    <value>Aucune connexion internet</value>
+    <comment>Message</comment>
+  </data>
 </root>
