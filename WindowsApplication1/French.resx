@@ -545,4 +545,12 @@
     <value>Aucune connexion internet</value>
     <comment>Message</comment>
   </data>
+  <data name="chkSpotifyForceToStart" xml:space="preserve">
+    <value>Forcer le démarrage</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="chkSpotifyPlayNextSong" xml:space="preserve">
+    <value>Toujours jouer la prochaine chanson</value>
+    <comment>Modules tab</comment>
+  </data>
 </root>

@@ -146,6 +146,8 @@ Partial Class NHLGamesMetro
         Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
         Me.cbAdShift = New MetroFramework.Controls.MetroCheckBox()
         Me.flpSpotifyParameters = New System.Windows.Forms.FlowLayoutPanel()
+        Me.chkSpotifyForceToStart = New MetroFramework.Controls.MetroCheckBox()
+        Me.chkSpotifyPlayNextSong = New MetroFramework.Controls.MetroCheckBox()
         Me.openFileDialog = New System.Windows.Forms.OpenFileDialog()
         Me.tmrAnimate = New System.Windows.Forms.Timer(Me.components)
         Me.SettingsToolTip = New MetroFramework.Components.MetroToolTip()
@@ -160,8 +162,6 @@ Partial Class NHLGamesMetro
         Me.btnClose = New MetroFramework.Controls.MetroLink()
         Me.btnNormal = New MetroFramework.Controls.MetroLink()
         Me.folderBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
-        Me.chkSpotifyForceToStart = New MetroFramework.Controls.MetroCheckBox()
-        Me.chkSpotifyPlayNextSong = New MetroFramework.Controls.MetroCheckBox()
         Me.tabMenu.SuspendLayout
         Me.tabGames.SuspendLayout
         Me.tabSettings.SuspendLayout
@@ -224,7 +224,7 @@ Partial Class NHLGamesMetro
         Me.tabMenu.ItemSize = New System.Drawing.Size(90, 34)
         Me.tabMenu.Location = New System.Drawing.Point(3, 60)
         Me.tabMenu.Name = "tabMenu"
-        Me.tabMenu.SelectedIndex = 3
+        Me.tabMenu.SelectedIndex = 1
         Me.tabMenu.Size = New System.Drawing.Size(994, 495)
         Me.tabMenu.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabMenu.Style = MetroFramework.MetroColorStyle.Blue
@@ -1522,24 +1522,26 @@ Partial Class NHLGamesMetro
         'lblObsAdEndingHotkey
         '
         Me.lblObsAdEndingHotkey.AutoSize = true
-        Me.lblObsAdEndingHotkey.Dock = System.Windows.Forms.DockStyle.Right
+        Me.lblObsAdEndingHotkey.Dock = System.Windows.Forms.DockStyle.Left
         Me.lblObsAdEndingHotkey.Location = New System.Drawing.Point(3, 3)
         Me.lblObsAdEndingHotkey.Margin = New System.Windows.Forms.Padding(3)
         Me.lblObsAdEndingHotkey.Name = "lblObsAdEndingHotkey"
         Me.lblObsAdEndingHotkey.Size = New System.Drawing.Size(146, 24)
         Me.lblObsAdEndingHotkey.TabIndex = 0
         Me.lblObsAdEndingHotkey.Text = "GAME_SCENE_HOTKEY"
+        Me.lblObsAdEndingHotkey.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblObsAdStartingHotkey
         '
         Me.lblObsAdStartingHotkey.AutoSize = true
-        Me.lblObsAdStartingHotkey.Dock = System.Windows.Forms.DockStyle.Right
-        Me.lblObsAdStartingHotkey.Location = New System.Drawing.Point(22, 33)
+        Me.lblObsAdStartingHotkey.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblObsAdStartingHotkey.Location = New System.Drawing.Point(3, 33)
         Me.lblObsAdStartingHotkey.Margin = New System.Windows.Forms.Padding(3)
         Me.lblObsAdStartingHotkey.Name = "lblObsAdStartingHotkey"
         Me.lblObsAdStartingHotkey.Size = New System.Drawing.Size(127, 24)
         Me.lblObsAdStartingHotkey.TabIndex = 1
         Me.lblObsAdStartingHotkey.Text = "AD_SCENE_HOTKEY"
+        Me.lblObsAdStartingHotkey.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'FlowLayoutPanel14
         '
@@ -1766,11 +1768,32 @@ Partial Class NHLGamesMetro
         Me.flpSpotifyParameters.Controls.Add(Me.chkSpotifyForceToStart)
         Me.flpSpotifyParameters.Controls.Add(Me.chkSpotifyPlayNextSong)
         Me.flpSpotifyParameters.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flpSpotifyParameters.Enabled = false
         Me.flpSpotifyParameters.Location = New System.Drawing.Point(196, 172)
         Me.flpSpotifyParameters.Margin = New System.Windows.Forms.Padding(0)
         Me.flpSpotifyParameters.Name = "flpSpotifyParameters"
         Me.flpSpotifyParameters.Size = New System.Drawing.Size(784, 30)
         Me.flpSpotifyParameters.TabIndex = 74
+        '
+        'chkSpotifyForceToStart
+        '
+        Me.chkSpotifyForceToStart.AutoSize = true
+        Me.chkSpotifyForceToStart.Location = New System.Drawing.Point(3, 3)
+        Me.chkSpotifyForceToStart.Name = "chkSpotifyForceToStart"
+        Me.chkSpotifyForceToStart.Size = New System.Drawing.Size(117, 15)
+        Me.chkSpotifyForceToStart.TabIndex = 0
+        Me.chkSpotifyForceToStart.Text = "FORCE_TO_START"
+        Me.chkSpotifyForceToStart.UseSelectable = true
+        '
+        'chkSpotifyPlayNextSong
+        '
+        Me.chkSpotifyPlayNextSong.AutoSize = true
+        Me.chkSpotifyPlayNextSong.Location = New System.Drawing.Point(126, 3)
+        Me.chkSpotifyPlayNextSong.Name = "chkSpotifyPlayNextSong"
+        Me.chkSpotifyPlayNextSong.Size = New System.Drawing.Size(121, 15)
+        Me.chkSpotifyPlayNextSong.TabIndex = 1
+        Me.chkSpotifyPlayNextSong.Text = "PLAY_NEXT_SONG"
+        Me.chkSpotifyPlayNextSong.UseSelectable = true
         '
         'tmrAnimate
         '
@@ -1915,26 +1938,6 @@ Partial Class NHLGamesMetro
         Me.btnNormal.TabIndex = 69
         Me.btnNormal.UseSelectable = true
         Me.btnNormal.Visible = false
-        '
-        'chkSpotifyForceToStart
-        '
-        Me.chkSpotifyForceToStart.AutoSize = true
-        Me.chkSpotifyForceToStart.Location = New System.Drawing.Point(3, 3)
-        Me.chkSpotifyForceToStart.Name = "chkSpotifyForceToStart"
-        Me.chkSpotifyForceToStart.Size = New System.Drawing.Size(117, 15)
-        Me.chkSpotifyForceToStart.TabIndex = 0
-        Me.chkSpotifyForceToStart.Text = "FORCE_TO_START"
-        Me.chkSpotifyForceToStart.UseSelectable = true
-        '
-        'chkSpotifyPlayNextSong
-        '
-        Me.chkSpotifyPlayNextSong.AutoSize = true
-        Me.chkSpotifyPlayNextSong.Location = New System.Drawing.Point(126, 3)
-        Me.chkSpotifyPlayNextSong.Name = "chkSpotifyPlayNextSong"
-        Me.chkSpotifyPlayNextSong.Size = New System.Drawing.Size(121, 15)
-        Me.chkSpotifyPlayNextSong.TabIndex = 1
-        Me.chkSpotifyPlayNextSong.Text = "PLAY_NEXT_SONG"
-        Me.chkSpotifyPlayNextSong.UseSelectable = true
         '
         'NHLGamesMetro
         '

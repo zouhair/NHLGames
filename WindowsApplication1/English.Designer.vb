@@ -164,6 +164,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Force to start.
+        '''</summary>
+        Friend Shared ReadOnly Property chkSpotifyForceToStart() As String
+            Get
+                Return ResourceManager.GetString("chkSpotifyForceToStart", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Always play next song.
+        '''</summary>
+        Friend Shared ReadOnly Property chkSpotifyPlayNextSong() As String
+            Get
+                Return ResourceManager.GetString("chkSpotifyPlayNextSong", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Ending.
         '''</summary>
         Friend Shared ReadOnly Property enumending() As String

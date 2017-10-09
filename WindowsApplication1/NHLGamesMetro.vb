@@ -440,6 +440,7 @@ Public Class NHLGamesMetro
 
     Private Sub cbServers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbServers.SelectedIndexChanged 
         tlpSettings.Focus()
+        HostName = cbServers.SelectedItem.ToString()
         ApplicationSettings.SetValue(SettingsEnum.SelectedServer, cbServers.SelectedItem.ToString())
     End Sub
 

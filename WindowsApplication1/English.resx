@@ -696,4 +696,12 @@
     <value>No Internet connection</value>
     <comment>Message</comment>
   </data>
+  <data name="chkSpotifyForceToStart" xml:space="preserve">
+    <value>Force to start</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="chkSpotifyPlayNextSong" xml:space="preserve">
+    <value>Always play next song</value>
+    <comment>Modules tab</comment>
+  </data>
 </root>

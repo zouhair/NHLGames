@@ -111,6 +111,8 @@ Namespace Utilities
             Form.lblObsAdStartingHotkey.Text = NHLGamesMetro.RmText.GetString("lblObsAdStartingHotkey")
             Form.rbVolumeDetection.Text = NHLGamesMetro.RmText.GetString("rbVolumeDetection")
             Form.rbFullscreenDetection.Text = NHLGamesMetro.RmText.GetString("rbFullscreenDetection")
+            Form.chkSpotifyForceToStart.Text = NHLGamesMetro.RmText.GetString("chkSpotifyForceToStart")
+            Form.chkSpotifyPlayNextSong.Text = NHLGamesMetro.RmText.GetString("chkSpotifyPlayNextSong")
 
             'Calendar
             Form.flpCalender.Controls.Clear()
