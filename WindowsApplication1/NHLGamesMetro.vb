@@ -157,16 +157,16 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub btnstreamlinkPath_Click(sender As Object, e As EventArgs) Handles btnstreamlinkPath.Click 
-        openFileDialog.Filter = $"streamlink|streamlink.exe|LiveStreamer|livestreamer.exe|All files (*.*)|*.*"
+    Private Sub btnstreamerPath_Click(sender As Object, e As EventArgs) Handles btnStreamerPath.Click 
+        openFileDialog.Filter = $"streamer|streamlink.exe;livestreamer.exe|All files (*.*)|*.*"
         openFileDialog.Multiselect = False
-        openFileDialog.InitialDirectory = If(txtStreamlinkPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtStreamlinkPath.Text))
+        openFileDialog.InitialDirectory = If(txtStreamerPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtStreamerPath.Text))
 
         If openFileDialog.ShowDialog() = DialogResult.OK Then
 
-            If String.IsNullOrEmpty(openFileDialog.FileName) = False And txtStreamlinkPath.Text <> openFileDialog.FileName Then
-                ApplicationSettings.SetValue(SettingsEnum.StreamlinkPath, openFileDialog.FileName)
-                txtStreamlinkPath.Text = openFileDialog.FileName
+            If String.IsNullOrEmpty(openFileDialog.FileName) = False And txtStreamerPath.Text <> openFileDialog.FileName Then
+                ApplicationSettings.SetValue(SettingsEnum.StreamerPath, openFileDialog.FileName)
+                txtStreamerPath.Text = openFileDialog.FileName
             End If
 
         End If
@@ -198,11 +198,11 @@ Public Class NHLGamesMetro
         Player.RenewArgs()
     End Sub
 
-    Private Sub txtStreamlinkPath_TextChanged(sender As Object, e As EventArgs) Handles txtStreamlinkPath.TextChanged 
+    Private Sub txtStreamerPath_TextChanged(sender As Object, e As EventArgs) Handles txtStreamerPath.TextChanged 
         Player.RenewArgs()
     End Sub
 
-    Private Sub player_CheckedChanged(sender As Object, e As EventArgs)  
+    Private Sub player_CheckedChanged(sender As Object, e As EventArgs) Handles rbVLC.CheckedChanged, rbMPV.CheckedChanged, rbMPC.CheckedChanged  
         Dim rb As RadioButton = sender
         If (rb.Checked) Then 
             Player.RenewArgs()
@@ -430,11 +430,11 @@ Public Class NHLGamesMetro
     Private Sub btnCopyConsole_Click(sender As Object, e As EventArgs) Handles btnCopyConsole.Click
         dim player As String = If (rbMpv.Checked,"MPV",If(rbMPC.Checked,"MPC",If(rbVLC.Checked,"VLC","none")))
         Dim x64 As String = if(Environment.Is64BitOperatingSystem,"64 Bits","32 Bits")
-        Dim streamlinkPath = ApplicationSettings.Read(Of String)(SettingsEnum.StreamlinkPath, String.Empty).ToString()
+        Dim StreamerPath = ApplicationSettings.Read(Of String)(SettingsEnum.StreamerPath, String.Empty).ToString()
         Dim vlcPath = ApplicationSettings.Read(Of String)(SettingsEnum.VlcPath, String.Empty).ToString()
         Dim mpcPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpcPath, String.Empty).ToString()
         Dim mpvPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpvPath, String.Empty).ToString()
-        Dim streamlinkExists = If(streamlinkPath <> "" AndAlso File.Exists(streamlinkPath), English.msgExists, "")
+        Dim StreamerExists = If(StreamerPath <> "" AndAlso File.Exists(StreamerPath), English.msgExists, "")
         Dim vlcExists = If(vlcPath <> "" AndAlso File.Exists(vlcPath), English.msgExists, "")
         Dim mpcExists = If(mpcPath <> "" AndAlso File.Exists(mpcPath), English.msgExists, "")
         Dim mpvExists = If(mpvPath <> "" AndAlso File.Exists(mpvPath), English.msgExists, "")
@@ -448,9 +448,9 @@ Public Class NHLGamesMetro
                                         My.Computer.Network.Ping(ServerIp).ToString(),
                                         cbServers.SelectedItem.ToString(),
                                         player.ToString(),
-                                        streamlinkPath.ToString(),
-                                        streamlinkPath.Equals(txtStreamlinkPath.Text).ToString(),
-                                        streamlinkExists.ToString(),
+                                        StreamerPath.ToString(),
+                                        StreamerPath.Equals(txtStreamerPath.Text).ToString(),
+                                        StreamerExists.ToString(),
                                         vlcPath.ToString(),
                                         vlcPath.Equals(txtVLCPath.Text).ToString(),
                                         vlcExists.ToString(),
@@ -523,10 +523,10 @@ Public Class NHLGamesMetro
 
     Private Sub rbDetection_CheckedChanged(sender As Object, e As EventArgs) Handles rbVolumeDetection.CheckedChanged, rbFullscreenDetection.CheckedChanged
         Dim rb As MetroRadioButton = sender
-        If rb.Checked Then
-            _adDetectionEngine.SelectedDetectionType = CType(rb.Tag, Integer)
-            _adDetectionEngine.DetectionTypeChanged()
-        End If
+        'If rb.Checked Then
+        '    _adDetectionEngine.SelectedDetectionType = rb.TabIndex
+        '    _adDetectionEngine.DetectionTypeChanged()
+        'End If
     End Sub
 
     Private Sub cbHostsFileActions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbHostsFileActions.SelectedIndexChanged
@@ -558,9 +558,5 @@ Public Class NHLGamesMetro
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(lblQuality.Text, cbStreamQuality.SelectedText)
         tlpSettings.Focus()
-    End Sub
-
-    Private Sub cbDefaultPlayeer_SelectedIndexChanged(sender As Object, e As EventArgs) 
-
     End Sub
 End Class
