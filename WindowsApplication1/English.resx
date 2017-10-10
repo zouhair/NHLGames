@@ -169,8 +169,8 @@
     <value>Error: Can't set Ad Detection Modules. Verify if a Nugget package has a dependency of an older nugget package that you have installed (ex: Spotify and Json): {0}</value>
     <comment>Console</comment>
   </data>
-  <data name="errorStreamlinkExe" xml:space="preserve">
-    <value>Error:  Can't find streamlink.exe. Streamlink is a tool that NHLGames uses to send streams to your media player, we shipped it with NHLGames. You probably moved it or deleted it and if you don't set any custom path, you will have to put it back there, just drop the folder 'streamlink-0.6.0' next to NHLGames.exe.</value>
+  <data name="errorStreamerExe" xml:space="preserve">
+    <value>Error:  Can't find the specified streamer. The streamer is used to send streams to your media player, please select the one that comes with NHLGames or select a valid path of Livestreamer.exe or Streamlink.exe</value>
     <comment>Console</comment>
   </data>
   <data name="errorWritingSettings" xml:space="preserve">
@@ -378,7 +378,7 @@
     <comment>Console</comment>
   </data>
   <data name="msgStreaming" xml:space="preserve">
-    <value>Streaming: {0} on {1} using {2} player with Streamlink</value>
+    <value>Streaming: {0} on {1} using {2} player</value>
     <comment>Console</comment>
   </data>
   <data name="errorDoubleDot" xml:space="preserve">
@@ -434,7 +434,7 @@
     <comment>Main</comment>
   </data>
   <data name="textCopyConsole" xml:space="preserve">
-    <value>NHLGames Official Bug Report {1}{0}{0}OS : {2} {3}{0}{0}UI loaded : {4}{0}{0}Domain resolved : {5}{0}{0}Server IP found : {6}{0}{0}Selected hostname : {7}{0}{0}Selected player : {8}{0}{0}Streamlink path : {9} [=UI:{10}] [{11}]{0}{0}VLC path : {12} [=UI:{13}] [{14}]{0}{0}MPC path : {15} [=UI:{16}] [{17]{0}{0}MPV path : {18} [=UI:{19}] [{20}]{0}{0}Console log : {0}{0}{21}</value>
+    <value>NHLGames Official Bug Report {1}{0}{0}OS : {2} {3}{0}{0}UI loaded : {4}{0}{0}Domain resolved : {5}{0}{0}Server IP found : {6}{0}{0}Selected hostname : {7}{0}{0}Selected player : {8}{0}{0}Streamer path : {9} [=UI:{10}] [{11}]{0}{0}VLC path : {12} [=UI:{13}] [{14}]{0}{0}MPC path : {15} [=UI:{16}] [{17]{0}{0}MPV path : {18} [=UI:{19}] [{20}]{0}{0}Console log : {0}{0}{21}</value>
     <comment>Console</comment>
   </data>
   <data name="enumending" xml:space="preserve">
@@ -505,7 +505,7 @@
     <value>exception</value>
     <comment>Console</comment>
   </data>
-  <data name="errorCliStreamlink" xml:space="preserve">
+  <data name="errorCliStreamer" xml:space="preserve">
     <value>[cli]</value>
     <comment>Console</comment>
   </data>
@@ -553,12 +553,13 @@
     <value>Refreshing</value>
     <comment>Console</comment>
   </data>
-  <data name="msgStreamlink" xml:space="preserve">
-    <value>Streamlink:</value>
+  <data name="msgStreamer" xml:space="preserve">
+    <value>Streamer:</value>
     <comment>Console</comment>
   </data>
-  <data name="msgStartingStreamlink" xml:space="preserve">
-    <value>Starting: Streamlink {0}</value>
+  <data name="msgStartingStreamer" xml:space="preserve">
+    <value>Starting: Streamer {0}</value>
+    <comment>Console</comment>
   </data>
   <data name="msgExists" xml:space="preserve">
     <value>Exists</value>

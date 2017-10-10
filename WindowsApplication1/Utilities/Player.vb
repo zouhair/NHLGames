@@ -8,9 +8,9 @@ Namespace Utilities
         Public Shared Sub Watch(args As GameWatchArguments)
             Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
 
-            If args.PlayerPath.Equals(String.Empty) OrElse args.StreamlinkPath.Equals(String.Empty) Then
-                If form.txtStreamlinkPath.Text.Equals(String.Empty) Then
-                    Console.WriteLine(English.errorStreamlinkExe)
+            If args.PlayerPath.Equals(String.Empty) OrElse args.StreamerPath.Equals(String.Empty) Then
+                If form.txtStreamerPath.Text.Equals(String.Empty) Then
+                    Console.WriteLine(English.errorStreamerExe)
                 ElseIf form.txtMpvPath.Text.Equals(String.Empty) AndAlso form.txtVLCPath.Text.Equals(String.Empty) AndAlso form.txtMPCPath.Text.Equals(String.Empty) Then
                     Console.WriteLine(English.errorMpvExe)
                 Else 
@@ -29,7 +29,7 @@ Namespace Utilities
 
         Private Shared Sub LaunchingStream(args As GameWatchArguments)
             Dim lstLines As New List(Of String) From {"Found matching plugin stream", "Available streams", "Opening stream", "Starting player"}
-            Dim lstLinesToRemove As New List(Of String) From {"[Streamlink for Windows", "[End of Streamlink for Windows]"}
+            'Dim lstLinesToRemove As New List(Of String) From {"[Streamlink for Windows", "[End of Streamlink for Windows]"}
             Dim progressStep As Integer = (NHLGamesMetro.ProgressMaxValue) / (lstLines.Count + 1)
 
             NHLGamesMetro.ProgressValue = 0
@@ -37,11 +37,11 @@ Namespace Utilities
             NHLGamesMetro.ProgressVisible = True
 
             Console.WriteLine(English.msgStreaming, args.GameTitle, args.Stream.Network, args.PlayerType.ToString())
-            Console.WriteLine(English.msgStartingStreamlink, args.ToString(True))
+            Console.WriteLine(English.msgStartingStreamer, args.ToString(True))
 
             Dim procStreaming = New Process() With {.StartInfo =
                     New ProcessStartInfo With {
-                    .FileName = args.StreamlinkPath,
+                    .FileName = args.StreamerPath,
                     .Arguments = args.ToString(),
                     .UseShellExecute = False,
                     .RedirectStandardOutput = True,
@@ -69,9 +69,9 @@ Namespace Utilities
                     If line.Contains(lstLines(3)) Then
                         taskPlayerWatcher.Start()
                     End If
-                    If Not lstLinesToRemove.Any(Function(x) line.Contains(x)) Then
+                    'If Not lstLinesToRemove.Any(Function(x) line.Contains(x)) Then
                         Console.WriteLine(line)
-                    End If
+                    'End If
                     Thread.Sleep(100) 'to let some time for the progress bar to move
                 End While
             Catch ex As Exception
@@ -131,10 +131,9 @@ Namespace Utilities
                 ElseIf form.rbVLC.Checked Then
                     watchArgs.PlayerType = PlayerTypeEnum.Vlc
                     watchArgs.PlayerPath = form.txtVLCPath.Text
-                
                 End If
 
-                watchArgs.StreamlinkPath = form.txtStreamlinkPath.Text
+                watchArgs.StreamerPath = form.txtStreamerPath.Text
 
                 If form.tgAlternateCdn.Checked Then
                     watchArgs.Cdn = CdnType.L3C
@@ -145,8 +144,8 @@ Namespace Utilities
                 watchArgs.UsePlayerArgs = form.tgPlayer.Checked
                 watchArgs.PlayerArgs = form.txtPlayerArgs.Text
 
-                watchArgs.UsestreamlinkArgs = form.tgStreamer.Checked
-                watchArgs.StreamlinkArgs = form.txtStreamerArgs.Text
+                watchArgs.UseStreamerArgs = form.tgStreamer.Checked
+                watchArgs.StreamerArgs = form.txtStreamerArgs.Text
 
                 watchArgs.UseOutputArgs = form.tgOutput.Checked
                 watchArgs.PlayerOutputPath = form.txtOutputArgs.Text

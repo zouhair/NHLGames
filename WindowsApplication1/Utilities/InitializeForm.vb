@@ -93,7 +93,7 @@ Namespace Utilities
             Form.SettingsToolTip.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.SettingsToolTip.SetToolTip(Form.btnMpvPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.SettingsToolTip.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
-            Form.SettingsToolTip.SetToolTip(Form.btnstreamlinkPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.SettingsToolTip.SetToolTip(Form.btnstreamerPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.SettingsToolTip.SetToolTip(Form.btnOuput, NHLGamesMetro.RmText.GetString("tipBrowse"))
         
             'Console
@@ -123,7 +123,7 @@ Namespace Utilities
             Form.txtMPCPath.Text = GetApplication(SettingsEnum.MpcPath, PathFinder.GetPathOfMpc())
             Form.txtVLCPath.Text = GetApplication(SettingsEnum.VlcPath, PathFinder.GetPathOfVlc())
             Form.txtMpvPath.Text = GetApplication(SettingsEnum.MpvPath, Path.Combine(Application.StartupPath, "mpv\mpv.exe"))
-            Form.txtStreamlinkPath.Text = GetApplication(SettingsEnum.StreamlinkPath, Path.Combine(Application.StartupPath, "streamlink-0.6.0\streamlink.exe"))
+            Form.txtStreamerPath.Text = GetApplication(SettingsEnum.StreamerPath, Path.Combine(Application.StartupPath, "livestreamer\livestreamer.exe"))
 
             Form.tgShowFinalScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, True)
             Form.tgShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, True)
@@ -132,7 +132,7 @@ Namespace Utilities
             Dim playersPath As String() = New String() {Form.txtMpvPath.Text, Form.txtMPCPath.Text, Form.txtVLCPath.Text}
             Dim watchArgs As GameWatchArguments = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
 
-            If ValidWatchArgs(watchArgs, playersPath, Form.txtStreamlinkPath.Text) Then
+            If ValidWatchArgs(watchArgs, playersPath, Form.txtStreamerPath.Text) Then
                 Player.RenewArgs(True)
                 watchArgs = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
             End If
@@ -198,11 +198,11 @@ Namespace Utilities
             End If
         End Sub
 
-        Private Shared Function ValidWatchArgs(watchArgs As GameWatchArguments, playersPath As String(), streamLinkPath As String) As Boolean
+        Private Shared Function ValidWatchArgs(watchArgs As GameWatchArguments, playersPath As String(), streamerPath As String) As Boolean
             If watchArgs Is Nothing Then Return True
 
             Dim hasPlayerSet As Boolean = playersPath.Any(Function(x) x = watchArgs.PlayerPath)
-            If Not watchArgs.StreamlinkPath.Equals(streamlinkPath) Then Return True
+            If Not watchArgs.streamerPath.Equals(streamerPath) Then Return True
             If Not hasPlayerSet Then
                 watchArgs.PlayerType = PlayerTypeEnum.None
                 watchArgs.PlayerPath = String.Empty
@@ -251,9 +251,9 @@ Namespace Utilities
                 Form.txtPlayerArgs.Enabled = watchArgs.UsePlayerArgs
                 Form.txtPlayerArgs.Text = watchArgs.PlayerArgs
 
-                Form.tgStreamer.Checked = watchArgs.UsestreamlinkArgs
-                Form.txtStreamerArgs.Enabled = watchArgs.UsestreamlinkArgs
-                Form.txtStreamerArgs.Text = watchArgs.StreamlinkArgs
+                Form.tgStreamer.Checked = watchArgs.UsestreamerArgs
+                Form.txtStreamerArgs.Enabled = watchArgs.UsestreamerArgs
+                Form.txtStreamerArgs.Text = watchArgs.streamerArgs
 
                 Form.txtOutputArgs.Text = watchArgs.PlayerOutputPath
                 Form.txtOutputArgs.Enabled = watchArgs.UseOutputArgs

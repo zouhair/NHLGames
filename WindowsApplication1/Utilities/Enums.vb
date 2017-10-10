@@ -53,7 +53,7 @@
         VlcPath = 3
         MpcPath = 4
         MpvPath = 5
-        StreamlinkPath = 6
+        StreamerPath = 6
         ServerList = 7
         ShowScores = 8
         SelectedServer = 9

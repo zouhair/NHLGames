@@ -60,7 +60,7 @@ Partial Class Loading
         Me.Version.Name = "Version"
         Me.Version.Size = New System.Drawing.Size(228, 20)
         Me.Version.TabIndex = 1
-        Me.Version.Text = "Downloading streamlink"
+        Me.Version.Text = "Downloading the streamer"
         Me.Version.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MetroPanel1

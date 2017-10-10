@@ -301,9 +301,9 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à [cli].
         '''</summary>
-        Friend Shared ReadOnly Property errorCliStreamlink() As String
+        Friend Shared ReadOnly Property errorCliStreamer() As String
             Get
-                Return ResourceManager.GetString("errorCliStreamlink", resourceCulture)
+                Return ResourceManager.GetString("errorCliStreamer", resourceCulture)
             End Get
         End Property
         
@@ -398,11 +398,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error:  Can&apos;t find streamlink.exe. Streamlink is a tool that NHLGames uses to send streams to your media player, we shipped it with NHLGames. You probably moved it or deleted it and if you don&apos;t set any custom path, you will have to put it back there, just drop the folder &apos;streamlink-0.6.0&apos; next to NHLGames.exe..
+        '''  Recherche une chaîne localisée semblable à Error:  Can&apos;t find Streamer.exe. Streamer is a tool that NHLGames uses to send streams to your media player, we shipped it with NHLGames. You probably moved it or deleted it and if you don&apos;t set any custom path, you will have to put it back there, just drop the folder &apos;Streamer-0.6.0&apos; next to NHLGames.exe..
         '''</summary>
-        Friend Shared ReadOnly Property errorStreamlinkExe() As String
+        Friend Shared ReadOnly Property errorStreamerExe() As String
             Get
-                Return ResourceManager.GetString("errorStreamlinkExe", resourceCulture)
+                Return ResourceManager.GetString("errorStreamerExe", resourceCulture)
             End Get
         End Property
         
@@ -1172,16 +1172,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Starting: Streamlink {0}.
+        '''  Recherche une chaîne localisée semblable à Starting: Streamer {0}.
         '''</summary>
-        Friend Shared ReadOnly Property msgStartingStreamlink() As String
+        Friend Shared ReadOnly Property msgStartingStreamer() As String
             Get
-                Return ResourceManager.GetString("msgStartingStreamlink", resourceCulture)
+                Return ResourceManager.GetString("msgStartingStreamer", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Streaming: {0} on {1} using {2} player with Streamlink.
+        '''  Recherche une chaîne localisée semblable à Streaming: {0} on {1} using {2} player with Streamer.
         '''</summary>
         Friend Shared ReadOnly Property msgStreaming() As String
             Get
@@ -1190,11 +1190,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Streamlink:.
+        '''  Recherche une chaîne localisée semblable à Streamer:.
         '''</summary>
-        Friend Shared ReadOnly Property msgStreamlink() As String
+        Friend Shared ReadOnly Property msgStreamer() As String
             Get
-                Return ResourceManager.GetString("msgStreamlink", resourceCulture)
+                Return ResourceManager.GetString("msgStreamer", resourceCulture)
             End Get
         End Property
         
@@ -1343,7 +1343,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à NHLGames Official Bug Report {1}{0}{0}OS : {2} {3}{0}{0}UI loaded : {4}{0}{0}Domain resolved : {5}{0}{0}Server IP found : {6}{0}{0}Selected hostname : {7}{0}{0}Selected player : {8}{0}{0}Streamlink path : {9} [=UI:{10}] [{11}]{0}{0}VLC path : {12} [=UI:{13}] [{14}]{0}{0}MPC path : {15} [=UI:{16}] [{17]{0}{0}MPV path : {18} [=UI:{19}] [{20}]{0}{0}Console log : {0}{0}{21}.
+        '''  Recherche une chaîne localisée semblable à NHLGames Official Bug Report {1}{0}{0}OS : {2} {3}{0}{0}UI loaded : {4}{0}{0}Domain resolved : {5}{0}{0}Server IP found : {6}{0}{0}Selected hostname : {7}{0}{0}Selected player : {8}{0}{0}Streamer path : {9} [=UI:{10}] [{11}]{0}{0}VLC path : {12} [=UI:{13}] [{14}]{0}{0}MPC path : {15} [=UI:{16}] [{17]{0}{0}MPV path : {18} [=UI:{19}] [{20}]{0}{0}Console log : {0}{0}{21}.
         '''</summary>
         Friend Shared ReadOnly Property textCopyConsole() As String
             Get

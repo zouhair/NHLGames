@@ -35,8 +35,8 @@ Namespace Utilities
                             startIndex = _output.TextLength
                             length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
                             _output.AppendText(vbCr)
-                        ElseIf value.IndexOf(English.errorCliStreamlink, StringComparison.Ordinal) = 0 Then
-                            value = English.msgStreamlink & value.Remove(0, 11)
+                        ElseIf value.IndexOf(English.errorCliStreamer, StringComparison.Ordinal) = 0 Then
+                            value = English.msgStreamer & value.Remove(0, 11)
                             type = OutputType.Cli
                             startIndex = _output.TextLength
                             length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2

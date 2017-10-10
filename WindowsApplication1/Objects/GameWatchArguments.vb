@@ -14,9 +14,9 @@ Namespace Objects
         Public Property GameTitle As String = ""
         Public Property PlayerPath As String = ""
         Public Property PlayerType As PlayerTypeEnum = PlayerTypeEnum.None
-        Public Property StreamlinkPath As String = ""
-        Public Property UsestreamlinkArgs As Boolean = False
-        Public Property StreamlinkArgs As String = ""
+        Public Property StreamerPath As String = ""
+        Public Property UseStreamerArgs As Boolean = False
+        Public Property StreamerArgs As String = ""
         Public Property UsePlayerArgs As Boolean = False
         Public Property PlayerArgs As String = ""
         Public Property UseOutputArgs As Boolean = False
@@ -115,8 +115,8 @@ Namespace Objects
                 returnValue &= "-f -o" & space & dblQuot & outputPath & dblQuot & space
             End If
 
-            If UsestreamlinkArgs Then
-                returnValue &= StreamlinkArgs
+            If UseStreamerArgs Then
+                returnValue &= StreamerArgs
             End If
 
             Return returnValue
