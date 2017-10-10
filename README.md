@@ -37,6 +37,7 @@ Tool to watch NHL games in High Definition
     * [App won't start](#app-wont-start)
     * [Display issues](#display-issues)
     * [Games won't load](#games-wont-load)
+    * [Games won't record](#games-wont-record)
     * [Games won't start](#games-wont-start)
     * [Hosts file issues](#hosts-file-issues)
     * [Ad Detection Modules](#ad-detection-modules)
@@ -229,6 +230,17 @@ Restarting the app might help, until we fix the issue related to our downloader.
 ### Games won't start
 #### Nothing happens after clicking on a stream --> Check your Hosts file
 If you clicked on a stream and nothing starts after the loading bar has disappeared, go to `Settings` and click on `Test` button to check if your Hosts file has been modified by NHLGames. If you get a red message box that means you won't be able to see a stream until you fix your Windows Hosts file. See the [Hosts](#hosts) section.
+
+#### Nothing happens after clicking on a stream --> Check your antivirus, windows defender or malware bytes
+If our app is blocked by your firewall or any software protection, it won't be able to get the stream url. Also, if streamlink.exe is blocked or in quarantine it won't be able to stream it to your media player and it will look like this into the nhl games console :
+`[Streamlink for windows]` `[End of Streamlink for windows]`
+
+#### Nothing happens after clicking on a stream --> Check for running background processes that did not end
+If you press `CTRL + SHIFT + ESC` and go to Processes and find running processes named streamlink.exe, mpv.exe, mpc.exe or vlc.exe. Right click on these and click on `End task`
+
+### Games won't record
+#### Recorded files are around 10 seconds long or less
+If you can't get the Ouput option to work, you are probably a Windows 7 user. We use Streamlink to get the stream and some reported that the output option only works on Windows 10. You might want to try to use an older version of Streamlink or use the oldest version called Livestreamer available on Github. If it still does not work, select `VLC` as the default player, enable the `Streamer args` in settings and add this : `--sout file/ts:FILENAME.mp4`. It will record the game using VLC player.
 
 ### Hosts file issues
 #### Windows can't find Hosts file --> Do it yourself
