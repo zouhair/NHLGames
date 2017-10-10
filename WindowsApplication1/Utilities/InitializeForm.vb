@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports NHLGames.Objects
+Imports NHLGames.Objects.Modules
 
 Namespace Utilities
     Public Class InitializeForm
@@ -25,17 +26,26 @@ Namespace Utilities
                                                  My.Application.Info.Version.Minor, 
                                                  My.Application.Info.Version.Build, 
                                                  My.Application.Info.Version.Revision)
-                'String.Format("v{0}", ApplicationSettings.Read(Of String)(SettingsEnum.Version))
         End Sub
 
         Public Shared Sub SetLanguage()
-            Dim lstHostsFileAction = New String() {
+            Dim lstHostsFileActions = New String() {
                 NHLGamesMetro.RmText.GetString("cbHostsTest"),
                 NHLGamesMetro.RmText.GetString("cbHostsAdd"),
                 NHLGamesMetro.RmText.GetString("cbHostsRemove"),
                 NHLGamesMetro.RmText.GetString("cbHostsView"),
                 NHLGamesMetro.RmText.GetString("cbHostsEntry"),
                 NHLGamesMetro.RmText.GetString("cbHostsLocation")
+            }
+
+            Dim lstStreamQualities = New String() {
+                NHLGamesMetro.RmText.GetString("cbQualitySuperb60fps"),
+                NHLGamesMetro.RmText.GetString("cbQualitySuperb"),
+                NHLGamesMetro.RmText.GetString("cbQualityGreat"),
+                NHLGamesMetro.RmText.GetString("cbQualityGood"),
+                NHLGamesMetro.RmText.GetString("cbQualityNormal"),
+                NHLGamesMetro.RmText.GetString("cbQualityLow"),
+                NHLGamesMetro.RmText.GetString("cbQualityMobile")
             }
 
             'Main
@@ -48,7 +58,7 @@ Namespace Utilities
             Form.lblNoGames.Text = NHLGamesMetro.RmText.GetString("lblNoGames")
 
             'Settings
-            Form.lblShowScores.Text = NHLGamesMetro.RmText.GetString("lblShowScores")
+            Form.lblGamePanel.Text = NHLGamesMetro.RmText.GetString("lblShowScores")
             Form.lblPlayer.Text = NHLGamesMetro.RmText.GetString("lblPlayer")
             Form.lblQuality.Text = NHLGamesMetro.RmText.GetString("lblQuality")
             Form.lblCdn.Text = NHLGamesMetro.RmText.GetString("lblCdn")
@@ -62,22 +72,19 @@ Namespace Utilities
             Form.lblPlayerArgs.Text = NHLGamesMetro.RmText.GetString("lblPlayerArgs")
             Form.lblStreamerArgs.Text = NHLGamesMetro.RmText.GetString("lblStreamerArgs")
             Form.lblLanguage.Text = NHLGamesMetro.RmText.GetString("lblLanguage")
-            Form.lblNoteCdn.Text = NHLGamesMetro.RmText.GetString("lblNoteCdn")
+            Form.lblUseAlternateCdn.Text = NHLGamesMetro.RmText.GetString("lblAlternateCdn")
 
-            Form.chkShowFinalScores.Text = NHLGamesMetro.RmText.GetString("chkShowFinalScores")
-            Form.chkShowLiveScores.Text = NHLGamesMetro.RmText.GetString("chkShowLiveScores")
-            Form.chkShowSeriesRecord.Text = NHLGamesMetro.RmText.GetString("chkShowSeriesRecord")
+            Form.lblGamePanel.Text = NHLGamesMetro.RmText.GetString("lblGamePanel")
+            Form.lblShowFinalScores.Text = NHLGamesMetro.RmText.GetString("lblShowFinalScores")
+            Form.lblShowLiveScores.Text = NHLGamesMetro.RmText.GetString("lblShowLiveScores")
+            Form.lblShowSeriesRecord.Text = NHLGamesMetro.RmText.GetString("lblShowSeriesRecord")
 
-            Form.rbQual1.Text = NHLGamesMetro.RmText.GetString("rbQualityMobile")
-            Form.rbQual2.Text = NHLGamesMetro.RmText.GetString("rbQualityLow")
-            Form.rbQual3.Text = NHLGamesMetro.RmText.GetString("rbQualityNormal")
-            Form.rbQual4.Text = NHLGamesMetro.RmText.GetString("rbQualityGood")
-            Form.rbQual5.Text = NHLGamesMetro.RmText.GetString("rbQualityGreat")
-            Form.rbQual6.Text = NHLGamesMetro.RmText.GetString("rbQualitySuperb")
-            Form.chk60.Text = NHLGamesMetro.RmText.GetString("rbQuality60fps")
+            Form.cbStreamQuality.Items.Clear()
+            Form.cbStreamQuality.Items.AddRange(lstStreamQualities)
+            Form.cbStreamQuality.SelectedIndex = 0
 
             Form.cbHostsFileActions.Items.Clear()
-            Form.cbHostsFileActions.Items.AddRange(lstHostsFileAction)
+            Form.cbHostsFileActions.Items.AddRange(lstHostsFileActions)
             Form.cbHostsFileActions.SelectedIndex = 0
 
             Form.SettingsToolTip.SetToolTip(Form.lnkGetVlc, NHLGamesMetro.RmText.GetString("tipGetVlc"))
@@ -88,13 +95,6 @@ Namespace Utilities
             Form.SettingsToolTip.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.SettingsToolTip.SetToolTip(Form.btnstreamlinkPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.SettingsToolTip.SetToolTip(Form.btnOuput, NHLGamesMetro.RmText.GetString("tipBrowse"))
-            Form.SettingsToolTip.SetToolTip(Form.rbQual1, "300" & NHLGamesMetro.RmText.GetString("tipFormatMbHour"))
-            Form.SettingsToolTip.SetToolTip(Form.rbQual2, "500" & NHLGamesMetro.RmText.GetString("tipFormatMbHour"))
-            Form.SettingsToolTip.SetToolTip(Form.rbQual3, "700" & NHLGamesMetro.RmText.GetString("tipFormatMbHour"))
-            Form.SettingsToolTip.SetToolTip(Form.rbQual4, "950" & NHLGamesMetro.RmText.GetString("tipFormatMbHour"))
-            Form.SettingsToolTip.SetToolTip(Form.rbQual5, "1.3" & NHLGamesMetro.RmText.GetString("tipFormatGbHour"))
-            Form.SettingsToolTip.SetToolTip(Form.rbQual6, "1.8" & NHLGamesMetro.RmText.GetString("tipFormatGbHour"))
-            Form.SettingsToolTip.SetToolTip(Form.chk60, "+700" & NHLGamesMetro.RmText.GetString("tipFormatMbHour") &" (+40%)")
         
             'Console
             Form.btnCopyConsole.Text = NHLGamesMetro.RmText.GetString("btnCopyConsole")
@@ -125,9 +125,9 @@ Namespace Utilities
             Form.txtMpvPath.Text = GetApplication(SettingsEnum.MpvPath, Path.Combine(Application.StartupPath, "mpv\mpv.exe"))
             Form.txtStreamlinkPath.Text = GetApplication(SettingsEnum.StreamlinkPath, Path.Combine(Application.StartupPath, "streamlink-0.6.0\streamlink.exe"))
 
-            Form.chkShowFinalScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, True)
-            Form.chkShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, True)
-            Form.chkShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, True)
+            Form.tgShowFinalScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, True)
+            Form.tgShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, True)
+            Form.tgShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, True)
 
             Dim playersPath As String() = New String() {Form.txtMpvPath.Text, Form.txtMPCPath.Text, Form.txtVLCPath.Text}
             Dim watchArgs As GameWatchArguments = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
@@ -217,17 +217,23 @@ Namespace Utilities
 
         Private Shared Sub BindWatchArgsToForm(watchArgs As GameWatchArguments)
             If watchArgs IsNot Nothing Then
-                Form.chk60.Checked = watchArgs.Is60Fps
+                If watchArgs.Quality = StreamQuality.Mobile Then
+                    Form.cbStreamQuality.SelectedIndex = 6
+                ElseIf watchArgs.Quality = StreamQuality.Low Then
+                    Form.cbStreamQuality.SelectedIndex = 5
+                ElseIf watchArgs.Quality = StreamQuality.Normal Then
+                    Form.cbStreamQuality.SelectedIndex = 4
+                ElseIf watchArgs.Quality = StreamQuality.Good Then
+                    Form.cbStreamQuality.SelectedIndex = 3
+                ElseIf watchArgs.Quality = StreamQuality.Great Then
+                    Form.cbStreamQuality.SelectedIndex = 2
+                ElseIf watchArgs.Quality = StreamQuality.Superb AndAlso watchArgs.Is60Fps Then
+                    Form.cbStreamQuality.SelectedIndex = 1
+                Else
+                    Form.cbStreamQuality.SelectedIndex = 0
+                End If
 
-                Form.rbQual6.Checked = watchArgs.Quality = StreamQuality.Superb
-                Form.rbQual5.Checked = watchArgs.Quality = StreamQuality.Great
-                Form.rbQual4.Checked = watchArgs.Quality = StreamQuality.Good
-                Form.rbQual3.Checked = watchArgs.Quality = StreamQuality.Normal
-                Form.rbQual2.Checked = watchArgs.Quality = StreamQuality.Low
-                Form.rbQual1.Checked = watchArgs.Quality = StreamQuality.Mobile
-
-                Form.rbAkamai.Checked = watchArgs.Cdn = CdnType.Akc
-                Form.rbLevel3.Checked = watchArgs.Cdn = CdnType.L3C
+                Form.tgAlternateCdn.Checked = watchArgs.Cdn = CdnType.L3C
 
                 Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc
                 Form.rbMPC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpc

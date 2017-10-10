@@ -137,9 +137,81 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Good - 504p - 950Mb/hr.
+        '''</summary>
+        Friend Shared ReadOnly Property cbQualityGood() As String
+            Get
+                Return ResourceManager.GetString("cbQualityGood", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Great - 540p - 1.3Gb/hr.
+        '''</summary>
+        Friend Shared ReadOnly Property cbQualityGreat() As String
+            Get
+                Return ResourceManager.GetString("cbQualityGreat", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Low - 288p - 500Mb/hr.
+        '''</summary>
+        Friend Shared ReadOnly Property cbQualityLow() As String
+            Get
+                Return ResourceManager.GetString("cbQualityLow", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Mobile - 224p 300Mb/hr.
+        '''</summary>
+        Friend Shared ReadOnly Property cbQualityMobile() As String
+            Get
+                Return ResourceManager.GetString("cbQualityMobile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Normal - 360p - 700Mb/hr.
+        '''</summary>
+        Friend Shared ReadOnly Property cbQualityNormal() As String
+            Get
+                Return ResourceManager.GetString("cbQualityNormal", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Superb - 720p - 1.8Gb/hr.
+        '''</summary>
+        Friend Shared ReadOnly Property cbQualitySuperb() As String
+            Get
+                Return ResourceManager.GetString("cbQualitySuperb", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Superb - 720p - 60 fps - 2.5Gb/hr.
+        '''</summary>
+        Friend Shared ReadOnly Property cbQualitySuperb60fps() As String
+            Get
+                Return ResourceManager.GetString("cbQualitySuperb60fps", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Use the alternate network.
+        '''</summary>
+        Friend Shared ReadOnly Property lblAlternateCdn() As String
+            Get
+                Return ResourceManager.GetString("chkAlternateCdn", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Final Scores.
         '''</summary>
-        Friend Shared ReadOnly Property chkShowFinalScores() As String
+        Friend Shared ReadOnly Property lblShowFinalScores() As String
             Get
                 Return ResourceManager.GetString("chkShowFinalScores", resourceCulture)
             End Get
@@ -148,7 +220,7 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à Live Scores.
         '''</summary>
-        Friend Shared ReadOnly Property chkShowLiveScores() As String
+        Friend Shared ReadOnly Property lblShowLiveScores() As String
             Get
                 Return ResourceManager.GetString("chkShowLiveScores", resourceCulture)
             End Get
@@ -157,7 +229,7 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à Series Record.
         '''</summary>
-        Friend Shared ReadOnly Property chkShowSeriesRecord() As String
+        Friend Shared ReadOnly Property lblShowSeriesRecord() As String
             Get
                 Return ResourceManager.GetString("chkShowSeriesRecord", resourceCulture)
             End Get
@@ -461,7 +533,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à CDN.
+        '''  Recherche une chaîne localisée semblable à Content Delivery Network.
         '''</summary>
         Friend Shared ReadOnly Property lblCdn() As String
             Get
@@ -646,15 +718,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property lblNoStreamAvailable() As String
             Get
                 Return ResourceManager.GetString("lblNoStreamAvailable", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Note: Refreshing games is required for CDN change to take effect.
-        '''</summary>
-        Friend Shared ReadOnly Property lblNoteCdn() As String
-            Get
-                Return ResourceManager.GetString("lblNoteCdn", resourceCulture)
             End Get
         End Property
         
@@ -1235,69 +1298,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à 60 fps.
-        '''</summary>
-        Friend Shared ReadOnly Property rbQuality60fps() As String
-            Get
-                Return ResourceManager.GetString("rbQuality60fps", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Good.
-        '''</summary>
-        Friend Shared ReadOnly Property rbQualityGood() As String
-            Get
-                Return ResourceManager.GetString("rbQualityGood", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Great.
-        '''</summary>
-        Friend Shared ReadOnly Property rbQualityGreat() As String
-            Get
-                Return ResourceManager.GetString("rbQualityGreat", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Low.
-        '''</summary>
-        Friend Shared ReadOnly Property rbQualityLow() As String
-            Get
-                Return ResourceManager.GetString("rbQualityLow", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Mobile.
-        '''</summary>
-        Friend Shared ReadOnly Property rbQualityMobile() As String
-            Get
-                Return ResourceManager.GetString("rbQualityMobile", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Normal.
-        '''</summary>
-        Friend Shared ReadOnly Property rbQualityNormal() As String
-            Get
-                Return ResourceManager.GetString("rbQualityNormal", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Superb.
-        '''</summary>
-        Friend Shared ReadOnly Property rbQualitySuperb() As String
-            Get
-                Return ResourceManager.GetString("rbQualitySuperb", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Volume: Detects ads based on the volume of your media player playing the game.
         '''</summary>
         Friend Shared ReadOnly Property rbVolumeDetection() As String
@@ -1357,6 +1357,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property tipBrowse() As String
             Get
                 Return ResourceManager.GetString("tipBrowse", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Gb/h.
+        '''</summary>
+        Friend Shared ReadOnly Property tipFormatGbHour() As String
+            Get
+                Return ResourceManager.GetString("tipFormatGbHour", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Mb/h.
+        '''</summary>
+        Friend Shared ReadOnly Property tipFormatMbHour() As String
+            Get
+                Return ResourceManager.GetString("tipFormatMbHour", resourceCulture)
             End Get
         End Property
         

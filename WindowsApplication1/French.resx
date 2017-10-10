@@ -125,16 +125,16 @@
     <value>Copier au presse-papier</value>
     <comment>Console tab</comment>
   </data>
-  <data name="chkShowFinalScores" xml:space="preserve">
-    <value>Résultats finaux</value>
+  <data name="lblShowFinalScores" xml:space="preserve">
+    <value>Afficher les résultats finaux</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="chkShowLiveScores" xml:space="preserve">
-    <value>Résultats en direct</value>
+  <data name="lblShowLiveScores" xml:space="preserve">
+    <value>Afficher les résultats en direct</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="chkShowSeriesRecord" xml:space="preserve">
-    <value>Détails des séries</value>
+  <data name="lblShowSeriesRecord" xml:space="preserve">
+    <value>Afficher les détails des séries</value>
     <comment>Settings tab</comment>
   </data>
   <data name="msgHostnameSet" xml:space="preserve">
@@ -201,10 +201,6 @@
     <value>Aucun stream de disponible</value>
     <comment>Game panel</comment>
   </data>
-  <data name="lblNoteCdn" xml:space="preserve">
-    <value>Note: Veuillez rafraîchir la grille des matchs pour obtenir le changement de diffuseur</value>
-    <comment>Settings tab</comment>
-  </data>
   <data name="lblOnNetwork" xml:space="preserve">
     <value> sur {0}</value>
     <comment>Game panel</comment>
@@ -231,10 +227,6 @@
   </data>
   <data name="lblQuality" xml:space="preserve">
     <value>Qualité vidéo</value>
-    <comment>Settings tab</comment>
-  </data>
-  <data name="lblShowScores" xml:space="preserve">
-    <value>Afficher les résultats</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblSlPath" xml:space="preserve">
@@ -341,14 +333,6 @@
     <value>Paramètres</value>
     <comment>Main</comment>
   </data>
-  <data name="lblFormatGbHour" xml:space="preserve">
-    <value>GB/Heure</value>
-    <comment>Settings tab</comment>
-  </data>
-  <data name="lblFormatMbHour" xml:space="preserve">
-    <value>MB/Heure</value>
-    <comment>Settings tab</comment>
-  </data>
   <data name="enumending" xml:space="preserve">
     <value>En cours</value>
     <comment>Game State Enum</comment>
@@ -425,28 +409,28 @@
     <value>{0}E P</value>
     <comment>Game panel</comment>
   </data>
-  <data name="rbQualityGood" xml:space="preserve">
-    <value>Bonne</value>
+  <data name="cbQualityGood" xml:space="preserve">
+    <value>Bonne - 504p - 950Mb/heure</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="rbQualityGreat" xml:space="preserve">
-    <value>Géniale</value>
+  <data name="cbQualityGreat" xml:space="preserve">
+    <value>Géniale - 540p - 1.3Gb/heure</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="rbQualityLow" xml:space="preserve">
-    <value>Basse</value>
+  <data name="cbQualityLow" xml:space="preserve">
+    <value>Basse - 288p - 500Mb/heure</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="rbQualityMobile" xml:space="preserve">
-    <value>Mobile</value>
+  <data name="cbQualityMobile" xml:space="preserve">
+    <value>Mobile - 224p - 300Mb/heure</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="rbQualityNormal" xml:space="preserve">
-    <value>Moyenne</value>
+  <data name="cbQualityNormal" xml:space="preserve">
+    <value>Moyenne - 360p - 700Mb/heure</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="rbQualitySuperb" xml:space="preserve">
-    <value>Superbe</value>
+  <data name="cbQualitySuperb" xml:space="preserve">
+    <value>Superbe - 720p - 1.8Gb/heure</value>
     <comment>Settings tab</comment>
   </data>
   <data name="cbHostsAdd" xml:space="preserve">
@@ -529,8 +513,8 @@
     <value>Download VLC</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="rbQuality60fps" xml:space="preserve">
-    <value>60 fps</value>
+  <data name="cbQualitySuperb60fps" xml:space="preserve">
+    <value>Excellente - 720p @ 60 fps - 2.5Gb/heure</value>
     <comment>Settings tab</comment>
   </data>
   <data name="msgHostsCopyEntry" xml:space="preserve">
@@ -552,5 +536,13 @@
   <data name="chkSpotifyPlayNextSong" xml:space="preserve">
     <value>Toujours jouer la prochaine chanson</value>
     <comment>Modules tab</comment>
+  </data>
+  <data name="lblAlternateCdn" xml:space="preserve">
+    <value>Utiliser le réseau alternatif</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="lblGamePanel" xml:space="preserve">
+    <value>Panneau de partie</value>
+    <comment>Settings tab</comment>
   </data>
 </root>

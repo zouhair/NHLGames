@@ -172,10 +172,10 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub chkShowFinalScores_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowFinalScores.CheckedChanged 
-        ApplicationSettings.SetValue(SettingsEnum.ShowScores, chkShowFinalScores.Checked)
+    Private Sub tgShowFinalScores_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowFinalScores.CheckedChanged
+        ApplicationSettings.SetValue(SettingsEnum.ShowScores, tgShowFinalScores.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameManager.GamesDict(game.GameId), chkShowFinalScores.Checked, chkShowLiveScores.Checked, chkShowSeriesRecord.Checked)
+            game.UpdateGame(GameManager.GamesDict(game.GameId), tgShowFinalScores.Checked, tgShowLiveScores.Checked, tgShowSeriesRecord.Checked)
         Next
     End Sub
 
@@ -183,28 +183,18 @@ Public Class NHLGamesMetro
         RichTextBox.Clear()
     End Sub
 
-    Private Sub chk60_CheckedChanged(sender As Object, e As EventArgs) Handles chk60.CheckedChanged 
-        If chk60.Checked Then
-            rbQual6.Checked = True
-            _writeToConsoleSettingsChanged(lblQuality.Text, rbQual6.Text & " @ " & chk60.Text)
-        ElseIf rbQual6.Checked Then
-            _writeToConsoleSettingsChanged(lblQuality.Text, rbQual6.Text)
-        End If
-        Player.RenewArgs()
-    End Sub
-
     Private Sub txtVLCPath_TextChanged(sender As Object, e As EventArgs) Handles txtVLCPath.TextChanged 
-        rbVLC.Enabled = True
+        If Not rbVLC.Enabled Then rbVLC.Enabled = True
         Player.RenewArgs()
     End Sub
 
     Private Sub txtMPCPath_TextChanged(sender As Object, e As EventArgs) Handles txtMPCPath.TextChanged 
-        rbMPC.Enabled = True
+        If Not rbMPC.Enabled Then rbMPC.Enabled = True
         Player.RenewArgs()
     End Sub
 
     Private Sub txtMpvPath_TextChanged(sender As Object, e As EventArgs) Handles txtMpvPath.TextChanged 
-        rbMpv.Enabled = True
+        If Not rbMPV.Enabled Then rbMPV.Enabled = True
         Player.RenewArgs()
     End Sub
 
@@ -212,13 +202,7 @@ Public Class NHLGamesMetro
         Player.RenewArgs()
     End Sub
 
-    Private Sub quality_CheckedChanged(sender As Object, e As EventArgs) Handles rbQual6.CheckedChanged, rbQual5.CheckedChanged, rbQual4.CheckedChanged, rbQual3.CheckedChanged, rbQual2.CheckedChanged, rbQual1.CheckedChanged 
-        Player.RenewArgs()
-        Dim rb As RadioButton = sender
-        If (Not chk60.Checked And rb.Checked) Then _writeToConsoleSettingsChanged(lblQuality.Text, rb.Text)
-    End Sub
-
-    Private Sub player_CheckedChanged(sender As Object, e As EventArgs) Handles rbVLC.CheckedChanged, rbMpv.CheckedChanged, rbMPC.CheckedChanged 
+    Private Sub player_CheckedChanged(sender As Object, e As EventArgs)  
         Dim rb As RadioButton = sender
         If (rb.Checked) Then 
             Player.RenewArgs()
@@ -226,12 +210,11 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub rbCDN_CheckedChanged(sender As Object, e As EventArgs) Handles rbLevel3.CheckedChanged, rbAkamai.CheckedChanged 
-        Dim rb As RadioButton = sender
-        If (rb.Checked) Then 
-            Player.RenewArgs()
-            _writeToConsoleSettingsChanged(lblCdn.Text, rb.Text)
-        End If
+    Private Sub tgAlternateCdn_CheckedChanged(sender As Object, e As EventArgs) Handles tgAlternateCdn.CheckedChanged
+        Dim cdn = If(tgAlternateCdn.Checked, CdnType.L3C, CdnType.Akc)
+        Player.RenewArgs()
+        _writeToConsoleSettingsChanged(lblCdn.Text, cdn.ToString())
+        InvokeElement.LoadGamesAsync(GameDate)
     End Sub
 
     Private Sub txtOutputPath_TextChanged(sender As Object, e As EventArgs) Handles txtOutputArgs.TextChanged 
@@ -287,10 +270,10 @@ Public Class NHLGamesMetro
         flpGames.Focus()
     End Sub
 
-    Private Sub chkShowLiveScores_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowLiveScores.CheckedChanged 
-        ApplicationSettings.SetValue(SettingsEnum.ShowLiveScores, chkShowLiveScores.Checked)
+    Private Sub chkShowLiveScores_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowLiveScores.CheckedChanged
+        ApplicationSettings.SetValue(SettingsEnum.ShowLiveScores, tgShowLiveScores.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameManager.GamesDict(game.GameId), chkShowFinalScores.Checked, chkShowLiveScores.Checked, chkShowSeriesRecord.Checked)
+            game.UpdateGame(GameManager.GamesDict(game.GameId), tgShowFinalScores.Checked, tgShowLiveScores.Checked, tgShowSeriesRecord.Checked)
         Next
     End Sub
 
@@ -332,10 +315,10 @@ Public Class NHLGamesMetro
                                        if(tgOutput.Checked, English.msgOn, English.msgOff))
     End Sub
 
-    Private Sub chkShowSeriesRecord_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowSeriesRecord.CheckedChanged 
-        ApplicationSettings.SetValue(SettingsEnum.ShowSeriesRecord, chkShowSeriesRecord.Checked)
+    Private Sub chkShowSeriesRecord_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowSeriesRecord.CheckedChanged
+        ApplicationSettings.SetValue(SettingsEnum.ShowSeriesRecord, tgShowSeriesRecord.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameManager.GamesDict(game.GameId), chkShowFinalScores.Checked, chkShowLiveScores.Checked, chkShowSeriesRecord.Checked)
+            game.UpdateGame(GameManager.GamesDict(game.GameId), tgShowFinalScores.Checked, tgShowLiveScores.Checked, tgShowSeriesRecord.Checked)
         Next
     End Sub
 
@@ -445,7 +428,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnCopyConsole_Click(sender As Object, e As EventArgs) Handles btnCopyConsole.Click
-        dim player As String = if (rbMpv.Checked,"MPV",If(rbMPC.Checked,"MPC",If(rbVLC.Checked,"VLC","none")))
+        dim player As String = If (rbMpv.Checked,"MPV",If(rbMPC.Checked,"MPC",If(rbVLC.Checked,"VLC","none")))
         Dim x64 As String = if(Environment.Is64BitOperatingSystem,"64 Bits","32 Bits")
         Dim streamlinkPath = ApplicationSettings.Read(Of String)(SettingsEnum.StreamlinkPath, String.Empty).ToString()
         Dim vlcPath = ApplicationSettings.Read(Of String)(SettingsEnum.VlcPath, String.Empty).ToString()
@@ -571,4 +554,13 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
+    Private Sub cbStreamQuality_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbStreamQuality.SelectedIndexChanged
+        Player.RenewArgs()
+        _writeToConsoleSettingsChanged(lblQuality.Text, cbStreamQuality.SelectedText)
+        tlpSettings.Focus()
+    End Sub
+
+    Private Sub cbDefaultPlayeer_SelectedIndexChanged(sender As Object, e As EventArgs) 
+
+    End Sub
 End Class

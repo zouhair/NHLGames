@@ -157,7 +157,7 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à Résultats finaux.
         '''</summary>
-        Public Shared ReadOnly Property chkShowFinalScores() As String
+        Public Shared ReadOnly Property lblShowFinalScores() As String
             Get
                 Return ResourceManager.GetString("chkShowFinalScores", resourceCulture)
             End Get
@@ -166,7 +166,7 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à Résultats en direct.
         '''</summary>
-        Public Shared ReadOnly Property chkShowLiveScores() As String
+        Public Shared ReadOnly Property lblShowLiveScores() As String
             Get
                 Return ResourceManager.GetString("chkShowLiveScores", resourceCulture)
             End Get
@@ -175,7 +175,7 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à Détails des séries.
         '''</summary>
-        Public Shared ReadOnly Property chkShowSeriesRecord() As String
+        Public Shared ReadOnly Property lblShowSeriesRecord() As String
             Get
                 Return ResourceManager.GetString("chkShowSeriesRecord", resourceCulture)
             End Get
@@ -850,7 +850,7 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à Bonne.
         '''</summary>
-        Public Shared ReadOnly Property rbQualityGood() As String
+        Public Shared ReadOnly Property cbQualityGood() As String
             Get
                 Return ResourceManager.GetString("rbQualityGood", resourceCulture)
             End Get
@@ -859,7 +859,7 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à Géniale.
         '''</summary>
-        Public Shared ReadOnly Property rbQualityGreat() As String
+        Public Shared ReadOnly Property cbQualityGreat() As String
             Get
                 Return ResourceManager.GetString("rbQualityGreat", resourceCulture)
             End Get
@@ -868,7 +868,7 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à Basse.
         '''</summary>
-        Public Shared ReadOnly Property rbQualityLow() As String
+        Public Shared ReadOnly Property cbQualityLow() As String
             Get
                 Return ResourceManager.GetString("rbQualityLow", resourceCulture)
             End Get
@@ -877,7 +877,7 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à Mobile.
         '''</summary>
-        Public Shared ReadOnly Property rbQualityMobile() As String
+        Public Shared ReadOnly Property cbQualityMobile() As String
             Get
                 Return ResourceManager.GetString("rbQualityMobile", resourceCulture)
             End Get
@@ -886,7 +886,7 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à Moyenne.
         '''</summary>
-        Public Shared ReadOnly Property rbQualityNormal() As String
+        Public Shared ReadOnly Property cbQualityNormal() As String
             Get
                 Return ResourceManager.GetString("rbQualityNormal", resourceCulture)
             End Get
@@ -895,7 +895,7 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à Superbe.
         '''</summary>
-        Public Shared ReadOnly Property rbQualitySuperb() As String
+        Public Shared ReadOnly Property cbQualitySuperb() As String
             Get
                 Return ResourceManager.GetString("rbQualitySuperb", resourceCulture)
             End Get

@@ -30,12 +30,11 @@ Namespace Utilities
         Private Shared Sub LaunchingStream(args As GameWatchArguments)
             Dim lstLines As New List(Of String) From {"Found matching plugin stream", "Available streams", "Opening stream", "Starting player"}
             Dim lstLinesToRemove As New List(Of String) From {"[Streamlink for Windows", "[End of Streamlink for Windows]"}
-            Dim progressStep As Integer = (NHLGamesMetro.ProgressMaxValue) / (lstLines.Count +1)
+            Dim progressStep As Integer = (NHLGamesMetro.ProgressMaxValue) / (lstLines.Count + 1)
 
             NHLGamesMetro.ProgressValue = 0
             NHLGamesMetro.StreamStarted = True
             NHLGamesMetro.ProgressVisible = True
-            Dim errorHappened As Boolean
 
             Console.WriteLine(English.msgStreaming, args.GameTitle, args.Stream.Network, args.PlayerType.ToString())
             Console.WriteLine(English.msgStartingStreamlink, args.ToString(True))
@@ -46,7 +45,7 @@ Namespace Utilities
                     .Arguments = args.ToString(),
                     .UseShellExecute = False,
                     .RedirectStandardOutput = True,
-                    .CreateNoWindow = True}
+                    .CreateNoWindow = Not NHLGamesMetro.FormInstance.tgOutput.Checked}
                     }
             procStreaming.EnableRaisingEvents = True
 
@@ -56,7 +55,10 @@ Namespace Utilities
 
             Try
                 procStreaming.Start()
-                While (procStreaming.StandardOutput.EndOfStream = False AndAlso Not errorHappened)
+
+                If NHLGamesMetro.FormInstance.tgOutput.Checked Then Return
+
+                While (procStreaming.StandardOutput.EndOfStream = False)
                     Dim line = procStreaming.StandardOutput.ReadLine()
                     If line.Contains(lstLines(0)) Or line.ToLower().Contains(Http) Then
                         line = line.Substring(0, line.ToLower().IndexOf(Http, StringComparison.Ordinal)) & English.msgCensoredStream
@@ -103,25 +105,21 @@ Namespace Utilities
 
             If NHLGamesMetro.FormLoaded OrElse forceSet Then
                 Dim watchArgs As New GameWatchArguments
-                watchArgs.Is60Fps = form.chk60.Checked
+                watchArgs.Is60Fps = form.cbStreamQuality.SelectedIndex = 0
 
-                If form.rbQual6.Checked Then
+                If form.cbStreamQuality.SelectedIndex = 0 OrElse
+                    form.cbStreamQuality.SelectedIndex = 1 Then
                     watchArgs.Quality = StreamQuality.Superb
-                ElseIf form.rbQual5.Checked Then
+                ElseIf form.cbStreamQuality.SelectedIndex = 2 Then
                     watchArgs.Quality =  StreamQuality.Great
-                    form.chk60.Checked = False
-                ElseIf form.rbQual4.Checked Then
+                ElseIf form.cbStreamQuality.SelectedIndex = 3 Then
                     watchArgs.Quality =  StreamQuality.Good
-                    form.chk60.Checked = False
-                ElseIf form.rbQual3.Checked Then
+                ElseIf form.cbStreamQuality.SelectedIndex = 4 Then
                     watchArgs.Quality =  StreamQuality.Normal
-                    form.chk60.Checked = False
-                ElseIf form.rbQual2.Checked Then
+                ElseIf form.cbStreamQuality.SelectedIndex = 5 Then
                     watchArgs.Quality =  StreamQuality.Low
-                    form.chk60.Checked = False
-                ElseIf form.rbQual1.Checked Then
+                ElseIf form.cbStreamQuality.SelectedIndex = 6 Then
                     watchArgs.Quality =  StreamQuality.Mobile
-                    form.chk60.Checked = False
                 End If
 
                 If form.rbMpv.Checked Then
@@ -138,10 +136,10 @@ Namespace Utilities
 
                 watchArgs.StreamlinkPath = form.txtStreamlinkPath.Text
 
-                If form.rbAkamai.Checked Then
-                    watchArgs.Cdn = CdnType.Akc
-                ElseIf form.rbLevel3.Checked Then
+                If form.tgAlternateCdn.Checked Then
                     watchArgs.Cdn = CdnType.L3C
+                Else
+                    watchArgs.Cdn = CdnType.Akc
                 End If
 
                 watchArgs.UsePlayerArgs = form.tgPlayer.Checked
