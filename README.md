@@ -40,7 +40,6 @@ Tool to watch NHL games in High Definition
     * [Games won't record](#games-wont-record)
     * [Games won't start](#games-wont-start)
     * [Hosts file issues](#hosts-file-issues)
-    * [Ad Detection Modules](#ad-detection-modules)
 * [Chromecast](#chromecast)
 * [Contribute](#contribute)
 
@@ -114,18 +113,18 @@ The selected value will defined which quality will be sent to your media player,
 - 720p at 60fps is about 2.50 GB per hour
 
 ### Content Delivery Network (CDN)
-Level 3 :
-```
-Level 3 owns and operates a global Tier-1 network and - logically - their CDN runs on top of it. 
-Level 3 CDN has POPs on all continents and their product focus is on video and large object delivery. 
-Level 3 CDN is part of the Google Cloud CDN Interconnect.
-```
-
-Akamai :
+Akamai (Default):
 ```
 Akamai is one of the oldest CDNs and generally considered to be the largest global CDN. 
 They have 'servers everywhere' and a wide range of products and services. 
 The company is actively involved in Let's Encrypt and is pushing HTTP/2 adoption.
+```
+
+Level 3 (Alternate):
+```
+Level 3 owns and operates a global Tier-1 network and - logically - their CDN runs on top of it. 
+Level 3 CDN has POPs on all continents and their product focus is on video and large object delivery. 
+Level 3 CDN is part of the Google Cloud CDN Interconnect.
 ```
 
 ### Server's Hostname
@@ -145,6 +144,8 @@ Note: If you need to remove NHLGames entry, just click on `Remove Entries` or op
 ### Streamlink
 Streamlink is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The path to streamlink.exe is inside NHLGames directory and it should not move, otherwise you will have to get the new path to it or you will get a message box that NHLGames lost the path and won't be able to play streams.
 
+If you can't play any stream, try to get an [older version of Streamlink](https://github.com/streamlink/streamlink-portable/tags) or try to use the old [LiveStreamer](http://docs.livestreamer.io/install.html#windows-binaries). In NHL Games settings, you can defined the type of .exe you are looking for by selecting an other type in the path browser.
+
 ### Other options
 If you wish to use these other options make sure to use the ON/OFF switch first.
 - Output : Path where you want to save games as .mp4 files.
@@ -155,7 +156,7 @@ If you wish to use these other options make sure to use the ON/OFF switch first.
 Go to this section to inspect everything that NHLGames does. Also, any error or warning will show here.
 
 ## Modules
-NHLGames doesn't use any Ad Detection modules by default, but you can activate one by checking `Enabled` and by moving a module from the left box to the right. Select one and use the `>>>` arrow button to activate it, use the `<<<` arrow button to desactivate it. If you don't use any, it's better if you disable the Ad Detection module. 
+NHLGames doesn't use any Ad Detection modules by default, but you can activate it and select the app you want to use during commercials. If you don't use any, it's better if you disable the Ad Detection module. 
 
 
 # Support
@@ -243,12 +244,13 @@ If you press `CTRL + SHIFT + ESC` and go to Processes and find running processes
 If you can't get the Ouput option to work, you are probably a Windows 7 user. We use Streamlink to get the stream and some reported that the output option only works on Windows 10. You might want to try to use an older version of Streamlink or use the oldest version called Livestreamer available on Github. If it still does not work, select `VLC` as the default player, enable the `Streamer args` in settings and add this : `--sout file/ts:FILENAME.mp4`. It will record the game using VLC player.
 
 ### Hosts file issues
-#### Windows can't find Hosts file --> Do it yourself
-NHLGames can't have access to the Hosts file, so you will have to add the entry line from `Settings` tab > `DIY Steps` button and paste it to your Hosts file in `C:\Windows\System32\Drivers\etc`. See the [Hosts](#hosts) section.
-
-### Ad Detection Modules
-#### Tab not showing up --> Unblock DLLs
-Right click on the DLL's in the Spotify/OBS folders then in `Properties` check the `unblock` button at the bottom of the `General` tab, that should get them to show up.
+#### Windows can't find Hosts file or access is denied --> Do it yourself
+NHLGames can't have access to the Hosts file? You will have to add the entry line and paste it to your Hosts file in `C:\Windows\System32\Drivers\etc`. You can do it by using the Hosts file actions in the Settings tab in NHL Games and click on GO :
+- Select action `Copy to clipboard the authentication bypass line`
+- Select action `View Hosts file content in Notepad` (or `Open Hosts file location` and select Notepad)
+- Paste the line (CTRL + V)
+- Save the Hosts file (make sure the filename is **Hosts** and not Hosts.txt, and the file type is **All Files (\*.\*)** and not Text Documents(*.txt). 
+- Go back to NHL Games and test the file by selecting the hosts action `Test if the NHL.tv authentication bypass works`
 
 
 # Chromecast
