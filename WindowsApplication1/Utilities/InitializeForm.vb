@@ -52,8 +52,6 @@ Namespace Utilities
             Form.tabMenu.TabPages.Item(0).Text = NHLGamesMetro.RmText.GetString("tabGames")
             Form.tabMenu.TabPages.Item(1).Text = NHLGamesMetro.RmText.GetString("tabSettings")
             Form.tabMenu.TabPages.Item(2).Text = NHLGamesMetro.RmText.GetString("tabConsole")
-            Form.tabMenu.TabPages.Item(3).Text = NHLGamesMetro.RmText.GetString("tabModules")
-
 
             Form.lblNoGames.Text = NHLGamesMetro.RmText.GetString("lblNoGames")
 
@@ -102,15 +100,12 @@ Namespace Utilities
 
             'Modules
             Form.lblModules.Text = NHLGamesMetro.RmText.GetString("lblModules")
-            Form.lblDetectionType.Text = NHLGamesMetro.RmText.GetString("lblDetectionType")
             Form.lblSpotify.Text = NHLGamesMetro.RmText.GetString("lblSpotify")
             Form.lblSpotifyDesc.Text = NHLGamesMetro.RmText.GetString("lblSpotifyDesc")
             Form.lblOBS.Text = NHLGamesMetro.RmText.GetString("lblObs")
-            Form.lblObsDesc.Text = NHLGamesMetro.RmText.GetString("lblObsDesc")
+            Form.lblOBSDesc.Text = NHLGamesMetro.RmText.GetString("lblObsDesc")
             Form.lblObsAdEndingHotkey.Text = NHLGamesMetro.RmText.GetString("lblObsAdEndingHotkey")
             Form.lblObsAdStartingHotkey.Text = NHLGamesMetro.RmText.GetString("lblObsAdStartingHotkey")
-            Form.rbVolumeDetection.Text = NHLGamesMetro.RmText.GetString("rbVolumeDetection")
-            Form.rbFullscreenDetection.Text = NHLGamesMetro.RmText.GetString("rbFullscreenDetection")
             Form.chkSpotifyForceToStart.Text = NHLGamesMetro.RmText.GetString("chkSpotifyForceToStart")
             Form.chkSpotifyPlayNextSong.Text = NHLGamesMetro.RmText.GetString("chkSpotifyPlayNextSong")
 
@@ -129,6 +124,8 @@ Namespace Utilities
             Form.tgShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, True)
             Form.tgShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, True)
 
+            PopulateComboBox(Form.cbLanguage, SettingsEnum.SelectedLanguage, SettingsEnum.LanguageList)
+
             Dim playersPath As String() = New String() {Form.txtMpvPath.Text, Form.txtMPCPath.Text, Form.txtVLCPath.Text}
             Dim watchArgs As GameWatchArguments = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
 
@@ -137,7 +134,6 @@ Namespace Utilities
                 watchArgs = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
             End If
 
-            PopulateComboBox(Form.cbLanguage, SettingsEnum.SelectedLanguage, SettingsEnum.LanguageList)
             PopulateComboBox(Form.cbServers, SettingsEnum.SelectedServer, settingsenum.ServerList)
 
             NHLGamesMetro.ServerIp = Dns.GetHostEntry(Form.cbServers.SelectedItem.ToString()).AddressList.First.ToString()
@@ -154,6 +150,15 @@ Namespace Utilities
                     Form.tabMenu.SelectedIndex = 1
                 End If
             End If
+
+            Dim adDetectionConfigs As AdDetectionConfigs = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection)
+
+            If adDetectionConfigs Is Nothing Then 
+                AdDetection.Renew(True)
+                adDetectionConfigs = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection)
+            End If
+
+            BindAdDetectionConfigsToForm(adDetectionConfigs)
 
             Form.lblNoGames.Location = New Point(((Form.flpGames.Width - Form.lblNoGames.Width) / 2),  Form.flpGames.Location.Y + 175)
             Form.spnLoading.Location = New Point(((Form.flpGames.Width - Form.lblNoGames.Width) / 2) + 42, Form.flpGames.Location.Y + 150)
@@ -217,21 +222,7 @@ Namespace Utilities
 
         Private Shared Sub BindWatchArgsToForm(watchArgs As GameWatchArguments)
             If watchArgs IsNot Nothing Then
-                If watchArgs.Quality = StreamQuality.Mobile Then
-                    Form.cbStreamQuality.SelectedIndex = 6
-                ElseIf watchArgs.Quality = StreamQuality.Low Then
-                    Form.cbStreamQuality.SelectedIndex = 5
-                ElseIf watchArgs.Quality = StreamQuality.Normal Then
-                    Form.cbStreamQuality.SelectedIndex = 4
-                ElseIf watchArgs.Quality = StreamQuality.Good Then
-                    Form.cbStreamQuality.SelectedIndex = 3
-                ElseIf watchArgs.Quality = StreamQuality.Great Then
-                    Form.cbStreamQuality.SelectedIndex = 2
-                ElseIf watchArgs.Quality = StreamQuality.Superb AndAlso watchArgs.Is60Fps Then
-                    Form.cbStreamQuality.SelectedIndex = 1
-                Else
-                    Form.cbStreamQuality.SelectedIndex = 0
-                End If
+                Form.cbStreamQuality.SelectedIndex = CType(watchArgs.Quality, Integer)
 
                 Form.tgAlternateCdn.Checked = watchArgs.Cdn = CdnType.L3C
 
@@ -258,6 +249,28 @@ Namespace Utilities
                 Form.txtOutputArgs.Text = watchArgs.PlayerOutputPath
                 Form.txtOutputArgs.Enabled = watchArgs.UseOutputArgs
                 Form.tgOutput.Checked = watchArgs.UseOutputArgs
+            End If
+        End Sub
+
+        Private Shared Sub BindAdDetectionConfigsToForm(configs As AdDetectionConfigs)
+            If configs IsNot Nothing Then
+                form.tgModules.Checked = configs.IsEnabled
+
+                form.tgSpotify.Checked = configs.EnabledSpotifyModule
+                form.tgOBS.Checked = configs.EnabledObsModule
+
+                form.chkSpotifyForceToStart.Checked = configs.EnabledSpotifyForceToOpen
+                form.chkSpotifyPlayNextSong.Checked = configs.EnabledSpotifyPlayNextSong
+
+                form.txtAdKey.Text = configs.EnabledObsAdSceneHotKey.Key
+                form.chkAdCtrl.Checked = configs.EnabledObsAdSceneHotKey.Ctrl
+                form.chkAdAlt.Checked = configs.EnabledObsAdSceneHotKey.Alt
+                form.chkAdShift.Checked = configs.EnabledObsAdSceneHotKey.Shift
+
+                form.txtGameKey.Text = configs.EnabledObsGameSceneHotKey.Key
+                form.chkGameCtrl.Checked = configs.EnabledObsGameSceneHotKey.Ctrl
+                form.chkGameAlt.Checked = configs.EnabledObsGameSceneHotKey.Alt
+                form.chkGameShift.Checked = configs.EnabledObsGameSceneHotKey.Shift
             End If
         End Sub
 

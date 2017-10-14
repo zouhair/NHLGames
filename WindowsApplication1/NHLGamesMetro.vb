@@ -31,8 +31,7 @@ Public Class NHLGamesMetro
     Public LstGameControls As List(Of GameControl) = New List(Of GameControl)
     Public Shared LstThreads As List(Of Thread) = New List(Of Thread)()
     Public Shared FormLoaded As Boolean = False
-    Private Shared _adDetectionType As AdDetectionTypeEnum
-    Private Shared _adDetectionEngine As Utilities.AdDetection
+    Private Shared _adDetectionEngine As AdDetection
 
     <DllImport("user32.dll")>
     Public Shared Function ReleaseCapture() As Boolean
@@ -41,7 +40,7 @@ Public Class NHLGamesMetro
     <DllImport("user32.dll")>
     Public Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Integer
     End Function
-
+#Disable Warning InconsistentNaming
     Private Const WM_NCLBUTTONDOWN As Integer = &HA1
     Private Const HTBOTTOM As Integer = 15
     Private Const HTBOTTOMLEFT As Integer = 16
@@ -51,6 +50,7 @@ Public Class NHLGamesMetro
     Private Const HTTOP As Integer = 12
     Private Const HTTOPLEFT As Integer = 13
     Private Const HTTOPRIGHT As Integer = 14
+#Enable Warning InconsistentNaming
 
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
     Public Shared Sub Main()
@@ -362,8 +362,6 @@ Public Class NHLGamesMetro
             tlpSettings.Focus()
         ElseIf tabConsole.Visible Then
             RichTextBox.Focus()
-        ElseIf tabModules.Visible Then
-            tlpModules.Focus()
         Else 
             tabMenu.Focus()
         End If
@@ -430,11 +428,11 @@ Public Class NHLGamesMetro
     Private Sub btnCopyConsole_Click(sender As Object, e As EventArgs) Handles btnCopyConsole.Click
         dim player As String = If (rbMpv.Checked,"MPV",If(rbMPC.Checked,"MPC",If(rbVLC.Checked,"VLC","none")))
         Dim x64 As String = if(Environment.Is64BitOperatingSystem,"64 Bits","32 Bits")
-        Dim StreamerPath = ApplicationSettings.Read(Of String)(SettingsEnum.StreamerPath, String.Empty).ToString()
+        Dim streamerPath = ApplicationSettings.Read(Of String)(SettingsEnum.StreamerPath, String.Empty).ToString()
         Dim vlcPath = ApplicationSettings.Read(Of String)(SettingsEnum.VlcPath, String.Empty).ToString()
         Dim mpcPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpcPath, String.Empty).ToString()
         Dim mpvPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpvPath, String.Empty).ToString()
-        Dim StreamerExists = If(StreamerPath <> "" AndAlso File.Exists(StreamerPath), English.msgExists, "")
+        Dim streamerExists = If(streamerPath <> "" AndAlso File.Exists(streamerPath), English.msgExists, "")
         Dim vlcExists = If(vlcPath <> "" AndAlso File.Exists(vlcPath), English.msgExists, "")
         Dim mpcExists = If(mpcPath <> "" AndAlso File.Exists(mpcPath), English.msgExists, "")
         Dim mpvExists = If(mpvPath <> "" AndAlso File.Exists(mpvPath), English.msgExists, "")
@@ -448,9 +446,9 @@ Public Class NHLGamesMetro
                                         My.Computer.Network.Ping(ServerIp).ToString(),
                                         cbServers.SelectedItem.ToString(),
                                         player.ToString(),
-                                        StreamerPath.ToString(),
-                                        StreamerPath.Equals(txtStreamerPath.Text).ToString(),
-                                        StreamerExists.ToString(),
+                                        streamerPath.ToString(),
+                                        streamerPath.Equals(txtStreamerPath.Text).ToString(),
+                                        streamerExists.ToString(),
                                         vlcPath.ToString(),
                                         vlcPath.Equals(txtVLCPath.Text).ToString(),
                                         vlcExists.ToString(),
@@ -474,16 +472,11 @@ Public Class NHLGamesMetro
         Common.WaitForGameThreads()
     End Sub
 
-    Private Sub tgModules_Click(sender As Object, e As EventArgs) Handles tgModules.Click
+    Private Sub tgModules_Click(sender As Object, e As EventArgs) Handles tgModules.CheckedChanged 
         Dim tg As MetroToggle = sender
 
         If tg.Checked Then
-            Select Case (_adDetectionType)
-                Case AdDetectionTypeEnum.Volume
-                    _adDetectionEngine = New AdDetectionByVolume
-                Case AdDetectionTypeEnum.Fullscreen
-                    Return
-            End Select
+            _adDetectionEngine = New AdDetection
         Else
             tgSpotify.Checked = False
             tgOBS.Checked = False
@@ -496,14 +489,20 @@ Public Class NHLGamesMetro
 
         _adDetectionEngine.IsEnabled = tg.checked
         If tg.Checked Then _adDetectionEngine.Start()
+        AdDetection.Renew()
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblModules.Text), 
+                                       if(tgModules.Checked, English.msgOn, English.msgOff))
     End Sub
 
-    Private Sub tgOBS_CheckedChanged(sender As Object, e As EventArgs) Handles tgOBS.CheckedChanged
+    Private Sub tgOBS_CheckedChanged(sender As Object, e As EventArgs) Handles tgOBS.CheckedChanged  
         Dim tg As MetroToggle = sender
         tlpOBSSettings.Enabled = Not tg.Checked
+        AdDetection.Renew()
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblOBS.Text), 
+                                       if(tgOBS.Checked, English.msgOn, English.msgOff))
     End Sub
 
-    Private Sub tgSpotify_CheckedChanged(sender As Object, e As EventArgs) Handles tgSpotify.CheckedChanged
+    Private Sub tgSpotify_CheckedChanged(sender As Object, e As EventArgs) Handles tgSpotify.CheckedChanged  
         Dim tg As MetroToggle = sender
         Dim spotify As New Spotify
 
@@ -511,22 +510,17 @@ Public Class NHLGamesMetro
 
         If tg.Checked Then
             spotify.ForceToOpen = chkSpotifyForceToStart.Checked
-            spotify.PlayNextSongWhenResuming = chkSpotifyPlayNextSong.Checked
+            spotify.PlayNextSong = chkSpotifyPlayNextSong.Checked
             _adDetectionEngine.AddModule(spotify)
         Else 
             If _adDetectionEngine.IsInAdModulesList(spotify.Title) Then
                 _adDetectionEngine.RemoveModule(spotify.Title)
             End If
         End If
-        
-    End Sub
 
-    Private Sub rbDetection_CheckedChanged(sender As Object, e As EventArgs) Handles rbVolumeDetection.CheckedChanged, rbFullscreenDetection.CheckedChanged
-        Dim rb As MetroRadioButton = sender
-        'If rb.Checked Then
-        '    _adDetectionEngine.SelectedDetectionType = rb.TabIndex
-        '    _adDetectionEngine.DetectionTypeChanged()
-        'End If
+        AdDetection.Renew()
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblSpotify.Text), 
+                                       if(tgSpotify.Checked, English.msgOn, English.msgOff))
     End Sub
 
     Private Sub cbHostsFileActions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbHostsFileActions.SelectedIndexChanged
@@ -558,5 +552,13 @@ Public Class NHLGamesMetro
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(lblQuality.Text, cbStreamQuality.SelectedText)
         tlpSettings.Focus()
+    End Sub
+
+    Private Sub txtGameKey_TextChanged(sender As Object, e As EventArgs) Handles txtGameKey.TextChanged
+        txtGameKey.Text = txtGameKey.Text.ToUpper()
+    End Sub
+
+    Private Sub txtAdKey_TextChanged(sender As Object, e As EventArgs) Handles txtAdKey.TextChanged
+        txtAdKey.Text = txtAdKey.Text.ToUpper()
     End Sub
 End Class

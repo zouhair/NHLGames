@@ -617,10 +617,6 @@
     <value>View Hosts file content in Notepad</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblDetectionType" xml:space="preserve">
-    <value>Detection type</value>
-    <comment>Modules tab</comment>
-  </data>
   <data name="lblModules" xml:space="preserve">
     <value>Ad detection</value>
     <comment>Modules tab</comment>
@@ -653,17 +649,9 @@
     <value>Fetching</value>
     <comment>Console</comment>
   </data>
-  <data name="rbFullscreenDetection" xml:space="preserve">
-    <value>Fullscreen: Detects ads based on NHL Game Center backgrounds while in fullscreen</value>
-    <comment>Modules tab</comment>
-  </data>
   <data name="cbQualitySuperb60fps" xml:space="preserve">
     <value>Excellent - 720p @ 60 fps - 2.5Gb/hour</value>
     <comment>Settings tab</comment>
-  </data>
-  <data name="rbVolumeDetection" xml:space="preserve">
-    <value>Volume: Detects ads based on the volume of your media player playing the game</value>
-    <comment>Modules tab</comment>
   </data>
   <data name="tipBrowse" xml:space="preserve">
     <value>Browse</value>
@@ -696,5 +684,9 @@
   <data name="lblGamePanel" xml:space="preserve">
     <value>Game Panel</value>
     <comment>Settings tab</comment>
+  </data>
+  <data name="errorWarning" xml:space="preserve">
+    <value>warning:</value>
+    <comment>Console</comment>
   </data>
 </root>

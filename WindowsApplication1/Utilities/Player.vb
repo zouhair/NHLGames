@@ -29,7 +29,6 @@ Namespace Utilities
 
         Private Shared Sub LaunchingStream(args As GameWatchArguments)
             Dim lstLines As New List(Of String) From {"Found matching plugin stream", "Available streams", "Opening stream", "Starting player"}
-            'Dim lstLinesToRemove As New List(Of String) From {"[Streamlink for Windows", "[End of Streamlink for Windows]"}
             Dim progressStep As Integer = (NHLGamesMetro.ProgressMaxValue) / (lstLines.Count + 1)
 
             NHLGamesMetro.ProgressValue = 0
@@ -69,9 +68,7 @@ Namespace Utilities
                     If line.Contains(lstLines(3)) Then
                         taskPlayerWatcher.Start()
                     End If
-                    'If Not lstLinesToRemove.Any(Function(x) line.Contains(x)) Then
-                        Console.WriteLine(line)
-                    'End If
+                    Console.WriteLine(line)
                     Thread.Sleep(100) 'to let some time for the progress bar to move
                 End While
             Catch ex As Exception
@@ -105,22 +102,9 @@ Namespace Utilities
 
             If NHLGamesMetro.FormLoaded OrElse forceSet Then
                 Dim watchArgs As New GameWatchArguments
-                watchArgs.Is60Fps = form.cbStreamQuality.SelectedIndex = 0
 
-                If form.cbStreamQuality.SelectedIndex = 0 OrElse
-                    form.cbStreamQuality.SelectedIndex = 1 Then
-                    watchArgs.Quality = StreamQuality.Superb
-                ElseIf form.cbStreamQuality.SelectedIndex = 2 Then
-                    watchArgs.Quality =  StreamQuality.Great
-                ElseIf form.cbStreamQuality.SelectedIndex = 3 Then
-                    watchArgs.Quality =  StreamQuality.Good
-                ElseIf form.cbStreamQuality.SelectedIndex = 4 Then
-                    watchArgs.Quality =  StreamQuality.Normal
-                ElseIf form.cbStreamQuality.SelectedIndex = 5 Then
-                    watchArgs.Quality =  StreamQuality.Low
-                ElseIf form.cbStreamQuality.SelectedIndex = 6 Then
-                    watchArgs.Quality =  StreamQuality.Mobile
-                End If
+                watchArgs.Is60Fps = form.cbStreamQuality.SelectedIndex = 0
+                watchArgs.Quality =  CType(form.cbStreamQuality.SelectedIndex, StreamQuality)
 
                 If form.rbMpv.Checked Then
                     watchArgs.PlayerType = PlayerTypeEnum.Mpv

@@ -32,12 +32,16 @@
     End Enum
 
     Public Enum StreamQuality
-        Mobile = 224
-        Low = 288
-        Normal = 360
-        Good = 504
-        Great = 540
-        Superb = 720
+#Disable Warning InconsistentNaming
+        best = 0
+        _720p = 1
+        _540p = 2
+        _504p = 3
+        _360p = 4
+        _288p = 5
+        _224p = 6
+        worst = 7
+#Enable Warning InconsistentNaming
     End Enum
 
     Public Enum PlayerTypeEnum
@@ -68,12 +72,8 @@
         Normal = 0
         Status = 1
         [Error] = 2
-        Cli = 3
-    End Enum
-
-    Public Enum AdDetectionTypeEnum
-        Volume = 0
-        Fullscreen
+        Warning = 3
+        Cli = 4
     End Enum
 
     Public Enum AdModulesEnum

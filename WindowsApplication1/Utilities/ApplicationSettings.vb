@@ -50,7 +50,7 @@ Namespace Utilities
                 If value.Length > 200 Then
                     value = English.msgValueTooLarge
                 End If
-                If key <> SettingsEnum.DefaultWatchArgs Then
+                If key <> SettingsEnum.DefaultWatchArgs AndAlso key <> SettingsEnum.AdDetection Then
                     Console.WriteLine(English.msgSettingUpdated, key.ToString(), value)
                 End If
                 configFile.Save(ConfigurationSaveMode.Modified)

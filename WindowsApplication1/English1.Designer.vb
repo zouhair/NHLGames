@@ -137,7 +137,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Good - 504p - 950Mb/hr.
+        '''  Recherche une chaîne localisée semblable à Good - 504p - 950Mb/hour.
         '''</summary>
         Friend Shared ReadOnly Property cbQualityGood() As String
             Get
@@ -146,7 +146,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Great - 540p - 1.3Gb/hr.
+        '''  Recherche une chaîne localisée semblable à Great - 540p - 1.3Gb/hour.
         '''</summary>
         Friend Shared ReadOnly Property cbQualityGreat() As String
             Get
@@ -155,7 +155,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Low - 288p - 500Mb/hr.
+        '''  Recherche une chaîne localisée semblable à Low - 288p - 500Mb/hour.
         '''</summary>
         Friend Shared ReadOnly Property cbQualityLow() As String
             Get
@@ -164,7 +164,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Mobile - 224p 300Mb/hr.
+        '''  Recherche une chaîne localisée semblable à Mobile - 224p - 300Mb/hour.
         '''</summary>
         Friend Shared ReadOnly Property cbQualityMobile() As String
             Get
@@ -173,7 +173,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Normal - 360p - 700Mb/hr.
+        '''  Recherche une chaîne localisée semblable à Normal - 360p - 700Mb/hour.
         '''</summary>
         Friend Shared ReadOnly Property cbQualityNormal() As String
             Get
@@ -182,7 +182,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Superb - 720p - 1.8Gb/hr.
+        '''  Recherche une chaîne localisée semblable à Superb - 720p - 1.8Gb/hour.
         '''</summary>
         Friend Shared ReadOnly Property cbQualitySuperb() As String
             Get
@@ -191,47 +191,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Superb - 720p - 60 fps - 2.5Gb/hr.
+        '''  Recherche une chaîne localisée semblable à Excellent - 720p @ 60 fps - 2.5Gb/hour.
         '''</summary>
         Friend Shared ReadOnly Property cbQualitySuperb60fps() As String
             Get
                 Return ResourceManager.GetString("cbQualitySuperb60fps", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Use the alternate network.
-        '''</summary>
-        Friend Shared ReadOnly Property lblAlternateCdn() As String
-            Get
-                Return ResourceManager.GetString("chkAlternateCdn", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Final Scores.
-        '''</summary>
-        Friend Shared ReadOnly Property lblShowFinalScores() As String
-            Get
-                Return ResourceManager.GetString("chkShowFinalScores", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Live Scores.
-        '''</summary>
-        Friend Shared ReadOnly Property lblShowLiveScores() As String
-            Get
-                Return ResourceManager.GetString("chkShowLiveScores", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Series Record.
-        '''</summary>
-        Friend Shared ReadOnly Property lblShowSeriesRecord() As String
-            Get
-                Return ResourceManager.GetString("chkShowSeriesRecord", resourceCulture)
             End Get
         End Property
         
@@ -398,7 +362,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error:  Can&apos;t find Streamer.exe. Streamer is a tool that NHLGames uses to send streams to your media player, we shipped it with NHLGames. You probably moved it or deleted it and if you don&apos;t set any custom path, you will have to put it back there, just drop the folder &apos;Streamer-0.6.0&apos; next to NHLGames.exe..
+        '''  Recherche une chaîne localisée semblable à Error:  Can&apos;t find the specified streamer. The streamer is used to send streams to your media player, please select the one that comes with NHLGames or select a valid path of Livestreamer.exe or Streamlink.exe.
         '''</summary>
         Friend Shared ReadOnly Property errorStreamerExe() As String
             Get
@@ -421,6 +385,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property errorUnknownServerDown() As String
             Get
                 Return ResourceManager.GetString("errorUnknownServerDown", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à warning:.
+        '''</summary>
+        Friend Shared ReadOnly Property errorWarning() As String
+            Get
+                Return ResourceManager.GetString("errorWarning", resourceCulture)
             End Get
         End Property
         
@@ -515,6 +488,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Use the alternate network.
+        '''</summary>
+        Friend Shared ReadOnly Property lblAlternateCdn() As String
+            Get
+                Return ResourceManager.GetString("lblAlternateCdn", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Away Team : {0} {1}.
         '''</summary>
         Friend Shared ReadOnly Property lblAwayTeam() As String
@@ -542,15 +524,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Detection type.
-        '''</summary>
-        Friend Shared ReadOnly Property lblDetectionType() As String
-            Get
-                Return ResourceManager.GetString("lblDetectionType", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à {0} endzone camera.
         '''</summary>
         Friend Shared ReadOnly Property lblEndzoneCam() As String
@@ -565,24 +538,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property lblEnglish() As String
             Get
                 Return ResourceManager.GetString("lblEnglish", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à GB/Hour.
-        '''</summary>
-        Friend Shared ReadOnly Property lblFormatGbHour() As String
-            Get
-                Return ResourceManager.GetString("lblFormatGbHour", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à MB/Hour.
-        '''</summary>
-        Friend Shared ReadOnly Property lblFormatMbHour() As String
-            Get
-                Return ResourceManager.GetString("lblFormatMbHour", resourceCulture)
             End Get
         End Property
         
@@ -628,6 +583,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property lblGameAbv() As String
             Get
                 Return ResourceManager.GetString("lblGameAbv", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Game Panel.
+        '''</summary>
+        Friend Shared ReadOnly Property lblGamePanel() As String
+            Get
+                Return ResourceManager.GetString("lblGamePanel", resourceCulture)
             End Get
         End Property
         
@@ -830,11 +794,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Show Scores.
+        '''  Recherche une chaîne localisée semblable à Show Final Scores.
         '''</summary>
-        Friend Shared ReadOnly Property lblShowScores() As String
+        Friend Shared ReadOnly Property lblShowFinalScores() As String
             Get
-                Return ResourceManager.GetString("lblShowScores", resourceCulture)
+                Return ResourceManager.GetString("lblShowFinalScores", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Show Live Scores.
+        '''</summary>
+        Friend Shared ReadOnly Property lblShowLiveScores() As String
+            Get
+                Return ResourceManager.GetString("lblShowLiveScores", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Show Series Record.
+        '''</summary>
+        Friend Shared ReadOnly Property lblShowSeriesRecord() As String
+            Get
+                Return ResourceManager.GetString("lblShowSeriesRecord", resourceCulture)
             End Get
         End Property
         
@@ -1181,20 +1163,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Streaming: {0} on {1} using {2} player with Streamer.
-        '''</summary>
-        Friend Shared ReadOnly Property msgStreaming() As String
-            Get
-                Return ResourceManager.GetString("msgStreaming", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Streamer:.
         '''</summary>
         Friend Shared ReadOnly Property msgStreamer() As String
             Get
                 Return ResourceManager.GetString("msgStreamer", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Streaming: {0} on {1} using {2} player.
+        '''</summary>
+        Friend Shared ReadOnly Property msgStreaming() As String
+            Get
+                Return ResourceManager.GetString("msgStreaming", resourceCulture)
             End Get
         End Property
         
@@ -1289,24 +1271,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Fullscreen: Detects ads based on NHL Game Center backgrounds while in fullscreen.
-        '''</summary>
-        Friend Shared ReadOnly Property rbFullscreenDetection() As String
-            Get
-                Return ResourceManager.GetString("rbFullscreenDetection", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Volume: Detects ads based on the volume of your media player playing the game.
-        '''</summary>
-        Friend Shared ReadOnly Property rbVolumeDetection() As String
-            Get
-                Return ResourceManager.GetString("rbVolumeDetection", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Console.
         '''</summary>
         Friend Shared ReadOnly Property tabConsole() As String
@@ -1357,24 +1321,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property tipBrowse() As String
             Get
                 Return ResourceManager.GetString("tipBrowse", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Gb/h.
-        '''</summary>
-        Friend Shared ReadOnly Property tipFormatGbHour() As String
-            Get
-                Return ResourceManager.GetString("tipFormatGbHour", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Mb/h.
-        '''</summary>
-        Friend Shared ReadOnly Property tipFormatMbHour() As String
-            Get
-                Return ResourceManager.GetString("tipFormatMbHour", resourceCulture)
             End Get
         End Property
         

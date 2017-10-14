@@ -41,6 +41,11 @@ Namespace Utilities
                             startIndex = _output.TextLength
                             length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
                             _output.AppendText(vbCr)
+                        ElseIf value.ToLower().IndexOf(English.errorWarning, StringComparison.Ordinal) = 0 Then
+                            type = OutputType.Warning
+                            startIndex = _output.TextLength
+                            length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
+                            _output.AppendText(vbCr)
                         ElseIf value.IndexOf(":", StringComparison.Ordinal) > -1 Then
                             type = OutputType.Status
                             startIndex = _output.TextLength
@@ -63,6 +68,8 @@ Namespace Utilities
                                 _output.SelectionColor = Color.Red
                             ElseIf type = OutputType.Status Then
                                 _output.SelectionColor = Color.Lime
+                            ElseIf type = OutputType.Warning Then
+                                _output.SelectionColor = Color.Yellow
                             ElseIf type = OutputType.Cli Then
                                 _output.SelectionColor = Color.DeepSkyBlue
                             End If

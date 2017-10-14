@@ -465,10 +465,6 @@
     <value>Exécuter l'action</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblDetectionType" xml:space="preserve">
-    <value>Type de détection</value>
-    <comment>Modules tab</comment>
-  </data>
   <data name="lblModules" xml:space="preserve">
     <value>Détection de publicité</value>
     <comment>Modules tab</comment>
@@ -495,14 +491,6 @@
   </data>
   <data name="lblSpotifyDesc" xml:space="preserve">
     <value>Résume/Pause Spotify quand une annonce est détectée</value>
-    <comment>Modules tab</comment>
-  </data>
-  <data name="rbFullscreenDetection" xml:space="preserve">
-    <value>Plein écran: Détecte les annonces selon les fond d'écran NHL Game Center lors du plein écran</value>
-    <comment>Modules tab</comment>
-  </data>
-  <data name="rbVolumeDetection" xml:space="preserve">
-    <value>Volume: Détecte les annonces selon le volume de votre lecteur média jouant la partie</value>
     <comment>Modules tab</comment>
   </data>
   <data name="tipGetMpc" xml:space="preserve">

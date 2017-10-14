@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Security.Cryptography
 Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
 
@@ -6,7 +7,7 @@ Namespace Objects
 
     Public Class GameWatchArguments
 
-        Public Property Quality As StreamQuality = StreamQuality.Superb
+        Public Property Quality As StreamQuality = StreamQuality.best
         Public Property Is60Fps As Boolean = True
         Public Property Cdn As CdnType = CdnType.Akc
         Public Property Stream As GameStream = Nothing
@@ -30,13 +31,26 @@ Namespace Objects
             Return OutputArgs(safeOutput)
         End Function
 
+        Private Function GetStreamQuality() As String
+            Dim selectedQualities = ""
+            Dim addQuality = Quality
+            Dim maxQuality = CType([Enum].GetValues(GetType(StreamQuality)), Integer()).Max()
+            While addQuality < maxQuality
+                selectedQualities &= addQuality.ToString().Substring(1) & ","
+                addQuality = addQuality + 1
+            End While
+            selectedQualities &= StreamQuality.worst.ToString()
+            Return selectedQualities
+        End Function
+
         Private Function OutputArgs(ByVal safeOutput As Boolean)
             Dim returnValue As String = ""
             Const dblQuot As String = """"
             Const dblQuot2 As String = """"""
             Const space As String = " "
             Dim literalPlayerArgs As String = String.Empty
-            Dim streamQuality = Quality & "p"
+
+            Dim streamQuality = GetStreamQuality()
 
             If UsePlayerArgs Then
                 literalPlayerArgs = PlayerArgs
@@ -84,15 +98,9 @@ Namespace Objects
             End If
 
             If Is60Fps Then
-                returnValue &= String.Format("name_key=bitrate{0}{1}", dblQuot, space)
+                returnValue &= String.Format("name_key=bitrate{0}{1}best{1}", dblQuot, space)
             Else
-                returnValue &= dblQuot & space
-            End If
-
-            If Is60Fps Then
-                returnValue &= String.Format("best{0}", space)
-            Else
-                returnValue &= streamQuality & space
+                returnValue &= dblQuot & space & streamQuality & space
             End If
 
             returnValue &= String.Format("--http-no-ssl-verify{0}", space)
