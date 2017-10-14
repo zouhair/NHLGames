@@ -191,9 +191,12 @@ First of all, if you have issues with one player you can try another player at a
 ### No playback
 #### Player used to open, but it does not anymore --> Kill old processes of this player
 ```
-Sometimes a player process can still runs even if the stream ended and an old process of the same name can affect 
-another from starting. So, right click on your Windows taskbar and click on Start Task Manager (CTRL + Shift + ESC)
-Go to Processes tab and right click on all of your player processes (.exe) that are running and click on End Process.
+Sometimes a player process can still runs even if the stream ended and an old process of the same name
+can affect another from starting. So, right click on your Windows taskbar and click on
+Start Task Manager (CTRL + Shift + ESC)
+Go to Processes tab
+Right click on all of your player processes (.exe) that are running
+Click on End Process.
 ```
 
 #### VLC 64 bits No playback --> use 32 bits
@@ -270,23 +273,29 @@ Run an Windows Operating System older than Windows Vista: 7, 8, 10.
 
 #### Windows protected your PC --> Run anyway
 ```
-If you get an error on Windows 10 that says "Windows Smartscreen protected your PC" when trying to open NHLGames.
-That means Windows 10 is worried about NHLGames not being an official publisher on Windows Store.
-Click on More Infos and click on Run anyway.
+If you get an error on Windows 10 that says "Windows Smartscreen protected your PC" when trying
+to open NHLGames. That means Windows 10 is worried about NHLGames not being an official publisher
+on Windows Store. Click on More Infos and click on Run anyway.
 ```
 
 ### Display issues
 ### Games won't load
 #### Forbidden 403, Unauthorized 401 or Not Found 404 Error --> Use another NHLGames domain in Settings
 ```
-If you can't get any games from NHLGames, try using another Domain Name in the Settings tab. Use the drop down list.
+If you can't get any games from NHLGames, try using another Domain Name in the Settings tab.
+Use the drop down list.
 ```
 
 ### Games won't start
 #### Nothing happens after clicking on a stream --> Check your Hosts file
 ```
-If you clicked on a stream and nothing starts after the loading bar has disappeared, go to `Settings` and click on `Test` button to check if your Hosts file has been modified by NHLGames. If it says "Failure" you won't be able to see a stream until you fix your Windows Hosts file. See the [Hosts](#hosts) section.
+If you clicked on a stream and nothing starts after the loading spinner has disappeared.
+Go to Settings and select Hosts Actions "Test if the NHL.tv authentification bypass works"
+Click on Go to check if your Hosts file has been modified by NHLGames.
+If it says "Failure" you won't be able to see a stream until you fix your Windows Hosts file.
 ```
+See the [Hosts](#hosts) section
+
 #### Nothing happens after clicking on a stream --> Open the Task Manager and kill processes
 ```
 A process might still be running in the background. You will have to terminate it.
@@ -314,9 +323,9 @@ Right click on these and click on End task
 ### Games won't record
 #### Recorded files are around 10 seconds long or less
 ```
-If you can't get the Ouput option to work, you are probably a Windows 7 user (some reported that the output option
-only works on Windows 10). You might want to try to use an older version of your streamer (livestreamer or streamlink)
-available on Github. If it still does not work:
+If you can't get the Ouput option to work, you are probably a Windows 7 user (some reported
+that the output option only works on Windows 10). You might want to try to use an older version
+of your streamer (livestreamer or streamlink) available on Github. If it still does not work:
 Select VLC as the default player
 Enable the Streamer args in settings
 Add: --sout file/ts:FILENAME.mp4
