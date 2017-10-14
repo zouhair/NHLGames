@@ -63,7 +63,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
-    <ApplicationIcon>Logos\nhl_icon.ico</ApplicationIcon>
+    <ApplicationIcon>Icons\logo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>E3288C8884A4E9425CB92E7E90BECB75F15FA222</ManifestCertificateThumbprint>
@@ -84,21 +84,29 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MetroFramework, Version=1.3.5.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroFramework.Design, Version=1.3.5.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroFramework.Fonts, Version=1.3.5.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHLGames.AdDetection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\NHLGames.AdDetection\obj\Debug\NHLGames.AdDetection.dll</HintPath>
+    </Reference>
+    <Reference Include="NHLGames.AdDetection.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\NHLGames.AdDetection.Common\obj\Debug\NHLGames.AdDetection.Common.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -161,6 +169,8 @@
     <Compile Include="NHLGamesMetro.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Utilities\Enums.vb" />
+    <Compile Include="Objects\GameWatchArguments.vb" />
     <Compile Include="Objects\GameManager.vb" />
     <Compile Include="Utilities\ApplicationSettings.vb" />
     <Compile Include="Utilities\Common.vb" />
@@ -184,11 +194,15 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Utilities\FileAccess.vb" />
+    <Compile Include="Utilities\GameFetcher.vb" />
     <Compile Include="Utilities\HostsFile.vb" />
     <Compile Include="Utilities\ImageFetcher.vb" />
+    <Compile Include="Utilities\InitializeForm.vb" />
+    <Compile Include="Utilities\InvokeElement.vb" />
     <Compile Include="Utilities\PathFinder.vb" />
+    <Compile Include="Utilities\Player.vb" />
     <Compile Include="Utilities\Serialization.vb" />
-    <Compile Include="Utilities\TextboxConsoleOutputRediect.vb" />
+    <Compile Include="Utilities\ConsoleRedirectStreamWriter.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\CalenderControl.resx">
@@ -206,6 +220,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>English1.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NHLGamesMetro.resx">
       <DependentUpon>NHLGamesMetro.vb</DependentUpon>
@@ -263,7 +278,6 @@
     <EmbeddedResource Include="Logos\Sharks.gif" />
     <EmbeddedResource Include="Logos\Stars.gif" />
     <EmbeddedResource Include="Logos\Wild.gif" />
-    <EmbeddedResource Include="Logos\nhl-icon.png" />
     <None Include="Icons\bdown.png" />
     <None Include="Icons\bup.png" />
     <None Include="Icons\wdate.png" />
@@ -306,32 +320,22 @@
     <None Include="Icons\endz1.gif" />
     <None Include="Icons\endz2.gif" />
     <EmbeddedResource Include="broadcasters\wgn.gif" />
-    <None Include="Icons\clos.gif" />
     <None Include="Icons\close.gif" />
-    <Content Include="Icons\git.gif" />
-    <None Include="Icons\help.gif" />
     <None Include="Icons\helpgit.gif" />
-    <Content Include="Icons\live.gif" />
+    <None Include="Icons\live.gif" />
     <None Include="Icons\nhltv.gif" />
     <None Include="Icons\refc.gif" />
     <None Include="Icons\sixc.gif" />
     <None Include="Icons\threec.gif" />
-    <None Include="Icons\max.gif" />
-    <None Include="Icons\min.gif" />
-    <None Include="Icons\norm.gif" />
     <None Include="Icons\maximize.gif" />
     <None Include="Icons\minimize.gif" />
     <None Include="Icons\normal.gif" />
-    <Content Include="Icons\reddit.gif" />
-    <Content Include="Logos\nhl_icon.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="Icons\download.gif" />
+    <None Include="Icons\bg.png" />
+    <None Include="Icons\logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NHLGames.AdDetection\NHLGames.AdDetection.csproj">
-      <Project>{2c851ff7-c1cd-4561-8ecc-d69b937ba622}</Project>
-      <Name>NHLGames.AdDetection</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="broadcasters\att.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,12 +5,13 @@ Tool to watch NHL games in High Definition
 - Click on a stream link inside the game panel.
 - Enjoy the game.
 
-![image](https://cloud.githubusercontent.com/assets/23088305/25733593/aa1c8648-3128-11e7-8407-2a4e51a9fddc.png)
+![image](https://user-images.githubusercontent.com/23088305/30517831-7276e442-9b39-11e7-8faa-e8960df24e8c.png)
 
 ## Index
 * [First use](#first-use)
   * [Requirements](#requirements)
   * [Message about the hosts file](#message-about-the-hosts-file)
+  * [Is this app safe?](#is-this-app-safe)
   * [Setup](#setup)
      * [Hosts file](#hosts-file)  
  * [User interface](#user-interface)
@@ -50,6 +51,9 @@ NHLGames is an app built on .NET Framework 4.5. So, it's only available on Windo
 
 ## Message about the hosts file
 First time you start NHLGames it will ask if you wish to view the Hosts file. That means the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [Server Hosts Entry](#server-hosts-entry) section.
+
+## Is this app safe?
+So, you might wonder if this application is safe. You can look at our code to find out by yourself, you will see the reason why anti-virus don't like us. We modify your hosts file in Windows/System32/drivers/etc/ and we do that to make sure that the app will be able to get the stream links for games that are available. The other reason is that the app sends web request to a server that might be blacklisted. But don't worry, this server only responds with plain text.
 
 ## Setup
 To be able to play streams properly, you have to choose a media player in the ![image](https://cloud.githubusercontent.com/assets/23088305/25557243/ce306f64-2cdb-11e7-9fa3-a4a73161c3ea.png) tab. Make sure the player that you choose has a valid path to the EXE file.
@@ -135,11 +139,11 @@ If the selected hostname (above) can be resolve by your network, it will get and
 
 To test your Hosts file, go to Settings and click on `Test` button. It should tells you if everything is fine.
 
-If NHLGames is not set properly, click on `View Hosts` and select Notepad to open it. If you can't open it: Go to `C:\Windows\System32\Drivers\etc` and right click on `hosts`, choose `Run as an administrator` and open it with Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, there is a button called `DIY Steps`, click on it and you will see the line, you can copy the line to your clipboard by clicking on 'Yes'. 
+If NHLGames is not set properly, try the following options:
+- Right click on NHLGames.exe and select `Run as an administrator`.
+- Click on `View Hosts` or go to `C:\Windows\System32\Drivers\etc` and right click on `hosts` file, choose open it with Notepad. Go at the end of the file and make sure that our entry is there. You can find the entry in the Settings tab, there is a help button `?` on the 'Server Hosts Entry' line, click on it and you will see the line that you need to copy to your clipboard (click on 'Yes'). If you don't find the entry line in the Hosts file and if the `Add Entry` button does not work. You can paste the line from your clipboard (that you copied earlier) or you can type it manually. Hit `Ctrl+S` to save it, if a save dialog pops, make sure the file name is `hosts` and not hosts.txt, also the file type should be set to `All Files (*.*)`.
 
-If you dont't find the entry line in the Hosts file and if the `Add Entry` button does not work. You can paste the line from your clipboard (that you copied earlier) or you can type it manually.
-
-Note: If you need to remove NHLGames entries, just click on `Remove Entries` or open it with `View Hosts` and remove our entries.
+Note: If you need to remove NHLGames entry, just click on `Remove Entries` or open it with `View Hosts` and remove our entry.
 
 ### Streamlink
 Streamlink is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The path to streamlink.exe is inside NHLGames directory and it should not move, otherwise you will have to get the new path to it or you will get a message box that NHLGames lost the path and won't be able to play streams.
@@ -227,8 +231,12 @@ If you can't get any games from NHLGames, try using another domain in the `Setti
 Restarting the app might help, until we fix the issue related to our downloader.
 
 ### Games won't start
-#### Nothing happens after clicking on a stream --> Check your Hosts file
-If you clicked on a stream and nothing starts after the loading bar has disappeared, go to `Settings` and click on `Test` button to check if your Hosts file has been modified by NHLGames. If you get a red message box that means you won't be able to see a stream until you fix your Windows Hosts file. See the [Hosts](#hosts) section.
+#### Nothing happens after clicking on a stream --> Check your Hosts file or open the Task Manager
+If you clicked on a stream and nothing starts after the loading bar has disappeared, go to `Settings` and click on `Test` button to check if your Hosts file has been modified by NHLGames. If it says "Failure" you won't be able to see a stream until you fix your Windows Hosts file. See the [Hosts](#hosts) section.
+
+Other option is that a process is running in the background. You will have to terminate those processes. On your keyboard, press all together *CTRL + SHIFT + ESC*, your task manager will open. Go to **Processes** and order processes by name, by clicking on **Image Name**. Search these processes, right click on them and select **End Process** :
+- streamlink.exe
+- mpv.exe (or) mpc.exe (or) vlc.exe (depends on which media player you use)
 
 ### Hosts file issues
 #### Windows can't find Hosts file --> Do it yourself

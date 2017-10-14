@@ -5,23 +5,7 @@ Namespace Utilities
 
     Public Class ApplicationSettings
 
-        Public Enum Settings
-            Version = 1
-            DefaultWatchArgs = 2
-            VlcPath = 3
-            MpcPath = 4
-            MpvPath = 5
-            StreamlinkPath = 6
-            ServerList = 7
-            ShowScores = 8
-            SelectedServer = 9
-            SelectedLanguage = 10
-            ShowLiveScores = 11
-            ShowSeriesRecord = 12
-            LanguageList = 13
-        End Enum
-
-        Public Shared Function Read(Of T)(key As Settings, Optional defaultReturnValue As Object = Nothing) As T
+        Public Shared Function Read(Of T)(key As SettingsEnum, Optional defaultReturnValue As Object = Nothing) As T
             Try
                 Dim configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
                 Dim settings = configFile.AppSettings.Settings
@@ -54,7 +38,7 @@ Namespace Utilities
         End Function
 
 
-        Public Shared Sub SetValue(key As Settings, value As String)
+        Public Shared Sub SetValue(key As SettingsEnum, value As String)
             Try
                 Dim configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
                 Dim settings = configFile.AppSettings.Settings
@@ -67,7 +51,7 @@ Namespace Utilities
                 If value.Length > 200 Then
                     value = English.msgValueTooLarge
                 End If
-                If key <> ApplicationSettings.Settings.DefaultWatchArgs Then
+                If key <> SettingsEnum.DefaultWatchArgs Then
                     Console.WriteLine(English.msgSettingUpdated, key.ToString(), value)
                 End If
                 configFile.Save(ConfigurationSaveMode.Modified)

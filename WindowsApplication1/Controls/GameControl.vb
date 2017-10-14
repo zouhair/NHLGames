@@ -8,48 +8,91 @@ Namespace Controls
         Private ReadOnly _broadcasters As New Dictionary(Of String, String)
         Private _game As Game
 
+        Public ReadOnly Property GameId() As String
+            Get
+                Return _game.GameId
+            End Get
+        End Property
 
-        Public Sub New(game As Game, showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean)
-            InitializeComponent()
-
-            _game = game
-            _getAllBroadcasters()
-
-            SetInitialProperties(game)
-            UpdateGameStatusProperties(game)
-
+        Public Sub UpdateGame(game As Game, showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean)
             If game.GameIsLive Then
                 lblHomeScore.Visible = showLiveScores
                 lblAwayScore.Visible = showLiveScores
-                If ((Not showLiveScores And game.Date.ToLocalTime() = Date.Today) OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
+                If ((Not showLiveScores And game.GameDate.ToLocalTime() = Date.Today) OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
                     lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
                 End If
             Else
                 lblHomeScore.Visible = showScores
                 lblAwayScore.Visible = showScores
                 If showScores And game.GameIsFinal And Not [String].Equals(game.GamePeriod, NHLGamesMetro.RmText.GetString("gamePeriod3"), StringComparison.CurrentCultureIgnoreCase) Then
-                    lblTime.Text &= If(game.GamePeriod <> "", "/" & game.GamePeriod, "")
+                    If(game.GamePeriod <> "") Then
+                        lblTime.Text =  NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper() & "/" & game.GamePeriod
+                    End If
+                ElseIf (lblTime.Text.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt"))) Then
+                    lblTime.Text = NHLGamesMetro.RmText.GetString("gamePeriodFinal").ToUpper()
                 End If
                 If ((Not showScores And game.GameIsFinal) OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
                     lblNotInSeason.Text =  NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
+                Else 
+                    _gameTitle(game)
                 End If
             End If
 
             live1.Visible = game.GameIsLive
             live2.Visible = game.GameIsLive
+        End Sub
+
+        Public Sub New(game As Game, showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean)
+
+            InitializeComponent()
+
+            _game = game
+            _getAllBroadcasters()
+
+            SetInitialProperties(game)
+
+            UpdateGameStatusProperties(game)
+            UpdateGame(game, showScores, showLiveScores, showSeriesRecord)
 
             AddHandler _game.GameUpdated, AddressOf GameUpdatedHandler
 
         End Sub
 
         Private Sub UpdateGameStatusProperties(game As Game)
+            lblPeriod.Text = ""
+            lblNotInSeason.Text = ""
+
+            _gameTitle(game)
+
+            If game.GameIsLive Then
+                lblTime.Text = game.GameTimeLeft.ToString().ToUpper()
+                lblPeriod.Text = game.GamePeriod.ToString().ToUpper()
+            ElseIf game.GameIsFinal Then
+                lblTime.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
+            ElseIf game.GameIsPreGame Then
+                lblTime.Text = game.GameDate.ToLocalTime().ToString("h:mm tt")
+                lblPeriod.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
+            Else
+                lblTime.Text = game.GameDate.ToLocalTime().ToString("h:mm tt")
+            End If
+
             lblHomeScore.Text = game.HomeScore
             lblHomeTeam.Text = game.HomeAbbrev
 
             lblAwayScore.Text = game.AwayScore
             lblAwayTeam.Text = game.AwayAbbrev
 
-            If game.GameIsScheduled And game.Date.ToLocalTime() <= Date.Today.AddDays(1) Then
+            lnkAway.Visible = game.AwayStream.IsAvailable
+            lnkHome.Visible = game.HomeStream.IsAvailable
+            lnkFrench.Visible = game.FrenchStream.IsAvailable
+            lnkNational.Visible = game.NationalStream.IsAvailable
+            lnkThree.Visible = game.MultiCam1Stream.IsAvailable
+            lnkSix.Visible = game.MultiCam2Stream.IsAvailable
+            lnkRef.Visible = game.RefCamStream.IsAvailable
+            lnkEnd1.Visible = game.EndzoneCam1Stream.IsAvailable
+            lnkEnd2.Visible = game.EndzoneCam2Stream.IsAvailable
+
+            If game.GameIsScheduled And game.GameDate.ToLocalTime() <= Date.Today.AddDays(1) Then
                 BorderPanel1.BorderColour = Color.FromArgb(255, 0, 175, 220)
             ElseIf game.GameIsPreGame Then
                 BorderPanel1.BorderColour = Color.Lime
@@ -62,7 +105,7 @@ Namespace Controls
 
         Private Shared Function RemoveDiacritics(text As String) As String
             Dim normalizedString = text.Normalize(System.Text.NormalizationForm.FormD)
-            Dim stringBuilder = New System.Text.StringBuilder()
+            Dim stringBuilder = New Text.StringBuilder()
 
             For Each c As String In normalizedString
                 Dim unicodeCategory1 = CharUnicodeInfo.GetUnicodeCategory(c)
@@ -74,24 +117,7 @@ Namespace Controls
             Return stringBuilder.ToString().Normalize(System.Text.NormalizationForm.FormC)
         End Function
 
-        Private Sub SetInitialProperties(game As Game)
-            picAway.SizeMode = PictureBoxSizeMode.Zoom
-            If String.IsNullOrEmpty(game.HomeTeam) = False Then
-                Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.AwayTeam).Replace(" ", "").Replace(".", ""))
-                If Not img Is Nothing Then picAway.BackgroundImage = img
-                ToolTip.SetToolTip(picAway, String.Format(NHLGamesMetro.RmText.GetString("lblAwayTeam"),game.Away,game.AwayTeam))
-            End If
-
-            picHome.SizeMode = PictureBoxSizeMode.Zoom
-            live2.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
-            If String.IsNullOrEmpty(game.AwayTeam) = False Then
-                Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.HomeTeam).Replace(" ", "").Replace(".", ""))
-                If Not img Is Nothing Then picHome.BackgroundImage = img
-                ToolTip.SetToolTip(picHome, String.Format(NHLGamesMetro.RmText.GetString("lblHomeTeam"),game.Home,game.HomeTeam))
-            End If
-
-            lblPeriod.Text = ""
-            lblNotInSeason.Text = ""
+        Private Sub _gameTitle(game As Game)
             If Not game.GameIsInSeason Then
                 If game.GameIsInPlayoff Then
                     If game.GameIsLive Or game.GameIsPreGame Then
@@ -108,33 +134,37 @@ Namespace Controls
                     lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPreseason").ToUpper()
                 End If
             End If
+        End Sub
 
-            If game.GameIsLive Then
-                lblTime.Text = game.GameTimeLeft.ToString().ToUpper()
-                lblPeriod.Text = game.GamePeriod.ToString().ToUpper()
-            ElseIf game.GameIsFinal Then
-                lblTime.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
-            ElseIf game.GameIsPreGame Then
-                lblTime.Text = game.Date.ToLocalTime().ToString("h:mm tt")
-                lblPeriod.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
-            Else
-                lblTime.Text = game.Date.ToLocalTime().ToString("h:mm tt")
+        Private Sub SetInitialProperties(game As Game)
+            Dim tip As String
+
+            picAway.SizeMode = PictureBoxSizeMode.Zoom
+            If String.IsNullOrEmpty(game.HomeTeam) = False Then
+                Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.AwayTeam).Replace(" ", "").Replace(".", ""))
+                If Not img Is Nothing Then picAway.BackgroundImage = img
+                ToolTip.SetToolTip(picAway, String.Format(NHLGamesMetro.RmText.GetString("lblAwayTeam"), game.Away, game.AwayTeam))
+            End If
+
+            picHome.SizeMode = PictureBoxSizeMode.Zoom
+            live2.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
+            If String.IsNullOrEmpty(game.AwayTeam) = False Then
+                Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.HomeTeam).Replace(" ", "").Replace(".", ""))
+                If Not img Is Nothing Then picHome.BackgroundImage = img
+                ToolTip.SetToolTip(picHome, String.Format(NHLGamesMetro.RmText.GetString("lblHomeTeam"), game.Home, game.HomeTeam))
             End If
 
             If Not game.AreAnyStreamsAvailable Then
-                If game.Date.ToLocalTime >= Date.Today And game.GameState < 5 Then
+                If game.GameDate.ToLocalTime >= Date.Today And game.GameState < GameStateEnum.InProgress Then
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblStreamAvailableDuringPregame")
                 Else
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblNoStreamAvailable")
                 End If
                 FlowLayoutPanel1.Visible = False
             End If
-
-            Dim tip As String
-
-            lnkAway.Visible = game.AwayStream.IsAvailable
+            
             If game.AwayStream.IsAvailable Then
-                tip = String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"),game.AwayAbbrev)
+                tip = String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"), game.AwayAbbrev)
                 If game.AwayStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.AwayStream.Network)
                     If img <> "" Then lnkAway.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
@@ -142,10 +172,9 @@ Namespace Controls
                 End If
                 ToolTip.SetToolTip(lnkAway, tip)
             End If
-
-            lnkHome.Visible = game.HomeStream.IsAvailable
+            
             If game.HomeStream.IsAvailable Then
-                tip =  String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"), game.HomeAbbrev)
+                tip = String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"), game.HomeAbbrev)
                 If game.HomeStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.HomeStream.Network)
                     If img <> "" Then lnkHome.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
@@ -153,8 +182,7 @@ Namespace Controls
                 End If
                 ToolTip.SetToolTip(lnkHome, tip)
             End If
-
-            lnkFrench.Visible = game.FrenchStream.IsAvailable
+            
             If game.FrenchStream.IsAvailable Then
                 tip = NHLGamesMetro.RmText.GetString("lblFrenchNetwork")
                 If game.FrenchStream.Network <> String.Empty Then
@@ -164,14 +192,13 @@ Namespace Controls
                 End If
                 ToolTip.SetToolTip(lnkFrench, tip)
             End If
-
-            lnkNational.Visible = game.NationalStream.IsAvailable
+            
             If game.NationalStream.IsAvailable Then
                 tip = NHLGamesMetro.RmText.GetString("lblNationalNetwork")
                 If game.NationalStream.Network <> String.Empty Then
                     Dim img As String = _getBroadcasterPicFor(game.NationalStream.Network)
                     If img <> "" Then lnkNational.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
-                    tip &= String.Format(NHLGamesMetro.RmText.GetString("lblOnNetwork"),  game.NationalStream.Network)
+                    tip &= String.Format(NHLGamesMetro.RmText.GetString("lblOnNetwork"), game.NationalStream.Network)
                 End If
                 ToolTip.SetToolTip(lnkNational, tip)
             End If
@@ -181,139 +208,103 @@ Namespace Controls
             ToolTip.SetToolTip(lnkSix, String.Format(NHLGamesMetro.RmText.GetString("lblCamViews"), 6))
             ToolTip.SetToolTip(lnkEnd1, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.AwayAbbrev))
             ToolTip.SetToolTip(lnkEnd2, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.HomeAbbrev))
-
-            lnkThree.Visible = game.MultiCam1Stream.IsAvailable
-            lnkSix.Visible = game.MultiCam2Stream.IsAvailable
-            lnkRef.Visible = game.RefCamStream.IsAvailable
-            lnkEnd1.Visible = game.EndzoneCam1Stream.IsAvailable
-            lnkEnd2.Visible = game.EndzoneCam2Stream.IsAvailable
             
         End Sub
 
         Private Function _getBroadcasterPicFor(network As String)
-
             Dim value As String = _broadcasters.Where(Function(kvp) network.ToUpper().StartsWith(kvp.Key.ToString())).Select(Function(kvp) kvp.Value).FirstOrDefault()
             Return If(value <> Nothing, value.ToLower, "")
-
         End Function
 
         Private Sub GameUpdatedHandler(game As Game)
-            _game = game
-            UpdateGameStatusProperties(game)
+            If InvokeRequired Then
+                BeginInvoke(New Action(Of Game)(AddressOf GameUpdatedHandler), game)
+            Else
+                _game = game
+                UpdateGameStatusProperties(game)
+            End If
         End Sub
 
-        Private Function WatchArgs() As Game.GameWatchArguments
-            Dim args = ApplicationSettings.Read(Of Game.GameWatchArguments)(ApplicationSettings.Settings.DefaultWatchArgs)
+        Private Function WatchArgs() As GameWatchArguments
+            Dim args = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
             args.GameTitle = _game.AwayAbbrev & " @ " & _game.HomeAbbrev
             Return args
         End Function
 
-        Private Sub lnkAway_Click(sender As Object, e As EventArgs) Handles lnkAway.Click
-            Dim args = WatchArgs()
-
-            If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.AwayStream.CheckVod(args.Cdn)
-                args.IsVod = _game.AwayStream.IsVod
+        Private Function IsGameVod(stream As GameStream, cdn As String) As Boolean
+            Dim isVod As Boolean = False
+            If DateHelper.GetPacificTime(_game.GameDate).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
+                If Not stream.Vodurl Is String.Empty Then
+                    stream.CheckVod(cdn)
+                    isVod = stream.IsVod
+                Else 
+                    isVod = False
+                End If
             End If
+            Return isVod
+        End Function
 
+        Private Sub lnkAway_Click(sender As Object, e As EventArgs) Handles lnkAway.Click 
+            Dim args = WatchArgs()
+            args.IsVod = IsGameVod(_game.AwayStream, args.Cdn)
             args.Stream = _game.AwayStream
-            _game.Watch(args)
+            Player.Watch(args)
         End Sub
 
-        Private Sub lnkFrench_Click(sender As Object, e As EventArgs) Handles lnkFrench.Click
+        Private Sub lnkFrench_Click(sender As Object, e As EventArgs) Handles lnkFrench.Click 
             Dim args = WatchArgs()
-
-            If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.FrenchStream.CheckVod(args.Cdn)
-                args.IsVod = _game.FrenchStream.IsVod
-            End If
-
+            args.IsVod = IsGameVod(_game.FrenchStream, args.Cdn)
             args.Stream = _game.FrenchStream
-            _game.Watch(args)
+            Player.Watch(args)
         End Sub
 
-        Private Sub lnkNational_Click(sender As Object, e As EventArgs) Handles lnkNational.Click
+        Private Sub lnkNational_Click(sender As Object, e As EventArgs) Handles lnkNational.Click 
             Dim args = WatchArgs()
-
-            If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.NationalStream.CheckVod(args.Cdn)
-                args.IsVod = _game.NationalStream.IsVod
-            End If
-
+            args.IsVod = IsGameVod(_game.NationalStream, args.Cdn)
             args.Stream = _game.NationalStream
-            _game.Watch(args)
+            Player.Watch(args)
         End Sub
 
-        Private Sub lnkHome_Click(sender As Object, e As EventArgs) Handles lnkHome.Click
+        Private Sub lnkHome_Click(sender As Object, e As EventArgs) Handles lnkHome.Click 
             Dim args = WatchArgs()
-
-            If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.HomeStream.CheckVod(args.Cdn)
-                args.IsVod = _game.HomeStream.IsVod
-            End If
-
+            args.IsVod = IsGameVod(_game.HomeStream, args.Cdn)
             args.Stream = _game.HomeStream
-            _game.Watch(args)
+            Player.Watch(args)
         End Sub
 
-        Private Sub lnkEnd1_Click(sender As Object, e As EventArgs) Handles lnkEnd1.Click
+        Private Sub lnkEnd1_Click(sender As Object, e As EventArgs) Handles lnkEnd1.Click 
             Dim args = WatchArgs()
-
-            If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.EndzoneCam1Stream.CheckVod(args.Cdn)
-                args.IsVod = _game.EndzoneCam1Stream.IsVod
-            End If
-
+            args.IsVod = IsGameVod(_game.EndzoneCam1Stream, args.Cdn)
             args.Stream = _game.EndzoneCam1Stream
-            _game.Watch(args)
+            Player.Watch(args)
         End Sub
 
-        Private Sub lnkRef_Click(sender As Object, e As EventArgs) Handles lnkRef.Click
+        Private Sub lnkRef_Click(sender As Object, e As EventArgs) Handles lnkRef.Click 
             Dim args = WatchArgs()
-
-            If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.RefCamStream.CheckVod(args.Cdn)
-                args.IsVod = _game.RefCamStream.IsVod
-            End If
-
+            args.IsVod = IsGameVod(_game.RefCamStream, args.Cdn)
             args.Stream = _game.RefCamStream
-            _game.Watch(args)
+            Player.Watch(args)
         End Sub
 
-        Private Sub lnkThree_Click(sender As Object, e As EventArgs) Handles lnkThree.Click
+        Private Sub lnkThree_Click(sender As Object, e As EventArgs) Handles lnkThree.Click 
             Dim args = WatchArgs()
-
-            If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.MultiCam1Stream.CheckVod(args.Cdn)
-                args.IsVod = _game.MultiCam1Stream.IsVod
-            End If
-
+            args.IsVod = IsGameVod(_game.MultiCam1Stream, args.Cdn)
             args.Stream = _game.MultiCam1Stream
-            _game.Watch(args)
+            Player.Watch(args)
         End Sub
 
-        Private Sub lnkSix_Click(sender As Object, e As EventArgs) Handles lnkSix.Click
+        Private Sub lnkSix_Click(sender As Object, e As EventArgs) Handles lnkSix.Click 
             Dim args = WatchArgs()
-
-            If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.MultiCam2Stream.CheckVod(args.Cdn)
-                args.IsVod = _game.MultiCam2Stream.IsVod
-            End If
-
+            args.IsVod = IsGameVod(_game.MultiCam2Stream, args.Cdn)
             args.Stream = _game.MultiCam2Stream
-            _game.Watch(args)
+            Player.Watch(args)
         End Sub
 
-        Private Sub lnkEnd2_Click(sender As Object, e As EventArgs) Handles lnkEnd2.Click
+        Private Sub lnkEnd2_Click(sender As Object, e As EventArgs) Handles lnkEnd2.Click 
             Dim args = WatchArgs()
-
-            If DateHelper.GetPacificTime(_game.Date).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                _game.EndzoneCam2Stream.CheckVod(args.Cdn)
-                args.IsVod = _game.EndzoneCam2Stream.IsVod
-            End If
-
+            args.IsVod = IsGameVod(_game.EndzoneCam2Stream, args.Cdn)
             args.Stream = _game.EndzoneCam2Stream
-            _game.Watch(args)
+            Player.Watch(args)
         End Sub
 
         Private Sub _getAllBroadcasters()
@@ -338,6 +329,8 @@ Namespace Controls
             _broadcasters.Add("KCOP", "FS")
             _broadcasters.Add("TCN", "CSN")
             _broadcasters.Add("USA", "NBC")
+            _broadcasters.Add("ATT", "ATT")
         End Sub
+
     End Class
 End Namespace

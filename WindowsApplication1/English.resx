@@ -155,15 +155,15 @@
   </data>
   <data name="errorConfigFile" xml:space="preserve">
     <value>Error: Can't find NHLGames config file. You will have to reinstall NHLGames.</value>
-    <comment>Message</comment>
+    <comment>Console</comment>
   </data>
   <data name="errorDeserialize" xml:space="preserve">
     <value>Error : Failed to deserialize setting value of '{0}' to type '{1}'</value>
-    <comment>Message</comment>
+    <comment>Console</comment>
   </data>
   <data name="errorGeneral" xml:space="preserve">
     <value>Error: {0}</value>
-    <comment>Message</comment>
+    <comment>Console</comment>
   </data>
   <data name="msgHostnameSet" xml:space="preserve">
     <value>NHLGames can't work without having its hostname set in your Windows Hosts file. Do you want to let NHLGames adds an entry to your Hosts file, so Windows can resolve NHLGames hostname and connect to its server's IP address?</value>
@@ -171,34 +171,34 @@
   </data>
   <data name="errorMpvExe" xml:space="preserve">
     <value>Error: Can't find mpv.exe : mpv is a media player that we shipped with NHLGames. You probably moved it or deleted it. Please set a player, NHLGames needs one.</value>
-    <comment>Message</comment>
+    <comment>Console</comment>
   </data>
   <data name="errorPlayerPathEmpty" xml:space="preserve">
-    <value>Error: Player path is empty</value>
-    <comment>Message</comment>
+    <value>Error: No media player selected in settings.</value>
+    <comment>Console</comment>
   </data>
   <data name="errorReadingSettings" xml:space="preserve">
     <value>Error: Failed to read app setting: {0}</value>
-    <comment>Message</comment>
+    <comment>Console</comment>
   </data>
   <data name="errorSetAdModule" xml:space="preserve">
-    <value>Error: Can't set Ad Detection Modules : {0}</value>
-    <comment>Message</comment>
+    <value>Error: Can't set Ad Detection Modules. Verify if a Nugget package has a dependency of an older nugget package that you have installed (ex: Spotify and Json): {0}</value>
+    <comment>Console</comment>
   </data>
   <data name="errorStreamlinkExe" xml:space="preserve">
-    <value>Error:  Can't find streamlink.exe. Streamlink is a tool that NHLGames uses to send streams to your media player, we shipped it with NHLGames. You probably moved it or deleted it and if you don't set any custom path, you will have to put it back there, just drop the folder 'streamlink-0.5.0' next to NHLGames.exe.</value>
-    <comment>Message</comment>
+    <value>Error:  Can't find streamlink.exe. Streamlink is a tool that NHLGames uses to send streams to your media player, we shipped it with NHLGames. You probably moved it or deleted it and if you don't set any custom path, you will have to put it back there, just drop the folder 'streamlink-0.8.1' next to NHLGames.exe.</value>
+    <comment>Console</comment>
   </data>
   <data name="errorWritingSettings" xml:space="preserve">
     <value>Error: Failed to write app settings</value>
-    <comment>Message</comment>
+    <comment>Console</comment>
   </data>
   <data name="lblAwayTeam" xml:space="preserve">
     <value>Away Team : {0} {1}</value>
     <comment>Game panel</comment>
   </data>
   <data name="lblCdn" xml:space="preserve">
-    <value>* CDN</value>
+    <value>CDN</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblEndzoneCam" xml:space="preserve">
@@ -274,7 +274,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblPlayer" xml:space="preserve">
-    <value>* Default Player</value>
+    <value>Default Player</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblPlayerArgs" xml:space="preserve">
@@ -290,7 +290,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="lblQuality" xml:space="preserve">
-    <value>* Stream Quality</value>
+    <value>Stream Quality</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblShowScores" xml:space="preserve">
@@ -298,7 +298,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblSlPath" xml:space="preserve">
-    <value>* Streamlink Path</value>
+    <value>Streamlink Path</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblStreamAvailableDuringPregame" xml:space="preserve">
@@ -331,47 +331,27 @@
   </data>
   <data name="msgBackingHostsFile" xml:space="preserve">
     <value>Hosts: Backing up file: {0}</value>
-    <comment>Message</comment>
+    <comment>Console</comment>
   </data>
   <data name="msgChangeLog" xml:space="preserve">
     <value>Version {0} is available! Changes: {1}{2}{3}</value>
     <comment>Version</comment>
   </data>
-  <data name="msgCheckingGames" xml:space="preserve">
-    <value>Checking: Available games</value>
-    <comment>Message</comment>
-  </data>
-  <data name="msgCheckingVersion" xml:space="preserve">
-    <value>Checking: Application version</value>
-    <comment>Message</comment>
-  </data>
   <data name="msgCleanHostsFile" xml:space="preserve">
     <value>Hosts: Removing existing entries from hosts file</value>
-    <comment>Message</comment>
-  </data>
-  <data name="msgCurrentVersion" xml:space="preserve">
-    <value>Status: Current version is {0}</value>
-    <comment>Version</comment>
+    <comment>Console</comment>
   </data>
   <data name="msgDiySteps" xml:space="preserve">
     <value>Need help?</value>
     <comment>Message</comment>
   </data>
   <data name="msgDiyStepsText" xml:space="preserve">
-    <value>This line needs to be insert in your hosts file : {0}{1} {2}{0}Use 'Open Hosts File' button to open the Hosts file quickly or go to : {0}C:\Windows\System32\drivers\etc\hosts{0}Use Notepad to edit it and paste (Ctrl+V) our entry line at the end of your Hosts file.{0}Do you want to copy that entry line to your clipboard ?</value>
+    <value>This line needs to be insert in your hosts file : {0}{1} {2}{0}Click on 'Open Hosts File' to open the Hosts file and paste (Ctrl+V) that entry line at the end of your Hosts file.{0}Do you want to copy that entry line to your clipboard ?</value>
     <comment>Message</comment>
   </data>
-  <data name="msgDownloadingFile" xml:space="preserve">
-    <value>Downloading File: {0} to {1}</value>
-    <comment>Message</comment>
-  </data>
-  <data name="msgDownloadingSchedule" xml:space="preserve">
-    <value>Status: Downloading todays current schedule from {0}</value>
-    <comment>Message</comment>
-  </data>
-  <data name="msgDownloadPath" xml:space="preserve">
-    <value>Download path: {0}</value>
-    <comment>Message</comment>
+  <data name="msgDownloadingJsonFile" xml:space="preserve">
+    <value>Downloading: Game schedule for {0} to {1}</value>
+    <comment>Console</comment>
   </data>
   <data name="msgErrorGeneralText" xml:space="preserve">
     <value>An error happened! See the console for more details.{0}Click on [?] button in the top-right corner to view NHLGames documentation for quick support in the Support section (App and Player).{0}You can also copy the console log using 'Copy to clipboard' button and paste it in a new thread on NHLGames subreddit for help. Use the link in the bottom-left corner to get there.</value>
@@ -381,13 +361,13 @@
     <value>Failure</value>
     <comment>Message</comment>
   </data>
-  <data name="msgFetchingSchedule" xml:space="preserve">
-    <value>Checking: Fetching game schedule for {0}</value>
-    <comment>Message</comment>
+  <data name="msgGettingSchedule" xml:space="preserve">
+    <value>{0}: Game schedule for {1} from NHL.tv</value>
+    <comment>Console</comment>
   </data>
-  <data name="msgFileExists" xml:space="preserve">
-    <value>Status: File aready exists at {0}</value>
-    <comment>Message</comment>
+  <data name="msgFetchingSavedSchedule" xml:space="preserve">
+    <value>Fetching: Saved game schedule for {0} ({1})</value>
+    <comment>Console</comment>
   </data>
   <data name="msgGamesFound" xml:space="preserve">
     <value>Games Found : {0}</value>
@@ -407,23 +387,23 @@
   </data>
   <data name="msgNewVersionAvailable" xml:space="preserve">
     <value>New Version Available</value>
-    <comment>Version</comment>
+    <comment>Message</comment>
   </data>
   <data name="msgNewVersionText" xml:space="preserve">
     <value>A new version is available, download the latest version {0} on /r/nhl_games</value>
-    <comment>Version</comment>
+    <comment>Status bar</comment>
   </data>
   <data name="msgOff" xml:space="preserve">
     <value>OFF</value>
-    <comment>Console tab</comment>
+    <comment>Console</comment>
   </data>
   <data name="msgOn" xml:space="preserve">
     <value>ON</value>
-    <comment>Console tab</comment>
+    <comment>Console</comment>
   </data>
   <data name="msgRemoveReadOnly" xml:space="preserve">
-    <value>The {0} file is no longer Read Only</value>
-    <comment>Message</comment>
+    <value>Status: The {0} file is no longer Read Only</value>
+    <comment>Console</comment>
   </data>
   <data name="msgRunAsAdmin" xml:space="preserve">
     <value>Admin Access Required</value>
@@ -435,15 +415,15 @@
   </data>
   <data name="msgSettingUpdated" xml:space="preserve">
     <value>Status: Setting updated for '{0}' to '{1}'</value>
-    <comment>Message</comment>
+    <comment>Console</comment>
   </data>
   <data name="msgStartingApp" xml:space="preserve">
     <value>Starting: {0} {1}</value>
-    <comment>Message</comment>
+    <comment>Console</comment>
   </data>
   <data name="errorDoubleDot" xml:space="preserve">
     <value>:</value>
-    <comment>Console tab</comment>
+    <comment>Console</comment>
   </data>
   <data name="msgSuccess" xml:space="preserve">
     <value>Success</value>
@@ -455,15 +435,15 @@
   </data>
   <data name="msgTestTxtContent" xml:space="preserve">
     <value>Test ability to write to this directory</value>
-    <comment>Message</comment>
+    <comment>Console / Writer</comment>
   </data>
   <data name="msgThisEnable" xml:space="preserve">
     <value>{0} enable</value>
-    <comment>Console tab</comment>
+    <comment>Console</comment>
   </data>
   <data name="msgValueTooLarge" xml:space="preserve">
     <value>[Value too large for display]</value>
-    <comment>Message</comment>
+    <comment>Console</comment>
   </data>
   <data name="msgViewHosts" xml:space="preserve">
     <value>Open Hosts File</value>
@@ -475,7 +455,7 @@
   </data>
   <data name="msgVOD" xml:space="preserve">
     <value>Video On Demand Status: {0}</value>
-    <comment>Message</comment>
+    <comment>Console</comment>
   </data>
   <data name="tabConsole" xml:space="preserve">
     <value>Console</value>
@@ -495,7 +475,7 @@
   </data>
   <data name="textCopyConsole" xml:space="preserve">
     <value>NHLGames Official Bug Report {1}{0}{0}OS : {2} {3}{0}{0}UI loaded : {4}{0}{0}Domain resolved : {5}{0}{0}Server IP found : {6}{0}{0}Selected hostname : {7}{0}{0}Selected player : {8}{0}{0}Streamlink path : {9} [=UI:{10}]{0}{0}VLC path : {11} [=UI:{12}]{0}{0}MPC path : {13} [=UI:{14}]{0}{0}MPV path : {15} [=UI:{16}]{0}{0}Console log : {0}{0}{17}</value>
-    <comment>Clipboard</comment>
+    <comment>Console</comment>
   </data>
   <data name="formatGbHour" xml:space="preserve">
     <value>GB/Hour</value>
@@ -571,11 +551,11 @@
   </data>
   <data name="msgRemoveHost" xml:space="preserve">
     <value>Remove our server from your hosts file</value>
-    <comment>Settings tab</comment>
+    <comment>Settings</comment>
   </data>
   <data name="msgTestHosts" xml:space="preserve">
     <value>Test the hosts file</value>
-    <comment>Settings tab</comment>
+    <comment>Settings</comment>
   </data>
   <data name="errorExceptionDetection" xml:space="preserve">
     <value>exception</value>
@@ -583,11 +563,11 @@
   </data>
   <data name="errorCliStreamlink" xml:space="preserve">
     <value>[cli]</value>
-    <comment>Console tab</comment>
+    <comment>Console</comment>
   </data>
   <data name="msgDateTimeNow" xml:space="preserve">
     <value>[{0}] </value>
-    <comment>Console tab</comment>
+    <comment>Console</comment>
   </data>
   <data name="formatWeekMonthDayYear" xml:space="preserve">
     <value>{0}, {1} {2}, {3}</value>
@@ -604,5 +584,33 @@
   <data name="gamePeriodOtMore" xml:space="preserve">
     <value>{0}OT</value>
     <comment>Game panel</comment>
+  </data>
+  <data name="msgServerSeemsDown" xml:space="preserve">
+    <value>Status: Server {0} seems down</value>
+    <comment>Console</comment>
+  </data>
+  <data name="errorUnknownServerDown" xml:space="preserve">
+    <value>unknown (server is not available)</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgServerNoRespondTryingAgain" xml:space="preserve">
+    <value>Status: Failed to download the game schedule file from {0}. Second attempt.</value>
+    <comment>Console</comment>
+  </data>
+  <data name="errorFetchingGames" xml:space="preserve">
+    <value>Error: Failed to fetch games schedule.</value>
+    <comment>Console</comment>
+  </data>
+  <data name="errorUnableToDecodeJson" xml:space="preserve">
+    <value>Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this.</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgFetching" xml:space="preserve">
+    <value>Fetching</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgRefreshing" xml:space="preserve">
+    <value>Refreshing</value>
+    <comment>Console</comment>
   </data>
 </root>
