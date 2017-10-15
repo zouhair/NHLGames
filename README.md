@@ -1,8 +1,8 @@
 # NHLGames
 Tool to watch NHL games in High Definition   
-> Choose a date by using the calendar or the nav arrows.    
-> Choose a game that you want to watch.    
-> Click on a stream link inside the game panel.    
+> Choose a date.    
+> Choose a game.    
+> Click on a stream link.    
 > Enjoy the game.
 
 ![image](https://user-images.githubusercontent.com/23088305/30517831-7276e442-9b39-11e7-8faa-e8960df24e8c.png)
