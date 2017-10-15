@@ -7,7 +7,7 @@ Tool to watch NHL games in High Definition
 
 ![image](https://user-images.githubusercontent.com/23088305/30517831-7276e442-9b39-11e7-8faa-e8960df24e8c.png)
 
-## /Index
+## /_Index_
 * [First use](#first-use)
   * [Requirements](#requirements)
   * [Message about the hosts file](#message-about-the-hosts-file)
