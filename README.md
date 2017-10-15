@@ -28,8 +28,6 @@ Tool to watch NHL games in High Definition
      * [Streamer](#streamer)
      * [Arguments](#arguments)
      * [Ad Detection](#ad-detection)
-        * [Spotify](#spotify)
-        * [OBS Scene Changer](#obs-scene-changer)
      * [Language](#language)
    * [Console](#console)
 * [Support](#support)
@@ -181,11 +179,9 @@ If you wish to customise the way your player or the streamer opens, turn on one 
 ### Ad Detection
 NHLGames doesn't use any Ad Detection modules by default, but you can activate it and select the app you want to use during commercials. If you don't use any, it's better if you disable the Ad Detection module. 
 
-#### Spotify
-If you want to play music during ads.
-
-#### OBS Scene Changer
-If you want to switch between windows when an ad hits.
+Ad detection only supports these applications:
+- Spotify Windows: If you want to play music during ads.
+- OBS Scene Changer : If you want to switch between windows when an ad hits.
 
 ### Language
 NHLGames supports two languages: English and French.
