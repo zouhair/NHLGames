@@ -340,4 +340,4 @@ If you want to contribute :
 - Fork the project and submit a pull request to `NHLGames\master` branch.
 - Open an issue and tell us what's wrong with NHLGames.
 
-Thanks to our follow [contributors](https://github.com/NHLGames/NHLGames/graphs/contributors)
+Thanks to our [contributors](https://github.com/NHLGames/NHLGames/graphs/contributors)
