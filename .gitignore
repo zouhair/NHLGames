@@ -21,9 +21,6 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
-livestreamer/
-streamlink/
-mpv/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -213,3 +210,6 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/livestreamer
+/mpv
+/streamlink
