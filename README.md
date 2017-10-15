@@ -186,10 +186,11 @@ Ad detection only supports these applications:
 ### ///_Language_
 NHLGames supports two languages: English and French.
 More can be added, but we are waiting for contributors to translate the file:
-`NHLGames/WindowsApplication1/EnglishTemplate.resx` (can be modified in Visual Studio)
+`NHLGames/NHLGames/res/EnglishTemplate.resx` (can be modified in Visual Studio)
 
 ## //_Console_
 Go to this tab to see everything that NHLGames does. Also, any error or warning will show up here.
+
 
 ___
 
