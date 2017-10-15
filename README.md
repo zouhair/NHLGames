@@ -3,7 +3,7 @@ Tool to watch NHL games in High Definition
 > Choose a date.    
 > Choose a game.    
 > Choose a stream.    
-> Enjoy the game.
+> Enjoy!
 
 ![image](https://user-images.githubusercontent.com/23088305/30517831-7276e442-9b39-11e7-8faa-e8960df24e8c.png)
 
