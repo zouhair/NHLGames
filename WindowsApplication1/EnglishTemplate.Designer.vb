@@ -25,7 +25,7 @@ Namespace My.Resources
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
-    Friend Class English
+    Friend Class EnglishTemplate
         
         Private Shared resourceMan As Global.System.Resources.ResourceManager
         
@@ -43,7 +43,7 @@ Namespace My.Resources
         Friend Shared ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
             Get
                 If Object.ReferenceEquals(resourceMan, Nothing) Then
-                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("NHLGames.English", GetType(English).Assembly)
+                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("NHLGames.EnglishTemplate", GetType(EnglishTemplate).Assembly)
                     resourceMan = temp
                 End If
                 Return resourceMan
@@ -259,150 +259,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property enumscheduled() As String
             Get
                 Return ResourceManager.GetString("enumscheduled", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à [cli].
-        '''</summary>
-        Friend Shared ReadOnly Property errorCliStreamer() As String
-            Get
-                Return ResourceManager.GetString("errorCliStreamer", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error : Failed to deserialize setting value of &apos;{0}&apos; to type &apos;{1}&apos;.
-        '''</summary>
-        Friend Shared ReadOnly Property errorDeserialize() As String
-            Get
-                Return ResourceManager.GetString("errorDeserialize", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à error:.
-        '''</summary>
-        Friend Shared ReadOnly Property errorDetection() As String
-            Get
-                Return ResourceManager.GetString("errorDetection", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à :.
-        '''</summary>
-        Friend Shared ReadOnly Property errorDoubleDot() As String
-            Get
-                Return ResourceManager.GetString("errorDoubleDot", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à exception.
-        '''</summary>
-        Friend Shared ReadOnly Property errorExceptionDetection() As String
-            Get
-                Return ResourceManager.GetString("errorExceptionDetection", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: Failed to fetch games schedule..
-        '''</summary>
-        Friend Shared ReadOnly Property errorFetchingGames() As String
-            Get
-                Return ResourceManager.GetString("errorFetchingGames", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: {0}.
-        '''</summary>
-        Friend Shared ReadOnly Property errorGeneral() As String
-            Get
-                Return ResourceManager.GetString("errorGeneral", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: Can&apos;t find mpv.exe : mpv is a media player that we shipped with NHLGames. You probably moved it or deleted it. Please set a player, NHLGames needs one..
-        '''</summary>
-        Friend Shared ReadOnly Property errorMpvExe() As String
-            Get
-                Return ResourceManager.GetString("errorMpvExe", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: No media player selected in settings..
-        '''</summary>
-        Friend Shared ReadOnly Property errorPlayerPathEmpty() As String
-            Get
-                Return ResourceManager.GetString("errorPlayerPathEmpty", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: Failed to read app setting: {0}.
-        '''</summary>
-        Friend Shared ReadOnly Property errorReadingSettings() As String
-            Get
-                Return ResourceManager.GetString("errorReadingSettings", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: Can&apos;t set Ad Detection Modules. Verify if a Nugget package has a dependency of an older nugget package that you have installed (ex: Spotify and Json): {0}.
-        '''</summary>
-        Friend Shared ReadOnly Property errorSetAdModule() As String
-            Get
-                Return ResourceManager.GetString("errorSetAdModule", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error:  Can&apos;t find the specified streamer. The streamer is used to send streams to your media player, please select the one that comes with NHLGames or select a valid path of Livestreamer.exe or Streamlink.exe.
-        '''</summary>
-        Friend Shared ReadOnly Property errorStreamerExe() As String
-            Get
-                Return ResourceManager.GetString("errorStreamerExe", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this..
-        '''</summary>
-        Friend Shared ReadOnly Property errorUnableToDecodeJson() As String
-            Get
-                Return ResourceManager.GetString("errorUnableToDecodeJson", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à unknown (server is not available).
-        '''</summary>
-        Friend Shared ReadOnly Property errorUnknownServerDown() As String
-            Get
-                Return ResourceManager.GetString("errorUnknownServerDown", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à warning:.
-        '''</summary>
-        Friend Shared ReadOnly Property errorWarning() As String
-            Get
-                Return ResourceManager.GetString("errorWarning", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: Failed to write app settings.
-        '''</summary>
-        Friend Shared ReadOnly Property errorWritingSettings() As String
-            Get
-                Return ResourceManager.GetString("errorWritingSettings", resourceCulture)
             End Get
         End Property
         
@@ -911,47 +767,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Hosts: Backing up file: {0}.
-        '''</summary>
-        Friend Shared ReadOnly Property msgBackingHostsFile() As String
-            Get
-                Return ResourceManager.GetString("msgBackingHostsFile", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à [CENSORED_STREAM_URL].
-        '''</summary>
-        Friend Shared ReadOnly Property msgCensoredStream() As String
-            Get
-                Return ResourceManager.GetString("msgCensoredStream", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Version {0} is available! Changes: {1}{2}{3}.
         '''</summary>
         Friend Shared ReadOnly Property msgChangeLog() As String
             Get
                 Return ResourceManager.GetString("msgChangeLog", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Hosts: Removing existing entries from hosts file.
-        '''</summary>
-        Friend Shared ReadOnly Property msgCleanHostsFile() As String
-            Get
-                Return ResourceManager.GetString("msgCleanHostsFile", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à [{0}] .
-        '''</summary>
-        Friend Shared ReadOnly Property msgDateTimeNow() As String
-            Get
-                Return ResourceManager.GetString("msgDateTimeNow", resourceCulture)
             End Get
         End Property
         
@@ -965,15 +785,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Exists.
-        '''</summary>
-        Friend Shared ReadOnly Property msgExists() As String
-            Get
-                Return ResourceManager.GetString("msgExists", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Failure.
         '''</summary>
         Friend Shared ReadOnly Property msgFailure() As String
@@ -983,29 +794,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Fetching.
-        '''</summary>
-        Friend Shared ReadOnly Property msgFetching() As String
-            Get
-                Return ResourceManager.GetString("msgFetching", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Games Found : {0}.
         '''</summary>
         Friend Shared ReadOnly Property msgGamesFound() As String
             Get
                 Return ResourceManager.GetString("msgGamesFound", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à {0}: Game schedule for {1} from NHL.tv.
-        '''</summary>
-        Friend Shared ReadOnly Property msgGettingSchedule() As String
-            Get
-                Return ResourceManager.GetString("msgGettingSchedule", resourceCulture)
             End Get
         End Property
         
@@ -1073,42 +866,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à OFF.
-        '''</summary>
-        Friend Shared ReadOnly Property msgOff() As String
-            Get
-                Return ResourceManager.GetString("msgOff", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à ON.
-        '''</summary>
-        Friend Shared ReadOnly Property msgOn() As String
-            Get
-                Return ResourceManager.GetString("msgOn", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Refreshing.
-        '''</summary>
-        Friend Shared ReadOnly Property msgRefreshing() As String
-            Get
-                Return ResourceManager.GetString("msgRefreshing", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Status: The {0} file is no longer Read Only.
-        '''</summary>
-        Friend Shared ReadOnly Property msgRemoveReadOnly() As String
-            Get
-                Return ResourceManager.GetString("msgRemoveReadOnly", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Admin Access Required.
         '''</summary>
         Friend Shared ReadOnly Property msgRunAsAdmin() As String
@@ -1123,60 +880,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgRunAsAdminText() As String
             Get
                 Return ResourceManager.GetString("msgRunAsAdminText", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Status: Failed to download the game schedule file from {0}. Second attempt..
-        '''</summary>
-        Friend Shared ReadOnly Property msgServerNoRespondTryingAgain() As String
-            Get
-                Return ResourceManager.GetString("msgServerNoRespondTryingAgain", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Status: Server {0} seems down.
-        '''</summary>
-        Friend Shared ReadOnly Property msgServerSeemsDown() As String
-            Get
-                Return ResourceManager.GetString("msgServerSeemsDown", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Status: Setting updated for &apos;{0}&apos; to &apos;{1}&apos;.
-        '''</summary>
-        Friend Shared ReadOnly Property msgSettingUpdated() As String
-            Get
-                Return ResourceManager.GetString("msgSettingUpdated", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Starting: Streamer {0}.
-        '''</summary>
-        Friend Shared ReadOnly Property msgStartingStreamer() As String
-            Get
-                Return ResourceManager.GetString("msgStartingStreamer", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Streamer:.
-        '''</summary>
-        Friend Shared ReadOnly Property msgStreamer() As String
-            Get
-                Return ResourceManager.GetString("msgStreamer", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Streaming: {0} on {1} using {2} player.
-        '''</summary>
-        Friend Shared ReadOnly Property msgStreaming() As String
-            Get
-                Return ResourceManager.GetString("msgStreaming", resourceCulture)
             End Get
         End Property
         
@@ -1199,24 +902,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à {0} enable.
-        '''</summary>
-        Friend Shared ReadOnly Property msgThisEnable() As String
-            Get
-                Return ResourceManager.GetString("msgThisEnable", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à [Value too large for display].
-        '''</summary>
-        Friend Shared ReadOnly Property msgValueTooLarge() As String
-            Get
-                Return ResourceManager.GetString("msgValueTooLarge", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Open Hosts File.
         '''</summary>
         Friend Shared ReadOnly Property msgViewHosts() As String
@@ -1231,15 +916,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgViewHostsText() As String
             Get
                 Return ResourceManager.GetString("msgViewHostsText", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Video On Demand Status: {0}.
-        '''</summary>
-        Friend Shared ReadOnly Property msgVOD() As String
-            Get
-                Return ResourceManager.GetString("msgVOD", resourceCulture)
             End Get
         End Property
         
@@ -1294,15 +970,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property tabSettings() As String
             Get
                 Return ResourceManager.GetString("tabSettings", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à NHLGames Official Bug Report {1}{0}{0}OS : {2} {3}{0}{0}UI loaded : {4}{0}{0}Domain resolved : {5}{0}{0}Server IP found : {6}{0}{0}Selected hostname : {7}{0}{0}Selected player : {8}{0}{0}Streamer path : {9} [=UI:{10}] [{11}]{0}{0}VLC path : {12} [=UI:{13}] [{14}]{0}{0}MPC path : {15} [=UI:{16}] [{17]{0}{0}MPV path : {18} [=UI:{19}] [{20}]{0}{0}Console log : {0}{0}{21}.
-        '''</summary>
-        Friend Shared ReadOnly Property textCopyConsole() As String
-            Get
-                Return ResourceManager.GetString("textCopyConsole", resourceCulture)
             End Get
         End Property
         
