@@ -328,15 +328,13 @@ NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps 
 ___
 
 # /_Contribute_
-NHLGames is written in Visual Basic. Ad Detection modules are written in C#. We use Visual Studio to code. 
+NHLGames is written in Visual Basic. We use Visual Studio to code. 
+
+NHLGames use also these NuGet packages:
+- MetroModernUI by [Dennis Magno](/dennismagno)
+- Newtonsoft.Json by [James Newton-King](/JamesNK)
+- SpotifyAPI-NET by [JohnnyCrazy](/JohnnyCrazy)
 
 If you want to contribute :
 - Fork the project and submit a pull request to `NHLGames\master` branch.
 - Open an issue and tell us what's wrong with NHLGames.
-
-NHLGames use also these NuGet packages:
-- MetroModernUI
-- CSCore
-- Newtonsoft JSON .NET
-- Prism.Core
-- SpotifyAPI-NET
