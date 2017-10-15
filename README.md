@@ -214,7 +214,7 @@ First of all, if you have issues with one player you can try another player at a
 ### ///_No Audio_
 #### MPC No audio --> Increase stream analysis duration
 > You will need to do the following to fix audio:    
-> Options > Internal Filters > Splitter   
+> View > Options > Internal Filters > Splitter   
 >    
 > Increase *stream analysis duration* (eg. 3000)
 
