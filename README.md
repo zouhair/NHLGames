@@ -190,14 +190,10 @@ First of all, if you have issues with one player you can try another player at a
 
 ### No playback
 #### Player used to open, but it does not anymore --> Kill old processes of this player
-```
-Sometimes a player process can still runs even if the stream ended and an old process of the same name
-can affect another from starting. So, right click on your Windows taskbar and click on
-Start Task Manager (CTRL + Shift + ESC)
-Go to Processes tab
-Right click on all of your player processes (.exe) that are running
-Click on End Process.
-```
+> Sometimes a player process can still runs even if the stream ended and an old process of the same name can affect another from starting. So, right click on your Windows taskbar and click on Start Task Manager (CTRL + Shift + ESC).
+> Go to Processes tab.
+> Right click on all of your player processes (.exe) that are running.
+> Click on End Process.
 
 #### VLC 64 bits No playback --> use 32 bits
 ```
