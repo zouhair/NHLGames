@@ -126,7 +126,7 @@ To test your Hosts file, go to Settings and use the *Hosts File* drop down list:
 It should tells you if everything is fine.
 
 If NHLGames is not set properly, try the following options:
-> Right click on NHLGames.exe and select `Run as an administrator`.
+> Right click on NHLGames.exe and select *Run as an administrator*.
 
 In settings, use the *Hosts file* drop down list:
 > Select ***Add the NHL.tv authentication bypass line to Hosts file***
@@ -156,9 +156,9 @@ NHLGames supports up to 3 media players:
 - MPC
 - VLC
 
-If you don't have or want VLC/MPC players, use our default media player to watch games. Make sure you select `MPV` as the default player.
+If you don't have or want VLC/MPC players, use our default media player to watch games. Make sure you select MPV as the default player.
 
-If you had previously installed VLC or MPC, NHLGames should find it automatically if you installed it in the default folder `Program Files`, otherwise you will have to browse ![image](https://cloud.githubusercontent.com/assets/23088305/25557239/b99ec37a-2cdb-11e7-8c27-d8b563128e8d.png) your computer and get the path to the EXE file. 
+If you had previously installed VLC or MPC, NHLGames should find it automatically if you installed it in the default folder Program Files, otherwise you will have to browse ![image](https://cloud.githubusercontent.com/assets/23088305/25557239/b99ec37a-2cdb-11e7-8c27-d8b563128e8d.png) your computer and get the path to the EXE file. 
 
 If you don't have one of these players installed and you want to install it, use the links on the right to download it.
 
@@ -185,7 +185,7 @@ Ad detection only supports these applications:
 
 ### ///_Language_
 NHLGames supports two languages: English and French.
-More can be added, but we are waiting for contributors to translate the file:
+More can be added, but we are waiting for contributors to translate the file:    
 `NHLGames/NHLGames/res/EnglishTemplate.resx` (can be modified in Visual Studio)
 
 ## //_Console_
