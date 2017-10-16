@@ -1,6 +1,7 @@
 ﻿Imports NHLGames.Utilities
+Imports NHLGames.Objects.Modules
 
-Namespace Objects.Modules
+Namespace Utilities
     Public Class AdDetectionConfigs
         Public Property IsEnabled As Boolean = False
         Public Property EnabledSpotifyModule As Boolean = False

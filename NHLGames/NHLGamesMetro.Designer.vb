@@ -559,7 +559,6 @@ Partial Class NHLGamesMetro
         Me.txtGameKey.MaxLength = 1
         Me.txtGameKey.Name = "txtGameKey"
         Me.txtGameKey.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtGameKey.PromptText = "G"
         Me.txtGameKey.ScrollBars = System.Windows.Forms.ScrollBars.None
         Me.txtGameKey.SelectedText = ""
         Me.txtGameKey.SelectionLength = 0
@@ -569,7 +568,6 @@ Partial Class NHLGamesMetro
         Me.txtGameKey.TabIndex = 2
         Me.txtGameKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtGameKey.UseSelectable = true
-        Me.txtGameKey.WaterMark = "G"
         Me.txtGameKey.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
         Me.txtGameKey.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
@@ -671,7 +669,6 @@ Partial Class NHLGamesMetro
         Me.txtAdKey.MaxLength = 1
         Me.txtAdKey.Name = "txtAdKey"
         Me.txtAdKey.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtAdKey.PromptText = "A"
         Me.txtAdKey.ScrollBars = System.Windows.Forms.ScrollBars.None
         Me.txtAdKey.SelectedText = ""
         Me.txtAdKey.SelectionLength = 0
@@ -681,7 +678,6 @@ Partial Class NHLGamesMetro
         Me.txtAdKey.TabIndex = 3
         Me.txtAdKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtAdKey.UseSelectable = true
-        Me.txtAdKey.WaterMark = "A"
         Me.txtAdKey.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
         Me.txtAdKey.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '

@@ -17,7 +17,6 @@ Namespace Utilities
 
         Private Property RequiredSilenceMilliseconds As Integer = 500
         Public ReadOnly Property PollPeriodMilliseconds As Integer = 500
-        ' Public Property SelectedDetectionType As AdDetectionTypeEnum = AdDetectionTypeEnum.Volume
         Public Property DetectionEnabled() As Boolean
         Public ReadOnly Property MediaPlayerProcesses As ReadOnlyCollection(Of Integer)
             Get

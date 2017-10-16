@@ -167,7 +167,7 @@
     <Compile Include="NHLGamesMetro.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Objects\Modules\AdDetectionConfigs.vb" />
+    <Compile Include="Utilities\AdDetectionConfigs.vb" />
     <Compile Include="Objects\Modules\Hotkey.vb" />
     <Compile Include="Objects\Modules\Obs.vb" />
     <Compile Include="Objects\Modules\Spotify.vb" />
