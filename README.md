@@ -334,6 +334,7 @@ NHLGames is written in Visual Basic. We use Visual Studio to code.
 NHLGames use also these NuGet packages:
 - MetroModernUI by [Dennis Magno](/dennismagno)
 - Newtonsoft.Json by [James Newton-King](/JamesNK)
+- NAudio by [Mark Heath](/markheath)
 
 If you want to contribute :
 - Fork the project and submit a pull request to `NHLGames\master` branch.
