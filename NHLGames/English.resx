@@ -689,4 +689,52 @@
     <value>Test ability to write to this directory</value>
     <comment>Console / Writer</comment>
   </data>
+  <data name="chkSpotifyAnyMediaPlayer" xml:space="preserve">
+    <value>With another media player</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="msgAdDetectionException" xml:space="preserve">
+    <value>Warning: Ad Detection: Unexpected Exception: {0}</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgAdDetectionProbInit" xml:space="preserve">
+    <value>Warning: Ad Detection: Problem initializing tasks: {0}</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgObsChangingScene" xml:space="preserve">
+    <value>Ad Detection: OBS is changing to {0} scene</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgObsHotkeyNotSet" xml:space="preserve">
+    <value>Warning: Ad Detection: OBS {0} scene hotkey not set</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgSpotifyCantStart" xml:space="preserve">
+    <value>Warning: Ad Detection: Can't start Spotify: {0}</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgSpotifyException" xml:space="preserve">
+    <value>Warning: Ad Detection: Unexpected exception connecting to Spotify: {0}</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgSpotifyIsntInstalled" xml:space="preserve">
+    <value>Ad Detection: Spotify is not installed</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgSpotifyNotConnected" xml:space="preserve">
+    <value>Ad Detection: Spotify didn't connect in time, try again.</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgSpotifyNotRunning" xml:space="preserve">
+    <value>Ad Detection: Spotify isn't running. Trying to start it...</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgObsAdWord" xml:space="preserve">
+    <value>Ad</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgObsGameWord" xml:space="preserve">
+    <value>Game</value>
+    <comment>Console</comment>
+  </data>
 </root>

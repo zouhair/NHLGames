@@ -31,8 +31,8 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>false</DebugSymbols>
-    <DebugType>None</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>..\bin\Debug\</OutputPath>
@@ -109,10 +109,6 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="SpotifyAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SpotifyAPI-NET.2.16.0\lib\SpotifyAPI.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -173,6 +169,7 @@
     </Compile>
     <Compile Include="Objects\Modules\AdDetectionConfigs.vb" />
     <Compile Include="Objects\Modules\Hotkey.vb" />
+    <Compile Include="Objects\Modules\Obs.vb" />
     <Compile Include="Objects\Modules\Spotify.vb" />
     <Compile Include="Utilities\Enums.vb" />
     <Compile Include="Objects\GameWatchArguments.vb" />
@@ -209,6 +206,7 @@
     <Compile Include="Utilities\Player.vb" />
     <Compile Include="Utilities\Serialization.vb" />
     <Compile Include="Utilities\ConsoleRedirectStreamWriter.vb" />
+    <Compile Include="Utilities\WindowsEvents.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\CalenderControl.resx">

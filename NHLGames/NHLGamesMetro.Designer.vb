@@ -130,6 +130,7 @@ Partial Class NHLGamesMetro
         Me.flpSpotifyParameters = New System.Windows.Forms.FlowLayoutPanel()
         Me.chkSpotifyForceToStart = New MetroFramework.Controls.MetroCheckBox()
         Me.chkSpotifyPlayNextSong = New MetroFramework.Controls.MetroCheckBox()
+        Me.chkSpotifyAnyMediaPlayer = New MetroFramework.Controls.MetroCheckBox()
         Me.lblModules = New MetroFramework.Controls.MetroLabel()
         Me.tgModules = New MetroFramework.Controls.MetroToggle()
         Me.tabConsole = New MetroFramework.Controls.MetroTabPage()
@@ -473,6 +474,7 @@ Partial Class NHLGamesMetro
         Me.tlpSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
         Me.tlpSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
         Me.tlpSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60!))
+        Me.tlpSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
         Me.tlpSettings.Size = New System.Drawing.Size(980, 457)
         Me.tlpSettings.TabIndex = 64
         '
@@ -482,7 +484,6 @@ Partial Class NHLGamesMetro
         Me.tlpOBSSettings.ColumnCount = 2
         Me.tlpOBSSettings.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.tlpOBSSettings.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
-        Me.tlpOBSSettings.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20!))
         Me.tlpOBSSettings.Controls.Add(Me.lblObsAdEndingHotkey, 0, 0)
         Me.tlpOBSSettings.Controls.Add(Me.lblObsAdStartingHotkey, 0, 1)
         Me.tlpOBSSettings.Controls.Add(Me.FlowLayoutPanel14, 1, 0)
@@ -495,6 +496,7 @@ Partial Class NHLGamesMetro
         Me.tlpOBSSettings.RowCount = 2
         Me.tlpOBSSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
         Me.tlpOBSSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
+        Me.tlpOBSSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
         Me.tlpOBSSettings.Size = New System.Drawing.Size(771, 60)
         Me.tlpOBSSettings.TabIndex = 84
         '
@@ -557,6 +559,7 @@ Partial Class NHLGamesMetro
         Me.txtGameKey.MaxLength = 1
         Me.txtGameKey.Name = "txtGameKey"
         Me.txtGameKey.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtGameKey.PromptText = "G"
         Me.txtGameKey.ScrollBars = System.Windows.Forms.ScrollBars.None
         Me.txtGameKey.SelectedText = ""
         Me.txtGameKey.SelectionLength = 0
@@ -566,6 +569,7 @@ Partial Class NHLGamesMetro
         Me.txtGameKey.TabIndex = 2
         Me.txtGameKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtGameKey.UseSelectable = true
+        Me.txtGameKey.WaterMark = "G"
         Me.txtGameKey.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
         Me.txtGameKey.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
@@ -667,6 +671,7 @@ Partial Class NHLGamesMetro
         Me.txtAdKey.MaxLength = 1
         Me.txtAdKey.Name = "txtAdKey"
         Me.txtAdKey.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtAdKey.PromptText = "A"
         Me.txtAdKey.ScrollBars = System.Windows.Forms.ScrollBars.None
         Me.txtAdKey.SelectedText = ""
         Me.txtAdKey.SelectionLength = 0
@@ -676,6 +681,7 @@ Partial Class NHLGamesMetro
         Me.txtAdKey.TabIndex = 3
         Me.txtAdKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtAdKey.UseSelectable = true
+        Me.txtAdKey.WaterMark = "A"
         Me.txtAdKey.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
         Me.txtAdKey.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
@@ -769,7 +775,7 @@ Partial Class NHLGamesMetro
         Me.lblOBSDesc.FontSize = MetroFramework.MetroLabelSize.Small
         Me.lblOBSDesc.Location = New System.Drawing.Point(89, 0)
         Me.lblOBSDesc.Name = "lblOBSDesc"
-        Me.lblOBSDesc.Size = New System.Drawing.Size(514, 25)
+        Me.lblOBSDesc.Size = New System.Drawing.Size(591, 25)
         Me.lblOBSDesc.TabIndex = 82
         Me.lblOBSDesc.Text = "OBS_DESC"
         Me.lblOBSDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -802,7 +808,7 @@ Partial Class NHLGamesMetro
         Me.lblSpotifyDesc.Location = New System.Drawing.Point(86, 0)
         Me.lblSpotifyDesc.Margin = New System.Windows.Forms.Padding(0)
         Me.lblSpotifyDesc.Name = "lblSpotifyDesc"
-        Me.lblSpotifyDesc.Size = New System.Drawing.Size(517, 25)
+        Me.lblSpotifyDesc.Size = New System.Drawing.Size(594, 25)
         Me.lblSpotifyDesc.TabIndex = 75
         Me.lblSpotifyDesc.Text = "SPOTIFY_DESC"
         Me.lblSpotifyDesc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1535,6 +1541,7 @@ Partial Class NHLGamesMetro
         '
         Me.flpSpotifyParameters.Controls.Add(Me.chkSpotifyForceToStart)
         Me.flpSpotifyParameters.Controls.Add(Me.chkSpotifyPlayNextSong)
+        Me.flpSpotifyParameters.Controls.Add(Me.chkSpotifyAnyMediaPlayer)
         Me.flpSpotifyParameters.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flpSpotifyParameters.Enabled = false
         Me.flpSpotifyParameters.Location = New System.Drawing.Point(177, 673)
@@ -1564,6 +1571,17 @@ Partial Class NHLGamesMetro
         Me.chkSpotifyPlayNextSong.TabIndex = 78
         Me.chkSpotifyPlayNextSong.Text = "PLAY_NEXT_SONG"
         Me.chkSpotifyPlayNextSong.UseSelectable = true
+        '
+        'chkSpotifyAnyMediaPlayer
+        '
+        Me.chkSpotifyAnyMediaPlayer.AutoSize = true
+        Me.chkSpotifyAnyMediaPlayer.Location = New System.Drawing.Point(274, 6)
+        Me.chkSpotifyAnyMediaPlayer.Margin = New System.Windows.Forms.Padding(6)
+        Me.chkSpotifyAnyMediaPlayer.Name = "chkSpotifyAnyMediaPlayer"
+        Me.chkSpotifyAnyMediaPlayer.Size = New System.Drawing.Size(133, 15)
+        Me.chkSpotifyAnyMediaPlayer.TabIndex = 79
+        Me.chkSpotifyAnyMediaPlayer.Text = "ANY_MEDIA_PLAYER"
+        Me.chkSpotifyAnyMediaPlayer.UseSelectable = true
         '
         'lblModules
         '
@@ -1959,4 +1977,5 @@ End Sub
     Friend WithEvents chkAdShift As MetroCheckBox
     Friend WithEvents lblModules As MetroLabel
     Friend WithEvents tgModules As MetroToggle
+    Friend WithEvents chkSpotifyAnyMediaPlayer As MetroCheckBox
 End Class

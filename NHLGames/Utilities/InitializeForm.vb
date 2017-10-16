@@ -93,12 +93,7 @@ Namespace Utilities
             Form.SettingsToolTip.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.SettingsToolTip.SetToolTip(Form.btnstreamerPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.SettingsToolTip.SetToolTip(Form.btnOuput, NHLGamesMetro.RmText.GetString("tipBrowse"))
-        
-            'Console
-            Form.btnCopyConsole.Text = NHLGamesMetro.RmText.GetString("btnCopyConsole")
-            Form.btnClearConsole.Text = NHLGamesMetro.RmText.GetString("btnClearConsole")
 
-            'Modules
             Form.lblModules.Text = NHLGamesMetro.RmText.GetString("lblModules")
             Form.lblSpotify.Text = NHLGamesMetro.RmText.GetString("lblSpotify")
             Form.lblSpotifyDesc.Text = NHLGamesMetro.RmText.GetString("lblSpotifyDesc")
@@ -108,6 +103,11 @@ Namespace Utilities
             Form.lblObsAdStartingHotkey.Text = NHLGamesMetro.RmText.GetString("lblObsAdStartingHotkey")
             Form.chkSpotifyForceToStart.Text = NHLGamesMetro.RmText.GetString("chkSpotifyForceToStart")
             Form.chkSpotifyPlayNextSong.Text = NHLGamesMetro.RmText.GetString("chkSpotifyPlayNextSong")
+            Form.chkSpotifyAnyMediaPlayer.Text = NHLGamesMetro.RmText.GetString("chkSpotifyAnyMediaPlayer")
+        
+            'Console
+            Form.btnCopyConsole.Text = NHLGamesMetro.RmText.GetString("btnCopyConsole")
+            Form.btnClearConsole.Text = NHLGamesMetro.RmText.GetString("btnClearConsole")
 
             'Calendar
             Form.flpCalender.Controls.Clear()
@@ -261,6 +261,7 @@ Namespace Utilities
 
                 form.chkSpotifyForceToStart.Checked = configs.EnabledSpotifyForceToOpen
                 form.chkSpotifyPlayNextSong.Checked = configs.EnabledSpotifyPlayNextSong
+                Form.chkSpotifyAnyMediaPlayer.Checked = configs.EnabledSpotifyAndAnyMediaPlayer
 
                 form.txtAdKey.Text = configs.EnabledObsAdSceneHotKey.Key
                 form.chkAdCtrl.Checked = configs.EnabledObsAdSceneHotKey.Ctrl

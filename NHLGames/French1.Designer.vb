@@ -200,6 +200,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Avec un autre lecteur média.
+        '''</summary>
+        Friend Shared ReadOnly Property chkSpotifyAnyMediaPlayer() As String
+            Get
+                Return ResourceManager.GetString("chkSpotifyAnyMediaPlayer", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Forcer le démarrage.
         '''</summary>
         Friend Shared ReadOnly Property chkSpotifyForceToStart() As String
@@ -551,7 +560,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Touches clavier de transition fin d&apos;annonce.
+        '''  Recherche une chaîne localisée semblable à Raccourci clavier: Fin d&apos;annonce.
         '''</summary>
         Friend Shared ReadOnly Property lblObsAdEndingHotkey() As String
             Get
@@ -560,7 +569,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Touches clavier de transition début d&apos;annonce.
+        '''  Recherche une chaîne localisée semblable à Raccourci clavier: Début d&apos;annonce.
         '''</summary>
         Friend Shared ReadOnly Property lblObsAdStartingHotkey() As String
             Get
@@ -569,7 +578,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Change la scène selon les touches configurées quand une annonce est détectée.
+        '''  Recherche une chaîne localisée semblable à Change de fenêtre selon les touches configurées quand une annonce est détectée.
         '''</summary>
         Friend Shared ReadOnly Property lblObsDesc() As String
             Get

@@ -537,4 +537,8 @@
     <value>Game Panel</value>
     <comment>Settings tab</comment>
   </data>
+  <data name="chkSpotifyAnyMediaPlayer" xml:space="preserve">
+    <value>With another media player</value>
+    <comment>Settings tab</comment>
+  </data>
 </root>

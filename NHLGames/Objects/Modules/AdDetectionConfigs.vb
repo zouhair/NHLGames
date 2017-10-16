@@ -9,5 +9,6 @@ Namespace Objects.Modules
         Public Property EnabledObsAdSceneHotKey As Hotkey = new Hotkey()
         Public Property EnabledSpotifyForceToOpen As Boolean = False
         Public Property EnabledSpotifyPlayNextSong As Boolean = False
+        Public Property EnabledSpotifyAndAnyMediaPlayer As Boolean = False
     End Class
 End Namespace

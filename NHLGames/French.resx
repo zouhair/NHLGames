@@ -474,15 +474,15 @@
     <comment>Modules tab</comment>
   </data>
   <data name="lblObsAdEndingHotkey" xml:space="preserve">
-    <value>Touches clavier de transition fin d'annonce</value>
+    <value>Raccourci clavier: Fin d'annonce</value>
     <comment>Modules tab</comment>
   </data>
   <data name="lblObsAdStartingHotkey" xml:space="preserve">
-    <value>Touches clavier de transition début d'annonce</value>
+    <value>Raccourci clavier: Début d'annonce</value>
     <comment>Modules tab</comment>
   </data>
   <data name="lblObsDesc" xml:space="preserve">
-    <value>Change la scène selon les touches configurées quand une annonce est détectée</value>
+    <value>Change de fenêtre selon les touches configurées quand une annonce est détectée</value>
     <comment>Modules tab</comment>
   </data>
   <data name="lblSpotify" xml:space="preserve">
@@ -531,6 +531,10 @@
   </data>
   <data name="lblGamePanel" xml:space="preserve">
     <value>Panneau de partie</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="chkSpotifyAnyMediaPlayer" xml:space="preserve">
+    <value>Avec un autre lecteur média</value>
     <comment>Settings tab</comment>
   </data>
 </root>

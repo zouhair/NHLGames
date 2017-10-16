@@ -80,4 +80,20 @@
         Spotify = 1
         Obs
     End Enum
+
+    Public Enum WindowsCode
+#Disable Warning InconsistentNaming
+        WM_NCLBUTTONDOWN = &HA1
+        HTLEFT = 10
+        HTRIGHT = 11
+        HTTOP = 12
+        HTTOPLEFT = 13
+        HTTOPRIGHT = 14
+        HTBOTTOM = 15
+        HTBOTTOMLEFT = 16
+        HTBOTTOMRIGHT = 17
+        VKMNEXT = 176
+        VKMPREVIOUS = 177
+#Enable Warning InconsistentNaming
+    End Enum
 End Namespace

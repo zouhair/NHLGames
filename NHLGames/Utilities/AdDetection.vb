@@ -1,6 +1,7 @@
 ﻿Imports System.Collections.ObjectModel
 Imports NAudio.CoreAudioApi
 Imports NAudio.CoreAudioApi.Interfaces
+Imports NHLGames.My.Resources
 Imports NHLGames.Objects.Modules
 
 Namespace Utilities
@@ -71,7 +72,7 @@ Namespace Utilities
             End If
         End Sub
 
-        Public Function GetCurrentVolume(processId As Integer) As Double
+        Public Shared Function GetCurrentVolume(processId As Integer) As Double
             Dim aMmDevices As New MMDeviceEnumerator()
             Dim defaultAudioEndPointDevice = aMmDevices.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia)
             Dim sessionsDefaultAudioEndPointDevice = defaultAudioEndPointDevice.AudioSessionManager.Sessions
@@ -137,7 +138,7 @@ Namespace Utilities
             Try
                 Task.WaitAll(_initializationTasks.ToArray(), TimeSpan.FromSeconds(5))
             Catch ex As Exception
-                Console.WriteLine($"Warning: Ad Detection: Problem initializing tasks: {ex.Message}")
+                Console.WriteLine(String.Format(English.msgAdDetectionProbInit, ex.Message))
             End Try
             While DetectionEnabled
                 Try
@@ -153,7 +154,7 @@ Namespace Utilities
                         NotifyModules()
                     End If
                 Catch ex As Exception
-                    Console.WriteLine($"Warning: Ad Detection: Unexpected Exception: {ex.Message}")
+                    Console.WriteLine(String.Format(English.msgAdDetectionException,ex.Message))
                 End Try
             End While
         End Sub
@@ -178,6 +179,7 @@ Namespace Utilities
 
                 _settings.EnabledSpotifyForceToOpen = form.chkSpotifyForceToStart.Checked
                 _settings.EnabledSpotifyPlayNextSong = form.chkSpotifyPlayNextSong.Checked
+                _settings.EnabledSpotifyAndAnyMediaPlayer = form.chkSpotifyAnyMediaPlayer.Checked
 
                 _settings.EnabledObsGameSceneHotKey.Key = form.txtGameKey.Text
                 _settings.EnabledObsGameSceneHotKey.Ctrl = form.chkGameCtrl.Checked

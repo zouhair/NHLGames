@@ -200,6 +200,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à With another media player.
+        '''</summary>
+        Friend Shared ReadOnly Property chkSpotifyAnyMediaPlayer() As String
+            Get
+                Return ResourceManager.GetString("chkSpotifyAnyMediaPlayer", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Force to start.
         '''</summary>
         Friend Shared ReadOnly Property chkSpotifyForceToStart() As String
@@ -893,6 +902,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Warning: Ad Detection: Unexpected Exception: {0}.
+        '''</summary>
+        Friend Shared ReadOnly Property msgAdDetectionException() As String
+            Get
+                Return ResourceManager.GetString("msgAdDetectionException", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Warning: Ad Detection: Problem initializing tasks: {0}.
+        '''</summary>
+        Friend Shared ReadOnly Property msgAdDetectionProbInit() As String
+            Get
+                Return ResourceManager.GetString("msgAdDetectionProbInit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Add our server to your hosts file.
         '''</summary>
         Friend Shared ReadOnly Property msgAddHost() As String
@@ -1073,6 +1100,42 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Ad.
+        '''</summary>
+        Friend Shared ReadOnly Property msgObsAdWord() As String
+            Get
+                Return ResourceManager.GetString("msgObsAdWord", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Ad Detection: OBS is changing to {0} scene.
+        '''</summary>
+        Friend Shared ReadOnly Property msgObsChangingScene() As String
+            Get
+                Return ResourceManager.GetString("msgObsChangingScene", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Game.
+        '''</summary>
+        Friend Shared ReadOnly Property msgObsGameWord() As String
+            Get
+                Return ResourceManager.GetString("msgObsGameWord", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Warning: Ad Detection: OBS {0} scene hotkey not set.
+        '''</summary>
+        Friend Shared ReadOnly Property msgObsHotkeyNotSet() As String
+            Get
+                Return ResourceManager.GetString("msgObsHotkeyNotSet", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à OFF.
         '''</summary>
         Friend Shared ReadOnly Property msgOff() As String
@@ -1150,6 +1213,51 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgSettingUpdated() As String
             Get
                 Return ResourceManager.GetString("msgSettingUpdated", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Warning: Ad Detection: Can&apos;t start Spotify: {0}.
+        '''</summary>
+        Friend Shared ReadOnly Property msgSpotifyCantStart() As String
+            Get
+                Return ResourceManager.GetString("msgSpotifyCantStart", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Warning: Ad Detection: Unexpected exception connecting to Spotify: {0}.
+        '''</summary>
+        Friend Shared ReadOnly Property msgSpotifyException() As String
+            Get
+                Return ResourceManager.GetString("msgSpotifyException", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Ad Detection: Spotify is not installed.
+        '''</summary>
+        Friend Shared ReadOnly Property msgSpotifyIsntInstalled() As String
+            Get
+                Return ResourceManager.GetString("msgSpotifyIsntInstalled", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Ad Detection: Spotify didn&apos;t connect in time, try again..
+        '''</summary>
+        Friend Shared ReadOnly Property msgSpotifyNotConnected() As String
+            Get
+                Return ResourceManager.GetString("msgSpotifyNotConnected", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Ad Detection: Spotify isn&apos;t running. Trying to start it....
+        '''</summary>
+        Friend Shared ReadOnly Property msgSpotifyNotRunning() As String
+            Get
+                Return ResourceManager.GetString("msgSpotifyNotRunning", resourceCulture)
             End Get
         End Property
         

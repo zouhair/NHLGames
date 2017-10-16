@@ -2,7 +2,6 @@
 Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Resources
-Imports System.Runtime.InteropServices
 Imports MetroFramework.Controls
 Imports NHLGames.Controls
 Imports NHLGames.My.Resources
@@ -32,25 +31,6 @@ Public Class NHLGamesMetro
     Public Shared LstThreads As List(Of Thread) = New List(Of Thread)()
     Public Shared FormLoaded As Boolean = False
     Private Shared _adDetectionEngine As AdDetection
-
-    <DllImport("user32.dll")>
-    Public Shared Function ReleaseCapture() As Boolean
-    End Function
-
-    <DllImport("user32.dll")>
-    Public Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Integer
-    End Function
-#Disable Warning InconsistentNaming
-    Private Const WM_NCLBUTTONDOWN As Integer = &HA1
-    Private Const HTBOTTOM As Integer = 15
-    Private Const HTBOTTOMLEFT As Integer = 16
-    Private Const HTBOTTOMRIGHT As Integer = 17
-    Private Const HTLEFT As Integer = 10
-    Private Const HTRIGHT As Integer = 11
-    Private Const HTTOP As Integer = 12
-    Private Const HTTOPLEFT As Integer = 13
-    Private Const HTTOPRIGHT As Integer = 14
-#Enable Warning InconsistentNaming
 
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
     Public Shared Sub Main()
@@ -375,28 +355,28 @@ Public Class NHLGamesMetro
         _resizeDirection = -1
         If e.Location.X < ResizeBorderWidth And e.Location.Y < ResizeBorderWidth Then
             Cursor = Cursors.SizeNWSE
-            _resizeDirection = HTTOPLEFT
+            _resizeDirection = WindowsCode.HTTOPLEFT
         ElseIf e.Location.X < ResizeBorderWidth And e.Location.Y > Height - ResizeBorderWidth Then
             Cursor = Cursors.SizeNESW
-            _resizeDirection = HTBOTTOMLEFT
+            _resizeDirection = WindowsCode.HTBOTTOMLEFT
         ElseIf e.Location.X > Width - ResizeBorderWidth And e.Location.Y > Height - ResizeBorderWidth Then
             Cursor = Cursors.SizeNWSE
-            _resizeDirection = HTBOTTOMRIGHT
+            _resizeDirection = WindowsCode.HTBOTTOMRIGHT
         ElseIf e.Location.X > Width - ResizeBorderWidth And e.Location.Y < ResizeBorderWidth Then
             Cursor = Cursors.SizeNESW
-            _resizeDirection = HTTOPRIGHT
+            _resizeDirection = WindowsCode.HTTOPRIGHT
         ElseIf e.Location.X < ResizeBorderWidth Then
             Cursor = Cursors.SizeWE
-            _resizeDirection = HTLEFT
+            _resizeDirection = WindowsCode.HTLEFT
         ElseIf e.Location.X > Width - ResizeBorderWidth Then
             Cursor = Cursors.SizeWE
-            _resizeDirection = HTRIGHT
+            _resizeDirection = WindowsCode.HTRIGHT
         ElseIf e.Location.Y < ResizeBorderWidth Then
             Cursor = Cursors.SizeNS
-            _resizeDirection = HTTOP
+            _resizeDirection = WindowsCode.HTTOP
         ElseIf e.Location.Y > Height - ResizeBorderWidth Then
             Cursor = Cursors.SizeNS
-            _resizeDirection = HTBOTTOM
+            _resizeDirection = WindowsCode.HTBOTTOM
         Else
             Cursor = Cursors.Default
         End If
@@ -410,8 +390,8 @@ Public Class NHLGamesMetro
 
     Private Sub ResizeForm()
         If _resizeDirection <> -1 Then
-            ReleaseCapture()
-            SendMessage(Handle, WM_NCLBUTTONDOWN, _resizeDirection, 0)
+            WindowsEvents.ReleaseCapture()
+            WindowsEvents.SendMessage(Handle, WindowsCode.WM_NCLBUTTONDOWN, _resizeDirection, 0)
         End If
     End Sub
 
@@ -496,7 +476,28 @@ Public Class NHLGamesMetro
 
     Private Sub tgOBS_CheckedChanged(sender As Object, e As EventArgs) Handles tgOBS.CheckedChanged  
         Dim tg As MetroToggle = sender
+        Dim obs As New Obs
+
         tlpOBSSettings.Enabled = Not tg.Checked
+
+        If tg.Checked Then
+            obs.HotkeyAd.Key = txtAdKey.Text
+            obs.HotkeyAd.Ctrl = chkAdCtrl.Checked
+            obs.HotkeyAd.Alt = chkAdAlt.Checked
+            obs.HotkeyAd.Shift = chkAdShift.Checked
+
+            obs.HotkeyGame.Key = txtGameKey.Text
+            obs.HotkeyGame.Ctrl = chkGameCtrl.Checked
+            obs.HotkeyGame.Alt = chkGameAlt.Checked
+            obs.HotkeyGame.Shift = chkGameShift.Checked
+
+            _adDetectionEngine.AddModule(obs)
+        Else 
+            If _adDetectionEngine.IsInAdModulesList(obs.Title) Then
+                _adDetectionEngine.RemoveModule(obs.Title)
+            End If
+        End If
+
         AdDetection.Renew()
         _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblOBS.Text), 
                                        if(tgOBS.Checked, English.msgOn, English.msgOff))
@@ -511,6 +512,7 @@ Public Class NHLGamesMetro
         If tg.Checked Then
             spotify.ForceToOpen = chkSpotifyForceToStart.Checked
             spotify.PlayNextSong = chkSpotifyPlayNextSong.Checked
+            spotify.AnyMediaPlayer = chkSpotifyAnyMediaPlayer.Checked
             _adDetectionEngine.AddModule(spotify)
         Else 
             If _adDetectionEngine.IsInAdModulesList(spotify.Title) Then
@@ -550,7 +552,7 @@ Public Class NHLGamesMetro
 
     Private Sub cbStreamQuality_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbStreamQuality.SelectedIndexChanged
         Player.RenewArgs()
-        _writeToConsoleSettingsChanged(lblQuality.Text, cbStreamQuality.SelectedText)
+        _writeToConsoleSettingsChanged(lblQuality.Text, cbStreamQuality.SelectedItem)
         tlpSettings.Focus()
     End Sub
 
@@ -561,4 +563,5 @@ Public Class NHLGamesMetro
     Private Sub txtAdKey_TextChanged(sender As Object, e As EventArgs) Handles txtAdKey.TextChanged
         txtAdKey.Text = txtAdKey.Text.ToUpper()
     End Sub
+
 End Class
