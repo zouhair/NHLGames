@@ -337,7 +337,7 @@ NHLGames use also these NuGet packages:
 - NAudio by [Mark Heath](/markheath)
 
 If you want to contribute :
-- Fork the project and submit a pull request to `NHLGames\master` branch.
 - Open an issue and tell us what's wrong with NHLGames.
+- Fork the project and submit a pull request to `NHLGames\master` branch.
 
 Thanks to our [contributors](https://github.com/NHLGames/NHLGames/graphs/contributors)
