@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Text.RegularExpressions
 Imports NHLGames.My.Resources
 
 Namespace Utilities
@@ -19,6 +20,7 @@ Namespace Utilities
             
         Public Overrides Sub WriteLine(value As String)
             Dim lastError As String = Nothing
+            Dim regex As New Regex($"\[cli\](\[(.*?)\])?")
             MyBase.WriteLine(value)
 
             _output.BeginInvoke(
@@ -35,8 +37,8 @@ Namespace Utilities
                             startIndex = _output.TextLength
                             length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
                             _output.AppendText(vbCr)
-                        ElseIf value.IndexOf(English.errorCliStreamer, StringComparison.Ordinal) = 0 Then
-                            value = English.msgStreamer & value.Remove(0, 11)
+                        ElseIf value.ToLower().IndexOf(English.errorCliStreamer, StringComparison.Ordinal) = 0 Then
+                            value = English.msgStreamer & regex.Replace(value, String.Empty)
                             type = OutputType.Cli
                             startIndex = _output.TextLength
                             length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2

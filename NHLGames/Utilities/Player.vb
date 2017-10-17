@@ -59,7 +59,7 @@ Namespace Utilities
 
                 While (procStreaming.StandardOutput.EndOfStream = False)
                     Dim line = procStreaming.StandardOutput.ReadLine()
-                    If line.Contains(lstLines(0)) Or line.ToLower().Contains(Http) Then
+                    If line.ToLower().Contains(Http) Then
                         line = line.Substring(0, line.ToLower().IndexOf(Http, StringComparison.Ordinal)) & English.msgCensoredStream
                     End If
                     If lstLines.Any(Function(x) line.Contains(x)) Then
