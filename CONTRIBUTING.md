@@ -36,3 +36,8 @@ Translate
 
 Help us to translate the app by translating the file using Visual Studio, located in:   
 `NHLGames\NHLGames\res\EnglishTemplate.resx`
+
+Contributors
+------------
+
+Thanks to our [contributors](https://github.com/NHLGames/NHLGames/graphs/contributors)
