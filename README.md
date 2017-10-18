@@ -341,4 +341,4 @@ Thanks to our [contributors](https://github.com/NHLGames/NHLGames/graphs/contrib
 
 # /_Download_
 
-### Windows: [Lastest release](/NHLGames/NHLGames/releases)
+### Windows: [Lastest release](https://github.com/NHLGames/NHLGames/releases)
