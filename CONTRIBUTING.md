@@ -1,13 +1,32 @@
-# Contribute
-NHLGames is written in Visual Basic. Ad Detection modules are written in C#. We use Visual Studio to code. 
+Contributing to NHLGames
+========================
 
-If you want to contribute :
-- Fork the project and submit a pull request to `NHLGames\master` branch.
-- Open an issue and tell us what's wrong with NHLGames.
+NHLGames is coded in VB.NET using Visual Studio and .Net Framework 4.5.
 
-NHLGames use also these NuGet packages:
-- MetroModernUI
-- CSCore
-- Newtonsoft JSON .NET
-- Prism.Core
-- SpotifyAPI-NET
+Documentation
+-------------
+
+Submit a pull request if the documentation is incomplete, has mistakes or is outdated.
+
+Issues
+------
+
+Feel free to submit issues and enhancement requests.
+
+Translate
+---------
+
+Help us to translate the app by translating the file using Visual Studio, located in: `NHLGames\NHLGames\res\EnglishTemplate.resx`
+
+Contributing
+------------
+
+In general, we follow the "fork-and-pull" Git workflow.
+
+ 1. **Fork** the repo on GitHub
+ 2. **Clone** the project to your own machine
+ 3. **Commit** changes to your own branch
+ 4. **Push** your work back up to your fork
+ 5. Submit a **Pull request** so that we can review your changes
+
+NOTE: Avoid any merge conflicts by merging the latest from "upstream" before making a pull request!
