@@ -327,8 +327,6 @@ NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps 
 
 <img src="https://cloud.githubusercontent.com/assets/23088305/25556617/a6caab1e-2ccd-11e7-89d3-c9177a997ed1.png" width="300"/>
 
-___
-
 # /_Contribute_
 NHLGames is coded in VB.NET using Visual Studio and .Net Framework 4.5.     
 
@@ -340,3 +338,7 @@ Dependencies:
 If you want to contribute : [Follow the guidelines](CONTRIBUTING.md)
 
 Thanks to our [contributors](https://github.com/NHLGames/NHLGames/graphs/contributors)
+
+# /_Download_
+
+### Windows: [Lastest release](/NHLGames/NHLGames/releases)
