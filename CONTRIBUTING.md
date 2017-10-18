@@ -1,22 +1,17 @@
 Contributing to NHLGames
 ========================
 
-NHLGames is coded in VB.NET using Visual Studio and .Net Framework 4.5.
+NHLGames is coded in VB.NET using Visual Studio and .Net Framework 4.5.     
 
-Documentation
--------------
-
-Submit a pull request if the documentation is incomplete, has mistakes or is outdated.
+Dependencies:
+- MetroModernUI by [Dennis Magno](/dennismagno)
+- Newtonsoft.Json by [James Newton-King](/JamesNK)
+- NAudio by [Mark Heath](/markheath)
 
 Issues
 ------
 
 Feel free to submit issues and enhancement requests.
-
-Translate
----------
-
-Help us to translate the app by translating the file using Visual Studio, located in: `NHLGames\NHLGames\res\EnglishTemplate.resx`
 
 Pull request
 ------------
@@ -29,4 +24,15 @@ In general, we follow the "fork-and-pull" Git workflow.
  4. **Push** your work back up to your fork
  5. Submit a **Pull request** so that we can review your changes
 
-NOTE: Avoid any merge conflicts by merging the latest from "upstream" before making a pull request!
+> Avoid any merge conflicts by merging the latest from "upstream" before making a pull request!
+
+Documentation
+-------------
+
+Submit a pull request if the documentation is incomplete, has mistakes or is outdated.
+
+Translate
+---------
+
+Help us to translate the app by translating the file using Visual Studio, located in:   
+`NHLGames\NHLGames\res\EnglishTemplate.resx`
