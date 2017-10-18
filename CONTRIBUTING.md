@@ -18,7 +18,7 @@ Translate
 
 Help us to translate the app by translating the file using Visual Studio, located in: `NHLGames\NHLGames\res\EnglishTemplate.resx`
 
-Coding
+Pull request
 ------------
 
 In general, we follow the "fork-and-pull" Git workflow.
