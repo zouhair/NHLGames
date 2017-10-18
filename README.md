@@ -1,5 +1,6 @@
 # NHLGames
-Tool to watch NHL games in High Definition    
+Tool to watch NHL games in High Definition      
+
 Choose a date.    
 Choose a game.    
 Choose a stream.    
