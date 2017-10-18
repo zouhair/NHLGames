@@ -1,9 +1,9 @@
 # NHLGames
-Tool to watch NHL games in High Definition   
-> Choose a date.    
-> Choose a game.    
-> Choose a stream.    
-> Enjoy!
+Tool to watch NHL games in High Definition    
+Choose a date.    
+Choose a game.    
+Choose a stream.    
+Enjoy!
 
 ![image](https://user-images.githubusercontent.com/23088305/30517831-7276e442-9b39-11e7-8faa-e8960df24e8c.png)
 
@@ -43,6 +43,7 @@ Tool to watch NHL games in High Definition
     * [Hosts file issues](#hosts-file-issues)
 * [Chromecast](#chromecast)
 * [Contribute](#contribute)
+* [Download](#download)
 
 ___
 
@@ -329,15 +330,13 @@ NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps 
 ___
 
 # /_Contribute_
-NHLGames is written in Visual Basic. We use Visual Studio to code. 
+NHLGames is coded in VB.NET using Visual Studio and .Net Framework 4.5.     
 
-NHLGames use also these NuGet packages:
+Dependencies:
 - MetroModernUI by [Dennis Magno](/dennismagno)
 - Newtonsoft.Json by [James Newton-King](/JamesNK)
 - NAudio by [Mark Heath](/markheath)
 
-If you want to contribute :
-- Open an issue and tell us what's wrong with NHLGames.
-- Fork the project and submit a pull request to `NHLGames\master` branch.
+If you want to contribute : [Follow the guidelines](CONTRIBUTING.md)
 
 Thanks to our [contributors](https://github.com/NHLGames/NHLGames/graphs/contributors)
