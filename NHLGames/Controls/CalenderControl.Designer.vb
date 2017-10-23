@@ -101,7 +101,7 @@
         'Su1
         '
         Me.Su1.BackColor = System.Drawing.Color.White
-        Me.Su1.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Su1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Su1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Su1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Su1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -110,13 +110,12 @@
         Me.Su1.Name = "Su1"
         Me.Su1.Size = New System.Drawing.Size(34, 26)
         Me.Su1.TabIndex = 9
-        Me.Su1.Text = "00"
         Me.Su1.UseVisualStyleBackColor = false
         '
         'Mo1
         '
         Me.Mo1.BackColor = System.Drawing.Color.White
-        Me.Mo1.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Mo1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Mo1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Mo1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Mo1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -125,13 +124,12 @@
         Me.Mo1.Name = "Mo1"
         Me.Mo1.Size = New System.Drawing.Size(34, 26)
         Me.Mo1.TabIndex = 10
-        Me.Mo1.Text = "00"
         Me.Mo1.UseVisualStyleBackColor = false
         '
         'Tu1
         '
         Me.Tu1.BackColor = System.Drawing.Color.White
-        Me.Tu1.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Tu1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Tu1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Tu1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Tu1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -140,13 +138,12 @@
         Me.Tu1.Name = "Tu1"
         Me.Tu1.Size = New System.Drawing.Size(34, 26)
         Me.Tu1.TabIndex = 11
-        Me.Tu1.Text = "00"
         Me.Tu1.UseVisualStyleBackColor = false
         '
         'We1
         '
         Me.We1.BackColor = System.Drawing.Color.White
-        Me.We1.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.We1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.We1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.We1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.We1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -155,13 +152,12 @@
         Me.We1.Name = "We1"
         Me.We1.Size = New System.Drawing.Size(34, 26)
         Me.We1.TabIndex = 12
-        Me.We1.Text = "00"
         Me.We1.UseVisualStyleBackColor = false
         '
         'Th1
         '
         Me.Th1.BackColor = System.Drawing.Color.White
-        Me.Th1.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Th1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Th1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Th1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Th1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -170,13 +166,12 @@
         Me.Th1.Name = "Th1"
         Me.Th1.Size = New System.Drawing.Size(34, 26)
         Me.Th1.TabIndex = 13
-        Me.Th1.Text = "00"
         Me.Th1.UseVisualStyleBackColor = false
         '
         'Fr1
         '
         Me.Fr1.BackColor = System.Drawing.Color.White
-        Me.Fr1.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Fr1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Fr1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Fr1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Fr1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -185,13 +180,12 @@
         Me.Fr1.Name = "Fr1"
         Me.Fr1.Size = New System.Drawing.Size(34, 26)
         Me.Fr1.TabIndex = 14
-        Me.Fr1.Text = "00"
         Me.Fr1.UseVisualStyleBackColor = false
         '
         'Sa1
         '
         Me.Sa1.BackColor = System.Drawing.Color.White
-        Me.Sa1.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Sa1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Sa1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Sa1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Sa1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -200,13 +194,12 @@
         Me.Sa1.Name = "Sa1"
         Me.Sa1.Size = New System.Drawing.Size(34, 26)
         Me.Sa1.TabIndex = 15
-        Me.Sa1.Text = "00"
         Me.Sa1.UseVisualStyleBackColor = false
         '
         'Su2
         '
         Me.Su2.BackColor = System.Drawing.Color.White
-        Me.Su2.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Su2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Su2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Su2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Su2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -215,13 +208,12 @@
         Me.Su2.Name = "Su2"
         Me.Su2.Size = New System.Drawing.Size(34, 26)
         Me.Su2.TabIndex = 9
-        Me.Su2.Text = "00"
         Me.Su2.UseVisualStyleBackColor = false
         '
         'Mo2
         '
         Me.Mo2.BackColor = System.Drawing.Color.White
-        Me.Mo2.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Mo2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Mo2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Mo2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Mo2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -230,13 +222,12 @@
         Me.Mo2.Name = "Mo2"
         Me.Mo2.Size = New System.Drawing.Size(34, 26)
         Me.Mo2.TabIndex = 10
-        Me.Mo2.Text = "00"
         Me.Mo2.UseVisualStyleBackColor = false
         '
         'Tu2
         '
         Me.Tu2.BackColor = System.Drawing.Color.White
-        Me.Tu2.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Tu2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Tu2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Tu2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Tu2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -245,13 +236,12 @@
         Me.Tu2.Name = "Tu2"
         Me.Tu2.Size = New System.Drawing.Size(34, 26)
         Me.Tu2.TabIndex = 11
-        Me.Tu2.Text = "00"
         Me.Tu2.UseVisualStyleBackColor = false
         '
         'We2
         '
         Me.We2.BackColor = System.Drawing.Color.White
-        Me.We2.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.We2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.We2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.We2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.We2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -260,13 +250,12 @@
         Me.We2.Name = "We2"
         Me.We2.Size = New System.Drawing.Size(34, 26)
         Me.We2.TabIndex = 12
-        Me.We2.Text = "00"
         Me.We2.UseVisualStyleBackColor = false
         '
         'Th2
         '
         Me.Th2.BackColor = System.Drawing.Color.White
-        Me.Th2.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Th2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Th2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Th2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Th2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -275,13 +264,12 @@
         Me.Th2.Name = "Th2"
         Me.Th2.Size = New System.Drawing.Size(34, 26)
         Me.Th2.TabIndex = 13
-        Me.Th2.Text = "00"
         Me.Th2.UseVisualStyleBackColor = false
         '
         'Fr2
         '
         Me.Fr2.BackColor = System.Drawing.Color.White
-        Me.Fr2.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Fr2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Fr2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Fr2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Fr2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -290,13 +278,12 @@
         Me.Fr2.Name = "Fr2"
         Me.Fr2.Size = New System.Drawing.Size(34, 26)
         Me.Fr2.TabIndex = 14
-        Me.Fr2.Text = "00"
         Me.Fr2.UseVisualStyleBackColor = false
         '
         'Sa2
         '
         Me.Sa2.BackColor = System.Drawing.Color.White
-        Me.Sa2.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Sa2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Sa2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Sa2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Sa2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -305,13 +292,12 @@
         Me.Sa2.Name = "Sa2"
         Me.Sa2.Size = New System.Drawing.Size(34, 26)
         Me.Sa2.TabIndex = 15
-        Me.Sa2.Text = "00"
         Me.Sa2.UseVisualStyleBackColor = false
         '
         'Su3
         '
         Me.Su3.BackColor = System.Drawing.Color.White
-        Me.Su3.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Su3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Su3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Su3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Su3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -320,13 +306,12 @@
         Me.Su3.Name = "Su3"
         Me.Su3.Size = New System.Drawing.Size(34, 26)
         Me.Su3.TabIndex = 9
-        Me.Su3.Text = "00"
         Me.Su3.UseVisualStyleBackColor = false
         '
         'Mo3
         '
         Me.Mo3.BackColor = System.Drawing.Color.White
-        Me.Mo3.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Mo3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Mo3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Mo3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Mo3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -335,13 +320,12 @@
         Me.Mo3.Name = "Mo3"
         Me.Mo3.Size = New System.Drawing.Size(34, 26)
         Me.Mo3.TabIndex = 10
-        Me.Mo3.Text = "00"
         Me.Mo3.UseVisualStyleBackColor = false
         '
         'Tu3
         '
         Me.Tu3.BackColor = System.Drawing.Color.White
-        Me.Tu3.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Tu3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Tu3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Tu3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Tu3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -350,13 +334,12 @@
         Me.Tu3.Name = "Tu3"
         Me.Tu3.Size = New System.Drawing.Size(34, 26)
         Me.Tu3.TabIndex = 11
-        Me.Tu3.Text = "00"
         Me.Tu3.UseVisualStyleBackColor = false
         '
         'We3
         '
         Me.We3.BackColor = System.Drawing.Color.White
-        Me.We3.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.We3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.We3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.We3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.We3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -365,13 +348,12 @@
         Me.We3.Name = "We3"
         Me.We3.Size = New System.Drawing.Size(34, 26)
         Me.We3.TabIndex = 12
-        Me.We3.Text = "00"
         Me.We3.UseVisualStyleBackColor = false
         '
         'Th3
         '
         Me.Th3.BackColor = System.Drawing.Color.White
-        Me.Th3.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Th3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Th3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Th3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Th3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -380,13 +362,12 @@
         Me.Th3.Name = "Th3"
         Me.Th3.Size = New System.Drawing.Size(34, 26)
         Me.Th3.TabIndex = 13
-        Me.Th3.Text = "00"
         Me.Th3.UseVisualStyleBackColor = false
         '
         'Fr3
         '
         Me.Fr3.BackColor = System.Drawing.Color.White
-        Me.Fr3.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Fr3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Fr3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Fr3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Fr3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -395,13 +376,12 @@
         Me.Fr3.Name = "Fr3"
         Me.Fr3.Size = New System.Drawing.Size(34, 26)
         Me.Fr3.TabIndex = 14
-        Me.Fr3.Text = "00"
         Me.Fr3.UseVisualStyleBackColor = false
         '
         'Sa3
         '
         Me.Sa3.BackColor = System.Drawing.Color.White
-        Me.Sa3.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Sa3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Sa3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Sa3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Sa3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -410,13 +390,12 @@
         Me.Sa3.Name = "Sa3"
         Me.Sa3.Size = New System.Drawing.Size(34, 26)
         Me.Sa3.TabIndex = 15
-        Me.Sa3.Text = "00"
         Me.Sa3.UseVisualStyleBackColor = false
         '
         'Su4
         '
         Me.Su4.BackColor = System.Drawing.Color.White
-        Me.Su4.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Su4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Su4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Su4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Su4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -425,13 +404,12 @@
         Me.Su4.Name = "Su4"
         Me.Su4.Size = New System.Drawing.Size(34, 26)
         Me.Su4.TabIndex = 9
-        Me.Su4.Text = "00"
         Me.Su4.UseVisualStyleBackColor = false
         '
         'Mo4
         '
         Me.Mo4.BackColor = System.Drawing.Color.White
-        Me.Mo4.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Mo4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Mo4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Mo4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Mo4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -440,13 +418,12 @@
         Me.Mo4.Name = "Mo4"
         Me.Mo4.Size = New System.Drawing.Size(34, 26)
         Me.Mo4.TabIndex = 10
-        Me.Mo4.Text = "00"
         Me.Mo4.UseVisualStyleBackColor = false
         '
         'Tu4
         '
         Me.Tu4.BackColor = System.Drawing.Color.White
-        Me.Tu4.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Tu4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Tu4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Tu4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Tu4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -455,13 +432,12 @@
         Me.Tu4.Name = "Tu4"
         Me.Tu4.Size = New System.Drawing.Size(34, 26)
         Me.Tu4.TabIndex = 11
-        Me.Tu4.Text = "00"
         Me.Tu4.UseVisualStyleBackColor = false
         '
         'We4
         '
         Me.We4.BackColor = System.Drawing.Color.White
-        Me.We4.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.We4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.We4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.We4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.We4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -470,13 +446,12 @@
         Me.We4.Name = "We4"
         Me.We4.Size = New System.Drawing.Size(34, 26)
         Me.We4.TabIndex = 12
-        Me.We4.Text = "00"
         Me.We4.UseVisualStyleBackColor = false
         '
         'Th4
         '
         Me.Th4.BackColor = System.Drawing.Color.White
-        Me.Th4.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Th4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Th4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Th4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Th4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -485,13 +460,12 @@
         Me.Th4.Name = "Th4"
         Me.Th4.Size = New System.Drawing.Size(34, 26)
         Me.Th4.TabIndex = 14
-        Me.Th4.Text = "00"
         Me.Th4.UseVisualStyleBackColor = false
         '
         'Fr4
         '
         Me.Fr4.BackColor = System.Drawing.Color.White
-        Me.Fr4.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Fr4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Fr4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Fr4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Fr4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -500,13 +474,12 @@
         Me.Fr4.Name = "Fr4"
         Me.Fr4.Size = New System.Drawing.Size(34, 26)
         Me.Fr4.TabIndex = 14
-        Me.Fr4.Text = "00"
         Me.Fr4.UseVisualStyleBackColor = false
         '
         'Sa4
         '
         Me.Sa4.BackColor = System.Drawing.Color.White
-        Me.Sa4.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Sa4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Sa4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Sa4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Sa4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -515,13 +488,12 @@
         Me.Sa4.Name = "Sa4"
         Me.Sa4.Size = New System.Drawing.Size(34, 26)
         Me.Sa4.TabIndex = 15
-        Me.Sa4.Text = "00"
         Me.Sa4.UseVisualStyleBackColor = false
         '
         'Su5
         '
         Me.Su5.BackColor = System.Drawing.Color.White
-        Me.Su5.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Su5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Su5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Su5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Su5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -530,13 +502,12 @@
         Me.Su5.Name = "Su5"
         Me.Su5.Size = New System.Drawing.Size(34, 26)
         Me.Su5.TabIndex = 9
-        Me.Su5.Text = "00"
         Me.Su5.UseVisualStyleBackColor = false
         '
         'Mo5
         '
         Me.Mo5.BackColor = System.Drawing.Color.White
-        Me.Mo5.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Mo5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Mo5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Mo5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Mo5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -545,13 +516,12 @@
         Me.Mo5.Name = "Mo5"
         Me.Mo5.Size = New System.Drawing.Size(34, 26)
         Me.Mo5.TabIndex = 10
-        Me.Mo5.Text = "00"
         Me.Mo5.UseVisualStyleBackColor = false
         '
         'Tu5
         '
         Me.Tu5.BackColor = System.Drawing.Color.White
-        Me.Tu5.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Tu5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Tu5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Tu5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Tu5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -560,13 +530,12 @@
         Me.Tu5.Name = "Tu5"
         Me.Tu5.Size = New System.Drawing.Size(34, 26)
         Me.Tu5.TabIndex = 11
-        Me.Tu5.Text = "00"
         Me.Tu5.UseVisualStyleBackColor = false
         '
         'We5
         '
         Me.We5.BackColor = System.Drawing.Color.White
-        Me.We5.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.We5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.We5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.We5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.We5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -575,13 +544,12 @@
         Me.We5.Name = "We5"
         Me.We5.Size = New System.Drawing.Size(34, 26)
         Me.We5.TabIndex = 12
-        Me.We5.Text = "00"
         Me.We5.UseVisualStyleBackColor = false
         '
         'Th5
         '
         Me.Th5.BackColor = System.Drawing.Color.White
-        Me.Th5.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Th5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Th5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Th5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Th5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -590,13 +558,12 @@
         Me.Th5.Name = "Th5"
         Me.Th5.Size = New System.Drawing.Size(34, 26)
         Me.Th5.TabIndex = 14
-        Me.Th5.Text = "00"
         Me.Th5.UseVisualStyleBackColor = false
         '
         'Fr5
         '
         Me.Fr5.BackColor = System.Drawing.Color.White
-        Me.Fr5.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Fr5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Fr5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Fr5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Fr5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -605,13 +572,12 @@
         Me.Fr5.Name = "Fr5"
         Me.Fr5.Size = New System.Drawing.Size(34, 26)
         Me.Fr5.TabIndex = 14
-        Me.Fr5.Text = "00"
         Me.Fr5.UseVisualStyleBackColor = false
         '
         'Sa5
         '
         Me.Sa5.BackColor = System.Drawing.Color.White
-        Me.Sa5.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Sa5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Sa5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Sa5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Sa5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -620,13 +586,12 @@
         Me.Sa5.Name = "Sa5"
         Me.Sa5.Size = New System.Drawing.Size(34, 26)
         Me.Sa5.TabIndex = 15
-        Me.Sa5.Text = "00"
         Me.Sa5.UseVisualStyleBackColor = false
         '
         'Su6
         '
         Me.Su6.BackColor = System.Drawing.Color.White
-        Me.Su6.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Su6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Su6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Su6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Su6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -635,13 +600,12 @@
         Me.Su6.Name = "Su6"
         Me.Su6.Size = New System.Drawing.Size(34, 26)
         Me.Su6.TabIndex = 9
-        Me.Su6.Text = "00"
         Me.Su6.UseVisualStyleBackColor = false
         '
         'Mo6
         '
         Me.Mo6.BackColor = System.Drawing.Color.White
-        Me.Mo6.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Mo6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Mo6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Mo6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Mo6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -650,13 +614,12 @@
         Me.Mo6.Name = "Mo6"
         Me.Mo6.Size = New System.Drawing.Size(34, 26)
         Me.Mo6.TabIndex = 10
-        Me.Mo6.Text = "00"
         Me.Mo6.UseVisualStyleBackColor = false
         '
         'Tu6
         '
         Me.Tu6.BackColor = System.Drawing.Color.White
-        Me.Tu6.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Tu6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Tu6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Tu6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Tu6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -665,13 +628,12 @@
         Me.Tu6.Name = "Tu6"
         Me.Tu6.Size = New System.Drawing.Size(34, 26)
         Me.Tu6.TabIndex = 11
-        Me.Tu6.Text = "00"
         Me.Tu6.UseVisualStyleBackColor = false
         '
         'We6
         '
         Me.We6.BackColor = System.Drawing.Color.White
-        Me.We6.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.We6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.We6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.We6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.We6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -680,13 +642,12 @@
         Me.We6.Name = "We6"
         Me.We6.Size = New System.Drawing.Size(34, 26)
         Me.We6.TabIndex = 12
-        Me.We6.Text = "00"
         Me.We6.UseVisualStyleBackColor = false
         '
         'Th6
         '
         Me.Th6.BackColor = System.Drawing.Color.White
-        Me.Th6.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Th6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Th6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Th6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Th6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -695,13 +656,12 @@
         Me.Th6.Name = "Th6"
         Me.Th6.Size = New System.Drawing.Size(34, 26)
         Me.Th6.TabIndex = 14
-        Me.Th6.Text = "00"
         Me.Th6.UseVisualStyleBackColor = false
         '
         'Fr6
         '
         Me.Fr6.BackColor = System.Drawing.Color.White
-        Me.Fr6.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Fr6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Fr6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Fr6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Fr6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -710,13 +670,12 @@
         Me.Fr6.Name = "Fr6"
         Me.Fr6.Size = New System.Drawing.Size(34, 26)
         Me.Fr6.TabIndex = 14
-        Me.Fr6.Text = "00"
         Me.Fr6.UseVisualStyleBackColor = false
         '
         'Sa6
         '
         Me.Sa6.BackColor = System.Drawing.Color.White
-        Me.Sa6.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.Sa6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer), CType(CType(230,Byte),Integer))
         Me.Sa6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(175,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.Sa6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
         Me.Sa6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -725,7 +684,6 @@
         Me.Sa6.Name = "Sa6"
         Me.Sa6.Size = New System.Drawing.Size(34, 26)
         Me.Sa6.TabIndex = 15
-        Me.Sa6.Text = "00"
         Me.Sa6.UseVisualStyleBackColor = false
         '
         'Label1

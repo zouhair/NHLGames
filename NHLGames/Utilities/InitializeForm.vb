@@ -158,8 +158,8 @@ Namespace Utilities
 
             BindAdDetectionConfigsToForm(adDetectionConfigs)
 
-            Form.lblNoGames.Location = New Point(((Form.flpGames.Width - Form.lblNoGames.Width) / 2),  Form.flpGames.Location.Y + 175)
-            Form.spnLoading.Location = New Point(((Form.flpGames.Width - Form.lblNoGames.Width) / 2) + 42, Form.flpGames.Location.Y + 150)
+            Form.lblNoGames.Location = New Point(((Form.tabGames.Width - Form.lblNoGames.Width) / 2),  Form.tabGames.Height / 2)
+            Form.spnLoading.Location = New Point(((Form.tabGames.Width - Form.lblNoGames.Width) / 2) + 40, (Form.tabGames.Height / 2) - 20)
 
             Form.spnLoading.Value = NHLGamesMetro.ProgressValue
             Form.spnLoading.Maximum = NHLGamesMetro.ProgressMaxValue
