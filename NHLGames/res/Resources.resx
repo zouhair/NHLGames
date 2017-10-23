@@ -175,10 +175,16 @@
   <data name="wleft" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\wleft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="wleftw" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\wleftw.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="wrefresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\wrefresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="wright" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\wright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wrightw" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\wrightw.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

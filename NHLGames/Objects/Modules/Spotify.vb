@@ -25,7 +25,7 @@ Namespace  Objects.Modules
         End Sub
 
         Private Function SpotifyIsRunning() As Boolean
-            Return Process.GetProcessesByName("spotify").Length = 0
+            Return Process.GetProcessesByName("spotify").Length > 0
         End Function
 
         Private Sub RunSpotify()
@@ -57,37 +57,37 @@ Namespace  Objects.Modules
             Return Math.Abs(AdDetection.GetCurrentVolume(_spotifyId)) > 0.0001
         End Function
 
-        Public Async Sub AdEnded() Implements IAdModule.AdEnded
-            If Not _initialized AndAlso SpotifyIsRunning() Then Return
+        Public Sub AdEnded() Implements IAdModule.AdEnded
+            If Not _initialized OrElse _spotifyHandle Is Nothing Then Return
 
             Dim curr? = WindowsEvents.GetForegroundWindow()
             WindowsEvents.SetForegroundWindow(_spotifyHandle)
 
             If PlayNextSong Then
-                Await Task.Delay(100)
+                Task.Delay(100)
                 NextSong()
             End If
 
-            Await Task.Delay(100)
+            Task.Delay(100)
             If SongIsPlaying() Then
                 PlayPause()
-                Await Task.Delay(50)
+                Task.Delay(50)
             End If
 
             PlayPause()
             WindowsEvents.SetForegroundWindow(curr)
         End Sub
 
-        Public Async Sub AdStarted() Implements IAdModule.AdStarted
-            If Not _initialized AndAlso SpotifyIsRunning() Then Return
+        Public Sub AdStarted() Implements IAdModule.AdStarted
+            If Not _initialized OrElse _spotifyHandle Is Nothing Then Return
 
             Dim curr? = WindowsEvents.GetForegroundWindow()
             WindowsEvents.SetForegroundWindow(_spotifyHandle)
-            Await Task.Delay(100)
+            Task.Delay(100)
 
             If SongIsPlaying() Then
                 PlayPause()
-                Await Task.Delay(50)
+                Task.Delay(50)
             End If
 
             PlayPause()
@@ -103,15 +103,7 @@ Namespace  Objects.Modules
 
             ConnectLoop()
 
-            Dim proc = Process.GetProcessesByName("spotify")
-
-            For i As Integer = 0 To proc.Count() - 1
-                If proc(i).MainWindowTitle = "" Then Continue For
-                _spotifyHandle = proc(i).MainWindowHandle
-                _spotifyId = proc(i).Id
-            Next
-
-            If _spotifyHandle Is Nothing Then
+            If _spotifyHandle Is Nothing AndAlso Not _stopIt Then
                 Console.WriteLine(English.msgSpotifyNotConnected)
                 InvokeElement.ModuleSpotifyOff()
             End If
@@ -123,7 +115,7 @@ Namespace  Objects.Modules
             _stopIt = True
         End Sub
 
-        Private Async Sub ConnectLoop()
+        Private Sub ConnectLoop()
             While Not _stopIt
                 Try
                     If ConnectInternal() Then Return
@@ -132,12 +124,12 @@ Namespace  Objects.Modules
                     _stopIt = True
                     InvokeElement.ModuleSpotifyOff
                 End Try
-                Await Task.Delay(_connectSleep)
+                Task.Delay(_connectSleep)
             End While
         End Sub
 
         Private Function ConnectInternal() As Boolean
-            If SpotifyIsRunning() Then
+            If Not SpotifyIsRunning() Then
                 If ForceToOpen Then
                     Console.WriteLine(English.msgSpotifyNotRunning)
                     Try
@@ -146,6 +138,16 @@ Namespace  Objects.Modules
                         Console.WriteLine(String.Format(English.msgSpotifyCantStart, ex.Message))
                     End Try
                 End If
+                Return False
+            End If
+            Dim proc = Process.GetProcessesByName("spotify")
+
+            If _spotifyHandle Is Nothing Then
+                For i As Integer = 0 To proc.Count() - 1
+                    If proc(i).MainWindowTitle = "" Then Continue For
+                    _spotifyHandle = proc(i).MainWindowHandle
+                    _spotifyId = proc(i).Id
+                Next
                 Return False
             End If
             Return True

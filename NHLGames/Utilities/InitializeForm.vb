@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Text.RegularExpressions
 Imports NHLGames.Objects
 Imports NHLGames.Objects.Modules
 
@@ -8,26 +9,23 @@ Namespace Utilities
         Private ReadOnly Shared Form As NHLGamesMetro = NHLGamesMetro.FormInstance
 
         Public Shared Sub VersionCheck()
-            Dim strLatest = Downloader.DownloadApplicationVersion()
-            Dim versionFromSettings = ApplicationSettings.Read(Of String)(SettingsEnum.Version, "")
-
-            If strLatest > versionFromSettings Then
+            Dim latestVersion = Downloader.DownloadApplicationVersion()
+            
+            If latestVersion > My.Application.Info.Version Then
                 Form.lnkDownload.Text = String.Format(
                     NHLGamesMetro.RmText.GetString("msgNewVersionText"), 
-                    strLatest)
+                    latestVersion.ToString())
                 Form.lnkDownload.Width = 700
                 Dim strChangeLog = Downloader.DownloadChangelog()
-                InvokeElement.MsgBoxBlue(String.Format(NHLGamesMetro.RmText.GetString("msgChangeLog"), strLatest, vbCrLf, vbCrLf, strChangeLog),
+                InvokeElement.MsgBoxBlue(String.Format(NHLGamesMetro.RmText.GetString("msgChangeLog"), latestVersion.ToString(), vbCrLf, vbCrLf, strChangeLog),
                                          NHLGamesMetro.RmText.GetString("msgNewVersionAvailable"),
                                          MessageBoxButtons.OK)
             End If
-            Form.lblVersion.Text = String.Format("v{0}.{1}.{2}.{3}", 
-                                                 My.Application.Info.Version.Major, 
-                                                 My.Application.Info.Version.Minor, 
-                                                 My.Application.Info.Version.Build, 
-                                                 My.Application.Info.Version.Revision)
+            Form.lblVersion.Text = String.Format("v {0}.{1}.{2}", My.Application.Info.Version.Major,
+                                                 My.Application.Info.Version.Minor,
+                                                 My.Application.Info.Version.Build)
         End Sub
-
+        
         Public Shared Sub SetLanguage()
             Dim lstHostsFileActions = New String() {
                 NHLGamesMetro.RmText.GetString("cbHostsTest"),

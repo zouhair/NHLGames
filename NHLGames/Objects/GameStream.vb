@@ -8,18 +8,20 @@ Imports NHLGames.Utilities
 Namespace Objects
 
     Public Class GameStream
-
+        Private Const Http = "http"
+        Private Const E404 = "404"
+        Private Const Timeout = 5000
         Public ReadOnly Property Type As StreamType
         Public ReadOnly Property Game As Game
         Public ReadOnly Property IsDefined As Boolean = False
         Public Property IsVod As Boolean = False
         Public ReadOnly Property Network As String
         Public ReadOnly Property PlayBackId As String
-        Public Property GameUrl As String = ""
-        Public Property Vodurl As String = ""
+        Public Property GameUrl As String = String.Empty
+        Public Property Vodurl As String = String.Empty
         Public ReadOnly Property IsAvailable As Boolean
             Get
-                return GameUrl <> ""
+                return GameUrl <> String.Empty
             End Get
         End Property
 
@@ -48,31 +50,41 @@ Namespace Objects
 
 
         Public Sub GetRightGameStream()
-            Dim client = New WebClient()
-            Dim reader As StreamReader
-
-            client.Headers.Set("User-Agent", Common.UserAgent)
+            Dim wr As WebRequest
+            Dim resp As StreamReader
+            
 
             Dim cdn = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs).Cdn.ToString().ToLower()
             Dim address As String = String.Format("http://{0}/m3u8/{1}/{2}{3}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, cdn)
             Dim legacyAddress As String = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId)
 
             Try
-                reader = New StreamReader(client.OpenRead(address))
-                GameUrl = reader.ReadToEnd()
+                wr = WebRequest.Create(address)
+                wr.Timeout = Timeout
+                resp = New StreamReader(wr.GetResponse.GetResponseStream())
+                GameUrl = resp.ReadToEnd()
+                If Not GameUrl.StartsWith(Http) Then
+                    GameUrl = String.Empty
+                End If
+                resp.Close()
             Catch ex As WebException
                 Try
-                    reader = New StreamReader(client.OpenRead(legacyAddress))
-                    GameUrl = reader.ReadToEnd()
+                    wr = WebRequest.Create(legacyAddress)
+                    wr.Timeout = Timeout
+                    resp = New StreamReader(wr.GetResponse.GetResponseStream())
+                    GameUrl = resp.ReadToEnd()
+                    If Not GameUrl.StartsWith(Http) Then
+                        GameUrl = String.Empty
+                    End If
+                    resp.Close()
                 Catch ex2 As Exception 
-                    If Not ex2.Message.Contains("404") Then
+                    If Not ex2.Message.Contains(E404) Then
                         Console.WriteLine(String.Format(NHLGamesMetro.RmText.GetString("errorGeneral"), ex.Message))
                     End If
                 End Try
             Catch ex As Exception
                 Console.WriteLine(String.Format(NHLGamesMetro.RmText.GetString("errorGeneral"), ex.Message))
             Finally
-                client.Dispose()
                 SetVideoOnDemandLink()
             End Try
 

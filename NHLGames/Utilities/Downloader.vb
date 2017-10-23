@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Net
 Imports System.Text
+Imports System.Text.RegularExpressions
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 Imports NHLGames.My.Resources
@@ -15,6 +16,7 @@ Namespace Utilities
         Private Const ScheduleApiurl As String = ApiUrl & "?startDate={0}&endDate={1}&expand=schedule.teams,schedule.linescore,schedule.game.seriesSummary,schedule.game.content.media.epg"
         Private Const AppVersionUrl As String = AppUrl & "static/version.txt"
         Private Const AppChangelogUrl As String = AppUrl & "static/changelog.txt"
+        Private Shared _regex As New Regex("(\d+\.)(\d+\.)?(\d+\.)?(\*|\d+)")
 
         Private Shared Function DownloadContents(server As String, url As String) As String
             Dim client As New WebClient
@@ -30,13 +32,15 @@ Namespace Utilities
             Return content
         End Function
 
-        Public Shared Function DownloadApplicationVersion() As String
+        Public Shared Function DownloadApplicationVersion() As Version
             Dim appVers As String
             appVers = DownloadContents(AppUrl, AppVersionUrl)
             If appVers.Contains("<html>") Then
                 appVers = String.Empty
             End If
-            Return appVers
+            appVers = _regex.Match(appVers).ToString()
+            If appVers = String.Empty Then Return My.Application.Info.Version
+            Return new Version(appVers)
         End Function
 
         Public Shared Function DownloadChangelog() As String

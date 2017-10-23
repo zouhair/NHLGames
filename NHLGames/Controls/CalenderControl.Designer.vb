@@ -67,10 +67,6 @@
         Me.Fr6 = New System.Windows.Forms.Button()
         Me.Sa6 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnBeforeMonth = New System.Windows.Forms.Button()
-        Me.btnBeforeYear = New System.Windows.Forms.Button()
-        Me.btnNextMonth = New System.Windows.Forms.Button()
-        Me.btnNextYear = New System.Windows.Forms.Button()
         Me.lblDate = New MetroFramework.Controls.MetroLabel()
         Me.Sun = New MetroFramework.Controls.MetroLabel()
         Me.Mon = New MetroFramework.Controls.MetroLabel()
@@ -79,13 +75,17 @@
         Me.Thu = New MetroFramework.Controls.MetroLabel()
         Me.Fri = New MetroFramework.Controls.MetroLabel()
         Me.Sat = New MetroFramework.Controls.MetroLabel()
+        Me.btnBeforeMonth = New System.Windows.Forms.Button()
+        Me.btnBeforeYear = New System.Windows.Forms.Button()
+        Me.btnNextMonth = New System.Windows.Forms.Button()
+        Me.btnNextYear = New System.Windows.Forms.Button()
         Me.SuspendLayout
         '
         'lnkToday
         '
         Me.lnkToday.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left)  _
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.lnkToday.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(230,Byte),Integer))
+        Me.lnkToday.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
         Me.lnkToday.FlatAppearance.BorderSize = 0
         Me.lnkToday.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray
         Me.lnkToday.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -732,7 +732,7 @@
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.Label1.BackColor = System.Drawing.Color.DarkGray
+        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label1.ForeColor = System.Drawing.Color.White
         Me.Label1.Location = New System.Drawing.Point(-3, 59)
@@ -741,16 +741,134 @@
         Me.Label1.TabIndex = 20
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'lblDate
+        '
+        Me.lblDate.FontSize = MetroFramework.MetroLabelSize.Tall
+        Me.lblDate.FontWeight = MetroFramework.MetroLabelWeight.Regular
+        Me.lblDate.ForeColor = System.Drawing.Color.DimGray
+        Me.lblDate.Location = New System.Drawing.Point(26, 0)
+        Me.lblDate.Name = "lblDate"
+        Me.lblDate.Size = New System.Drawing.Size(226, 59)
+        Me.lblDate.TabIndex = 21
+        Me.lblDate.Text = "MONTH_YEAR"
+        Me.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblDate.UseCustomForeColor = true
+        '
+        'Sun
+        '
+        Me.Sun.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.Sun.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.Sun.FontWeight = MetroFramework.MetroLabelWeight.Regular
+        Me.Sun.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.Sun.Location = New System.Drawing.Point(6, 59)
+        Me.Sun.Name = "Sun"
+        Me.Sun.Size = New System.Drawing.Size(30, 21)
+        Me.Sun.TabIndex = 22
+        Me.Sun.Text = "Su"
+        Me.Sun.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Sun.UseCustomBackColor = true
+        Me.Sun.UseCustomForeColor = true
+        '
+        'Mon
+        '
+        Me.Mon.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.Mon.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.Mon.FontWeight = MetroFramework.MetroLabelWeight.Regular
+        Me.Mon.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.Mon.Location = New System.Drawing.Point(42, 59)
+        Me.Mon.Name = "Mon"
+        Me.Mon.Size = New System.Drawing.Size(34, 21)
+        Me.Mon.TabIndex = 23
+        Me.Mon.Text = "Mo"
+        Me.Mon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Mon.UseCustomBackColor = true
+        Me.Mon.UseCustomForeColor = true
+        '
+        'Tue
+        '
+        Me.Tue.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.Tue.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.Tue.FontWeight = MetroFramework.MetroLabelWeight.Regular
+        Me.Tue.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.Tue.Location = New System.Drawing.Point(82, 59)
+        Me.Tue.Name = "Tue"
+        Me.Tue.Size = New System.Drawing.Size(34, 21)
+        Me.Tue.TabIndex = 24
+        Me.Tue.Text = "Tu"
+        Me.Tue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Tue.UseCustomBackColor = true
+        Me.Tue.UseCustomForeColor = true
+        '
+        'Wed
+        '
+        Me.Wed.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.Wed.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.Wed.FontWeight = MetroFramework.MetroLabelWeight.Regular
+        Me.Wed.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.Wed.Location = New System.Drawing.Point(122, 59)
+        Me.Wed.Name = "Wed"
+        Me.Wed.Size = New System.Drawing.Size(34, 21)
+        Me.Wed.TabIndex = 25
+        Me.Wed.Text = "We"
+        Me.Wed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Wed.UseCustomBackColor = true
+        Me.Wed.UseCustomForeColor = true
+        '
+        'Thu
+        '
+        Me.Thu.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.Thu.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.Thu.FontWeight = MetroFramework.MetroLabelWeight.Regular
+        Me.Thu.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.Thu.Location = New System.Drawing.Point(162, 59)
+        Me.Thu.Name = "Thu"
+        Me.Thu.Size = New System.Drawing.Size(34, 21)
+        Me.Thu.TabIndex = 26
+        Me.Thu.Text = "Th"
+        Me.Thu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Thu.UseCustomBackColor = true
+        Me.Thu.UseCustomForeColor = true
+        '
+        'Fri
+        '
+        Me.Fri.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.Fri.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.Fri.FontWeight = MetroFramework.MetroLabelWeight.Regular
+        Me.Fri.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.Fri.Location = New System.Drawing.Point(202, 59)
+        Me.Fri.Name = "Fri"
+        Me.Fri.Size = New System.Drawing.Size(34, 21)
+        Me.Fri.TabIndex = 27
+        Me.Fri.Text = "Fr"
+        Me.Fri.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Fri.UseCustomBackColor = true
+        Me.Fri.UseCustomForeColor = true
+        '
+        'Sat
+        '
+        Me.Sat.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.Sat.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.Sat.FontWeight = MetroFramework.MetroLabelWeight.Regular
+        Me.Sat.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.Sat.Location = New System.Drawing.Point(242, 59)
+        Me.Sat.Name = "Sat"
+        Me.Sat.Size = New System.Drawing.Size(34, 21)
+        Me.Sat.TabIndex = 28
+        Me.Sat.Text = "Sa"
+        Me.Sat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Sat.UseCustomBackColor = true
+        Me.Sat.UseCustomForeColor = true
+        '
         'btnBeforeMonth
         '
         Me.btnBeforeMonth.BackColor = System.Drawing.Color.Gray
-        Me.btnBeforeMonth.BackgroundImage = Global.NHLGames.My.Resources.Resources.wleft
+        Me.btnBeforeMonth.BackgroundImage = Global.NHLGames.My.Resources.Resources.wleftw
         Me.btnBeforeMonth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnBeforeMonth.FlatAppearance.BorderColor = System.Drawing.Color.White
         Me.btnBeforeMonth.FlatAppearance.BorderSize = 0
         Me.btnBeforeMonth.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
         Me.btnBeforeMonth.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-        Me.btnBeforeMonth.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(230,Byte),Integer))
+        Me.btnBeforeMonth.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
         Me.btnBeforeMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBeforeMonth.Font = New System.Drawing.Font("Verdana", 20!, System.Drawing.FontStyle.Bold)
         Me.btnBeforeMonth.ForeColor = System.Drawing.Color.DimGray
@@ -769,7 +887,7 @@
         Me.btnBeforeYear.FlatAppearance.BorderSize = 0
         Me.btnBeforeYear.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
         Me.btnBeforeYear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-        Me.btnBeforeYear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(230,Byte),Integer))
+        Me.btnBeforeYear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
         Me.btnBeforeYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBeforeYear.Font = New System.Drawing.Font("Verdana", 7!)
         Me.btnBeforeYear.ForeColor = System.Drawing.Color.DimGray
@@ -785,13 +903,13 @@
         Me.btnNextMonth.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnNextMonth.BackColor = System.Drawing.Color.Gray
-        Me.btnNextMonth.BackgroundImage = Global.NHLGames.My.Resources.Resources.wright
+        Me.btnNextMonth.BackgroundImage = Global.NHLGames.My.Resources.Resources.wrightw
         Me.btnNextMonth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnNextMonth.FlatAppearance.BorderColor = System.Drawing.Color.White
         Me.btnNextMonth.FlatAppearance.BorderSize = 0
         Me.btnNextMonth.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
         Me.btnNextMonth.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-        Me.btnNextMonth.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(230,Byte),Integer))
+        Me.btnNextMonth.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
         Me.btnNextMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNextMonth.Font = New System.Drawing.Font("Verdana", 20!, System.Drawing.FontStyle.Bold)
         Me.btnNextMonth.ForeColor = System.Drawing.Color.DimGray
@@ -810,7 +928,7 @@
         Me.btnNextYear.FlatAppearance.BorderSize = 0
         Me.btnNextYear.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
         Me.btnNextYear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-        Me.btnNextYear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(230,Byte),Integer))
+        Me.btnNextYear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
         Me.btnNextYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNextYear.Font = New System.Drawing.Font("Verdana", 7!)
         Me.btnNextYear.ForeColor = System.Drawing.Color.DimGray
@@ -820,124 +938,6 @@
         Me.btnNextYear.TabIndex = 18
         Me.btnNextYear.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnNextYear.UseVisualStyleBackColor = false
-        '
-        'lblDate
-        '
-        Me.lblDate.FontSize = MetroFramework.MetroLabelSize.Tall
-        Me.lblDate.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.lblDate.ForeColor = System.Drawing.Color.DimGray
-        Me.lblDate.Location = New System.Drawing.Point(26, 0)
-        Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(226, 59)
-        Me.lblDate.TabIndex = 21
-        Me.lblDate.Text = "MONTH_YEAR"
-        Me.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.lblDate.UseCustomForeColor = true
-        '
-        'Sun
-        '
-        Me.Sun.BackColor = System.Drawing.Color.DarkGray
-        Me.Sun.FontSize = MetroFramework.MetroLabelSize.Small
-        Me.Sun.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.Sun.ForeColor = System.Drawing.Color.White
-        Me.Sun.Location = New System.Drawing.Point(6, 59)
-        Me.Sun.Name = "Sun"
-        Me.Sun.Size = New System.Drawing.Size(30, 21)
-        Me.Sun.TabIndex = 22
-        Me.Sun.Text = "Su"
-        Me.Sun.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.Sun.UseCustomBackColor = true
-        Me.Sun.UseCustomForeColor = true
-        '
-        'Mon
-        '
-        Me.Mon.BackColor = System.Drawing.Color.DarkGray
-        Me.Mon.FontSize = MetroFramework.MetroLabelSize.Small
-        Me.Mon.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.Mon.ForeColor = System.Drawing.Color.White
-        Me.Mon.Location = New System.Drawing.Point(42, 59)
-        Me.Mon.Name = "Mon"
-        Me.Mon.Size = New System.Drawing.Size(34, 21)
-        Me.Mon.TabIndex = 23
-        Me.Mon.Text = "Mo"
-        Me.Mon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.Mon.UseCustomBackColor = true
-        Me.Mon.UseCustomForeColor = true
-        '
-        'Tue
-        '
-        Me.Tue.BackColor = System.Drawing.Color.DarkGray
-        Me.Tue.FontSize = MetroFramework.MetroLabelSize.Small
-        Me.Tue.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.Tue.ForeColor = System.Drawing.Color.White
-        Me.Tue.Location = New System.Drawing.Point(82, 59)
-        Me.Tue.Name = "Tue"
-        Me.Tue.Size = New System.Drawing.Size(34, 21)
-        Me.Tue.TabIndex = 24
-        Me.Tue.Text = "Tu"
-        Me.Tue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.Tue.UseCustomBackColor = true
-        Me.Tue.UseCustomForeColor = true
-        '
-        'Wed
-        '
-        Me.Wed.BackColor = System.Drawing.Color.DarkGray
-        Me.Wed.FontSize = MetroFramework.MetroLabelSize.Small
-        Me.Wed.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.Wed.ForeColor = System.Drawing.Color.White
-        Me.Wed.Location = New System.Drawing.Point(122, 59)
-        Me.Wed.Name = "Wed"
-        Me.Wed.Size = New System.Drawing.Size(34, 21)
-        Me.Wed.TabIndex = 25
-        Me.Wed.Text = "We"
-        Me.Wed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.Wed.UseCustomBackColor = true
-        Me.Wed.UseCustomForeColor = true
-        '
-        'Thu
-        '
-        Me.Thu.BackColor = System.Drawing.Color.DarkGray
-        Me.Thu.FontSize = MetroFramework.MetroLabelSize.Small
-        Me.Thu.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.Thu.ForeColor = System.Drawing.Color.White
-        Me.Thu.Location = New System.Drawing.Point(162, 59)
-        Me.Thu.Name = "Thu"
-        Me.Thu.Size = New System.Drawing.Size(34, 21)
-        Me.Thu.TabIndex = 26
-        Me.Thu.Text = "Th"
-        Me.Thu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.Thu.UseCustomBackColor = true
-        Me.Thu.UseCustomForeColor = true
-        '
-        'Fri
-        '
-        Me.Fri.BackColor = System.Drawing.Color.DarkGray
-        Me.Fri.FontSize = MetroFramework.MetroLabelSize.Small
-        Me.Fri.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.Fri.ForeColor = System.Drawing.Color.White
-        Me.Fri.Location = New System.Drawing.Point(202, 59)
-        Me.Fri.Name = "Fri"
-        Me.Fri.Size = New System.Drawing.Size(34, 21)
-        Me.Fri.TabIndex = 27
-        Me.Fri.Text = "Fr"
-        Me.Fri.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.Fri.UseCustomBackColor = true
-        Me.Fri.UseCustomForeColor = true
-        '
-        'Sat
-        '
-        Me.Sat.BackColor = System.Drawing.Color.DarkGray
-        Me.Sat.FontSize = MetroFramework.MetroLabelSize.Small
-        Me.Sat.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.Sat.ForeColor = System.Drawing.Color.White
-        Me.Sat.Location = New System.Drawing.Point(242, 59)
-        Me.Sat.Name = "Sat"
-        Me.Sat.Size = New System.Drawing.Size(34, 21)
-        Me.Sat.TabIndex = 28
-        Me.Sat.Text = "Sa"
-        Me.Sat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.Sat.UseCustomBackColor = true
-        Me.Sat.UseCustomForeColor = true
         '
         'CalenderControl
         '

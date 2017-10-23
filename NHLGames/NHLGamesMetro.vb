@@ -25,7 +25,7 @@ Public Class NHLGamesMetro
     Public Shared DownloadLink As String = "https://www.reddit.com/r/nhl_games/"
     Public Shared GameDate As Date = DateHelper.GetPacificTime()
     Private _resizeDirection As Integer = -1
-    Private Const ResizeBorderWidth As Integer = 3
+    Private Const ResizeBorderWidth As Integer = 8
     Public Shared RmText As ResourceManager = English.ResourceManager
     Public LstGameControls As List(Of GameControl) = New List(Of GameControl)
     Public Shared LstThreads As List(Of Thread) = New List(Of Thread)()

@@ -41,7 +41,7 @@ Namespace Objects.Modules
             Switching(HotkeyAd, IsHotkeyAdSet, IsHotkeyAdHasSpecialKeys, English.msgObsAdWord)
         End Sub
 
-        Private Async Sub Switching(hotkey As Hotkey, isHotkeySet As Boolean, specialKey As Boolean, scene As String)
+        Private Sub Switching(hotkey As Hotkey, isHotkeySet As Boolean, specialKey As Boolean, scene As String)
             If Not isHotkeySet Then
                 Console.WriteLine(String.Format(English.msgObsHotkeyNotSet, scene))
                 Return
@@ -74,7 +74,7 @@ Namespace Objects.Modules
                 Dim curr? = WindowsEvents.GetForegroundWindow()
                 Console.WriteLine(String.Format(English.msgObsChangingScene, scene))
                 WindowsEvents.SetForegroundWindow(_obsHandle)
-                Await Task.Delay(100)
+                Task.Delay(100)
                 SendKeys.SendWait(toSend)
                 WindowsEvents.SetForegroundWindow(curr)
             End If

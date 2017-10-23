@@ -28,6 +28,7 @@
     <ApplicationVersion>1.0.0.1</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <AppDesignerFolder>res</AppDesignerFolder>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -343,6 +344,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Objects\Modules\IAdModule.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\wrightw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\wleftw.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
