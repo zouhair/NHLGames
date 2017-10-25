@@ -211,7 +211,7 @@ Partial Class NHLGamesMetro
         Me.tabMenu.Location = New System.Drawing.Point(-1, 60)
         Me.tabMenu.Margin = New System.Windows.Forms.Padding(0)
         Me.tabMenu.Name = "tabMenu"
-        Me.tabMenu.SelectedIndex = 1
+        Me.tabMenu.SelectedIndex = 0
         Me.tabMenu.Size = New System.Drawing.Size(992, 505)
         Me.tabMenu.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabMenu.Style = MetroFramework.MetroColorStyle.Blue
@@ -312,7 +312,7 @@ Partial Class NHLGamesMetro
         Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
         Me.btnRefresh.BackgroundImage = Global.NHLGames.My.Resources.Resources.wrefresh
         Me.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
+        Me.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.btnRefresh.FlatAppearance.BorderSize = 0
         Me.btnRefresh.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
         Me.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
@@ -332,7 +332,7 @@ Partial Class NHLGamesMetro
         Me.btnYesterday.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
         Me.btnYesterday.BackgroundImage = Global.NHLGames.My.Resources.Resources.wleft
         Me.btnYesterday.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnYesterday.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
+        Me.btnYesterday.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.btnYesterday.FlatAppearance.BorderSize = 0
         Me.btnYesterday.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
         Me.btnYesterday.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
@@ -349,7 +349,7 @@ Partial Class NHLGamesMetro
         Me.btnTomorrow.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
         Me.btnTomorrow.BackgroundImage = Global.NHLGames.My.Resources.Resources.wright
         Me.btnTomorrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnTomorrow.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
+        Me.btnTomorrow.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.btnTomorrow.FlatAppearance.BorderSize = 0
         Me.btnTomorrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
         Me.btnTomorrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
@@ -366,7 +366,7 @@ Partial Class NHLGamesMetro
         Me.btnDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
         Me.btnDate.BackgroundImage = Global.NHLGames.My.Resources.Resources.wdate
         Me.btnDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnDate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
+        Me.btnDate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.btnDate.FlatAppearance.BorderSize = 0
         Me.btnDate.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
         Me.btnDate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
