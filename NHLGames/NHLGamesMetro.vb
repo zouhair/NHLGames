@@ -563,5 +563,4 @@ Public Class NHLGamesMetro
     Private Sub txtAdKey_TextChanged(sender As Object, e As EventArgs) Handles txtAdKey.TextChanged
         txtAdKey.Text = txtAdKey.Text.ToUpper()
     End Sub
-
 End Class

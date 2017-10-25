@@ -690,7 +690,7 @@
     <comment>Console / Writer</comment>
   </data>
   <data name="chkSpotifyAnyMediaPlayer" xml:space="preserve">
-    <value>With another media player</value>
+    <value>Try with the detected media player</value>
     <comment>Settings tab</comment>
   </data>
   <data name="msgAdDetectionException" xml:space="preserve">

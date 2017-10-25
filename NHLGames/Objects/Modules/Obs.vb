@@ -74,7 +74,7 @@ Namespace Objects.Modules
                 Dim curr? = WindowsEvents.GetForegroundWindow()
                 Console.WriteLine(String.Format(English.msgObsChangingScene, scene))
                 WindowsEvents.SetForegroundWindow(_obsHandle)
-                Task.Delay(100)
+                Threading.Thread.Sleep(100)
                 SendKeys.SendWait(toSend)
                 WindowsEvents.SetForegroundWindow(curr)
             End If

@@ -200,7 +200,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à With another media player.
+        '''  Recherche une chaîne localisée semblable à Try with the detected media player.
         '''</summary>
         Friend Shared ReadOnly Property chkSpotifyAnyMediaPlayer() As String
             Get

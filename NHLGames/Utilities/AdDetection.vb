@@ -55,7 +55,7 @@ Namespace Utilities
             Next
 
             For Each process In MediaPlayerProcesses
-                If Math.Abs(GetCurrentVolume(process)) > 0.00001 Then
+                If Math.Abs(GetAverageCurrentVolume(process)) > 0.00001 Then
                     AddOrUpdateLastSoundOccured(process)
                 End If
             Next
@@ -71,17 +71,24 @@ Namespace Utilities
             End If
         End Sub
 
+        Public Shared Function GetAverageCurrentVolume(processId As Integer) As Double
+            Dim volumeList As List(Of Double) = new List(Of Double)
+            For i As Integer = 0 To 2
+                volumeList.Add(GetCurrentVolume(processId))
+                Threading.Thread.Sleep(10)
+            Next
+            Return (volumeList.Item(0) + volumeList.Item(1) + volumeList.Item(2)) / 3.0
+        End Function
+
         Public Shared Function GetCurrentVolume(processId As Integer) As Double
             Dim aMmDevices As New MMDeviceEnumerator()
             Dim defaultAudioEndPointDevice = aMmDevices.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia)
             Dim sessionsDefaultAudioEndPointDevice = defaultAudioEndPointDevice.AudioSessionManager.Sessions
-
             For i As Integer = 0 To sessionsDefaultAudioEndPointDevice.Count - 1
                 If sessionsDefaultAudioEndPointDevice(i).GetProcessID <> processId Then Continue For
                 Dim audioMeter As audioMeterInformation = sessionsDefaultAudioEndPointDevice(i).AudioMeterInformation
                 Return audioMeter.MasterPeakValue
             Next
-
             Return 0.0
         End Function
 

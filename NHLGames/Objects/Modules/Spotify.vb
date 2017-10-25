@@ -54,7 +54,7 @@ Namespace  Objects.Modules
 
         Private Function SongIsPlaying() As Boolean
             If AnyMediaPlayer Then Return False
-            Return Math.Abs(AdDetection.GetCurrentVolume(_spotifyId)) > 0.0001
+            Return Math.Abs(AdDetection.GetAverageCurrentVolume(_spotifyId)) > 0.0001
         End Function
 
         Public Sub AdEnded() Implements IAdModule.AdEnded
@@ -64,14 +64,14 @@ Namespace  Objects.Modules
             WindowsEvents.SetForegroundWindow(_spotifyHandle)
 
             If PlayNextSong Then
-                Task.Delay(100)
+                Threading.Thread.Sleep(100)
                 NextSong()
             End If
 
-            Task.Delay(100)
-            If SongIsPlaying() Then
+            Threading.Thread.Sleep(100)
+            If Not SongIsPlaying() Then
                 PlayPause()
-                Task.Delay(50)
+                Threading.Thread.Sleep(100)
             End If
 
             PlayPause()
@@ -83,11 +83,11 @@ Namespace  Objects.Modules
 
             Dim curr? = WindowsEvents.GetForegroundWindow()
             WindowsEvents.SetForegroundWindow(_spotifyHandle)
-            Task.Delay(100)
+            Threading.Thread.Sleep(100)
 
             If SongIsPlaying() Then
                 PlayPause()
-                Task.Delay(50)
+                Threading.Thread.Sleep(100)
             End If
 
             PlayPause()
