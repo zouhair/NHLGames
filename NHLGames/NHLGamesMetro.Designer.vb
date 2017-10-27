@@ -153,6 +153,7 @@ Partial Class NHLGamesMetro
         Me.folderBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
         Me.tabMenu.SuspendLayout
         Me.tabGames.SuspendLayout
+        Me.MetroPanel1.SuspendLayout
         Me.tabSettings.SuspendLayout
         Me.tlpSettings.SuspendLayout
         Me.tlpOBSSettings.SuspendLayout
@@ -225,10 +226,6 @@ Partial Class NHLGamesMetro
         Me.tabGames.Controls.Add(Me.lblDate)
         Me.tabGames.Controls.Add(Me.lblNoGames)
         Me.tabGames.Controls.Add(Me.flpCalender)
-        Me.tabGames.Controls.Add(Me.btnRefresh)
-        Me.tabGames.Controls.Add(Me.btnYesterday)
-        Me.tabGames.Controls.Add(Me.btnTomorrow)
-        Me.tabGames.Controls.Add(Me.btnDate)
         Me.tabGames.Controls.Add(Me.flpGames)
         Me.tabGames.Controls.Add(Me.MetroPanel1)
         Me.tabGames.Cursor = System.Windows.Forms.Cursors.Default
@@ -269,7 +266,7 @@ Partial Class NHLGamesMetro
         Me.lblDate.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
         Me.lblDate.Location = New System.Drawing.Point(40, 0)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(216, 38)
+        Me.lblDate.Size = New System.Drawing.Size(228, 38)
         Me.lblDate.TabIndex = 28
         Me.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblDate.UseCustomBackColor = true
@@ -321,9 +318,9 @@ Partial Class NHLGamesMetro
         Me.btnRefresh.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnRefresh.Location = New System.Drawing.Point(945, 9)
+        Me.btnRefresh.Location = New System.Drawing.Point(946, 6)
         Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(24, 24)
+        Me.btnRefresh.Size = New System.Drawing.Size(30, 30)
         Me.btnRefresh.TabIndex = 140
         Me.btnRefresh.UseVisualStyleBackColor = false
         '
@@ -338,9 +335,9 @@ Partial Class NHLGamesMetro
         Me.btnYesterday.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
         Me.btnYesterday.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
         Me.btnYesterday.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnYesterday.Location = New System.Drawing.Point(15, 11)
+        Me.btnYesterday.Location = New System.Drawing.Point(9, 7)
         Me.btnYesterday.Name = "btnYesterday"
-        Me.btnYesterday.Size = New System.Drawing.Size(20, 20)
+        Me.btnYesterday.Size = New System.Drawing.Size(25, 25)
         Me.btnYesterday.TabIndex = 110
         Me.btnYesterday.UseVisualStyleBackColor = false
         '
@@ -355,9 +352,9 @@ Partial Class NHLGamesMetro
         Me.btnTomorrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
         Me.btnTomorrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
         Me.btnTomorrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnTomorrow.Location = New System.Drawing.Point(308, 11)
+        Me.btnTomorrow.Location = New System.Drawing.Point(316, 8)
         Me.btnTomorrow.Name = "btnTomorrow"
-        Me.btnTomorrow.Size = New System.Drawing.Size(20, 20)
+        Me.btnTomorrow.Size = New System.Drawing.Size(25, 25)
         Me.btnTomorrow.TabIndex = 130
         Me.btnTomorrow.UseVisualStyleBackColor = false
         '
@@ -374,9 +371,9 @@ Partial Class NHLGamesMetro
         Me.btnDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.btnDate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.btnDate.Location = New System.Drawing.Point(262, 8)
+        Me.btnDate.Location = New System.Drawing.Point(273, 6)
         Me.btnDate.Name = "btnDate"
-        Me.btnDate.Size = New System.Drawing.Size(24, 24)
+        Me.btnDate.Size = New System.Drawing.Size(27, 27)
         Me.btnDate.TabIndex = 120
         Me.btnDate.UseVisualStyleBackColor = false
         '
@@ -401,6 +398,10 @@ Partial Class NHLGamesMetro
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.MetroPanel1.AutoSize = true
         Me.MetroPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.MetroPanel1.Controls.Add(Me.btnTomorrow)
+        Me.MetroPanel1.Controls.Add(Me.btnYesterday)
+        Me.MetroPanel1.Controls.Add(Me.btnDate)
+        Me.MetroPanel1.Controls.Add(Me.btnRefresh)
         Me.MetroPanel1.HorizontalScrollbarBarColor = true
         Me.MetroPanel1.HorizontalScrollbarHighlightOnWheel = false
         Me.MetroPanel1.HorizontalScrollbarSize = 10
@@ -1850,6 +1851,7 @@ Partial Class NHLGamesMetro
         Me.tabMenu.ResumeLayout(false)
         Me.tabGames.ResumeLayout(false)
         Me.tabGames.PerformLayout
+        Me.MetroPanel1.ResumeLayout(false)
         Me.tabSettings.ResumeLayout(false)
         Me.tlpSettings.ResumeLayout(false)
         Me.tlpSettings.PerformLayout

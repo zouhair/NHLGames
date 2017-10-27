@@ -252,10 +252,8 @@ Namespace Utilities
 
         Private Shared Sub BindAdDetectionConfigsToForm(configs As AdDetectionConfigs)
             If configs IsNot Nothing Then
+                
                 form.tgModules.Checked = configs.IsEnabled
-
-                form.tgSpotify.Checked = configs.EnabledSpotifyModule
-                form.tgOBS.Checked = configs.EnabledObsModule
 
                 form.chkSpotifyForceToStart.Checked = configs.EnabledSpotifyForceToOpen
                 form.chkSpotifyPlayNextSong.Checked = configs.EnabledSpotifyPlayNextSong
@@ -270,6 +268,10 @@ Namespace Utilities
                 form.chkGameCtrl.Checked = configs.EnabledObsGameSceneHotKey.Ctrl
                 form.chkGameAlt.Checked = configs.EnabledObsGameSceneHotKey.Alt
                 form.chkGameShift.Checked = configs.EnabledObsGameSceneHotKey.Shift
+
+                form.tgSpotify.Checked = configs.EnabledSpotifyModule
+                form.tgOBS.Checked = configs.EnabledObsModule
+                
             End If
         End Sub
 

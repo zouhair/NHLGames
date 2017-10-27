@@ -64,7 +64,7 @@ Namespace Objects
             If PlayerType = PlayerTypeEnum.Vlc Then
                 titleArg = String.Format("--meta-title{0}{1}{2}{1}{0}", space, dblQuot2, GameTitle)
             ElseIf PlayerType = PlayerTypeEnum.Mpv Then
-                titleArg = String.Format("--title{0}{1}{2}{1}{0}--user-agent=User-Agent={1}{3}{1}{0}", space, dblQuot2, GameTitle, Common.UserAgent)
+                titleArg = String.Format("--force-window=immediate{0}--title{0}{1}{2}{1}{0}--user-agent=User-Agent={1}{3}{1}{0}", space, dblQuot2, GameTitle, Common.UserAgent)
             End If
 
             If String.IsNullOrEmpty(PlayerPath) = False Then
