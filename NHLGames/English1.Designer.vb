@@ -470,6 +470,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à SO.
+        '''</summary>
+        Friend Shared ReadOnly Property gamePeriodSo() As String
+            Get
+                Return ResourceManager.GetString("gamePeriodSo", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à leads.
         '''</summary>
         Friend Shared ReadOnly Property gameSeriesLead() As String

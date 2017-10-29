@@ -34,12 +34,12 @@ Partial Class NHLGamesMetro
         Me.lblDate = New MetroFramework.Controls.MetroLabel()
         Me.lblNoGames = New System.Windows.Forms.Label()
         Me.flpCalender = New System.Windows.Forms.FlowLayoutPanel()
-        Me.btnRefresh = New System.Windows.Forms.Button()
-        Me.btnYesterday = New System.Windows.Forms.Button()
-        Me.btnTomorrow = New System.Windows.Forms.Button()
-        Me.btnDate = New System.Windows.Forms.Button()
         Me.flpGames = New System.Windows.Forms.FlowLayoutPanel()
         Me.MetroPanel1 = New MetroFramework.Controls.MetroPanel()
+        Me.btnTomorrow = New System.Windows.Forms.Button()
+        Me.btnYesterday = New System.Windows.Forms.Button()
+        Me.btnDate = New System.Windows.Forms.Button()
+        Me.btnRefresh = New System.Windows.Forms.Button()
         Me.tabSettings = New MetroFramework.Controls.MetroTabPage()
         Me.tlpSettings = New System.Windows.Forms.TableLayoutPanel()
         Me.tlpOBSSettings = New System.Windows.Forms.TableLayoutPanel()
@@ -212,7 +212,7 @@ Partial Class NHLGamesMetro
         Me.tabMenu.Location = New System.Drawing.Point(-1, 60)
         Me.tabMenu.Margin = New System.Windows.Forms.Padding(0)
         Me.tabMenu.Name = "tabMenu"
-        Me.tabMenu.SelectedIndex = 0
+        Me.tabMenu.SelectedIndex = 1
         Me.tabMenu.Size = New System.Drawing.Size(992, 505)
         Me.tabMenu.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabMenu.Style = MetroFramework.MetroColorStyle.Blue
@@ -303,80 +303,6 @@ Partial Class NHLGamesMetro
         Me.flpCalender.TabIndex = 10
         Me.flpCalender.Visible = false
         '
-        'btnRefresh
-        '
-        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
-        Me.btnRefresh.BackgroundImage = Global.NHLGames.My.Resources.Resources.wrefresh
-        Me.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        Me.btnRefresh.FlatAppearance.BorderSize = 0
-        Me.btnRefresh.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
-        Me.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
-        Me.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
-        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRefresh.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnRefresh.Location = New System.Drawing.Point(946, 6)
-        Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(30, 30)
-        Me.btnRefresh.TabIndex = 140
-        Me.btnRefresh.UseVisualStyleBackColor = false
-        '
-        'btnYesterday
-        '
-        Me.btnYesterday.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
-        Me.btnYesterday.BackgroundImage = Global.NHLGames.My.Resources.Resources.wleft
-        Me.btnYesterday.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnYesterday.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        Me.btnYesterday.FlatAppearance.BorderSize = 0
-        Me.btnYesterday.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
-        Me.btnYesterday.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
-        Me.btnYesterday.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
-        Me.btnYesterday.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnYesterday.Location = New System.Drawing.Point(9, 7)
-        Me.btnYesterday.Name = "btnYesterday"
-        Me.btnYesterday.Size = New System.Drawing.Size(25, 25)
-        Me.btnYesterday.TabIndex = 110
-        Me.btnYesterday.UseVisualStyleBackColor = false
-        '
-        'btnTomorrow
-        '
-        Me.btnTomorrow.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
-        Me.btnTomorrow.BackgroundImage = Global.NHLGames.My.Resources.Resources.wright
-        Me.btnTomorrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnTomorrow.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        Me.btnTomorrow.FlatAppearance.BorderSize = 0
-        Me.btnTomorrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
-        Me.btnTomorrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
-        Me.btnTomorrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
-        Me.btnTomorrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnTomorrow.Location = New System.Drawing.Point(316, 8)
-        Me.btnTomorrow.Name = "btnTomorrow"
-        Me.btnTomorrow.Size = New System.Drawing.Size(25, 25)
-        Me.btnTomorrow.TabIndex = 130
-        Me.btnTomorrow.UseVisualStyleBackColor = false
-        '
-        'btnDate
-        '
-        Me.btnDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
-        Me.btnDate.BackgroundImage = Global.NHLGames.My.Resources.Resources.wdate
-        Me.btnDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnDate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        Me.btnDate.FlatAppearance.BorderSize = 0
-        Me.btnDate.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
-        Me.btnDate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
-        Me.btnDate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
-        Me.btnDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.btnDate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.btnDate.Location = New System.Drawing.Point(273, 6)
-        Me.btnDate.Name = "btnDate"
-        Me.btnDate.Size = New System.Drawing.Size(27, 27)
-        Me.btnDate.TabIndex = 120
-        Me.btnDate.UseVisualStyleBackColor = false
-        '
         'flpGames
         '
         Me.flpGames.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
@@ -414,6 +340,80 @@ Partial Class NHLGamesMetro
         Me.MetroPanel1.VerticalScrollbarBarColor = true
         Me.MetroPanel1.VerticalScrollbarHighlightOnWheel = true
         Me.MetroPanel1.VerticalScrollbarSize = 10
+        '
+        'btnTomorrow
+        '
+        Me.btnTomorrow.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.btnTomorrow.BackgroundImage = Global.NHLGames.My.Resources.Resources.wright
+        Me.btnTomorrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnTomorrow.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.btnTomorrow.FlatAppearance.BorderSize = 0
+        Me.btnTomorrow.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
+        Me.btnTomorrow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
+        Me.btnTomorrow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
+        Me.btnTomorrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnTomorrow.Location = New System.Drawing.Point(316, 8)
+        Me.btnTomorrow.Name = "btnTomorrow"
+        Me.btnTomorrow.Size = New System.Drawing.Size(24, 24)
+        Me.btnTomorrow.TabIndex = 130
+        Me.btnTomorrow.UseVisualStyleBackColor = false
+        '
+        'btnYesterday
+        '
+        Me.btnYesterday.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.btnYesterday.BackgroundImage = Global.NHLGames.My.Resources.Resources.wleft
+        Me.btnYesterday.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnYesterday.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.btnYesterday.FlatAppearance.BorderSize = 0
+        Me.btnYesterday.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
+        Me.btnYesterday.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
+        Me.btnYesterday.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
+        Me.btnYesterday.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnYesterday.Location = New System.Drawing.Point(9, 8)
+        Me.btnYesterday.Name = "btnYesterday"
+        Me.btnYesterday.Size = New System.Drawing.Size(24, 24)
+        Me.btnYesterday.TabIndex = 110
+        Me.btnYesterday.UseVisualStyleBackColor = false
+        '
+        'btnDate
+        '
+        Me.btnDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.btnDate.BackgroundImage = Global.NHLGames.My.Resources.Resources.wdate
+        Me.btnDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnDate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.btnDate.FlatAppearance.BorderSize = 0
+        Me.btnDate.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
+        Me.btnDate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
+        Me.btnDate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
+        Me.btnDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.btnDate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.btnDate.Location = New System.Drawing.Point(276, 7)
+        Me.btnDate.Name = "btnDate"
+        Me.btnDate.Size = New System.Drawing.Size(24, 24)
+        Me.btnDate.TabIndex = 120
+        Me.btnDate.UseVisualStyleBackColor = false
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.btnRefresh.BackgroundImage = Global.NHLGames.My.Resources.Resources.wrefresh
+        Me.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.btnRefresh.FlatAppearance.BorderSize = 0
+        Me.btnRefresh.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
+        Me.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
+        Me.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
+        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefresh.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnRefresh.Location = New System.Drawing.Point(944, 6)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(28, 28)
+        Me.btnRefresh.TabIndex = 140
+        Me.btnRefresh.UseVisualStyleBackColor = false
         '
         'tabSettings
         '

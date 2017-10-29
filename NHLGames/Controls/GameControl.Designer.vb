@@ -400,7 +400,7 @@
         Me.lblStreamStatus.Name = "lblStreamStatus"
         Me.lblStreamStatus.Size = New System.Drawing.Size(306, 38)
         Me.lblStreamStatus.TabIndex = 27
-        Me.lblStreamStatus.Text = "Select a stream to watch"
+        Me.lblStreamStatus.Text = "STREAM_STATUS"
         Me.lblStreamStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblStreamStatus.UseCustomBackColor = true
         Me.lblStreamStatus.UseCustomForeColor = true

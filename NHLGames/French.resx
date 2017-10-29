@@ -537,4 +537,8 @@
     <value>Essaie avec le lecteur média détecté</value>
     <comment>Settings tab</comment>
   </data>
+  <data name="gamePeriodSo" xml:space="preserve">
+    <value>FUS</value>
+    <comment>Game panel</comment>
+  </data>
 </root>

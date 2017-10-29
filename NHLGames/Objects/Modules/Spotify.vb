@@ -59,21 +59,22 @@ Namespace  Objects.Modules
 
         Public Sub AdEnded() Implements IAdModule.AdEnded
             If Not _initialized OrElse _spotifyHandle Is Nothing Then Return
-
+            
             Dim curr? = WindowsEvents.GetForegroundWindow()
             WindowsEvents.SetForegroundWindow(_spotifyHandle)
+            Threading.Thread.Sleep(200)
 
             If PlayNextSong Then
-                Threading.Thread.Sleep(100)
                 NextSong()
+                Threading.Thread.Sleep(100)
             End If
-
-            Threading.Thread.Sleep(100)
+            
             If Not SongIsPlaying() Then
                 PlayPause()
-                Threading.Thread.Sleep(100)
+                Console.WriteLine($"play")
+                Threading.Thread.Sleep(50)
             End If
-
+            Console.WriteLine($"pause")
             PlayPause()
             WindowsEvents.SetForegroundWindow(curr)
         End Sub
@@ -83,13 +84,14 @@ Namespace  Objects.Modules
 
             Dim curr? = WindowsEvents.GetForegroundWindow()
             WindowsEvents.SetForegroundWindow(_spotifyHandle)
-            Threading.Thread.Sleep(100)
+            Threading.Thread.Sleep(200)
 
             If SongIsPlaying() Then
                 PlayPause()
-                Threading.Thread.Sleep(100)
+                Console.WriteLine($"pause")
+                Threading.Thread.Sleep(50)
             End If
-
+            Console.WriteLine($"play")
             PlayPause()
             WindowsEvents.SetForegroundWindow(curr)
         End Sub
@@ -137,6 +139,7 @@ Namespace  Objects.Modules
                     Catch ex As Exception
                         Console.WriteLine(String.Format(English.msgSpotifyCantStart, ex.Message))
                     End Try
+                    ForceToOpen = False
                 End If
                 Return False
             End If

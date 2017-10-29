@@ -446,6 +446,9 @@ Public Class NHLGamesMetro
         ApplicationSettings.SetValue(SettingsEnum.SelectedLanguage, cbLanguage.SelectedItem.ToString())
         Common.GetLanguage()
         InitializeForm.SetLanguage()
+        For each game As GameControl In flpGames.Controls
+            game.UpdateGame(GameManager.GamesDict(game.GameId), tgShowFinalScores.Checked, tgShowLiveScores.Checked, tgShowSeriesRecord.Checked)
+        Next
     End Sub
 
     Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing

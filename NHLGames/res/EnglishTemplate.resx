@@ -541,4 +541,8 @@
     <value>With another media player</value>
     <comment>Settings tab</comment>
   </data>
+  <data name="gamePeriodSo" xml:space="preserve">
+    <value>SO</value>
+    <comment>Game panel</comment>
+  </data>
 </root>

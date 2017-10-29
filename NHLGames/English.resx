@@ -737,4 +737,8 @@
     <value>Game</value>
     <comment>Console</comment>
   </data>
+  <data name="gamePeriodSo" xml:space="preserve">
+    <value>SO</value>
+    <comment>Game panel</comment>
+  </data>
 </root>

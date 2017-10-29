@@ -160,17 +160,7 @@ Namespace Objects
         End Sub
 
         Public Sub Update(game As Game)
-
-            If _GameObj.GetHashCode() <> game.GetHashCode() Then
-
-                If GameIsLive Then
-                    _AwayScore = game.AwayScore
-                    _HomeScore = game.HomeScore
-                End If
-
-                RaiseEvent GameUpdated(Me)
-            End If
-
+            RaiseEvent GameUpdated(Me)
         End Sub
 
         Public Sub Update(game As JObject, maxProgressSize As Integer)
@@ -229,32 +219,13 @@ Namespace Objects
             GameState = CType(statusId, GameStateEnum)
 
             If _gameType = GameTypeEnum.Series Then
-                SeriesGameNumber = game("seriesSummary")("gameNumber").ToString()
-                SeriesGameStatus = game("seriesSummary")("seriesStatusShort").ToString().ToLower().
-                    Replace("tied",NHLGamesMetro.RmText.GetString("gameSeriesTied")).
-                    Replace("wins",NHLGamesMetro.RmText.GetString("gameSeriesWin")).
-                    Replace("leads",NHLGamesMetro.RmText.GetString("gameSeriesLead")).
-                    ToUpper()'Team wins 4-2, Tied 2-2, Team leads 1-0
+                SeriesGameNumber = game("seriesSummary")("gameNumber").ToString() 'Series: Game 1.. 7
+                SeriesGameStatus = game("seriesSummary")("seriesStatusShort").ToString() 'Series: Team wins 4-2, Tied 2-2, Team leads 1-0
             End If
 
             If (GameState >= GameStateEnum.InProgress) Then
-                GamePeriod = game("linescore")("currentPeriodOrdinal").ToString().
-                    Replace("1st",NHLGamesMetro.RmText.GetString("gamePeriod1")).
-                    Replace("2nd",NHLGamesMetro.RmText.GetString("gamePeriod2")).
-                    Replace("3rd",NHLGamesMetro.RmText.GetString("gamePeriod3")).
-                    Replace("OT",NHLGamesMetro.RmText.GetString("gamePeriodOt")).
-                    ToUpper() '1st 2nd 3rd OT 2OT ...
-                If GamePeriod.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt"))
-                    If IsNumeric(GamePeriod(0)) Then
-                        GamePeriod = String.Format(NHLGamesMetro.RmText.GetString("gamePeriodOtMore"), GamePeriod(0))
-                    End If
-                End If
-                GameTimeLeft = game("linescore")("currentPeriodTimeRemaining").ToString().
-                    Replace("Final",NHLGamesMetro.RmText.GetString("gamePeriodFinal")).
-                    ToUpper()'Final, 12:34, 20:00
-            End If
-
-            If GameDate <= DateTime.Now.ToUniversalTime() Then
+                GamePeriod = game("linescore")("currentPeriodOrdinal").ToString() '1st 2nd 3rd OT SO OT2..
+                GameTimeLeft = game("linescore")("currentPeriodTimeRemaining").ToString() 'Final, 12:34, 20:00
                 _HomeScore = game("teams")("home")("score").ToString()
                 _AwayScore = game("teams")("away")("score").ToString()
             End If

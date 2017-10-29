@@ -73,11 +73,14 @@ Namespace Utilities
 
         Public Shared Function GetAverageCurrentVolume(processId As Integer) As Double
             Dim volumeList As List(Of Double) = new List(Of Double)
-            For i As Integer = 0 To 2
-                volumeList.Add(GetCurrentVolume(processId))
-                Threading.Thread.Sleep(10)
-            Next
-            Return (volumeList.Item(0) + volumeList.Item(1) + volumeList.Item(2)) / 3.0
+            SyncLock volumeList
+                For i As Integer = 0 To 1
+                    volumeList.Add(GetCurrentVolume(processId))
+                    Threading.Thread.Sleep(100)
+                Next
+            End SyncLock
+            Dim x =(volumeList.Item(0) + volumeList.Item(1)) / 2.0
+            Return x
         End Function
 
         Public Shared Function GetCurrentVolume(processId As Integer) As Double

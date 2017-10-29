@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports NHLGames.My.Resources
 Imports NHLGames.Objects
 Imports NHLGames.Utilities
 
@@ -7,6 +8,9 @@ Namespace Controls
     Public Class GameControl
         Private ReadOnly _broadcasters As New Dictionary(Of String, String)
         Private _game As Game
+        Private ReadOnly _showLiveScores As Boolean = False
+        Private ReadOnly _showScores As Boolean = False
+        Private ReadOnly _showSeriesRecord As Boolean = False
 
         Public ReadOnly Property GameId() As String
             Get
@@ -15,60 +19,47 @@ Namespace Controls
         End Property
 
         Public Sub UpdateGame(game As Game, showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean)
-            If game.GameIsLive Then
-                lblHomeScore.Visible = showLiveScores
-                lblAwayScore.Visible = showLiveScores
-                If ((Not showLiveScores And game.GameDate.ToLocalTime() = Date.Today) OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
-                    lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
-                End If
-            Else
-                lblHomeScore.Visible = showScores
-                lblAwayScore.Visible = showScores
-                If showScores And game.GameIsFinal And Not [String].Equals(game.GamePeriod, NHLGamesMetro.RmText.GetString("gamePeriod3"), StringComparison.CurrentCultureIgnoreCase) Then
-                    If(game.GamePeriod <> "") Then
-                        lblTime.Text =  NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper() & "/" & game.GamePeriod
-                    End If
-                ElseIf (lblTime.Text.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt"))) Then
-                    lblTime.Text = NHLGamesMetro.RmText.GetString("gamePeriodFinal").ToUpper()
-                End If
-                If ((Not showScores And game.GameIsFinal) OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
-                    lblNotInSeason.Text =  NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
-                Else 
-                    _gameTitle(game)
-                End If
-            End If
-
-            live1.Visible = game.GameIsLive
-            live2.Visible = game.GameIsLive
-        End Sub
-
-        Public Sub New(game As Game, showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean)
-
-            InitializeComponent()
-
-            _game = game
-            _getAllBroadcasters()
-
-            SetInitialProperties(game)
-
-            UpdateGameStatusProperties(game)
-            UpdateGame(game, showScores, showLiveScores, showSeriesRecord)
-
-            AddHandler _game.GameUpdated, AddressOf GameUpdatedHandler
-
-        End Sub
-
-        Private Sub UpdateGameStatusProperties(game As Game)
             lblPeriod.Text = ""
             lblNotInSeason.Text = ""
 
             _gameTitle(game)
 
             If game.GameIsLive Then
-                lblTime.Text = game.GameTimeLeft.ToString().ToUpper()
-                lblPeriod.Text = game.GamePeriod.ToString().ToUpper()
+                lblTime.Text = game.GameTimeLeft.
+                    Replace("Final",NHLGamesMetro.RmText.GetString("gamePeriodFinal")).
+                    ToUpper() 'Final, 12:34, 20:00
+                lblPeriod.Text = (game.GamePeriod.Replace($"1st",NHLGamesMetro.RmText.GetString("gamePeriod1")).
+                    Replace($"2nd",NHLGamesMetro.RmText.GetString("gamePeriod2")).
+                    Replace($"3rd",NHLGamesMetro.RmText.GetString("gamePeriod3")).
+                    Replace($"OT",NHLGamesMetro.RmText.GetString("gamePeriodOt")).
+                    Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo"))).ToUpper() '1st 2nd 3rd OT SO...
+                If game.GamePeriod.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt")) And IsNumeric(game.GamePeriod(0)) Then
+                    lblPeriod.Text = String.Format(NHLGamesMetro.RmText.GetString("gamePeriodOtMore"), game.GamePeriod(0)).ToUpper() '2OT..
+                End If
+                lblHomeScore.Visible = showLiveScores
+                lblAwayScore.Visible = showLiveScores
+                lblPeriod.Visible = showLiveScores
+                If Not showLiveScores Then
+                    lblTime.Text = NHLGamesMetro.RmText.GetString("enuminprogress").ToUpper()
+                End If
+                If (Not showLiveScores OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
+                    lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
+                End If
             ElseIf game.GameIsFinal Then
                 lblTime.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
+                lblHomeScore.Visible = showScores
+                lblAwayScore.Visible = showScores
+                If showScores Then
+                    If Not [String].Equals(game.GamePeriod, $"3rd", StringComparison.CurrentCultureIgnoreCase) And game.GamePeriod <> "" Then
+                        lblTime.Text =  (NHLGamesMetro.RmText.GetString($"enum" & game.GameState.ToString().ToLower()) & 
+                            $"/" & game.GamePeriod.Replace($"OT",NHLGamesMetro.RmText.GetString("gamePeriodOt")).
+                            Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo"))).ToUpper() 'FINAL/SO.. OT.. 2OT
+                    End If
+                Else
+                    If lblTime.Text.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt")) Then
+                        lblTime.Text = NHLGamesMetro.RmText.GetString("gamePeriodFinal").ToUpper()
+                    End If
+                End If
             ElseIf game.GameIsPreGame Then
                 lblTime.Text = game.GameDate.ToLocalTime().ToString("h:mm tt")
                 lblPeriod.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
@@ -76,6 +67,46 @@ Namespace Controls
                 lblTime.Text = game.GameDate.ToLocalTime().ToString("h:mm tt")
             End If
 
+            If Not showSeriesRecord And game.GameIsInPlayoff Then
+                lblNotInSeason.Text =  NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
+            Else
+                _gameTitle(game)
+            End If
+
+            If game.AreAnyStreamsAvailable Then
+            Else
+                If game.GameDate.ToLocalTime >= Date.Today And game.GameState < GameStateEnum.InProgress Then
+                    lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblStreamAvailableAtGameTime")
+                Else
+                    lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblNoStreamAvailable")
+                End If
+                FlowLayoutPanel1.Visible = False
+            End If
+
+            ToolTip.SetToolTip(picAway, String.Format(NHLGamesMetro.RmText.GetString("lblAwayTeam"), game.Away, game.AwayTeam))
+            ToolTip.SetToolTip(picHome, String.Format(NHLGamesMetro.RmText.GetString("lblHomeTeam"), game.Home, game.HomeTeam))
+        End Sub
+
+        Public Sub New(game As Game, showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean)
+
+            InitializeComponent()
+            _showScores = showScores
+            _showLiveScores = showLiveScores
+            _showSeriesRecord = showSeriesRecord
+
+            _game = game
+            live2.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
+            _getAllBroadcasters()
+
+            UpdateWholeGamePanel(game)
+            AddHandler _game.GameUpdated, AddressOf GameUpdatedHandler
+        End Sub
+
+        Private Sub UpdateGameStreams(game As Game)
+
+            live1.Visible = game.GameIsLive
+            live2.Visible = game.GameIsLive
+            
             lblHomeScore.Text = game.HomeScore
             lblHomeTeam.Text = game.HomeAbbrev
 
@@ -103,6 +134,8 @@ Namespace Controls
             Else 
                 BorderPanel1.BorderColour = Color.LightGray
             End If
+
+            UpdateGame(game, _showScores, _showLiveScores, _showSeriesRecord)
         End Sub
 
         Private Shared Function RemoveDiacritics(text As String) As String
@@ -122,15 +155,24 @@ Namespace Controls
         Private Sub _gameTitle(game As Game)
             If Not game.GameIsInSeason Then
                 If game.GameIsInPlayoff Then
+                    Dim seriesGameStatus = game.SeriesGameStatus.ToString().ToLower().
+                            Replace("tied",NHLGamesMetro.RmText.GetString("gameSeriesTied")).
+                            Replace("wins",NHLGamesMetro.RmText.GetString("gameSeriesWin")).
+                            Replace("leads",NHLGamesMetro.RmText.GetString("gameSeriesLead")) 'Team wins 4-2, Tied 2-2, Team leads 1-0
+
                     If game.GameIsLive Or game.GameIsPreGame Then
                         If game.SeriesGameNumber <> 1 Then
-                            lblNotInSeason.Text = String.Format(NHLGamesMetro.RmText.GetString("lblGameAbv"),game.SeriesGameNumber.ToString(), game.SeriesGameStatus.ToString()).ToUpper()
+                            lblNotInSeason.Text = String.Format(NHLGamesMetro.RmText.GetString("lblGameAbv"),
+                                                                game.SeriesGameNumber.ToString(), 'Game 2.. 7
+                                                                seriesGameStatus).ToUpper()
                         Else
-                            lblNotInSeason.Text = String.Format(NHLGamesMetro.RmText.GetString("lblGame"), game.SeriesGameNumber.ToString()).ToUpper()
+                            lblNotInSeason.Text = String.Format(NHLGamesMetro.RmText.GetString("lblGame"),
+                                                                game.SeriesGameNumber.ToString()).ToUpper()  'Game 1
                         End If
                     Else
-                        lblNotInSeason.Text = game.SeriesGameStatus.ToString()
-                        lblPeriod.Text = String.Format(NHLGamesMetro.RmText.GetString("lblGame"), game.SeriesGameNumber.ToString()).ToUpper()
+                        lblNotInSeason.Text = seriesGameStatus
+                        lblPeriod.Text = String.Format(NHLGamesMetro.RmText.GetString("lblGame"),
+                                                       game.SeriesGameNumber.ToString()).ToUpper() 'Game 1
                     End If
                 Else
                     lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPreseason").ToUpper()
@@ -138,31 +180,19 @@ Namespace Controls
             End If
         End Sub
 
-        Private Sub SetInitialProperties(game As Game)
+        Public Sub UpdateWholeGamePanel(game As Game)
             Dim tip As String
-
+            
             picAway.SizeMode = PictureBoxSizeMode.Zoom
             If String.IsNullOrEmpty(game.HomeTeam) = False Then
                 Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.AwayTeam).Replace(" ", "").Replace(".", ""))
                 If Not img Is Nothing Then picAway.BackgroundImage = img
-                ToolTip.SetToolTip(picAway, String.Format(NHLGamesMetro.RmText.GetString("lblAwayTeam"), game.Away, game.AwayTeam))
             End If
 
             picHome.SizeMode = PictureBoxSizeMode.Zoom
-            live2.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
             If String.IsNullOrEmpty(game.AwayTeam) = False Then
                 Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(game.HomeTeam).Replace(" ", "").Replace(".", ""))
                 If Not img Is Nothing Then picHome.BackgroundImage = img
-                ToolTip.SetToolTip(picHome, String.Format(NHLGamesMetro.RmText.GetString("lblHomeTeam"), game.Home, game.HomeTeam))
-            End If
-
-            If Not game.AreAnyStreamsAvailable Then
-                If game.GameDate.ToLocalTime >= Date.Today And game.GameState < GameStateEnum.InProgress Then
-                    lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblStreamAvailableAtGameTime")
-                Else
-                    lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblNoStreamAvailable")
-                End If
-                FlowLayoutPanel1.Visible = False
             End If
             
             If game.AwayStream.IsAvailable Then
@@ -211,6 +241,7 @@ Namespace Controls
             ToolTip.SetToolTip(lnkEnd1, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.AwayAbbrev))
             ToolTip.SetToolTip(lnkEnd2, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.HomeAbbrev))
             
+            UpdateGameStreams(game)
         End Sub
 
         Private Function _getBroadcasterPicFor(network As String)
@@ -223,7 +254,7 @@ Namespace Controls
                 BeginInvoke(New Action(Of Game)(AddressOf GameUpdatedHandler), game)
             Else
                 _game = game
-                UpdateGameStatusProperties(game)
+                UpdateWholeGamePanel(game)
             End If
         End Sub
 
