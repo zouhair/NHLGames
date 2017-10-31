@@ -1,4 +1,6 @@
 ﻿Imports System.Globalization
+Imports System.Windows
+Imports MetroFramework
 Imports NHLGames.My.Resources
 Imports NHLGames.Objects
 Imports NHLGames.Utilities
@@ -20,57 +22,93 @@ Namespace Controls
 
         Public Sub UpdateGame(game As Game, showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean)
             lblPeriod.Text = ""
+            lblGameStatus.Text = ""
             lblNotInSeason.Text = ""
 
-            _gameTitle(game)
-
             If game.GameIsLive Then
-                lblTime.Text = game.GameTimeLeft.
-                    Replace("Final",NHLGamesMetro.RmText.GetString("gamePeriodFinal")).
-                    ToUpper() 'Final, 12:34, 20:00
-                lblPeriod.Text = (game.GamePeriod.Replace($"1st",NHLGamesMetro.RmText.GetString("gamePeriod1")).
+                banner.BackColor = Color.FromArgb(255, 0, 170, 210)
+                lblPeriod.Visible = showLiveScores
+                lblGameStatus.Visible = Not showLiveScores
+                lblHomeScore.Visible = showLiveScores
+                lblAwayScore.Visible = showLiveScores
+                lblPeriod.BackColor = Color.FromArgb(255, 0, 170, 210)
+                lblPeriod.ForeColor = Color.White
+
+                lblPeriod.Text = $"{game.GamePeriod.
+                    Replace($"1st",NHLGamesMetro.RmText.GetString("gamePeriod1")).
                     Replace($"2nd",NHLGamesMetro.RmText.GetString("gamePeriod2")).
                     Replace($"3rd",NHLGamesMetro.RmText.GetString("gamePeriod3")).
-                    Replace($"OT",NHLGamesMetro.RmText.GetString("gamePeriodOt")).
-                    Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo"))).ToUpper() '1st 2nd 3rd OT SO...
+                    Replace($"OT", NHLGamesMetro.RmText.GetString("gamePeriodOt")).
+                    Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo")).
+                    ToUpper()}          {game.GameTimeLeft.ToLower().
+                    Replace("final",NHLGamesMetro.RmText.GetString("gamePeriodFinal")).
+                    Replace("end", "00:00")}".
+                    ToUpper() '1st 2nd 3rd OT SO... Final, 12:34, 20:00 
+
                 If game.GamePeriod.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt")) And IsNumeric(game.GamePeriod(0)) Then
                     lblPeriod.Text = String.Format(NHLGamesMetro.RmText.GetString("gamePeriodOtMore"), game.GamePeriod(0)).ToUpper() '2OT..
                 End If
-                lblHomeScore.Visible = showLiveScores
-                lblAwayScore.Visible = showLiveScores
-                lblPeriod.Visible = showLiveScores
+                
                 If Not showLiveScores Then
-                    lblTime.Text = NHLGamesMetro.RmText.GetString("enuminprogress").ToUpper()
+                    lblGameStatus.Text = NHLGamesMetro.RmText.GetString("enuminprogress").ToUpper()
                 End If
                 If (Not showLiveScores OrElse Not showSeriesRecord) And game.GameIsInPlayoff Then
                     lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
                 End If
             ElseIf game.GameIsFinal Then
-                lblTime.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
+                lblPeriod.Visible = showScores
                 lblHomeScore.Visible = showScores
                 lblAwayScore.Visible = showScores
+                lblGameStatus.Visible = Not showScores
+                If game.HomeScore < game.AwayScore Then
+                    lblHomeScore.ForeColor = Color.Gray
+                Else 
+                    lblAwayScore.ForeColor = Color.Gray
+                End If
+
                 If showScores Then
+                    lblPeriod.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
                     If Not [String].Equals(game.GamePeriod, $"3rd", StringComparison.CurrentCultureIgnoreCase) And game.GamePeriod <> "" Then
-                        lblTime.Text =  (NHLGamesMetro.RmText.GetString($"enum" & game.GameState.ToString().ToLower()) & 
+                        lblPeriod.Text =  (NHLGamesMetro.RmText.GetString($"enum" & game.GameState.ToString().ToLower()) & 
                             $"/" & game.GamePeriod.Replace($"OT",NHLGamesMetro.RmText.GetString("gamePeriodOt")).
                             Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo"))).ToUpper() 'FINAL/SO.. OT.. 2OT
                     End If
                 Else
-                    If lblTime.Text.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt")) Then
-                        lblTime.Text = NHLGamesMetro.RmText.GetString("gamePeriodFinal").ToUpper()
+                    lblGameStatus.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
+                    If lblPeriod.Text.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt")) Then
+                        lblGameStatus.Text = NHLGamesMetro.RmText.GetString("gamePeriodFinal").ToUpper()
                     End If
                 End If
-            ElseIf game.GameIsPreGame Then
-                lblTime.Text = game.GameDate.ToLocalTime().ToString("h:mm tt")
-                lblPeriod.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
-            Else
-                lblTime.Text = game.GameDate.ToLocalTime().ToString("h:mm tt")
+            ElseIf game.GameIsPreGame OrElse game.GameIsScheduled Then
+                divider.Visible = False
+                lblGameStatus.Visible = True
+                lblGameStatus.Text = game.GameDate.ToLocalTime().ToString("h:mm tt")
+                If game.GameIsScheduled Then
+                    lblPeriod.Visible = False
+                Else 
+                    banner.BackColor = Color.FromArgb(255, 0, 170, 210)
+                    lblPeriod.Text = NHLGamesMetro.RmText.GetString("enum" & game.GameState.ToString.ToLower()).ToUpper()
+                    lblPeriod.BackColor = Color.FromArgb(255, 0, 170, 210)
+                    lblPeriod.ForeColor = Color.White
+                End If
             End If
 
-            If Not showSeriesRecord And game.GameIsInPlayoff Then
-                lblNotInSeason.Text =  NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
-            Else
-                _gameTitle(game)
+            If game.GameIsInPreSeason Then 
+                lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPreseason").ToUpper()
+            Else If game.GameIsInPlayoff Then
+                Dim seriesStatusShort =  String.Format(NHLGamesMetro.RmText.GetString("lblGame"),
+                                                        game.SeriesGameNumber.ToString()).ToUpper() 'Game 1
+                Dim seriesStatusLong = If(
+                    game.SeriesGameNumber <> 1,
+                    String.Format(NHLGamesMetro.RmText.GetString("lblGameAbv"),
+                        game.SeriesGameNumber.ToString(), 'Game 2.. 7
+                        game.SeriesGameStatus.ToString().ToLower().
+                        Replace("tied",NHLGamesMetro.RmText.GetString("gameSeriesTied")).
+                        Replace("wins",NHLGamesMetro.RmText.GetString("gameSeriesWin")).
+                        Replace("leads",NHLGamesMetro.RmText.GetString("gameSeriesLead"))).ToUpper(),  'G3: Team wins 4-2, Tied 2-2, Team leads 1-0
+                    seriesStatusShort)
+
+                lblNotInSeason.Text = If (showSeriesRecord, seriesStatusLong, seriesStatusShort)
             End If
 
             If game.AreAnyStreamsAvailable Then
@@ -95,7 +133,7 @@ Namespace Controls
             _showSeriesRecord = showSeriesRecord
 
             _game = game
-            live2.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
+            'live2.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipX)
             _getAllBroadcasters()
 
             UpdateWholeGamePanel(game)
@@ -104,8 +142,8 @@ Namespace Controls
 
         Private Sub UpdateGameStreams(game As Game)
 
-            live1.Visible = game.GameIsLive
-            live2.Visible = game.GameIsLive
+            'live1.Visible = game.GameIsLive
+            'live2.Visible = game.GameIsLive
             
             lblHomeScore.Text = game.HomeScore
             lblHomeTeam.Text = game.HomeAbbrev
@@ -123,14 +161,8 @@ Namespace Controls
             lnkEnd1.Visible = game.EndzoneCam1Stream.IsAvailable
             lnkEnd2.Visible = game.EndzoneCam2Stream.IsAvailable
 
-            If game.GameIsScheduled And game.GameDate.ToLocalTime() <= Date.Today.AddDays(1) Then
-                BorderPanel1.BorderColour = Color.FromArgb(255, 0, 175, 220)
-            ElseIf game.GameIsPreGame Then
-                BorderPanel1.BorderColour = Color.Lime
-            ElseIf game.GameIsLive Then
-                BorderPanel1.BorderColour = Color.Red
-            ElseIf game.GameIsScheduled Then
-                BorderPanel1.BorderColour = Color.DarkGray
+            If (game.GameIsScheduled Or game.GameIsPreGame Or game.GameIsLive) And game.GameDate.ToLocalTime() <= Date.Today.AddDays(1) Then
+                BorderPanel1.BorderColour = Color.FromArgb(255, 0, 170, 210)
             Else 
                 BorderPanel1.BorderColour = Color.LightGray
             End If
@@ -151,34 +183,6 @@ Namespace Controls
 
             Return stringBuilder.ToString().Normalize(System.Text.NormalizationForm.FormC)
         End Function
-
-        Private Sub _gameTitle(game As Game)
-            If Not game.GameIsInSeason Then
-                If game.GameIsInPlayoff Then
-                    Dim seriesGameStatus = game.SeriesGameStatus.ToString().ToLower().
-                            Replace("tied",NHLGamesMetro.RmText.GetString("gameSeriesTied")).
-                            Replace("wins",NHLGamesMetro.RmText.GetString("gameSeriesWin")).
-                            Replace("leads",NHLGamesMetro.RmText.GetString("gameSeriesLead")) 'Team wins 4-2, Tied 2-2, Team leads 1-0
-
-                    If game.GameIsLive Or game.GameIsPreGame Then
-                        If game.SeriesGameNumber <> 1 Then
-                            lblNotInSeason.Text = String.Format(NHLGamesMetro.RmText.GetString("lblGameAbv"),
-                                                                game.SeriesGameNumber.ToString(), 'Game 2.. 7
-                                                                seriesGameStatus).ToUpper()
-                        Else
-                            lblNotInSeason.Text = String.Format(NHLGamesMetro.RmText.GetString("lblGame"),
-                                                                game.SeriesGameNumber.ToString()).ToUpper()  'Game 1
-                        End If
-                    Else
-                        lblNotInSeason.Text = seriesGameStatus
-                        lblPeriod.Text = String.Format(NHLGamesMetro.RmText.GetString("lblGame"),
-                                                       game.SeriesGameNumber.ToString()).ToUpper() 'Game 1
-                    End If
-                Else
-                    lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPreseason").ToUpper()
-                End If
-            End If
-        End Sub
 
         Public Sub UpdateWholeGamePanel(game As Game)
             Dim tip As String

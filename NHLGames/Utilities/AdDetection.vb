@@ -55,7 +55,7 @@ Namespace Utilities
             Next
 
             For Each process In MediaPlayerProcesses
-                If Math.Abs(GetAverageCurrentVolume(process)) > 0.00001 Then
+                If Math.Abs(GetCurrentVolume(process)) > 0.00001 Then
                     AddOrUpdateLastSoundOccured(process)
                 End If
             Next
@@ -71,26 +71,19 @@ Namespace Utilities
             End If
         End Sub
 
-        Public Shared Function GetAverageCurrentVolume(processId As Integer) As Double
-            Dim volumeList As List(Of Double) = new List(Of Double)
-            SyncLock volumeList
-                For i As Integer = 0 To 1
-                    volumeList.Add(GetCurrentVolume(processId))
-                    Threading.Thread.Sleep(100)
-                Next
-            End SyncLock
-            Dim x =(volumeList.Item(0) + volumeList.Item(1)) / 2.0
-            Return x
-        End Function
-
         Public Shared Function GetCurrentVolume(processId As Integer) As Double
             Dim aMmDevices As New MMDeviceEnumerator()
             Dim defaultAudioEndPointDevice = aMmDevices.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia)
             Dim sessionsDefaultAudioEndPointDevice = defaultAudioEndPointDevice.AudioSessionManager.Sessions
             For i As Integer = 0 To sessionsDefaultAudioEndPointDevice.Count - 1
                 If sessionsDefaultAudioEndPointDevice(i).GetProcessID <> processId Then Continue For
-                Dim audioMeter As audioMeterInformation = sessionsDefaultAudioEndPointDevice(i).AudioMeterInformation
-                Return audioMeter.MasterPeakValue
+                Dim volumeList As List(Of Double) = new List(Of Double)
+                For j As Integer = 0 To 2
+                    Dim audioMeter As audioMeterInformation = sessionsDefaultAudioEndPointDevice(i).AudioMeterInformation
+                    volumeList.Add( audioMeter.MasterPeakValue)
+                    Threading.Thread.Sleep(100)
+                Next
+                Return (volumeList.Item(0) + volumeList.Item(1) + volumeList.Item(2)) / 3.0
             Next
             Return 0.0
         End Function
@@ -127,10 +120,10 @@ Namespace Utilities
             Task.Run(AddressOf LoopForever)
         End Sub
 
-        Private Sub NotifyModules(Optional stillNoGames As Boolean = False)
+        Private Sub NotifyModules()
             SyncLock _adModules
                 For Each m In _adModules
-                    If _previousAdPlayingState OrElse stillNoGames Then
+                    If _previousAdPlayingState Then
                         Task.Run(Sub()
                                      m.AdStarted()
                                  End Sub)

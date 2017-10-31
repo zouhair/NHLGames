@@ -42,7 +42,8 @@ Namespace Objects
                 myHttpWebRequest.CookieContainer = New CookieContainer()
                 myHttpWebRequest.CookieContainer.Add(New Cookie("mediaAuth", Common.GetRandomString(240), String.Empty, "nhl.com"))
                 myHttpWebRequest.UserAgent = Common.UserAgent
-                IsVod = Common.CheckURL(Vodurl.Replace("CDN", strCdn), myHttpWebRequest)
+                myHttpWebRequest.Timeout = 2000
+                IsVod = Common.SendWebRequest(Vodurl.Replace("CDN", strCdn), myHttpWebRequest)
             Catch e As Exception
                 Console.WriteLine(English.msgVOD, e.Message)
             End Try

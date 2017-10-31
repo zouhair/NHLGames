@@ -18,12 +18,13 @@ Namespace Utilities
             Return sb.ToString()
         End Function
 
-        Public Shared Function CheckUrl(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Boolean
+        Public Shared Function SendWebRequest(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Boolean
             Try
                 Dim myHttpWebRequest As HttpWebRequest
                 If httpWebRequest Is Nothing Then
                     myHttpWebRequest = CType(WebRequest.Create(address), HttpWebRequest)
                     myHttpWebRequest.UserAgent = UserAgent
+                    myHttpWebRequest.Timeout = 2000
                 Else 
                     myHttpWebRequest = httpWebRequest
                 End If
@@ -58,7 +59,7 @@ Namespace Utilities
         Public Shared Sub CheckAppCanRun()
             If Not IO.File.Exists("NHLGames.exe.Config") then
                 FatalError(NHLGamesMetro.RmText.GetString("noConfigFile"))
-            Else If Not CheckUrl("http://www.google.com") Then
+            Else If Not SendWebRequest("http://www.google.com") Then
                 FatalError(NHLGamesMetro.RmText.GetString("noWebAccess"))
             End If
         End Sub

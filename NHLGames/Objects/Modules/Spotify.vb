@@ -1,4 +1,6 @@
 ﻿Imports System.IO
+Imports System.Net
+Imports Newtonsoft.Json
 Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
 
@@ -8,12 +10,14 @@ Namespace  Objects.Modules
         Private ReadOnly _connectSleep As TimeSpan = TimeSpan.FromSeconds(5)
         Private _initialized As Boolean
         Private _stopIt As Boolean = False
-        Private _spotifyHandle As IntPtr?
-        Private _spotifyId As Integer
-        Private Const KeyNextSong = "^{RIGHT}"
-        Private Const KeyPlayPause = " "
+
+        Private _spotifyId As Integer = 0
         Private Const KeyVkNextSong = 176
         Private Const KeyVkPlayPause = 179
+        Private Shared ReadOnly WebRequestParams = "&ref=&cors=&_=" & Convert.ToInt32((Datetime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds)
+
+        Private _authKey As String
+        Private _cfIdKey As String
 
         Public Property ForceToOpen As Boolean
         Public Property PlayNextSong  As Boolean
@@ -38,62 +42,47 @@ Namespace  Objects.Modules
 
         Private Sub NextSong()
             If Not AnyMediaPlayer Then
-                SendKeys.SendWait(KeyNextSong)
+                Query("remote/skip_next.json?")
             Else
                 WindowsEvents.PressKey(KeyVkNextSong)
             End If
         End Sub
 
-        Private Sub PlayPause()
+        Private Sub Play()
             If Not AnyMediaPlayer Then
-                SendKeys.SendWait(KeyPlayPause)
+                Query("remote/pause.json?pause=false") 'remote/resume.json?
             Else
                 WindowsEvents.PressKey(KeyVkPlayPause)
             End If
         End Sub
 
-        Private Function SongIsPlaying() As Boolean
-            If AnyMediaPlayer Then Return False
-            Return Math.Abs(AdDetection.GetAverageCurrentVolume(_spotifyId)) > 0.0001
+        Private Sub Pause()
+            If Not AnyMediaPlayer Then
+                Query("remote/pause.json?pause=true")  'remote/pause.json?pause=false
+            Else
+                WindowsEvents.PressKey(KeyVkPlayPause)
+            End If
+        End Sub
+
+        Private Function IsItInitialized() As Boolean
+            Try
+                Process.GetProcessById(_spotifyId)
+            Catch ex As Exception
+                InvokeElement.ModuleSpotifyOff()
+                _initialized = false
+            End Try
+            Return _initialized
         End Function
 
         Public Sub AdEnded() Implements IAdModule.AdEnded
-            If Not _initialized OrElse _spotifyHandle Is Nothing Then Return
-            
-            Dim curr? = WindowsEvents.GetForegroundWindow()
-            WindowsEvents.SetForegroundWindow(_spotifyHandle)
-            Threading.Thread.Sleep(200)
-
-            If PlayNextSong Then
-                NextSong()
-                Threading.Thread.Sleep(100)
-            End If
-            
-            If Not SongIsPlaying() Then
-                PlayPause()
-                Console.WriteLine($"play")
-                Threading.Thread.Sleep(50)
-            End If
-            Console.WriteLine($"pause")
-            PlayPause()
-            WindowsEvents.SetForegroundWindow(curr)
+            If Not IsItInitialized() Then Return
+            If PlayNextSong Then NextSong()
+            Pause()
         End Sub
 
         Public Sub AdStarted() Implements IAdModule.AdStarted
-            If Not _initialized OrElse _spotifyHandle Is Nothing Then Return
-
-            Dim curr? = WindowsEvents.GetForegroundWindow()
-            WindowsEvents.SetForegroundWindow(_spotifyHandle)
-            Threading.Thread.Sleep(200)
-
-            If SongIsPlaying() Then
-                PlayPause()
-                Console.WriteLine($"pause")
-                Threading.Thread.Sleep(50)
-            End If
-            Console.WriteLine($"play")
-            PlayPause()
-            WindowsEvents.SetForegroundWindow(curr)
+            If Not IsItInitialized() Then Return
+            Play()
         End Sub
 
         Public Sub Initialize() Implements IAdModule.Initialize
@@ -105,11 +94,13 @@ Namespace  Objects.Modules
 
             ConnectLoop()
 
-            If _spotifyHandle Is Nothing AndAlso Not _stopIt Then
+            If _spotifyId = 0 AndAlso Not _stopIt Then
                 Console.WriteLine(English.msgSpotifyNotConnected)
                 InvokeElement.ModuleSpotifyOff()
             End If
-            
+
+            _authKey = GetAuthKey()
+            _cfIdKey = GetCfId()
             _initialized = True
         End Sub
 
@@ -145,16 +136,77 @@ Namespace  Objects.Modules
             End If
             Dim proc = Process.GetProcessesByName("spotify")
 
-            If _spotifyHandle Is Nothing Then
-                For i As Integer = 0 To proc.Count() - 1
-                    If proc(i).MainWindowTitle = "" Then Continue For
-                    _spotifyHandle = proc(i).MainWindowHandle
-                    _spotifyId = proc(i).Id
-                Next
-                Return False
-            End If
-            Return True
+            For i As Integer = 0 To proc.Count() - 1
+                If proc(i).MainWindowTitle = "" Then Continue For
+                _spotifyId = proc(i).Id
+                Return True
+            Next
+
+            Return False
         End Function
 
+        Private Sub Query(request As String)
+            Dim auth = If (_authKey IsNot Nothing, $"&oauth={_authKey}", "")
+            Dim cfid = If (_cfIdKey IsNot Nothing, $"&csrf={_cfIdKey}", "")
+            Dim address = $"http://127.0.0.1:4381/{request}{WebRequestParams}{auth}{cfid}"
+
+            Dim myHttpWebRequest As HttpWebRequest = GetMyHttpWebRequest(address)
+            Try
+                Common.SendWebRequest(address, myHttpWebRequest)
+            Catch ex As Exception
+
+            End Try
+        End Sub
+
+        Private Shared Function GetAuthKey() As String
+            Dim raw As String
+            Dim address = $"http://open.spotify.com/token"
+            Dim myHttpWebRequest = GetMyHttpWebRequest(address)
+            raw = GetResponseToString(myHttpWebRequest)
+            Dim dict As Dictionary(Of string, Object) = JsonConvert.DeserializeObject(Of Dictionary(Of string, Object))(raw)
+            Return If (dict Is Nothing, "", dict("t").ToString())
+        End Function
+
+        Private Shared Function GetCfId() As String
+            Dim raw As String
+            Dim address = $"http://127.0.0.1:4381/simplecsrf/token.json?{WebRequestParams}"
+            Dim myHttpWebRequest = GetMyHttpWebRequest(address)
+            raw = $"[{GetResponseToString(myHttpWebRequest)}]"
+            
+            Dim res = raw.Replace($"\", $"")
+            Dim cfIdList As List(Of CfId) = JsonConvert.DeserializeObject(Of List(Of CfId))(res)
+
+            If cfIdList Is Nothing Or cfIdList.Count <> 1 Then
+                Return ""
+            End If
+            Return If (cfidList(0).Error Is Nothing, cfIdList(0).Token, "")
+        End Function
+
+        Private Shared Function GetResponseToString(webRequest As HttpWebRequest) As String
+            Dim webResponse = New StreamReader(webRequest.GetResponse().GetResponseStream())
+            Return webResponse.ReadToEnd()
+        End Function
+
+        Private Shared Function  GetMyHttpWebRequest(address As String) As HttpWebRequest
+            Dim myHttpWebRequest As HttpWebRequest = CType(WebRequest.Create(address), HttpWebRequest)
+            myHttpWebRequest.UserAgent = Common.UserAgent
+            myHttpWebRequest.Timeout = 2000
+            myHttpWebRequest.Headers.Add("Origin", "https://embed.spotify.com")
+            Return myHttpWebRequest
+        End Function
+
+    End Class
+
+    Friend Class CfId
+        Public [Error] As Errors
+        Public Token As String
+        Public Version As String
+        Public ClientVersion As String
+        Public Running As Boolean
+    End Class
+
+    Friend Class Errors
+        Public Type As String
+        Public Message As String
     End Class
 End Namespace

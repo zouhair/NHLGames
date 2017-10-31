@@ -229,10 +229,6 @@
     <value>Players Args</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblPlayoffs" xml:space="preserve">
-    <value>Playoffs</value>
-    <comment>Game panel</comment>
-  </data>
   <data name="lblPreseason" xml:space="preserve">
     <value>Preseason</value>
     <comment>Game panel</comment>

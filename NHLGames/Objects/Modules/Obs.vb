@@ -8,6 +8,7 @@ Namespace Objects.Modules
         Public HotkeyAd As Hotkey = New Hotkey()
         Public HotkeyGame As Hotkey = New Hotkey()
         Private _obsHandle As IntPtr?
+        Private _obsIdProcess As Integer
 
         Private Function IsHotkeyAdSet As Boolean
             Return HotkeyAd.Key <> vbNullChar
@@ -67,8 +68,13 @@ Namespace Objects.Modules
 
             If Not String.IsNullOrEmpty(toSend) Then
                 If _obsHandle Is Nothing Then
-                    _obsHandle = HookObs()
-                    If _obsHandle Is Nothing Then Return
+                    HookObs()
+                Else 
+                    Try
+                        Process.GetProcessById(_obsIdProcess)
+                    Catch ex As Exception
+                        InvokeElement.ModuleObsOff()
+                    End Try
                 End If
 
                 Dim curr? = WindowsEvents.GetForegroundWindow()
@@ -80,17 +86,17 @@ Namespace Objects.Modules
             End If
         End Sub
 
-        Private Shared Function HookObs() As IntPtr?
+        Private Sub HookObs()
             Dim processNames = new List(Of string) From {"obs32", "obs64"}
             Dim processes = New Process(){}
             For i As Integer = 0 To processNames.Count -1
                 processes = Process.GetProcessesByName(processNames(i))
                 If processes.Length <> 0 Then
-                    Return processes(0).MainWindowHandle
+                    _obsHandle = processes(0).MainWindowHandle
+                    _obsIdProcess = processes(0).Id
                 End If
             Next
-            Return Nothing
-        End Function
+        End Sub
 
     End Class
 End Namespace

@@ -776,15 +776,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Playoffs.
-        '''</summary>
-        Friend Shared ReadOnly Property lblPlayoffs() As String
-            Get
-                Return ResourceManager.GetString("lblPlayoffs", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à Preseason.
         '''</summary>
         Friend Shared ReadOnly Property lblPreseason() As String

@@ -19,7 +19,8 @@ Namespace Utilities
         End Function
 
         Public Shared Sub PressKey(ByVal keyCode As Byte)
-            keybd_event(KeyCode, CByte(69), 1UI, 0)
+            keybd_event(KeyCode, &H45, &H01, 0)
+            keybd_event(KeyCode, &H45, &H02, 0)
         End Sub
 
         <DllImport("user32.dll")>

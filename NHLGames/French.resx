@@ -217,10 +217,6 @@
     <value>Lecteur args. supp.</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblPlayoffs" xml:space="preserve">
-    <value>Séries</value>
-    <comment>Game panel</comment>
-  </data>
   <data name="lblPreseason" xml:space="preserve">
     <value>Présaison</value>
     <comment>Game panel</comment>
