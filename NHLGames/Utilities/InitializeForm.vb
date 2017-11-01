@@ -74,6 +74,7 @@ Namespace Utilities
             Form.lblShowFinalScores.Text = NHLGamesMetro.RmText.GetString("lblShowFinalScores")
             Form.lblShowLiveScores.Text = NHLGamesMetro.RmText.GetString("lblShowLiveScores")
             Form.lblShowSeriesRecord.Text = NHLGamesMetro.RmText.GetString("lblShowSeriesRecord")
+            Form.lblShowTeamCityAbr.Text = NHLGamesMetro.RmText.GetString("lblShowTeamCityAbr")
 
             Form.cbStreamQuality.Items.Clear()
             Form.cbStreamQuality.Items.AddRange(lstStreamQualities)
@@ -93,6 +94,7 @@ Namespace Utilities
             Form.SettingsToolTip.SetToolTip(Form.btnOuput, NHLGamesMetro.RmText.GetString("tipBrowse"))
 
             Form.lblModules.Text = NHLGamesMetro.RmText.GetString("lblModules")
+            Form.lblModulesDesc.Text = NHLGamesMetro.RmText.GetString("lblModulesDesc")
             Form.lblSpotify.Text = NHLGamesMetro.RmText.GetString("lblSpotify")
             Form.lblSpotifyDesc.Text = NHLGamesMetro.RmText.GetString("lblSpotifyDesc")
             Form.lblOBS.Text = NHLGamesMetro.RmText.GetString("lblObs")
@@ -121,6 +123,7 @@ Namespace Utilities
             Form.tgShowFinalScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, True)
             Form.tgShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, True)
             Form.tgShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, True)
+            Form.tgShowTeamCityAbr.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, True)
 
             PopulateComboBox(Form.cbLanguage, SettingsEnum.SelectedLanguage, SettingsEnum.LanguageList)
 

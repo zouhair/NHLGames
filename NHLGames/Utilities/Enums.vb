@@ -66,6 +66,7 @@
         ShowSeriesRecord = 12
         LanguageList = 13
         AdDetection = 14
+        ShowTeamCityAbr = 15
     End Enum
 
     Public Enum OutputType

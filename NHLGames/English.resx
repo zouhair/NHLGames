@@ -126,15 +126,15 @@
     <comment>Console tab</comment>
   </data>
   <data name="lblShowFinalScores" xml:space="preserve">
-    <value>Show Final Scores</value>
+    <value>Final scores</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblShowLiveScores" xml:space="preserve">
-    <value>Show Live Scores</value>
+    <value>Live scores</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblShowSeriesRecord" xml:space="preserve">
-    <value>Show Series Record</value>
+    <value>Series record</value>
     <comment>Settings tab</comment>
   </data>
   <data name="noConfigFile" xml:space="preserve">
@@ -744,5 +744,13 @@
   <data name="errorHostname" xml:space="preserve">
     <value>Error: Selected Hostname is unreachable</value>
     <comment>Console</comment>
+  </data>
+  <data name="lblModulesDesc" xml:space="preserve">
+    <value>Detect ads and notify activated apps below</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblShowTeamCityAbr" xml:space="preserve">
+    <value>Teams city abbreviation</value>
+    <comment>Settings tab</comment>
   </data>
 </root>

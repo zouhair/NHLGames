@@ -58,7 +58,8 @@ Namespace Utilities
                     game.Value,
                     ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores),
                     ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores),
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord))).ToArray())
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr))).ToArray())
             End If
         End Sub
 

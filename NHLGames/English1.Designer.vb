@@ -677,6 +677,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Detect ads and notify activated apps below.
+        '''</summary>
+        Friend Shared ReadOnly Property lblModulesDesc() As String
+            Get
+                Return ResourceManager.GetString("lblModulesDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à MPC Path.
         '''</summary>
         Friend Shared ReadOnly Property lblMpcPath() As String
@@ -821,7 +830,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Show Final Scores.
+        '''  Recherche une chaîne localisée semblable à Final scores.
         '''</summary>
         Friend Shared ReadOnly Property lblShowFinalScores() As String
             Get
@@ -830,7 +839,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Show Live Scores.
+        '''  Recherche une chaîne localisée semblable à Live scores.
         '''</summary>
         Friend Shared ReadOnly Property lblShowLiveScores() As String
             Get
@@ -839,11 +848,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Show Series Record.
+        '''  Recherche une chaîne localisée semblable à Series record.
         '''</summary>
         Friend Shared ReadOnly Property lblShowSeriesRecord() As String
             Get
                 Return ResourceManager.GetString("lblShowSeriesRecord", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Teams city abbreviation.
+        '''</summary>
+        Friend Shared ReadOnly Property lblShowTeamCityAbr() As String
+            Get
+                Return ResourceManager.GetString("lblShowTeamCityAbr", resourceCulture)
             End Get
         End Property
         

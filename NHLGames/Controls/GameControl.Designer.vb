@@ -31,7 +31,6 @@
         Me.picAway = New System.Windows.Forms.PictureBox()
         Me.lblHomeScore = New MetroFramework.Controls.MetroLabel()
         Me.lblAwayScore = New MetroFramework.Controls.MetroLabel()
-        Me.live2 = New System.Windows.Forms.PictureBox()
         Me.live1 = New System.Windows.Forms.PictureBox()
         Me.lblAwayTeam = New MetroFramework.Controls.MetroLabel()
         Me.picHome = New System.Windows.Forms.PictureBox()
@@ -49,10 +48,8 @@
         Me.lnkRef = New System.Windows.Forms.Button()
         Me.lblNotInSeason = New MetroFramework.Controls.MetroLabel()
         Me.lblStreamStatus = New MetroFramework.Controls.MetroLabel()
-        Me.banner = New MetroFramework.Controls.MetroLabel()
         Me.BorderPanel1.SuspendLayout
         CType(Me.picAway,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.live2,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.live1,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.picHome,System.ComponentModel.ISupportInitialize).BeginInit
         Me.FlowLayoutPanel1.SuspendLayout
@@ -74,7 +71,6 @@
         Me.BorderPanel1.Controls.Add(Me.picAway)
         Me.BorderPanel1.Controls.Add(Me.lblHomeScore)
         Me.BorderPanel1.Controls.Add(Me.lblAwayScore)
-        Me.BorderPanel1.Controls.Add(Me.live2)
         Me.BorderPanel1.Controls.Add(Me.live1)
         Me.BorderPanel1.Controls.Add(Me.lblAwayTeam)
         Me.BorderPanel1.Controls.Add(Me.picHome)
@@ -83,7 +79,6 @@
         Me.BorderPanel1.Controls.Add(Me.FlowLayoutPanel1)
         Me.BorderPanel1.Controls.Add(Me.lblNotInSeason)
         Me.BorderPanel1.Controls.Add(Me.lblStreamStatus)
-        Me.BorderPanel1.Controls.Add(Me.banner)
         Me.BorderPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.BorderPanel1.Location = New System.Drawing.Point(3, 3)
         Me.BorderPanel1.Name = "BorderPanel1"
@@ -94,7 +89,7 @@
         '
         Me.lblGameStatus.BackColor = System.Drawing.Color.Transparent
         Me.lblGameStatus.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.lblGameStatus.Location = New System.Drawing.Point(97, 31)
+        Me.lblGameStatus.Location = New System.Drawing.Point(97, 35)
         Me.lblGameStatus.Name = "lblGameStatus"
         Me.lblGameStatus.Size = New System.Drawing.Size(117, 50)
         Me.lblGameStatus.TabIndex = 25
@@ -106,9 +101,9 @@
         'divider
         '
         Me.divider.BackColor = System.Drawing.Color.Silver
-        Me.divider.Location = New System.Drawing.Point(154, 35)
+        Me.divider.Location = New System.Drawing.Point(155, 35)
         Me.divider.Name = "divider"
-        Me.divider.Size = New System.Drawing.Size(1, 45)
+        Me.divider.Size = New System.Drawing.Size(1, 50)
         Me.divider.TabIndex = 29
         Me.divider.UseCustomBackColor = true
         '
@@ -116,7 +111,7 @@
         '
         Me.picAway.BackgroundImage = CType(resources.GetObject("picAway.BackgroundImage"),System.Drawing.Image)
         Me.picAway.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picAway.Location = New System.Drawing.Point(31, 31)
+        Me.picAway.Location = New System.Drawing.Point(31, 35)
         Me.picAway.Name = "picAway"
         Me.picAway.Size = New System.Drawing.Size(60, 50)
         Me.picAway.TabIndex = 0
@@ -127,9 +122,10 @@
         Me.lblHomeScore.BackColor = System.Drawing.Color.Transparent
         Me.lblHomeScore.FontSize = MetroFramework.MetroLabelSize.Tall
         Me.lblHomeScore.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.lblHomeScore.Location = New System.Drawing.Point(161, 35)
+        Me.lblHomeScore.Location = New System.Drawing.Point(160, 35)
+        Me.lblHomeScore.Margin = New System.Windows.Forms.Padding(0)
         Me.lblHomeScore.Name = "lblHomeScore"
-        Me.lblHomeScore.Size = New System.Drawing.Size(53, 43)
+        Me.lblHomeScore.Size = New System.Drawing.Size(50, 50)
         Me.lblHomeScore.TabIndex = 24
         Me.lblHomeScore.Text = "0"
         Me.lblHomeScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -141,33 +137,24 @@
         Me.lblAwayScore.BackColor = System.Drawing.Color.Transparent
         Me.lblAwayScore.FontSize = MetroFramework.MetroLabelSize.Tall
         Me.lblAwayScore.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.lblAwayScore.Location = New System.Drawing.Point(96, 35)
+        Me.lblAwayScore.Location = New System.Drawing.Point(100, 35)
+        Me.lblAwayScore.Margin = New System.Windows.Forms.Padding(0)
         Me.lblAwayScore.Name = "lblAwayScore"
-        Me.lblAwayScore.Size = New System.Drawing.Size(52, 43)
+        Me.lblAwayScore.Size = New System.Drawing.Size(50, 50)
         Me.lblAwayScore.TabIndex = 23
         Me.lblAwayScore.Text = "0"
         Me.lblAwayScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblAwayScore.UseCustomBackColor = true
         Me.lblAwayScore.UseCustomForeColor = true
         '
-        'live2
-        '
-        Me.live2.BackgroundImage = CType(resources.GetObject("live2.BackgroundImage"),System.Drawing.Image)
-        Me.live2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.live2.Location = New System.Drawing.Point(287, 3)
-        Me.live2.Name = "live2"
-        Me.live2.Size = New System.Drawing.Size(19, 18)
-        Me.live2.TabIndex = 15
-        Me.live2.TabStop = false
-        Me.live2.Visible = false
-        '
         'live1
         '
-        Me.live1.BackgroundImage = CType(resources.GetObject("live1.BackgroundImage"),System.Drawing.Image)
+        Me.live1.BackgroundImage = Global.NHLGames.My.Resources.Resources.live
         Me.live1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.live1.Location = New System.Drawing.Point(3, 3)
+        Me.live1.InitialImage = Global.NHLGames.My.Resources.Resources.live
+        Me.live1.Location = New System.Drawing.Point(1, 1)
         Me.live1.Name = "live1"
-        Me.live1.Size = New System.Drawing.Size(19, 18)
+        Me.live1.Size = New System.Drawing.Size(18, 18)
         Me.live1.TabIndex = 14
         Me.live1.TabStop = false
         Me.live1.Visible = false
@@ -175,9 +162,9 @@
         'lblAwayTeam
         '
         Me.lblAwayTeam.BackColor = System.Drawing.Color.Transparent
-        Me.lblAwayTeam.Location = New System.Drawing.Point(30, 80)
+        Me.lblAwayTeam.Location = New System.Drawing.Point(30, 88)
         Me.lblAwayTeam.Name = "lblAwayTeam"
-        Me.lblAwayTeam.Size = New System.Drawing.Size(60, 28)
+        Me.lblAwayTeam.Size = New System.Drawing.Size(60, 20)
         Me.lblAwayTeam.TabIndex = 4
         Me.lblAwayTeam.Text = "AWAY"
         Me.lblAwayTeam.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -187,7 +174,7 @@
         '
         Me.picHome.BackgroundImage = CType(resources.GetObject("picHome.BackgroundImage"),System.Drawing.Image)
         Me.picHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picHome.Location = New System.Drawing.Point(220, 31)
+        Me.picHome.Location = New System.Drawing.Point(220, 35)
         Me.picHome.Name = "picHome"
         Me.picHome.Size = New System.Drawing.Size(60, 50)
         Me.picHome.TabIndex = 1
@@ -196,9 +183,9 @@
         'lblHomeTeam
         '
         Me.lblHomeTeam.BackColor = System.Drawing.Color.Transparent
-        Me.lblHomeTeam.Location = New System.Drawing.Point(219, 80)
+        Me.lblHomeTeam.Location = New System.Drawing.Point(219, 88)
         Me.lblHomeTeam.Name = "lblHomeTeam"
-        Me.lblHomeTeam.Size = New System.Drawing.Size(60, 28)
+        Me.lblHomeTeam.Size = New System.Drawing.Size(60, 20)
         Me.lblHomeTeam.TabIndex = 4
         Me.lblHomeTeam.Text = "HOME"
         Me.lblHomeTeam.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -210,9 +197,9 @@
         Me.lblPeriod.FontSize = MetroFramework.MetroLabelSize.Small
         Me.lblPeriod.FontWeight = MetroFramework.MetroLabelWeight.Bold
         Me.lblPeriod.ForeColor = System.Drawing.Color.Black
-        Me.lblPeriod.Location = New System.Drawing.Point(97, 1)
+        Me.lblPeriod.Location = New System.Drawing.Point(1, 1)
         Me.lblPeriod.Name = "lblPeriod"
-        Me.lblPeriod.Size = New System.Drawing.Size(117, 20)
+        Me.lblPeriod.Size = New System.Drawing.Size(307, 20)
         Me.lblPeriod.TabIndex = 11
         Me.lblPeriod.Text = "PERIOD_STATUS"
         Me.lblPeriod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -389,9 +376,9 @@
         '
         Me.lblNotInSeason.BackColor = System.Drawing.Color.Transparent
         Me.lblNotInSeason.FontSize = MetroFramework.MetroLabelSize.Small
-        Me.lblNotInSeason.Location = New System.Drawing.Point(2, 81)
+        Me.lblNotInSeason.Location = New System.Drawing.Point(2, 88)
         Me.lblNotInSeason.Name = "lblNotInSeason"
-        Me.lblNotInSeason.Size = New System.Drawing.Size(303, 27)
+        Me.lblNotInSeason.Size = New System.Drawing.Size(306, 20)
         Me.lblNotInSeason.TabIndex = 13
         Me.lblNotInSeason.Text = "NOT_IN_SEASON"
         Me.lblNotInSeason.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -413,16 +400,6 @@
         Me.lblStreamStatus.UseCustomBackColor = true
         Me.lblStreamStatus.UseCustomForeColor = true
         '
-        'banner
-        '
-        Me.banner.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.banner.Location = New System.Drawing.Point(1, 1)
-        Me.banner.Margin = New System.Windows.Forms.Padding(0)
-        Me.banner.Name = "banner"
-        Me.banner.Size = New System.Drawing.Size(307, 20)
-        Me.banner.TabIndex = 28
-        Me.banner.UseCustomBackColor = true
-        '
         'GameControl
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -435,7 +412,6 @@
         Me.Size = New System.Drawing.Size(318, 157)
         Me.BorderPanel1.ResumeLayout(false)
         CType(Me.picAway,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.live2,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.live1,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.picHome,System.ComponentModel.ISupportInitialize).EndInit
         Me.FlowLayoutPanel1.ResumeLayout(false)
@@ -453,7 +429,6 @@ End Sub
         Friend WithEvents lblNotInSeason As MetroFramework.Controls.MetroLabel
         Friend WithEvents picHome As PictureBox
         Friend WithEvents live1 As PictureBox
-        Friend WithEvents live2 As PictureBox
         Friend WithEvents lblHomeScore As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblAwayScore As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblStreamStatus As MetroFramework.Controls.MetroLabel
@@ -466,7 +441,6 @@ End Sub
         Friend WithEvents lnkEnd1 As Button
         Friend WithEvents lnkEnd2 As Button
         Friend WithEvents lnkRef As Button
-        Friend WithEvents banner As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblGameStatus As MetroFramework.Controls.MetroLabel
         Friend WithEvents divider As MetroFramework.Controls.MetroLabel
     End Class

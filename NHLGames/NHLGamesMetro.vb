@@ -155,7 +155,11 @@ Public Class NHLGamesMetro
     Private Sub tgShowFinalScores_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowFinalScores.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowScores, tgShowFinalScores.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameManager.GamesDict(game.GameId), tgShowFinalScores.Checked, tgShowLiveScores.Checked, tgShowSeriesRecord.Checked)
+            game.UpdateGame(GameManager.GamesDict(game.GameId), 
+                            tgShowFinalScores.Checked,
+                            tgShowLiveScores.Checked,
+                            tgShowSeriesRecord.Checked,
+                            tgShowTeamCityAbr.Checked)
         Next
     End Sub
 
@@ -253,7 +257,11 @@ Public Class NHLGamesMetro
     Private Sub chkShowLiveScores_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowLiveScores.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowLiveScores, tgShowLiveScores.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameManager.GamesDict(game.GameId), tgShowFinalScores.Checked, tgShowLiveScores.Checked, tgShowSeriesRecord.Checked)
+            game.UpdateGame(GameManager.GamesDict(game.GameId),
+                            tgShowFinalScores.Checked,
+                            tgShowLiveScores.Checked,
+                            tgShowSeriesRecord.Checked,
+                            tgShowTeamCityAbr.Checked)
         Next
     End Sub
 
@@ -298,7 +306,11 @@ Public Class NHLGamesMetro
     Private Sub chkShowSeriesRecord_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowSeriesRecord.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowSeriesRecord, tgShowSeriesRecord.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameManager.GamesDict(game.GameId), tgShowFinalScores.Checked, tgShowLiveScores.Checked, tgShowSeriesRecord.Checked)
+            game.UpdateGame(GameManager.GamesDict(game.GameId),
+                            tgShowFinalScores.Checked,
+                            tgShowLiveScores.Checked,
+                            tgShowSeriesRecord.Checked,
+                            tgShowTeamCityAbr.Checked)
         Next
     End Sub
 
@@ -447,7 +459,11 @@ Public Class NHLGamesMetro
         Common.GetLanguage()
         InitializeForm.SetLanguage()
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameManager.GamesDict(game.GameId), tgShowFinalScores.Checked, tgShowLiveScores.Checked, tgShowSeriesRecord.Checked)
+            game.UpdateGame(GameManager.GamesDict(game.GameId),
+                            tgShowFinalScores.Checked,
+                            tgShowLiveScores.Checked,
+                            tgShowSeriesRecord.Checked,
+                            tgShowTeamCityAbr.Checked)
         Next
     End Sub
 
@@ -565,5 +581,12 @@ Public Class NHLGamesMetro
 
     Private Sub txtAdKey_TextChanged(sender As Object, e As EventArgs) Handles txtAdKey.TextChanged
         txtAdKey.Text = txtAdKey.Text.ToUpper()
+    End Sub
+
+    Private Sub tgTeamNamesAbr_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowTeamCityAbr.CheckedChanged
+        ApplicationSettings.SetValue(SettingsEnum.ShowTeamCityAbr, tgShowTeamCityAbr.Checked)
+        For each game As GameControl In flpGames.Controls
+            game.UpdateGame(GameManager.GamesDict(game.GameId), tgShowFinalScores.Checked, tgShowLiveScores.Checked, tgShowSeriesRecord.Checked, tgShowTeamCityAbr.Checked)
+        Next
     End Sub
 End Class

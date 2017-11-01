@@ -126,15 +126,15 @@
     <comment>Console tab</comment>
   </data>
   <data name="lblShowFinalScores" xml:space="preserve">
-    <value>Afficher les résultats finaux</value>
+    <value>Résultats finaux</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblShowLiveScores" xml:space="preserve">
-    <value>Afficher les résultats en direct</value>
+    <value>Résultats en direct</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblShowSeriesRecord" xml:space="preserve">
-    <value>Afficher les détails des séries</value>
+    <value>Détails des séries</value>
     <comment>Settings tab</comment>
   </data>
   <data name="msgHostnameSet" xml:space="preserve">
@@ -536,5 +536,13 @@
   <data name="gamePeriodSo" xml:space="preserve">
     <value>FUS</value>
     <comment>Game panel</comment>
+  </data>
+  <data name="lblModulesDesc" xml:space="preserve">
+    <value>Détecte les annonces et informe les applications activées ci-dessous</value>
+    <comment>Modules tab</comment>
+  </data>
+  <data name="lblShowTeamCityAbr" xml:space="preserve">
+    <value>Abbréviation de la ville des équipes</value>
+    <comment>Settings tab</comment>
   </data>
 </root>

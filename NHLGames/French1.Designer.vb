@@ -515,6 +515,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Détecte les annonces et informe les applications activées ci-dessous.
+        '''</summary>
+        Friend Shared ReadOnly Property lblModulesDesc() As String
+            Get
+                Return ResourceManager.GetString("lblModulesDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Emplacement MPC.
         '''</summary>
         Friend Shared ReadOnly Property lblMpcPath() As String
@@ -659,7 +668,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Afficher les résultats finaux.
+        '''  Recherche une chaîne localisée semblable à Résultats finaux.
         '''</summary>
         Friend Shared ReadOnly Property lblShowFinalScores() As String
             Get
@@ -668,7 +677,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Afficher les résultats en direct.
+        '''  Recherche une chaîne localisée semblable à Résultats en direct.
         '''</summary>
         Friend Shared ReadOnly Property lblShowLiveScores() As String
             Get
@@ -677,11 +686,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Afficher les détails des séries.
+        '''  Recherche une chaîne localisée semblable à Détails des séries.
         '''</summary>
         Friend Shared ReadOnly Property lblShowSeriesRecord() As String
             Get
                 Return ResourceManager.GetString("lblShowSeriesRecord", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Abbréviation de la ville des équipes.
+        '''</summary>
+        Friend Shared ReadOnly Property lblShowTeamCityAbr() As String
+            Get
+                Return ResourceManager.GetString("lblShowTeamCityAbr", resourceCulture)
             End Get
         End Property
         
