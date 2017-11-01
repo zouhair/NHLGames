@@ -326,11 +326,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: {0}.
+        '''  Recherche une chaîne localisée semblable à Error: Code failed at: {0} - With exception: {1}.
         '''</summary>
         Friend Shared ReadOnly Property errorGeneral() As String
             Get
                 Return ResourceManager.GetString("errorGeneral", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Error: Getting game streams from server with code exception: {0}.
+        '''</summary>
+        Friend Shared ReadOnly Property errorGettingStreams() As String
+            Get
+                Return ResourceManager.GetString("errorGettingStreams", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Error: Selected Hostname is unreachable.
+        '''</summary>
+        Friend Shared ReadOnly Property errorHostname() As String
+            Get
+                Return ResourceManager.GetString("errorHostname", resourceCulture)
             End Get
         End Property
         

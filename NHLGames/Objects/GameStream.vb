@@ -53,7 +53,6 @@ Namespace Objects
         Public Sub GetRightGameStream()
             Dim wr As WebRequest
             Dim resp As StreamReader
-            
 
             Dim cdn = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs).Cdn.ToString().ToLower()
             Dim address As String = String.Format("http://{0}/m3u8/{1}/{2}{3}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, cdn)
@@ -80,11 +79,11 @@ Namespace Objects
                     resp.Close()
                 Catch ex2 As Exception 
                     If Not ex2.Message.Contains(E404) Then
-                        Console.WriteLine(String.Format(NHLGamesMetro.RmText.GetString("errorGeneral"), ex.Message))
+                        Console.WriteLine(String.Format(NHLGamesMetro.RmText.GetString("errorGettingStreams"), ex.Message))
                     End If
                 End Try
             Catch ex As Exception
-                Console.WriteLine(String.Format(NHLGamesMetro.RmText.GetString("errorGeneral"), ex.Message))
+                Console.WriteLine(String.Format(NHLGamesMetro.RmText.GetString("errorGettingStreams"), ex.Message))
             Finally
                 SetVideoOnDemandLink()
             End Try

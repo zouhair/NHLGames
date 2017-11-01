@@ -146,7 +146,7 @@
     <comment>Console</comment>
   </data>
   <data name="errorGeneral" xml:space="preserve">
-    <value>Error: {0}</value>
+    <value>Error: Code failed at: {0} - With exception: {1}</value>
     <comment>Console</comment>
   </data>
   <data name="msgHostnameSet" xml:space="preserve">
@@ -736,5 +736,13 @@
   <data name="gamePeriodSo" xml:space="preserve">
     <value>SO</value>
     <comment>Game panel</comment>
+  </data>
+  <data name="errorGettingStreams" xml:space="preserve">
+    <value>Error: Getting game streams from server with code exception: {0}</value>
+    <comment>Console</comment>
+  </data>
+  <data name="errorHostname" xml:space="preserve">
+    <value>Error: Selected Hostname is unreachable</value>
+    <comment>Console</comment>
   </data>
 </root>

@@ -14,6 +14,8 @@ Namespace  Objects.Modules
         Private _spotifyId As Integer = 0
         Private Const KeyVkNextSong = 176
         Private Const KeyVkPlayPause = 179
+        Private Const KeyNextSong = "^{RIGHT}"
+        Private Const keyTab = "{TAB}"
         Private Shared ReadOnly WebRequestParams = "&ref=&cors=&_=" & Convert.ToInt32((Datetime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds)
 
         Private _authKey As String
@@ -42,7 +44,12 @@ Namespace  Objects.Modules
 
         Private Sub NextSong()
             If Not AnyMediaPlayer Then
-                Query("remote/skip_next.json?")
+                Dim curr? = WindowsEvents.GetForegroundWindow()
+                WindowsEvents.SetForegroundWindow(Process.GetProcessById(_spotifyId).MainWindowHandle)
+                Threading.Thread.Sleep(200)
+                SendKeys.SendWait(keyTab) 'to unfocus any current field on spotify
+                SendKeys.SendWait(KeyNextSong) 
+                WindowsEvents.SetForegroundWindow(curr)
             Else
                 WindowsEvents.PressKey(KeyVkNextSong)
             End If
@@ -50,7 +57,7 @@ Namespace  Objects.Modules
 
         Private Sub Play()
             If Not AnyMediaPlayer Then
-                Query("remote/pause.json?pause=false") 'remote/resume.json?
+                Query("remote/pause.json?pause=false") 'remote/resume.json
             Else
                 WindowsEvents.PressKey(KeyVkPlayPause)
             End If
@@ -58,7 +65,7 @@ Namespace  Objects.Modules
 
         Private Sub Pause()
             If Not AnyMediaPlayer Then
-                Query("remote/pause.json?pause=true")  'remote/pause.json?pause=false
+                Query("remote/pause.json?pause=true")  'remote/pause.json
             Else
                 WindowsEvents.PressKey(KeyVkPlayPause)
             End If
@@ -183,8 +190,11 @@ Namespace  Objects.Modules
         End Function
 
         Private Shared Function GetResponseToString(webRequest As HttpWebRequest) As String
-            Dim webResponse = New StreamReader(webRequest.GetResponse().GetResponseStream())
-            Return webResponse.ReadToEnd()
+            Try
+                Return New StreamReader(webRequest.GetResponse().GetResponseStream()).ReadToEnd()
+            Catch ex As Exception
+                Return String.Empty
+            End Try
         End Function
 
         Private Shared Function  GetMyHttpWebRequest(address As String) As HttpWebRequest

@@ -47,6 +47,7 @@ Namespace Utilities
         End Sub
 
         Public Shared Sub LoadGames(dateTime As DateTime, refreshing As Boolean)
+            If HostNameInvalid() Then Return
             Try
                 NHLGamesMetro.ProgressVisible = True
                 NHLGamesMetro.ProgressValue = 0
@@ -74,5 +75,13 @@ Namespace Utilities
                 Console.WriteLine(ex.ToString())
             End Try
         End Sub
+
+        Private Shared Function HostNameInvalid() As Boolean
+            Dim address As String = String.Format("http://{0}/", NHLGamesMetro.HostName)
+            Dim result = Not Common.SendWebRequest(address)
+            If result Then Console.WriteLine(English.errorHostname)
+            Return result
+        End Function
+
     End Class
 End Namespace
