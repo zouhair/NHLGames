@@ -102,8 +102,10 @@ NHLGames gives you some options to change how a game panel will appear.
 
 ### ///_Language_
 NHLGames supports two languages: English and French.
-More can be added, but we are waiting for contributors to translate the file:    
-`NHLGames/NHLGames/res/EnglishTemplate.resx` (can be modified in Visual Studio)
+More can be added, but we are waiting for contributions.
+
+Contribute:
+> If you want to contribute. Translate the file `NHLGames/NHLGames/English.resx`. It can be modified in Visual Studio, remove any lines tagged as Console lines (these are not translated), rename the file and open a Pull Request.
 
 ### ///_Stream Quality_
 The selected value will defined which quality will be sent to your media player, from the worst to the best quality. Selecting the highest quality also means bigger files to download :
