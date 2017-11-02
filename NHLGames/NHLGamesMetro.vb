@@ -217,6 +217,10 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnOuput_Click(sender As Object, e As EventArgs) Handles btnOuput.Click
+        folderBrowserDialog.SelectedPath = If (txtOutputArgs.Text <> String.Empty, 
+                                            Path.GetDirectoryName(txtOutputArgs.Text), 
+                                            Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
+                                            )
         folderBrowserDialog.ShowDialog()
         If folderBrowserDialog.SelectedPath <> txtOutputArgs.Text Then
             txtOutputArgs.Text = folderBrowserDialog.SelectedPath & $"\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(QUAL).mp4"
@@ -481,7 +485,7 @@ Public Class NHLGamesMetro
             tgOBS.Checked = False
         End If
 
-        tgOBS.Enabled = tg.Checked
+        tgOBS.Enabled = tg.Checked AndAlso txtAdKey.Text <> String.Empty AndAlso txtGameKey.Text <> String.Empty
         tgSpotify.Enabled = tg.Checked
         tlpOBSSettings.Enabled = tg.Checked
         flpSpotifyParameters.Enabled = tg.Checked
@@ -588,5 +592,9 @@ Public Class NHLGamesMetro
         For each game As GameControl In flpGames.Controls
             game.UpdateGame(GameManager.GamesDict(game.GameId), tgShowFinalScores.Checked, tgShowLiveScores.Checked, tgShowSeriesRecord.Checked, tgShowTeamCityAbr.Checked)
         Next
+    End Sub
+
+    Private Sub txtObsKey_TextChanged(sender As Object, e As EventArgs) Handles txtGameKey.TextChanged, txtAdKey.TextChanged
+        tgOBS.Enabled = txtAdKey.Text <> String.Empty AndAlso txtGameKey.Text <> String.Empty AndAlso tgModules.Checked
     End Sub
 End Class

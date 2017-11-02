@@ -78,12 +78,12 @@ Namespace Utilities
             For i As Integer = 0 To sessionsDefaultAudioEndPointDevice.Count - 1
                 If sessionsDefaultAudioEndPointDevice(i).GetProcessID <> processId Then Continue For
                 Dim volumeList As List(Of Double) = new List(Of Double)
-                For j As Integer = 0 To 2
+                For j As Integer = 0 To 1
                     Dim audioMeter As audioMeterInformation = sessionsDefaultAudioEndPointDevice(i).AudioMeterInformation
                     volumeList.Add( audioMeter.MasterPeakValue)
                     Threading.Thread.Sleep(100)
                 Next
-                Return (volumeList.Item(0) + volumeList.Item(1) + volumeList.Item(2)) / 3.0
+                Return (volumeList.Item(0) + volumeList.Item(1)) / 2.0
             Next
             Return 0.0
         End Function

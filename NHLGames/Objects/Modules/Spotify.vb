@@ -15,7 +15,7 @@ Namespace  Objects.Modules
         Private Const KeyVkNextSong = 176
         Private Const KeyVkPlayPause = 179
         Private Const KeyNextSong = "^{RIGHT}"
-        Private Const keyTab = "{TAB}"
+        Private Const KeyTab = "{TAB}"
         Private Shared ReadOnly WebRequestParams = "&ref=&cors=&_=" & Convert.ToInt32((Datetime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds)
 
         Private _authKey As String
@@ -44,12 +44,14 @@ Namespace  Objects.Modules
 
         Private Sub NextSong()
             If Not AnyMediaPlayer Then
-                Dim curr? = WindowsEvents.GetForegroundWindow()
-                WindowsEvents.SetForegroundWindow(Process.GetProcessById(_spotifyId).MainWindowHandle)
-                Threading.Thread.Sleep(200)
+                Dim curr? = WindowsEvents.GetForegroundWindowFromHandle()
+                Dim spotifyHandle? = Process.GetProcessById(_spotifyId).MainWindowHandle
+                WindowsEvents.SetForegroundWindowFromHandle(spotifyHandle)
+                Threading.Thread.Sleep(100)
                 SendKeys.SendWait(keyTab) 'to unfocus any current field on spotify
                 SendKeys.SendWait(KeyNextSong) 
-                WindowsEvents.SetForegroundWindow(curr)
+                WindowsEvents.SetBackgroundWindowFromHandle(spotifyHandle)
+                WindowsEvents.SetForegroundWindowFromHandle(curr)
             Else
                 WindowsEvents.PressKey(KeyVkNextSong)
             End If
@@ -94,16 +96,16 @@ Namespace  Objects.Modules
 
         Public Sub Initialize() Implements IAdModule.Initialize
             If Not SpotifyIsInstalled() Then
-                Console.WriteLine(English.msgSpotifyIsntInstalled)
                 _stopIt = True
                 InvokeElement.ModuleSpotifyOff
+                Console.WriteLine(English.msgSpotifyIsntInstalled)
             End If
 
             ConnectLoop()
 
             If _spotifyId = 0 AndAlso Not _stopIt Then
-                Console.WriteLine(English.msgSpotifyNotConnected)
                 InvokeElement.ModuleSpotifyOff()
+                Console.WriteLine(English.msgSpotifyNotConnected)
             End If
 
             _authKey = GetAuthKey()
@@ -120,9 +122,9 @@ Namespace  Objects.Modules
                 Try
                     If ConnectInternal() Then Return
                 Catch ex As Exception
-                    Console.WriteLine(String.Format(English.msgSpotifyException, ex.Message))
                     _stopIt = True
                     InvokeElement.ModuleSpotifyOff
+                    Console.WriteLine(String.Format(English.msgSpotifyException, ex.Message))
                 End Try
                 Task.Delay(_connectSleep)
             End While

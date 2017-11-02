@@ -1271,7 +1271,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Ad Detection: Spotify is not installed.
+        '''  Recherche une chaîne localisée semblable à Warning: Ad Detection: Spotify is not installed.
         '''</summary>
         Friend Shared ReadOnly Property msgSpotifyIsntInstalled() As String
             Get

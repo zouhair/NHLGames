@@ -77,12 +77,13 @@ Namespace Objects.Modules
                     End Try
                 End If
 
-                Dim curr? = WindowsEvents.GetForegroundWindow()
+                Dim curr? = WindowsEvents.GetForegroundWindowFromHandle()
                 Console.WriteLine(String.Format(English.msgObsChangingScene, scene))
-                WindowsEvents.SetForegroundWindow(_obsHandle)
-                Threading.Thread.Sleep(100)
+                WindowsEvents.SetForegroundWindowFromHandle(_obsHandle)
+                Threading.Thread.Sleep(50)
                 SendKeys.SendWait(toSend)
-                WindowsEvents.SetForegroundWindow(curr)
+                WindowsEvents.SetBackgroundWindowFromHandle(_obsHandle)
+                WindowsEvents.SetForegroundWindowFromHandle(curr)
             End If
         End Sub
 

@@ -714,7 +714,7 @@
     <comment>Console</comment>
   </data>
   <data name="msgSpotifyIsntInstalled" xml:space="preserve">
-    <value>Ad Detection: Spotify is not installed</value>
+    <value>Warning: Ad Detection: Spotify is not installed</value>
     <comment>Console</comment>
   </data>
   <data name="msgSpotifyNotConnected" xml:space="preserve">
