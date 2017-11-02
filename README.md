@@ -21,6 +21,7 @@ Enjoy!
       * [Game panel](#game-panel)
    * [Settings](#settings)
      * [Show Scores](#show-scores)
+     * [Language](#language)
      * [Stream Quality](#stream-quality)
      * [Content Delivery Network (CDN)](#content-delivery-network-cdn)
      * [Server's Hostname](#servers-hostname)
@@ -29,7 +30,6 @@ Enjoy!
      * [Streamer](#streamer)
      * [Arguments](#arguments)
      * [Ad Detection](#ad-detection)
-     * [Language](#language)
    * [Console](#console)
 * [Support](#support)
   * [Players issues](#players-issues)
@@ -99,6 +99,11 @@ NHLGames gives you some options to change how a game panel will appear.
 *Final Scores* : If on, it shows final score of all past games.    
 *Live Scores* : If on, it shows live score of all current games.    
 *Series Record* : If on, it shows serie records of all upcoming playoffs games.  
+
+### ///_Language_
+NHLGames supports two languages: English and French.
+More can be added, but we are waiting for contributors to translate the file:    
+`NHLGames/NHLGames/res/EnglishTemplate.resx` (can be modified in Visual Studio)
 
 ### ///_Stream Quality_
 The selected value will defined which quality will be sent to your media player, from the worst to the best quality. Selecting the highest quality also means bigger files to download :
@@ -186,11 +191,6 @@ NHLGames doesn't use any Ad Detection modules by default, but you can activate i
 Ad detection only supports these applications:
 - Spotify Windows: If you want to play music during ads.
 - OBS Scene Changer : If you want to switch between windows when an ad hits.
-
-### ///_Language_
-NHLGames supports two languages: English and French.
-More can be added, but we are waiting for contributors to translate the file:    
-`NHLGames/NHLGames/res/EnglishTemplate.resx` (can be modified in Visual Studio)
 
 ## //_Console_
 Go to this tab to see everything that NHLGames does. Also, any error or warning will show up here.
