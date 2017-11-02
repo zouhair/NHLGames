@@ -6,7 +6,7 @@ Choose a game.
 Choose a stream.    
 Enjoy!
 
-![image](https://user-images.githubusercontent.com/23088305/30517831-7276e442-9b39-11e7-8faa-e8960df24e8c.png)
+![image](https://user-images.githubusercontent.com/23088305/32304622-21de220c-bf47-11e7-8e7c-e63bbe57f994.png)
 
 ## /_Index_
 * [First use](#first-use)
@@ -59,7 +59,7 @@ First time you start NHLGames it will ask if you wish to view the Hosts file. Th
 So, you might wonder if this application is safe. You can look at our code to find out by yourself, you will see the reason why anti-virus don't like us. We modify your hosts file in Windows/System32/drivers/etc/ and we do that to make sure that the app will be able to get the stream links for games that are available. The other reason is that the app sends web request to a server that might be blacklisted. But don't worry, this server only responds with plain text.
 
 ## //_Setup_
-To be able to play streams properly, you have to choose a media player in the ![image](https://cloud.githubusercontent.com/assets/23088305/25557243/ce306f64-2cdb-11e7-9fa3-a4a73161c3ea.png) tab. Make sure the player that you choose has a valid path to the EXE file.
+To be able to play streams properly, you have to choose a media player in the ![image](https://user-images.githubusercontent.com/23088305/32304695-9589db88-bf47-11e7-9af5-867c8db0d4a3.png) tab. Make sure the player that you choose has a valid path to the EXE file.
 
 MPV player comes with NHLGames. So if you don't have or want VLC/MPC players, just use our default media player to watch games. Make sure you select mpv as the default player.
 
@@ -74,20 +74,22 @@ Everytime you launch NHLGames it will search for today's games.
 ## //_Games_
 ### ///_Navigation bar_
 If you want to watch past games, use the calendar or use the arrows to navigate through the days.
-![image](https://cloud.githubusercontent.com/assets/23088305/25556865/0f4cc51e-2cd3-11e7-96db-b875a4ab716c.png)
+![image](https://user-images.githubusercontent.com/23088305/32304708-b0bf16f2-bf47-11e7-99f7-51c9dcb2382f.png)
 Use the refresh button (at the right) to refresh the current day games.
 
 ### ///_Game panel_
-Here are 5 differents game panels that you will see while using NHLGames.
-  1. Dark Gray : Upcoming games
-  2. Blue : Today's games
-  3. Green : Pre game
-  4. Red : In progress
-  5. Gray : Final games
-  
-  Note : 6th picture shows the possibility to add live score or final score to the panel. You can turn it on/off in Settings tab.
+Game panels can be customize to show or hide infos, it can be set in settings. Only today's games will show with a blue frame, like the one below :
 
-![image](https://cloud.githubusercontent.com/assets/23088305/25744794/b7e037f2-3169-11e7-89d6-98fe61684158.png)
+![image](https://user-images.githubusercontent.com/23088305/32305019-40a1e596-bf49-11e7-89ab-ad12d2cfa573.png)
+
+Today's games are blue:
+- Upcoming games : blue frame
+- Pregame games: blue frame and blue top banner
+- Live games : blue frame, blue top banner and live icon (red)
+
+Every others games, past or scheduled, are grey:
+- Past games: grey frame with a grey top banner
+- Scheduled games: grey frame
 
 ___
 
