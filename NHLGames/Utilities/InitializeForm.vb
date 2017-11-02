@@ -52,6 +52,7 @@ Namespace Utilities
             Form.tabMenu.TabPages.Item(2).Text = NHLGamesMetro.RmText.GetString("tabConsole")
 
             Form.lblNoGames.Text = NHLGamesMetro.RmText.GetString("lblNoGames")
+            Form.lblStatus.Text = String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"), NHLGamesMetro.FormInstance.flpGames.Controls.Count())
 
             'Settings
             Form.lblGamePanel.Text = NHLGamesMetro.RmText.GetString("lblShowScores")

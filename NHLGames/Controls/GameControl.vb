@@ -101,7 +101,7 @@ Namespace Controls
                         lblPeriod.ForeColor = Color.White
                         lblPeriod.Text = NHLGamesMetro.RmText.GetString("enumpregame").ToUpper()
                     Else
-                        lblGameStatus.Text &= String.Format("{0}({1})", vbCrLf, NHLGamesMetro.RmText.GetString("enumpregame").ToUpper())
+                        lblGameStatus.Text &= String.Format("{0}{1}", vbCrLf, NHLGamesMetro.RmText.GetString("enumpregame").ToUpper())
                     End If
                 End If
             End If
