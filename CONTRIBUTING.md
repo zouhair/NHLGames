@@ -3,7 +3,7 @@ Contributing to NHLGames
 
 NHLGames is coded in VB.NET using Visual Studio and .Net Framework 4.5.     
 
-Dependencies:
+Using NuGet packages:
 - MetroModernUI by [Dennis Magno](/dennismagno)
 - Newtonsoft.Json by [James Newton-King](/JamesNK)
 - NAudio by [Mark Heath](/markheath)
