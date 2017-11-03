@@ -5,45 +5,44 @@ Imports NHLGames.Objects
 
 Namespace Utilities
     Public Class GameFetcher
+        Private Shared ReadOnly Form As NHLGamesMetro = NHLGamesMetro.FormInstance
+
         Public Shared Sub StreamingProgress
-            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
-            form.spnStreaming.Visible = NHLGamesMetro.ProgressVisible
-            form.flpGames.Enabled = False
-            form.flpGames.Focus()
-            Progress(form.spnStreaming)
+            Form.spnStreaming.Visible = NHLGamesMetro.ProgressVisible
+            Form.flpGames.Enabled = False
+            Form.flpGames.Focus()
+            Progress(Form.spnStreaming)
         End Sub
 
         Public Shared Sub LoadingProgress
-            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
-            form.spnLoading.Visible = NHLGamesMetro.ProgressVisible
-            form.flpGames.Enabled = True
+            Form.spnLoading.Visible = NHLGamesMetro.ProgressVisible
+            Form.flpGames.Enabled = True
             Progress(form.spnLoading)
         End Sub
 
         Private Shared Sub Progress(spinner As MetroProgressSpinner)
-            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
-
             If NHLGamesMetro.ProgressValue < spinner.Maximum And NHLGamesMetro.ProgressValue >= 0 Then
                 spinner.Value = NHLGamesMetro.ProgressValue
             End If
 
             If spinner.Visible Then
-                form.btnDate.Enabled = False
-                form.btnTomorrow.Enabled = False
-                form.btnYesterday.Enabled = False
-                form.lblNoGames.Visible = False
+                SetGameTabControls(False)
+                Form.lblNoGames.Visible = False
             Else
                 spinner.Value = 0
-                form.btnDate.Enabled = True
-                form.btnTomorrow.Enabled = True
-                form.btnYesterday.Enabled = True
-                If (form.flpGames.Controls.Count = 0) Then
-                    form.lblNoGames.Visible = True
+                SetGameTabControls(True)
+                If (Form.flpGames.Controls.Count = 0) Then
+                    Form.lblNoGames.Visible = True
                 Else
-                    form.lblNoGames.Visible = False
+                    Form.lblNoGames.Visible = False
                 End If
             End If
+        End Sub
 
+        Private Shared Sub SetGameTabControls(enabled As Boolean)
+            Form.btnDate.Enabled = enabled
+            Form.btnTomorrow.Enabled = enabled
+            Form.btnYesterday.Enabled = enabled
         End Sub
 
         Public Shared Sub LoadGames(dateTime As DateTime, refreshing As Boolean)

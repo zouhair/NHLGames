@@ -78,9 +78,9 @@ Public Class NHLGamesMetro
 
     Private Shared Sub tmrAnimate_Tick(sender As Object, e As EventArgs) Handles tmrAnimate.Tick
         If StreamStarted Then
-            GameFetcher.StreamingProgress
-        Else 
-            GameFetcher.LoadingProgress
+            GameFetcher.StreamingProgress()
+        Else
+            GameFetcher.LoadingProgress()
         End If
     End Sub
 

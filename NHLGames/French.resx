@@ -138,7 +138,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="msgHostnameSet" xml:space="preserve">
-    <value>NHLGames ne peut pas fonctionner sans avoir son nom de domaine inscrit dans le fichier Hosts de Windows. Acceptez-vous que NHLGames ajoute une entrée à votre fichier Hosts, ainsi Windows pourra résoudre le nom de domaine de NHLGames et pourra se connecter à son adresse IP?</value>
+    <value>NHLGames doit ajouter une ligne à votre fichier Hosts de Windows pour qu'il puisse rediriger efficacement les streams de NHL.tv. Laissez-vous NHLGames ajouter son domaine à ce fichier?</value>
     <comment>Message</comment>
   </data>
   <data name="lblAwayTeam" xml:space="preserve">

@@ -81,7 +81,7 @@ Namespace Utilities
             End If
         End Sub
 
-        Public Shared Sub AddEntry(ip As String, host As String)
+        Public Shared Sub AddEntry(ip As String, host As String, Optional viewChanges As Boolean = True)
 
             If EnsureAdmin() Then
                 Dim fileIsReadonly As Boolean = FileAccess.IsFileReadonly(HostsFilePath)
@@ -111,7 +111,7 @@ Namespace Utilities
                     FileAccess.AddReadonly(HostsFilePath)
                 End If
 
-                MessageOpenHostsFile()
+                If viewChanges Then MessageOpenHostsFile()
             End If
 
         End Sub

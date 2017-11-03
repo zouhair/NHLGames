@@ -821,7 +821,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à NHLGames ne peut pas fonctionner sans avoir son nom de domaine inscrit dans le fichier Hosts de Windows. Acceptez-vous que NHLGames ajoute une entrée à votre fichier Hosts, ainsi Windows pourra résoudre le nom de domaine de NHLGames et pourra se connecter à son adresse IP?.
+        '''  Recherche une chaîne localisée semblable à NHLGames doit ajouter une ligne à votre fichier Hosts de Windows pour qu&apos;il puisse rediriger efficacement les streams de NHL.tv. Laissez-vous NHLGames ajouter son domaine à ce fichier?.
         '''</summary>
         Friend Shared ReadOnly Property msgHostnameSet() As String
             Get
