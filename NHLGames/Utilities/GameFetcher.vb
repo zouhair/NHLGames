@@ -76,8 +76,8 @@ Namespace Utilities
         End Sub
 
         Private Shared Function HostNameInvalid() As Boolean
-            Dim address As String = String.Format("http://{0}/", NHLGamesMetro.HostName)
-            Dim result = Not Common.SendWebRequest(address)
+            Dim hostname As String = String.Format("http://{0}/", NHLGamesMetro.HostName)
+            Dim result = Not Common.SendWebRequest(hostname)
             If result Then Console.WriteLine(English.errorHostname)
             Return result
         End Function

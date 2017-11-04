@@ -335,11 +335,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Error: Getting game streams from server with code exception: {0}.
+        '''  Recherche une chaîne localisée semblable à Warning: Game stream for {0} not found on the server.
         '''</summary>
-        Friend Shared ReadOnly Property errorGettingStreams() As String
+        Friend Shared ReadOnly Property errorGettingStream() As String
             Get
-                Return ResourceManager.GetString("errorGettingStreams", resourceCulture)
+                Return ResourceManager.GetString("errorGettingStream", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Warning: Game stream for {0} not found on the server, with exception : {1}.
+        '''</summary>
+        Friend Shared ReadOnly Property errorGettingStreamWithEx() As String
+            Get
+                Return ResourceManager.GetString("errorGettingStreamWithEx", resourceCulture)
             End Get
         End Property
         

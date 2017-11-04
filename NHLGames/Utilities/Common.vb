@@ -1,10 +1,13 @@
-﻿Imports System.Net
+﻿Imports System.IO
+Imports System.Net
 Imports NHLGames.My.Resources
 
 Namespace Utilities
     Public Class Common
 
         Public Const UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316"
+        Private Const Http = "http"
+        Private Const E404 = "404"
 
         Public Shared Function GetRandomString(ByVal intLength As Integer)
             Const s As String = "abcdefghijklmnopqrstuvwxyz0123456789"
@@ -38,6 +41,57 @@ Namespace Utilities
                 Return False
             End Try
             Return False
+        End Function
+
+        Public Shared Function SendWebRequestForStream(ByVal address As String, ByVal legacyAddress As String, ByVal gameTitle As String) As String
+            Dim myHttpWebRequest As HttpWebRequest
+            Dim resp As StreamReader
+            Dim gameUrl As String = String.Empty
+
+            myHttpWebRequest = CType(WebRequest.Create(address), HttpWebRequest)
+            myHttpWebRequest.UserAgent = UserAgent
+            myHttpWebRequest.Timeout = 2000
+            Try
+                Dim myHttpWebResponse As HttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
+                If myHttpWebResponse.StatusCode = Httpstatuscode.OK Then
+                    resp = New StreamReader(myHttpWebResponse.GetResponseStream())
+                    gameUrl = resp.ReadToEnd()
+                    If Not gameUrl.StartsWith(Http) Then
+                        gameUrl = String.Empty
+                    End If
+                Else 
+                    myHttpWebRequest = CType(WebRequest.Create(legacyAddress), HttpWebRequest)
+                    myHttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
+                    If myHttpWebResponse.StatusCode = Httpstatuscode.OK Then
+                        resp = New StreamReader(myHttpWebResponse.GetResponseStream())
+                        gameUrl = resp.ReadToEnd()
+                        If Not gameUrl.StartsWith(Http) Then
+                            gameUrl = String.Empty
+                        End If
+                    Else 
+                        Console.WriteLine(String.Format(English.errorGettingStream, gameTitle))
+                    End If
+                End If
+                myHttpWebResponse.Close()
+            Catch
+                Try
+                    myHttpWebRequest = CType(WebRequest.Create(legacyAddress), HttpWebRequest)
+                    Dim myHttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
+                    If myHttpWebResponse.StatusCode = Httpstatuscode.OK Then
+                        resp = New StreamReader(myHttpWebResponse.GetResponseStream())
+                        gameUrl = resp.ReadToEnd()
+                        If Not gameUrl.StartsWith(Http) Then
+                            gameUrl = String.Empty
+                        End If
+                    Else 
+                        Console.WriteLine(String.Format(English.errorGettingStream, gameTitle))
+                    End If
+                Catch ex As Exception
+                    Console.WriteLine(String.Format(English.errorGettingStreamWithEx, gameTitle, ex.Message))
+                End Try
+            End Try
+            Return gameUrl
+            
         End Function
 
         Public Shared Sub WaitForGameThreads()

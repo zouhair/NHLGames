@@ -49,44 +49,13 @@ Namespace Objects
             End Try
         End Sub
 
-
         Public Sub GetRightGameStream()
-            Dim wr As WebRequest
-            Dim resp As StreamReader
-
             Dim cdn = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs).Cdn.ToString().ToLower()
             Dim address As String = String.Format("http://{0}/m3u8/{1}/{2}{3}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, cdn)
             Dim legacyAddress As String = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId)
-
-            Try
-                wr = WebRequest.Create(address)
-                wr.Timeout = Timeout
-                resp = New StreamReader(wr.GetResponse.GetResponseStream())
-                GameUrl = resp.ReadToEnd()
-                If Not GameUrl.StartsWith(Http) Then
-                    GameUrl = String.Empty
-                End If
-                resp.Close()
-            Catch ex As WebException
-                Try
-                    wr = WebRequest.Create(legacyAddress)
-                    wr.Timeout = Timeout
-                    resp = New StreamReader(wr.GetResponse.GetResponseStream())
-                    GameUrl = resp.ReadToEnd()
-                    If Not GameUrl.StartsWith(Http) Then
-                        GameUrl = String.Empty
-                    End If
-                    resp.Close()
-                Catch ex2 As Exception 
-                    If Not ex2.Message.Contains(E404) Then
-                        Console.WriteLine(String.Format(NHLGamesMetro.RmText.GetString("errorGettingStreams"), ex.Message))
-                    End If
-                End Try
-            Catch ex As Exception
-                Console.WriteLine(String.Format(NHLGamesMetro.RmText.GetString("errorGettingStreams"), ex.Message))
-            Finally
-                SetVideoOnDemandLink()
-            End Try
+            Dim gameTitle As String = $"{Game.Away} vs {Game.Home} on {Network}"
+            GameUrl = Common.SendWebRequestForStream(address, legacyAddress, gameTitle)
+            SetVideoOnDemandLink()
 
         End Sub
 

@@ -737,8 +737,8 @@
     <value>SO</value>
     <comment>Game panel</comment>
   </data>
-  <data name="errorGettingStreams" xml:space="preserve">
-    <value>Error: Getting game streams from server with code exception: {0}</value>
+  <data name="errorGettingStreamWithEx" xml:space="preserve">
+    <value>Warning: Game stream for {0} not found on the server, with exception : {1}</value>
     <comment>Console</comment>
   </data>
   <data name="errorHostname" xml:space="preserve">
@@ -752,5 +752,9 @@
   <data name="lblShowTeamCityAbr" xml:space="preserve">
     <value>Teams city abbreviation</value>
     <comment>Settings tab</comment>
+  </data>
+  <data name="errorGettingStream" xml:space="preserve">
+    <value>Warning: Game stream for {0} not found on the server</value>
+    <comment>Console</comment>
   </data>
 </root>
