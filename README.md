@@ -96,9 +96,10 @@ ___
 ## //_Settings_
 ### ///_Show Scores_
 NHLGames gives you some options to change how a game panel will appear.     
-*Final Scores* : If on, it shows final score of all past games.    
-*Live Scores* : If on, it shows live score of all current games.    
-*Series Record* : If on, it shows serie records of all upcoming playoffs games.  
+*Final Scores* : If on, it shows final score of all past games between the teams logo.    
+*Live Scores* : If on, it shows live score of all games in progress between the teams logo.    
+*Series Record* : If on, it shows serie records under the game status, like: Game 4 Tied 2-2  
+*Teams city abbreviation*: If on, it shows team city abbreviation under the team logo, like: MTL
 
 ### ///_Language_
 NHLGames supports two languages: English and French.
