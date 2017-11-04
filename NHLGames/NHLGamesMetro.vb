@@ -597,4 +597,11 @@ Public Class NHLGamesMetro
     Private Sub txtObsKey_TextChanged(sender As Object, e As EventArgs) Handles txtGameKey.TextChanged, txtAdKey.TextChanged
         tgOBS.Enabled = txtAdKey.Text <> String.Empty AndAlso txtGameKey.Text <> String.Empty AndAlso tgModules.Checked
     End Sub
+
+    Private Sub chkSpotifyAnyMediaPlayer_CheckedChanged(sender As Object, e As EventArgs) Handles chkSpotifyAnyMediaPlayer.CheckedChanged
+        If chkSpotifyAnyMediaPlayer.Checked Then
+            chkSpotifyForceToStart.Checked = False
+        End If
+        chkSpotifyForceToStart.Enabled = Not chkSpotifyAnyMediaPlayer.Checked
+    End Sub
 End Class

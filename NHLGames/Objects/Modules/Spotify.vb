@@ -54,6 +54,7 @@ Namespace  Objects.Modules
                 WindowsEvents.SetForegroundWindowFromHandle(curr)
             Else
                 WindowsEvents.PressKey(KeyVkNextSong)
+                Threading.Thread.Sleep(100)
             End If
         End Sub
 
@@ -74,12 +75,14 @@ Namespace  Objects.Modules
         End Sub
 
         Private Function IsItInitialized() As Boolean
-            Try
-                Process.GetProcessById(_spotifyId)
-            Catch ex As Exception
-                InvokeElement.ModuleSpotifyOff()
-                _initialized = false
-            End Try
+            If Not AnyMediaPlayer Then
+                Try
+                    Process.GetProcessById(_spotifyId)
+                Catch ex As Exception
+                    InvokeElement.ModuleSpotifyOff()
+                    _initialized = false
+                End Try
+            End If
             Return _initialized
         End Function
 
@@ -95,6 +98,10 @@ Namespace  Objects.Modules
         End Sub
 
         Public Sub Initialize() Implements IAdModule.Initialize
+            If AnyMediaPlayer Then 
+                _initialized = True
+                Return
+            End If
             If Not SpotifyIsInstalled() Then
                 _stopIt = True
                 InvokeElement.ModuleSpotifyOff
