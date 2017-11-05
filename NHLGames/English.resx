@@ -738,7 +738,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="errorGettingStreamWithEx" xml:space="preserve">
-    <value>Warning: Game stream for {0} not found on the server, with exception : {1}</value>
+    <value>Warning: Game stream {0} not found on the server: {1}</value>
     <comment>Console</comment>
   </data>
   <data name="errorHostname" xml:space="preserve">
@@ -754,7 +754,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="errorGettingStream" xml:space="preserve">
-    <value>Warning: Game stream for {0} not found on the server</value>
+    <value>Warning: Game stream {0} not found on the server</value>
     <comment>Console</comment>
   </data>
 </root>

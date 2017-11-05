@@ -52,13 +52,15 @@ Namespace Objects
 
             TempList = TempList.OrderBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
 
-            For Each game As Game In TempList
-                If GamesDict.ContainsKey(game.GameId) Then
-                    GamesDict(game.GameId).Update(game)
-                Else
-                    GamesDict.Add(game.GameId, game)
-                End If
-            Next
+            SyncLock TempList
+                For Each game As Game In TempList
+                    If GamesDict.ContainsKey(game.GameId) Then
+                        GamesDict(game.GameId).Update(game)
+                    Else
+                        GamesDict.Add(game.GameId, game)
+                    End If
+                Next
+            End SyncLock
 
         End Sub
 

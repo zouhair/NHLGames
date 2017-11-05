@@ -20,7 +20,7 @@ Namespace Utilities
             Return sb.ToString()
         End Function
 
-        Public Shared Function SendWebRequest(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Boolean
+        Public Shared Async Function SendWebRequest(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Task(Of Boolean)
             Try
                 Dim myHttpWebRequest As HttpWebRequest
                 If httpWebRequest Is Nothing Then
@@ -30,7 +30,7 @@ Namespace Utilities
                 Else 
                     myHttpWebRequest = httpWebRequest
                 End If
-                Dim myHttpWebResponse As HttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
+                Dim myHttpWebResponse As HttpWebResponse = CType(Await myHttpWebRequest.GetResponseAsync(), HttpWebResponse)
                 myHttpWebResponse.Close()
 
                 If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
@@ -42,64 +42,61 @@ Namespace Utilities
             Return False
         End Function
 
-        Public Shared Function SendWebRequestForStream(ByVal address As String, ByVal legacyAddress As String, ByVal gameTitle As String) As String
+        Public Shared Async Function SendWebRequestForStream(ByVal address As String, ByVal legacyAddress As String, ByVal gameTitle As String) As Task(Of String)
             Dim myHttpWebRequest As HttpWebRequest
             Dim resp As StreamReader
-            Dim gameUrl As String = String.Empty
+            Dim myHttpWebResponse As HttpWebResponse
+            Dim gameUrl As String = Await Task.FromResult(Of String)(String.Empty)
 
             myHttpWebRequest = CType(WebRequest.Create(address), HttpWebRequest)
             myHttpWebRequest.UserAgent = UserAgent
             myHttpWebRequest.Timeout = 2000
             Try
-                Dim myHttpWebResponse As HttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
+                myHttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
                 If myHttpWebResponse.StatusCode = Httpstatuscode.OK Then
                     resp = New StreamReader(myHttpWebResponse.GetResponseStream())
-                    gameUrl = resp.ReadToEnd()
+                    gameUrl = Await resp.ReadToEndAsync()
                     If Not gameUrl.StartsWith(Http) Then
-                        gameUrl = String.Empty
+                        gameUrl = Await Task.FromResult(Of String)(String.Empty)
                     End If
                 Else 
                     myHttpWebRequest = CType(WebRequest.Create(legacyAddress), HttpWebRequest)
                     myHttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
                     If myHttpWebResponse.StatusCode = Httpstatuscode.OK Then
                         resp = New StreamReader(myHttpWebResponse.GetResponseStream())
-                        gameUrl = resp.ReadToEnd()
+                        gameUrl = Await resp.ReadToEndAsync()
                         If Not gameUrl.StartsWith(Http) Then
-                            gameUrl = String.Empty
+                            gameUrl = Await Task.FromResult(Of String)(String.Empty)
                         End If
                     Else 
                         Console.WriteLine(String.Format(English.errorGettingStream, gameTitle))
                     End If
                 End If
                 myHttpWebResponse.Close()
+                Return gameUrl
             Catch
-                Try
-                    myHttpWebRequest = CType(WebRequest.Create(legacyAddress), HttpWebRequest)
-                    Dim myHttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
-                    If myHttpWebResponse.StatusCode = Httpstatuscode.OK Then
-                        resp = New StreamReader(myHttpWebResponse.GetResponseStream())
-                        gameUrl = resp.ReadToEnd()
-                        If Not gameUrl.StartsWith(Http) Then
-                            gameUrl = String.Empty
-                        End If
-                    Else 
-                        Console.WriteLine(String.Format(English.errorGettingStream, gameTitle))
-                    End If
-                    myHttpWebResponse.Close()
-                Catch ex As Exception
-                    Console.WriteLine(String.Format(English.errorGettingStreamWithEx, gameTitle, ex.Message))
-                End Try
             End Try
-            Return gameUrl
-            
-        End Function
+            'If first Web request fails with an exception, it will try the second request with the legacy address
+            Try
+                myHttpWebRequest = CType(WebRequest.Create(legacyAddress), HttpWebRequest)
+                myHttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
+                If myHttpWebResponse.StatusCode = Httpstatuscode.OK Then
+                    resp = New StreamReader(myHttpWebResponse.GetResponseStream())
+                    gameUrl = Await resp.ReadToEndAsync()
+                    If Not gameUrl.StartsWith(Http) Then
+                        gameUrl = Await Task.FromResult(Of String)(String.Empty)
+                    End If
+                Else 
+                    Console.WriteLine(String.Format(English.errorGettingStream, gameTitle))
+                End If
+                myHttpWebResponse.Close()
+                Return gameUrl
+            Catch ex As Exception
+                Console.WriteLine(String.Format(English.errorGettingStreamWithEx, gameTitle, ex.Message))
+            End Try
 
-        Public Shared Sub WaitForGameThreads()
-            For Each t As Threading.Thread In NHLGamesMetro.lstThreads
-                t.Join()
-            Next
-            NHLGamesMetro.lstThreads.Clear()
-        End Sub
+            Return gameUrl
+        End Function
 
         Public Shared Sub GetLanguage()
             Dim lang = ApplicationSettings.Read(Of String)(SettingsEnum.SelectedLanguage, String.Empty)
@@ -110,10 +107,10 @@ Namespace Utilities
             End If
         End Sub
 
-        Public Shared Sub CheckAppCanRun()
+        Public Shared Async Sub CheckAppCanRun()
             If Not File.Exists("NHLGames.exe.Config") then
                 FatalError(NHLGamesMetro.RmText.GetString("noConfigFile"))
-            Else If Not SendWebRequest("http://www.google.com") Then
+            Else If Not (Await SendWebRequest("http://www.google.com")) Then
                 FatalError(NHLGamesMetro.RmText.GetString("noWebAccess"))
             End If
         End Sub

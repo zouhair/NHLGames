@@ -31,27 +31,27 @@ Namespace Objects
             Me.Type = type
         End Sub
 
-        Public Sub CheckVod(ByVal strCdn As String)
+        Public Async Sub CheckVod(ByVal strCdn As String)
             Try
                 Dim myHttpWebRequest As HttpWebRequest = CType(WebRequest.Create(Vodurl.Replace("CDN", strCdn)), HttpWebRequest)
                 myHttpWebRequest.CookieContainer = New CookieContainer()
                 myHttpWebRequest.CookieContainer.Add(New Cookie("mediaAuth", Common.GetRandomString(240), String.Empty, "nhl.com"))
                 myHttpWebRequest.UserAgent = Common.UserAgent
                 myHttpWebRequest.Timeout = 2000
-                IsVod = Common.SendWebRequest(Vodurl.Replace("CDN", strCdn), myHttpWebRequest)
+                IsVod = Await (Common.SendWebRequest(Vodurl.Replace("CDN", strCdn), myHttpWebRequest))
             Catch e As Exception
                 Console.WriteLine(English.msgVOD, e.Message)
             End Try
         End Sub
 
-        Public Sub GetRightGameStream()
+        Public Async Sub GetRightGameStream()
             Dim cdn = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs).Cdn.ToString().ToLower()
             If cdn = String.Empty Then cdn = "akc"
             Dim address As String = String.Format("http://{0}/m3u8/{1}/{2}{3}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, cdn)
             Dim legacyAddress As String = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId)
             Dim gameTitle As String = $"{Game.Away} vs {Game.Home} on {Network}"
 
-            GameUrl = Common.SendWebRequestForStream(address, legacyAddress, gameTitle)
+            GameUrl = Await Common.SendWebRequestForStream(address, legacyAddress, gameTitle)
             SetVideoOnDemandLink()
         End Sub
 

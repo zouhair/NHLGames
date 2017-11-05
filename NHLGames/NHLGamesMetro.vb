@@ -28,7 +28,7 @@ Public Class NHLGamesMetro
     Private Const ResizeBorderWidth As Integer = 8
     Public Shared RmText As ResourceManager = English.ResourceManager
     Public LstGameControls As List(Of GameControl) = New List(Of GameControl)
-    Public Shared LstThreads As List(Of Thread) = New List(Of Thread)()
+    Public Shared LstTasks As List(Of Task) = New List(Of Task)()
     Public Shared FormLoaded As Boolean = False
     Private Shared _adDetectionEngine As AdDetection
 
@@ -472,7 +472,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Common.WaitForGameThreads()
+        Task.WaitAll(LstTasks.ToArray())
     End Sub
 
     Private Sub tgModules_Click(sender As Object, e As EventArgs) Handles tgModules.CheckedChanged 
@@ -581,10 +581,16 @@ Public Class NHLGamesMetro
 
     Private Sub txtGameKey_TextChanged(sender As Object, e As EventArgs) Handles txtGameKey.TextChanged
         txtGameKey.Text = txtGameKey.Text.ToUpper()
+        If txtGameKey.Text = String.Empty Then
+            tgOBS.Enabled = False
+        End If
     End Sub
 
     Private Sub txtAdKey_TextChanged(sender As Object, e As EventArgs) Handles txtAdKey.TextChanged
         txtAdKey.Text = txtAdKey.Text.ToUpper()
+        If txtAdKey.Text = String.Empty Then
+            tgOBS.Enabled = False
+        End If
     End Sub
 
     Private Sub tgTeamNamesAbr_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowTeamCityAbr.CheckedChanged
@@ -604,4 +610,5 @@ Public Class NHLGamesMetro
         End If
         chkSpotifyForceToStart.Enabled = Not chkSpotifyAnyMediaPlayer.Checked
     End Sub
+
 End Class

@@ -45,8 +45,8 @@ Namespace Utilities
             Form.btnYesterday.Enabled = enabled
         End Sub
 
-        Public Shared Sub LoadGames(dateTime As DateTime, refreshing As Boolean)
-            If HostNameInvalid() Then Return
+        Public Shared Async Sub LoadGames(dateTime As DateTime, refreshing As Boolean)
+            If Await HostNameInvalid() Then Return
             Try
                 NHLGamesMetro.ProgressVisible = True
                 NHLGamesMetro.ProgressValue = 0
@@ -61,9 +61,9 @@ Namespace Utilities
                 Dim jsonSchedule As JObject = Downloader.DownloadJsonSchedule(dateTime, refreshing)
                 If jsonSchedule.HasValues Then
                     GameManager.GetGames(dateTime, jsonSchedule, refreshing)
-                    Common.WaitForGameThreads()
                     NHLGamesMetro.ProgressValue = NHLGamesMetro.ProgressMaxValue - 1
-                    Threading.Thread.Sleep(100)
+                    Task.WaitAll(NHLGamesMetro.LstTasks.ToArray())
+                    Threading.Thread.Sleep(30)
                     InvokeElement.NewGamesFound(GameManager.GamesDict)
                     InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"),GameManager.GamesList.Count.ToString()))
                     NHLGamesMetro.ProgressVisible = False
@@ -75,9 +75,9 @@ Namespace Utilities
             End Try
         End Sub
 
-        Private Shared Function HostNameInvalid() As Boolean
+        Private Shared Async Function HostNameInvalid() As Task(Of Boolean)
             Dim hostname As String = String.Format("http://{0}/", NHLGamesMetro.HostName)
-            Dim result = Not Common.SendWebRequest(hostname)
+            Dim result = Not Await (Common.SendWebRequest(hostname))
             If result Then Console.WriteLine(English.errorHostname)
             Return result
         End Function

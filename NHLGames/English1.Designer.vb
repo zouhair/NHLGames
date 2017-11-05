@@ -335,7 +335,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Warning: Game stream for {0} not found on the server.
+        '''  Recherche une chaîne localisée semblable à Warning: Game stream {0} not found on the server.
         '''</summary>
         Friend Shared ReadOnly Property errorGettingStream() As String
             Get
@@ -344,7 +344,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Warning: Game stream for {0} not found on the server, with exception : {1}.
+        '''  Recherche une chaîne localisée semblable à Warning: Game stream {0} not found on the server: {1}.
         '''</summary>
         Friend Shared ReadOnly Property errorGettingStreamWithEx() As String
             Get
