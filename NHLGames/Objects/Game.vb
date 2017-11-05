@@ -164,13 +164,11 @@ Namespace Objects
         End Sub
 
         Public Sub Update(game As JObject, maxProgressSize As Integer)
-
             If _gameObj.ToString() <> game.ToString() Then
                 _gameObj = game
                 GetGameInfos(game)
-                GetGameStreams(game, maxProgressSize)
             End If
-
+            GetGameStreams(game, maxProgressSize)
         End Sub
 
         Private Function LoadGameData(game As JObject, maxProgressSize As Integer)

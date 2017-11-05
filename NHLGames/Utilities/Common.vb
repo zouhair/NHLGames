@@ -7,7 +7,6 @@ Namespace Utilities
 
         Public Const UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, Like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/14.14316"
         Private Const Http = "http"
-        Private Const E404 = "404"
 
         Public Shared Function GetRandomString(ByVal intLength As Integer)
             Const s As String = "abcdefghijklmnopqrstuvwxyz0123456789"
@@ -86,6 +85,7 @@ Namespace Utilities
                     Else 
                         Console.WriteLine(String.Format(English.errorGettingStream, gameTitle))
                     End If
+                    myHttpWebResponse.Close()
                 Catch ex As Exception
                     Console.WriteLine(String.Format(English.errorGettingStreamWithEx, gameTitle, ex.Message))
                 End Try
@@ -111,7 +111,7 @@ Namespace Utilities
         End Sub
 
         Public Shared Sub CheckAppCanRun()
-            If Not IO.File.Exists("NHLGames.exe.Config") then
+            If Not File.Exists("NHLGames.exe.Config") then
                 FatalError(NHLGamesMetro.RmText.GetString("noConfigFile"))
             Else If Not SendWebRequest("http://www.google.com") Then
                 FatalError(NHLGamesMetro.RmText.GetString("noWebAccess"))

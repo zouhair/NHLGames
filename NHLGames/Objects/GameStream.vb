@@ -1,6 +1,4 @@
-﻿Imports System.Globalization
-Imports System.IO
-Imports System.Net
+﻿Imports System.Net
 Imports Newtonsoft.Json.Linq
 Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
@@ -8,9 +6,6 @@ Imports NHLGames.Utilities
 Namespace Objects
 
     Public Class GameStream
-        Private Const Http = "http"
-        Private Const E404 = "404"
-        Private Const Timeout = 5000
         Public ReadOnly Property Type As StreamType
         Public ReadOnly Property Game As Game
         Public ReadOnly Property IsDefined As Boolean = False
@@ -51,12 +46,13 @@ Namespace Objects
 
         Public Sub GetRightGameStream()
             Dim cdn = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs).Cdn.ToString().ToLower()
+            If cdn = String.Empty Then cdn = "akc"
             Dim address As String = String.Format("http://{0}/m3u8/{1}/{2}{3}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, cdn)
             Dim legacyAddress As String = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId)
             Dim gameTitle As String = $"{Game.Away} vs {Game.Home} on {Network}"
+
             GameUrl = Common.SendWebRequestForStream(address, legacyAddress, gameTitle)
             SetVideoOnDemandLink()
-
         End Sub
 
         Private Sub SetVideoOnDemandLink()
