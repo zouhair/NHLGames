@@ -26,11 +26,11 @@ Namespace Utilities
             End If
 
             If spinner.Visible Then
-                SetGameTabControls(False)
+                InvokeElement.SetGameTabControls(False)
                 Form.lblNoGames.Visible = False
             Else
                 spinner.Value = 0
-                SetGameTabControls(True)
+                InvokeElement.SetGameTabControls(True)
                 If (Form.flpGames.Controls.Count = 0) Then
                     Form.lblNoGames.Visible = True
                 Else
@@ -39,16 +39,12 @@ Namespace Utilities
             End If
         End Sub
 
-        Private Shared Sub SetGameTabControls(enabled As Boolean)
-            Form.btnDate.Enabled = enabled
-            Form.btnTomorrow.Enabled = enabled
-            Form.btnYesterday.Enabled = enabled
-        End Sub
+        
 
         Public Shared Async Sub LoadGames(dateTime As DateTime, refreshing As Boolean)
+            NHLGamesMetro.ProgressVisible = True
             If Await HostNameInvalid() Then Return
             Try
-                NHLGamesMetro.ProgressVisible = True
                 NHLGamesMetro.ProgressValue = 0
                 InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgLoadingGames"))
 
@@ -63,16 +59,16 @@ Namespace Utilities
                     GameManager.GetGames(dateTime, jsonSchedule, refreshing)
                     NHLGamesMetro.ProgressValue = NHLGamesMetro.ProgressMaxValue - 1
                     Threading.Thread.Sleep(30)
+                    Task.WaitAll(NHLGamesMetro.LstTasks.ToArray())
                     InvokeElement.NewGamesFound(GameManager.GamesDict)
-                    InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"),GameManager.GamesList.Count.ToString())) 
-                    NHLGamesMetro.ProgressVisible = False
+                    InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"),GameManager.GamesList.Count.ToString()))
                 Else 
                     Console.WriteLine(English.errorFetchingGames)
                 End If
             Catch ex As Exception
                 Console.WriteLine(ex.ToString())
             End Try
-            Task.WaitAll(NHLGamesMetro.LstTasks.ToArray())
+            NHLGamesMetro.ProgressVisible = False
         End Sub
 
         Private Shared Async Function HostNameInvalid() As Task(Of Boolean)

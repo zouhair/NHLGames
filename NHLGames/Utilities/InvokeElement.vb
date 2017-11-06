@@ -31,6 +31,18 @@ Namespace Utilities
             End If
         End Sub
 
+        Public Shared Sub SetGameTabControls(enabled As Boolean)
+            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
+            If form.InvokeRequired Then
+                form.BeginInvoke(New Action(Of Boolean)(AddressOf SetGameTabControls), enabled)
+            Else
+                Form.btnDate.Enabled = enabled
+                Form.btnTomorrow.Enabled = enabled
+                Form.btnYesterday.Enabled = enabled
+                Form.btnRefresh.Enabled = enabled
+            End If
+        End Sub
+
         Public Shared Sub ModuleSpotifyOff()
             Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
             If form.InvokeRequired Then
