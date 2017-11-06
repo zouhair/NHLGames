@@ -42,10 +42,10 @@ Namespace Utilities
         
 
         Public Shared Async Sub LoadGames(dateTime As DateTime, refreshing As Boolean)
+            NHLGamesMetro.ProgressValue = 0
             NHLGamesMetro.ProgressVisible = True
             If Await HostNameInvalid() Then Return
             Try
-                NHLGamesMetro.ProgressValue = 0
                 InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgLoadingGames"))
 
                 If Not refreshing Then
