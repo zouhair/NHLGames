@@ -20,7 +20,9 @@ Namespace Utilities
             End If
 
             Dim taskLaunchingStream As Task = New Task(Sub()
+                NHLGamesMetro.StreamStarted = True
                 LaunchingStream(args)
+                NHLGamesMetro.StreamStarted = False
             End Sub)
 
             taskLaunchingStream.Start()
@@ -29,11 +31,9 @@ Namespace Utilities
 
         Private Shared Sub LaunchingStream(args As GameWatchArguments)
             Dim lstLines As New List(Of String) From {"Found matching plugin stream", "Available streams", "Opening stream", "Starting player"}
-            Dim progressStep As Integer = (NHLGamesMetro.ProgressMaxValue) / (lstLines.Count + 1)
-
-            NHLGamesMetro.ProgressValue = 0
-            NHLGamesMetro.StreamStarted = True
-            NHLGamesMetro.ProgressVisible = True
+            Dim progressStep As Integer = (NHLGamesMetro.spnLoadingMaxValue) / (lstLines.Count + 1)
+            NHLGamesMetro.SpnStreamingValue = 1
+            Thread.Sleep(100)
 
             Console.WriteLine(English.msgStreaming, args.GameTitle, args.Stream.Network, args.PlayerType.ToString())
             Console.WriteLine(English.msgStartingStreamer, args.ToString(True))
@@ -63,22 +63,20 @@ Namespace Utilities
                         line = line.Substring(0, line.ToLower().IndexOf(Http, StringComparison.Ordinal)) & English.msgCensoredStream
                     End If
                     If lstLines.Any(Function(x) line.Contains(x)) Then
-                        NHLGamesMetro.ProgressValue += progressStep
+                        NHLGamesMetro.SpnStreamingValue += progressStep
                     End If
                     If line.Contains(lstLines(3)) Then
                         taskPlayerWatcher.Start()
                     End If
                     Console.WriteLine(line)
-                    Thread.Sleep(100) 'to let some time for the progress bar to move
+                    Thread.Sleep(30) 'to let some time for the progress bar to move
                 End While
             Catch ex As Exception
                 Console.WriteLine(English.errorGeneral, ex.Message.ToString())
             Finally
-                NHLGamesMetro.ProgressVisible = False
-                Thread.Sleep(1000)
-                NHLGamesMetro.StreamStarted = False
+                NHLGamesMetro.SpnStreamingValue = 0
+                NHLGamesMetro.SpnStreamingVisible = False
             End Try
-
         End Sub
 
         Private Shared Sub PlayerWatcher(args As GameWatchArguments)
@@ -89,11 +87,10 @@ Namespace Utilities
                 Thread.Sleep(1000)
                 i += 1
             End While
-            NHLGamesMetro.ProgressValue = NHLGamesMetro.ProgressMaxValue - 1
-            Thread.Sleep(1000)
-            NHLGamesMetro.ProgressVisible = False
-            Thread.Sleep(1000)
-            NHLGamesMetro.StreamStarted = False
+            NHLGamesMetro.SpnStreamingValue = NHLGamesMetro.spnStreamingMaxValue - 1
+            Thread.Sleep(2000)
+            NHLGamesMetro.SpnStreamingValue = 0
+            NHLGamesMetro.SpnStreamingVisible = False
         End Sub
 
         Public Shared Sub RenewArgs(Optional forceSet As Boolean = False)

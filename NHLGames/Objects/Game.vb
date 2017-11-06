@@ -230,7 +230,7 @@ Namespace Objects
 
         End Sub
 
-        Private Async Sub GetGameStreams(game As JObject, maxProgressSize As Integer)
+        Private Sub GetGameStreams(game As JObject, maxProgressSize As Integer)
             Dim progress As Integer = 0
             Const mediaOff = "MEDIA_OFF"
 
@@ -277,7 +277,7 @@ Namespace Objects
                     For Each stream As KeyValuePair(Of StreamType, GameStream) In _streams
                         If stream.Value.IsDefined Then
                             NHLGamesMetro.LstTasks.Add(Task.Run(AddressOf stream.Value.GetRightGameStream))
-                            NHLGamesMetro.progressValue += progress
+                            NHLGamesMetro.SpnLoadingValue += progress
                             Thread.Sleep(30) 'to let some time for the progress bar to move
                         End If
                     Next

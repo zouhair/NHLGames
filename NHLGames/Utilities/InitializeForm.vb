@@ -165,10 +165,10 @@ Namespace Utilities
             Form.lblNoGames.Location = New Point(((Form.tabGames.Width - Form.lblNoGames.Width) / 2),  Form.tabGames.Height / 2)
             Form.spnLoading.Location = New Point(((Form.tabGames.Width - Form.lblNoGames.Width) / 2) + 40, (Form.tabGames.Height / 2) - 20)
 
-            Form.spnLoading.Value = NHLGamesMetro.ProgressValue
-            Form.spnLoading.Maximum = NHLGamesMetro.ProgressMaxValue
-            Form.spnStreaming.Value = NHLGamesMetro.ProgressValue
-            Form.spnStreaming.Maximum = NHLGamesMetro.ProgressMaxValue
+            Form.spnLoading.Value = NHLGamesMetro.SpnLoadingValue
+            Form.spnLoading.Maximum = NHLGamesMetro.spnLoadingMaxValue
+            Form.spnStreaming.Value = NHLGamesMetro.SpnStreamingValue
+            Form.spnStreaming.Maximum = NHLGamesMetro.spnStreamingMaxValue
             Form.lblDate.Text = DateHelper.GetFormattedDate(NHLGamesMetro.GameDate)
             
             NHLGamesMetro.LabelDate = Form.lblDate

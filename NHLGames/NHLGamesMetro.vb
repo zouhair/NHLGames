@@ -15,11 +15,14 @@ Public Class NHLGamesMetro
     Public Const DomainName As String = "mf.svc.nhl.com"
     Public Shared HostName As String
     Public Shared FormInstance As NHLGamesMetro = Nothing
-    Public Shared ProgressValue As Integer = 0
-    Public Shared ProgressMaxValue As Integer = 1000
-    Public Shared FlpCalendar As FlowLayoutPanel
     Public Shared StreamStarted As Boolean = False
-    Public Shared ProgressVisible As Boolean = False
+    Public Shared SpnLoadingValue As Integer = 0
+    Public Shared SpnLoadingMaxValue As Integer = 1000
+    Public Shared SpnLoadingVisible As Boolean = False
+    Public Shared SpnStreamingValue As Integer = 0
+    Public Shared SpnStreamingMaxValue As Integer = 1000
+    Public Shared SpnStreamingVisible As Boolean = False
+    Public Shared FlpCalendar As FlowLayoutPanel
     Public Shared GamesDownloadedTime As Date
     Public Shared LabelDate As Label
     Public Shared DownloadLink As String = "https://www.reddit.com/r/nhl_games/"
