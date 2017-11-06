@@ -27,6 +27,7 @@ Namespace Objects
             Me.Game = game
             IsDefined = True
             Network = stream.Property("callLetters")
+            If Network = String.Empty Then Network = "NHLTV"
             PlayBackId = stream.Property("mediaPlaybackId").Value.ToString()
             Me.Type = type
         End Sub
@@ -49,7 +50,7 @@ Namespace Objects
             If cdn = String.Empty Then cdn = "akc"
             Dim address As String = String.Format("http://{0}/m3u8/{1}/{2}{3}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, cdn)
             Dim legacyAddress As String = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId)
-            Dim gameTitle As String = $"{Game.Away} vs {Game.Home} on {Network}"
+            Dim gameTitle As String = $"{Game.AwayAbbrev} vs {Game.HomeAbbrev} on {Network}"
 
             GameUrl = Await Common.SendWebRequestForStream(address, legacyAddress, gameTitle)
             SetVideoOnDemandLink()

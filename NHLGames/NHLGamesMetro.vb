@@ -472,7 +472,10 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Task.WaitAll(LstTasks.ToArray())
+        Try
+            Task.WaitAll(LstTasks.ToArray())
+        Catch
+        End Try
     End Sub
 
     Private Sub tgModules_Click(sender As Object, e As EventArgs) Handles tgModules.CheckedChanged 

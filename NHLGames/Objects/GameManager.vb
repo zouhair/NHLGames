@@ -61,7 +61,6 @@ Namespace Objects
                     End If
                 Next
             End SyncLock
-
         End Sub
 
     End Class

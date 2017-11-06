@@ -230,7 +230,7 @@ Namespace Objects
 
         End Sub
 
-        Private Sub GetGameStreams(game As JObject, maxProgressSize As Integer)
+        Private Async Sub GetGameStreams(game As JObject, maxProgressSize As Integer)
             Dim progress As Integer = 0
             Const mediaOff = "MEDIA_OFF"
 
@@ -272,15 +272,16 @@ Namespace Objects
                 Next
             End If
 
-            SyncLock _streams
-                For Each stream As KeyValuePair(Of StreamType, GameStream) In _streams
-                    If stream.Value.IsDefined Then
-                        NHLGamesMetro.LstTasks.Add(New Task(AddressOf stream.Value.GetRightGameStream))
-                        NHLGamesMetro.LstTasks.Last().Start()
-                        NHLGamesMetro.progressValue += progress
-                        Thread.Sleep(30) 'to let some time for the progress bar to move
-                    End If
-                Next
+            SyncLock NHLGamesMetro.LstTasks
+                SyncLock _streams
+                    For Each stream As KeyValuePair(Of StreamType, GameStream) In _streams
+                        If stream.Value.IsDefined Then
+                            NHLGamesMetro.LstTasks.Add(Task.Run(AddressOf stream.Value.GetRightGameStream))
+                            NHLGamesMetro.progressValue += progress
+                            Thread.Sleep(30) 'to let some time for the progress bar to move
+                        End If
+                    Next
+                End SyncLock
             End SyncLock
         End Sub
 

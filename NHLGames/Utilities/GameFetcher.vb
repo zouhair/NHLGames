@@ -62,10 +62,9 @@ Namespace Utilities
                 If jsonSchedule.HasValues Then
                     GameManager.GetGames(dateTime, jsonSchedule, refreshing)
                     NHLGamesMetro.ProgressValue = NHLGamesMetro.ProgressMaxValue - 1
-                    Task.WaitAll(NHLGamesMetro.LstTasks.ToArray())
                     Threading.Thread.Sleep(30)
                     InvokeElement.NewGamesFound(GameManager.GamesDict)
-                    InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"),GameManager.GamesList.Count.ToString()))
+                    InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"),GameManager.GamesList.Count.ToString())) 
                     NHLGamesMetro.ProgressVisible = False
                 Else 
                     Console.WriteLine(English.errorFetchingGames)
@@ -73,6 +72,7 @@ Namespace Utilities
             Catch ex As Exception
                 Console.WriteLine(ex.ToString())
             End Try
+            Task.WaitAll(NHLGamesMetro.LstTasks.ToArray())
         End Sub
 
         Private Shared Async Function HostNameInvalid() As Task(Of Boolean)
