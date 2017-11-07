@@ -32,16 +32,6 @@ Enjoy!
      * [Ad Detection](#ad-detection)
    * [Console](#console)
 * [Support](#support)
-  * [Players issues](#players-issues)
-    * [No playback](#no-playback)
-    * [No audio](#no-audio)
-    * [Player is lagging](#player-is-lagging)
-  * [App issues](#app-issues)
-    * [App won't start](#app-wont-start)
-    * [Games won't load](#games-wont-load)
-    * [Games won't record](#games-wont-record)
-    * [Games won't start](#games-wont-start)
-    * [Hosts file issues](#hosts-file-issues)
 * [Chromecast](#chromecast)
 * [Contribute](#contribute)
 * [Download](#download)
@@ -202,122 +192,7 @@ Go to this tab to see everything that NHLGames does. Also, any error or warning 
 ___
 
 # /_Support_
-## //_Players issues_
-First of all, if you have issues with one player you can try another player at any time by choosing another player in the Settings tab in the app under the Players section. Just make sure your choosen player is installed and the path is set in the settings tab. No need to download MPV, it comes with NHLGames and should work right away.
-
-### ///_No playback_
-#### Player used to open, but it does not anymore --> Kill old processes of this player
-> Sometimes a player process can still runs even if the stream ended and an old process of the same name can affect another from starting. So, right click on your Windows taskbar and click on Start Task Manager *CTRL+Shift+ESC*.
-> - Go to Processes tab.
-> - Right click on all of your player processes (.exe) that are running.
-> - Click on End Process.
-
-#### VLC 64 bits No playback --> use 32 bits
-
-> If you run VLC 64 bits version and VLC hangs when buffering and no playback starts or you don't have audio, use the 32 bits version (x86) instead. Since we use a streamer, some versions of 64-bit VLC seem to be unable to read the stream. Using the 32 bits version of VLC might help.
-> - [x86 (VLC 2.2.4 32bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win32/vlc-2.2.4-win32.exe)
-> - [VLC 2.2.4 path](https://download.videolan.org/pub/videolan/vlc/2.2.4/)
-
-### ///_No Audio_
-#### MPC No audio --> Increase stream analysis duration
-> You will need to do the following to fix audio:    
-> View > Options > Internal Filters > Splitter   
->    
-> Increase *stream analysis duration* (eg. 3000)
-
-### ///_Player is lagging_
-#### Are you using a laptop on power saver mode ? --> use Performance mode
-> Streaming games needs processor time and network bandwidth, so your laptop has to be set to *High Performance* mode.
-
-#### Enable caching in your player
-> Go to NHLGames Settings and Enable Players args, then add this line inside the text box.     
-> `--cache XXXX`
->    
-> Value `XXXX` is a value in KB. It goes from 1024, 2048, 4096 to 8192.
-
-#### Enable multi-threaded streaming
-> Go to NHLGames Settings and Enable **Streamer args**, then add this line inside the text box.    
-> `--hls-segment-threads X`     
->    
-> Value `X` goes from 1 to 10. A value of 2 or 4 should be enough.
-
-#### Try to disable Windows auto tuning level
-> Open Command Prompt and type:   
-> `netsh int tcp set global autotuninglevel=disabled`    
->     
-> If this impacts your connection and you want to return to the default value, type:    
-> `netsh int tcp set global autotuninglevel=normal`
-
-#### Are you using VLC 3.0 ? --> use 2.2.4
-> If you run VLC 3.0 and it's stuttering, lagging or not rendering well, go back to the most stable version 2.2.4:
-> - [x86 (VLC 2.2.4 32bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win32/vlc-2.2.4-win32.exe)
-> - [x64 (VLC 2.2.4 64bits exe)](https://download.videolan.org/pub/videolan/vlc/2.2.4/win64/vlc-2.2.4-win64.exe)
-> - [VLC 2.2.4 path](https://download.videolan.org/pub/videolan/vlc/2.2.4/)
-
-
-## //_App issues_
-
-### ///_App won't start_
-#### Application error --> Download Microsoft .NET Framework 4.5
-> If you get an error that says ***Failed to initialize NHLGames.exe*** when trying to open NHLGames. That means you have to:
-> - Download and install [Microsoft .NET Framework 4.5](https://www.microsoft.com/en-ca/download/details.aspx?id=30653) or up
-> - Run an Windows Operating System older than Windows Vista: 7, 8, 10.
-
-#### Windows protected your PC --> Run anyway
-> If you get an error on Windows 10 that says ***Windows Smartscreen protected your PC*** when trying to open NHLGames. That means Windows 10 is worried about NHLGames not being an official publisher on Windows Store. Click on *More Infos* and click on *Run anyway*.
-
-### ///_Games won't load_
-#### Forbidden 403, Unauthorized 401 or Not Found 404 Error --> Use another NHLGames domain in Settings
-> If you can't get any games from NHLGames, try using another Domain Name in the Settings tab. Use the drop down list.
-
-### ///_Games won't start_
-#### Nothing happens after clicking on a stream --> Check your Hosts file
-> If you clicked on a stream and nothing starts after the loading spinner has disappeared.    
-> Go to Settings and select the Hosts Actions: **Test if the NHL.tv authentification bypass works**     
-> Click on *Go* to check if your Hosts file has been successfully modified by NHLGames.  
->   
-> If it shows *Failure*, you won't be able to see a stream until you fix your Windows Hosts file.
-
-#### Nothing happens after clicking on a stream --> Open the Task Manager and kill processes
-> A process might still be running in the background. You will have to terminate it.    
-> Press all together *CTRL+SHIFT+ESC*, your task manager will open.    
-> Go to *Processes* and order processes by name, by clicking on *Image Name*.    
-> Search these processes, right click on them and select *End Process*:   
-> - livestreamer.exe (or) streamlink.exe
-> - mpv.exe (or) mpc.exe (or) vlc.exe (depends on which media player you use)
-
-#### Nothing happens after clicking on a stream --> Check your antivirus, windows defender or malware bytes
-> If our app is blocked by your firewall or any software protection, it won't be able to get the stream url.    
-> Also, if the streamer (livestreamer.exe / streamlink.exe) is blocked or in quarantine it won't be able to stream it to your media player.    
->     
-> You might be want to try a different streamer or a different version to see what it's working best for you.
-> - [Livestreamer](http://docs.livestreamer.io/install.html)
-> - [Streamlink](https://streamlink.github.io/install.html)
-
-#### Nothing happens after clicking on a stream --> Check for running background processes that did not end
-> If you press *CTRL+SHIFT+ESC* and go to *Processes* and find a running process named:   
-> livestreamer.exe, streamlink.exe, mpv.exe, mpc.exe or vlc.exe.    
-> Right click on these and click on *End task*.
-
-### ///_Games won't record_
-#### Recorded files are around 10 seconds long or less
-> If you can't get the Ouput option to work, you are probably a Windows 7 user (some reported that the output option only works on Windows 10). You might want to try to use an older version of your streamer (livestreamer or streamlink). If it still does not work:
-> Select VLC as the default player   
-> Enable the Streamer args in settings    
-> Add: `--sout file/ts:FILENAME.mp4`. It will record the game using VLC player.
->     
-> - [Livestreamer](http://docs.livestreamer.io/install.html)
-> - [Streamlink](https://streamlink.github.io/install.html)
-
-### ///_Hosts file issues_
-#### Windows can't find Hosts file or access is denied --> Do it yourself
-> NHLGames can't have access to the Hosts file? You will have to add the entry line and paste it to your Hosts file located in C:\Windows\System32\Drivers\etc\. You can do it by using the Hosts file actions in the Settings tab in NHLGames and click on *GO*:
-> - Select action *Copy to clipboard the authentication bypass line*
-> - Select action *View Hosts file content in Notepad* or *Open Hosts file location* and select Notepad
-> - Paste the line *CTRL+V*
-> - Save the Hosts file and make sure the filename is **hosts**, *not hosts.txt*, and the file type is **All Files (\*.\*)**, *not Text Documents (\*.txt)*
-> - Test the file by selecting the hosts action in NHLGames *Test if the NHL.tv authentication bypass works*
-
+Having an issue with NHLGames, head to our [Wiki](wiki) to find the fix. Look at the side bar on the right to navigate between known issues. If you can't find it, feel free to open an [issue](issue).
 ___
 
 # /_Chromecast_
