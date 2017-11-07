@@ -187,7 +187,7 @@ Ad detection only supports these applications:
 Go to this tab to see everything that NHLGames does. Also, any error or warning will show up here.
 
 # /_Support_
-Having an issue with NHLGames? Head to our [Wiki](wiki) to find the fix. Look at the side bar on the right to navigate between known issues. If you can't find it, feel free to open an [issue](issue).
+Having an issue with NHLGames? Head to our [Wiki](/wiki) to find a fix. Look at the side bar, on the right, to navigate between known issues. If you can't find it, feel free to open an [issue](/issue).
 
 # /_Chromecast_
 NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps if you want to play the game on your TV.
