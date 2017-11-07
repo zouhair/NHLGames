@@ -42,7 +42,7 @@ Namespace Utilities
             Return False
         End Function
 
-        Public Shared Async Function SendWebRequestForStream(ByVal address As String, ByVal legacyAddress As String, ByVal gameTitle As String) As Task(Of String)
+        Public Shared Async Function SendWebRequestForStream(ByVal address As String, ByVal legacyAddress As String, ByVal gameTitle As String, ByVal gameDate As DateTime) As Task(Of String)
             Dim myHttpWebRequest As HttpWebRequest
             Dim resp As StreamReader
             Dim myHttpWebResponse As HttpWebResponse
@@ -69,7 +69,9 @@ Namespace Utilities
                             gameUrl = Await Task.FromResult(Of String)(String.Empty)
                         End If
                     Else 
-                        Console.WriteLine(String.Format(English.errorGettingStream, gameTitle))
+                        If DateHelper.IsGameTimePast(gameDate) Then
+                            Console.WriteLine(String.Format(English.errorGettingStream, gameTitle))
+                        End If
                     End If
                 End If
                 myHttpWebResponse.Close()
@@ -87,12 +89,16 @@ Namespace Utilities
                         gameUrl = Await Task.FromResult(Of String)(String.Empty)
                     End If
                 Else 
-                    Console.WriteLine(String.Format(English.errorGettingStream, gameTitle))
+                    If DateHelper.IsGameTimePast(gameDate) Then
+                        Console.WriteLine(String.Format(English.errorGettingStream, gameTitle))
+                    End If
                 End If
                 myHttpWebResponse.Close()
                 Return gameUrl
             Catch ex As Exception
-                Console.WriteLine(String.Format(English.errorGettingStreamWithEx, gameTitle, ex.Message))
+                If DateHelper.IsGameTimePast(gameDate) Then
+                    Console.WriteLine(String.Format(English.errorGettingStreamWithEx, gameTitle, ex.Message))
+                End If
             End Try
 
             Return gameUrl

@@ -21,5 +21,9 @@ Namespace Utilities
                     CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(number).ToString())
         End Function
 
+        Public Shared Function IsGameTimePast(gameDate As DateTime) As Boolean
+            Return DateTime.Now() > gameDate.ToLocalTime()
+        End Function
+
     End Class
 End Namespace

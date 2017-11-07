@@ -52,7 +52,7 @@ Namespace Objects
             Dim legacyAddress As String = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId)
             Dim gameTitle As String = $"{Game.AwayAbbrev} vs {Game.HomeAbbrev} on {Network}"
 
-            GameUrl = Await Common.SendWebRequestForStream(address, legacyAddress, gameTitle)
+            GameUrl = Await Common.SendWebRequestForStream(address, legacyAddress, gameTitle, game.GameDate)
             SetVideoOnDemandLink()
         End Sub
 
