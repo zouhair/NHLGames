@@ -8,6 +8,10 @@ Using NuGet packages:
 - Newtonsoft.Json by [James Newton-King](/JamesNK)
 - NAudio by [Mark Heath](/markheath)
 
+Using external applications:
+- [MPV](https://mpv.io/installation/) by [MPV Player](/mpv-player)
+- [Livestreamer](http://docs.livestreamer.io/install.html#windows-binaries) by [chrippa](/chrippa) (also supports [Streamlink](https://streamlink.github.io/install.html#windows-binaries) by [Streamlink](/streamlink))
+
 Issues
 ------
 
