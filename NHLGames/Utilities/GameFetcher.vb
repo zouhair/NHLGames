@@ -13,7 +13,6 @@ Namespace Utilities
                 Form.spnStreaming.Value = NHLGamesMetro.SpnStreamingValue
             End If
 
-            Form.flpGames.Focus()
             If  Form.spnStreaming.Value > 0 Then
                 Form.spnStreaming.Visible = True
             Else
