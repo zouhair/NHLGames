@@ -81,8 +81,6 @@ Every others games, past or scheduled, are grey:
 - Past games: grey frame with a grey top banner
 - Scheduled games: grey frame
 
-___
-
 ## //_Settings_
 ### ///_Show Scores_
 NHLGames gives you some options to change how a game panel will appear.     
@@ -188,12 +186,8 @@ Ad detection only supports these applications:
 ## //_Console_
 Go to this tab to see everything that NHLGames does. Also, any error or warning will show up here.
 
-
-___
-
 # /_Support_
 Having an issue with NHLGames, head to our [Wiki](wiki) to find the fix. Look at the side bar on the right to navigate between known issues. If you can't find it, feel free to open an [issue](issue).
-___
 
 # /_Chromecast_
 NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps if you want to play the game on your TV.
