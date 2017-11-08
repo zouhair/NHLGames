@@ -22,7 +22,11 @@ Namespace Utilities
             Dim taskLaunchingStream As Task = New Task(Sub()
                 NHLGamesMetro.StreamStarted = True
                 LaunchingStream(args)
+                Thread.Sleep(100)
                 NHLGamesMetro.StreamStarted = False
+                If Not Process.GetProcesses().Any(Function(p) p.ProcessName.ToLower().Contains(args.PlayerType.ToString().ToLower())) Then
+                    Console.WriteLine(English.errorStreamFailed)
+                End If
             End Sub)
 
             taskLaunchingStream.Start()
@@ -72,7 +76,7 @@ Namespace Utilities
                     Thread.Sleep(30) 'to let some time for the progress bar to move
                 End While
             Catch ex As Exception
-                Console.WriteLine(English.errorGeneral, ex.Message.ToString())
+                Console.WriteLine(English.errorGeneral, $"starting stream", ex.Message.ToString())
             Finally
                 NHLGamesMetro.SpnStreamingValue = 0
                 NHLGamesMetro.SpnStreamingVisible = False

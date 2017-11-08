@@ -757,4 +757,8 @@
     <value>Warning: Game stream {0} not found on the server</value>
     <comment>Console</comment>
   </data>
+  <data name="errorStreamFailed" xml:space="preserve">
+    <value>Warning: Starting stream failed. Make sure your player and streamer are set or try to use a different quality in settings, so it will try another stream.</value>
+    <comment>Console</comment>
+  </data>
 </root>

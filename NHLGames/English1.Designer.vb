@@ -407,6 +407,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Warning: Starting stream failed. Make sure your player and streamer are set or try to use a different quality in settings, so it will try another stream..
+        '''</summary>
+        Friend Shared ReadOnly Property errorStreamFailed() As String
+            Get
+                Return ResourceManager.GetString("errorStreamFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this..
         '''</summary>
         Friend Shared ReadOnly Property errorUnableToDecodeJson() As String
