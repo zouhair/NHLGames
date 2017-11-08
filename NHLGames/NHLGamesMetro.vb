@@ -226,7 +226,7 @@ Public Class NHLGamesMetro
                                             )
         folderBrowserDialog.ShowDialog()
         If folderBrowserDialog.SelectedPath <> txtOutputArgs.Text Then
-            txtOutputArgs.Text = folderBrowserDialog.SelectedPath & $"\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(QUAL).mp4"
+            txtOutputArgs.Text = folderBrowserDialog.SelectedPath & $"\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(NETWORK).mp4"
             Player.RenewArgs()
         End If
     End Sub
@@ -305,6 +305,9 @@ Public Class NHLGamesMetro
 
     Private Sub tgOutput_CheckedChanged(sender As Object, e As EventArgs) Handles tgOutput.CheckedChanged 
         txtOutputArgs.Enabled = tgOutput.Checked
+        If txtOutputArgs.Text = String.Empty Then
+            txtOutputArgs.Text = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)}\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(NETWORK).mp4"
+        End If
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblOutput.Text),
                                        if(tgOutput.Checked, English.msgOn, English.msgOff))

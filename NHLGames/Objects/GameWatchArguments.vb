@@ -111,7 +111,7 @@ Namespace Objects
                         Replace("(HOME)", Stream.Game.HomeAbbrev).
                         Replace("(AWAY)", Stream.Game.AwayAbbrev).
                         Replace("(TYPE)", Stream.Type.ToString()).
-                        Replace("(QUAL)", If(Is60Fps, "720p60", streamQuality))
+                        Replace("(NETWORK)", Stream.Network)
                 Dim suffix As Integer = 1
                 Dim originalName = Path.GetFileNameWithoutExtension(outputPath)
                 Dim originalExt = Path.GetExtension(outputPath)

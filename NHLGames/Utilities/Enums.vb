@@ -82,6 +82,11 @@
         Obs
     End Enum
 
+    Public Enum StreamerTypeEnum
+        LiveStreamer = 0
+        StreamLink
+    End Enum
+
     Public Enum WindowsCode
 #Disable Warning InconsistentNaming
         WM_NCLBUTTONDOWN = &HA1

@@ -24,9 +24,6 @@ Namespace Utilities
                 LaunchingStream(args)
                 Thread.Sleep(100)
                 NHLGamesMetro.StreamStarted = False
-                If Not Process.GetProcesses().Any(Function(p) p.ProcessName.ToLower().Contains(args.PlayerType.ToString().ToLower())) Then
-                    Console.WriteLine(English.errorStreamFailed)
-                End If
             End Sub)
 
             taskLaunchingStream.Start()
@@ -73,6 +70,9 @@ Namespace Utilities
                         taskPlayerWatcher.Start()
                     End If
                     Console.WriteLine(line)
+                    If line.ToLower().Contains("could not open stream") Then
+                        Console.WriteLine(English.errorStreamFailed)
+                    End If
                     Thread.Sleep(30) 'to let some time for the progress bar to move
                 End While
             Catch ex As Exception
@@ -95,6 +95,9 @@ Namespace Utilities
             Thread.Sleep(2000)
             NHLGamesMetro.SpnStreamingValue = 0
             NHLGamesMetro.SpnStreamingVisible = False
+            If Not Process.GetProcesses().Any(Function(p) p.ProcessName.ToLower().Contains(args.PlayerType.ToString().ToLower())) Then
+                Console.WriteLine(English.errorStreamFailed)
+            End If
         End Sub
 
         Public Shared Sub RenewArgs(Optional forceSet As Boolean = False)
