@@ -232,7 +232,7 @@
         Me.lnkHome.BackColor = System.Drawing.Color.WhiteSmoke
         Me.lnkHome.BackgroundImage = CType(resources.GetObject("lnkHome.BackgroundImage"),System.Drawing.Image)
         Me.lnkHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkHome.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkHome.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.lnkHome.FlatAppearance.BorderSize = 0
         Me.lnkHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -248,7 +248,7 @@
         '
         Me.lnkAway.BackgroundImage = CType(resources.GetObject("lnkAway.BackgroundImage"),System.Drawing.Image)
         Me.lnkAway.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkAway.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkAway.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.lnkAway.FlatAppearance.BorderSize = 0
         Me.lnkAway.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkAway.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -264,7 +264,7 @@
         '
         Me.lnkNational.BackgroundImage = CType(resources.GetObject("lnkNational.BackgroundImage"),System.Drawing.Image)
         Me.lnkNational.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkNational.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkNational.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.lnkNational.FlatAppearance.BorderSize = 0
         Me.lnkNational.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkNational.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -280,7 +280,7 @@
         '
         Me.lnkFrench.BackgroundImage = CType(resources.GetObject("lnkFrench.BackgroundImage"),System.Drawing.Image)
         Me.lnkFrench.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkFrench.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkFrench.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.lnkFrench.FlatAppearance.BorderSize = 0
         Me.lnkFrench.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkFrench.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -296,7 +296,7 @@
         '
         Me.lnkThree.BackgroundImage = Global.NHLGames.My.Resources.Resources.threec
         Me.lnkThree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkThree.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkThree.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.lnkThree.FlatAppearance.BorderSize = 0
         Me.lnkThree.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkThree.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -312,7 +312,7 @@
         '
         Me.lnkSix.BackgroundImage = Global.NHLGames.My.Resources.Resources.sixc
         Me.lnkSix.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkSix.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkSix.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.lnkSix.FlatAppearance.BorderSize = 0
         Me.lnkSix.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkSix.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -328,7 +328,7 @@
         '
         Me.lnkEnd1.BackgroundImage = Global.NHLGames.My.Resources.Resources.endz1
         Me.lnkEnd1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkEnd1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkEnd1.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.lnkEnd1.FlatAppearance.BorderSize = 0
         Me.lnkEnd1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkEnd1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -344,7 +344,7 @@
         '
         Me.lnkEnd2.BackgroundImage = Global.NHLGames.My.Resources.Resources.endz2
         Me.lnkEnd2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkEnd2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkEnd2.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.lnkEnd2.FlatAppearance.BorderSize = 0
         Me.lnkEnd2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkEnd2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -360,7 +360,7 @@
         '
         Me.lnkRef.BackgroundImage = Global.NHLGames.My.Resources.Resources.refc
         Me.lnkRef.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkRef.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkRef.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
         Me.lnkRef.FlatAppearance.BorderSize = 0
         Me.lnkRef.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkRef.FlatStyle = System.Windows.Forms.FlatStyle.Flat
