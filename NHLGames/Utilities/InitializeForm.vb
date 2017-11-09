@@ -212,7 +212,9 @@ Namespace Utilities
             If Not watchArgs.streamerPath.Equals(streamerPath) Then Return True
             If Not hasPlayerSet Then
                 watchArgs.PlayerType = PlayerTypeEnum.None
+                watchArgs.StreamerType = StreamerTypeEnum.None
                 watchArgs.PlayerPath = String.Empty
+                watchArgs.StreamerPath = String.Empty
                 Form.rbMPC.Enabled = False
                 Form.rbVLC.Enabled = False
                 Form.rbMpv.Enabled = False

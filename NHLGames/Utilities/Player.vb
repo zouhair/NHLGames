@@ -122,6 +122,8 @@ Namespace Utilities
                 End If
 
                 watchArgs.StreamerPath = form.txtStreamerPath.Text
+                watchArgs.StreamerType = GetStreamerType(watchArgs.StreamerPath)
+                Console.WriteLine(watchArgs.StreamerType.ToString())
 
                 If form.tgAlternateCdn.Checked Then
                     watchArgs.Cdn = CdnType.L3C
@@ -140,6 +142,17 @@ Namespace Utilities
                 ApplicationSettings.SetValue(SettingsEnum.DefaultWatchArgs, Serialization.SerializeObject(Of GameWatchArguments)(watchArgs))
             End If
         End Sub
+
+        Private Shared Function GetStreamerType(streamerPath As String) As StreamerTypeEnum
+            Dim selectedStreamerExe = IO.Path.GetFileNameWithoutExtension(streamerPath).ToLower()
+            If selectedStreamerExe = StreamerTypeEnum.LiveStreamer.ToString().ToLower() Then
+                Return StreamerTypeEnum.LiveStreamer
+            Else If selectedStreamerExe = StreamerTypeEnum.StreamLink.ToString().ToLower() Then
+                Return StreamerTypeEnum.StreamLink
+            Else 
+                Return StreamerTypeEnum.None
+            End If
+        End Function
     End Class
 End Namespace
 

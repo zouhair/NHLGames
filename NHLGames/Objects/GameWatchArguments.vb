@@ -12,16 +12,17 @@ Namespace Objects
         Public Property Cdn As CdnType = CdnType.Akc
         Public Property Stream As GameStream = Nothing
         Public Property IsVod As Boolean = False
-        Public Property GameTitle As String = ""
-        Public Property PlayerPath As String = ""
+        Public Property GameTitle As String = String.Empty
+        Public Property PlayerPath As String = String.Empty
         Public Property PlayerType As PlayerTypeEnum = PlayerTypeEnum.None
-        Public Property StreamerPath As String = ""
+        Public Property StreamerPath As String = String.Empty
         Public Property UseStreamerArgs As Boolean = False
-        Public Property StreamerArgs As String = ""
+        Public Property StreamerArgs As String = String.Empty
         Public Property UsePlayerArgs As Boolean = False
-        Public Property PlayerArgs As String = ""
+        Public Property PlayerArgs As String = String.Empty
         Public Property UseOutputArgs As Boolean = False
-        Public Property PlayerOutputPath As String = ""
+        Public Property PlayerOutputPath As String = String.Empty
+        Public Property StreamerType As StreamerTypeEnum = StreamerTypeEnum.None
 
         Public Overrides Function ToString() As String
             Return OutputArgs(False)

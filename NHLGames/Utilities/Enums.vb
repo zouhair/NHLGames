@@ -83,7 +83,8 @@
     End Enum
 
     Public Enum StreamerTypeEnum
-        LiveStreamer = 0
+        None = 0
+        LiveStreamer
         StreamLink
     End Enum
 
