@@ -325,7 +325,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Shared Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://github.com/NHLGames/NHLGames#nhlgames")
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://github.com/NHLGames/NHLGames/wiki")
         Process.Start(sInfo)
     End Sub
 

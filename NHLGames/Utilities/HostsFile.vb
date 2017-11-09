@@ -41,7 +41,7 @@ Namespace Utilities
 
         Public Shared Sub CleanHosts(host As String)
 
-            If FileAccess.HasAccess(HostsFilePath, false, true) Then
+            If FileAccess.HasAccess(HostsFilePath, false, true) AndAlso EnsureAdmin() Then
                 Dim fileIsReadonly As Boolean = FileAccess.IsFileReadonly(HostsFilePath)
 
                 If fileIsReadonly Then

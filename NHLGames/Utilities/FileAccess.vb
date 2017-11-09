@@ -45,7 +45,7 @@ Namespace Utilities
                 Return True
             Catch ex As Exception
                 If reportException Then 
-                    Console.WriteLine(String.Format(English.errorGeneral, ex.Message))
+                    Console.WriteLine(String.Format(English.errorGeneral, "checking access to a path", ex.Message))
                 End If
                 Return False
             End Try
