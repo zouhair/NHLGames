@@ -123,7 +123,6 @@ Namespace Utilities
 
                 watchArgs.StreamerPath = form.txtStreamerPath.Text
                 watchArgs.StreamerType = GetStreamerType(watchArgs.StreamerPath)
-                Console.WriteLine(watchArgs.StreamerType.ToString())
 
                 If form.tgAlternateCdn.Checked Then
                     watchArgs.Cdn = CdnType.L3C
