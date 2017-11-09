@@ -24,19 +24,19 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GameControl))
-        Me.ToolTip = New MetroFramework.Components.MetroToolTip()
-        Me.BorderPanel1 = New NHLGames.Controls.BorderPanel()
+        Me.tt = New MetroFramework.Components.MetroToolTip()
+        Me.bpGameControl = New NHLGames.Controls.BorderPanel()
         Me.lblGameStatus = New MetroFramework.Controls.MetroLabel()
-        Me.divider = New MetroFramework.Controls.MetroLabel()
+        Me.lblDivider = New MetroFramework.Controls.MetroLabel()
         Me.picAway = New System.Windows.Forms.PictureBox()
         Me.lblHomeScore = New MetroFramework.Controls.MetroLabel()
         Me.lblAwayScore = New MetroFramework.Controls.MetroLabel()
-        Me.live1 = New System.Windows.Forms.PictureBox()
+        Me.picLive = New System.Windows.Forms.PictureBox()
         Me.lblAwayTeam = New MetroFramework.Controls.MetroLabel()
         Me.picHome = New System.Windows.Forms.PictureBox()
         Me.lblHomeTeam = New MetroFramework.Controls.MetroLabel()
         Me.lblPeriod = New MetroFramework.Controls.MetroLabel()
-        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.flpStreams = New System.Windows.Forms.FlowLayoutPanel()
         Me.lnkHome = New System.Windows.Forms.Button()
         Me.lnkAway = New System.Windows.Forms.Button()
         Me.lnkNational = New System.Windows.Forms.Button()
@@ -48,42 +48,42 @@
         Me.lnkRef = New System.Windows.Forms.Button()
         Me.lblNotInSeason = New MetroFramework.Controls.MetroLabel()
         Me.lblStreamStatus = New MetroFramework.Controls.MetroLabel()
-        Me.BorderPanel1.SuspendLayout
+        Me.bpGameControl.SuspendLayout
         CType(Me.picAway,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.live1,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.picLive,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.picHome,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.FlowLayoutPanel1.SuspendLayout
+        Me.flpStreams.SuspendLayout
         Me.SuspendLayout
         '
-        'ToolTip
+        'tt
         '
-        Me.ToolTip.Style = MetroFramework.MetroColorStyle.[Default]
-        Me.ToolTip.StyleManager = Nothing
-        Me.ToolTip.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.tt.Style = MetroFramework.MetroColorStyle.[Default]
+        Me.tt.StyleManager = Nothing
+        Me.tt.Theme = MetroFramework.MetroThemeStyle.Light
         '
-        'BorderPanel1
+        'bpGameControl
         '
-        Me.BorderPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.BorderPanel1.BorderColour = System.Drawing.Color.LightGray
-        Me.BorderPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.BorderPanel1.Controls.Add(Me.lblGameStatus)
-        Me.BorderPanel1.Controls.Add(Me.divider)
-        Me.BorderPanel1.Controls.Add(Me.picAway)
-        Me.BorderPanel1.Controls.Add(Me.lblHomeScore)
-        Me.BorderPanel1.Controls.Add(Me.lblAwayScore)
-        Me.BorderPanel1.Controls.Add(Me.live1)
-        Me.BorderPanel1.Controls.Add(Me.lblAwayTeam)
-        Me.BorderPanel1.Controls.Add(Me.picHome)
-        Me.BorderPanel1.Controls.Add(Me.lblHomeTeam)
-        Me.BorderPanel1.Controls.Add(Me.lblPeriod)
-        Me.BorderPanel1.Controls.Add(Me.FlowLayoutPanel1)
-        Me.BorderPanel1.Controls.Add(Me.lblNotInSeason)
-        Me.BorderPanel1.Controls.Add(Me.lblStreamStatus)
-        Me.BorderPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BorderPanel1.Location = New System.Drawing.Point(3, 3)
-        Me.BorderPanel1.Name = "BorderPanel1"
-        Me.BorderPanel1.Size = New System.Drawing.Size(312, 151)
-        Me.BorderPanel1.TabIndex = 9
+        Me.bpGameControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.bpGameControl.BorderColour = System.Drawing.Color.LightGray
+        Me.bpGameControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.bpGameControl.Controls.Add(Me.lblGameStatus)
+        Me.bpGameControl.Controls.Add(Me.lblDivider)
+        Me.bpGameControl.Controls.Add(Me.picAway)
+        Me.bpGameControl.Controls.Add(Me.lblHomeScore)
+        Me.bpGameControl.Controls.Add(Me.lblAwayScore)
+        Me.bpGameControl.Controls.Add(Me.picLive)
+        Me.bpGameControl.Controls.Add(Me.lblAwayTeam)
+        Me.bpGameControl.Controls.Add(Me.picHome)
+        Me.bpGameControl.Controls.Add(Me.lblHomeTeam)
+        Me.bpGameControl.Controls.Add(Me.lblPeriod)
+        Me.bpGameControl.Controls.Add(Me.flpStreams)
+        Me.bpGameControl.Controls.Add(Me.lblNotInSeason)
+        Me.bpGameControl.Controls.Add(Me.lblStreamStatus)
+        Me.bpGameControl.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.bpGameControl.Location = New System.Drawing.Point(3, 3)
+        Me.bpGameControl.Name = "bpGameControl"
+        Me.bpGameControl.Size = New System.Drawing.Size(312, 151)
+        Me.bpGameControl.TabIndex = 9
         '
         'lblGameStatus
         '
@@ -98,14 +98,14 @@
         Me.lblGameStatus.UseCustomBackColor = true
         Me.lblGameStatus.Visible = false
         '
-        'divider
+        'lblDivider
         '
-        Me.divider.BackColor = System.Drawing.Color.Silver
-        Me.divider.Location = New System.Drawing.Point(155, 35)
-        Me.divider.Name = "divider"
-        Me.divider.Size = New System.Drawing.Size(1, 50)
-        Me.divider.TabIndex = 29
-        Me.divider.UseCustomBackColor = true
+        Me.lblDivider.BackColor = System.Drawing.Color.Silver
+        Me.lblDivider.Location = New System.Drawing.Point(155, 35)
+        Me.lblDivider.Name = "lblDivider"
+        Me.lblDivider.Size = New System.Drawing.Size(1, 50)
+        Me.lblDivider.TabIndex = 29
+        Me.lblDivider.UseCustomBackColor = true
         '
         'picAway
         '
@@ -147,17 +147,17 @@
         Me.lblAwayScore.UseCustomBackColor = true
         Me.lblAwayScore.UseCustomForeColor = true
         '
-        'live1
+        'picLive
         '
-        Me.live1.BackgroundImage = Global.NHLGames.My.Resources.Resources.live
-        Me.live1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.live1.InitialImage = Global.NHLGames.My.Resources.Resources.live
-        Me.live1.Location = New System.Drawing.Point(1, 1)
-        Me.live1.Name = "live1"
-        Me.live1.Size = New System.Drawing.Size(18, 18)
-        Me.live1.TabIndex = 14
-        Me.live1.TabStop = false
-        Me.live1.Visible = false
+        Me.picLive.BackgroundImage = Global.NHLGames.My.Resources.Resources.live
+        Me.picLive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.picLive.InitialImage = Global.NHLGames.My.Resources.Resources.live
+        Me.picLive.Location = New System.Drawing.Point(1, 1)
+        Me.picLive.Name = "picLive"
+        Me.picLive.Size = New System.Drawing.Size(18, 18)
+        Me.picLive.TabIndex = 14
+        Me.picLive.TabStop = false
+        Me.picLive.Visible = false
         '
         'lblAwayTeam
         '
@@ -206,26 +206,26 @@
         Me.lblPeriod.UseCustomBackColor = true
         Me.lblPeriod.UseCustomForeColor = true
         '
-        'FlowLayoutPanel1
+        'flpStreams
         '
-        Me.FlowLayoutPanel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+        Me.flpStreams.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.FlowLayoutPanel1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.FlowLayoutPanel1.Controls.Add(Me.lnkHome)
-        Me.FlowLayoutPanel1.Controls.Add(Me.lnkAway)
-        Me.FlowLayoutPanel1.Controls.Add(Me.lnkNational)
-        Me.FlowLayoutPanel1.Controls.Add(Me.lnkFrench)
-        Me.FlowLayoutPanel1.Controls.Add(Me.lnkThree)
-        Me.FlowLayoutPanel1.Controls.Add(Me.lnkSix)
-        Me.FlowLayoutPanel1.Controls.Add(Me.lnkEnd1)
-        Me.FlowLayoutPanel1.Controls.Add(Me.lnkEnd2)
-        Me.FlowLayoutPanel1.Controls.Add(Me.lnkRef)
-        Me.FlowLayoutPanel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(2, 108)
-        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(305, 38)
-        Me.FlowLayoutPanel1.TabIndex = 10
-        Me.FlowLayoutPanel1.WrapContents = false
+        Me.flpStreams.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.flpStreams.Controls.Add(Me.lnkHome)
+        Me.flpStreams.Controls.Add(Me.lnkAway)
+        Me.flpStreams.Controls.Add(Me.lnkNational)
+        Me.flpStreams.Controls.Add(Me.lnkFrench)
+        Me.flpStreams.Controls.Add(Me.lnkThree)
+        Me.flpStreams.Controls.Add(Me.lnkSix)
+        Me.flpStreams.Controls.Add(Me.lnkEnd1)
+        Me.flpStreams.Controls.Add(Me.lnkEnd2)
+        Me.flpStreams.Controls.Add(Me.lnkRef)
+        Me.flpStreams.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.flpStreams.Location = New System.Drawing.Point(2, 108)
+        Me.flpStreams.Name = "flpStreams"
+        Me.flpStreams.Size = New System.Drawing.Size(305, 38)
+        Me.flpStreams.TabIndex = 10
+        Me.flpStreams.WrapContents = false
         '
         'lnkHome
         '
@@ -404,17 +404,17 @@
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
-        Me.Controls.Add(Me.BorderPanel1)
+        Me.Controls.Add(Me.bpGameControl)
         Me.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "GameControl"
         Me.Padding = New System.Windows.Forms.Padding(3)
         Me.Size = New System.Drawing.Size(318, 157)
-        Me.BorderPanel1.ResumeLayout(false)
+        Me.bpGameControl.ResumeLayout(false)
         CType(Me.picAway,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.live1,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.picLive,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.picHome,System.ComponentModel.ISupportInitialize).EndInit
-        Me.FlowLayoutPanel1.ResumeLayout(false)
+        Me.flpStreams.ResumeLayout(false)
         Me.ResumeLayout(false)
 
 End Sub
@@ -422,13 +422,13 @@ End Sub
         Friend WithEvents picAway As PictureBox
         Friend WithEvents lblAwayTeam As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblHomeTeam As MetroFramework.Controls.MetroLabel
-        Friend WithEvents BorderPanel1 As BorderPanel
-        Friend WithEvents ToolTip As MetroFramework.Components.MetroToolTip
-        Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+        Friend WithEvents bpGameControl As BorderPanel
+        Friend WithEvents tt As MetroFramework.Components.MetroToolTip
+        Friend WithEvents flpStreams As FlowLayoutPanel
         Friend WithEvents lblPeriod As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblNotInSeason As MetroFramework.Controls.MetroLabel
         Friend WithEvents picHome As PictureBox
-        Friend WithEvents live1 As PictureBox
+        Friend WithEvents picLive As PictureBox
         Friend WithEvents lblHomeScore As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblAwayScore As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblStreamStatus As MetroFramework.Controls.MetroLabel
@@ -442,6 +442,6 @@ End Sub
         Friend WithEvents lnkEnd2 As Button
         Friend WithEvents lnkRef As Button
         Friend WithEvents lblGameStatus As MetroFramework.Controls.MetroLabel
-        Friend WithEvents divider As MetroFramework.Controls.MetroLabel
+        Friend WithEvents lblDivider As MetroFramework.Controls.MetroLabel
     End Class
 End Namespace

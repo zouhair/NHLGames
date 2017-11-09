@@ -24,7 +24,7 @@ Namespace Controls
             lblNotInSeason.Text = ""
 
             If game.GameIsLive Then
-                live1.Visible = True
+                picLive.Visible = True
                 lblGameStatus.Visible = Not showLiveScores
                 lblHomeScore.Visible = showLiveScores
                 lblAwayScore.Visible = showLiveScores
@@ -91,7 +91,7 @@ Namespace Controls
 
                 If Not showScores Then lblPeriod.Text = String.Empty
             ElseIf game.GameIsPreGame OrElse game.GameIsScheduled Then
-                divider.Visible = False
+                lblDivider.Visible = False
                 lblPeriod.Text = String.Empty
                 lblGameStatus.Visible = True
                 lblGameStatus.Text = game.GameDate.ToLocalTime().ToString("h:mm tt")
@@ -130,14 +130,14 @@ Namespace Controls
                 Else
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblNoStreamAvailable")
                 End If
-                FlowLayoutPanel1.Visible = False
+                flpStreams.Visible = False
             End If
 
             lblHomeTeam.Visible = showTeamCityAbr
             lblAwayTeam.Visible = showTeamCityAbr
 
-            ToolTip.SetToolTip(picAway, String.Format(NHLGamesMetro.RmText.GetString("lblAwayTeam"), game.Away, game.AwayTeam))
-            ToolTip.SetToolTip(picHome, String.Format(NHLGamesMetro.RmText.GetString("lblHomeTeam"), game.Home, game.HomeTeam))
+            tt.SetToolTip(picAway, String.Format(NHLGamesMetro.RmText.GetString("lblAwayTeam"), game.Away, game.AwayTeam))
+            tt.SetToolTip(picHome, String.Format(NHLGamesMetro.RmText.GetString("lblHomeTeam"), game.Home, game.HomeTeam))
         End Sub
 
         Public Sub New(game As Game, showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean, showTeamCityAbr As Boolean)
@@ -173,9 +173,9 @@ Namespace Controls
             lnkEnd2.Visible = game.EndzoneCam2Stream.IsAvailable
 
             If (game.GameIsScheduled Or game.GameIsPreGame Or game.GameIsLive) And game.GameDate.ToLocalTime() <= Date.Today.AddDays(1) Then
-                BorderPanel1.BorderColour = Color.FromArgb(255, 0, 170, 210)
+                bpGameControl.BorderColour = Color.FromArgb(255, 0, 170, 210)
             Else 
-                BorderPanel1.BorderColour = Color.LightGray
+                bpGameControl.BorderColour = Color.LightGray
             End If
 
             UpdateGame(game, _showScores, _showLiveScores, _showSeriesRecord, _showTeamCityAbr)
@@ -217,7 +217,7 @@ Namespace Controls
                     If img <> "" Then lnkAway.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
                     tip &= String.Format(NHLGamesMetro.RmText.GetString("lblOnNetwork"), game.AwayStream.Network)
                 End If
-                ToolTip.SetToolTip(lnkAway, tip)
+                tt.SetToolTip(lnkAway, tip)
             End If
             
             If game.HomeStream.IsAvailable Then
@@ -227,7 +227,7 @@ Namespace Controls
                     If img <> "" Then lnkHome.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
                     tip &= String.Format(NHLGamesMetro.RmText.GetString("lblOnNetwork"), game.HomeStream.Network)
                 End If
-                ToolTip.SetToolTip(lnkHome, tip)
+                tt.SetToolTip(lnkHome, tip)
             End If
             
             If game.FrenchStream.IsAvailable Then
@@ -237,7 +237,7 @@ Namespace Controls
                     If img <> "" Then lnkFrench.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
                     tip &= String.Format(NHLGamesMetro.RmText.GetString("lblOnNetwork"), game.FrenchStream.Network)
                 End If
-                ToolTip.SetToolTip(lnkFrench, tip)
+                tt.SetToolTip(lnkFrench, tip)
             End If
             
             If game.NationalStream.IsAvailable Then
@@ -247,14 +247,14 @@ Namespace Controls
                     If img <> "" Then lnkNational.BackgroundImage = ImageFetcher.GetEmbeddedImage(img)
                     tip &= String.Format(NHLGamesMetro.RmText.GetString("lblOnNetwork"), game.NationalStream.Network)
                 End If
-                ToolTip.SetToolTip(lnkNational, tip)
+                tt.SetToolTip(lnkNational, tip)
             End If
 
-            ToolTip.SetToolTip(lnkRef, NHLGamesMetro.RmText.GetString("lblRefCam"))
-            ToolTip.SetToolTip(lnkThree,String.Format( NHLGamesMetro.RmText.GetString("lblCamViews"), 3))
-            ToolTip.SetToolTip(lnkSix, String.Format(NHLGamesMetro.RmText.GetString("lblCamViews"), 6))
-            ToolTip.SetToolTip(lnkEnd1, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.AwayAbbrev))
-            ToolTip.SetToolTip(lnkEnd2, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.HomeAbbrev))
+            tt.SetToolTip(lnkRef, NHLGamesMetro.RmText.GetString("lblRefCam"))
+            tt.SetToolTip(lnkThree,String.Format( NHLGamesMetro.RmText.GetString("lblCamViews"), 3))
+            tt.SetToolTip(lnkSix, String.Format(NHLGamesMetro.RmText.GetString("lblCamViews"), 6))
+            tt.SetToolTip(lnkEnd1, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.AwayAbbrev))
+            tt.SetToolTip(lnkEnd2, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), game.HomeAbbrev))
             
             UpdateGameStreams(game)
         End Sub

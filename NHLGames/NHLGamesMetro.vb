@@ -44,7 +44,7 @@ Public Class NHLGamesMetro
         Dim form As New NHLGamesMetro()
         FormInstance = form
 
-        Dim writer = New ConsoleRedirectStreamWriter(form.RichTextBox)
+        Dim writer = New ConsoleRedirectStreamWriter(form.txtConsole)
         Console.SetOut(writer)
         Application.Run(form)
     End Sub
@@ -79,7 +79,7 @@ Public Class NHLGamesMetro
         If FormLoaded Then Console.WriteLine(String.Format(English.msgSettingUpdated, key, value))
     End Sub
 
-    Private Shared Sub tmrAnimate_Tick(sender As Object, e As EventArgs) Handles tmrAnimate.Tick
+    Private Shared Sub tmrAnimate_Tick(sender As Object, e As EventArgs) Handles tmr.Tick
         If StreamStarted Then
             GameFetcher.StreamingProgress()
         Else
@@ -92,64 +92,64 @@ Public Class NHLGamesMetro
         flpGames.Focus()
     End Sub
 
-    Private Sub RichTextBox_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox.TextChanged
-        RichTextBox.SelectionStart = RichTextBox.Text.Length
-        RichTextBox.ScrollToCaret()
+    Private Sub RichTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtConsole.TextChanged
+        txtConsole.SelectionStart = txtConsole.Text.Length
+        txtConsole.ScrollToCaret()
     End Sub
 
     Private Sub btnVLCPath_Click(sender As Object, e As EventArgs) Handles btnVLCPath.Click 
-        openFileDialog.Filter = $"VLC|vlc.exe|All files (*.*)|*.*"
-        openFileDialog.Multiselect = False
-        openFileDialog.InitialDirectory = If(txtVLCPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtVLCPath.Text))
+        ofd.Filter = $"VLC|vlc.exe|All files (*.*)|*.*"
+        ofd.Multiselect = False
+        ofd.InitialDirectory = If(txtVLCPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtVLCPath.Text))
 
-        If openFileDialog.ShowDialog() = DialogResult.OK Then
-            If String.IsNullOrEmpty(openFileDialog.FileName) = False And txtVLCPath.Text <> openFileDialog.FileName Then
-                ApplicationSettings.SetValue(SettingsEnum.VlcPath, openFileDialog.FileName)
-                txtVLCPath.Text = openFileDialog.FileName
+        If ofd.ShowDialog() = DialogResult.OK Then
+            If String.IsNullOrEmpty(ofd.FileName) = False And txtVLCPath.Text <> ofd.FileName Then
+                ApplicationSettings.SetValue(SettingsEnum.VlcPath, ofd.FileName)
+                txtVLCPath.Text = ofd.FileName
             End If
         End If
     End Sub
 
     Private Sub btnMPCPath_Click(sender As Object, e As EventArgs) Handles btnMPCPath.Click 
-        openFileDialog.Filter = $"MPC|mpc-hc64.exe;mpc-hc.exe|All files (*.*)|*.*"
-        openFileDialog.Multiselect = False
-        openFileDialog.InitialDirectory = If(txtMPCPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtMPCPath.Text))
+        ofd.Filter = $"MPC|mpc-hc64.exe;mpc-hc.exe|All files (*.*)|*.*"
+        ofd.Multiselect = False
+        ofd.InitialDirectory = If(txtMPCPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtMPCPath.Text))
 
-        If openFileDialog.ShowDialog() = DialogResult.OK Then
+        If ofd.ShowDialog() = DialogResult.OK Then
 
-            If String.IsNullOrEmpty(openFileDialog.FileName) = False And txtMPCPath.Text <> openFileDialog.FileName Then
-                ApplicationSettings.SetValue(SettingsEnum.MpcPath, openFileDialog.FileName)
-                txtMPCPath.Text = openFileDialog.FileName
+            If String.IsNullOrEmpty(ofd.FileName) = False And txtMPCPath.Text <> ofd.FileName Then
+                ApplicationSettings.SetValue(SettingsEnum.MpcPath, ofd.FileName)
+                txtMPCPath.Text = ofd.FileName
             End If
 
         End If
     End Sub
 
     Private Sub btnMpvPath_Click(sender As Object, e As EventArgs) Handles btnMpvPath.Click 
-        openFileDialog.Filter = $"mpv|mpv.exe|All files (*.*)|*.*"
-        openFileDialog.Multiselect = False
-        openFileDialog.InitialDirectory = If(txtMpvPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtMpvPath.Text))
+        ofd.Filter = $"mpv|mpv.exe|All files (*.*)|*.*"
+        ofd.Multiselect = False
+        ofd.InitialDirectory = If(txtMpvPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtMpvPath.Text))
 
-        If openFileDialog.ShowDialog() = DialogResult.OK Then
+        If ofd.ShowDialog() = DialogResult.OK Then
 
-            If String.IsNullOrEmpty(openFileDialog.FileName) = False And txtMpvPath.Text <> openFileDialog.FileName Then
-                ApplicationSettings.SetValue(SettingsEnum.MpvPath, openFileDialog.FileName)
-                txtMpvPath.Text = openFileDialog.FileName
+            If String.IsNullOrEmpty(ofd.FileName) = False And txtMpvPath.Text <> ofd.FileName Then
+                ApplicationSettings.SetValue(SettingsEnum.MpvPath, ofd.FileName)
+                txtMpvPath.Text = ofd.FileName
             End If
 
         End If
     End Sub
 
     Private Sub btnstreamerPath_Click(sender As Object, e As EventArgs) Handles btnStreamerPath.Click 
-        openFileDialog.Filter = $"streamer|streamlink.exe;livestreamer.exe|All files (*.*)|*.*"
-        openFileDialog.Multiselect = False
-        openFileDialog.InitialDirectory = If(txtStreamerPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtStreamerPath.Text))
+        ofd.Filter = $"streamer|streamlink.exe;livestreamer.exe|All files (*.*)|*.*"
+        ofd.Multiselect = False
+        ofd.InitialDirectory = If(txtStreamerPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtStreamerPath.Text))
 
-        If openFileDialog.ShowDialog() = DialogResult.OK Then
+        If ofd.ShowDialog() = DialogResult.OK Then
 
-            If String.IsNullOrEmpty(openFileDialog.FileName) = False And txtStreamerPath.Text <> openFileDialog.FileName Then
-                ApplicationSettings.SetValue(SettingsEnum.StreamerPath, openFileDialog.FileName)
-                txtStreamerPath.Text = openFileDialog.FileName
+            If String.IsNullOrEmpty(ofd.FileName) = False And txtStreamerPath.Text <> ofd.FileName Then
+                ApplicationSettings.SetValue(SettingsEnum.StreamerPath, ofd.FileName)
+                txtStreamerPath.Text = ofd.FileName
             End If
 
         End If
@@ -167,7 +167,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnClearConsole_Click(sender As Object, e As EventArgs) Handles btnClearConsole.Click
-        RichTextBox.Clear()
+        txtConsole.Clear()
     End Sub
 
     Private Sub txtVLCPath_TextChanged(sender As Object, e As EventArgs) Handles txtVLCPath.TextChanged 
@@ -220,13 +220,13 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnOuput_Click(sender As Object, e As EventArgs) Handles btnOuput.Click
-        folderBrowserDialog.SelectedPath = If (txtOutputArgs.Text <> String.Empty, 
+        fbd.SelectedPath = If (txtOutputArgs.Text <> String.Empty, 
                                             Path.GetDirectoryName(txtOutputArgs.Text), 
                                             Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
                                             )
-        folderBrowserDialog.ShowDialog()
-        If folderBrowserDialog.SelectedPath <> txtOutputArgs.Text Then
-            txtOutputArgs.Text = folderBrowserDialog.SelectedPath & $"\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(NETWORK).mp4"
+        fbd.ShowDialog()
+        If fbd.SelectedPath <> txtOutputArgs.Text Then
+            txtOutputArgs.Text = fbd.SelectedPath & $"\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(NETWORK).mp4"
             Player.RenewArgs()
         End If
     End Sub
@@ -363,7 +363,7 @@ Public Class NHLGamesMetro
         ElseIf tabSettings.Visible Then
             tlpSettings.Focus()
         ElseIf tabConsole.Visible Then
-            RichTextBox.Focus()
+            txtConsole.Focus()
         Else 
             tabMenu.Focus()
         End If
@@ -460,7 +460,7 @@ Public Class NHLGamesMetro
                                         mpvPath.ToString(),
                                         mpvPath.Equals(txtMpvPath.Text).ToString(),
                                         mpvExists.ToString(),
-                                        RichTextBox.Text.ToString()))
+                                        txtConsole.Text.ToString()))
     End Sub
 
     Private Sub cbLanguage_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLanguage.SelectedIndexChanged 
@@ -620,4 +620,7 @@ Public Class NHLGamesMetro
         chkSpotifyForceToStart.Enabled = Not chkSpotifyAnyMediaPlayer.Checked
     End Sub
 
+    Private Sub MetroPanel1_Paint(sender As Object, e As PaintEventArgs) Handles pnlGameBar.Paint
+        flpCalender.Visible = False
+    End Sub
 End Class

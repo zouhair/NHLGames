@@ -85,14 +85,14 @@ Namespace Utilities
             Form.cbHostsFileActions.Items.AddRange(lstHostsFileActions)
             Form.cbHostsFileActions.SelectedIndex = 0
 
-            Form.SettingsToolTip.SetToolTip(Form.lnkGetVlc, NHLGamesMetro.RmText.GetString("tipGetVlc"))
-            Form.SettingsToolTip.SetToolTip(Form.lnkGetMpc, NHLGamesMetro.RmText.GetString("tipGetMpc"))
-            Form.SettingsToolTip.SetToolTip(Form.btnHostsFileActions, NHLGamesMetro.RmText.GetString("tipHostsExecuteAction"))
-            Form.SettingsToolTip.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
-            Form.SettingsToolTip.SetToolTip(Form.btnMpvPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
-            Form.SettingsToolTip.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
-            Form.SettingsToolTip.SetToolTip(Form.btnstreamerPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
-            Form.SettingsToolTip.SetToolTip(Form.btnOuput, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.tt.SetToolTip(Form.lnkGetVlc, NHLGamesMetro.RmText.GetString("tipGetVlc"))
+            Form.tt.SetToolTip(Form.lnkGetMpc, NHLGamesMetro.RmText.GetString("tipGetMpc"))
+            Form.tt.SetToolTip(Form.btnHostsFileActions, NHLGamesMetro.RmText.GetString("tipHostsExecuteAction"))
+            Form.tt.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.tt.SetToolTip(Form.btnMpvPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.tt.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.tt.SetToolTip(Form.btnstreamerPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.tt.SetToolTip(Form.btnOuput, NHLGamesMetro.RmText.GetString("tipBrowse"))
 
             Form.lblModules.Text = NHLGamesMetro.RmText.GetString("lblModules")
             Form.lblModulesDesc.Text = NHLGamesMetro.RmText.GetString("lblModulesDesc")

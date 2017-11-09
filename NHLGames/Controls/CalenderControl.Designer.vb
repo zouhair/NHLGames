@@ -66,7 +66,7 @@
         Me.Th6 = New System.Windows.Forms.Button()
         Me.Fr6 = New System.Windows.Forms.Button()
         Me.Sa6 = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblWeeksBackground = New System.Windows.Forms.Label()
         Me.lblDate = New MetroFramework.Controls.MetroLabel()
         Me.Sun = New MetroFramework.Controls.MetroLabel()
         Me.Mon = New MetroFramework.Controls.MetroLabel()
@@ -686,18 +686,18 @@
         Me.Sa6.TabIndex = 15
         Me.Sa6.UseVisualStyleBackColor = false
         '
-        'Label1
+        'lblWeeksBackground
         '
-        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+        Me.lblWeeksBackground.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(-3, 59)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(281, 21)
-        Me.Label1.TabIndex = 20
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblWeeksBackground.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lblWeeksBackground.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblWeeksBackground.ForeColor = System.Drawing.Color.White
+        Me.lblWeeksBackground.Location = New System.Drawing.Point(-3, 59)
+        Me.lblWeeksBackground.Name = "lblWeeksBackground"
+        Me.lblWeeksBackground.Size = New System.Drawing.Size(281, 21)
+        Me.lblWeeksBackground.TabIndex = 20
+        Me.lblWeeksBackground.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblDate
         '
@@ -955,7 +955,7 @@
         Me.Controls.Add(Me.Su2)
         Me.Controls.Add(Me.Su1)
         Me.Controls.Add(Me.lnkToday)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblWeeksBackground)
         Me.Controls.Add(Me.lblDate)
         Me.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Margin = New System.Windows.Forms.Padding(1)
@@ -1009,7 +1009,7 @@ End Sub
         Friend WithEvents Sa6 As Button
         Friend WithEvents btnBeforeYear As Button
         Friend WithEvents btnNextYear As Button
-        Friend WithEvents Label1 As Label
+        Friend WithEvents lblWeeksBackground As Label
         Friend WithEvents btnNextMonth As Button
         Friend WithEvents btnBeforeMonth As Button
         Friend WithEvents lblDate As MetroFramework.Controls.MetroLabel
