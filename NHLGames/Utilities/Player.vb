@@ -76,7 +76,7 @@ Namespace Utilities
                     Thread.Sleep(30) 'to let some time for the progress bar to move
                 End While
             Catch ex As Exception
-                Console.WriteLine(English.errorGeneral, $"starting stream", ex.Message.ToString())
+                Console.WriteLine(English.errorGeneral, $"Starting stream", ex.Message.ToString())
             Finally
                 NHLGamesMetro.SpnStreamingValue = 0
                 NHLGamesMetro.SpnStreamingVisible = False

@@ -50,7 +50,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Shared Sub Form1_UIThreadException(ByVal sender As Object, ByVal t As ThreadExceptionEventArgs)
-        Console.WriteLine(English.errorGeneral, t.Exception.ToString())
+        Console.WriteLine(English.errorGeneral, $"Running main thread", t.Exception.ToString())
     End Sub
 
     Private Shared Sub CurrentDomain_UnhandledException(ByVal sender As Object, ByVal e As UnhandledExceptionEventArgs)

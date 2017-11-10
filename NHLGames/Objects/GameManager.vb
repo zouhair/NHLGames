@@ -43,7 +43,7 @@ Namespace Objects
                             End If
                         Next
                         If MessageError <> Nothing Then
-                            Console.WriteLine(English.errorGeneral, MessageError)
+                            Console.WriteLine(English.errorGeneral, $"Getting games in manager", MessageError)
                         End If
                     End If
                 Next
