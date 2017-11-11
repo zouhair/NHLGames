@@ -124,11 +124,14 @@ Namespace Controls
                 lblNotInSeason.Text = If (showSeriesRecord, seriesStatusLong, seriesStatusShort)
             End If
 
-            If Not game.AreAnyStreamsAvailable Then
+            If Not game.AreAnyStreamsAvailable OrElse Not NHLGamesMetro.HostNameResolved Then
                 If game.GameDate.ToLocalTime >= Date.Today And game.GameState < GameStateEnum.InProgress Then
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblStreamAvailableAtGameTime")
                 Else
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblNoStreamAvailable")
+                End If
+                If Not NHLGamesMetro.HostNameResolved Then
+                    lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblHostFileNotWorking")
                 End If
                 flpStreams.Visible = False
             End If
@@ -161,7 +164,7 @@ Namespace Controls
 
             lblAwayScore.Text = game.AwayScore
             lblAwayTeam.Text = game.AwayAbbrev
-
+   
             lnkAway.Visible = game.AwayStream.IsAvailable
             lnkHome.Visible = game.HomeStream.IsAvailable
             lnkFrench.Visible = game.FrenchStream.IsAvailable

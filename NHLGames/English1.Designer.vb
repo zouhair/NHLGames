@@ -659,6 +659,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to NHL.tv bypass failed.
+        '''</summary>
+        Friend Shared ReadOnly Property lblHostFileNotWorking() As String
+            Get
+                Return ResourceManager.GetString("lblHostFileNotWorking", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Server&apos;s Hostname.
         '''</summary>
         Friend Shared ReadOnly Property lblHostname() As String

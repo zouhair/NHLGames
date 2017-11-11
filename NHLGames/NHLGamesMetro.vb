@@ -14,6 +14,7 @@ Public Class NHLGamesMetro
     Public Shared ServerIp As String
     Public Const DomainName As String = "mf.svc.nhl.com"
     Public Shared HostName As String
+    Public Shared HostNameResolved As Boolean = False
     Public Shared FormInstance As NHLGamesMetro = Nothing
     Public Shared StreamStarted As Boolean = False
     Public Shared SpnLoadingValue As Integer = 0

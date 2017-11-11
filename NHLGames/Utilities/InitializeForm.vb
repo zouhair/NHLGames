@@ -143,14 +143,18 @@ Namespace Utilities
 
             BindWatchArgsToForm(watchArgs)
 
-            If (HostsFile.TestEntry( NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp) = False) Then
-                If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgHostnameSet"), 
-                                            NHLGamesMetro.RmText.GetString("msgAddHost"), 
-                                            MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                    HostsFile.AddEntry(NHLGamesMetro.ServerIp,  NHLGamesMetro.DomainName, False)
-                Else
-                    Form.tabMenu.SelectedIndex = 1
+            If (HostsFile.TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp) = False) Then
+                If HostsFile.EnsureAdmin() Then
+                    If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgHostnameSet"), 
+                                                NHLGamesMetro.RmText.GetString("msgAddHost"), 
+                                                MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                        HostsFile.AddEntry(NHLGamesMetro.ServerIp,  NHLGamesMetro.DomainName, False)
+                    Else
+                        Form.tabMenu.SelectedIndex = 1
+                    End If
                 End If
+            Else 
+                NHLGamesMetro.HostNameResolved = True
             End If
 
             Dim adDetectionConfigs As AdDetectionConfigs = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection)

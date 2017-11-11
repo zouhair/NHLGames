@@ -66,6 +66,8 @@ Namespace Utilities
                     FileAccess.AddReadonly(HostsFilePath)
                 End If
 
+                NHLGamesMetro.HostNameResolved = TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp)
+                InvokeElement.LoadGamesAsync(NHLGamesMetro.GameDate, True)
                 MessageOpenHostsFile()
             End If
 
@@ -109,6 +111,8 @@ Namespace Utilities
                     FileAccess.AddReadonly(HostsFilePath)
                 End If
 
+                NHLGamesMetro.HostNameResolved = TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp)
+                InvokeElement.LoadGamesAsync(NHLGamesMetro.GameDate, True)
                 If viewChanges Then MessageOpenHostsFile()
             End If
 
