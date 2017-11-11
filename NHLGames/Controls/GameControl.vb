@@ -264,9 +264,9 @@ Namespace Controls
             Return If(value <> Nothing, value.ToLower, "")
         End Function
 
-        Private Sub GameUpdatedHandler(game As Game)
+        Private Sub GameUpdatedHandler(game As Game, e As EventArgs)
             If InvokeRequired Then
-                BeginInvoke(New Action(Of Game)(AddressOf GameUpdatedHandler), game)
+                BeginInvoke(New Action(Of Game, EventArgs)(AddressOf GameUpdatedHandler), game, e)
             Else
                 _game = game
                 UpdateWholeGamePanel(game)

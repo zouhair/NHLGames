@@ -9,7 +9,7 @@ Namespace Objects
     <DebuggerDisplay("{HomeTeam} vs. {AwayTeam} at {[Date]}")>
     Public Class Game
 
-        Public Event GameUpdated(sender As Object)
+        Public Event GameUpdated(ByVal sender As Object, e As EventArgs)
 
         Private ReadOnly _streams As Dictionary(Of StreamType, GameStream)
         Private _gameObj As JObject
@@ -160,7 +160,7 @@ Namespace Objects
         End Sub
 
         Public Sub Update(game As Game)
-            RaiseEvent GameUpdated(Me)
+            RaiseEvent GameUpdated(Me, New EventArgs())
         End Sub
 
         Public Sub Update(game As JObject, maxProgressSize As Integer)

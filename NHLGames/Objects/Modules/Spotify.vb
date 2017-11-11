@@ -44,16 +44,16 @@ Namespace  Objects.Modules
 
         Private Sub NextSong()
             If Not AnyMediaPlayer Then
-                Dim curr? = WindowsEvents.GetForegroundWindowFromHandle()
+                Dim curr? = NativeMethods.GetForegroundWindowFromHandle()
                 Dim spotifyHandle? = Process.GetProcessById(_spotifyId).MainWindowHandle
-                WindowsEvents.SetForegroundWindowFromHandle(spotifyHandle)
+                NativeMethods.SetForegroundWindowFromHandle(spotifyHandle)
                 Threading.Thread.Sleep(100)
                 SendKeys.SendWait(keyTab) 'to unfocus any current field on spotify
                 SendKeys.SendWait(KeyNextSong) 
-                WindowsEvents.SetBackgroundWindowFromHandle(spotifyHandle)
-                WindowsEvents.SetForegroundWindowFromHandle(curr)
+                NativeMethods.SetBackgroundWindowFromHandle(spotifyHandle)
+                NativeMethods.SetForegroundWindowFromHandle(curr)
             Else
-                WindowsEvents.PressKey(KeyVkNextSong)
+                NativeMethods.PressKey(KeyVkNextSong)
                 Threading.Thread.Sleep(100)
             End If
         End Sub
@@ -62,7 +62,7 @@ Namespace  Objects.Modules
             If Not AnyMediaPlayer Then
                 Query("remote/pause.json?pause=false") 'remote/resume.json
             Else
-                WindowsEvents.PressKey(KeyVkPlayPause)
+                NativeMethods.PressKey(KeyVkPlayPause)
             End If
         End Sub
 
@@ -70,7 +70,7 @@ Namespace  Objects.Modules
             If Not AnyMediaPlayer Then
                 Query("remote/pause.json?pause=true")  'remote/pause.json
             Else
-                WindowsEvents.PressKey(KeyVkPlayPause)
+                NativeMethods.PressKey(KeyVkPlayPause)
             End If
         End Sub
 

@@ -412,8 +412,8 @@ Public Class NHLGamesMetro
 
     Private Sub ResizeForm()
         If _resizeDirection <> -1 Then
-            WindowsEvents.ReleaseCapture()
-            WindowsEvents.SendMessage(Handle, WindowsCode.WM_NCLBUTTONDOWN, _resizeDirection, 0)
+            NativeMethods.ReleaseCaptureOfForm()
+            NativeMethods.SendMessageToHandle(Handle, WindowsCode.WM_NCLBUTTONDOWN, _resizeDirection, 0)
         End If
     End Sub
 

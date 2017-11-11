@@ -34,11 +34,10 @@ Namespace Utilities
             Try
                 If createIt Then File.WriteAllText(filePath, English.msgTestTxtContent)
 
-                Using inputstreamreader As New StreamReader(filePath)
-                    inputstreamreader.Close()
+                Using New StreamReader(filePath)
                 End Using
-                Using inputStream As FileStream = File.Open(filePath, FileMode.Open, IO.FileAccess.ReadWrite, FileShare.None)
-                    inputStream.Close()
+
+                Using File.Open(filePath, FileMode.Open, IO.FileAccess.ReadWrite, FileShare.None)
                 End Using
 
                 If createIt Then File.Delete(filePath)

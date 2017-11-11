@@ -60,7 +60,6 @@ Namespace Utilities
 
                 Using sw As New StreamWriter(HostsFilePath)
                     sw.Write(output)
-                    sw.Close()
                 End Using
 
                 If fileIsReadonly Then
@@ -104,7 +103,6 @@ Namespace Utilities
 
                 Using sw As New StreamWriter(HostsFilePath)
                     sw.Write(output)
-                    sw.Close()
                 End Using
 
                 If fileIsReadonly Then
