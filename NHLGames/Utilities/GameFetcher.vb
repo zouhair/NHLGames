@@ -61,6 +61,7 @@ Namespace Utilities
                     NHLGamesMetro.SpnLoadingValue = NHLGamesMetro.spnLoadingMaxValue - 1
                     Threading.Thread.Sleep(30)
                     Task.WaitAll(NHLGamesMetro.LstTasks.ToArray())
+                    NHLGamesMetro.LstTasks.Clear()
                     InvokeElement.NewGamesFound(GameManager.GamesDict)
                     InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"),GameManager.GamesList.Count.ToString()))
                 Else 

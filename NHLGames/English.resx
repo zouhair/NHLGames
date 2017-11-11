@@ -425,10 +425,6 @@
     <value>Settings</value>
     <comment>Main</comment>
   </data>
-  <data name="textCopyConsole" xml:space="preserve">
-    <value>NHLGames Official Bug Report {1}{0}{0}OS : {2} {3}{0}{0}UI loaded : {4}{0}{0}Domain resolved : {5}{0}{0}Server IP found : {6}{0}{0}Selected hostname : {7}{0}{0}Selected player : {8}{0}{0}Streamer path : {9} [=UI:{10}] [{11}]{0}{0}VLC path : {12} [=UI:{13}] [{14}]{0}{0}MPC path : {15} [=UI:{16}] [{17]{0}{0}MPV path : {18} [=UI:{19}] [{20}]{0}{0}Console log : {0}{0}{21}</value>
-    <comment>Console</comment>
-  </data>
   <data name="enumending" xml:space="preserve">
     <value>Ending</value>
     <comment>Game State Enum</comment>
@@ -551,10 +547,6 @@
   </data>
   <data name="msgStartingStreamer" xml:space="preserve">
     <value>Starting: Streamer {0}</value>
-    <comment>Console</comment>
-  </data>
-  <data name="msgExists" xml:space="preserve">
-    <value>Exists</value>
     <comment>Console</comment>
   </data>
   <data name="cbQualityGood" xml:space="preserve">

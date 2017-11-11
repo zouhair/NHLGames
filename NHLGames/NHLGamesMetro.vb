@@ -30,7 +30,6 @@ Public Class NHLGamesMetro
     Private _resizeDirection As Integer = -1
     Private Const ResizeBorderWidth As Integer = 8
     Public Shared RmText As ResourceManager = English.ResourceManager
-    Public LstGameControls As List(Of GameControl) = New List(Of GameControl)
     Public Shared LstTasks As List(Of Task) = New List(Of Task)()
     Public Shared FormLoaded As Boolean = False
     Private Shared _adDetectionEngine As AdDetection
@@ -68,7 +67,6 @@ Public Class NHLGamesMetro
 
         tabMenu.SelectedIndex = 0
         FlpCalendar = flpCalender
-        flpGames.Controls.AddRange(lstGameControls.ToArray())
         InitializeForm.SetSettings()
         InitializeForm.VersionCheck()
         ResumeLayout()
@@ -434,33 +432,26 @@ Public Class NHLGamesMetro
         Dim vlcPath = ApplicationSettings.Read(Of String)(SettingsEnum.VlcPath, String.Empty).ToString()
         Dim mpcPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpcPath, String.Empty).ToString()
         Dim mpvPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpvPath, String.Empty).ToString()
-        Dim streamerExists = If(streamerPath <> "" AndAlso File.Exists(streamerPath), English.msgExists, "")
-        Dim vlcExists = If(vlcPath <> "" AndAlso File.Exists(vlcPath), English.msgExists, "")
-        Dim mpcExists = If(mpcPath <> "" AndAlso File.Exists(mpcPath), English.msgExists, "")
-        Dim mpvExists = If(mpvPath <> "" AndAlso File.Exists(mpvPath), English.msgExists, "")
-        Clipboard.SetText(String.Format(English.textCopyConsole,
-                                        vbCrLf,
-                                        lblVersion.Text.ToString(),
-                                        My.Computer.Info.OSFullName.ToString(), 
-                                        x64.ToString(), 
-                                        (Not String.IsNullOrEmpty(lblDate.Text)).ToString(),
-                                        HostsFile.TestEntry(DomainName,ServerIp).ToString(),
-                                        My.Computer.Network.Ping(ServerIp).ToString(),
-                                        cbServers.SelectedItem.ToString(),
-                                        player.ToString(),
-                                        streamerPath.ToString(),
-                                        streamerPath.Equals(txtStreamerPath.Text).ToString(),
-                                        streamerExists.ToString(),
-                                        vlcPath.ToString(),
-                                        vlcPath.Equals(txtVLCPath.Text).ToString(),
-                                        vlcExists.ToString(),
-                                        mpcPath.ToString(),
-                                        mpcPath.Equals(txtMPCPath.Text).ToString(),
-                                        mpcExists.ToString(),
-                                        mpvPath.ToString(),
-                                        mpvPath.Equals(txtMpvPath.Text).ToString(),
-                                        mpvExists.ToString(),
-                                        txtConsole.Text.ToString()))
+        Dim streamerExists = streamerPath <> "" AndAlso File.Exists(streamerPath)
+        Dim vlcExists = vlcPath <> "" AndAlso File.Exists(vlcPath)
+        Dim mpcExists = mpcPath <> "" AndAlso File.Exists(mpcPath)
+        Dim mpvExists = mpvPath <> "" AndAlso File.Exists(mpvPath)
+        Dim report = $"NHLGames Bug Report {lblVersion.Text}{vbCrLf}{vbCrLf}" &
+            $"Operating system: {My.Computer.Info.OSFullName.ToString()} {x64.ToString()}{vbCrLf}{vbCrLf}" &
+            $"Form: {If (Not String.IsNullOrEmpty(lblDate.Text), "loaded", "not loaded")}, " &
+            $"{flpGames.Controls.Count} games currently on form, " &
+            $"Spinner (games) {If (SpnLoadingVisible, "visible", "invisible")} {SpnLoadingValue.ToString()}/{SpnLoadingMaxValue.ToString()}, " &
+            $"Spinner (stream) {If (SpnStreamingVisible, "visible", "invisible")} {SpnStreamingValue.ToString()}/{SpnStreamingMaxValue.ToString()}{vbCrLf}{vbCrLf}" &
+            $"Servers: NHLGames IP {If (My.Computer.Network.Ping(ServerIp), "found", "not found")} ({cbServers.SelectedItem.ToString()}), " &
+            $"NHL.TV redirection is{If (HostsFile.TestEntry(DomainName,ServerIp), " working", "n't working")} (Hosts file tested){vbCrLf}{vbCrLf}" &
+            $"Streams fetcher: {LstTasks.Count} tasks still running{vbCrLf}{vbCrLf}" &
+            $"Selected player: {player.ToString()}{vbCrLf}{vbCrLf}" &
+            $"Streamer path: {streamerPath.ToString()} [{If (streamerPath.Equals(txtStreamerPath.Text), "on form", "not on form")}] [{If (streamerExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
+            $"VLC path: {vlcPath.ToString()} [{If (vlcPath.Equals(txtVLCPath.Text), "on form", "not on form")}] [{If (vlcExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
+            $"MPC path: {mpcPath.ToString()} [{If (mpcPath.Equals(txtMPCPath.Text), "on form", "not on form")}] [{If (mpcExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
+            $"MPV path: {mpvPath.ToString()} [{If (mpvPath.Equals(txtMpvPath.Text), "on form", "not on form")}] [{If (mpvExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
+            $"Console log: {vbCrLf}{vbCrLf}{txtConsole.Text.ToString()}"
+        Clipboard.SetText(report)
     End Sub
 
     Private Sub cbLanguage_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLanguage.SelectedIndexChanged 
@@ -480,6 +471,7 @@ Public Class NHLGamesMetro
     Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Try
             Task.WaitAll(LstTasks.ToArray())
+            LstTasks.Clear()
         Catch
         End Try
     End Sub
