@@ -138,9 +138,6 @@ Namespace Utilities
 
             PopulateComboBox(Form.cbServers, SettingsEnum.SelectedServer, settingsenum.ServerList)
 
-            NHLGamesMetro.ServerIp = Dns.GetHostEntry(Form.cbServers.SelectedItem.ToString()).AddressList.First.ToString()
-            NHLGamesMetro.HostName = Form.cbServers.SelectedItem.ToString()
-
             BindWatchArgsToForm(watchArgs)
 
             If (HostsFile.TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp) = False) Then

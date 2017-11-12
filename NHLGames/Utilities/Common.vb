@@ -26,7 +26,7 @@ Namespace Utilities
                 If httpWebRequest Is Nothing Then
                     myHttpWebRequest = CType(WebRequest.Create(address), HttpWebRequest)
                     myHttpWebRequest.UserAgent = UserAgent
-                    myHttpWebRequest.Timeout = 2000
+                    myHttpWebRequest.Timeout = 1000
                 Else 
                     myHttpWebRequest = httpWebRequest
                 End If

@@ -423,7 +423,10 @@ Public Class NHLGamesMetro
     Private Sub cbServers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbServers.SelectedIndexChanged 
         tlpSettings.Focus()
         HostName = cbServers.SelectedItem.ToString()
+        ServerIp = Net.Dns.GetHostEntry(HostName).AddressList.First.ToString()
+        HostNameResolved = HostsFile.TestEntry(DomainName, ServerIp)
         ApplicationSettings.SetValue(SettingsEnum.SelectedServer, cbServers.SelectedItem.ToString())
+        If FormLoaded Then InvokeElement.LoadGamesAsync(GameDate)
     End Sub
 
     Private Sub btnCopyConsole_Click(sender As Object, e As EventArgs) Handles btnCopyConsole.Click

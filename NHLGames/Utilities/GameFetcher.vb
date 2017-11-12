@@ -43,17 +43,23 @@ Namespace Utilities
         End Sub
 
         Public Shared Async Sub LoadGames(dateTime As DateTime, refreshing As Boolean)
+            InvokeElement.ClearGamePanel()
+
             NHLGamesMetro.SpnLoadingValue = 1
-            If Await HostNameInvalid() Then Return
+            NHLGamesMetro.SpnLoadingVisible = True
+
+            If Await HostNameInvalid() Then
+                NHLGamesMetro.SpnLoadingVisible = False
+                NHLGamesMetro.SpnLoadingValue = 0
+                Return
+            End If
+
             Try
-                NHLGamesMetro.SpnLoadingVisible = True
                 InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgLoadingGames"))
 
                 If Not refreshing Then
                     GameManager.ClearGames()
                 End If
-
-                InvokeElement.ClearGamePanel()
 
                 Dim jsonSchedule As JObject = Downloader.DownloadJsonSchedule(dateTime, refreshing)
                 If jsonSchedule.HasValues Then
@@ -75,7 +81,7 @@ Namespace Utilities
         End Sub
 
         Private Shared Async Function HostNameInvalid() As Task(Of Boolean)
-            Dim hostname As String = String.Format("http://{0}/", NHLGamesMetro.HostName)
+            Dim hostname As String = String.Format("http://{0}/", NHLGamesMetro.ServerIp)
             Dim result = Not Await (Common.SendWebRequest(hostname))
             If result Then Console.WriteLine(English.errorHostname)
             Return result
