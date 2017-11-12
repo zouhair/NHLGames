@@ -738,7 +738,7 @@
     <comment>Console</comment>
   </data>
   <data name="lblModulesDesc" xml:space="preserve">
-    <value>Detect ads and notify activated apps below</value>
+    <value>Detects ads and notify activated apps below</value>
     <comment>Modules tab</comment>
   </data>
   <data name="lblShowTeamCityAbr" xml:space="preserve">

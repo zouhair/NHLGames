@@ -704,7 +704,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Detect ads and notify activated apps below.
+        '''  Looks up a localized string similar to Detects ads and notify activated apps below.
         '''</summary>
         Friend Shared ReadOnly Property lblModulesDesc() As String
             Get
