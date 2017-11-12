@@ -506,7 +506,7 @@
     <comment>Message</comment>
   </data>
   <data name="noConfigFile" xml:space="preserve">
-    <value>Fichier de configuration NHLGames introuvable. Vous devez réinstaller NHLGames.</value>
+    <value>Fichiers requis de NHLGames introuvables. L'archive zip de NHLGames doit être décompressée et nhlgames.exe doit rester dans son dossier ou vous devrez re-télécharger NHLGames.</value>
     <comment>Message</comment>
   </data>
   <data name="noWebAccess" xml:space="preserve">

@@ -138,7 +138,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="noConfigFile" xml:space="preserve">
-    <value>Can't find NHLGames config file. You will have to reinstall NHLGames.</value>
+    <value>NHLGames required files not found. NHLGames must be extracted from the zip archive and nhlgames.exe must stay in its folder or you will have to re-download NHLGames.</value>
     <comment>Message</comment>
   </data>
   <data name="errorDeserialize" xml:space="preserve">

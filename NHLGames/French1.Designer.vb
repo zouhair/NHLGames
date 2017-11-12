@@ -947,7 +947,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fichier de configuration NHLGames introuvable. Vous devez réinstaller NHLGames..
+        '''  Looks up a localized string similar to Fichiers requis de NHLGames introuvables. L&apos;archive zip de NHLGames doit être décompressée et nhlgames.exe doit rester dans son dossier ou vous devrez re-télécharger NHLGames..
         '''</summary>
         Friend Shared ReadOnly Property noConfigFile() As String
             Get

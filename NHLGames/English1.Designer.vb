@@ -1415,7 +1415,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Can&apos;t find NHLGames config file. You will have to reinstall NHLGames..
+        '''  Looks up a localized string similar to NHLGames required files not found. NHLGames must be extracted from the zip archive and nhlgames.exe must stay in its folder or you will have to re-download NHLGames..
         '''</summary>
         Friend Shared ReadOnly Property noConfigFile() As String
             Get
