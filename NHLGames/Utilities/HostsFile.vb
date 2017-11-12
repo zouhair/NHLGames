@@ -67,7 +67,7 @@ Namespace Utilities
                 End If
 
                 NHLGamesMetro.HostNameResolved = TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp)
-                InvokeElement.LoadGamesAsync(NHLGamesMetro.GameDate, True)
+                If NHLGamesMetro.FormLoaded Then InvokeElement.LoadGamesAsync(NHLGamesMetro.GameDate, True)
                 MessageOpenHostsFile()
             End If
 
@@ -112,7 +112,7 @@ Namespace Utilities
                 End If
 
                 NHLGamesMetro.HostNameResolved = TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp)
-                InvokeElement.LoadGamesAsync(NHLGamesMetro.GameDate, True)
+                If NHLGamesMetro.FormLoaded Then InvokeElement.LoadGamesAsync(NHLGamesMetro.GameDate, True)
                 If viewChanges Then MessageOpenHostsFile()
             End If
 

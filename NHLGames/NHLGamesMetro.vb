@@ -200,7 +200,7 @@ Public Class NHLGamesMetro
         Dim cdn = If(tgAlternateCdn.Checked, CdnType.L3C, CdnType.Akc)
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(lblCdn.Text, cdn.ToString())
-        InvokeElement.LoadGamesAsync(GameDate)
+        If NHLGamesMetro.FormLoaded Then InvokeElement.LoadGamesAsync(GameDate)
     End Sub
 
     Private Sub txtOutputPath_TextChanged(sender As Object, e As EventArgs) Handles txtOutputArgs.TextChanged 
