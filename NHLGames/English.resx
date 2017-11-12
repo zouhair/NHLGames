@@ -334,7 +334,7 @@
     <comment>Message</comment>
   </data>
   <data name="msgHostsSuccess" xml:space="preserve">
-    <value>Hosts file looks good!</value>
+    <value>Windows Hosts file looks good: NHL.tv and NHLGames IP addresses matches :)</value>
     <comment>Message</comment>
   </data>
   <data name="msgLoadingGames" xml:space="preserve">

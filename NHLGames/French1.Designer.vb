@@ -857,7 +857,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Le fichier Hosts semble fonctionnel :).
+        '''  Looks up a localized string similar to Le fichier Hosts de Windows semble fonctionnel: Les adresses IP de NHL.tv et NHLGames correspondent  :).
         '''</summary>
         Friend Shared ReadOnly Property msgHostsSuccess() As String
             Get

@@ -274,7 +274,7 @@
     <comment>Message</comment>
   </data>
   <data name="msgHostsSuccess" xml:space="preserve">
-    <value>Le fichier Hosts semble fonctionnel :)</value>
+    <value>Le fichier Hosts de Windows semble fonctionnel: Les adresses IP de NHL.tv et NHLGames correspondent  :)</value>
     <comment>Message</comment>
   </data>
   <data name="msgLoadingGames" xml:space="preserve">
