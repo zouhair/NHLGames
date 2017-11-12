@@ -258,7 +258,7 @@
     <comment>Version</comment>
   </data>
   <data name="msgErrorGeneralText" xml:space="preserve">
-    <value>Une erreur est survenue! Voir la console pour plus de détails.{0}Cliquez sur le bouton [?] dans le coin supérieur droit pour voir la documentation en anglais de NHLGames et obtenir un support rapide dans la section 'Support' (Application et Lecteur){0}Vous pouvez copier le contenu de la console avec le bouton 'Copier au presse-papier' et coller (CTRL+V) dans un nouveau sujet sur reddit /r/NHLGames pour obtenir de l'aide. Utilisez le lien en bas à gauche pour vous y rendre.</value>
+    <value>Une erreur est survenue!{0}Cliquez sur [?] (coin supérieur droit) pour voir la documentation en anglais de NHLGames et rechercher votre problème{0}Si introuvable, cliquez sur "Copier au presse-papier" et collez dans un nouveau sujet sur /r/nhl_games ou ouvrez un "issue" sur notre page GitHub. Soyez certain qu'aucun sujet (thread) n'y réfère déjà.</value>
     <comment>Message</comment>
   </data>
   <data name="msgFailure" xml:space="preserve">

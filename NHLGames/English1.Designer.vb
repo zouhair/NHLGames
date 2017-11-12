@@ -1046,7 +1046,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to An error happened! See the console for more details.{0}Click on [?] button in the top-right corner to view NHLGames documentation for quick support in the Support section (App and Player).{0}You can also copy the console log using &apos;Copy to clipboard&apos; button and paste it in a new thread on NHLGames subreddit for help. Use the link in the bottom-left corner to get there..
+        '''  Looks up a localized string similar to An error happened! {0}Click on [?] (top-right corner) to get to NHLGames documentation and search for your issue.{0}If not found, click on &quot;Copy to clipboard&quot; and paste it in a new thread on /r/nhl_games or open a new issue on our GitHub page. Make sure it was not already posted by someone else..
         '''</summary>
         Friend Shared ReadOnly Property msgErrorGeneralText() As String
             Get

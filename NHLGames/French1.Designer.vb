@@ -803,7 +803,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Une erreur est survenue! Voir la console pour plus de détails.{0}Cliquez sur le bouton [?] dans le coin supérieur droit pour voir la documentation en anglais de NHLGames et obtenir un support rapide dans la section &apos;Support&apos; (Application et Lecteur){0}Vous pouvez copier le contenu de la console avec le bouton &apos;Copier au presse-papier&apos; et coller (CTRL+V) dans un nouveau sujet sur reddit /r/NHLGames pour obtenir de l&apos;aide. Utilisez le lien en bas à gauche pour vous y rendre..
+        '''  Looks up a localized string similar to Une erreur est survenue!{0}Cliquez sur [?] (coin supérieur droit) pour voir la documentation en anglais de NHLGames et rechercher votre problème{0}Si introuvable, cliquez sur &quot;Copier au presse-papier&quot; et collez dans un nouveau sujet sur /r/nhl_games ou ouvrez un &quot;issue&quot; sur notre page GitHub. Soyez certain qu&apos;aucun sujet (thread) n&apos;y réfère déjà..
         '''</summary>
         Friend Shared ReadOnly Property msgErrorGeneralText() As String
             Get
