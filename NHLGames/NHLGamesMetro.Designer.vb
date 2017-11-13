@@ -338,7 +338,7 @@ Partial Class NHLGamesMetro
         Me.pnlGameBar.Location = New System.Drawing.Point(1, 0)
         Me.pnlGameBar.Margin = New System.Windows.Forms.Padding(0)
         Me.pnlGameBar.Name = "pnlGameBar"
-        Me.pnlGameBar.Size = New System.Drawing.Size(983, 41)
+        Me.pnlGameBar.Size = New System.Drawing.Size(982, 41)
         Me.pnlGameBar.TabIndex = 141
         Me.pnlGameBar.UseCustomBackColor = true
         Me.pnlGameBar.VerticalScrollbarBarColor = true
@@ -413,7 +413,7 @@ Partial Class NHLGamesMetro
         Me.btnRefresh.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnRefresh.Location = New System.Drawing.Point(945, 6)
+        Me.btnRefresh.Location = New System.Drawing.Point(944, 6)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(28, 28)
         Me.btnRefresh.TabIndex = 140
