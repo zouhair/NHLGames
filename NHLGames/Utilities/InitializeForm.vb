@@ -112,7 +112,7 @@ Namespace Utilities
 
             'Calendar
             Form.flpCalendarPanel.Controls.Clear()
-            Form.flpCalendarPanel.Controls.Add(New Controls.CalenderControl)
+            Form.flpCalendarPanel.Controls.Add(New Controls.CalendarControl)
         End Sub
 
         Public Shared Sub SetSettings()

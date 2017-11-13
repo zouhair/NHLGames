@@ -142,10 +142,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\BorderPanel.vb" />
-    <Compile Include="Controls\CalenderControl.Designer.vb">
-      <DependentUpon>CalenderControl.vb</DependentUpon>
+    <Compile Include="Controls\CalendarControl.Designer.vb">
+      <DependentUpon>CalendarControl.vb</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CalenderControl.vb">
+    <Compile Include="Controls\CalendarControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\GameControl.Designer.vb">
@@ -212,8 +212,8 @@
     <Compile Include="Utilities\WindowsEvents.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\CalenderControl.resx">
-      <DependentUpon>CalenderControl.vb</DependentUpon>
+    <EmbeddedResource Include="Controls\CalendarControl.resx">
+      <DependentUpon>CalendarControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\GameControl.resx">
       <DependentUpon>GameControl.vb</DependentUpon>

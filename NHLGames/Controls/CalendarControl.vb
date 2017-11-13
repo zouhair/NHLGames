@@ -1,10 +1,9 @@
 ﻿Imports System.Globalization
-Imports System.Web.UI.WebControls.Expressions
 Imports NHLGames.Utilities
 
 Namespace Controls
 
-    Public Class CalenderControl
+    Public Class CalendarControl
 
         Private _currentDate As Date
         Private ReadOnly _arrayButtons(,) As Button
@@ -78,7 +77,7 @@ Namespace Controls
 
         Public Sub New()
             InitializeComponent()
-            _arrayButtons = New Button(5,6) {
+            _arrayButtons = New Button(,) {
                                                 {Su1, Mo1, Tu1, We1, Th1, Fr1, Sa1},
                                                 {Su2, Mo2, Tu2, We2, Th2, Fr2, Sa2},
                                                 {Su3, Mo3, Tu3, We3, Th3, Fr3, Sa3},

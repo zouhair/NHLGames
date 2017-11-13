@@ -1,6 +1,6 @@
 ﻿Namespace Controls
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class CalenderControl
+    Partial Class CalendarControl
         Inherits System.Windows.Forms.UserControl
 
         'UserControl remplace la méthode Dispose pour nettoyer la liste des composants.
@@ -897,7 +897,7 @@
         Me.btnNextYear.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnNextYear.UseVisualStyleBackColor = false
         '
-        'CalenderControl
+        'CalendarControl
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.SystemColors.ControlLightLight
@@ -959,7 +959,7 @@
         Me.Controls.Add(Me.lblDate)
         Me.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Margin = New System.Windows.Forms.Padding(1)
-        Me.Name = "CalenderControl"
+        Me.Name = "CalendarControl"
         Me.Size = New System.Drawing.Size(278, 318)
         Me.ResumeLayout(false)
 
