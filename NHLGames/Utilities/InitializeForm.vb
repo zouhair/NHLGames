@@ -111,8 +111,8 @@ Namespace Utilities
             Form.btnClearConsole.Text = NHLGamesMetro.RmText.GetString("btnClearConsole")
 
             'Calendar
-            Form.flpCalender.Controls.Clear()
-            Form.flpCalender.Controls.Add(New Controls.CalenderControl)
+            Form.flpCalendarPanel.Controls.Clear()
+            Form.flpCalendarPanel.Controls.Add(New Controls.CalenderControl)
         End Sub
 
         Public Shared Sub SetSettings()

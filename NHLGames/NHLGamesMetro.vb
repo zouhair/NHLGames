@@ -67,7 +67,7 @@ Public Class NHLGamesMetro
         Common.CheckAppCanRun()
 
         tabMenu.SelectedIndex = 0
-        FlpCalendar = flpCalender
+        FlpCalendar = flpCalendarPanel
         InitializeForm.SetSettings()
         InitializeForm.VersionCheck()
         ResumeLayout()
@@ -87,6 +87,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        flpCalendarPanel.Visible = False
         InvokeElement.LoadGamesAsync(GameDate, True)
         flpGames.Focus()
     End Sub
@@ -251,11 +252,12 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnDate_Click(sender As Object, e As EventArgs) Handles btnDate.Click
-        Dim val = Not flpCalender.Visible
-        flpCalender.Visible = val
+        Dim val = Not flpCalendarPanel.Visible
+        flpCalendarPanel.Visible = val
     End Sub
 
     Private Sub lblDate_TextChanged(sender As Object, e As EventArgs) Handles lblDate.TextChanged
+        flpCalendarPanel.Visible = False
         InvokeElement.LoadGamesAsync(GameDate)
         flpGames.Focus()
     End Sub
@@ -277,15 +279,15 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub TabControl_MouseClick(sender As Object, e As MouseEventArgs) Handles tabMenu.MouseClick
-        flpCalender.Visible = False
+        flpCalendarPanel.Visible = False
     End Sub
 
     Private Sub GamesTab_Click(sender As Object, e As EventArgs) Handles tabGames.Click
-        flpCalender.Visible = False
+        flpCalendarPanel.Visible = False
     End Sub
 
     Private Sub FlowLayoutPanel_Click(sender As Object, e As EventArgs) Handles flpGames.Click
-        flpCalender.Visible = False
+        flpCalendarPanel.Visible = False
     End Sub
 
     Private Sub tgStreamer_CheckedChanged(sender As Object, e As EventArgs) Handles tgStreamer.CheckedChanged 
@@ -616,7 +618,7 @@ Public Class NHLGamesMetro
         chkSpotifyForceToStart.Enabled = Not chkSpotifyAnyMediaPlayer.Checked
     End Sub
 
-    Private Sub MetroPanel1_Paint(sender As Object, e As PaintEventArgs) Handles pnlGameBar.Paint
-        flpCalender.Visible = False
+    Private Sub pnlGameBar_Click(sender As Object, e As EventArgs) Handles pnlGameBar.Click
+        flpCalendarPanel.Visible = False
     End Sub
 End Class

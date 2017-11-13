@@ -33,7 +33,7 @@ Partial Class NHLGamesMetro
         Me.spnLoading = New MetroFramework.Controls.MetroProgressSpinner()
         Me.lblDate = New MetroFramework.Controls.MetroLabel()
         Me.lblNoGames = New System.Windows.Forms.Label()
-        Me.flpCalender = New System.Windows.Forms.FlowLayoutPanel()
+        Me.flpCalendarPanel = New System.Windows.Forms.FlowLayoutPanel()
         Me.flpGames = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlGameBar = New MetroFramework.Controls.MetroPanel()
         Me.btnTomorrow = New System.Windows.Forms.Button()
@@ -230,7 +230,7 @@ Partial Class NHLGamesMetro
         Me.tabGames.Controls.Add(Me.spnLoading)
         Me.tabGames.Controls.Add(Me.lblDate)
         Me.tabGames.Controls.Add(Me.lblNoGames)
-        Me.tabGames.Controls.Add(Me.flpCalender)
+        Me.tabGames.Controls.Add(Me.flpCalendarPanel)
         Me.tabGames.Controls.Add(Me.flpGames)
         Me.tabGames.Controls.Add(Me.pnlGameBar)
         Me.tabGames.Cursor = System.Windows.Forms.Cursors.Default
@@ -269,9 +269,9 @@ Partial Class NHLGamesMetro
         Me.lblDate.FontSize = MetroFramework.MetroLabelSize.Tall
         Me.lblDate.FontWeight = MetroFramework.MetroLabelWeight.Bold
         Me.lblDate.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
-        Me.lblDate.Location = New System.Drawing.Point(40, 0)
+        Me.lblDate.Location = New System.Drawing.Point(40, 1)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(228, 38)
+        Me.lblDate.Size = New System.Drawing.Size(228, 33)
         Me.lblDate.TabIndex = 28
         Me.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblDate.UseCustomBackColor = true
@@ -295,18 +295,18 @@ Partial Class NHLGamesMetro
         Me.lblNoGames.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblNoGames.Visible = false
         '
-        'flpCalender
+        'flpCalendarPanel
         '
-        Me.flpCalender.AutoSize = true
-        Me.flpCalender.BackColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
-        Me.flpCalender.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
-        Me.flpCalender.Location = New System.Drawing.Point(35, 41)
-        Me.flpCalender.Margin = New System.Windows.Forms.Padding(0)
-        Me.flpCalender.Name = "flpCalender"
-        Me.flpCalender.Padding = New System.Windows.Forms.Padding(2)
-        Me.flpCalender.Size = New System.Drawing.Size(34, 30)
-        Me.flpCalender.TabIndex = 10
-        Me.flpCalender.Visible = false
+        Me.flpCalendarPanel.AutoSize = true
+        Me.flpCalendarPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
+        Me.flpCalendarPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
+        Me.flpCalendarPanel.Location = New System.Drawing.Point(35, 41)
+        Me.flpCalendarPanel.Margin = New System.Windows.Forms.Padding(0)
+        Me.flpCalendarPanel.Name = "flpCalendarPanel"
+        Me.flpCalendarPanel.Padding = New System.Windows.Forms.Padding(2)
+        Me.flpCalendarPanel.Size = New System.Drawing.Size(34, 30)
+        Me.flpCalendarPanel.TabIndex = 10
+        Me.flpCalendarPanel.Visible = false
         '
         'flpGames
         '
@@ -327,7 +327,6 @@ Partial Class NHLGamesMetro
         '
         Me.pnlGameBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.pnlGameBar.AutoSize = true
         Me.pnlGameBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.pnlGameBar.Controls.Add(Me.btnTomorrow)
         Me.pnlGameBar.Controls.Add(Me.btnYesterday)
@@ -339,7 +338,7 @@ Partial Class NHLGamesMetro
         Me.pnlGameBar.Location = New System.Drawing.Point(1, 0)
         Me.pnlGameBar.Margin = New System.Windows.Forms.Padding(0)
         Me.pnlGameBar.Name = "pnlGameBar"
-        Me.pnlGameBar.Size = New System.Drawing.Size(982, 41)
+        Me.pnlGameBar.Size = New System.Drawing.Size(983, 41)
         Me.pnlGameBar.TabIndex = 141
         Me.pnlGameBar.UseCustomBackColor = true
         Me.pnlGameBar.VerticalScrollbarBarColor = true
@@ -404,7 +403,7 @@ Partial Class NHLGamesMetro
         Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
         Me.btnRefresh.BackgroundImage = Global.NHLGames.My.Resources.Resources.wrefresh
-        Me.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.btnRefresh.FlatAppearance.BorderSize = 0
         Me.btnRefresh.FlatAppearance.CheckedBackColor = System.Drawing.Color.White
@@ -414,7 +413,7 @@ Partial Class NHLGamesMetro
         Me.btnRefresh.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnRefresh.Location = New System.Drawing.Point(944, 6)
+        Me.btnRefresh.Location = New System.Drawing.Point(945, 6)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(28, 28)
         Me.btnRefresh.TabIndex = 140
@@ -1961,7 +1960,7 @@ End Sub
     Friend WithEvents btnRefresh As Button
     Friend WithEvents tmr As Timer
     Friend WithEvents flpGames As FlowLayoutPanel
-    Friend WithEvents flpCalender As FlowLayoutPanel
+    Friend WithEvents flpCalendarPanel As FlowLayoutPanel
     Friend WithEvents lblNoGames As Label
     Friend WithEvents tt As MetroFramework.Components.MetroToolTip
     Friend WithEvents btnClose As MetroLink
