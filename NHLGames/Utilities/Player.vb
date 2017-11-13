@@ -98,6 +98,8 @@ Namespace Utilities
             If Not Process.GetProcesses().Any(Function(p) p.ProcessName.ToLower().Contains(args.PlayerType.ToString().ToLower())) Then
                 Console.WriteLine(English.errorStreamFailed)
             End If
+            Thread.Sleep(2000)
+            NHLGamesMetro.StreamStarted = False
         End Sub
 
         Public Shared Sub RenewArgs(Optional forceSet As Boolean = False)
