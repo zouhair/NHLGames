@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Resources
@@ -276,18 +277,6 @@ Public Class NHLGamesMetro
     Private Sub lnkDownload_Click(sender As Object, e As EventArgs) Handles lnkDownload.Click
         Dim sInfo As ProcessStartInfo = New ProcessStartInfo(DownloadLink)
         Process.Start(sInfo)
-    End Sub
-
-    Private Sub TabControl_MouseClick(sender As Object, e As MouseEventArgs) Handles tabMenu.MouseClick
-        flpCalendarPanel.Visible = False
-    End Sub
-
-    Private Sub GamesTab_Click(sender As Object, e As EventArgs) Handles tabGames.Click
-        flpCalendarPanel.Visible = False
-    End Sub
-
-    Private Sub FlowLayoutPanel_Click(sender As Object, e As EventArgs) Handles flpGames.Click
-        flpCalendarPanel.Visible = False
     End Sub
 
     Private Sub tgStreamer_CheckedChanged(sender As Object, e As EventArgs) Handles tgStreamer.CheckedChanged 
@@ -618,7 +607,15 @@ Public Class NHLGamesMetro
         chkSpotifyForceToStart.Enabled = Not chkSpotifyAnyMediaPlayer.Checked
     End Sub
 
-    Private Sub pnlGameBar_Click(sender As Object, e As EventArgs) Handles pnlGameBar.Click
-        flpCalendarPanel.Visible = False
+    Private Sub pnlCalendar_MouseLeave(sender As Object, e As EventArgs) Handles flpCalendarPanel.MouseLeave
+        flpCalendarPanel.Visible = flpCalendarPanel.ClientRectangle.Contains(flpCalendarPanel.PointToClient(Cursor.Position))
+    End Sub
+
+    Private Sub flpCalendarPanel_VisibleChanged(sender As Object, e As EventArgs) Handles flpCalendarPanel.VisibleChanged
+        If flpCalendarPanel.Visible Then 
+            btnDate.BackColor = Color.FromArgb(0, 170, 210)
+        Else
+            btnDate.BackColor = Color.FromArgb(64, 64, 64)
+        End If
     End Sub
 End Class
