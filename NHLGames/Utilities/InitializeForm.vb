@@ -180,19 +180,15 @@ Namespace Utilities
             Dim savedPathFromConfig As String = ApplicationSettings.Read(Of String)(varPath, String.Empty)
             Dim currentPathIfFound As String = currentPath
 
-            If savedPathFromConfig.Equals(String.Empty) And Not currentPathIfFound.Equals(String.Empty) Then
-                ApplicationSettings.SetValue(varPath, currentPathIfFound)
-                savedPathFromConfig = currentPathIfFound
-            ElseIf savedPathFromConfig <> currentPathIfFound And Not currentPathIfFound.Equals(String.Empty) Then
-                ApplicationSettings.SetValue(varPath, currentPathIfFound)
-                savedPathFromConfig = currentPathIfFound
-            End If
+            If File.Exists(savedPathFromConfig) Then Return savedPathFromConfig
 
-            If Not File.Exists(savedPathFromConfig) Then
-                savedPathFromConfig = String.Empty
-                ApplicationSettings.SetValue(varPath, savedPathFromConfig)
+            If File.Exists(currentPathIfFound) Then
+                ApplicationSettings.SetValue(varPath, currentPathIfFound)
+                Return currentPathIfFound
+            Else 
+                ApplicationSettings.SetValue(varPath, String.Empty)
+                Return String.Empty
             End If
-            return savedPathFromConfig
         End Function
 
         Private Shared Sub PopulateComboBox(cb As MetroFramework.Controls.MetroComboBox, selectedItem As SettingsEnum, items As SettingsEnum)
