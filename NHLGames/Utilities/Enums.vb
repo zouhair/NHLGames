@@ -67,6 +67,7 @@
         LanguageList = 13
         AdDetection = 14
         ShowTeamCityAbr = 15
+        ShowTodayLiveGamesFirst = 16
     End Enum
 
     Public Enum OutputType

@@ -34,6 +34,7 @@ Public Class NHLGamesMetro
     Public Shared RmText As ResourceManager = English.ResourceManager
     Public Shared LstTasks As List(Of Task) = New List(Of Task)()
     Public Shared FormLoaded As Boolean = False
+    Public Shared TodayLiveGamesFirst As Boolean = False
     Private Shared _adDetectionEngine As AdDetection
 
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
@@ -617,5 +618,10 @@ Public Class NHLGamesMetro
         Else
             btnDate.BackColor = Color.FromArgb(64, 64, 64)
         End If
+    End Sub
+
+    Private Sub tgShowTodayLiveGamesFirst_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowTodayLiveGamesFirst.CheckedChanged
+        ApplicationSettings.SetValue(SettingsEnum.ShowTodayLiveGamesFirst, tgShowTodayLiveGamesFirst.Checked)
+        TodayLiveGamesFirst = tgShowTodayLiveGamesFirst.Checked
     End Sub
 End Class

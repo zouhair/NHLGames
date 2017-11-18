@@ -757,4 +757,8 @@
     <value>NHL.tv bypass failed</value>
     <comment>Game panel</comment>
   </data>
+  <data name="lblShowTodayLiveGamesFirst" xml:space="preserve">
+    <value>Live games first</value>
+    <comment>Settings tab</comment>
+  </data>
 </root>

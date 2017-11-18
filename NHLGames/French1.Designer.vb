@@ -713,6 +713,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Parties en direct en premier.
+        '''</summary>
+        Friend Shared ReadOnly Property lblShowTodayLiveGamesFirst() As String
+            Get
+                Return ResourceManager.GetString("lblShowTodayLiveGamesFirst", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Emplacement du Streamer.
         '''</summary>
         Friend Shared ReadOnly Property lblSlPath() As String

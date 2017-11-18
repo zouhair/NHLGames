@@ -549,4 +549,8 @@
     <value>Redirection NHL.tv impossible</value>
     <comment>Game panel</comment>
   </data>
+  <data name="lblShowTodayLiveGamesFirst" xml:space="preserve">
+    <value>Parties en direct en premier</value>
+    <comment>Settings tab</comment>
+  </data>
 </root>

@@ -197,13 +197,13 @@ Namespace Objects
                 End If
             End If
 
-            Home = game("teams")("home")("team")("locationName").ToString()
-            HomeAbbrev = game("teams")("home")("team")("abbreviation").ToString()
-            HomeTeam = game("teams")("home")("team")("teamName").ToString()
+            Home = game.SelectToken("teams.home.team.locationName").ToString()
+            HomeAbbrev = game.SelectToken("teams.home.team.abbreviation").ToString()
+            HomeTeam = game.SelectToken("teams.home.team.teamName").ToString()
 
-            Away = game("teams")("away")("team")("locationName").ToString()
-            AwayAbbrev = game("teams")("away")("team")("abbreviation").ToString()
-            AwayTeam = game("teams")("away")("team")("teamName").ToString()
+            Away = game.SelectToken("teams.away.team.locationName").ToString()
+            AwayAbbrev = game.SelectToken("teams.away.team.abbreviation").ToString()
+            AwayTeam = game.SelectToken("teams.away.team.teamName").ToString()
 
             GetGameInfos(game)
             GetGameStreams(game, maxProgressSize)
@@ -212,20 +212,20 @@ Namespace Objects
         End Function 
 
         Private Sub GetGameInfos(game As JObject)
-            Dim status = game("status")("statusCode").ToString()
+            Dim status = game.SelectToken("status.statusCode").ToString()
             Dim statusId = If(status >= 5, 5, Convert.ToInt16(status))
             GameState = CType(statusId, GameStateEnum)
 
             If _gameType = GameTypeEnum.Series Then
-                SeriesGameNumber = game("seriesSummary")("gameNumber").ToString() 'Series: Game 1.. 7
-                SeriesGameStatus = game("seriesSummary")("seriesStatusShort").ToString() 'Series: Team wins 4-2, Tied 2-2, Team leads 1-0
+                SeriesGameNumber = game.SelectToken("seriesSummary.gameNumber").ToString() 'Series: Game 1.. 7
+                SeriesGameStatus = game.SelectToken("seriesSummary.seriesStatusShort").ToString() 'Series: Team wins 4-2, Tied 2-2, Team leads 1-0
             End If
 
             If (GameState >= GameStateEnum.InProgress) Then
-                GamePeriod = game("linescore")("currentPeriodOrdinal").ToString() '1st 2nd 3rd OT SO OT2..
-                GameTimeLeft = game("linescore")("currentPeriodTimeRemaining").ToString() 'Final, 12:34, 20:00
-                _HomeScore = game("teams")("home")("score").ToString()
-                _AwayScore = game("teams")("away")("score").ToString()
+                GamePeriod = game.SelectToken("linescore.currentPeriodOrdinal").ToString() '1st 2nd 3rd OT SO OT2..
+                GameTimeLeft = game.SelectToken("linescore.currentPeriodTimeRemaining").ToString() 'Final, 12:34, 20:00
+                _HomeScore = game.SelectToken("teams.home.score").ToString()
+                _AwayScore = game.SelectToken("teams.away.score").ToString()
             End If
 
         End Sub
@@ -234,8 +234,8 @@ Namespace Objects
             Dim progress As Integer = 0
             Const mediaOff = "MEDIA_OFF"
 
-            If game("content")("media") IsNot Nothing Then
-                For Each stream As JObject In game("content")("media")("epg")
+            If game.SelectToken("content.media") IsNot Nothing Then
+                For Each stream As JObject In game.SelectToken("content.media.epg")
                     If stream.Property("title") = "NHLTV" Then
                         If stream.Property("items").Value.Count = 0 Then Return
                         For Each item As JArray In stream.Property("items")
