@@ -1,7 +1,7 @@
 Contributing to NHLGames
 ========================
 
-NHLGames is coded in VB.NET using Visual Studio and .Net Framework 4.5.     
+NHLGames is coded in **VB.NET** using Visual Studio and .Net Framework 4.5.     
 
 Using NuGet packages:
 - MetroModernUI by [Dennis Magno](/dennismagno)
@@ -24,9 +24,12 @@ In general, we follow the "fork-and-pull" Git workflow.
 
  1. **Fork** the repo on GitHub
  2. **Clone** the project to your own machine
+ 3. **Grab** an issue, by requesting to be assigned to it.
  3. **Commit** changes to your own branch
  4. **Push** your work back up to your fork
  5. Submit a **Pull request** to `NHLGames\master` so that we can review your changes
+
+> Refactoring should not be consider, except if every user is affected by the issue.   
 
 > Avoid any merge conflicts by merging the latest from "upstream" before making a pull request!
 
