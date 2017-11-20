@@ -33,7 +33,7 @@ Namespace Objects
                             Dim rGame = tempList.Find(Function(g) g.GameId = game.Property("gamePk").ToString())
                             If rGame Is Nothing Then
                                 tempList.Add(New Game(game, progress))
-                            Else 
+                            Else
                                 rGame.Update(game, progress)
                             End If
                         Else

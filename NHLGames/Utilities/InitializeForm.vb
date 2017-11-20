@@ -126,6 +126,7 @@ Namespace Utilities
             Form.tgShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, True)
             Form.tgShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, True)
             Form.tgShowTeamCityAbr.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, True)
+            Form.tgShowTodayLiveGamesFirst.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTodayLiveGamesFirst, True)
 
             PopulateComboBox(Form.cbLanguage, SettingsEnum.SelectedLanguage, SettingsEnum.LanguageList)
 
