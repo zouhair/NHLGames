@@ -80,7 +80,7 @@ Partial Class NHLGamesMetro
         Me.flpOutputSettings = New System.Windows.Forms.FlowLayoutPanel()
         Me.tgOutput = New MetroFramework.Controls.MetroToggle()
         Me.txtOutputArgs = New System.Windows.Forms.TextBox()
-        Me.btnOuput = New MetroFramework.Controls.MetroButton()
+        Me.btnOutput = New MetroFramework.Controls.MetroButton()
         Me.flpStreamerPath = New System.Windows.Forms.FlowLayoutPanel()
         Me.txtStreamerPath = New System.Windows.Forms.TextBox()
         Me.btnStreamerPath = New MetroFramework.Controls.MetroButton()
@@ -979,7 +979,7 @@ Partial Class NHLGamesMetro
         '
         Me.flpOutputSettings.Controls.Add(Me.tgOutput)
         Me.flpOutputSettings.Controls.Add(Me.txtOutputArgs)
-        Me.flpOutputSettings.Controls.Add(Me.btnOuput)
+        Me.flpOutputSettings.Controls.Add(Me.btnOutput)
         Me.flpOutputSettings.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flpOutputSettings.Location = New System.Drawing.Point(174, 580)
         Me.flpOutputSettings.Margin = New System.Windows.Forms.Padding(0)
@@ -1010,15 +1010,15 @@ Partial Class NHLGamesMetro
         Me.txtOutputArgs.Size = New System.Drawing.Size(514, 22)
         Me.txtOutputArgs.TabIndex = 1110
         '
-        'btnOuput
+        'btnOutput
         '
-        Me.btnOuput.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnOuput.Location = New System.Drawing.Point(609, 3)
-        Me.btnOuput.Name = "btnOuput"
-        Me.btnOuput.Size = New System.Drawing.Size(40, 20)
-        Me.btnOuput.TabIndex = 1120
-        Me.btnOuput.Text = "..."
-        Me.btnOuput.UseSelectable = true
+        Me.btnOutput.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnOutput.Location = New System.Drawing.Point(609, 3)
+        Me.btnOutput.Name = "btnOutput"
+        Me.btnOutput.Size = New System.Drawing.Size(40, 20)
+        Me.btnOutput.TabIndex = 1120
+        Me.btnOutput.Text = "..."
+        Me.btnOutput.UseSelectable = true
         '
         'flpStreamerPath
         '
@@ -2014,7 +2014,7 @@ End Sub
     Friend WithEvents tgPlayer As MetroToggle
     Friend WithEvents flpOutputSettings As FlowLayoutPanel
     Friend WithEvents txtOutputArgs As TextBox
-    Friend WithEvents btnOuput As MetroButton
+    Friend WithEvents btnOutput As MetroButton
     Friend WithEvents tgOutput As MetroToggle
     Friend WithEvents flpStreamerPath As FlowLayoutPanel
     Friend WithEvents txtStreamerPath As TextBox

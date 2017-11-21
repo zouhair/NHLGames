@@ -221,13 +221,12 @@ Public Class NHLGamesMetro
         _writeToConsoleSettingsChanged(lblStreamerArgs.Text, txtStreamerArgs.Text)
     End Sub
 
-    Private Sub btnOuput_Click(sender As Object, e As EventArgs) Handles btnOuput.Click
+    Private Sub btnOuput_Click(sender As Object, e As EventArgs) Handles btnOutput.Click
         fbd.SelectedPath = If (txtOutputArgs.Text <> String.Empty, 
                                             Path.GetDirectoryName(txtOutputArgs.Text), 
                                             Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
                                             )
-        fbd.ShowDialog()
-        If fbd.SelectedPath <> txtOutputArgs.Text Then
+        If fbd.ShowDialog() = DialogResult.OK Then
             txtOutputArgs.Text = fbd.SelectedPath & $"\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(NETWORK).mp4"
             Player.RenewArgs()
         End If
