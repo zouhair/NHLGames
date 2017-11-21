@@ -57,7 +57,7 @@ Namespace Objects
             Dim url = Await Common.SendWebRequestForStream(address, legacyAddress, gameTitle, game.GameDate)
 
             If DateHelper.GetPacificTime(_game.GameDate).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                Vodurl = SetVideoOnDemandLink(url, cdn)
+                Vodurl = SetVideoOnDemandLink(url, cdn, Type > 4)
                 IsVod = Await CheckVod(cdn)
             End If
 
@@ -69,16 +69,17 @@ Namespace Objects
             
         End Sub
 
-        Private Function SetVideoOnDemandLink(url As String, cdn As String)
+        Private Function SetVideoOnDemandLink(url As String, cdn As String, Optional web As Boolean = False)
             If url.Contains("http://hlslive") Then
                 Dim spliter = url.Split("/")
                 For Each split As String In spliter
                     If split.StartsWith("NHL_GAME_VIDEO_") Then
-                        Return String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/{0}/{1}/{2}/{3}/master_wired60.m3u8",
+                        Return String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/{0}/{1}/{2}/{3}/master_wired{4}.m3u8",
                                                Game.GameDate.Year,
                                                Game.GameDate.Month,
                                                Game.GameDate.Day,
-                                               split)
+                                               split,
+                                               If (web, "_web", "60"))
                     End If
                 Next
             End If
