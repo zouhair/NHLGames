@@ -893,6 +893,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Live games first.
+        '''</summary>
+        Friend Shared ReadOnly Property lblShowTodayLiveGamesFirst() As String
+            Get
+                Return ResourceManager.GetString("lblShowTodayLiveGamesFirst", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Streamer Path.
         '''</summary>
         Friend Shared ReadOnly Property lblSlPath() As String
@@ -961,6 +970,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property lnkCalendarToday() As String
             Get
                 Return ResourceManager.GetString("lnkCalendarToday", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to /r/nhl_games.
+        '''</summary>
+        Friend Shared ReadOnly Property lnkSubreddit() As String
+            Get
+                Return ResourceManager.GetString("lnkSubreddit", resourceCulture)
             End Get
         End Property
         
@@ -1145,7 +1163,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to A new version is available, download the latest version {0} on /r/nhl_games.
+        '''  Looks up a localized string similar to A new version is available, download the latest version {0} on GitHub.
         '''</summary>
         Friend Shared ReadOnly Property msgNewVersionText() As String
             Get

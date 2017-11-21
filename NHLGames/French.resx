@@ -286,8 +286,8 @@
     <comment>Version</comment>
   </data>
   <data name="msgNewVersionText" xml:space="preserve">
-    <value>Une nouvelle version est disponible, téléchargez la plus récente version {0} sur /r/nhl_games</value>
-    <comment>Version</comment>
+    <value>Une nouvelle version est disponible, téléchargez la plus récente version {0} sur GitHub</value>
+    <comment>Status bar</comment>
   </data>
   <data name="msgRunAsAdmin" xml:space="preserve">
     <value>Accès d'administrateur requis</value>
@@ -463,31 +463,31 @@
   </data>
   <data name="lblModules" xml:space="preserve">
     <value>Détection de publicité</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblObs" xml:space="preserve">
     <value>OBS</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblObsAdEndingHotkey" xml:space="preserve">
     <value>Raccourci clavier: Fin d'annonce</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblObsAdStartingHotkey" xml:space="preserve">
     <value>Raccourci clavier: Début d'annonce</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblObsDesc" xml:space="preserve">
     <value>Change de fenêtre selon les touches configurées quand une annonce est détectée</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblSpotify" xml:space="preserve">
     <value>Spotify</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblSpotifyDesc" xml:space="preserve">
     <value>Résume/Pause Spotify quand une annonce est détectée</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="tipGetMpc" xml:space="preserve">
     <value>Download MPC</value>
@@ -515,11 +515,11 @@
   </data>
   <data name="chkSpotifyForceToStart" xml:space="preserve">
     <value>Forcer le démarrage</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="chkSpotifyPlayNextSong" xml:space="preserve">
     <value>Toujours jouer la prochaine chanson</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblAlternateCdn" xml:space="preserve">
     <value>Utiliser le réseau alternatif</value>
@@ -539,7 +539,7 @@
   </data>
   <data name="lblModulesDesc" xml:space="preserve">
     <value>Détecte les annonces et informe les applications activées ci-dessous</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblShowTeamCityAbr" xml:space="preserve">
     <value>Abbréviation de la ville des équipes</value>

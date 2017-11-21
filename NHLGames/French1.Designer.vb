@@ -893,7 +893,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Une nouvelle version est disponible, téléchargez la plus récente version {0} sur /r/nhl_games.
+        '''  Looks up a localized string similar to Une nouvelle version est disponible, téléchargez la plus récente version {0} sur GitHub.
         '''</summary>
         Friend Shared ReadOnly Property msgNewVersionText() As String
             Get

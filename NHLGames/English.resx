@@ -307,7 +307,7 @@
   </data>
   <data name="msgChangeLog" xml:space="preserve">
     <value>Version {0} is available! Changes: {1}{2}{3}</value>
-    <comment>Message</comment>
+    <comment>Version</comment>
   </data>
   <data name="msgCleanHostsFile" xml:space="preserve">
     <value>Hosts: Removing existing entries from hosts file</value>
@@ -343,10 +343,10 @@
   </data>
   <data name="msgNewVersionAvailable" xml:space="preserve">
     <value>New Version Available</value>
-    <comment>Message</comment>
+    <comment>Version</comment>
   </data>
   <data name="msgNewVersionText" xml:space="preserve">
-    <value>A new version is available, download the latest version {0} on /r/nhl_games</value>
+    <value>A new version is available, download the latest version {0} on GitHub</value>
     <comment>Status bar</comment>
   </data>
   <data name="msgOff" xml:space="preserve">
@@ -603,31 +603,31 @@
   </data>
   <data name="lblModules" xml:space="preserve">
     <value>Ad detection</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblObs" xml:space="preserve">
     <value>OBS</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblObsAdEndingHotkey" xml:space="preserve">
     <value>Ad ending hotkey</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblObsAdStartingHotkey" xml:space="preserve">
     <value>Ad starting hotkey</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblObsDesc" xml:space="preserve">
     <value>Switch scenes using binded keys when an Ad is detected</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblSpotify" xml:space="preserve">
     <value>Spotify</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblSpotifyDesc" xml:space="preserve">
     <value>Play/Pause Spotify when an Ad is detected</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="msgFetching" xml:space="preserve">
     <value>Fetching</value>
@@ -655,11 +655,11 @@
   </data>
   <data name="chkSpotifyForceToStart" xml:space="preserve">
     <value>Force to start</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="chkSpotifyPlayNextSong" xml:space="preserve">
     <value>Always play next song</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblAlternateCdn" xml:space="preserve">
     <value>Use the alternate network</value>
@@ -739,7 +739,7 @@
   </data>
   <data name="lblModulesDesc" xml:space="preserve">
     <value>Detects ads and notify activated apps below</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblShowTeamCityAbr" xml:space="preserve">
     <value>Teams city abbreviation</value>
@@ -760,5 +760,9 @@
   <data name="lblShowTodayLiveGamesFirst" xml:space="preserve">
     <value>Live games first</value>
     <comment>Settings tab</comment>
+  </data>
+  <data name="lnkSubreddit" xml:space="preserve">
+    <value>/r/nhl_games</value>
+    <comment>Status bar</comment>
   </data>
 </root>

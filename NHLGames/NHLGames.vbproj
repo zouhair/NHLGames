@@ -154,7 +154,7 @@
     <Compile Include="Controls\GameControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="English1.Designer.vb">
+    <Compile Include="English.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>English.resx</DependentUpon>

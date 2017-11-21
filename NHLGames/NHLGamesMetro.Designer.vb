@@ -1,5 +1,6 @@
 ﻿Imports MetroFramework.Controls
 Imports MetroFramework.Forms
+Imports NHLGames.My.Resources
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class NHLGamesMetro
@@ -157,6 +158,7 @@ Partial Class NHLGamesMetro
         Me.btnClose = New MetroFramework.Controls.MetroLink()
         Me.btnNormal = New MetroFramework.Controls.MetroLink()
         Me.fbd = New System.Windows.Forms.FolderBrowserDialog()
+        Me.pnlLogo = New System.Windows.Forms.Panel()
         Me.tabMenu.SuspendLayout
         Me.tabGames.SuspendLayout
         Me.pnlGameBar.SuspendLayout
@@ -219,7 +221,7 @@ Partial Class NHLGamesMetro
         Me.tabMenu.Location = New System.Drawing.Point(-1, 60)
         Me.tabMenu.Margin = New System.Windows.Forms.Padding(0)
         Me.tabMenu.Name = "tabMenu"
-        Me.tabMenu.SelectedIndex = 1
+        Me.tabMenu.SelectedIndex = 0
         Me.tabMenu.Size = New System.Drawing.Size(992, 505)
         Me.tabMenu.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabMenu.Style = MetroFramework.MetroColorStyle.Blue
@@ -1795,7 +1797,7 @@ Partial Class NHLGamesMetro
         Me.lnkDownload.Name = "lnkDownload"
         Me.lnkDownload.Size = New System.Drawing.Size(88, 25)
         Me.lnkDownload.TabIndex = 20
-        Me.lnkDownload.Text = "/r/nhl_games"
+        Me.lnkDownload.Text = Global.NHLGames.My.Resources.English.lnkSubreddit
         Me.lnkDownload.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lnkDownload.UseCustomBackColor = true
         Me.lnkDownload.UseSelectable = true
@@ -1900,14 +1902,22 @@ Partial Class NHLGamesMetro
         Me.btnNormal.UseSelectable = true
         Me.btnNormal.Visible = false
         '
+        'pnlLogo
+        '
+        Me.pnlLogo.BackgroundImage = Global.NHLGames.My.Resources.Resources.bg
+        Me.pnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.pnlLogo.Location = New System.Drawing.Point(10, 15)
+        Me.pnlLogo.Name = "pnlLogo"
+        Me.pnlLogo.Size = New System.Drawing.Size(150, 50)
+        Me.pnlLogo.TabIndex = 10000
+        '
         'NHLGamesMetro
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.BackImage = Global.NHLGames.My.Resources.Resources.bg
-        Me.BackImagePadding = New System.Windows.Forms.Padding(12, 12, 0, 0)
         Me.BackMaxSize = 150
         Me.ClientSize = New System.Drawing.Size(990, 600)
+        Me.Controls.Add(Me.pnlLogo)
         Me.Controls.Add(Me.spnStreaming)
         Me.Controls.Add(Me.pnlBottom)
         Me.Controls.Add(Me.btnHelp)
@@ -1917,6 +1927,7 @@ Partial Class NHLGamesMetro
         Me.Controls.Add(Me.tabMenu)
         Me.Controls.Add(Me.btnNormal)
         Me.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
         Me.ImeMode = System.Windows.Forms.ImeMode.Close
         Me.MaximizeBox = false
@@ -1925,6 +1936,7 @@ Partial Class NHLGamesMetro
         Me.Name = "NHLGamesMetro"
         Me.Padding = New System.Windows.Forms.Padding(3, 60, 3, 3)
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
+        Me.Text = "NHLGames"
         Me.tabMenu.ResumeLayout(false)
         Me.tabGames.ResumeLayout(false)
         Me.tabGames.PerformLayout
@@ -2103,4 +2115,5 @@ End Sub
     Friend WithEvents lblModulesDesc As MetroLabel
     Friend WithEvents tgShowTodayLiveGamesFirst As MetroToggle
     Friend WithEvents lblShowTodayLiveGamesFirst As MetroLabel
+    Friend WithEvents pnlLogo As Panel
 End Class

@@ -50,7 +50,7 @@ Namespace Utilities
 
             myHttpWebRequest = CType(WebRequest.Create(address), HttpWebRequest)
             myHttpWebRequest.UserAgent = UserAgent
-            myHttpWebRequest.Timeout = 2000
+            myHttpWebRequest.Timeout = 1000
             Try
                 myHttpWebResponse = CType(myHttpWebRequest.GetResponse(), HttpWebResponse)
                 If myHttpWebResponse.StatusCode = Httpstatuscode.OK Then

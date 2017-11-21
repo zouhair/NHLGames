@@ -1,5 +1,4 @@
-﻿Imports System.ComponentModel
-Imports System.IO
+﻿Imports System.IO
 Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Resources
@@ -27,7 +26,8 @@ Public Class NHLGamesMetro
     Public Shared FlpCalendar As FlowLayoutPanel
     Public Shared GamesDownloadedTime As Date
     Public Shared LabelDate As Label
-    Public Shared DownloadLink As String = "https://www.reddit.com/r/nhl_games/"
+    Private Const SubredditLink As String = "https://www.reddit.com/r/nhl_games/"
+    Private Const LatestReleaseLink As String = "https://github.com/NHLGames/NHLGames/releases"
     Public Shared GameDate As Date = DateHelper.GetPacificTime()
     Private _resizeDirection As Integer = -1
     Private Const ResizeBorderWidth As Integer = 8
@@ -203,7 +203,7 @@ Public Class NHLGamesMetro
         Dim cdn = If(tgAlternateCdn.Checked, CdnType.L3C, CdnType.Akc)
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(lblCdn.Text, cdn.ToString())
-        If NHLGamesMetro.FormLoaded Then InvokeElement.LoadGamesAsync(GameDate)
+        If FormLoaded Then InvokeElement.LoadGamesAsync(GameDate)
     End Sub
 
     Private Sub txtOutputPath_TextChanged(sender As Object, e As EventArgs) Handles txtOutputArgs.TextChanged 
@@ -275,7 +275,10 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub lnkDownload_Click(sender As Object, e As EventArgs) Handles lnkDownload.Click
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo(DownloadLink)
+        Dim sInfo As ProcessStartInfo = If (
+            lnkDownload.Text.Equals(English.lnkSubreddit),
+            New ProcessStartInfo(SubredditLink),
+            New ProcessStartInfo(LatestReleaseLink))
         Process.Start(sInfo)
     End Sub
 

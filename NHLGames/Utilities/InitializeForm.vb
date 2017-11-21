@@ -1,8 +1,5 @@
 ﻿Imports System.IO
-Imports System.Net
-Imports System.Text.RegularExpressions
 Imports NHLGames.Objects
-Imports NHLGames.Objects.Modules
 
 Namespace Utilities
     Public Class InitializeForm
@@ -93,7 +90,7 @@ Namespace Utilities
             Form.tt.SetToolTip(Form.btnMpvPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.tt.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.tt.SetToolTip(Form.btnstreamerPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
-            Form.tt.SetToolTip(Form.btnOuput, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.tt.SetToolTip(Form.btnOutput, NHLGamesMetro.RmText.GetString("tipBrowse"))
 
             Form.lblModules.Text = NHLGamesMetro.RmText.GetString("lblModules")
             Form.lblModulesDesc.Text = NHLGamesMetro.RmText.GetString("lblModulesDesc")
