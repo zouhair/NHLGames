@@ -272,15 +272,17 @@ Namespace Objects
                 Next
             End If
 
-
-            For Each stream As KeyValuePair(Of StreamType, GameStream) In _streams
-                If stream.Value.IsDefined Then
-                    NHLGamesMetro.LstTasks.Add(Task.Run(AddressOf stream.Value.GetRightGameStream))
-                    NHLGamesMetro.SpnLoadingValue += progress
-                    Thread.Sleep(30) 'to let some time for the progress bar to move
-                End If
-            Next
-
+            SyncLock NHLGamesMetro.LstTasks
+                SyncLock _streams
+                    For Each stream As KeyValuePair(Of StreamType, GameStream) In _streams
+                        If stream.Value.IsDefined Then
+                            NHLGamesMetro.LstTasks.Add(Task.Run(AddressOf stream.Value.GetRightGameStream))
+                            NHLGamesMetro.SpnLoadingValue += progress
+                            Thread.Sleep(30) 'to let some time for the progress bar to move
+                        End If
+                    Next
+                End SyncLock
+            End SyncLock
         End Sub
 
     End Class
