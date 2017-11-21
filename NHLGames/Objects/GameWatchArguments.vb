@@ -11,7 +11,6 @@ Namespace Objects
         Public Property Is60Fps As Boolean = True
         Public Property Cdn As CdnType = CdnType.Akc
         Public Property Stream As GameStream = Nothing
-        Public Property IsVod As Boolean = False
         Public Property GameTitle As String = String.Empty
         Public Property PlayerPath As String = String.Empty
         Public Property PlayerType As PlayerTypeEnum = PlayerTypeEnum.None
@@ -87,7 +86,7 @@ Namespace Objects
             If safeOutput = False Then
                 returnValue &= String.Format("{0}hlsvariant://", dblQuot)
 
-                If IsVod Then
+                If Stream.IsVod Then
                     returnValue &= Stream.VODURL
                 Else
                     returnValue &= Stream.GameURL

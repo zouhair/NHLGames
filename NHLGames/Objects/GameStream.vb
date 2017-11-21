@@ -10,6 +10,7 @@ Namespace Objects
         Public ReadOnly Property Game As Game
         Public ReadOnly Property IsDefined As Boolean = False
         Public Property IsVod As Boolean = False
+
         Public ReadOnly Property Network As String
         Public ReadOnly Property PlayBackId As String
         Public Property GameUrl As String = String.Empty
@@ -32,18 +33,19 @@ Namespace Objects
             Me.Type = type
         End Sub
 
-        Public Async Sub CheckVod(ByVal strCdn As String)
+        Public Async Function CheckVod(ByVal strCdn As String) As Task(Of Boolean)
             Try
                 Dim myHttpWebRequest As HttpWebRequest = CType(WebRequest.Create(Vodurl.Replace("CDN", strCdn)), HttpWebRequest)
                 myHttpWebRequest.CookieContainer = New CookieContainer()
                 myHttpWebRequest.CookieContainer.Add(New Cookie("mediaAuth", Common.GetRandomString(240), String.Empty, "nhl.com"))
                 myHttpWebRequest.UserAgent = Common.UserAgent
                 myHttpWebRequest.Timeout = 1000
-                IsVod = Await (Common.SendWebRequest(Vodurl.Replace("CDN", strCdn), myHttpWebRequest))
+                Return Await (Common.SendWebRequest(Vodurl.Replace("CDN", strCdn), myHttpWebRequest))
             Catch e As Exception
                 Console.WriteLine(English.msgVOD, e.Message)
+                Return False
             End Try
-        End Sub
+        End Function
 
         Public Async Sub GetRightGameStream()
             Dim cdn = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs).Cdn.ToString().ToLower()
@@ -53,8 +55,13 @@ Namespace Objects
             Dim gameTitle As String = $"{Game.AwayAbbrev} vs {Game.HomeAbbrev} on {Network}"
 
             Dim url = Await Common.SendWebRequestForStream(address, legacyAddress, gameTitle, game.GameDate)
-            SetVideoOnDemandLink(url, cdn)
 
+            If DateHelper.GetPacificTime(_game.GameDate).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
+                Vodurl = SetVideoOnDemandLink(url, cdn)
+                IsVod = Await CheckVod(cdn)
+            End If
+
+            'it will erase the game url if the url does not work
             Dim urlVerified = Await Common.SendWebRequest(url)
             If urlVerified OrElse IsVod Then
                 GameUrl = url
@@ -62,16 +69,21 @@ Namespace Objects
             
         End Sub
 
-        Private Sub SetVideoOnDemandLink(url As String, cdn As String)
+        Private Function SetVideoOnDemandLink(url As String, cdn As String)
             If url.Contains("http://hlslive") Then
                 Dim spliter = url.Split("/")
                 For Each split As String In spliter
                     If split.StartsWith("NHL_GAME_VIDEO_") Then
-                        Vodurl = String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/{0}/{1}/master_wired60.m3u8", dateString, split)
-                        CheckVod(cdn)
+                        Return String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/{0}/{1}/{2}/{3}/master_wired60.m3u8",
+                                               Game.GameDate.Year,
+                                               Game.GameDate.Month,
+                                               Game.GameDate.Day,
+                                               split)
                     End If
                 Next
             End If
-        End Sub
+            Return String.Empty
+        End Function
+
     End Class
 End Namespace

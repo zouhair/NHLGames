@@ -282,78 +282,58 @@ Namespace Controls
             Return args
         End Function
 
-        Private Function IsGameVod(stream As GameStream, cdn As CdnType) As Boolean
-            Dim isVod As Boolean = False
-            If DateHelper.GetPacificTime(_game.GameDate).ToShortDateString <> DateHelper.GetPacificTime().ToShortDateString() Then
-                If Not stream.Vodurl Is String.Empty Then
-                    stream.CheckVod(cdn.ToString().ToLower())
-                    isVod = stream.IsVod
-                Else 
-                    isVod = False
-                End If
-            End If
-            Return isVod
-        End Function
+        
 
         Private Sub lnkAway_Click(sender As Object, e As EventArgs) Handles lnkAway.Click 
             Dim args = WatchArgs()
-            args.IsVod = IsGameVod(_game.AwayStream, args.Cdn)
             args.Stream = _game.AwayStream
             Player.Watch(args)
         End Sub
 
         Private Sub lnkFrench_Click(sender As Object, e As EventArgs) Handles lnkFrench.Click 
             Dim args = WatchArgs()
-            args.IsVod = IsGameVod(_game.FrenchStream, args.Cdn)
             args.Stream = _game.FrenchStream
             Player.Watch(args)
         End Sub
 
         Private Sub lnkNational_Click(sender As Object, e As EventArgs) Handles lnkNational.Click 
             Dim args = WatchArgs()
-            args.IsVod = IsGameVod(_game.NationalStream, args.Cdn)
             args.Stream = _game.NationalStream
             Player.Watch(args)
         End Sub
 
         Private Sub lnkHome_Click(sender As Object, e As EventArgs) Handles lnkHome.Click 
             Dim args = WatchArgs()
-            args.IsVod = IsGameVod(_game.HomeStream, args.Cdn)
             args.Stream = _game.HomeStream
             Player.Watch(args)
         End Sub
 
         Private Sub lnkEnd1_Click(sender As Object, e As EventArgs) Handles lnkEnd1.Click 
             Dim args = WatchArgs()
-            args.IsVod = IsGameVod(_game.EndzoneCam1Stream, args.Cdn)
             args.Stream = _game.EndzoneCam1Stream
             Player.Watch(args)
         End Sub
 
         Private Sub lnkRef_Click(sender As Object, e As EventArgs) Handles lnkRef.Click 
             Dim args = WatchArgs()
-            args.IsVod = IsGameVod(_game.RefCamStream, args.Cdn)
             args.Stream = _game.RefCamStream
             Player.Watch(args)
         End Sub
 
         Private Sub lnkThree_Click(sender As Object, e As EventArgs) Handles lnkThree.Click 
             Dim args = WatchArgs()
-            args.IsVod = IsGameVod(_game.MultiCam1Stream, args.Cdn)
             args.Stream = _game.MultiCam1Stream
             Player.Watch(args)
         End Sub
 
         Private Sub lnkSix_Click(sender As Object, e As EventArgs) Handles lnkSix.Click 
             Dim args = WatchArgs()
-            args.IsVod = IsGameVod(_game.MultiCam2Stream, args.Cdn)
             args.Stream = _game.MultiCam2Stream
             Player.Watch(args)
         End Sub
 
         Private Sub lnkEnd2_Click(sender As Object, e As EventArgs) Handles lnkEnd2.Click 
             Dim args = WatchArgs()
-            args.IsVod = IsGameVod(_game.EndzoneCam2Stream, args.Cdn)
             args.Stream = _game.EndzoneCam2Stream
             Player.Watch(args)
         End Sub
