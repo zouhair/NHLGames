@@ -803,6 +803,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Annoncement!.
+        '''</summary>
+        Friend Shared ReadOnly Property msgAnnouncement() As String
+            Get
+                Return ResourceManager.GetString("msgAnnouncement", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Version {0} maintenant disponible! Changements: {1}{2}{3}.
         '''</summary>
         Friend Shared ReadOnly Property msgChangeLog() As String
@@ -965,7 +974,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Aucune connexion internet.
+        '''  Looks up a localized string similar to NHLGames n&apos;a pas accès à l&apos;Internet, il est peut-être bloqué!.
         '''</summary>
         Friend Shared ReadOnly Property noWebAccess() As String
             Get
@@ -1006,6 +1015,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property tabSettings() As String
             Get
                 Return ResourceManager.GetString("tabSettings", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Stream brisée.
+        '''</summary>
+        Friend Shared ReadOnly Property tipBrokenStream() As String
+            Get
+                Return ResourceManager.GetString("tipBrokenStream", resourceCulture)
             End Get
         End Property
         

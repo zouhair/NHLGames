@@ -1,4 +1,5 @@
-﻿Imports NHLGames.Controls
+﻿Imports System.Threading
+Imports NHLGames.Controls
 Imports NHLGames.Objects
 
 Namespace Utilities
@@ -7,10 +8,11 @@ Namespace Utilities
         ''' <summary>
         ''' Wrapper for LoadGames to stop UI locking and slow startup
         ''' </summary>
-        ''' <param name="dateTime"></param>
-        Public Shared Sub LoadGamesAsync(dateTime As DateTime, Optional refreshing As Boolean = False)
-            Dim loadGamesFunc As New Action(Of DateTime, Boolean)(Sub(dt As DateTime, rf As Boolean) GameFetcher.LoadGames(dt, rf))
-            loadGamesFunc.BeginInvoke(dateTime, refreshing, Nothing, Nothing)
+        Public Shared Sub LoadGames()
+            'Dim loadGamesFunc As New Action(Of DateTime, Boolean)(Sub(dt As DateTime, rf As Boolean) GameFetcher.LoadGames(dt, rf))
+            'loadGamesFunc.BeginInvoke(dateTime, refreshing, Nothing, Nothing)
+            Task.Run(AddressOf GameFetcher.LoadGames)
+
         End Sub
 
         Public Shared Sub SetFormStatusLabel(msg As String)
@@ -61,13 +63,13 @@ Namespace Utilities
             End If
         End Sub
 
-        Public Shared Sub NewGamesFound(gamesDict As Dictionary(Of String, Game))
+        Public Shared Sub NewGamesFound(gamesDict As List(Of Game))
             Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
             If form.InvokeRequired Then
-                form.BeginInvoke(New Action(Of Dictionary(Of String, Game))(AddressOf NewGamesFound), gamesDict)
+                form.BeginInvoke(New Action(Of List(Of Game))(AddressOf NewGamesFound), gamesDict)
             Else
                 form.flpGames.Controls.AddRange((From game In gamesDict Select New GameControl(
-                    game.Value,
+                    game,
                     ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores),
                     ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores),
                     ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord),
@@ -108,3 +110,4 @@ Namespace Utilities
 
     End Class
 End Namespace
+

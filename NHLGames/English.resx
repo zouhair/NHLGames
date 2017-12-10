@@ -537,10 +537,6 @@
     <value>Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this.</value>
     <comment>Console</comment>
   </data>
-  <data name="msgRefreshing" xml:space="preserve">
-    <value>Refreshing</value>
-    <comment>Console</comment>
-  </data>
   <data name="msgStreamer" xml:space="preserve">
     <value>Streamer:</value>
     <comment>Console</comment>
@@ -650,7 +646,7 @@
     <comment>Message</comment>
   </data>
   <data name="noWebAccess" xml:space="preserve">
-    <value>No Internet connection</value>
+    <value>NHLGames has no Internet access, it might be blocked!</value>
     <comment>Message</comment>
   </data>
   <data name="chkSpotifyForceToStart" xml:space="preserve">
@@ -764,5 +760,21 @@
   <data name="lnkSubreddit" xml:space="preserve">
     <value>/r/nhl_games</value>
     <comment>Status bar</comment>
+  </data>
+  <data name="tipBrokenStream" xml:space="preserve">
+    <value>Broken stream</value>
+    <comment>Game panel</comment>
+  </data>
+  <data name="errorAccessPath" xml:space="preserve">
+    <value>Error: Checking access to path: {0}</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgAnnouncement" xml:space="preserve">
+    <value>Announcement!</value>
+    <comment>Announcement</comment>
+  </data>
+  <data name="errorStreamTypeUnknown" xml:space="preserve">
+    <value>Warning: Stream type unknown for the game {0} vs {1} : {2} - {3}</value>
+    <comment>Console</comment>
   </data>
 </root>

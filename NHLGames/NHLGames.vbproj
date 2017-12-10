@@ -117,6 +117,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -141,7 +142,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\BorderPanel.vb" />
+    <Compile Include="Controls\BorderPanel.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\CalendarControl.Designer.vb">
       <DependentUpon>CalendarControl.vb</DependentUpon>
     </Compile>
@@ -355,6 +358,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Icons\wleftw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="broadcasters\broken.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

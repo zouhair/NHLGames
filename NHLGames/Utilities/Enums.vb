@@ -15,7 +15,8 @@
     End Enum
 
     Public Enum StreamType
-        Away = 1
+        None = 0
+        Away
         Home
         National
         French

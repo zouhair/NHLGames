@@ -1,5 +1,4 @@
 ﻿Imports System.Runtime.InteropServices
-Imports System.Runtime.InteropServices.WindowsRuntime
 
 Namespace Utilities
     Public Class NativeMethods

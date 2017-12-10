@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports System.Threading
 Imports Newtonsoft.Json.Linq
 Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
@@ -8,81 +7,78 @@ Namespace Objects
 
     <DebuggerDisplay("{HomeTeam} vs. {AwayTeam} at {[Date]}")>
     Public Class Game
-
         Public Event GameUpdated(ByVal sender As Object, e As EventArgs)
-
-        Private ReadOnly _streams As Dictionary(Of StreamType, GameStream)
-        Private _gameObj As JObject
-        Private _gameType As GameTypeEnum
-        Private _homeScore As String = ""
-        Private _awayScore As String = ""
+        Public Property StreamsDict As Dictionary(Of StreamType, GameStream)
 
         Public Property Id As Guid = Guid.NewGuid()
         Public Property GameId As String
+        Public Property GameType As GameTypeEnum 'Get type of the game : 1 preseason, 2 regular, 3 series
         Public Property GameDate As DateTime
         Public Property GameState As GameStateEnum
-        Public Property GamePeriod As String
-        Public Property GameTimeLeft As String
+        Public Property GamePeriod As String '1st 2nd 3rd OT SO OT2..
+        Public Property GameTimeLeft As String 'Final, 12:34, 20:00
 
-        Public Property SeriesGameNumber As String
-        Public Property SeriesGameStatus As String
+        Public Property SeriesGameNumber As String 'Series: Game 1.. 7
+        Public Property SeriesGameStatus As String 'Series: Team wins 4-2, Tied 2-2, Team leads 1-0
 
         Public Property Away As String
         Public Property AwayAbbrev As String
         Public Property AwayTeam As String
+        Public Property AwayScore As String
 
         Public Property Home As String
         Public Property HomeAbbrev As String
         Public Property HomeTeam As String
+        Public Property HomeScore As String
 
         Public ReadOnly Property AwayStream As GameStream
             Get
-                Return _streams.Item(StreamType.Away)
+                Return StreamsDict.Item(StreamType.Away)
             End Get
         End Property
         Public ReadOnly Property HomeStream As GameStream
             Get
-                Return _streams.Item(StreamType.Home)
+                Return StreamsDict.Item(StreamType.Home)
             End Get
         End Property
         Public ReadOnly Property NationalStream As GameStream
             Get
-                Return _streams.Item(StreamType.National)
+                Return StreamsDict.Item(StreamType.National)
             End Get
         End Property
         Public ReadOnly Property FrenchStream As GameStream
             Get
-                Return _streams.Item(StreamType.French)
+                Return StreamsDict.Item(StreamType.French)
             End Get
         End Property
         Public ReadOnly Property MultiCam1Stream As GameStream
             Get
-                Return _streams.Item(StreamType.MultiCam1)
+                Return StreamsDict.Item(StreamType.MultiCam1)
             End Get
         End Property
         Public ReadOnly Property MultiCam2Stream As GameStream
             Get
-                Return _streams.Item(StreamType.MultiCam2)
+                Return StreamsDict.Item(StreamType.MultiCam2)
             End Get
         End Property
         Public ReadOnly Property EndzoneCam1Stream As GameStream
             Get
-                Return _streams.Item(StreamType.EndzoneCam1)
+                Return StreamsDict.Item(StreamType.EndzoneCam1)
             End Get
         End Property
         Public ReadOnly Property EndzoneCam2Stream As GameStream
             Get
-                Return _streams.Item(StreamType.EndzoneCam2)
+                Return StreamsDict.Item(StreamType.EndzoneCam2)
             End Get
         End Property
         Public ReadOnly Property RefCamStream As GameStream
             Get
-                Return _streams.Item(StreamType.RefCam)
+                Return StreamsDict.Item(StreamType.RefCam)
             End Get
         End Property
 
         Public Overrides Function ToString() As String
-            Return String.Format(NHLGamesMetro.RmText.GetString("msgTeamVsTeam"),HomeTeam,AwayTeam)
+            Return String.Format(NHLGamesMetro.RmText.GetString("msgTeamVsTeam"), HomeTeam, AwayTeam)
         End Function
 
         Public ReadOnly Property GameIsFinal As Boolean
@@ -127,163 +123,49 @@ Namespace Objects
             End Get
         End Property
 
-        Public ReadOnly Property HomeScore As String
-            Get
-                Return _HomeScore
-            End Get
-        End Property
-
-        Public ReadOnly Property AwayScore As String
-            Get
-                Return _AwayScore
-            End Get
-        End Property
-
         Public ReadOnly Property AreAnyStreamsAvailable As Boolean
             Get
-                Return AwayStream.IsAvailable OrElse HomeStream.IsAvailable OrElse NationalStream.IsAvailable OrElse FrenchStream.IsAvailable
+                Return StreamsDict.Any(Function(x) x.Value.IsDefined)
             End Get
         End Property
-
-        Public Sub New()
-            _streams = New Dictionary(Of StreamType, GameStream)
-            For Each type As StreamType In [Enum].GetValues(GetType(StreamType))
-                _streams.Add(type, New GameStream())
-            Next 
-        End Sub
-
-        Public Sub New(game As JObject, maxprogress As Integer)
-            Me.New()
-            _gameObj = game
-            Dim messageError As String = LoadGameData(game, maxprogress)
-            GameManager.MessageError = messageError
-        End Sub
 
         Public Sub Update(game As Game)
             RaiseEvent GameUpdated(Me, New EventArgs())
         End Sub
 
-        Public Sub Update(game As JObject, maxProgressSize As Integer)
-            If _gameObj.ToString() <> game.ToString() Then
-                _gameObj = game
-                GetGameInfos(game)
-            End If
-            GetGameStreams(game, maxProgressSize)
-        End Sub
-
-        Private Function LoadGameData(game As JObject, maxProgressSize As Integer)
-            Dim messageError As String = Nothing
-            Dim dateTimeStr As String = game.Property("gameDate").Value.ToString() '"2016-03-20T21:00:00Z"
+        Public Sub SetGameDate(jDate As String)
             Dim dateTimeVal As DateTime
 
-            If (DateTime.TryParseExact(dateTimeStr, "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.None, dateTimeVal) = False) Then
-                dateTimeVal = Date.Parse(game.Property("gameDate").Value.ToString())
+            If (DateTime.TryParseExact(jDate, "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.None, dateTimeVal) = False) Then
+                dateTimeVal = Date.Parse(jDate)
             End If
 
             GameDate = dateTimeVal.ToUniversalTime() ' Must use universal time to always get correct date for stream
-            GameId = game.Property("gamePk").ToString()
-
-            If Not (game.TryGetValue("teams", "home") And game.TryGetValue("teams", "away") And
-                    game.TryGetValue("linescore", "currentPeriodOrdinal") And game.TryGetValue("linescore", "currentPeriodTimeRemaining") And
-                    game.TryGetValue("content", "media")) Then
-                messageError = English.errorUnableToDecodeJson
-            End If
-
-            _gameType = CType(Convert.ToInt16(GetChar(game("gamePk"), 6)) - 48, GameTypeEnum) 'Get type of the game : 1 preseason, 2 regular, 3 series
-
-            If _gameType = GameTypeEnum.Series Then
-                If Not game.TryGetValue("seriesSummary", "gameNumber") And game.TryGetValue("seriesSummary", "seriesStatusShort") Then
-                    messageError = English.errorUnableToDecodeJson
-                End If
-            End If
-
-            Home = game.SelectToken("teams.home.team.locationName").ToString()
-            HomeAbbrev = game.SelectToken("teams.home.team.abbreviation").ToString()
-            HomeTeam = game.SelectToken("teams.home.team.teamName").ToString()
-
-            Away = game.SelectToken("teams.away.team.locationName").ToString()
-            AwayAbbrev = game.SelectToken("teams.away.team.abbreviation").ToString()
-            AwayTeam = game.SelectToken("teams.away.team.teamName").ToString()
-
-            GetGameInfos(game)
-            GetGameStreams(game, maxProgressSize)
-
-            Return messageError
-        End Function 
-
-        Private Sub GetGameInfos(game As JObject)
-            Dim status = game.SelectToken("status.statusCode").ToString()
-            Dim statusId = If(status >= 5, 5, Convert.ToInt16(status))
-            GameState = CType(statusId, GameStateEnum)
-
-            If _gameType = GameTypeEnum.Series Then
-                SeriesGameNumber = game.SelectToken("seriesSummary.gameNumber").ToString() 'Series: Game 1.. 7
-                SeriesGameStatus = game.SelectToken("seriesSummary.seriesStatusShort").ToString() 'Series: Team wins 4-2, Tied 2-2, Team leads 1-0
-            End If
-
-            If (GameState >= GameStateEnum.InProgress) Then
-                GamePeriod = game.SelectToken("linescore.currentPeriodOrdinal").ToString() '1st 2nd 3rd OT SO OT2..
-                GameTimeLeft = game.SelectToken("linescore.currentPeriodTimeRemaining").ToString() 'Final, 12:34, 20:00
-                _HomeScore = game.SelectToken("teams.home.score").ToString()
-                _AwayScore = game.SelectToken("teams.away.score").ToString()
-            End If
-
         End Sub
 
-        Private Sub GetGameStreams(game As JObject, maxProgressSize As Integer)
-            Dim progress As Integer = 0
-            Const mediaOff = "MEDIA_OFF"
-
-            If game.SelectToken("content.media") IsNot Nothing Then
-                For Each stream As JObject In game.SelectToken("content.media.epg")
-                    If stream.Property("title") = "NHLTV" Then
-                        If stream.Property("items").Value.Count = 0 Then Return
-                        For Each item As JArray In stream.Property("items")
-                            progress = Convert.ToInt32(maxProgressSize / item.Count)
-                            For Each innerStream As JObject In item.Children(Of JObject)
-                                If innerStream.Property("mediaState") = mediaOff Then Continue For
-                                Dim strType As String = innerStream.Property("mediaFeedType")
-                                If strType = "AWAY" Then
-                                    _streams.Item(StreamType.Away) = New GameStream(Me,innerStream,StreamType.Away)
-                                ElseIf strType = "HOME" Then
-                                    _streams.Item(StreamType.Home) = New GameStream(Me,innerStream,StreamType.Home)
-                                ElseIf strType = "NATIONAL" Then
-                                    _streams.Item(StreamType.National) = New GameStream(Me,innerStream,StreamType.National)
-                                ElseIf strType = "FRENCH" Then
-                                    _streams.Item(StreamType.French) = New GameStream(Me,innerStream,StreamType.French)
-                                ElseIf strType = "COMPOSITE" Then
-                                    If innerStream.Property("feedName").Value.ToString().Equals("Multi-Cam 1") Then
-                                        _streams.Item(StreamType.MultiCam1) = New GameStream(Me,innerStream,StreamType.MultiCam1)
-                                    ElseIf innerStream.Property("feedName").Value.ToString().Equals("Multi-Cam 2") Then
-                                        _streams.Item(StreamType.MultiCam2) = New GameStream(Me,innerStream,StreamType.MultiCam2)
-                                    End If
-                                ElseIf strType = "ISO" Then
-                                    If innerStream.Property("feedName").Value.ToString().Equals("Endzone Cam 1") Then
-                                        _streams.Item(StreamType.EndzoneCam1) = New GameStream(Me,innerStream,StreamType.EndzoneCam1)
-                                    ElseIf innerStream.Property("feedName").Value.ToString().Equals("Endzone Cam 2") Then
-                                        _streams.Item(StreamType.EndzoneCam2) = New GameStream(Me,innerStream,StreamType.EndzoneCam2)
-                                    ElseIf innerStream.Property("feedName").Value.ToString().Equals("Ref Cam") Then
-                                        _streams.Item(StreamType.RefCam) = New GameStream(Me,innerStream,StreamType.RefCam)
-                                    End If
-                                End If
-                            Next
-                        Next
-                    End If
-                Next
+        Public Function SetSeriesInfo(game As JObject) As Boolean
+            If Not game.TryGetValue("seriesSummary", "gameNumber") And game.TryGetValue("seriesSummary", "seriesStatusShort") Then
+                Console.WriteLine(English.errorUnableToDecodeJson)
+                Return False
             End If
 
-            SyncLock NHLGamesMetro.LstTasks
-                SyncLock _streams
-                    For Each stream As KeyValuePair(Of StreamType, GameStream) In _streams
-                        If stream.Value.IsDefined Then
-                            NHLGamesMetro.LstTasks.Add(Task.Run(AddressOf stream.Value.GetRightGameStream))
-                            NHLGamesMetro.SpnLoadingValue += progress
-                            Thread.Sleep(30) 'to let some time for the progress bar to move
-                        End If
-                    Next
-                End SyncLock
-            End SyncLock
+            SeriesGameNumber = game.SelectToken("seriesSummary.gameNumber").ToString() 
+            SeriesGameStatus = game.SelectToken("seriesSummary.seriesStatusShort").ToString()
+            Return True
+        End Function
+
+        Public Sub SetLiveInfo(game As JObject)
+            GamePeriod = game.SelectToken("linescore.currentPeriodOrdinal").ToString()
+            GameTimeLeft = game.SelectToken("linescore.currentPeriodTimeRemaining").ToString()
+            HomeScore = game.SelectToken("teams.home.score").ToString()
+            AwayScore = game.SelectToken("teams.away.score").ToString()
         End Sub
 
+        Public Sub New()
+            StreamsDict = New Dictionary(Of StreamType, GameStream)
+            For Each type As StreamType In [Enum].GetValues(GetType(StreamType))
+                StreamsDict.Add(type, New GameStream())
+            Next 
+        End Sub
     End Class
 End Namespace

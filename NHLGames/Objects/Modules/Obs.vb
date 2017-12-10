@@ -1,5 +1,4 @@
-﻿Imports System.IO
-Imports NHLGames.My.Resources
+﻿Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
 
 Namespace Objects.Modules
@@ -89,8 +88,8 @@ Namespace Objects.Modules
 
         Private Sub HookObs()
             Dim processNames = new List(Of string) From {"obs32", "obs64"}
-            Dim processes = New Process(){}
-            For i As Integer = 0 To processNames.Count -1
+            Dim processes  As Process()
+            For i = 0 To processNames.Count -1
                 processes = Process.GetProcessesByName(processNames(i))
                 If processes.Length <> 0 Then
                     _obsHandle = processes(0).MainWindowHandle

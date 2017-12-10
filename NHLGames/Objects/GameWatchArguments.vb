@@ -1,5 +1,4 @@
 ﻿Imports System.IO
-Imports System.Security.Cryptography
 Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
 
@@ -86,11 +85,7 @@ Namespace Objects
             If safeOutput = False Then
                 returnValue &= String.Format("{0}hlsvariant://", dblQuot)
 
-                If Stream.IsVod Then
-                    returnValue &= Stream.VODURL
-                Else
-                    returnValue &= Stream.GameURL
-                End If
+                returnValue &= Stream.GameURL
 
                 returnValue = returnValue.Replace("CDN", Cdn.ToString().ToLower()) & space
             Else

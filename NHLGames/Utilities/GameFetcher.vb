@@ -1,5 +1,4 @@
-﻿Imports MetroFramework.Controls
-Imports Newtonsoft.Json.Linq
+﻿Imports Newtonsoft.Json.Linq
 Imports NHLGames.My.Resources
 Imports NHLGames.Objects
 
@@ -42,49 +41,79 @@ Namespace Utilities
             End If
         End Sub
 
-        Public Shared Async Sub LoadGames(dateTime As DateTime, refreshing As Boolean)
+        Public Shared Async Function LoadGames() As Task(Of Boolean)
+
             InvokeElement.ClearGamePanel()
 
             NHLGamesMetro.SpnLoadingValue = 1
             NHLGamesMetro.SpnLoadingVisible = True
 
-            If Await HostNameInvalid() Then
+            If Not NHLGamesMetro.FormLoaded OrElse Await HostNameInvalid() Then
                 NHLGamesMetro.SpnLoadingVisible = False
                 NHLGamesMetro.SpnLoadingValue = 0
-                Return
+                Return False
             End If
 
-            Try
+            'Try
                 InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgLoadingGames"))
+                GameManager.ClearGames()
 
-                If Not refreshing Then
-                    GameManager.ClearGames()
-                End If
-
-                Dim jsonSchedule As JObject = Downloader.DownloadJsonSchedule(dateTime, refreshing)
-                If jsonSchedule.HasValues Then
-                    GameManager.GetGames(dateTime, jsonSchedule, refreshing)
+                
+                    Await GameManager.GetGames()
                     NHLGamesMetro.SpnLoadingValue = NHLGamesMetro.spnLoadingMaxValue - 1
-                    Threading.Thread.Sleep(30)
-                    Task.WaitAll(NHLGamesMetro.LstTasks.ToArray())
-                    NHLGamesMetro.LstTasks.Clear()
-                    InvokeElement.NewGamesFound(GameManager.GamesDict)
-                    InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"),GameManager.GamesList.Count.ToString()))
-                Else 
-                    Console.WriteLine(English.errorFetchingGames)
-                End If
+                    'Threading.Thread.Sleep(30)
+                    'Task.WaitAll(NHLGamesMetro.LstTasks.ToArray())
+                    'NHLGamesMetro.LstTasks.Clear()
+                    InvokeElement.NewGamesFound(GameManager.GamesDict.Values.ToList())
+                    InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"),GameManager.GamesDict.Values.Count.ToString()))
+            
                 NHLGamesMetro.SpnLoadingVisible = False
-            Catch ex As Exception
-                Console.WriteLine(ex.ToString())
-            End Try
+            'Catch ex As Exception
+                'Console.WriteLine(ex.ToString())
+                'Return
+            'End Try
             NHLGamesMetro.SpnLoadingValue = 0
-        End Sub
+            Return True
+        End Function
 
         Private Shared Async Function HostNameInvalid() As Task(Of Boolean)
-            Dim hostname As String = String.Format("http://{0}/", NHLGamesMetro.ServerIp)
-            Dim result = Not Await (Common.SendWebRequest(hostname))
+            Dim hostname As String = String.Format("http://{0}/", NHLGamesMetro.HostName)
+            Dim result = Not Await Common.SendWebRequestAsync(hostname)
             If result Then Console.WriteLine(English.errorHostname)
             Return result
+        End Function
+
+        Public Shared Async Function GetUncryptedUrlFromTheServer(ByVal address As String, ByVal gameDate As Date, type As StreamType) As Task(Of String)
+            If Not Await Common.SendWebRequestAsync(address) Then Return String.Empty
+
+            Dim streamUrl = Await Common.SendWebRequestAndGetContentAsync(address)
+            If Await Common.SendWebRequestAsync(streamUrl) Then
+                Return streamUrl
+            Else
+                Dim vod = SetVideoOnDemandLink(streamUrl, gameDate, type > 4)
+                If Await Common.SendWebRequestAsync(vod) Then
+                    Return Await Common.SendWebRequestAndGetContentAsync(address)
+                End If
+            End If
+
+            Return String.Empty
+        End Function
+
+        Private Shared Function SetVideoOnDemandLink(url As String, gameDate As Date, Optional web As Boolean = False)
+            If url.Contains("http://hlslive") Then
+                Dim spliter = url.Split("/")
+                For Each split As String In spliter
+                    If split.StartsWith("NHL_GAME_VIDEO_") Then
+                        Return String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/{0}/{1}/{2}/{3}/master_wired{4}.m3u8",
+                                             gameDate.Year,
+                                             gameDate.Month,
+                                             gameDate.Day,
+                                             split,
+                                             If (web, "_web", "60"))
+                    End If
+                Next
+            End If
+            Return String.Empty
         End Function
 
     End Class

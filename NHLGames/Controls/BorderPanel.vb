@@ -1,5 +1,4 @@
 ﻿Namespace Controls
-    <System.ComponentModel.DesignerCategory("Code")>
     Public Class BorderPanel
         Inherits Panel
         Public Sub New()
@@ -17,6 +16,5 @@
         End Sub
 
         Public Property BorderColour As Color
-
     End Class
 End Namespace

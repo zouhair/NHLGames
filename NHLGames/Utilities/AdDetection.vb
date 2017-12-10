@@ -1,6 +1,5 @@
 ﻿Imports System.Collections.ObjectModel
 Imports NAudio.CoreAudioApi
-Imports NAudio.CoreAudioApi.Interfaces
 Imports NHLGames.My.Resources
 Imports NHLGames.Objects.Modules
 
@@ -75,10 +74,10 @@ Namespace Utilities
             Dim aMmDevices As New MMDeviceEnumerator()
             Dim defaultAudioEndPointDevice = aMmDevices.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia)
             Dim sessionsDefaultAudioEndPointDevice = defaultAudioEndPointDevice.AudioSessionManager.Sessions
-            For i As Integer = 0 To sessionsDefaultAudioEndPointDevice.Count - 1
+            For i = 0 To sessionsDefaultAudioEndPointDevice.Count - 1
                 If sessionsDefaultAudioEndPointDevice(i).GetProcessID <> processId Then Continue For
                 Dim volumeList As List(Of Double) = new List(Of Double)
-                For j As Integer = 0 To 1
+                For j = 0 To 1
                     Dim audioMeter As audioMeterInformation = sessionsDefaultAudioEndPointDevice(i).AudioMeterInformation
                     volumeList.Add( audioMeter.MasterPeakValue)
                     Threading.Thread.Sleep(100)

@@ -1,7 +1,5 @@
 ﻿Imports System.Globalization
 Imports System.IO
-Imports System.Net
-Imports System.Text
 Imports System.Text.RegularExpressions
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
@@ -16,52 +14,46 @@ Namespace Utilities
         Private Const ScheduleApiurl As String = ApiUrl & "?startDate={0}&endDate={1}&expand=schedule.teams,schedule.linescore,schedule.game.seriesSummary,schedule.game.content.media.epg"
         Private Const AppVersionUrl As String = AppUrl & "static/version.txt"
         Private Const AppChangelogUrl As String = AppUrl & "static/changelog.txt"
-        Private Shared _regex As New Regex("(\d+\.)(\d+\.)?(\d+\.)?(\*|\d+)")
-
-        Private Shared Function DownloadContents(server As String, url As String) As String
-            Dim client As New WebClient
-            Dim content As String = String.Empty
-            client.Encoding = Encoding.UTF8
-            Try
-                content = client.DownloadString(url).Trim().ToString()
-            Catch ex As Exception
-                If Not server = AppUrl Then
-                    Console.WriteLine(English.msgServerSeemsDown, server)
-                End If
-            End Try
-            Return content
-        End Function
+        Private Const AppAnnouncementUrl As String = AppUrl & "static/announcement.txt"
+        Private Shared ReadOnly Regex As New Regex("(\d+\.)(\d+\.)?(\d+\.)?(\*|\d+)")
 
         Public Shared Function DownloadApplicationVersion() As Version
-            Dim appVers As String
-            appVers = DownloadContents(AppUrl, AppVersionUrl)
+            Dim appVers As String = Common.SendWebRequestAndGetContent(AppVersionUrl)
             If appVers.Contains("<html>") Then
                 appVers = String.Empty
             End If
-            appVers = _regex.Match(appVers).ToString()
-            If appVers = String.Empty Then Return My.Application.Info.Version
+            appVers = Regex.Match(appVers).ToString()
+            If appVers = String.Empty Then Return New Version()
             Return new Version(appVers)
         End Function
 
         Public Shared Function DownloadChangelog() As String
-            Dim appChangelog As String
-            appChangelog = DownloadContents(AppUrl, AppChangelogUrl)
+            Dim appChangelog As String = Common.SendWebRequestAndGetContent(AppChangelogUrl)
             If appChangelog.Contains("<html>") Then
                 appChangelog = String.Empty
             End If
             Return appChangelog
         End Function
 
-        Public Shared Function DownloadJsonSchedule(startDate As DateTime, Optional refreshing As Boolean = False) As JObject
+        Public Shared Function DownloadAnnouncement() As String
+            Dim appAnnouncement As String = Common.SendWebRequestAndGetContent(AppAnnouncementUrl)
+            If appAnnouncement.Contains("<html>") Then
+                appAnnouncement = String.Empty
+            End If
+            Return appAnnouncement
+        End Function
+
+        Public Shared Async Function DownloadJsonSchedule(startDate As DateTime) As Task(Of JObject)
             Dim returnValue As JObject
             Dim dateTimeString As String = startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
             Dim url As String = String.Format(ScheduleApiurl, dateTimeString, dateTimeString)
-            Dim gettingTerm As String = If (refreshing, English.msgRefreshing, English.msgFetching)
 
-            Console.WriteLine(English.msgGettingSchedule, gettingTerm, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
+            Console.WriteLine(English.msgGettingSchedule, English.msgFetching, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
 
-            Dim data = DownloadContents(ApiUrl, url)
-
+            Dim data = Await Common.SendWebRequestAndGetContentAsync(url)
+            'If error
+            'Console.WriteLine(English.msgServerSeemsDown, server)
+            'End If
             If data.Equals(String.Empty) Then Return New JObject()
 
             Dim reader As New JsonTextReader(New StringReader(data))

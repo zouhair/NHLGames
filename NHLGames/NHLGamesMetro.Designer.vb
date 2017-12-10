@@ -159,6 +159,7 @@ Partial Class NHLGamesMetro
         Me.btnNormal = New MetroFramework.Controls.MetroLink()
         Me.fbd = New System.Windows.Forms.FolderBrowserDialog()
         Me.pnlLogo = New System.Windows.Forms.Panel()
+        Me.bw = New System.ComponentModel.BackgroundWorker()
         Me.tabMenu.SuspendLayout
         Me.tabGames.SuspendLayout
         Me.pnlGameBar.SuspendLayout
@@ -1911,6 +1912,11 @@ Partial Class NHLGamesMetro
         Me.pnlLogo.Size = New System.Drawing.Size(150, 50)
         Me.pnlLogo.TabIndex = 10000
         '
+        'bw
+        '
+        Me.bw.WorkerReportsProgress = true
+        Me.bw.WorkerSupportsCancellation = true
+        '
         'NHLGamesMetro
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -2116,4 +2122,5 @@ End Sub
     Friend WithEvents tgShowTodayLiveGamesFirst As MetroToggle
     Friend WithEvents lblShowTodayLiveGamesFirst As MetroLabel
     Friend WithEvents pnlLogo As Panel
+    Friend WithEvents bw As System.ComponentModel.BackgroundWorker
 End Class

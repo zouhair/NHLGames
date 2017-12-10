@@ -510,7 +510,7 @@
     <comment>Message</comment>
   </data>
   <data name="noWebAccess" xml:space="preserve">
-    <value>Aucune connexion internet</value>
+    <value>NHLGames n'a pas accès à l'Internet, il est peut-être bloqué!</value>
     <comment>Message</comment>
   </data>
   <data name="chkSpotifyForceToStart" xml:space="preserve">
@@ -552,5 +552,13 @@
   <data name="lblShowTodayLiveGamesFirst" xml:space="preserve">
     <value>Parties en direct en premier</value>
     <comment>Settings tab</comment>
+  </data>
+  <data name="tipBrokenStream" xml:space="preserve">
+    <value>Stream brisée</value>
+    <comment>Game panel</comment>
+  </data>
+  <data name="msgAnnouncement" xml:space="preserve">
+    <value>Annoncement!</value>
+    <comment>Announcement</comment>
   </data>
 </root>
