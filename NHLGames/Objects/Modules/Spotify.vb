@@ -172,14 +172,14 @@ Namespace  Objects.Modules
             Return False
         End Function
 
-        Private Async Sub Query(request As String)
+        Private Sub Query(request As String)
             Dim auth = If (_authKey IsNot Nothing, $"&oauth={_authKey}", "")
             Dim cfid = If (_cfIdKey IsNot Nothing, $"&csrf={_cfIdKey}", "")
             Dim address = $"http://127.0.0.1:4381/{request}{WebRequestParams}{auth}{cfid}"
 
             Dim myHttpWebRequest As HttpWebRequest = GetMyHttpWebRequest(address)
             Try
-                Await Common.SendWebRequestAsync(address, myHttpWebRequest)
+                Common.SendWebRequest(address, myHttpWebRequest)
             Catch ex As Exception
 
             End Try

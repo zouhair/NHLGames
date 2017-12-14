@@ -777,4 +777,8 @@
     <value>Warning: Stream type unknown for the game {0} vs {1} : {2} - {3}</value>
     <comment>Console</comment>
   </data>
+  <data name="lblStarCam" xml:space="preserve">
+    <value>Star camera</value>
+    <comment>Game panel</comment>
+  </data>
 </root>

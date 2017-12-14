@@ -20,11 +20,12 @@
         Home
         National
         French
+        EndzoneCam1
+        EndzoneCam2
         MultiCam1
         MultiCam2
         RefCam
-        EndzoneCam1
-        EndzoneCam2
+        StarCam
     End Enum
 
     Public Enum CdnType

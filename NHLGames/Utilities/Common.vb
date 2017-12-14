@@ -35,6 +35,7 @@ Namespace Utilities
         End Function
 
         Public Shared Function SendWebRequest(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Boolean
+            If address Is Nothing AndAlso httpWebRequest Is Nothing Then Return False
             Dim myHttpWebRequest As HttpWebRequest
             If httpWebRequest Is Nothing Then
                 myHttpWebRequest = SetHttpWebRequest(address)
@@ -42,11 +43,11 @@ Namespace Utilities
                 myHttpWebRequest = httpWebRequest
             End If
             Try
-                Using myHttpWebResponse As HttpWebResponse = myHttpWebRequest.GetResponse()
-                    If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
-                        Return True
-                    End If
-                End Using
+                Dim myHttpWebResponse As HttpWebResponse = myHttpWebRequest.GetResponse()
+                If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
+                    Return True
+                End If
+                myHttpWebResponse.Close()
             Catch ex As Exception
                 Return False
             End Try
@@ -54,7 +55,7 @@ Namespace Utilities
         End Function
 
         Public Shared Async Function SendWebRequestAsync(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Task(Of Boolean)
-            If address.Equals(String.Empty) Then Return False
+            If address Is Nothing AndAlso httpWebRequest Is Nothing Then Return False
             Dim myHttpWebRequest As HttpWebRequest
             If httpWebRequest Is Nothing Then
                 myHttpWebRequest = SetHttpWebRequest(address)
@@ -74,6 +75,7 @@ Namespace Utilities
         End Function
 
         Public Shared Function SendWebRequestAndGetContent(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As String
+            Dim content = New MemoryStream()
             Dim myHttpWebRequest As HttpWebRequest
             If httpWebRequest Is Nothing Then
                 myHttpWebRequest = SetHttpWebRequest(address)
@@ -81,15 +83,27 @@ Namespace Utilities
                 myHttpWebRequest = httpWebRequest
             End If
             Try
-                Using myHttpWebResponse As HttpWebResponse = myHttpWebRequest.GetResponse()
-                    If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
-                        Using reader As New StreamReader(myHttpWebResponse.GetResponseStream())
-                            Return reader.ReadToEnd()
-                        End Using
-                    Else
-                        Return String.Empty
-                    End If
-                End Using
+                Dim myHttpWebResponse As WebResponse = myHttpWebRequest.GetResponse()
+                Dim reader As Stream = myHttpWebResponse.GetResponseStream()
+                reader.CopyTo(content)
+                reader.Close()
+                myHttpWebResponse.Close()
+            Catch ex As Exception
+                content.Dispose()
+                Return String.Empty
+            End Try
+            Return System.Text.Encoding.UTF8.GetString(content.ToArray())
+        End Function
+
+        Public Shared Async Function GetContent(ByVal address As String, ByVal client As HttpClient) As Task(of String)
+            Try
+                Dim response As HttpResponseMessage = Await client.GetAsync(address)
+                If response.StatusCode <> HttpStatusCode.OK Then Return String.Empty
+                Dim content As HttpContent = response.Content
+                Dim result As String = Await content.ReadAsStringAsync()
+                content.Dispose()
+                response.Dispose()
+                Return result
             Catch ex As Exception
                 Return String.Empty
             End Try
@@ -104,12 +118,13 @@ Namespace Utilities
                 myHttpWebRequest = httpWebRequest
             End If
             Try
-            Using myHttpWebResponse As WebResponse = Await myHttpWebRequest.GetResponseAsync()
-                Using reader As Stream = myHttpWebResponse.GetResponseStream()
-                    Await reader.CopyToAsync(content)
-                End Using
-            End Using
+                Dim myHttpWebResponse As WebResponse = Await myHttpWebRequest.GetResponseAsync()
+                Dim reader As Stream = myHttpWebResponse.GetResponseStream()
+                reader.CopyTo(content)
+                reader.Close()
+                myHttpWebResponse.Close()
             Catch
+                content.Dispose()
                 Return String.Empty
             End Try
             Return System.Text.Encoding.UTF8.GetString(content.ToArray())

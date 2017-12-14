@@ -198,7 +198,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="lblNoStreamAvailable" xml:space="preserve">
-    <value>Aucun stream de disponible</value>
+    <value>Streams indisponible</value>
     <comment>Game panel</comment>
   </data>
   <data name="lblOnNetwork" xml:space="preserve">
@@ -350,15 +350,15 @@
     <comment>Game State Enum</comment>
   </data>
   <data name="gamePeriod1" xml:space="preserve">
-    <value>1ere</value>
+    <value>1ère</value>
     <comment>Game panel</comment>
   </data>
   <data name="gamePeriod2" xml:space="preserve">
-    <value>2eme</value>
+    <value>2ième</value>
     <comment>Game panel</comment>
   </data>
   <data name="gamePeriod3" xml:space="preserve">
-    <value>3eme</value>
+    <value>3ième</value>
     <comment>Game panel</comment>
   </data>
   <data name="gamePeriodFinal" xml:space="preserve">
@@ -394,11 +394,11 @@
     <comment>Games tab</comment>
   </data>
   <data name="lblCamViews" xml:space="preserve">
-    <value>{0} vues de camera</value>
+    <value>{0} vues de caméra</value>
     <comment>Game panel</comment>
   </data>
   <data name="lblRefCam" xml:space="preserve">
-    <value>Camera de l'arbitre</value>
+    <value>Caméra de l'arbitre</value>
     <comment>Game panel</comment>
   </data>
   <data name="gamePeriodOtMore" xml:space="preserve">
@@ -486,7 +486,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblSpotifyDesc" xml:space="preserve">
-    <value>Résume/Pause Spotify quand une annonce est détectée</value>
+    <value>Joue/Pause Spotify quand une annonce est détectée</value>
     <comment>Settings tab</comment>
   </data>
   <data name="tipGetMpc" xml:space="preserve">
@@ -530,7 +530,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="chkSpotifyAnyMediaPlayer" xml:space="preserve">
-    <value>Essaie avec le lecteur média détecté</value>
+    <value>Essayer avec le lecteur média détecté</value>
     <comment>Settings tab</comment>
   </data>
   <data name="gamePeriodSo" xml:space="preserve">
@@ -554,11 +554,15 @@
     <comment>Settings tab</comment>
   </data>
   <data name="tipBrokenStream" xml:space="preserve">
-    <value>Stream brisée</value>
+    <value>Stream brisé</value>
     <comment>Game panel</comment>
   </data>
   <data name="msgAnnouncement" xml:space="preserve">
-    <value>Annoncement!</value>
+    <value>Annonce!</value>
     <comment>Announcement</comment>
+  </data>
+  <data name="lblStarCam" xml:space="preserve">
+    <value>Caméra du joueur</value>
+    <comment>Game panel</comment>
   </data>
 </root>

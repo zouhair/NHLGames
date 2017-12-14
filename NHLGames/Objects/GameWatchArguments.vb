@@ -85,7 +85,7 @@ Namespace Objects
             If safeOutput = False Then
                 returnValue &= String.Format("{0}hlsvariant://", dblQuot)
 
-                returnValue &= Stream.GameURL
+                returnValue &= Stream.StreamUrl
 
                 returnValue = returnValue.Replace("CDN", Cdn.ToString().ToLower()) & space
             Else

@@ -48,6 +48,7 @@
         Me.lnkRef = New System.Windows.Forms.Button()
         Me.lblNotInSeason = New MetroFramework.Controls.MetroLabel()
         Me.lblStreamStatus = New MetroFramework.Controls.MetroLabel()
+        Me.lnkStar = New System.Windows.Forms.Button()
         Me.bpGameControl.SuspendLayout
         CType(Me.picAway,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.picLive,System.ComponentModel.ISupportInitialize).BeginInit
@@ -220,6 +221,7 @@
         Me.flpStreams.Controls.Add(Me.lnkEnd1)
         Me.flpStreams.Controls.Add(Me.lnkEnd2)
         Me.flpStreams.Controls.Add(Me.lnkRef)
+        Me.flpStreams.Controls.Add(Me.lnkStar)
         Me.flpStreams.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.flpStreams.Location = New System.Drawing.Point(2, 108)
         Me.flpStreams.Name = "flpStreams"
@@ -400,6 +402,22 @@
         Me.lblStreamStatus.UseCustomBackColor = true
         Me.lblStreamStatus.UseCustomForeColor = true
         '
+        'lnkStar
+        '
+        Me.lnkStar.BackgroundImage = Global.NHLGames.My.Resources.Resources.refc
+        Me.lnkStar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.lnkStar.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke
+        Me.lnkStar.FlatAppearance.BorderSize = 0
+        Me.lnkStar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkStar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lnkStar.Location = New System.Drawing.Point(310, 6)
+        Me.lnkStar.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.lnkStar.Name = "lnkStar"
+        Me.lnkStar.Size = New System.Drawing.Size(26, 26)
+        Me.lnkStar.TabIndex = 30
+        Me.lnkStar.UseVisualStyleBackColor = true
+        Me.lnkStar.Visible = false
+        '
         'GameControl
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -443,5 +461,6 @@ End Sub
         Friend WithEvents lnkRef As Button
         Friend WithEvents lblGameStatus As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblDivider As MetroFramework.Controls.MetroLabel
+        Friend WithEvents lnkStar As Button
     End Class
 End Namespace

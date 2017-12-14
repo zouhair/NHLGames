@@ -31,103 +31,29 @@ Namespace Objects
         Public Property HomeTeam As String
         Public Property HomeScore As String
 
-        Public ReadOnly Property AwayStream As GameStream
-            Get
-                Return StreamsDict.Item(StreamType.Away)
-            End Get
-        End Property
-        Public ReadOnly Property HomeStream As GameStream
-            Get
-                Return StreamsDict.Item(StreamType.Home)
-            End Get
-        End Property
-        Public ReadOnly Property NationalStream As GameStream
-            Get
-                Return StreamsDict.Item(StreamType.National)
-            End Get
-        End Property
-        Public ReadOnly Property FrenchStream As GameStream
-            Get
-                Return StreamsDict.Item(StreamType.French)
-            End Get
-        End Property
-        Public ReadOnly Property MultiCam1Stream As GameStream
-            Get
-                Return StreamsDict.Item(StreamType.MultiCam1)
-            End Get
-        End Property
-        Public ReadOnly Property MultiCam2Stream As GameStream
-            Get
-                Return StreamsDict.Item(StreamType.MultiCam2)
-            End Get
-        End Property
-        Public ReadOnly Property EndzoneCam1Stream As GameStream
-            Get
-                Return StreamsDict.Item(StreamType.EndzoneCam1)
-            End Get
-        End Property
-        Public ReadOnly Property EndzoneCam2Stream As GameStream
-            Get
-                Return StreamsDict.Item(StreamType.EndzoneCam2)
-            End Get
-        End Property
-        Public ReadOnly Property RefCamStream As GameStream
-            Get
-                Return StreamsDict.Item(StreamType.RefCam)
-            End Get
-        End Property
-
         Public Overrides Function ToString() As String
             Return String.Format(NHLGamesMetro.RmText.GetString("msgTeamVsTeam"), HomeTeam, AwayTeam)
         End Function
 
-        Public ReadOnly Property GameIsFinal As Boolean
+        Public ReadOnly Property IsLive As Boolean
             Get
-                Return GameState = GameStateEnum.Final
-            End Get
-        End Property
-
-        Public ReadOnly Property GameIsLive As Boolean
-            Get
-                Return GameState = GameStateEnum.InProgress OrElse GameState = GameStateEnum.Ending
-            End Get
-        End Property
-
-        Public ReadOnly Property GameIsPreGame As Boolean
-            Get
-                Return GameState = GameStateEnum.Pregame
-            End Get
-        End Property
-
-        Public ReadOnly Property GameIsScheduled As Boolean
-            Get
-                Return GameState = GameStateEnum.Scheduled
-            End Get
-        End Property
-
-        Public ReadOnly Property GameIsInPlayoff As Boolean
-            Get
-                Return _GameType = GameTypeEnum.Series
-            End Get
-        End Property
-
-        Public ReadOnly Property GameIsInSeason As Boolean
-            Get
-                Return _GameType = GameTypeEnum.Season
-            End Get
-        End Property
-
-        Public ReadOnly Property GameIsInPreSeason As Boolean
-            Get
-                Return _GameType = GameTypeEnum.Preseason
+                Return GameState.Equals(GameStateEnum.InProgress) OrElse GameState.Equals(GameStateEnum.Ending)
             End Get
         End Property
 
         Public ReadOnly Property AreAnyStreamsAvailable As Boolean
             Get
-                Return StreamsDict.Any(Function(x) x.Value.IsDefined)
+                Return StreamsDict.Count > 0
             End Get
         End Property
+
+        Public Function GetStream(streamType As StreamType) As GameStream
+            Return StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value
+        End Function
+
+        Public Function IsStreamDefined(streamType As StreamType) As Boolean
+            Return StreamsDict.ContainsKey(streamType)
+        End Function
 
         Public Sub Update(game As Game)
             RaiseEvent GameUpdated(Me, New EventArgs())
@@ -163,9 +89,6 @@ Namespace Objects
 
         Public Sub New()
             StreamsDict = New Dictionary(Of StreamType, GameStream)
-            For Each type As StreamType In [Enum].GetValues(GetType(StreamType))
-                StreamsDict.Add(type, New GameStream())
-            Next 
         End Sub
     End Class
 End Namespace

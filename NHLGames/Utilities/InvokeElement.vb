@@ -5,14 +5,8 @@ Imports NHLGames.Objects
 Namespace Utilities
     Public Class InvokeElement
 
-        ''' <summary>
-        ''' Wrapper for LoadGames to stop UI locking and slow startup
-        ''' </summary>
         Public Shared Sub LoadGames()
-            'Dim loadGamesFunc As New Action(Of DateTime, Boolean)(Sub(dt As DateTime, rf As Boolean) GameFetcher.LoadGames(dt, rf))
-            'loadGamesFunc.BeginInvoke(dateTime, refreshing, Nothing, Nothing)
             Task.Run(AddressOf GameFetcher.LoadGames)
-
         End Sub
 
         Public Shared Sub SetFormStatusLabel(msg As String)
