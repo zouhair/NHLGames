@@ -5,7 +5,6 @@ Namespace Utilities
     Public Class GameFetcher
         Private Shared ReadOnly Form As NHLGamesMetro = NHLGamesMetro.FormInstance
         Public Shared ReadOnly GamesDict As New Dictionary(Of String, Game)
-        'Public Shared ReadOnly AllStreamsTasks As New List(Of Task)
 
         Public Shared Sub ClearGames()
             GamesDict.Clear()
@@ -46,46 +45,46 @@ Namespace Utilities
             End If
         End Sub
 
-        Public Shared Async Sub LoadGames()
+        Public Async Shared Sub LoadGames()
 
             InvokeElement.ClearGamePanel()
 
             NHLGamesMetro.SpnLoadingValue = 1
             NHLGamesMetro.SpnLoadingVisible = True
 
-            If Not NHLGamesMetro.FormLoaded OrElse HostNameInvalid() Then
+            If Not NHLGamesMetro.FormLoaded Then
                 NHLGamesMetro.SpnLoadingVisible = False
                 NHLGamesMetro.SpnLoadingValue = 0
                 Return
             End If
 
+            Dim games As Game()
+            Dim sortedGames As Game()
+
             Try
                 InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgLoadingGames"))
                 ClearGames()
 
-                Dim games = Await GameManager.GetGames()
+                games = Await GameManager.GetGamesAsync()
 
-                NHLGamesMetro.SpnLoadingValue = NHLGamesMetro.spnLoadingMaxValue - 1
+                If Not games Is Nothing Then
+                    NHLGamesMetro.SpnLoadingValue = NHLGamesMetro.spnLoadingMaxValue - 1
 
-                'FetchAllStreams()
-                games = SortGames(games)
-                AddGamesToDict(games)
+                    sortedGames = SortGames(games)
+                    AddGamesToDict(sortedGames)
 
-                InvokeElement.NewGamesFound(GamesDict.Values.ToList())
-                InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"), GamesDict.Values.Count.ToString()))
-            
+                    InvokeElement.NewGamesFound(GamesDict.Values.ToList())
+                    InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"), GamesDict.Values.Count.ToString()))
+                End If
+
                 NHLGamesMetro.SpnLoadingVisible = False
+                
             Catch ex As Exception
                 Console.WriteLine(ex.ToString())
                 Return
             End Try
             NHLGamesMetro.SpnLoadingValue = 0
         End Sub
-
-        'Private Shared Sub FetchAllStreams()
-        '    Task.WaitAll(AllStreamsTasks.ToArray())
-        '    AllStreamsTasks.Clear()
-        'End Sub
 
         Private Shared Function SortGames(games As Game()) As Game()
             If NHLGamesMetro.TodayLiveGamesFirst Then
@@ -105,13 +104,6 @@ Namespace Utilities
                 End If
             Next
         End Sub
-
-        Private Shared Function HostNameInvalid() As Boolean
-            Dim hostname As String = String.Format("http://{0}/", NHLGamesMetro.HostName)
-            Dim result = Not Common.SendWebRequest(hostname)
-            If result Then Console.WriteLine(English.errorHostname)
-            Return result
-        End Function
 
     End Class
 End Namespace

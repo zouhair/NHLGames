@@ -71,10 +71,8 @@ Public Class NHLGamesMetro
         FlpCalendar = flpCalendarPanel
         InitializeForm.SetSettings()
 
-        ResumeLayout()
         FormLoaded = True
-
-        InvokeElement.LoadGames()
+        ResumeLayout()
     End Sub
 
     Private Shared Sub _writeToConsoleSettingsChanged(key As String, value As String)
@@ -418,7 +416,11 @@ Public Class NHLGamesMetro
     Private Sub cbServers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbServers.SelectedIndexChanged 
         tlpSettings.Focus()
         HostName = cbServers.SelectedItem.ToString()
-        ServerIp = Net.Dns.GetHostEntry(HostName).AddressList.First.ToString()
+        Try
+            ServerIp = Net.Dns.GetHostEntry(HostName).AddressList.First.ToString()
+        Catch ex As Exception
+            ServerIp = String.Empty
+        End Try
         HostNameResolved = HostsFile.TestEntry(DomainName, ServerIp)
         ApplicationSettings.SetValue(SettingsEnum.SelectedServer, cbServers.SelectedItem.ToString())
         InvokeElement.LoadGames()

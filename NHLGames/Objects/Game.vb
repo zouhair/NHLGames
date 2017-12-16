@@ -8,7 +8,7 @@ Namespace Objects
     <DebuggerDisplay("{HomeTeam} vs. {AwayTeam} at {[Date]}")>
     Public Class Game
         Public Event GameUpdated(ByVal sender As Object, e As EventArgs)
-        Public Property StreamsDict As Dictionary(Of StreamType, GameStream)
+        Public Property StreamsDict As Dictionary(Of StreamType, GameStream) = New Dictionary(Of StreamType, GameStream)
 
         Public Property Id As Guid = Guid.NewGuid()
         Public Property GameId As String
@@ -88,7 +88,7 @@ Namespace Objects
         End Sub
 
         Public Sub New()
-            StreamsDict = New Dictionary(Of StreamType, GameStream)
         End Sub
+
     End Class
 End Namespace

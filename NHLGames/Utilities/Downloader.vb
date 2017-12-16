@@ -43,14 +43,14 @@ Namespace Utilities
             Return appAnnouncement
         End Function
 
-        Public Shared Function DownloadJsonSchedule(startDate As DateTime) As JObject
+        Public Async Shared Function DownloadJsonScheduleAsync(startDate As DateTime) As Task(Of JObject)
             Dim returnValue As JObject
             Dim dateTimeString As String = startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
             Dim url As String = String.Format(ScheduleApiurl, dateTimeString, dateTimeString)
 
             Console.WriteLine(English.msgGettingSchedule, English.msgFetching, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
 
-            Dim data = Common.SendWebRequestAndGetContent(url)
+            Dim data = Await Common.SendWebRequestAndGetContentAsync(url)
 
             If data.Equals(String.Empty) Then 
                 Console.WriteLine(English.msgServerSeemsDown, ApiUrl)
