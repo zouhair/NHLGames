@@ -31,7 +31,6 @@ Public Class NHLGamesMetro
     Private _resizeDirection As Integer = -1
     Private Const ResizeBorderWidth As Integer = 8
     Public Shared RmText As ResourceManager = English.ResourceManager
-    Public Shared LstTasks As List(Of Task) = New List(Of Task)()
     Public Shared FormLoaded As Boolean = False
     Public Shared TodayLiveGamesFirst As Boolean = False
     Private Shared _adDetectionEngine As AdDetection
@@ -444,14 +443,6 @@ Public Class NHLGamesMetro
         Next
     End Sub
 
-    Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Try
-            Task.WaitAll(LstTasks.ToArray())
-            LstTasks.Clear()
-        Catch
-        End Try
-    End Sub
-
     Private Sub tgModules_Click(sender As Object, e As EventArgs) Handles tgModules.CheckedChanged 
         Dim tg As MetroToggle = sender
 
@@ -629,7 +620,6 @@ Public Class NHLGamesMetro
                      $"Spinner (stream) {If (SpnStreamingVisible, "visible", "invisible")} {SpnStreamingValue.ToString()}/{SpnStreamingMaxValue.ToString()}{vbCrLf}{vbCrLf}" &
                      $"Servers: NHLGames IP {If (My.Computer.Network.Ping(ServerIp), "found", "not found")} ({cbServers.SelectedItem.ToString()}), " &
                      $"NHL.TV redirection is{If (HostsFile.TestEntry(DomainName, ServerIp), " working", "n't working")} (Hosts file tested){vbCrLf}{vbCrLf}" &
-                     $"Streams fetcher: {LstTasks.Count} tasks still running{vbCrLf}{vbCrLf}" &
                      $"Selected player: {player.ToString()}{vbCrLf}{vbCrLf}" &
                      $"Streamer path: {streamerPath.ToString()} [{If (streamerPath.Equals(txtStreamerPath.Text), "on form", "not on form")}] [{If (streamerExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
                      $"VLC path: {vlcPath.ToString()} [{If (vlcPath.Equals(txtVLCPath.Text), "on form", "not on form")}] [{If (vlcExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &

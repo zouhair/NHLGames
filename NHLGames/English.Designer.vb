@@ -1127,7 +1127,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Game stream: {0} not found on the server.
+        '''  Looks up a localized string similar to Game stream: {0} not found or unavailable on the server.
         '''</summary>
         Friend Shared ReadOnly Property msgGettingStreamFailed() As String
             Get

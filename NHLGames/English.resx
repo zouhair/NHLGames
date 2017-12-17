@@ -738,7 +738,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="msgGettingStreamFailed" xml:space="preserve">
-    <value>Game stream: {0} not found on the server</value>
+    <value>Game stream: {0} not found or unavailable on the server</value>
     <comment>Console</comment>
   </data>
   <data name="errorStreamFailed" xml:space="preserve">
