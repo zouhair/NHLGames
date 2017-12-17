@@ -20,7 +20,7 @@ Enjoy!
       * [Navigation bar](#navigation-bar)
       * [Game panel](#game-panel)
    * [Settings](#settings)
-     * [Show Scores](#show-scores)
+     * [Customize game panels](#customize-game-panels)
      * [Language](#language)
      * [Stream Quality](#stream-quality)
      * [Content Delivery Network (CDN)](#content-delivery-network-cdn)
@@ -82,12 +82,13 @@ Every others games, past or scheduled, are grey:
 - Scheduled games: grey frame
 
 ## //_Settings_
-### ///_Show Scores_
+### ///_Customize Game panels_
 NHLGames gives you some options to change how a game panel will appear.     
 *Final Scores* : If on, it shows final score of all past games between the teams logo.    
 *Live Scores* : If on, it shows live score of all games in progress between the teams logo.    
 *Series Record* : If on, it shows serie records under the game status, like: Game 4 Tied 2-2  
 *Teams city abbreviation*: If on, it shows team city abbreviation under the team logo, like: MTL
+*Live games first*: If on, games list will be ordered by live games first
 
 ### ///_Language_
 NHLGames supports two languages: English and French.
