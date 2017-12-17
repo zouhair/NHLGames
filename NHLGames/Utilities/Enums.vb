@@ -70,6 +70,7 @@
         AdDetection = 14
         ShowTeamCityAbr = 15
         ShowTodayLiveGamesFirst = 16
+        LastWindowSize = 17
     End Enum
 
     Public Enum OutputType

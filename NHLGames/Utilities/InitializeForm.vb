@@ -127,6 +127,11 @@ Namespace Utilities
         End Sub
 
         Public Shared Sub SetSettings()
+
+            Dim windowSize = Split(ApplicationSettings.Read(Of String)(SettingsEnum.LastWindowSize, "990;655"), ";")
+            Form.Width = If (windowSize.Length = 2, Convert.ToInt32(windowSize(0)), 990)
+            Form.Height = If (windowSize.Length = 2, Convert.ToInt32(windowSize(1)), 655)
+
             Form.txtMPCPath.Text = GetApplication(SettingsEnum.MpcPath, PathFinder.GetPathOfMpc())
             Form.txtVLCPath.Text = GetApplication(SettingsEnum.VlcPath, PathFinder.GetPathOfVlc())
             Form.txtMpvPath.Text = GetApplication(SettingsEnum.MpvPath, Path.Combine(Application.StartupPath, "mpv\mpv.exe"))

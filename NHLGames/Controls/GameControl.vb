@@ -199,7 +199,7 @@ Namespace Controls
             If game.GameState < GameStateEnum.Final And game.GameDate.ToLocalTime() <= Date.Today.AddDays(1) Then
                 bpGameControl.BorderColour = Color.FromArgb(255, 0, 170, 210)
             Else
-                bpGameControl.BorderColour = Color.LightGray
+                bpGameControl.BorderColour = Color.DarkGray
             End If
 
             UpdateGame(game, _showScores, _showLiveScores, _showSeriesRecord, _showTeamCityAbr)

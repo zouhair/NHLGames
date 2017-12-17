@@ -64,6 +64,7 @@ Public Class NHLGamesMetro
     Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
         SuspendLayout()
 
+
         If Not Common.CheckAppCanRun() Then Close()
         Common.GetLanguage()
         tabMenu.SelectedIndex = 0
@@ -629,4 +630,7 @@ Public Class NHLGamesMetro
         Clipboard.SetText(report)
     End Sub
 
+    Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If btnMaximize.Visible Then ApplicationSettings.SetValue(SettingsEnum.LastWindowSize, Me.Width & ";" & Me.Height)
+    End Sub
 End Class
