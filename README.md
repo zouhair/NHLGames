@@ -83,11 +83,12 @@ Every others games, past or scheduled, are grey:
 
 ## //_Settings_
 ### ///_Customize Game panels_
-NHLGames gives you some options to change how a game panel will appear.     
+NHLGames gives you some options to change how a game panel will appear.
+
 *Final Scores* : If on, it shows final score of all past games between the teams logo.    
 *Live Scores* : If on, it shows live score of all games in progress between the teams logo.    
 *Series Record* : If on, it shows serie records under the game status, like: Game 4 Tied 2-2  
-*Teams city abbreviation*: If on, it shows team city abbreviation under the team logo, like: MTL
+*Teams city abbreviation*: If on, it shows team city abbreviation under the team logo, like: MTL   
 *Live games first*: If on, games list will be ordered by live games first
 
 ### ///_Language_
