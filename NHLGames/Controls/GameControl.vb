@@ -192,6 +192,7 @@ Namespace Controls
             lnkThree.Visible = game.IsStreamDefined(StreamType.MultiCam1)
             lnkSix.Visible = game.IsStreamDefined(StreamType.MultiCam2)
             lnkRef.Visible = game.IsStreamDefined(StreamType.RefCam)
+            lnkStar.Visible = game.IsStreamDefined(StreamType.StarCam)
             lnkEnd1.Visible = game.IsStreamDefined(StreamType.EndzoneCam1)
             lnkEnd2.Visible = game.IsStreamDefined(StreamType.EndzoneCam2)
 

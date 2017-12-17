@@ -344,24 +344,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Warning: Game stream {0} not found on the server.
-        '''</summary>
-        Friend Shared ReadOnly Property errorGettingStream() As String
-            Get
-                Return ResourceManager.GetString("errorGettingStream", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Warning: Game stream {0} not found on the server: {1}.
-        '''</summary>
-        Friend Shared ReadOnly Property errorGettingStreamWithEx() As String
-            Get
-                Return ResourceManager.GetString("errorGettingStreamWithEx", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Error: Selected Hostname is unreachable.
         '''</summary>
         Friend Shared ReadOnly Property errorHostname() As String
@@ -1141,6 +1123,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgGettingSchedule() As String
             Get
                 Return ResourceManager.GetString("msgGettingSchedule", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Game stream: {0} not found on the server.
+        '''</summary>
+        Friend Shared ReadOnly Property msgGettingStreamFailed() As String
+            Get
+                Return ResourceManager.GetString("msgGettingStreamFailed", resourceCulture)
             End Get
         End Property
         

@@ -84,11 +84,10 @@ Namespace Objects
                                     Dim progressPerStream = Convert.ToInt32(progressPerGame / item.Count)
                                     For Each innerStream As JObject In item.Children(Of JObject)
                                         NHLGamesMetro.SpnLoadingValue += progressPerStream
-
-                                        If innerStream.SelectToken("mediaState").ToString().Equals(MediaOff) Then Continue For
-
+                                        Dim streamOff = innerStream.SelectToken("mediaState").ToString().Equals(MediaOff)
                                         Dim streamType As StreamType = GetStreamType(innerStream.Property("mediaFeedType").Value.ToString(), innerStream.Property("feedName").Value.ToString())
-                                        If streamType <> StreamType.None AndAlso numberOfStreams <> 0 Then
+
+                                        If Not streamOff AndAlso streamType <> StreamType.None AndAlso numberOfStreams <> 0 Then
                                             Dim tCurrentGame = currentGame
                                             Dim tInnerStream = innerStream
                                             Dim tStreamType = streamType
@@ -98,16 +97,21 @@ Namespace Objects
                                                                  gamesArray(tCurrentGameIndex).StreamsDict.Add(streamType, newStream)
                                                              End Function)
                                             lstStreamsTask(currentStreamIndex) = t
-                                            currentStreamIndex += 1
                                         Else
-                                            Console.WriteLine(String.Format(English.errorStreamTypeUnknown, currentGame.AwayAbbrev, currentGame.HomeAbbrev, innerStream.Property("mediaFeedType").Value.ToString(), innerStream.Property("feedName").Value))
+                                            If Not streamOff Then
+                                                Console.WriteLine(String.Format(English.errorStreamTypeUnknown, currentGame.AwayAbbrev, currentGame.HomeAbbrev, innerStream.Property("mediaFeedType").Value.ToString(), innerStream.Property("feedName").Value))
+                                            End If
+                                            lstStreamsTask(currentStreamIndex) = Task.Run(Sub() Return)
                                         End If
+
+                                        currentStreamIndex += 1
                                     Next
                                 Next
                             End If
                         Next
                     End If
 
+                    Await Task.Delay(50)
                     gamesArray(currentGameIndex) = currentGame
                     currentGameIndex += 1
                 Next
@@ -115,7 +119,7 @@ Namespace Objects
                 Try
                     Task.WaitAll(lstStreamsTask)
                 Catch ex As AggregateException
-                    Console.WriteLine(English.errorGeneral, $"Getting streams in manager", ex.InnerException.Message)
+                    Console.WriteLine(English.errorGeneral, $"Getting streams in manager", ex.Message)
                 End Try
                 
 
@@ -128,26 +132,9 @@ Namespace Objects
         End Function
 
         Private Shared Function GetNumberOfStreams(gamesJson As JEnumerable(Of JObject)) As Integer
-            Dim count = 0
-            For Each game As JObject In gamesJson
-                If game.SelectToken("content.media") IsNot Nothing Then
-                    For Each stream As JObject In game.SelectToken("content.media.epg")
-                        If stream.SelectToken("title").ToString().Equals("NHLTV") Then
-                            If stream.Property("items").Value.Count.Equals(0) Then Continue For
-                            For Each item As JArray In stream.Property("items")
-                                For Each innerStream As JObject In item.Children(Of JObject)
-                                    If innerStream.SelectToken("mediaState").ToString().Equals(MediaOff) Then Continue For
-                                    If StreamType.None <> GetStreamType(innerStream.Property("mediaFeedType").Value.ToString(), innerStream.Property("feedName").Value.ToString()) Then
-                                        count += 1
-                                    End If
-                                Next
-                            Next
-                        End If
-                    Next
-                End If
-            Next
-
-            Return count
+            Return (From game In gamesJson Where game.SelectToken("content.media") IsNot Nothing).
+                Sum(Function(game) (From stream As JObject In game.SelectToken("content.media.epg") Where stream.SelectToken("title").ToString().Equals("NHLTV")).
+                Sum(Function(stream) stream.Property("items").Value.Count))
         End Function
 
         Private Shared Async Function SetNewGameStream(currentGame As Game, innerStream As JObject, streamType As StreamType) As Task(Of GameStream)
@@ -155,7 +142,7 @@ Namespace Objects
             gs.streamUrl = Await GetGameFeedUrlAsync(gs)
 
             If gs.StreamUrl.Equals(String.Empty) Then
-                Console.WriteLine(String.Format(English.errorGettingStream, gs.Title))
+                Console.WriteLine(String.Format(English.msgGettingStreamFailed, gs.Title))
             End If
 
             Return gs
@@ -182,7 +169,7 @@ Namespace Objects
             If Await Common.SendWebRequestAsync(Nothing, request) Then
                 Return streamUrlReturned
             Else
-                Dim generatedStreamUrlFix As String = GetStreamUrlFix(streamUrlReturned, gameStream.Game.GameDate, true)
+                Dim generatedStreamUrlFix As String = GetStreamUrlFix(streamUrlReturned)
 
                 If generatedStreamUrlFix = String.Empty Then Return String.Empty
                 request = Common.SetHttpWebRequest(generatedStreamUrlFix)
@@ -195,21 +182,23 @@ Namespace Objects
             Return String.Empty
         End Function
 
-        Private Shared Function GetStreamUrlFix(url As String, gameDate As Date, Optional web As Boolean = False)
+        Private Shared Function GetStreamUrlFix(url As String)
             If url.Contains("http://hlslive") Then
                 Dim spliter = url.Split("/")
+                Dim index As Integer = Array.FindIndex(spliter, Function(x) x.ToString().Equals("nhl"))
 
-                For Each split As String In spliter
-                    If split.StartsWith("NHL_GAME_VIDEO_") Then
-                        Return String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/{0}/{1}/{2}/{3}/master_wired{4}.m3u8",
-                                             gameDate.Year,
-                                             gameDate.Month,
-                                             gameDate.Day,
-                                             split,
-                                             If(web, "_web", "60"))
-                    End If
-                Next
-
+                If index = 0 OrElse index + 5 <> spliter.Length - 1 Then 
+                    Return String.Empty
+                Else
+                    Return String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/{0}/{1}/{2}/{3}/{4}/{5}",
+                                         spliter(index),
+                                         spliter(index +1),
+                                         spliter(index +2),
+                                         spliter(index +3),
+                                         spliter(index +4),
+                                         spliter(index +5))
+                    '/ps01/nhl/2000/01/01/NHL_GAME_VIDEO_TEAMTEAM_M2_VISIT_20000101_1234567890123/master_wired{_web}{60}.m3u8
+                End If
             End If
 
             Return String.Empty

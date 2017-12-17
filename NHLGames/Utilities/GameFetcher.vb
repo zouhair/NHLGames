@@ -59,7 +59,7 @@ Namespace Utilities
             End If
 
             Dim games As Game()
-            Dim sortedGames As Game()
+            Dim sortedGames As List(Of Game)
 
             Try
                 InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgLoadingGames"))
@@ -67,9 +67,10 @@ Namespace Utilities
 
                 games = Await GameManager.GetGamesAsync()
 
-                If Not games Is Nothing Then
-                    NHLGamesMetro.SpnLoadingValue = NHLGamesMetro.spnLoadingMaxValue - 1
+                NHLGamesMetro.SpnLoadingValue = NHLGamesMetro.spnLoadingMaxValue - 1
+                Await Task.Delay(100)
 
+                If games IsNot Nothing Then
                     sortedGames = SortGames(games)
                     AddGamesToDict(sortedGames)
 
@@ -86,16 +87,15 @@ Namespace Utilities
             NHLGamesMetro.SpnLoadingValue = 0
         End Sub
 
-        Private Shared Function SortGames(games As Game()) As Game()
+        Private Shared Function SortGames(games As Game()) As List(Of Game)
             If NHLGamesMetro.TodayLiveGamesFirst Then
-                games.OrderBy(Of Boolean)(Function(val) val.GameState.Equals(GameStateEnum.Final)).ThenBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
+                Return games.OrderBy(Of Boolean)(Function(val) val.GameState.Equals(GameStateEnum.Final)).ThenBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
             Else
-                games.OrderBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
+                Return games.OrderBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
             End If
-            Return games
         End Function
 
-        Private Shared Sub AddGamesToDict(games As Game())
+        Private Shared Sub AddGamesToDict(games As List(Of Game))
             For Each game As Game In games
                 If GamesDict.ContainsKey(game.GameId) Then
                     GamesDict(game.GameId).Update(game)

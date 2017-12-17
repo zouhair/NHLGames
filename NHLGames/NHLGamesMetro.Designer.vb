@@ -202,7 +202,7 @@ Partial Class NHLGamesMetro
         Me.txtConsole.Margin = New System.Windows.Forms.Padding(1)
         Me.txtConsole.Name = "txtConsole"
         Me.txtConsole.ReadOnly = true
-        Me.txtConsole.Size = New System.Drawing.Size(984, 428)
+        Me.txtConsole.Size = New System.Drawing.Size(984, 483)
         Me.txtConsole.TabIndex = 110
         Me.txtConsole.Text = ""
         '
@@ -222,8 +222,8 @@ Partial Class NHLGamesMetro
         Me.tabMenu.Location = New System.Drawing.Point(-1, 60)
         Me.tabMenu.Margin = New System.Windows.Forms.Padding(0)
         Me.tabMenu.Name = "tabMenu"
-        Me.tabMenu.SelectedIndex = 1
-        Me.tabMenu.Size = New System.Drawing.Size(992, 505)
+        Me.tabMenu.SelectedIndex = 0
+        Me.tabMenu.Size = New System.Drawing.Size(992, 560)
         Me.tabMenu.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabMenu.Style = MetroFramework.MetroColorStyle.Blue
         Me.tabMenu.TabIndex = 10
@@ -246,7 +246,7 @@ Partial Class NHLGamesMetro
         Me.tabGames.Location = New System.Drawing.Point(4, 38)
         Me.tabGames.Name = "tabGames"
         Me.tabGames.Padding = New System.Windows.Forms.Padding(1)
-        Me.tabGames.Size = New System.Drawing.Size(984, 463)
+        Me.tabGames.Size = New System.Drawing.Size(984, 518)
         Me.tabGames.TabIndex = 0
         Me.tabGames.Text = "GAMES"
         Me.tabGames.UseVisualStyleBackColor = true
@@ -259,7 +259,7 @@ Partial Class NHLGamesMetro
         Me.spnLoading.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.spnLoading.BackColor = System.Drawing.Color.White
         Me.spnLoading.Backwards = true
-        Me.spnLoading.Location = New System.Drawing.Point(293, 462)
+        Me.spnLoading.Location = New System.Drawing.Point(200, 503)
         Me.spnLoading.Maximum = 1000
         Me.spnLoading.Name = "spnLoading"
         Me.spnLoading.Size = New System.Drawing.Size(80, 80)
@@ -290,7 +290,7 @@ Partial Class NHLGamesMetro
         Me.lblNoGames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblNoGames.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.lblNoGames.ForeColor = System.Drawing.Color.DimGray
-        Me.lblNoGames.Location = New System.Drawing.Point(173, 466)
+        Me.lblNoGames.Location = New System.Drawing.Point(100, 503)
         Me.lblNoGames.Margin = New System.Windows.Forms.Padding(3)
         Me.lblNoGames.Name = "lblNoGames"
         Me.lblNoGames.Padding = New System.Windows.Forms.Padding(20, 6, 20, 6)
@@ -325,7 +325,7 @@ Partial Class NHLGamesMetro
         Me.flpGames.Margin = New System.Windows.Forms.Padding(0)
         Me.flpGames.Name = "flpGames"
         Me.flpGames.Padding = New System.Windows.Forms.Padding(3)
-        Me.flpGames.Size = New System.Drawing.Size(982, 420)
+        Me.flpGames.Size = New System.Drawing.Size(982, 475)
         Me.flpGames.TabIndex = 1
         '
         'pnlGameBar
@@ -434,7 +434,7 @@ Partial Class NHLGamesMetro
         Me.tabSettings.Location = New System.Drawing.Point(4, 38)
         Me.tabSettings.Name = "tabSettings"
         Me.tabSettings.Padding = New System.Windows.Forms.Padding(1)
-        Me.tabSettings.Size = New System.Drawing.Size(984, 463)
+        Me.tabSettings.Size = New System.Drawing.Size(984, 518)
         Me.tabSettings.TabIndex = 1
         Me.tabSettings.Text = "SETTINGS"
         Me.tabSettings.UseCustomForeColor = true
@@ -523,7 +523,7 @@ Partial Class NHLGamesMetro
         Me.tlpSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30!))
         Me.tlpSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60!))
         Me.tlpSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100!))
-        Me.tlpSettings.Size = New System.Drawing.Size(982, 459)
+        Me.tlpSettings.Size = New System.Drawing.Size(982, 514)
         Me.tlpSettings.TabIndex = 64
         '
         'tlpOBSSettings
@@ -1728,7 +1728,7 @@ Partial Class NHLGamesMetro
         Me.tabConsole.HorizontalScrollbarSize = 10
         Me.tabConsole.Location = New System.Drawing.Point(4, 38)
         Me.tabConsole.Name = "tabConsole"
-        Me.tabConsole.Size = New System.Drawing.Size(984, 463)
+        Me.tabConsole.Size = New System.Drawing.Size(984, 518)
         Me.tabConsole.TabIndex = 2
         Me.tabConsole.Text = "CONSOLE"
         Me.tabConsole.UseCustomForeColor = true
@@ -1739,7 +1739,7 @@ Partial Class NHLGamesMetro
         'btnCopyConsole
         '
         Me.btnCopyConsole.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnCopyConsole.Location = New System.Drawing.Point(635, 434)
+        Me.btnCopyConsole.Location = New System.Drawing.Point(635, 489)
         Me.btnCopyConsole.Name = "btnCopyConsole"
         Me.btnCopyConsole.Size = New System.Drawing.Size(200, 23)
         Me.btnCopyConsole.TabIndex = 120
@@ -1749,7 +1749,7 @@ Partial Class NHLGamesMetro
         'btnClearConsole
         '
         Me.btnClearConsole.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnClearConsole.Location = New System.Drawing.Point(841, 434)
+        Me.btnClearConsole.Location = New System.Drawing.Point(841, 489)
         Me.btnClearConsole.Name = "btnClearConsole"
         Me.btnClearConsole.Size = New System.Drawing.Size(139, 23)
         Me.btnClearConsole.TabIndex = 130
@@ -1777,7 +1777,7 @@ Partial Class NHLGamesMetro
         Me.pnlBottom.HorizontalScrollbarBarColor = true
         Me.pnlBottom.HorizontalScrollbarHighlightOnWheel = false
         Me.pnlBottom.HorizontalScrollbarSize = 10
-        Me.pnlBottom.Location = New System.Drawing.Point(3, 559)
+        Me.pnlBottom.Location = New System.Drawing.Point(3, 614)
         Me.pnlBottom.Margin = New System.Windows.Forms.Padding(0)
         Me.pnlBottom.Name = "pnlBottom"
         Me.pnlBottom.Size = New System.Drawing.Size(984, 38)
@@ -1922,7 +1922,7 @@ Partial Class NHLGamesMetro
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackMaxSize = 150
-        Me.ClientSize = New System.Drawing.Size(990, 600)
+        Me.ClientSize = New System.Drawing.Size(990, 655)
         Me.Controls.Add(Me.pnlLogo)
         Me.Controls.Add(Me.spnStreaming)
         Me.Controls.Add(Me.pnlBottom)

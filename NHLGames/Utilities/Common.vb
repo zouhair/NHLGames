@@ -8,7 +8,7 @@ Namespace Utilities
 
         Public Const UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"
         Private Const Http = "http"
-        Private Const Timeout = 2000
+        Private Const Timeout = 800
 
         Public Shared Function GetRandomString(ByVal intLength As Integer)
             Const s As String = "abcdefghijklmnopqrstuvwxyz0123456789"
