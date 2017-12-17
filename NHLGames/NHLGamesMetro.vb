@@ -631,6 +631,6 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If btnMaximize.Visible Then ApplicationSettings.SetValue(SettingsEnum.LastWindowSize, Me.Width & ";" & Me.Height)
+        If btnMaximize.Visible Then ApplicationSettings.SetValue(SettingsEnum.LastWindowSize, Width & ";" & Height)
     End Sub
 End Class

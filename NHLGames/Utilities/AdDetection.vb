@@ -121,7 +121,8 @@ Namespace Utilities
 
         Private Sub NotifyModules()
             SyncLock _adModules
-                For Each m In _adModules
+                For Each adModule In _adModules
+                    Dim m = adModule
                     If _previousAdPlayingState Then
                         Task.Run(Sub()
                                      m.AdStarted()

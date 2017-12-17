@@ -1,5 +1,4 @@
-﻿Imports NHLGames.My.Resources
-Imports NHLGames.Objects
+﻿Imports NHLGames.Objects
 
 Namespace Utilities
     Public Class GameFetcher

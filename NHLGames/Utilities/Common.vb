@@ -7,11 +7,10 @@ Namespace Utilities
     Public Class Common
 
         Public Const UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"
-        Private Const Http = "http"
         Private Const Timeout = 10000
 
         Public Shared Function GetRandomString(ByVal intLength As Integer)
-            Const s As String = "abcdefghijklmnopqrstuvwxyz0123456789"
+            Const s = "abcdefghijklmnopqrstuvwxyz0123456789"
             Dim r As New Random
             Dim sb As New Text.StringBuilder
 
@@ -30,7 +29,7 @@ Namespace Utilities
             defaultHttpWebRequest.Proxy = Nothing
             defaultHttpWebRequest.ContentType = "text/plain"
             defaultHttpWebRequest.CookieContainer = New CookieContainer()
-            defaultHttpWebRequest.CookieContainer.Add(New Cookie("mediaAuth", Common.GetRandomString(240), String.Empty, "nhl.com"))
+            defaultHttpWebRequest.CookieContainer.Add(New Cookie("mediaAuth", GetRandomString(240), String.Empty, "nhl.com"))
             defaultHttpWebRequest.Timeout = Timeout
 
             Return defaultHttpWebRequest

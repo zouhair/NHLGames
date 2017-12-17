@@ -22,7 +22,7 @@ Namespace Utilities
             Form.lblVersion.Text = String.Format("v {0}.{1}.{2}", My.Application.Info.Version.Major,
                                                  My.Application.Info.Version.Minor,
                                                  My.Application.Info.Version.Build)
-            InitializeForm.AnnouncementCheck()
+            AnnouncementCheck()
             Return True
         End Function
 
