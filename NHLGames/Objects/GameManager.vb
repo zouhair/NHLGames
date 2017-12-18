@@ -1,4 +1,5 @@
-﻿Imports Newtonsoft.Json.Linq
+﻿Imports System.Windows
+Imports Newtonsoft.Json.Linq
 Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
 
@@ -176,9 +177,10 @@ Namespace Objects
                             result = generatedStreamUrlFix
                         End If
                     End If
+                    request.Abort()
                 End If
             End If
-
+            
             Return result
         End Function
 

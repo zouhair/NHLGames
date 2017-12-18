@@ -9,7 +9,7 @@ Namespace Objects
     Public Class Game: Implements IDisposable
         Private _disposedValue As Boolean
 
-        Public Property StreamsDict As Dictionary(Of StreamType, GameStream) = New Dictionary(Of StreamType, GameStream)
+        Public Property StreamsDict As Dictionary(Of StreamType, GameStream)
         Public Property Id As Guid = Guid.NewGuid()
         Public Property GameId As String
         Public Property GameType As GameTypeEnum 'Get type of the game : 1 preseason, 2 regular, 3 series
@@ -43,16 +43,16 @@ Namespace Objects
 
         Public ReadOnly Property AreAnyStreamsAvailable As Boolean
             Get
-                Return StreamsDict.Count > 0 AndAlso (StreamsDict.Any(Function(x) Not x.Value.IsBroken) OrElse GameState > GameStateEnum.Pregame)
+                Return StreamsDict IsNot Nothing AndAlso StreamsDict.Count > 0 AndAlso (StreamsDict.Any(Function(x) Not x.Value.IsBroken) OrElse GameState > GameStateEnum.Pregame)
             End Get
         End Property
 
         Public Function GetStream(streamType As StreamType) As GameStream
-            Return StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value
+            Return If (StreamsDict IsNot Nothing, StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value, Nothing)
         End Function
 
         Public Function IsStreamDefined(streamType As StreamType) As Boolean
-            Return StreamsDict.ContainsKey(streamType)
+            Return If (StreamsDict IsNot Nothing, StreamsDict.ContainsKey(streamType), Nothing)
         End Function
 
         Public Sub SetGameDate(jDate As String)
@@ -84,6 +84,7 @@ Namespace Objects
         End Sub
 
         Public Sub New()
+            StreamsDict = New Dictionary(Of StreamType, GameStream)
         End Sub
 
         Protected Overridable Sub Dispose(disposing As Boolean)

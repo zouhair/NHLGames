@@ -69,17 +69,17 @@ Namespace Utilities
                 If games IsNot Nothing Then
                     sortedGames = SortGames(games)
                     AddGamesToDict(sortedGames)
-
-                    InvokeElement.NewGamesFound(NHLGamesMetro.GamesDict.Values.ToList())
-                    InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"), NHLGamesMetro.GamesDict.Values.Count.ToString()))
                 End If
 
-                NHLGamesMetro.SpnLoadingVisible = False
+                InvokeElement.NewGamesFound(NHLGamesMetro.GamesDict.Values.ToList())
+                InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"), NHLGamesMetro.GamesDict.Values.Count.ToString()))
+
             Catch ex As Exception
                 Console.WriteLine(ex.ToString())
                 Return
             End Try
 
+            NHLGamesMetro.SpnLoadingVisible = False
             NHLGamesMetro.SpnLoadingValue = 0
         End Sub
 
