@@ -17,8 +17,8 @@ Namespace Utilities
         Private Const AppAnnouncementUrl As String = AppUrl & "static/announcement.txt"
         Private Shared ReadOnly Regex As New Regex("(\d+\.)(\d+\.)?(\d+\.)?(\*|\d+)")
 
-        Public Shared Function DownloadApplicationVersion() As Version
-            Dim appVers As String = Common.SendWebRequestAndGetContent(AppVersionUrl)
+        Public Async Shared Function DownloadApplicationVersion() As Task(Of Version)
+            Dim appVers As String = Await Common.SendWebRequestAndGetContentAsync(AppVersionUrl)
             If appVers.Contains("<html>") Then
                 appVers = String.Empty
             End If
@@ -27,16 +27,16 @@ Namespace Utilities
             Return new Version(appVers)
         End Function
 
-        Public Shared Function DownloadChangelog() As String
-            Dim appChangelog As String = Common.SendWebRequestAndGetContent(AppChangelogUrl)
+        Public Async Shared Function DownloadChangelog() As Task(Of String)
+            Dim appChangelog As String = Await Common.SendWebRequestAndGetContentAsync(AppChangelogUrl)
             If appChangelog.Contains("<html>") Then
                 appChangelog = String.Empty
             End If
             Return appChangelog
         End Function
 
-        Public Shared Function DownloadAnnouncement() As String
-            Dim appAnnouncement As String = Common.SendWebRequestAndGetContent(AppAnnouncementUrl)
+        Public Async Shared Function DownloadAnnouncement() As Task(Of String)
+            Dim appAnnouncement As String = Await Common.SendWebRequestAndGetContentAsync(AppAnnouncementUrl)
             If appAnnouncement.Contains("<html>") Then
                 appAnnouncement = String.Empty
             End If

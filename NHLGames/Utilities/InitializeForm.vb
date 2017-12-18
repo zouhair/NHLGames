@@ -5,8 +5,8 @@ Namespace Utilities
     Public Class InitializeForm
         Private ReadOnly Shared Form As NHLGamesMetro = NHLGamesMetro.FormInstance
 
-        Public Shared Function VersionCheck() As Boolean
-            Dim latestVersion As Version = Downloader.DownloadApplicationVersion()
+        Public Async Shared Function VersionCheck() As Task(Of Boolean)
+            Dim latestVersion As Version = Await Downloader.DownloadApplicationVersion()
             If latestVersion.Equals(New Version()) Then Return False
             
             If latestVersion > My.Application.Info.Version Then
@@ -14,7 +14,7 @@ Namespace Utilities
                     NHLGamesMetro.RmText.GetString("msgNewVersionText"), 
                     latestVersion.ToString())
                 Form.lnkDownload.Width = 700
-                Dim strChangeLog As String = Downloader.DownloadChangelog()
+                Dim strChangeLog As String = Await Downloader.DownloadChangelog()
                 InvokeElement.MsgBoxBlue(String.Format(NHLGamesMetro.RmText.GetString("msgChangeLog"), latestVersion.ToString(), vbCrLf, vbCrLf, strChangeLog),
                                          NHLGamesMetro.RmText.GetString("msgNewVersionAvailable"),
                                          MessageBoxButtons.OK)
@@ -22,12 +22,12 @@ Namespace Utilities
             Form.lblVersion.Text = String.Format("v {0}.{1}.{2}", My.Application.Info.Version.Major,
                                                  My.Application.Info.Version.Minor,
                                                  My.Application.Info.Version.Build)
-            AnnouncementCheck()
+            Await AnnouncementCheck()
             Return True
         End Function
 
-        Public Shared Function AnnouncementCheck() As Boolean
-            Dim latestAnnouncement As String = Downloader.DownloadAnnouncement()
+        Public Async Shared Function AnnouncementCheck() As Task(Of Boolean)
+            Dim latestAnnouncement As String = Await Downloader.DownloadAnnouncement()
             If Not latestAnnouncement.Equals(String.Empty) Then
                 InvokeElement.MsgBoxBlue(latestAnnouncement,
                                          NHLGamesMetro.RmText.GetString("msgAnnouncement"),

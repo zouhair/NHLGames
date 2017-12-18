@@ -78,34 +78,6 @@ Namespace Utilities
             Return result
         End Function
 
-        Public Shared Function SendWebRequestAndGetContent(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As String
-            Dim content = New MemoryStream()
-            Dim myHttpWebRequest As HttpWebRequest
-            If httpWebRequest Is Nothing Then
-                myHttpWebRequest = SetHttpWebRequest(address)
-            Else 
-                myHttpWebRequest = httpWebRequest
-            End If
-
-            Try
-                Using myHttpWebResponse As HttpWebResponse = myHttpWebRequest.GetResponse()
-                    If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
-                        Using reader As Stream = myHttpWebResponse.GetResponseStream()
-                            reader.CopyTo(content)
-                        End Using
-                    End If
-                End Using
-            Catch ex As Exception
-                content.Dispose()
-                Return String.Empty
-            End Try
-
-            Dim result = Text.Encoding.UTF8.GetString(content.ToArray())
-            content.Dispose()
-
-            Return result
-        End Function
-
         Public Shared Async Function SendWebRequestAndGetContentAsync(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Task(Of String)
             Dim content = New MemoryStream()
             Dim myHttpWebRequest As HttpWebRequest
@@ -145,11 +117,11 @@ Namespace Utilities
             End If
         End Sub
 
-        Public Shared Function CheckAppCanRun() As Boolean
+        Public Async Shared Function CheckAppCanRun() As Task(Of Boolean)
             If Not File.Exists("NHLGames.exe.Config") Then
                 FatalError(NHLGamesMetro.RmText.GetString("noConfigFile"))
                 Return False
-            Else If Not InitializeForm.VersionCheck() OrElse Not SendWebRequest("https://www.google.com") Then
+            Else If Not (Await InitializeForm.VersionCheck()) OrElse Not (Await SendWebRequestAsync("https://www.google.com")) Then
                 FatalError(NHLGamesMetro.RmText.GetString("noWebAccess"))
                 Return False
             End If

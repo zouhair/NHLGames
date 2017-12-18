@@ -63,11 +63,9 @@ Public Class NHLGamesMetro
         Console.WriteLine(English.errorGeneral, $"Running main thread",e.ToString())
     End Sub
 
-    Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Async Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
         SuspendLayout()
 
-
-        If Not Common.CheckAppCanRun() Then Close()
         Common.GetLanguage()
         tabMenu.SelectedIndex = 0
         FlpCalendar = flpCalendarPanel
@@ -75,6 +73,10 @@ Public Class NHLGamesMetro
 
         FormLoaded = True
         ResumeLayout()
+
+        If Not Await Common.CheckAppCanRun() Then Close()
+
+        tmr.Enabled = True
         InvokeElement.LoadGames()
     End Sub
 

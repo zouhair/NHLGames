@@ -1758,7 +1758,6 @@ Partial Class NHLGamesMetro
         '
         'tmr
         '
-        Me.tmr.Enabled = true
         '
         'tt
         '
