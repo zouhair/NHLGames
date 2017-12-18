@@ -4,8 +4,8 @@ Imports NHLGames.Utilities
 
 Namespace Objects
 
-    Public Class GameManager
-
+    Public Class GameManager: Implements IDisposable
+        Private _disposedValue As Boolean
         Private Shared ReadOnly DictStreamType = New Dictionary(Of String, StreamType)() From {
                                           {"HOME", StreamType.Home}, {"AWAY", StreamType.Away}, {"NATIONAL", StreamType.National}, {"FRENCH", StreamType.French},
                                           {"Multi-Cam 1", StreamType.MultiCam1}, {"Multi-Cam 2", StreamType.MultiCam2},
@@ -14,7 +14,7 @@ Namespace Objects
 
         Private Const MediaOff = "MEDIA_OFF"
 
-        Public Async Shared Function GetGamesAsync() As Task(Of Game())
+        Public Async Function GetGamesAsync() As Task(Of Game())
 
             Dim jsonSchedule As JObject = Await Downloader.DownloadJsonScheduleAsync(NHLGamesMetro.GameDate)
 
@@ -97,7 +97,7 @@ Namespace Objects
                                             lstStreamsTask(currentStreamIndex) = t
                                         Else
                                             If Not streamOff Then
-                                                Console.WriteLine(String.Format(English.errorStreamTypeUnknown, currentGame.AwayAbbrev, currentGame.HomeAbbrev, innerStream.Property("mediaFeedType").Value.ToString(), innerStream.Property("feedName").Value))
+                                                Console.WriteLine(English.errorStreamTypeUnknown, currentGame.AwayAbbrev, currentGame.HomeAbbrev, innerStream.Property("mediaFeedType").Value.ToString(), innerStream.Property("feedName").Value)
                                             End If
                                             lstStreamsTask(currentStreamIndex) = Task.Run(Sub() Return)
                                         End If
@@ -115,11 +115,10 @@ Namespace Objects
                 Next
 
                 Try
-                    Task.WaitAll(lstStreamsTask)
+                    Await Task.WhenAll(lstStreamsTask).ContinueWith(Sub(x) x.Dispose())
                 Catch ex As AggregateException
                     Console.WriteLine(English.errorGeneral, $"Getting streams in manager", ex.Message)
                 End Try
-                
 
             Catch ex As Exception
                 Console.WriteLine(English.errorGeneral, $"Getting games in manager", ex.Message)
@@ -140,7 +139,7 @@ Namespace Objects
             gs.streamUrl = Await GetGameFeedUrlAsync(gs)
 
             If gs.StreamUrl.Equals(String.Empty) Then
-                Console.WriteLine(String.Format(English.msgGettingStreamFailed, gs.Title))
+                Console.WriteLine(English.msgGettingStreamFailed, gs.Title)
             End If
 
             Return gs
@@ -157,27 +156,30 @@ Namespace Objects
         End Function
 
         Private Shared Async Function GetGameFeedUrlAsync(gameStream As GameStream) As Task(Of String)
-            If gameStream.GameUrl = String.Empty Then Return String.Empty
+            Dim result = String.Empty
 
-            Dim streamUrlReturned = Await Common.SendWebRequestAndGetContentAsync(gameStream.GameUrl & gameStream.CdnParameter.ToString().ToLower())
-            If streamUrlReturned = String.Empty Then Return String.Empty
+            If gameStream.GameUrl <> String.Empty Then
+                Dim streamUrlReturned = Await Common.SendWebRequestAndGetContentAsync(gameStream.GameUrl & gameStream.CdnParameter.ToString().ToLower())
 
-            Dim request = Common.SetHttpWebRequest(streamUrlReturned)
+                If streamUrlReturned <> String.Empty Then
+                    Dim request = Common.SetHttpWebRequest(streamUrlReturned)
 
-            If Await Common.SendWebRequestAsync(Nothing, request) Then
-                Return streamUrlReturned
-            Else
-                Dim generatedStreamUrlFix As String = GetStreamUrlFix(streamUrlReturned)
+                    If Await Common.SendWebRequestAsync(Nothing, request) Then
+                        result = streamUrlReturned
+                    Else
+                        Dim generatedStreamUrlFix As String = GetStreamUrlFix(streamUrlReturned)
 
-                If generatedStreamUrlFix = String.Empty Then Return String.Empty
-                request = Common.SetHttpWebRequest(generatedStreamUrlFix)
+                        If generatedStreamUrlFix = String.Empty Then Return String.Empty
+                        request = Common.SetHttpWebRequest(generatedStreamUrlFix)
 
-                If Await Common.SendWebRequestAsync(Nothing, request) Then
-                    Return generatedStreamUrlFix
+                        If Await Common.SendWebRequestAsync(Nothing, request) Then
+                            result = generatedStreamUrlFix
+                        End If
+                    End If
                 End If
             End If
 
-            Return String.Empty
+            Return result
         End Function
 
         Private Shared Function GetStreamUrlFix(url As String)
@@ -207,6 +209,19 @@ Namespace Objects
                     game.TryGetValue("linescore", "currentPeriodOrdinal") And game.TryGetValue("linescore", "currentPeriodTimeRemaining") And
                     game.TryGetValue("content", "media"))
         End Function
+
+        Protected Overridable Sub Dispose(disposing As Boolean)
+            _disposedValue = True
+        End Sub
+
+        Public Sub Dispose() Implements IDisposable.Dispose
+            Dispose(True)
+            GC.SuppressFinalize(Me)
+        End Sub
+
+        Protected Overrides Sub Finalize()
+            Dispose(False)
+        End Sub
 
     End Class
 End Namespace

@@ -43,7 +43,7 @@ Namespace Objects.Modules
 
         Private Sub Switching(hotkey As Hotkey, isHotkeySet As Boolean, specialKey As Boolean, scene As String)
             If Not isHotkeySet Then
-                Console.WriteLine(String.Format(English.msgObsHotkeyNotSet, scene))
+                Console.WriteLine(English.msgObsHotkeyNotSet, scene)
                 Return
             End If
 
@@ -77,7 +77,7 @@ Namespace Objects.Modules
                 End If
 
                 Dim curr? = NativeMethods.GetForegroundWindowFromHandle()
-                Console.WriteLine(String.Format(English.msgObsChangingScene, scene))
+                Console.WriteLine(English.msgObsChangingScene, scene)
                 NativeMethods.SetForegroundWindowFromHandle(_obsHandle)
                 Threading.Thread.Sleep(50)
                 SendKeys.SendWait(toSend)

@@ -1,6 +1,5 @@
 ﻿Imports System.IO
 Imports System.Net
-Imports System.Net.Http
 Imports NHLGames.My.Resources
 
 Namespace Utilities
@@ -39,6 +38,7 @@ Namespace Utilities
             If address Is Nothing AndAlso httpWebRequest Is Nothing Then Return False
 
             Dim myHttpWebRequest As HttpWebRequest
+            Dim result As Boolean = False
 
             If httpWebRequest Is Nothing Then
                 myHttpWebRequest = SetHttpWebRequest(address)
@@ -48,21 +48,19 @@ Namespace Utilities
 
             Try
                 Using myHttpWebResponse As HttpWebResponse = myHttpWebRequest.GetResponse()
-                    If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
-                        Return True
-                    End If
+                    result = (myHttpWebResponse.StatusCode = HttpStatusCode.OK)
                 End Using
             Catch ex As Exception
-                Return False
             End Try
 
-            Return False
+            Return result
         End Function
 
         Public Shared Async Function SendWebRequestAsync(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Task(Of Boolean)
             If address Is Nothing AndAlso httpWebRequest Is Nothing Then Return False
 
             Dim myHttpWebRequest As HttpWebRequest
+            Dim result As Boolean = False
 
             If httpWebRequest Is Nothing Then
                 myHttpWebRequest = SetHttpWebRequest(address)
@@ -72,21 +70,17 @@ Namespace Utilities
 
             Try
                 Using myHttpWebResponse As HttpWebResponse = Await myHttpWebRequest.GetResponseAsync()
-                    If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
-                        Return True
-                    End If
+                    result = (myHttpWebResponse.StatusCode = HttpStatusCode.OK)
                 End Using
             Catch
-                Return False
             End Try
 
-            Return False
+            Return result
         End Function
 
         Public Shared Function SendWebRequestAndGetContent(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As String
             Dim content = New MemoryStream()
             Dim myHttpWebRequest As HttpWebRequest
-
             If httpWebRequest Is Nothing Then
                 myHttpWebRequest = SetHttpWebRequest(address)
             Else 
@@ -106,23 +100,10 @@ Namespace Utilities
                 Return String.Empty
             End Try
 
-            Dim ret = Text.Encoding.UTF8.GetString(content.ToArray())
+            Dim result = Text.Encoding.UTF8.GetString(content.ToArray())
             content.Dispose()
 
-            Return ret
-        End Function
-
-        Public Shared Async Function GetContent(ByVal address As String, ByVal client As HttpClient) As Task(of String)
-            Try
-                Using response As HttpResponseMessage = Await client.GetAsync(address)
-                    If response.StatusCode <> HttpStatusCode.OK Then Return String.Empty
-                    Using content As HttpContent = response.Content
-                        Return Await content.ReadAsStringAsync()
-                    End Using
-                End Using
-            Catch ex As Exception
-                Return String.Empty
-            End Try
+            Return result
         End Function
 
         Public Shared Async Function SendWebRequestAndGetContentAsync(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Task(Of String)
@@ -148,10 +129,10 @@ Namespace Utilities
                 Return String.Empty
             End Try
 
-            Dim ret = Text.Encoding.UTF8.GetString(content.ToArray())
+            Dim result = Text.Encoding.UTF8.GetString(content.ToArray())
             content.Dispose()
 
-            Return ret
+            Return result
         End Function
 
         Public Shared Sub GetLanguage()

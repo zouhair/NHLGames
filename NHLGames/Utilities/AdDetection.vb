@@ -140,7 +140,7 @@ Namespace Utilities
             Try
                 Task.WaitAll(_initializationTasks.ToArray(), TimeSpan.FromSeconds(5))
             Catch ex As Exception
-                Console.WriteLine(String.Format(English.msgAdDetectionProbInit, ex.Message))
+                Console.WriteLine(English.msgAdDetectionProbInit, ex.Message)
             End Try
             While DetectionEnabled
                 Try
@@ -156,7 +156,7 @@ Namespace Utilities
                         NotifyModules()
                     End If
                 Catch ex As Exception
-                    Console.WriteLine(String.Format(English.msgAdDetectionException,ex.Message))
+                    Console.WriteLine(English.msgAdDetectionException,ex.Message)
                 End Try
             End While
         End Sub

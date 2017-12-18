@@ -5,7 +5,9 @@ Namespace Utilities
     Public Class InvokeElement
 
         Public Shared Sub LoadGames()
-            Task.Run(AddressOf GameFetcher.LoadGames)
+            Dim t = Task.Run(AddressOf GameFetcher.LoadGames)
+            t.Wait()
+            t.Dispose()
         End Sub
 
         Public Shared Sub SetFormStatusLabel(msg As String)
@@ -34,7 +36,6 @@ Namespace Utilities
                 Form.btnDate.Enabled = enabled
                 Form.btnTomorrow.Enabled = enabled
                 Form.btnYesterday.Enabled = enabled
-                Form.btnRefresh.Enabled = enabled
             End If
         End Sub
 
@@ -61,6 +62,7 @@ Namespace Utilities
             If form.InvokeRequired Then
                 form.BeginInvoke(New Action(Of List(Of Game))(AddressOf NewGamesFound), gamesDict)
             Else
+                If form.flpGames.Controls.Count > 0 Then ClearGamePanel()
                 form.flpGames.Controls.AddRange((From game In gamesDict Select New GameControl(
                     game,
                     ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores),

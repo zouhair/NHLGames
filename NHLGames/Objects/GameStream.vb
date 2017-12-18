@@ -3,7 +3,8 @@ Imports NHLGames.Utilities
 
 Namespace Objects
 
-    Public Class GameStream
+    Public Class GameStream: Implements IDisposable
+        Private _disposedValue As Boolean
         Public ReadOnly Property Type As StreamType
         Public ReadOnly Property Game As Game
         Public ReadOnly Property Network As String
@@ -31,6 +32,24 @@ Namespace Objects
             CdnParameter = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs).Cdn
             GameUrl = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, Game.GameDate.ToLocalTime().ToString("yyyy-MM-dd"), PlayBackId)
             Title = $"{Game.AwayAbbrev} vs {Game.HomeAbbrev} on {Network}"
+        End Sub
+
+        Protected Overridable Sub Dispose(disposing As Boolean)
+            If Not Me._disposedValue Then
+                If disposing Then
+                    Me.Game.Dispose()
+                End If
+            End If
+            Me._disposedValue = True
+        End Sub
+
+        Public Sub Dispose() Implements IDisposable.Dispose
+            Dispose(True)
+            GC.SuppressFinalize(Me)
+        End Sub
+
+        Protected Overrides Sub Finalize()
+            Dispose(False)
         End Sub
 
     End Class

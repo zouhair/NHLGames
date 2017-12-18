@@ -5,6 +5,7 @@ Imports System.Resources
 Imports MetroFramework.Controls
 Imports NHLGames.Controls
 Imports NHLGames.My.Resources
+Imports NHLGames.Objects
 Imports NHLGames.Objects.Modules
 Imports NHLGames.Utilities
 
@@ -34,6 +35,7 @@ Public Class NHLGamesMetro
     Public Shared FormLoaded As Boolean = False
     Public Shared TodayLiveGamesFirst As Boolean = False
     Private Shared _adDetectionEngine As AdDetection
+    Public Shared ReadOnly GamesDict As New Dictionary(Of String, Game)
 
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
     Public Shared Sub Main()
@@ -50,15 +52,15 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Shared Sub Form1_UIThreadException(ByVal sender As Object, ByVal t As ThreadExceptionEventArgs)
-        Console.WriteLine(English.errorGeneral, $"Running main thread", t.Exception.ToString())
+        Console.WriteLine(English.errorGeneral, $"Running UI thread", t.Exception.ToString())
     End Sub
 
     Private Shared Sub CurrentDomain_UnhandledException(ByVal sender As Object, ByVal e As UnhandledExceptionEventArgs)
-        Console.WriteLine(e.ExceptionObject.ToString())
+        Console.WriteLine(English.errorGeneral, $"Using NHLGames domain", e.ExceptionObject.ToString())
     End Sub
 
     Public Sub HandleException(e As Exception)
-        Console.WriteLine(e.ToString())
+        Console.WriteLine(English.errorGeneral, $"Running main thread",e.ToString())
     End Sub
 
     Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -73,10 +75,11 @@ Public Class NHLGamesMetro
 
         FormLoaded = True
         ResumeLayout()
+        InvokeElement.LoadGames()
     End Sub
 
     Private Shared Sub _writeToConsoleSettingsChanged(key As String, value As String)
-        If FormLoaded Then Console.WriteLine(String.Format(English.msgSettingUpdated, key, value))
+        If FormLoaded Then Console.WriteLine(English.msgSettingUpdated, key, value)
     End Sub
 
     Private Shared Sub tmrAnimate_Tick(sender As Object, e As EventArgs) Handles tmr.Tick
@@ -159,7 +162,7 @@ Public Class NHLGamesMetro
     Private Sub tgShowFinalScores_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowFinalScores.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowScores, tgShowFinalScores.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameFetcher.GamesDict(game.GameId),
+            game.UpdateGame(GamesDict(game.GameId),
                             tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,
@@ -265,7 +268,7 @@ Public Class NHLGamesMetro
     Private Sub chkShowLiveScores_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowLiveScores.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowLiveScores, tgShowLiveScores.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameFetcher.GamesDict(game.GameId),
+            game.UpdateGame(GamesDict(game.GameId),
                             tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,
@@ -308,7 +311,7 @@ Public Class NHLGamesMetro
     Private Sub chkShowSeriesRecord_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowSeriesRecord.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowSeriesRecord, tgShowSeriesRecord.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameFetcher.GamesDict(game.GameId),
+            game.UpdateGame(GamesDict(game.GameId),
                             tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,
@@ -436,7 +439,7 @@ Public Class NHLGamesMetro
         Common.GetLanguage()
         InitializeForm.SetLanguage()
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameFetcher.GamesDict(game.GameId),
+            game.UpdateGame(GamesDict(game.GameId),
                             tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,
@@ -565,7 +568,7 @@ Public Class NHLGamesMetro
     Private Sub tgTeamNamesAbr_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowTeamCityAbr.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowTeamCityAbr, tgShowTeamCityAbr.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameFetcher.GamesDict(game.GameId),
+            game.UpdateGame(GamesDict(game.GameId),
                             tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,

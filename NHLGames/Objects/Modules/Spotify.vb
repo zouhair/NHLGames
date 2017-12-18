@@ -142,7 +142,7 @@ Namespace  Objects.Modules
                 Catch ex As Exception
                     _stopIt = True
                     InvokeElement.ModuleSpotifyOff
-                    Console.WriteLine(String.Format(English.msgSpotifyException, ex.Message))
+                    Console.WriteLine(English.msgSpotifyException, ex.Message)
                 End Try
                 Task.Delay(_connectSleep)
             End While
@@ -155,7 +155,7 @@ Namespace  Objects.Modules
                     Try
                         RunSpotify()
                     Catch ex As Exception
-                        Console.WriteLine(String.Format(English.msgSpotifyCantStart, ex.Message))
+                        Console.WriteLine(English.msgSpotifyCantStart, ex.Message)
                     End Try
                     ForceToOpen = False
                 End If

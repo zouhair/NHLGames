@@ -6,10 +6,10 @@ Imports NHLGames.Utilities
 Namespace Objects
 
     <DebuggerDisplay("{HomeTeam} vs. {AwayTeam} at {[Date]}")>
-    Public Class Game
-        Public Event GameUpdated(ByVal sender As Object, e As EventArgs)
-        Public Property StreamsDict As Dictionary(Of StreamType, GameStream) = New Dictionary(Of StreamType, GameStream)
+    Public Class Game: Implements IDisposable
+        Private _disposedValue As Boolean
 
+        Public Property StreamsDict As Dictionary(Of StreamType, GameStream) = New Dictionary(Of StreamType, GameStream)
         Public Property Id As Guid = Guid.NewGuid()
         Public Property GameId As String
         Public Property GameType As GameTypeEnum 'Get type of the game : 1 preseason, 2 regular, 3 series
@@ -43,7 +43,7 @@ Namespace Objects
 
         Public ReadOnly Property AreAnyStreamsAvailable As Boolean
             Get
-                Return StreamsDict.Count > 0
+                Return StreamsDict.Count > 0 AndAlso (StreamsDict.Any(Function(x) Not x.Value.IsBroken) OrElse GameState > GameStateEnum.Pregame)
             End Get
         End Property
 
@@ -54,10 +54,6 @@ Namespace Objects
         Public Function IsStreamDefined(streamType As StreamType) As Boolean
             Return StreamsDict.ContainsKey(streamType)
         End Function
-
-        Public Sub Update(game As Game)
-            RaiseEvent GameUpdated(Me, New EventArgs())
-        End Sub
 
         Public Sub SetGameDate(jDate As String)
             Dim dateTimeVal As DateTime
@@ -88,6 +84,21 @@ Namespace Objects
         End Sub
 
         Public Sub New()
+        End Sub
+
+        Protected Overridable Sub Dispose(disposing As Boolean)
+            If Not Me._disposedValue Then
+                Me._disposedValue = True
+            End If
+        End Sub
+
+        Public Sub Dispose() Implements IDisposable.Dispose
+            Dispose(True)
+            GC.SuppressFinalize(Me)
+        End Sub
+
+        Protected Overrides Sub Finalize()
+            Dispose(False)
         End Sub
 
     End Class

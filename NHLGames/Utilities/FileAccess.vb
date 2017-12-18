@@ -44,7 +44,7 @@ Namespace Utilities
                 Return True
             Catch ex As Exception
                 If reportException Then 
-                    Console.WriteLine(String.Format(English.errorAccessPath, ex.Message))
+                    Console.WriteLine(English.errorAccessPath, ex.Message)
                 End If
                 Return False
             End Try

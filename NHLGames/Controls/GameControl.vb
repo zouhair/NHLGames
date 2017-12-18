@@ -4,7 +4,7 @@ Imports NHLGames.Utilities
 
 Namespace Controls
 
-    Public Class GameControl
+    Public Class GameControl: Implements IDisposable
         
         Private ReadOnly _game As Game
         Private ReadOnly _showLiveScores As Boolean = False
