@@ -5,35 +5,12 @@ Imports NHLGames.Utilities
 Namespace Controls
 
     Public Class GameControl: Implements IDisposable
-        
         Private _game As Game
-        Private ReadOnly _showLiveScores As Boolean = False
-        Private ReadOnly _showScores As Boolean = False
-        Private ReadOnly _showSeriesRecord As Boolean = False
-        Private ReadOnly _showTeamCityAbr As Boolean = False
-        Private ReadOnly _broadcasters As Dictionary(Of String, String) = New Dictionary(Of String, String)() From {
-            {"ALT", "ALT"},
-            {"CBC", "CBC"},
-            {"CSN", "CSN"},
-            {"ESPN", "ESPN"},
-            {"FS", "FS"},
-            {"MSG", "MSG"},
-            {"NBC", "NBC"},
-            {"NESN", "NESN"},
-            {"RDS", "RDS"},
-            {"ROOT", "ROOT"},
-            {"SN", "SN"},
-            {"TSN", "TSN"},
-            {"TVAS", "TVAS"},
-            {"SUN", "FS"},
-            {"CITY", "CBC"},
-            {"WGN", "WGN"},
-            {"PRIM", "FS"},
-            {"CNBC", "NBC"},
-            {"KCOP", "FS"},
-            {"TCN", "CSN"},
-            {"USA", "NBC"},
-            {"ATT", "ATT"}}
+        Private ReadOnly _showLiveScores As Boolean
+        Private ReadOnly _showScores As Boolean
+        Private ReadOnly _showSeriesRecord As Boolean
+        Private ReadOnly _showTeamCityAbr As Boolean
+        Private ReadOnly _broadcasters As Dictionary(Of String, String)
 
         Public ReadOnly Property GameId() As String
             Get
@@ -174,6 +151,29 @@ Namespace Controls
         Public Sub New(game As Game, showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean, showTeamCityAbr As Boolean)
 
             InitializeComponent()
+            _broadcasters = New Dictionary(Of String, String)() From {
+                {"ALT", "ALT"},
+                {"CBC", "CBC"},
+                {"CSN", "CSN"},
+                {"ESPN", "ESPN"},
+                {"FS", "FS"},
+                {"MSG", "MSG"},
+                {"NBC", "NBC"},
+                {"NESN", "NESN"},
+                {"RDS", "RDS"},
+                {"ROOT", "ROOT"},
+                {"SN", "SN"},
+                {"TSN", "TSN"},
+                {"TVAS", "TVAS"},
+                {"SUN", "FS"},
+                {"CITY", "CBC"},
+                {"WGN", "WGN"},
+                {"PRIM", "FS"},
+                {"CNBC", "NBC"},
+                {"KCOP", "FS"},
+                {"TCN", "CSN"},
+                {"USA", "NBC"},
+                {"ATT", "ATT"}}
             _showScores = showScores
             _showLiveScores = showLiveScores
             _showSeriesRecord = showSeriesRecord

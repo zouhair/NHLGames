@@ -5,65 +5,52 @@ Namespace Utilities
     Public Class InvokeElement
 
         Public Shared Sub LoadGames()
+            NHLGamesMetro.FormInstance.ClearGamePanel()
             Dim t = Task.Run(AddressOf GameFetcher.LoadGames)
             t.Wait()
             t.Dispose()
         End Sub
 
         Public Shared Sub SetFormStatusLabel(msg As String)
-            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
-            If form.InvokeRequired Then
-                form.BeginInvoke(New Action(Of String)(AddressOf SetFormStatusLabel), msg)
+            If NHLGamesMetro.FormInstance.InvokeRequired Then
+                NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String)(AddressOf SetFormStatusLabel), msg)
             Else
-                form.lblStatus.Text = msg
-            End If
-        End Sub
-
-        Public Shared Sub ClearGamePanel()
-            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
-            If form.InvokeRequired Then
-                form.BeginInvoke(New Action(AddressOf ClearGamePanel))
-            Else
-                form.flpGames.Controls.Clear()
+                NHLGamesMetro.FormInstance.lblStatus.Text = msg
             End If
         End Sub
 
         Public Shared Sub SetGameTabControls(enabled As Boolean)
-            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
-            If form.InvokeRequired Then
-                form.BeginInvoke(New Action(Of Boolean)(AddressOf SetGameTabControls), enabled)
+            If NHLGamesMetro.FormInstance.InvokeRequired Then
+                NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of Boolean)(AddressOf SetGameTabControls), enabled)
             Else
-                Form.btnDate.Enabled = enabled
-                Form.btnTomorrow.Enabled = enabled
-                Form.btnYesterday.Enabled = enabled
+                NHLGamesMetro.FormInstance.btnDate.Enabled = enabled
+                NHLGamesMetro.FormInstance.btnTomorrow.Enabled = enabled
+                NHLGamesMetro.FormInstance.btnYesterday.Enabled = enabled
             End If
         End Sub
 
         Public Shared Sub ModuleSpotifyOff()
-            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
-            If form.InvokeRequired Then
-                form.BeginInvoke(New Action(AddressOf ModuleSpotifyOff))
+            If NHLGamesMetro.FormInstance.InvokeRequired Then
+                NHLGamesMetro.FormInstance.BeginInvoke(New Action(AddressOf ModuleSpotifyOff))
             Else
-                form.tgSpotify.Checked = False
+                NHLGamesMetro.FormInstance.tgSpotify.Checked = False
             End If
         End Sub
 
         Public Shared Sub ModuleObsOff()
-            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
-            If form.InvokeRequired Then
-                form.BeginInvoke(New Action(AddressOf ModuleObsOff))
+            If NHLGamesMetro.FormInstance.InvokeRequired Then
+                NHLGamesMetro.FormInstance.BeginInvoke(New Action(AddressOf ModuleObsOff))
             Else
-                form.tgOBS.Checked = False
+                NHLGamesMetro.FormInstance.tgOBS.Checked = False
             End If
         End Sub
 
         Public Shared Sub NewGamesFound(gamesDict As List(Of Game))
-            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
-            If form.InvokeRequired Then
-                form.BeginInvoke(New Action(Of List(Of Game))(AddressOf NewGamesFound), gamesDict)
+            If NHLGamesMetro.FormInstance.InvokeRequired Then
+                NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of List(Of Game))(AddressOf NewGamesFound), gamesDict)
             Else
-                If form.flpGames.Controls.Count > 0 Then ClearGamePanel()
-                form.flpGames.Controls.AddRange((From game In gamesDict Select New GameControl(
+                NHLGamesMetro.FormInstance.ClearGamePanel()
+                NHLGamesMetro.FormInstance.flpGames.Controls.AddRange((From game In gamesDict Select New GameControl(
                     game,
                     ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores),
                     ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores),
@@ -73,13 +60,12 @@ Namespace Utilities
         End Sub
 
         Public Shared Function MsgBoxRed(message As String, title As String, buttons As MessageBoxButtons) As DialogResult
-            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
             Dim result As DialogResult = New DialogResult()
-            If form.InvokeRequired Then
-                form.BeginInvoke(New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxRed), message, title, buttons)
+            If NHLGamesMetro.FormInstance.InvokeRequired Then
+                NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxRed), message, title, buttons)
             Else
-                form.tabMenu.SelectedIndex = 2
-                result = MetroFramework.MetroMessageBox.Show(form,
+                NHLGamesMetro.FormInstance.tabMenu.SelectedIndex = 2
+                result = MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance,
                                                            message,
                                                            title, 
                                                            buttons,
@@ -89,12 +75,11 @@ Namespace Utilities
         End Function
 
         Public Shared Function MsgBoxBlue(message As String, title As String, buttons As MessageBoxButtons) As DialogResult
-            Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
             Dim result As DialogResult = New DialogResult()
-            If form.InvokeRequired Then
-                form.BeginInvoke(New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxBlue), message, title, buttons)
+            If NHLGamesMetro.FormInstance.InvokeRequired Then
+                NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxBlue), message, title, buttons)
             Else
-                result = MetroFramework.MetroMessageBox.Show(form,
+                result = MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance,
                                                              message,
                                                              title, 
                                                              buttons,

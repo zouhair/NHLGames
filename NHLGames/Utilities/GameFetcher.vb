@@ -50,7 +50,6 @@ Namespace Utilities
                 Return
             End If
 
-            InvokeElement.ClearGamePanel()
             NHLGamesMetro.GamesDict.Clear()
 
             Dim games As Game()

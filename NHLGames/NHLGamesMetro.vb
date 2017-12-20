@@ -80,6 +80,14 @@ Public Class NHLGamesMetro
         InvokeElement.LoadGames()
     End Sub
 
+    Public Sub ClearGamePanel()
+        SyncLock flpGames.Controls
+            While flpGames.Controls.Count <> 0
+                flpGames.Controls(0).Dispose()
+            End While
+        End SyncLock
+    End Sub
+
     Private Shared Sub _writeToConsoleSettingsChanged(key As String, value As String)
         If FormLoaded Then Console.WriteLine(English.msgSettingUpdated, key, value)
     End Sub
