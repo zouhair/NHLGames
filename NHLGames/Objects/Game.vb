@@ -48,11 +48,11 @@ Namespace Objects
         End Property
 
         Public Function GetStream(streamType As StreamType) As GameStream
-            Return If (StreamsDict IsNot Nothing, StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value, Nothing)
+            Return If (StreamsDict IsNot Nothing, StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value, New GameStream())
         End Function
 
         Public Function IsStreamDefined(streamType As StreamType) As Boolean
-            Return If (StreamsDict IsNot Nothing, StreamsDict.ContainsKey(streamType), Nothing)
+            Return If (StreamsDict IsNot Nothing, StreamsDict.ContainsKey(streamType), False)
         End Function
 
         Public Sub SetGameDate(jDate As String)

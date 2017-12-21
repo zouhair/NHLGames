@@ -82,9 +82,11 @@ Public Class NHLGamesMetro
 
     Public Sub ClearGamePanel()
         SyncLock flpGames.Controls
-            While flpGames.Controls.Count <> 0
-                flpGames.Controls(0).Dispose()
-            End While
+            If flpGames.Controls.Count > 0 Then
+                For index = flpGames.Controls.Count -1 To 0 Step -1
+                    CType(flpGames.Controls(index), GameControl).Dispose()
+                Next
+            End If
         End SyncLock
     End Sub
 

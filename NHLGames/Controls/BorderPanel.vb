@@ -18,5 +18,10 @@
         End Sub
 
         Public Property BorderColour As Color
+
+        Protected Overrides Sub Dispose(disposing As Boolean)
+            Me.Controls.Clear()
+            MyBase.Dispose(disposing)
+        End Sub
     End Class
 End Namespace

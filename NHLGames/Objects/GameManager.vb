@@ -76,7 +76,7 @@ Namespace Objects
                     'set stream feeds for the current game
                     If game.SelectToken("content.media") IsNot Nothing Then
                         For Each stream As JObject In game.SelectToken("content.media.epg")
-                            If stream.SelectToken("title").ToString().Equals("NHLTV") Then
+                            If stream.SelectToken("title").ToString().Equals("NHLTV") AndAlso stream.Property("items").Value.Count > 0 Then
 
                                 For Each item As JArray In stream.Property("items")
                                     Dim progressPerStream = Convert.ToInt32(progressPerGame / item.Count)

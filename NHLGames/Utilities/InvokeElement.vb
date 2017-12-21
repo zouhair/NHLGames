@@ -21,7 +21,8 @@ Namespace Utilities
 
         Public Shared Sub SetGameTabControls(enabled As Boolean)
             If NHLGamesMetro.FormInstance.InvokeRequired Then
-                NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of Boolean)(AddressOf SetGameTabControls), enabled)
+                Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of Boolean)(AddressOf SetGameTabControls), enabled)
+                NHLGamesMetro.FormInstance.EndInvoke(asyncResult)
             Else
                 NHLGamesMetro.FormInstance.btnDate.Enabled = enabled
                 NHLGamesMetro.FormInstance.btnTomorrow.Enabled = enabled
@@ -31,7 +32,8 @@ Namespace Utilities
 
         Public Shared Sub ModuleSpotifyOff()
             If NHLGamesMetro.FormInstance.InvokeRequired Then
-                NHLGamesMetro.FormInstance.BeginInvoke(New Action(AddressOf ModuleSpotifyOff))
+                Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(AddressOf ModuleSpotifyOff))
+                NHLGamesMetro.FormInstance.EndInvoke(asyncResult)
             Else
                 NHLGamesMetro.FormInstance.tgSpotify.Checked = False
             End If
@@ -39,7 +41,8 @@ Namespace Utilities
 
         Public Shared Sub ModuleObsOff()
             If NHLGamesMetro.FormInstance.InvokeRequired Then
-                NHLGamesMetro.FormInstance.BeginInvoke(New Action(AddressOf ModuleObsOff))
+                Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(AddressOf ModuleObsOff))
+                NHLGamesMetro.FormInstance.EndInvoke(asyncResult)
             Else
                 NHLGamesMetro.FormInstance.tgOBS.Checked = False
             End If
@@ -47,7 +50,8 @@ Namespace Utilities
 
         Public Shared Sub NewGamesFound(gamesDict As List(Of Game))
             If NHLGamesMetro.FormInstance.InvokeRequired Then
-                NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of List(Of Game))(AddressOf NewGamesFound), gamesDict)
+                Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of List(Of Game))(AddressOf NewGamesFound), gamesDict)
+                NHLGamesMetro.FormInstance.EndInvoke(asyncResult)
             Else
                 NHLGamesMetro.FormInstance.ClearGamePanel()
                 NHLGamesMetro.FormInstance.flpGames.Controls.AddRange((From game In gamesDict Select New GameControl(
@@ -62,7 +66,8 @@ Namespace Utilities
         Public Shared Function MsgBoxRed(message As String, title As String, buttons As MessageBoxButtons) As DialogResult
             Dim result As DialogResult = New DialogResult()
             If NHLGamesMetro.FormInstance.InvokeRequired Then
-                NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxRed), message, title, buttons)
+                Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxRed), message, title, buttons)
+                NHLGamesMetro.FormInstance.EndInvoke(asyncResult)
             Else
                 NHLGamesMetro.FormInstance.tabMenu.SelectedIndex = 2
                 result = MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance,
@@ -77,7 +82,8 @@ Namespace Utilities
         Public Shared Function MsgBoxBlue(message As String, title As String, buttons As MessageBoxButtons) As DialogResult
             Dim result As DialogResult = New DialogResult()
             If NHLGamesMetro.FormInstance.InvokeRequired Then
-                NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxBlue), message, title, buttons)
+                Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxBlue), message, title, buttons)
+                NHLGamesMetro.FormInstance.EndInvoke(asyncResult)
             Else
                 result = MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance,
                                                              message,
