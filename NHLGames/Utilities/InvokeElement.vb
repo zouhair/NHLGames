@@ -95,10 +95,11 @@ Namespace Utilities
         End Function
 
         Private Shared Sub EndInvokeOf(asyncResult As IAsyncResult)
-            If asyncResult IsNot Nothing Then
+            Try
                 asyncResult.AsyncWaitHandle.WaitOne()
                 NHLGamesMetro.FormInstance.EndInvoke(asyncResult)
-            End If
+            Catch
+            End Try
         End Sub
 
     End Class

@@ -233,12 +233,13 @@ Namespace Controls
         Private Sub SetStreamButtonLink(streamType As StreamType, btnLink As Button, tooltip As String)
             If _game.IsStreamDefined(streamType) Then
                 Dim stream = _game.GetStream(streamType)
-                btnLink.Enabled = Not stream.IsBroken
 
                 If stream.IsBroken Then
                     Dim brokenImage = ImageFetcher.GetEmbeddedImage("broken")
                     btnLink.BackgroundImage.Dispose()
                     btnLink.BackgroundImage = brokenImage
+                    btnLink.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 224, 224)
+                    btnLink.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 224, 224, 224)
                     tt.SetToolTip(btnLink, String.Format(NHLGamesMetro.RmText.GetString("tipBrokenStream")))
                 Else 
                     If streamType < StreamType.EndzoneCam1 Then
@@ -294,64 +295,50 @@ Namespace Controls
             Return args
         End Function
 
-        Private Sub lnkAway_Click(sender As Object, e As EventArgs) Handles lnkAway.Click
+        Private Sub WatchStream(streamType As StreamerTypeEnum)
             Dim args = WatchArgs()
-            args.Stream = _game.GetStream(StreamType.Away)
-            Player.Watch(args)
+            args.Stream = _game.GetStream(streamType)
+            If Not args.Stream.IsBroken Then Player.Watch(args)            
+        End Sub
+
+        Private Sub lnkAway_Click(sender As Object, e As EventArgs) Handles lnkAway.Click
+            WatchStream(StreamType.Away)
         End Sub
 
         Private Sub lnkFrench_Click(sender As Object, e As EventArgs) Handles lnkFrench.Click 
-            Dim args = WatchArgs()
-            args.Stream = _game.GetStream(StreamType.French)
-            Player.Watch(args)
+            WatchStream(StreamType.French)
         End Sub
 
         Private Sub lnkNational_Click(sender As Object, e As EventArgs) Handles lnkNational.Click 
-            Dim args = WatchArgs()
-            args.Stream = _game.GetStream(StreamType.National)
-            Player.Watch(args)
+            WatchStream(StreamType.National)
         End Sub
 
         Private Sub lnkHome_Click(sender As Object, e As EventArgs) Handles lnkHome.Click 
-            Dim args = WatchArgs()
-            args.Stream = _game.GetStream(StreamType.Home)
-            Player.Watch(args)
+            WatchStream(StreamType.Home)
         End Sub
 
         Private Sub lnkThree_Click(sender As Object, e As EventArgs) Handles lnkThree.Click 
-            Dim args = WatchArgs()
-            args.Stream = _game.GetStream(StreamType.MultiCam1)
-            Player.Watch(args)
+            WatchStream(StreamType.MultiCam1)
         End Sub
 
         Private Sub lnkSix_Click(sender As Object, e As EventArgs) Handles lnkSix.Click 
-            Dim args = WatchArgs()
-            args.Stream = _game.GetStream(StreamType.MultiCam2)
-            Player.Watch(args)
+            WatchStream(StreamType.MultiCam2)
         End Sub
 
         Private Sub lnkEnd1_Click(sender As Object, e As EventArgs) Handles lnkEnd1.Click 
-            Dim args = WatchArgs()
-            args.Stream = _game.GetStream(StreamType.EndzoneCam1)
-            Player.Watch(args)
+            WatchStream(StreamType.EndzoneCam1)
         End Sub
 
         Private Sub lnkEnd2_Click(sender As Object, e As EventArgs) Handles lnkEnd2.Click 
-            Dim args = WatchArgs()
-            args.Stream = _game.GetStream(StreamType.EndzoneCam2)
-            Player.Watch(args)
+            WatchStream(StreamType.EndzoneCam2)
         End Sub
 
         Private Sub lnkRef_Click(sender As Object, e As EventArgs) Handles lnkRef.Click 
-            Dim args = WatchArgs()
-            args.Stream = _game.GetStream(StreamType.RefCam)
-            Player.Watch(args)
+            WatchStream(StreamType.RefCam)
         End Sub
 
         Private Sub lnkStar_Click(sender As Object, e As EventArgs) Handles lnkStar.Click
-            Dim args = WatchArgs()
-            args.Stream = _game.GetStream(StreamType.StarCam)
-            Player.Watch(args)
+            WatchStream(StreamType.StarCam)
         End Sub
 
         Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)
