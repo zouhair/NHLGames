@@ -386,6 +386,8 @@ Namespace Controls
                         Me.bpGameControl.Dispose()
                     End If
                     If Me.components IsNot Nothing Then Me.components.Dispose()
+                    Me._broadcasters.Clear()
+                    Me._game.Dispose()
                 End If
             Finally
                 MyBase.Dispose(disposing)
