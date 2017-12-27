@@ -18,8 +18,14 @@ Namespace  Objects.Modules
         Private Const KeyTab = "{TAB}"
         Private Shared ReadOnly WebRequestParams = "&ref=&cors=&_=" & Convert.ToInt32((Datetime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds)
 
+        Private ReadOnly _spotifyPossiblePaths() = New String() {
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "spotify\\spotify.exe"),
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft\\WindowsApps\\Spotify.exe")
+        }
+
         Private _authKey As String
         Private _cfIdKey As String
+        Private Shared _spotifyPath As String
 
         Public Property ForceToOpen As Boolean
         Public Property PlayNextSong  As Boolean
@@ -28,6 +34,11 @@ Namespace  Objects.Modules
         Public ReadOnly Property Title As AdModulesEnum = AdModulesEnum.Spotify Implements IAdModule.Title
 
         Public Sub New()
+            For Each path As String In _spotifyPossiblePaths
+                If File.Exists(path) Then
+                    _spotifyPath = path
+                End If
+            Next
         End Sub
 
         Private Function SpotifyIsRunning() As Boolean
@@ -35,11 +46,11 @@ Namespace  Objects.Modules
         End Function
 
         Private Sub RunSpotify()
-            Process.Start(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "spotify\\spotify.exe"))
+            Process.Start(_spotifyPath)
         End Sub
 
         Private Function SpotifyIsInstalled() As Boolean
-            Return File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "spotify\\spotify.exe"))
+            Return File.Exists(_spotifyPath)
         End Function
 
         Private Sub NextSong()
@@ -131,7 +142,7 @@ Namespace  Objects.Modules
                 Catch ex As Exception
                     _stopIt = True
                     InvokeElement.ModuleSpotifyOff
-                    Console.WriteLine(String.Format(English.msgSpotifyException, ex.Message))
+                    Console.WriteLine(English.msgSpotifyException, ex.Message)
                 End Try
                 Task.Delay(_connectSleep)
             End While
@@ -144,7 +155,7 @@ Namespace  Objects.Modules
                     Try
                         RunSpotify()
                     Catch ex As Exception
-                        Console.WriteLine(String.Format(English.msgSpotifyCantStart, ex.Message))
+                        Console.WriteLine(English.msgSpotifyCantStart, ex.Message)
                     End Try
                     ForceToOpen = False
                 End If
@@ -161,14 +172,14 @@ Namespace  Objects.Modules
             Return False
         End Function
 
-        Private Async Sub Query(request As String)
+        Private Sub Query(request As String)
             Dim auth = If (_authKey IsNot Nothing, $"&oauth={_authKey}", "")
             Dim cfid = If (_cfIdKey IsNot Nothing, $"&csrf={_cfIdKey}", "")
             Dim address = $"http://127.0.0.1:4381/{request}{WebRequestParams}{auth}{cfid}"
 
             Dim myHttpWebRequest As HttpWebRequest = GetMyHttpWebRequest(address)
             Try
-                Await Common.SendWebRequest(address, myHttpWebRequest)
+                Common.SendWebRequest(address, myHttpWebRequest)
             Catch ex As Exception
 
             End Try

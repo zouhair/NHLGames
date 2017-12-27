@@ -307,7 +307,7 @@
   </data>
   <data name="msgChangeLog" xml:space="preserve">
     <value>Version {0} is available! Changes: {1}{2}{3}</value>
-    <comment>Message</comment>
+    <comment>Version</comment>
   </data>
   <data name="msgCleanHostsFile" xml:space="preserve">
     <value>Hosts: Removing existing entries from hosts file</value>
@@ -343,10 +343,10 @@
   </data>
   <data name="msgNewVersionAvailable" xml:space="preserve">
     <value>New Version Available</value>
-    <comment>Message</comment>
+    <comment>Version</comment>
   </data>
   <data name="msgNewVersionText" xml:space="preserve">
-    <value>A new version is available, download the latest version {0} on /r/nhl_games</value>
+    <value>A new version is available, download the latest version {0} on GitHub</value>
     <comment>Status bar</comment>
   </data>
   <data name="msgOff" xml:space="preserve">
@@ -537,10 +537,6 @@
     <value>Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this.</value>
     <comment>Console</comment>
   </data>
-  <data name="msgRefreshing" xml:space="preserve">
-    <value>Refreshing</value>
-    <comment>Console</comment>
-  </data>
   <data name="msgStreamer" xml:space="preserve">
     <value>Streamer:</value>
     <comment>Console</comment>
@@ -603,31 +599,31 @@
   </data>
   <data name="lblModules" xml:space="preserve">
     <value>Ad detection</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblObs" xml:space="preserve">
     <value>OBS</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblObsAdEndingHotkey" xml:space="preserve">
     <value>Ad ending hotkey</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblObsAdStartingHotkey" xml:space="preserve">
     <value>Ad starting hotkey</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblObsDesc" xml:space="preserve">
     <value>Switch scenes using binded keys when an Ad is detected</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblSpotify" xml:space="preserve">
     <value>Spotify</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblSpotifyDesc" xml:space="preserve">
     <value>Play/Pause Spotify when an Ad is detected</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="msgFetching" xml:space="preserve">
     <value>Fetching</value>
@@ -650,16 +646,16 @@
     <comment>Message</comment>
   </data>
   <data name="noWebAccess" xml:space="preserve">
-    <value>No Internet connection</value>
+    <value>NHLGames has no Internet access, it might be blocked!</value>
     <comment>Message</comment>
   </data>
   <data name="chkSpotifyForceToStart" xml:space="preserve">
     <value>Force to start</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="chkSpotifyPlayNextSong" xml:space="preserve">
     <value>Always play next song</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblAlternateCdn" xml:space="preserve">
     <value>Use the alternate network</value>
@@ -729,24 +725,20 @@
     <value>SO</value>
     <comment>Game panel</comment>
   </data>
-  <data name="errorGettingStreamWithEx" xml:space="preserve">
-    <value>Warning: Game stream {0} not found on the server: {1}</value>
-    <comment>Console</comment>
-  </data>
   <data name="errorHostname" xml:space="preserve">
     <value>Error: Selected Hostname is unreachable</value>
     <comment>Console</comment>
   </data>
   <data name="lblModulesDesc" xml:space="preserve">
     <value>Detects ads and notify activated apps below</value>
-    <comment>Modules tab</comment>
+    <comment>Settings tab</comment>
   </data>
   <data name="lblShowTeamCityAbr" xml:space="preserve">
     <value>Teams city abbreviation</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="errorGettingStream" xml:space="preserve">
-    <value>Warning: Game stream {0} not found on the server</value>
+  <data name="msgGettingStreamFailed" xml:space="preserve">
+    <value>Game stream: {0} not found or unavailable on the server</value>
     <comment>Console</comment>
   </data>
   <data name="errorStreamFailed" xml:space="preserve">
@@ -755,6 +747,34 @@
   </data>
   <data name="lblHostFileNotWorking" xml:space="preserve">
     <value>NHL.tv bypass failed</value>
+    <comment>Game panel</comment>
+  </data>
+  <data name="lblShowTodayLiveGamesFirst" xml:space="preserve">
+    <value>Live games first</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="lnkSubreddit" xml:space="preserve">
+    <value>/r/nhl_games</value>
+    <comment>Status bar</comment>
+  </data>
+  <data name="tipBrokenStream" xml:space="preserve">
+    <value>Broken stream</value>
+    <comment>Game panel</comment>
+  </data>
+  <data name="errorAccessPath" xml:space="preserve">
+    <value>Error: Checking access to path: {0}</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgAnnouncement" xml:space="preserve">
+    <value>Announcement!</value>
+    <comment>Announcement</comment>
+  </data>
+  <data name="errorStreamTypeUnknown" xml:space="preserve">
+    <value>Warning: Stream type unknown for the game {0} vs {1} : {2} - {3}</value>
+    <comment>Console</comment>
+  </data>
+  <data name="lblStarCam" xml:space="preserve">
+    <value>Star camera</value>
     <comment>Game panel</comment>
   </data>
 </root>

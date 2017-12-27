@@ -1,5 +1,4 @@
-﻿Imports System.ComponentModel
-Imports System.IO
+﻿Imports System.IO
 Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Resources
@@ -12,9 +11,9 @@ Imports NHLGames.Utilities
 
 Public Class NHLGamesMetro
 
-    Public Shared ServerIp As String
+    Public Shared ServerIp As String = String.Empty
     Public Const DomainName As String = "mf.svc.nhl.com"
-    Public Shared HostName As String
+    Public Shared HostName As String = String.Empty
     Public Shared HostNameResolved As Boolean = False
     Public Shared FormInstance As NHLGamesMetro = Nothing
     Public Shared StreamStarted As Boolean = False
@@ -27,14 +26,16 @@ Public Class NHLGamesMetro
     Public Shared FlpCalendar As FlowLayoutPanel
     Public Shared GamesDownloadedTime As Date
     Public Shared LabelDate As Label
-    Public Shared DownloadLink As String = "https://www.reddit.com/r/nhl_games/"
+    Private Const SubredditLink As String = "https://www.reddit.com/r/nhl_games/"
+    Private Const LatestReleaseLink As String = "https://github.com/NHLGames/NHLGames/releases"
     Public Shared GameDate As Date = DateHelper.GetPacificTime()
     Private _resizeDirection As Integer = -1
     Private Const ResizeBorderWidth As Integer = 8
     Public Shared RmText As ResourceManager = English.ResourceManager
-    Public Shared LstTasks As List(Of Task) = New List(Of Task)()
     Public Shared FormLoaded As Boolean = False
+    Public Shared TodayLiveGamesFirst As Boolean = False
     Private Shared _adDetectionEngine As AdDetection
+    Public Shared ReadOnly GamesDict As New Dictionary(Of String, Game)
 
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
     Public Shared Sub Main()
@@ -51,32 +52,46 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Shared Sub Form1_UIThreadException(ByVal sender As Object, ByVal t As ThreadExceptionEventArgs)
-        Console.WriteLine(English.errorGeneral, $"Running main thread", t.Exception.ToString())
+        Console.WriteLine(English.errorGeneral, $"Running UI thread", t.Exception.ToString())
     End Sub
 
     Private Shared Sub CurrentDomain_UnhandledException(ByVal sender As Object, ByVal e As UnhandledExceptionEventArgs)
-        Console.WriteLine(e.ExceptionObject.ToString())
+        Console.WriteLine(English.errorGeneral, $"Using NHLGames domain", e.ExceptionObject.ToString())
     End Sub
 
     Public Sub HandleException(e As Exception)
-        Console.WriteLine(e.ToString())
+        Console.WriteLine(English.errorGeneral, $"Running main thread",e.ToString())
     End Sub
 
-    Private Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Async Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
         SuspendLayout()
-        Common.GetLanguage()
-        Common.CheckAppCanRun()
 
+        Common.GetLanguage()
         tabMenu.SelectedIndex = 0
         FlpCalendar = flpCalendarPanel
         InitializeForm.SetSettings()
-        InitializeForm.VersionCheck()
-        ResumeLayout()
+
         FormLoaded = True
+        ResumeLayout()
+
+        If Not Await Common.CheckAppCanRun() Then Close()
+
+        tmr.Enabled = True
+        InvokeElement.LoadGames()
+    End Sub
+
+    Public Sub ClearGamePanel()
+        SyncLock flpGames.Controls
+            If flpGames.Controls.Count > 0 Then
+                For index = flpGames.Controls.Count -1 To 0 Step -1
+                    CType(flpGames.Controls(index), GameControl).Dispose()
+                Next
+            End If
+        End SyncLock
     End Sub
 
     Private Shared Sub _writeToConsoleSettingsChanged(key As String, value As String)
-        If FormLoaded Then Console.WriteLine(String.Format(English.msgSettingUpdated, key, value))
+        If FormLoaded Then Console.WriteLine(English.msgSettingUpdated, key, value)
     End Sub
 
     Private Shared Sub tmrAnimate_Tick(sender As Object, e As EventArgs) Handles tmr.Tick
@@ -89,7 +104,7 @@ Public Class NHLGamesMetro
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         flpCalendarPanel.Visible = False
-        InvokeElement.LoadGamesAsync(GameDate, True)
+        InvokeElement.LoadGames()
         flpGames.Focus()
     End Sub
 
@@ -159,11 +174,11 @@ Public Class NHLGamesMetro
     Private Sub tgShowFinalScores_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowFinalScores.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowScores, tgShowFinalScores.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameManager.GamesDict(game.GameId), 
-                            tgShowFinalScores.Checked,
+            game.UpdateGame(tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,
-                            tgShowTeamCityAbr.Checked)
+                            tgShowTeamCityAbr.Checked,
+                            GamesDict(game.GameId))
         Next
     End Sub
 
@@ -202,7 +217,7 @@ Public Class NHLGamesMetro
         Dim cdn = If(tgAlternateCdn.Checked, CdnType.L3C, CdnType.Akc)
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(lblCdn.Text, cdn.ToString())
-        If NHLGamesMetro.FormLoaded Then InvokeElement.LoadGamesAsync(GameDate)
+        InvokeElement.LoadGames()
     End Sub
 
     Private Sub txtOutputPath_TextChanged(sender As Object, e As EventArgs) Handles txtOutputArgs.TextChanged 
@@ -220,13 +235,12 @@ Public Class NHLGamesMetro
         _writeToConsoleSettingsChanged(lblStreamerArgs.Text, txtStreamerArgs.Text)
     End Sub
 
-    Private Sub btnOuput_Click(sender As Object, e As EventArgs) Handles btnOuput.Click
+    Private Sub btnOuput_Click(sender As Object, e As EventArgs) Handles btnOutput.Click
         fbd.SelectedPath = If (txtOutputArgs.Text <> String.Empty, 
                                             Path.GetDirectoryName(txtOutputArgs.Text), 
                                             Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
                                             )
-        fbd.ShowDialog()
-        If fbd.SelectedPath <> txtOutputArgs.Text Then
+        If fbd.ShowDialog() = DialogResult.OK Then
             txtOutputArgs.Text = fbd.SelectedPath & $"\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(NETWORK).mp4"
             Player.RenewArgs()
         End If
@@ -259,23 +273,26 @@ Public Class NHLGamesMetro
 
     Private Sub lblDate_TextChanged(sender As Object, e As EventArgs) Handles lblDate.TextChanged
         flpCalendarPanel.Visible = False
-        InvokeElement.LoadGamesAsync(GameDate)
+        InvokeElement.LoadGames()
         flpGames.Focus()
     End Sub
 
     Private Sub chkShowLiveScores_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowLiveScores.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowLiveScores, tgShowLiveScores.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameManager.GamesDict(game.GameId),
-                            tgShowFinalScores.Checked,
+            game.UpdateGame(tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,
-                            tgShowTeamCityAbr.Checked)
+                            tgShowTeamCityAbr.Checked,
+                            GamesDict(game.GameId))
         Next
     End Sub
 
     Private Sub lnkDownload_Click(sender As Object, e As EventArgs) Handles lnkDownload.Click
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo(DownloadLink)
+        Dim sInfo As ProcessStartInfo = If (
+            lnkDownload.Text.Equals(English.lnkSubreddit),
+            New ProcessStartInfo(SubredditLink),
+            New ProcessStartInfo(LatestReleaseLink))
         Process.Start(sInfo)
     End Sub
 
@@ -306,11 +323,11 @@ Public Class NHLGamesMetro
     Private Sub chkShowSeriesRecord_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowSeriesRecord.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowSeriesRecord, tgShowSeriesRecord.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameManager.GamesDict(game.GameId),
-                            tgShowFinalScores.Checked,
+            game.UpdateGame(tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,
-                            tgShowTeamCityAbr.Checked)
+                            tgShowTeamCityAbr.Checked,
+                            GamesDict(game.GameId))
         Next
     End Sub
 
@@ -414,39 +431,18 @@ Public Class NHLGamesMetro
     Private Sub cbServers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbServers.SelectedIndexChanged 
         tlpSettings.Focus()
         HostName = cbServers.SelectedItem.ToString()
-        ServerIp = Net.Dns.GetHostEntry(HostName).AddressList.First.ToString()
+        Try
+            ServerIp = Net.Dns.GetHostEntry(HostName).AddressList.First.ToString()
+        Catch ex As Exception
+            ServerIp = String.Empty
+        End Try
         HostNameResolved = HostsFile.TestEntry(DomainName, ServerIp)
         ApplicationSettings.SetValue(SettingsEnum.SelectedServer, cbServers.SelectedItem.ToString())
-        If FormLoaded Then InvokeElement.LoadGamesAsync(GameDate)
+        InvokeElement.LoadGames()
     End Sub
 
     Private Sub btnCopyConsole_Click(sender As Object, e As EventArgs) Handles btnCopyConsole.Click
-        dim player As String = If (rbMpv.Checked,"MPV",If(rbMPC.Checked,"MPC",If(rbVLC.Checked,"VLC","none")))
-        Dim x64 As String = if(Environment.Is64BitOperatingSystem,"64 Bits","32 Bits")
-        Dim streamerPath = ApplicationSettings.Read(Of String)(SettingsEnum.StreamerPath, String.Empty).ToString()
-        Dim vlcPath = ApplicationSettings.Read(Of String)(SettingsEnum.VlcPath, String.Empty).ToString()
-        Dim mpcPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpcPath, String.Empty).ToString()
-        Dim mpvPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpvPath, String.Empty).ToString()
-        Dim streamerExists = streamerPath <> "" AndAlso File.Exists(streamerPath)
-        Dim vlcExists = vlcPath <> "" AndAlso File.Exists(vlcPath)
-        Dim mpcExists = mpcPath <> "" AndAlso File.Exists(mpcPath)
-        Dim mpvExists = mpvPath <> "" AndAlso File.Exists(mpvPath)
-        Dim report = $"NHLGames Bug Report {lblVersion.Text}{vbCrLf}{vbCrLf}" &
-            $"Operating system: {My.Computer.Info.OSFullName.ToString()} {x64.ToString()}{vbCrLf}{vbCrLf}" &
-            $"Form: {If (Not String.IsNullOrEmpty(lblDate.Text), "loaded", "not loaded")}, " &
-            $"{flpGames.Controls.Count} games currently on form, " &
-            $"Spinner (games) {If (SpnLoadingVisible, "visible", "invisible")} {SpnLoadingValue.ToString()}/{SpnLoadingMaxValue.ToString()}, " &
-            $"Spinner (stream) {If (SpnStreamingVisible, "visible", "invisible")} {SpnStreamingValue.ToString()}/{SpnStreamingMaxValue.ToString()}{vbCrLf}{vbCrLf}" &
-            $"Servers: NHLGames IP {If (My.Computer.Network.Ping(ServerIp), "found", "not found")} ({cbServers.SelectedItem.ToString()}), " &
-            $"NHL.TV redirection is{If (HostsFile.TestEntry(DomainName,ServerIp), " working", "n't working")} (Hosts file tested){vbCrLf}{vbCrLf}" &
-            $"Streams fetcher: {LstTasks.Count} tasks still running{vbCrLf}{vbCrLf}" &
-            $"Selected player: {player.ToString()}{vbCrLf}{vbCrLf}" &
-            $"Streamer path: {streamerPath.ToString()} [{If (streamerPath.Equals(txtStreamerPath.Text), "on form", "not on form")}] [{If (streamerExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
-            $"VLC path: {vlcPath.ToString()} [{If (vlcPath.Equals(txtVLCPath.Text), "on form", "not on form")}] [{If (vlcExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
-            $"MPC path: {mpcPath.ToString()} [{If (mpcPath.Equals(txtMPCPath.Text), "on form", "not on form")}] [{If (mpcExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
-            $"MPV path: {mpvPath.ToString()} [{If (mpvPath.Equals(txtMpvPath.Text), "on form", "not on form")}] [{If (mpvExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
-            $"Console log: {vbCrLf}{vbCrLf}{txtConsole.Text.ToString()}"
-        Clipboard.SetText(report)
+        CopyConsoleToClipBoard
     End Sub
 
     Private Sub cbLanguage_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLanguage.SelectedIndexChanged 
@@ -455,20 +451,12 @@ Public Class NHLGamesMetro
         Common.GetLanguage()
         InitializeForm.SetLanguage()
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameManager.GamesDict(game.GameId),
-                            tgShowFinalScores.Checked,
+            game.UpdateGame(tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,
-                            tgShowTeamCityAbr.Checked)
+                            tgShowTeamCityAbr.Checked,
+                            GamesDict(game.GameId))
         Next
-    End Sub
-
-    Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Try
-            Task.WaitAll(LstTasks.ToArray())
-            LstTasks.Clear()
-        Catch
-        End Try
     End Sub
 
     Private Sub tgModules_Click(sender As Object, e As EventArgs) Handles tgModules.CheckedChanged 
@@ -592,7 +580,11 @@ Public Class NHLGamesMetro
     Private Sub tgTeamNamesAbr_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowTeamCityAbr.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowTeamCityAbr, tgShowTeamCityAbr.Checked)
         For each game As GameControl In flpGames.Controls
-            game.UpdateGame(GameManager.GamesDict(game.GameId), tgShowFinalScores.Checked, tgShowLiveScores.Checked, tgShowSeriesRecord.Checked, tgShowTeamCityAbr.Checked)
+            game.UpdateGame(tgShowFinalScores.Checked,
+                            tgShowLiveScores.Checked,
+                            tgShowSeriesRecord.Checked,
+                            tgShowTeamCityAbr.Checked,
+                            GamesDict(game.GameId))
         Next
     End Sub
 
@@ -617,5 +609,43 @@ Public Class NHLGamesMetro
         Else
             btnDate.BackColor = Color.FromArgb(64, 64, 64)
         End If
+    End Sub
+
+    Private Sub tgShowTodayLiveGamesFirst_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowTodayLiveGamesFirst.CheckedChanged
+        ApplicationSettings.SetValue(SettingsEnum.ShowTodayLiveGamesFirst, tgShowTodayLiveGamesFirst.Checked)
+        TodayLiveGamesFirst = tgShowTodayLiveGamesFirst.Checked
+        InvokeElement.LoadGames()
+    End Sub
+
+    Private Sub CopyConsoleToClipBoard()
+        dim player As String = If (rbMpv.Checked,"MPV",If(rbMPC.Checked,"MPC",If(rbVLC.Checked,"VLC","none")))
+        Dim x64 As String = if(Environment.Is64BitOperatingSystem,"64 Bits","32 Bits")
+        Dim streamerPath = ApplicationSettings.Read(Of String)(SettingsEnum.StreamerPath, String.Empty).ToString()
+        Dim vlcPath = ApplicationSettings.Read(Of String)(SettingsEnum.VlcPath, String.Empty).ToString()
+        Dim mpcPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpcPath, String.Empty).ToString()
+        Dim mpvPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpvPath, String.Empty).ToString()
+        Dim streamerExists = streamerPath <> "" AndAlso File.Exists(streamerPath)
+        Dim vlcExists = vlcPath <> "" AndAlso File.Exists(vlcPath)
+        Dim mpcExists = mpcPath <> "" AndAlso File.Exists(mpcPath)
+        Dim mpvExists = mpvPath <> "" AndAlso File.Exists(mpvPath)
+        Dim report = $"NHLGames Bug Report {lblVersion.Text}{vbCrLf}{vbCrLf}" &
+                     $"Operating system: {My.Computer.Info.OSFullName.ToString()} {x64.ToString()}{vbCrLf}{vbCrLf}" &
+                     $"Form: {If (Not String.IsNullOrEmpty(lblDate.Text), "loaded", "not loaded")}, " &
+                     $"{flpGames.Controls.Count} games currently on form, " &
+                     $"Spinner (games) {If (SpnLoadingVisible, "visible", "invisible")} {SpnLoadingValue.ToString()}/{SpnLoadingMaxValue.ToString()}, " &
+                     $"Spinner (stream) {If (SpnStreamingVisible, "visible", "invisible")} {SpnStreamingValue.ToString()}/{SpnStreamingMaxValue.ToString()}{vbCrLf}{vbCrLf}" &
+                     $"Servers: NHLGames IP {If (My.Computer.Network.Ping(ServerIp), "found", "not found")} ({cbServers.SelectedItem.ToString()}), " &
+                     $"NHL.TV redirection is{If (HostsFile.TestEntry(DomainName, ServerIp), " working", "n't working")} (Hosts file tested){vbCrLf}{vbCrLf}" &
+                     $"Selected player: {player.ToString()}{vbCrLf}{vbCrLf}" &
+                     $"Streamer path: {streamerPath.ToString()} [{If (streamerPath.Equals(txtStreamerPath.Text), "on form", "not on form")}] [{If (streamerExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
+                     $"VLC path: {vlcPath.ToString()} [{If (vlcPath.Equals(txtVLCPath.Text), "on form", "not on form")}] [{If (vlcExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
+                     $"MPC path: {mpcPath.ToString()} [{If (mpcPath.Equals(txtMPCPath.Text), "on form", "not on form")}] [{If (mpcExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
+                     $"MPV path: {mpvPath.ToString()} [{If (mpvPath.Equals(txtMpvPath.Text), "on form", "not on form")}] [{If (mpvExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
+                     $"Console log: {vbCrLf}{vbCrLf}{txtConsole.Text.ToString()}"
+        Clipboard.SetText(report)
+    End Sub
+
+    Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If btnMaximize.Visible Then ApplicationSettings.SetValue(SettingsEnum.LastWindowSize, Width & ";" & Height)
     End Sub
 End Class

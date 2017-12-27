@@ -1,5 +1,4 @@
-﻿Imports System.IO
-Imports NHLGames.My.Resources
+﻿Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
 
 Namespace Objects.Modules
@@ -44,7 +43,7 @@ Namespace Objects.Modules
 
         Private Sub Switching(hotkey As Hotkey, isHotkeySet As Boolean, specialKey As Boolean, scene As String)
             If Not isHotkeySet Then
-                Console.WriteLine(String.Format(English.msgObsHotkeyNotSet, scene))
+                Console.WriteLine(English.msgObsHotkeyNotSet, scene)
                 Return
             End If
 
@@ -78,7 +77,7 @@ Namespace Objects.Modules
                 End If
 
                 Dim curr? = NativeMethods.GetForegroundWindowFromHandle()
-                Console.WriteLine(String.Format(English.msgObsChangingScene, scene))
+                Console.WriteLine(English.msgObsChangingScene, scene)
                 NativeMethods.SetForegroundWindowFromHandle(_obsHandle)
                 Threading.Thread.Sleep(50)
                 SendKeys.SendWait(toSend)
@@ -89,8 +88,8 @@ Namespace Objects.Modules
 
         Private Sub HookObs()
             Dim processNames = new List(Of string) From {"obs32", "obs64"}
-            Dim processes = New Process(){}
-            For i As Integer = 0 To processNames.Count -1
+            Dim processes  As Process()
+            For i = 0 To processNames.Count -1
                 processes = Process.GetProcessesByName(processNames(i))
                 If processes.Length <> 0 Then
                     _obsHandle = processes(0).MainWindowHandle

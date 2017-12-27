@@ -1,22 +1,20 @@
 ﻿Imports System.IO
-Imports System.Net
-Imports System.Text.RegularExpressions
 Imports NHLGames.Objects
-Imports NHLGames.Objects.Modules
 
 Namespace Utilities
     Public Class InitializeForm
         Private ReadOnly Shared Form As NHLGamesMetro = NHLGamesMetro.FormInstance
 
-        Public Shared Sub VersionCheck()
-            Dim latestVersion = Downloader.DownloadApplicationVersion()
+        Public Async Shared Function VersionCheck() As Task(Of Boolean)
+            Dim latestVersion As Version = Await Downloader.DownloadApplicationVersion()
+            If latestVersion.Equals(New Version()) Then Return False
             
             If latestVersion > My.Application.Info.Version Then
                 Form.lnkDownload.Text = String.Format(
                     NHLGamesMetro.RmText.GetString("msgNewVersionText"), 
                     latestVersion.ToString())
                 Form.lnkDownload.Width = 700
-                Dim strChangeLog = Downloader.DownloadChangelog()
+                Dim strChangeLog As String = Await Downloader.DownloadChangelog()
                 InvokeElement.MsgBoxBlue(String.Format(NHLGamesMetro.RmText.GetString("msgChangeLog"), latestVersion.ToString(), vbCrLf, vbCrLf, strChangeLog),
                                          NHLGamesMetro.RmText.GetString("msgNewVersionAvailable"),
                                          MessageBoxButtons.OK)
@@ -24,7 +22,19 @@ Namespace Utilities
             Form.lblVersion.Text = String.Format("v {0}.{1}.{2}", My.Application.Info.Version.Major,
                                                  My.Application.Info.Version.Minor,
                                                  My.Application.Info.Version.Build)
-        End Sub
+            Await AnnouncementCheck()
+            Return True
+        End Function
+
+        Public Async Shared Function AnnouncementCheck() As Task(Of Boolean)
+            Dim latestAnnouncement As String = Await Downloader.DownloadAnnouncement()
+            If Not latestAnnouncement.Equals(String.Empty) Then
+                InvokeElement.MsgBoxBlue(latestAnnouncement,
+                                         NHLGamesMetro.RmText.GetString("msgAnnouncement"),
+                                         MessageBoxButtons.OK)
+            End If
+            Return Not latestAnnouncement.Equals(String.Empty)
+        End Function
         
         Public Shared Sub SetLanguage()
             Dim lstHostsFileActions = New String() {
@@ -76,6 +86,7 @@ Namespace Utilities
             Form.lblShowLiveScores.Text = NHLGamesMetro.RmText.GetString("lblShowLiveScores")
             Form.lblShowSeriesRecord.Text = NHLGamesMetro.RmText.GetString("lblShowSeriesRecord")
             Form.lblShowTeamCityAbr.Text = NHLGamesMetro.RmText.GetString("lblShowTeamCityAbr")
+            Form.lblShowTodayLiveGamesFirst.Text = NHLGamesMetro.RmText.GetString("lblShowTodayLiveGamesFirst")
 
             Form.cbStreamQuality.Items.Clear()
             Form.cbStreamQuality.Items.AddRange(lstStreamQualities)
@@ -92,7 +103,7 @@ Namespace Utilities
             Form.tt.SetToolTip(Form.btnMpvPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.tt.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.tt.SetToolTip(Form.btnstreamerPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
-            Form.tt.SetToolTip(Form.btnOuput, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.tt.SetToolTip(Form.btnOutput, NHLGamesMetro.RmText.GetString("tipBrowse"))
 
             Form.lblModules.Text = NHLGamesMetro.RmText.GetString("lblModules")
             Form.lblModulesDesc.Text = NHLGamesMetro.RmText.GetString("lblModulesDesc")
@@ -116,6 +127,11 @@ Namespace Utilities
         End Sub
 
         Public Shared Sub SetSettings()
+
+            Dim windowSize = Split(ApplicationSettings.Read(Of String)(SettingsEnum.LastWindowSize, "990;655"), ";")
+            Form.Width = If (windowSize.Length = 2, Convert.ToInt32(windowSize(0)), 990)
+            Form.Height = If (windowSize.Length = 2, Convert.ToInt32(windowSize(1)), 655)
+
             Form.txtMPCPath.Text = GetApplication(SettingsEnum.MpcPath, PathFinder.GetPathOfMpc())
             Form.txtVLCPath.Text = GetApplication(SettingsEnum.VlcPath, PathFinder.GetPathOfVlc())
             Form.txtMpvPath.Text = GetApplication(SettingsEnum.MpvPath, Path.Combine(Application.StartupPath, "mpv\mpv.exe"))
@@ -125,6 +141,7 @@ Namespace Utilities
             Form.tgShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, True)
             Form.tgShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, True)
             Form.tgShowTeamCityAbr.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, True)
+            Form.tgShowTodayLiveGamesFirst.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTodayLiveGamesFirst, True)
 
             PopulateComboBox(Form.cbLanguage, SettingsEnum.SelectedLanguage, SettingsEnum.LanguageList)
 
@@ -146,8 +163,6 @@ Namespace Utilities
                                                 NHLGamesMetro.RmText.GetString("msgAddHost"), 
                                                 MessageBoxButtons.YesNo) = DialogResult.Yes Then
                         HostsFile.AddEntry(NHLGamesMetro.ServerIp,  NHLGamesMetro.DomainName, False)
-                    Else
-                        Form.tabMenu.SelectedIndex = 1
                     End If
                 End If
             Else 

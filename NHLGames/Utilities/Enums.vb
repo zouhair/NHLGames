@@ -15,15 +15,17 @@
     End Enum
 
     Public Enum StreamType
-        Away = 1
+        None = 0
+        Away
         Home
         National
         French
+        EndzoneCam1
+        EndzoneCam2
         MultiCam1
         MultiCam2
         RefCam
-        EndzoneCam1
-        EndzoneCam2
+        StarCam
     End Enum
 
     Public Enum CdnType
@@ -67,6 +69,8 @@
         LanguageList = 13
         AdDetection = 14
         ShowTeamCityAbr = 15
+        ShowTodayLiveGamesFirst = 16
+        LastWindowSize = 17
     End Enum
 
     Public Enum OutputType

@@ -1,7 +1,8 @@
 ﻿Namespace Controls
-    <System.ComponentModel.DesignerCategory("Code")>
     Public Class BorderPanel
         Inherits Panel
+        Implements IDisposable
+
         Public Sub New()
             SetStyle(ControlStyles.UserPaint Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
             BorderColour = Color.Black
@@ -18,5 +19,9 @@
 
         Public Property BorderColour As Color
 
+        Protected Overrides Sub Dispose(disposing As Boolean)
+            Me.Controls.Clear()
+            MyBase.Dispose(disposing)
+        End Sub
     End Class
 End Namespace
