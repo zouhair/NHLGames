@@ -56,10 +56,10 @@ Namespace Utilities
                 NHLGamesMetro.FormInstance.ClearGamePanel()
                 NHLGamesMetro.FormInstance.flpGames.Controls.AddRange((From game In gamesDict Select New GameControl(
                     game,
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores),
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores),
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord),
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr))).ToArray())
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, False))).ToArray())
             End If
         End Sub
 

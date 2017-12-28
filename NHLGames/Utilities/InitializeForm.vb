@@ -6,6 +6,10 @@ Namespace Utilities
         Private ReadOnly Shared Form As NHLGamesMetro = NHLGamesMetro.FormInstance
 
         Public Async Shared Function VersionCheck() As Task(Of Boolean)
+            Form.lblVersion.Text = String.Format("v {0}.{1}.{2}", My.Application.Info.Version.Major,
+                                                 My.Application.Info.Version.Minor,
+                                                 My.Application.Info.Version.Build)
+
             Dim latestVersion As Version = Await Downloader.DownloadApplicationVersion()
             If latestVersion.Equals(New Version()) Then Return False
             
@@ -19,9 +23,7 @@ Namespace Utilities
                                          NHLGamesMetro.RmText.GetString("msgNewVersionAvailable"),
                                          MessageBoxButtons.OK)
             End If
-            Form.lblVersion.Text = String.Format("v {0}.{1}.{2}", My.Application.Info.Version.Major,
-                                                 My.Application.Info.Version.Minor,
-                                                 My.Application.Info.Version.Build)
+
             Await AnnouncementCheck()
             Return True
         End Function
@@ -137,43 +139,31 @@ Namespace Utilities
             Form.txtMpvPath.Text = GetApplication(SettingsEnum.MpvPath, Path.Combine(Application.StartupPath, "mpv\mpv.exe"))
             Form.txtStreamerPath.Text = GetApplication(SettingsEnum.StreamerPath, Path.Combine(Application.StartupPath, "livestreamer\livestreamer.exe"))
 
-            Form.tgShowFinalScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, True)
-            Form.tgShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, True)
-            Form.tgShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, True)
-            Form.tgShowTeamCityAbr.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, True)
-            Form.tgShowTodayLiveGamesFirst.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTodayLiveGamesFirst, True)
+            Form.tgShowFinalScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, False)
+            Form.tgShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, False)
+            Form.tgShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, False)
+            Form.tgShowTeamCityAbr.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, False)
+            Form.tgShowTodayLiveGamesFirst.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTodayLiveGamesFirst, False)
 
-            PopulateComboBox(Form.cbLanguage, SettingsEnum.SelectedLanguage, SettingsEnum.LanguageList)
+            PopulateComboBox(Form.cbLanguage, SettingsEnum.SelectedLanguage, SettingsEnum.LanguageList, "English")
 
             Dim playersPath As String() = New String() {Form.txtMpvPath.Text, Form.txtMPCPath.Text, Form.txtVLCPath.Text}
-            Dim watchArgs As GameWatchArguments = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
+            Dim watchArgs As GameWatchArguments = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, Nothing)
 
             If ValidWatchArgs(watchArgs, playersPath, Form.txtStreamerPath.Text) Then
                 Player.RenewArgs(True)
-                watchArgs = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
+                watchArgs = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, New GameWatchArguments)
             End If
 
-            PopulateComboBox(Form.cbServers, SettingsEnum.SelectedServer, settingsenum.ServerList)
+            PopulateComboBox(Form.cbServers, SettingsEnum.SelectedServer, settingsenum.ServerList, String.Empty)
 
-            BindWatchArgsToForm(watchArgs)
+            BindWatchArgsToForm(watchArgs) 
 
-            If (HostsFile.TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp) = False) Then
-                If HostsFile.EnsureAdmin() Then
-                    If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgHostnameSet"), 
-                                                NHLGamesMetro.RmText.GetString("msgAddHost"), 
-                                                MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                        HostsFile.AddEntry(NHLGamesMetro.ServerIp,  NHLGamesMetro.DomainName, False)
-                    End If
-                End If
-            Else 
-                NHLGamesMetro.HostNameResolved = True
-            End If
-
-            Dim adDetectionConfigs As AdDetectionConfigs = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection)
+            Dim adDetectionConfigs As AdDetectionConfigs = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection, Nothing)
 
             If adDetectionConfigs Is Nothing Then 
                 AdDetection.Renew(True)
-                adDetectionConfigs = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection)
+                adDetectionConfigs = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection, New AdDetectionConfigs)
             End If
 
             BindAdDetectionConfigsToForm(adDetectionConfigs)
@@ -206,8 +196,8 @@ Namespace Utilities
             End If
         End Function
 
-        Private Shared Sub PopulateComboBox(cb As MetroFramework.Controls.MetroComboBox, selectedItem As SettingsEnum, items As SettingsEnum)
-            Dim cbItemsFromConfig As String = ApplicationSettings.Read(Of String)(items, String.Empty)
+        Private Shared Sub PopulateComboBox(cb As MetroFramework.Controls.MetroComboBox, selectedItem As SettingsEnum, items As SettingsEnum, defaultValue As String)
+            Dim cbItemsFromConfig As String = ApplicationSettings.Read(Of String)(items, defaultValue)
 
             cb.Items.AddRange(cbItemsFromConfig.Split(";"))
 
