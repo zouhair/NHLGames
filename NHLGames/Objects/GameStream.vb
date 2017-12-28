@@ -29,7 +29,7 @@ Namespace Objects
             If Network = String.Empty Then Network = "NHLTV"
             PlayBackId = stream.Property("mediaPlaybackId").Value.ToString()
             Me.Type = type
-            CdnParameter = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs).Cdn
+            CdnParameter = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, New GameWatchArguments).Cdn
             GameUrl = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, Game.GameDate.ToLocalTime().ToString("yyyy-MM-dd"), PlayBackId)
             Title = $"{Game.AwayAbbrev} vs {Game.HomeAbbrev} on {Network}"
         End Sub

@@ -920,6 +920,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Assurez-vous que votre antivirus n&apos;est pas effacé un fichier, sinon réinstallez l&apos;app. Voulez-vous quitter NHLGames?.
+        '''</summary>
+        Friend Shared ReadOnly Property msgNotStarting() As String
+            Get
+                Return ResourceManager.GetString("msgNotStarting", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Accès d&apos;administrateur requis.
         '''</summary>
         Friend Shared ReadOnly Property msgRunAsAdmin() As String
@@ -974,16 +983,25 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fichiers requis de NHLGames introuvables. L&apos;archive zip de NHLGames doit être décompressée et nhlgames.exe doit rester dans son dossier ou vous devrez re-télécharger NHLGames..
+        '''  Looks up a localized string similar to NHLGames serveur non disponible!.
         '''</summary>
-        Friend Shared ReadOnly Property noConfigFile() As String
+        Friend Shared ReadOnly Property noAppServer() As String
             Get
-                Return ResourceManager.GetString("noConfigFile", resourceCulture)
+                Return ResourceManager.GetString("noAppServer", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to NHLGames n&apos;a pas accès à l&apos;Internet, il est peut-être bloqué!.
+        '''  Looks up a localized string similar to Aucun serveur de redirection trouvé!.
+        '''</summary>
+        Friend Shared ReadOnly Property noGameServer() As String
+            Get
+                Return ResourceManager.GetString("noGameServer", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Aucun accès à Internet!.
         '''</summary>
         Friend Shared ReadOnly Property noWebAccess() As String
             Get

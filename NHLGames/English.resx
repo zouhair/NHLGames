@@ -137,10 +137,6 @@
     <value>Series record</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="noConfigFile" xml:space="preserve">
-    <value>NHLGames required files not found. NHLGames must be extracted from the zip archive and nhlgames.exe must stay in its folder or you will have to re-download NHLGames.</value>
-    <comment>Message</comment>
-  </data>
   <data name="errorDeserialize" xml:space="preserve">
     <value>Error : Failed to deserialize setting value of '{0}' to type '{1}'</value>
     <comment>Console</comment>
@@ -646,7 +642,7 @@
     <comment>Message</comment>
   </data>
   <data name="noWebAccess" xml:space="preserve">
-    <value>NHLGames has no Internet access, it might be blocked!</value>
+    <value>No Internet access!</value>
     <comment>Message</comment>
   </data>
   <data name="chkSpotifyForceToStart" xml:space="preserve">
@@ -776,5 +772,17 @@
   <data name="lblStarCam" xml:space="preserve">
     <value>Star camera</value>
     <comment>Game panel</comment>
+  </data>
+  <data name="msgNotStarting" xml:space="preserve">
+    <value>Make sure your antivirus did not delete a file or reinstall the app. Do you want to exit NHLGames?</value>
+    <comment>Message</comment>
+  </data>
+  <data name="noGameServer" xml:space="preserve">
+    <value>No redirection server found!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="noAppServer" xml:space="preserve">
+    <value>NHLGames server not avaible!</value>
+    <comment>Message</comment>
   </data>
 </root>
