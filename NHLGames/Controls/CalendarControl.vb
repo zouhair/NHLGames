@@ -3,7 +3,7 @@ Imports NHLGames.Utilities
 
 Namespace Controls
 
-    Public Class CalendarControl
+    Public Class CalendarControl: Implements IDisposable
 
         Private _currentDate As Date
         Private ReadOnly _arrayButtons(,) As Button
@@ -119,5 +119,6 @@ Namespace Controls
         Private Sub btnNextYear_Click(sender As Object, e As EventArgs) Handles btnNextYear.Click
             ReloadCal(_currentDate.AddYears(-1), _currentDate.AddYears(-1).Day)
         End Sub
+
     End Class
 End Namespace

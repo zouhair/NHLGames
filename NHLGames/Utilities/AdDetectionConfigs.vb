@@ -1,5 +1,4 @@
-﻿Imports NHLGames.Utilities
-Imports NHLGames.Objects.Modules
+﻿Imports NHLGames.Objects.Modules
 
 Namespace Utilities
     Public Class AdDetectionConfigs

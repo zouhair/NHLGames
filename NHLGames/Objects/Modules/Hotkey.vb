@@ -1,6 +1,4 @@
-﻿Imports NHLGames.Utilities
-
-Namespace Objects.Modules
+﻿Namespace Objects.Modules
     Public Class Hotkey
         Public Property Key As Char
         Public Property Ctrl As Boolean

@@ -1,22 +1,22 @@
-﻿Imports System.Net
-Imports Newtonsoft.Json.Linq
-Imports NHLGames.My.Resources
+﻿Imports Newtonsoft.Json.Linq
 Imports NHLGames.Utilities
 
 Namespace Objects
 
-    Public Class GameStream
+    Public Class GameStream: Implements IDisposable
+        Private _disposedValue As Boolean
         Public ReadOnly Property Type As StreamType
         Public ReadOnly Property Game As Game
-        Public ReadOnly Property IsDefined As Boolean = False
-        Public Property IsVod As Boolean = False
         Public ReadOnly Property Network As String
         Public ReadOnly Property PlayBackId As String
         Public Property GameUrl As String = String.Empty
-        Public Property Vodurl As String = String.Empty
-        Public ReadOnly Property IsAvailable As Boolean
+        Public Property CdnParameter As CdnType = CdnType.Akc
+        Public Property Title As String = String.Empty
+        Public Property StreamUrl As String = String.Empty
+
+        Public ReadOnly Property IsBroken As Boolean
             Get
-                return GameUrl <> String.Empty
+                Return StreamUrl.Equals(String.Empty)
             End Get
         End Property
 
@@ -25,46 +25,33 @@ Namespace Objects
 
         Public Sub New(game As Game, stream As JObject, type As StreamType)
             Me.Game = game
-            IsDefined = True
             Network = stream.Property("callLetters")
             If Network = String.Empty Then Network = "NHLTV"
             PlayBackId = stream.Property("mediaPlaybackId").Value.ToString()
             Me.Type = type
+            CdnParameter = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs).Cdn
+            GameUrl = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, Game.GameDate.ToLocalTime().ToString("yyyy-MM-dd"), PlayBackId)
+            Title = $"{Game.AwayAbbrev} vs {Game.HomeAbbrev} on {Network}"
         End Sub
 
-        Public Async Sub CheckVod(ByVal strCdn As String)
-            Try
-                Dim myHttpWebRequest As HttpWebRequest = CType(WebRequest.Create(Vodurl.Replace("CDN", strCdn)), HttpWebRequest)
-                myHttpWebRequest.CookieContainer = New CookieContainer()
-                myHttpWebRequest.CookieContainer.Add(New Cookie("mediaAuth", Common.GetRandomString(240), String.Empty, "nhl.com"))
-                myHttpWebRequest.UserAgent = Common.UserAgent
-                myHttpWebRequest.Timeout = 2000
-                IsVod = Await (Common.SendWebRequest(Vodurl.Replace("CDN", strCdn), myHttpWebRequest))
-            Catch e As Exception
-                Console.WriteLine(English.msgVOD, e.Message)
-            End Try
-        End Sub
-
-        Public Async Sub GetRightGameStream()
-            Dim cdn = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs).Cdn.ToString().ToLower()
-            If cdn = String.Empty Then cdn = "akc"
-            Dim address As String = String.Format("http://{0}/m3u8/{1}/{2}{3}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId, cdn)
-            Dim legacyAddress As String = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, GameManager.GamesListDate.ToString("yyyy-MM-dd"), PlayBackId)
-            Dim gameTitle As String = $"{Game.AwayAbbrev} vs {Game.HomeAbbrev} on {Network}"
-
-            GameUrl = Await Common.SendWebRequestForStream(address, legacyAddress, gameTitle, game.GameDate)
-            SetVideoOnDemandLink()
-        End Sub
-
-        Private Sub SetVideoOnDemandLink()
-            If GameUrl.Contains("http://hlslive") Then
-                Dim spliter = GameUrl.Split("/")
-                For Each split As String In spliter
-                    If split.StartsWith("NHL_GAME_VIDEO_") Then
-                        Vodurl = String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/nhl/{0}/{1}/master_wired60.m3u8", dateString, split)
-                    End If
-                Next
+        Protected Overridable Sub Dispose(disposing As Boolean)
+            If Not Me._disposedValue Then
+                If disposing Then
+                    Me.Game.Dispose()
+                End If
             End If
+            Me._disposedValue = True
         End Sub
+
+        Public Sub Dispose() Implements IDisposable.Dispose
+            Dispose(True)
+            GC.SuppressFinalize(Me)
+        End Sub
+
+        Protected Overrides Sub Finalize()
+            Dispose(False)
+        End Sub
+
     End Class
 End Namespace
+

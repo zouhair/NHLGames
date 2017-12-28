@@ -67,7 +67,7 @@ Namespace Utilities
                 End If
 
                 NHLGamesMetro.HostNameResolved = TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp)
-                If NHLGamesMetro.FormLoaded Then InvokeElement.LoadGamesAsync(NHLGamesMetro.GameDate, True)
+                InvokeElement.LoadGames()
                 MessageOpenHostsFile()
             End If
 
@@ -84,7 +84,7 @@ Namespace Utilities
 
         Public Shared Sub AddEntry(ip As String, host As String, Optional viewChanges As Boolean = True)
 
-            If EnsureAdmin() Then
+            If FileAccess.HasAccess(HostsFilePath, false, true) AndAlso EnsureAdmin() Then
                 Dim fileIsReadonly As Boolean = FileAccess.IsFileReadonly(HostsFilePath)
 
                 If fileIsReadonly Then
@@ -112,7 +112,7 @@ Namespace Utilities
                 End If
 
                 NHLGamesMetro.HostNameResolved = TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp)
-                If NHLGamesMetro.FormLoaded Then InvokeElement.LoadGamesAsync(NHLGamesMetro.GameDate, True)
+                InvokeElement.LoadGames()
                 If viewChanges Then MessageOpenHostsFile()
             End If
 
@@ -120,35 +120,31 @@ Namespace Utilities
 
         Public Shared Function EnsureAdmin() As Boolean
 
-            If FileAccess.HasAccess(HostsFilePath, false, true) Then
-                If IsAdministrator() Then
-                    If InvokeElement.MsgBoxBlue(
-                        NHLGamesMetro.RmText.GetString("msgRunAsAdminText"), 
-                        NHLGamesMetro.RmText.GetString("msgRunAsAdmin"),
-                        MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            If IsNotAdministrator() Then
+                If InvokeElement.MsgBoxBlue(
+                    NHLGamesMetro.RmText.GetString("msgRunAsAdminText"), 
+                    NHLGamesMetro.RmText.GetString("msgRunAsAdmin"),
+                    MessageBoxButtons.YesNo) = DialogResult.Yes Then
 
-                        ' Restart program And run as admin
-                        Dim exeName = Process.GetCurrentProcess().MainModule.FileName
-                        Dim startInfo As ProcessStartInfo = New ProcessStartInfo(exeName)
-                        startInfo.Verb = "runas"
-                        startInfo.UseShellExecute = True
-                        Try
-                            Process.Start(startInfo)
-                            Application.Exit()
-                        Catch ex As Exception
-                        End Try
+                    ' Restart program And run as admin
+                    Dim exeName = Process.GetCurrentProcess().MainModule.FileName
+                    Dim startInfo As ProcessStartInfo = New ProcessStartInfo(exeName)
+                    startInfo.Verb = "runas"
+                    startInfo.UseShellExecute = True
+                    Try
+                        Process.Start(startInfo)
+                        Application.Exit()
+                    Catch ex As Exception
+                    End Try
 
-                    End If
-                    Return False
                 End If
-                Return True
-            Else 
                 Return False
             End If
+            Return True
 
         End Function
 
-        Public Shared Function IsAdministrator() As Boolean
+        Public Shared Function IsNotAdministrator() As Boolean
             Dim identity As WindowsIdentity = WindowsIdentity.GetCurrent()
             Dim principal As WindowsPrincipal = New WindowsPrincipal(identity)
             Return Not principal.IsInRole(WindowsBuiltInRole.Administrator)

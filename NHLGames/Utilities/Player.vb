@@ -27,7 +27,6 @@ Namespace Utilities
             End Sub)
 
             taskLaunchingStream.Start()
-
         End Sub
 
         Private Shared Sub LaunchingStream(args As GameWatchArguments)

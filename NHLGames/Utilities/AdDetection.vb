@@ -1,6 +1,5 @@
 ﻿Imports System.Collections.ObjectModel
 Imports NAudio.CoreAudioApi
-Imports NAudio.CoreAudioApi.Interfaces
 Imports NHLGames.My.Resources
 Imports NHLGames.Objects.Modules
 
@@ -75,10 +74,10 @@ Namespace Utilities
             Dim aMmDevices As New MMDeviceEnumerator()
             Dim defaultAudioEndPointDevice = aMmDevices.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia)
             Dim sessionsDefaultAudioEndPointDevice = defaultAudioEndPointDevice.AudioSessionManager.Sessions
-            For i As Integer = 0 To sessionsDefaultAudioEndPointDevice.Count - 1
+            For i = 0 To sessionsDefaultAudioEndPointDevice.Count - 1
                 If sessionsDefaultAudioEndPointDevice(i).GetProcessID <> processId Then Continue For
                 Dim volumeList As List(Of Double) = new List(Of Double)
-                For j As Integer = 0 To 1
+                For j = 0 To 1
                     Dim audioMeter As audioMeterInformation = sessionsDefaultAudioEndPointDevice(i).AudioMeterInformation
                     volumeList.Add( audioMeter.MasterPeakValue)
                     Threading.Thread.Sleep(100)
@@ -122,7 +121,8 @@ Namespace Utilities
 
         Private Sub NotifyModules()
             SyncLock _adModules
-                For Each m In _adModules
+                For Each adModule In _adModules
+                    Dim m = adModule
                     If _previousAdPlayingState Then
                         Task.Run(Sub()
                                      m.AdStarted()
@@ -140,7 +140,7 @@ Namespace Utilities
             Try
                 Task.WaitAll(_initializationTasks.ToArray(), TimeSpan.FromSeconds(5))
             Catch ex As Exception
-                Console.WriteLine(String.Format(English.msgAdDetectionProbInit, ex.Message))
+                Console.WriteLine(English.msgAdDetectionProbInit, ex.Message)
             End Try
             While DetectionEnabled
                 Try
@@ -156,7 +156,7 @@ Namespace Utilities
                         NotifyModules()
                     End If
                 Catch ex As Exception
-                    Console.WriteLine(String.Format(English.msgAdDetectionException,ex.Message))
+                    Console.WriteLine(English.msgAdDetectionException,ex.Message)
                 End Try
             End While
         End Sub

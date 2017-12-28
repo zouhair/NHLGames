@@ -200,7 +200,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Essaie avec le lecteur média détecté.
+        '''  Looks up a localized string similar to Essayer avec le lecteur média détecté.
         '''</summary>
         Friend Shared ReadOnly Property chkSpotifyAnyMediaPlayer() As String
             Get
@@ -272,7 +272,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 1ere.
+        '''  Looks up a localized string similar to 1ère.
         '''</summary>
         Friend Shared ReadOnly Property gamePeriod1() As String
             Get
@@ -281,7 +281,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 2eme.
+        '''  Looks up a localized string similar to 2ième.
         '''</summary>
         Friend Shared ReadOnly Property gamePeriod2() As String
             Get
@@ -290,7 +290,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 3eme.
+        '''  Looks up a localized string similar to 3ième.
         '''</summary>
         Friend Shared ReadOnly Property gamePeriod3() As String
             Get
@@ -380,7 +380,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to {0} vues de camera.
+        '''  Looks up a localized string similar to {0} vues de caméra.
         '''</summary>
         Friend Shared ReadOnly Property lblCamViews() As String
             Get
@@ -569,7 +569,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Aucun stream de disponible.
+        '''  Looks up a localized string similar to Streams indisponible.
         '''</summary>
         Friend Shared ReadOnly Property lblNoStreamAvailable() As String
             Get
@@ -668,7 +668,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Camera de l&apos;arbitre.
+        '''  Looks up a localized string similar to Caméra de l&apos;arbitre.
         '''</summary>
         Friend Shared ReadOnly Property lblRefCam() As String
             Get
@@ -713,6 +713,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Parties en direct en premier.
+        '''</summary>
+        Friend Shared ReadOnly Property lblShowTodayLiveGamesFirst() As String
+            Get
+                Return ResourceManager.GetString("lblShowTodayLiveGamesFirst", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Emplacement du Streamer.
         '''</summary>
         Friend Shared ReadOnly Property lblSlPath() As String
@@ -731,11 +740,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Résume/Pause Spotify quand une annonce est détectée.
+        '''  Looks up a localized string similar to Joue/Pause Spotify quand une annonce est détectée.
         '''</summary>
         Friend Shared ReadOnly Property lblSpotifyDesc() As String
             Get
                 Return ResourceManager.GetString("lblSpotifyDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Caméra du joueur.
+        '''</summary>
+        Friend Shared ReadOnly Property lblStarCam() As String
+            Get
+                Return ResourceManager.GetString("lblStarCam", resourceCulture)
             End Get
         End Property
         
@@ -790,6 +808,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgAddHost() As String
             Get
                 Return ResourceManager.GetString("msgAddHost", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Annonce!.
+        '''</summary>
+        Friend Shared ReadOnly Property msgAnnouncement() As String
+            Get
+                Return ResourceManager.GetString("msgAnnouncement", resourceCulture)
             End Get
         End Property
         
@@ -884,7 +911,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Une nouvelle version est disponible, téléchargez la plus récente version {0} sur /r/nhl_games.
+        '''  Looks up a localized string similar to Une nouvelle version est disponible, téléchargez la plus récente version {0} sur GitHub.
         '''</summary>
         Friend Shared ReadOnly Property msgNewVersionText() As String
             Get
@@ -956,7 +983,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Aucune connexion internet.
+        '''  Looks up a localized string similar to NHLGames n&apos;a pas accès à l&apos;Internet, il est peut-être bloqué!.
         '''</summary>
         Friend Shared ReadOnly Property noWebAccess() As String
             Get
@@ -997,6 +1024,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property tabSettings() As String
             Get
                 Return ResourceManager.GetString("tabSettings", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Stream brisé.
+        '''</summary>
+        Friend Shared ReadOnly Property tipBrokenStream() As String
+            Get
+                Return ResourceManager.GetString("tipBrokenStream", resourceCulture)
             End Get
         End Property
         
