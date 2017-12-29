@@ -43,7 +43,8 @@ Namespace Objects
 
         Public ReadOnly Property AreAnyStreamsAvailable As Boolean
             Get
-                Return StreamsDict IsNot Nothing AndAlso StreamsDict.Count > 0 AndAlso (StreamsDict.Any(Function(x) Not x.Value.IsBroken) OrElse GameState > GameStateEnum.Pregame)
+                Return (StreamsDict IsNot Nothing) AndAlso (StreamsDict.Count > 0) AndAlso
+                    (StreamsDict.Any(Function(x) x.Value IsNot Nothing AndAlso Not x.Value.IsBroken) OrElse GameState > GameStateEnum.Pregame)
             End Get
         End Property
 
@@ -52,7 +53,7 @@ Namespace Objects
         End Function
 
         Public Function IsStreamDefined(streamType As StreamType) As Boolean
-            Return If (StreamsDict IsNot Nothing, StreamsDict.ContainsKey(streamType), False)
+            Return (StreamsDict IsNot Nothing) AndAlso StreamsDict.ContainsKey(streamType)
         End Function
 
         Public Sub SetGameDate(jDate As String)
@@ -88,8 +89,8 @@ Namespace Objects
         End Sub
 
         Protected Overridable Sub Dispose(disposing As Boolean)
-            If Not Me._disposedValue Then
-                Me._disposedValue = True
+            If Not _disposedValue Then
+                _disposedValue = True
             End If
         End Sub
 
