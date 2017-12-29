@@ -1129,7 +1129,7 @@ Partial Class NHLGamesMetro
         Me.lnkGetMpc.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.lnkGetMpc.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lnkGetMpc.ForeColor = System.Drawing.Color.Black
-        Me.lnkGetMpc.Image = CType(resources.GetObject("lnkGetMpc.Image"),System.Drawing.Image)
+        Me.lnkGetMpc.Image = Global.NHLGames.My.Resources.Resources.download
         Me.lnkGetMpc.Location = New System.Drawing.Point(655, 3)
         Me.lnkGetMpc.Name = "lnkGetMpc"
         Me.lnkGetMpc.Size = New System.Drawing.Size(25, 25)
@@ -1177,7 +1177,7 @@ Partial Class NHLGamesMetro
         Me.lnkGetVlc.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.lnkGetVlc.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lnkGetVlc.ForeColor = System.Drawing.Color.Black
-        Me.lnkGetVlc.Image = CType(resources.GetObject("lnkGetVlc.Image"),System.Drawing.Image)
+        Me.lnkGetVlc.Image = Global.NHLGames.My.Resources.Resources.download
         Me.lnkGetVlc.Location = New System.Drawing.Point(655, 3)
         Me.lnkGetVlc.Name = "lnkGetVlc"
         Me.lnkGetVlc.Size = New System.Drawing.Size(25, 25)
