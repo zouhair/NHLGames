@@ -220,7 +220,7 @@ Namespace  Objects.Modules
         Private Shared Function  GetMyHttpWebRequest(address As String) As HttpWebRequest
             Dim myHttpWebRequest As HttpWebRequest = CType(WebRequest.Create(address), HttpWebRequest)
             myHttpWebRequest.UserAgent = Common.UserAgent
-            myHttpWebRequest.Timeout = 2000
+            myHttpWebRequest.Timeout = Common.Timeout
             myHttpWebRequest.Headers.Add("Origin", "https://embed.spotify.com")
             Return myHttpWebRequest
         End Function
