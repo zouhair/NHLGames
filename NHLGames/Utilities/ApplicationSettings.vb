@@ -5,14 +5,18 @@ Namespace Utilities
 
     Public Class ApplicationSettings
 
-        Public Shared Function Read(Of T)(key As SettingsEnum, Optional defaultReturnValue As Object = Nothing) As T
+        Public Shared Function Read(Of T)(key As SettingsEnum, defaultReturnValue As Object) As T
             Try
                 Dim configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
-                Dim settings = configFile.AppSettings.Settings
-                Dim result As Object = settings(key.ToString()).Value
-                If String.IsNullOrEmpty(result) OrElse IsNothing(result) Then
+                If (Not configFile.HasFile) OrElse configFile.AppSettings.Settings(key.ToString()) Is Nothing Then
+                    If defaultReturnValue IsNot Nothing Then SetValue(key, defaultReturnValue)
                     Return defaultReturnValue
                 End If
+
+                Dim settings = configFile.AppSettings.Settings
+                Dim result As Object = settings(key.ToString()).Value
+
+                If String.IsNullOrEmpty(result) OrElse IsNothing(result) Then Return defaultReturnValue
 
                 If TypeOf result Is T Then
                     result = DirectCast(result, T)
@@ -41,6 +45,7 @@ Namespace Utilities
             Try
                 Dim configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
                 Dim settings = configFile.AppSettings.Settings
+
                 If IsNothing(settings(key.ToString())) Then
                     settings.Add(key.ToString(), value)
                 Else

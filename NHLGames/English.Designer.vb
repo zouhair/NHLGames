@@ -1199,6 +1199,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Make sure your antivirus did not delete a file or reinstall the app. Do you want to exit NHLGames?.
+        '''</summary>
+        Friend Shared ReadOnly Property msgNotStarting() As String
+            Get
+                Return ResourceManager.GetString("msgNotStarting", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Ad.
         '''</summary>
         Friend Shared ReadOnly Property msgObsAdWord() As String
@@ -1451,16 +1460,25 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to NHLGames required files not found. NHLGames must be extracted from the zip archive and nhlgames.exe must stay in its folder or you will have to re-download NHLGames..
+        '''  Looks up a localized string similar to NHLGames server not avaible!.
         '''</summary>
-        Friend Shared ReadOnly Property noConfigFile() As String
+        Friend Shared ReadOnly Property noAppServer() As String
             Get
-                Return ResourceManager.GetString("noConfigFile", resourceCulture)
+                Return ResourceManager.GetString("noAppServer", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to NHLGames has no Internet access, it might be blocked!.
+        '''  Looks up a localized string similar to No redirection server found!.
+        '''</summary>
+        Friend Shared ReadOnly Property noGameServer() As String
+            Get
+                Return ResourceManager.GetString("noGameServer", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to No Internet access!.
         '''</summary>
         Friend Shared ReadOnly Property noWebAccess() As String
             Get

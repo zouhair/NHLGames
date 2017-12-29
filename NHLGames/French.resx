@@ -505,12 +505,8 @@
     <value>La ligne de redirection de l'authentifcation à NHL.tv ''{0}'' a été copiée dans votre presse-papier. Utiliser CTRL+V pour la coller dans le fichier Hosts.</value>
     <comment>Message</comment>
   </data>
-  <data name="noConfigFile" xml:space="preserve">
-    <value>Fichiers requis de NHLGames introuvables. L'archive zip de NHLGames doit être décompressée et nhlgames.exe doit rester dans son dossier ou vous devrez re-télécharger NHLGames.</value>
-    <comment>Message</comment>
-  </data>
   <data name="noWebAccess" xml:space="preserve">
-    <value>NHLGames n'a pas accès à l'Internet, il est peut-être bloqué!</value>
+    <value>Aucun accès à Internet!</value>
     <comment>Message</comment>
   </data>
   <data name="chkSpotifyForceToStart" xml:space="preserve">
@@ -564,5 +560,17 @@
   <data name="lblStarCam" xml:space="preserve">
     <value>Caméra du joueur</value>
     <comment>Game panel</comment>
+  </data>
+  <data name="msgNotStarting" xml:space="preserve">
+    <value>Assurez-vous que votre antivirus n'est pas effacé un fichier, sinon réinstallez l'app. Voulez-vous quitter NHLGames?</value>
+    <comment>Message</comment>
+  </data>
+  <data name="noGameServer" xml:space="preserve">
+    <value>Aucun serveur de redirection trouvé!</value>
+    <comment>Message</comment>
+  </data>
+  <data name="noAppServer" xml:space="preserve">
+    <value>NHLGames serveur non disponible!</value>
+    <comment>Message</comment>
   </data>
 </root>

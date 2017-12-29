@@ -4,16 +4,15 @@ Imports NHLGames.Objects
 Namespace Utilities
     Public Class InvokeElement
 
-        Public Shared Sub LoadGames()
+        Public Async Shared Sub LoadGames()
             NHLGamesMetro.FormInstance.ClearGamePanel()
-            Dim t = Task.Run(AddressOf GameFetcher.LoadGames)
-            t.Wait()
-            t.Dispose()
+            Await Task.Run(AddressOf GameFetcher.LoadGames)
         End Sub
 
         Public Shared Sub SetFormStatusLabel(msg As String)
             If NHLGamesMetro.FormInstance.InvokeRequired Then
-                NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String)(AddressOf SetFormStatusLabel), msg)
+                Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String)(AddressOf SetFormStatusLabel), msg)
+                EndInvokeOf(asyncResult)
             Else
                 NHLGamesMetro.FormInstance.lblStatus.Text = msg
             End If
@@ -56,10 +55,10 @@ Namespace Utilities
                 NHLGamesMetro.FormInstance.ClearGamePanel()
                 NHLGamesMetro.FormInstance.flpGames.Controls.AddRange((From game In gamesDict Select New GameControl(
                     game,
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores),
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores),
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord),
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr))).ToArray())
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, False))).ToArray())
             End If
         End Sub
 

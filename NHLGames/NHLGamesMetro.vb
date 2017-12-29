@@ -71,10 +71,11 @@ Public Class NHLGamesMetro
         FlpCalendar = flpCalendarPanel
         InitializeForm.SetSettings()
 
+        Await Common.CheckAppCanRun()
+        Common.CheckHostsFile()
+        
         FormLoaded = True
         ResumeLayout()
-
-        If Not Await Common.CheckAppCanRun() Then Close()
 
         tmr.Enabled = True
         InvokeElement.LoadGames()
@@ -432,7 +433,11 @@ Public Class NHLGamesMetro
         tlpSettings.Focus()
         HostName = cbServers.SelectedItem.ToString()
         Try
-            ServerIp = Net.Dns.GetHostEntry(HostName).AddressList.First.ToString()
+            If HostName Is String.Empty Then
+                ServerIp = String.Empty
+            Else
+                ServerIp = Net.Dns.GetHostEntry(HostName).AddressList.First.ToString()
+            End If
         Catch ex As Exception
             ServerIp = String.Empty
         End Try

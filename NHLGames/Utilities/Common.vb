@@ -108,9 +108,9 @@ Namespace Utilities
         End Function
 
         Public Shared Sub GetLanguage()
-            Dim lang = ApplicationSettings.Read(Of String)(SettingsEnum.SelectedLanguage, String.Empty)
+            Dim lang = ApplicationSettings.Read(Of String)(SettingsEnum.SelectedLanguage, "English")
 
-            If String.IsNullOrEmpty(lang) OrElse lang = NHLGamesMetro.RmText.GetString("lblEnglish") Then
+            If lang = NHLGamesMetro.RmText.GetString("lblEnglish") Then
                 NHLGamesMetro.RmText = English.ResourceManager
             ElseIf lang = NHLGamesMetro.RmText.GetString("lblFrench") Then
                 NHLGamesMetro.RmText = French.ResourceManager
@@ -118,19 +118,39 @@ Namespace Utilities
         End Sub
 
         Public Async Shared Function CheckAppCanRun() As Task(Of Boolean)
-            If Not File.Exists("NHLGames.exe.Config") Then
-                FatalError(NHLGamesMetro.RmText.GetString("noConfigFile"))
+            If NHLGamesMetro.ServerIp.Equals(String.Empty) Then
+                FatalError(NHLGamesMetro.RmText.GetString("noGameServer"))
                 Return False
-            Else If Not (Await InitializeForm.VersionCheck()) OrElse Not (Await SendWebRequestAsync("https://www.google.com")) Then
+            End If
+            If Not Await SendWebRequestAsync("https://www.google.com") Then
                 FatalError(NHLGamesMetro.RmText.GetString("noWebAccess"))
                 Return False
             End If
-
+            If Not Await InitializeForm.VersionCheck() Then
+                FatalError(NHLGamesMetro.RmText.GetString("noAppServer"))
+                Return False
+            End If
             Return True
         End Function
 
+        Public Shared Sub CheckHostsFile
+            If (HostsFile.TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp) = False) Then
+                If HostsFile.EnsureAdmin() Then
+                    If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgHostnameSet"), 
+                                                NHLGamesMetro.RmText.GetString("msgAddHost"), 
+                                                MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                        HostsFile.AddEntry(NHLGamesMetro.ServerIp,  NHLGamesMetro.DomainName, False)
+                    End If
+                End If
+            Else 
+                NHLGamesMetro.HostNameResolved = True
+            End If
+        End Sub
+
         Private Shared Sub FatalError(message As String)
-            If InvokeElement.MsgBoxRed(message, NHLGamesMetro.RmText.GetString("msgFailure"), MessageBoxButtons.OK) = DialogResult.OK Then
+            If InvokeElement.MsgBoxRed($"{message} {NHLGamesMetro.RmText.GetString("msgNotStarting")}",
+                                       NHLGamesMetro.RmText.GetString("msgFailure"),
+                                       MessageBoxButtons.YesNo) = DialogResult.Yes Then
                 NHLGamesMetro.FormInstance.Close
             End If
         End Sub

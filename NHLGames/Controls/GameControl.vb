@@ -290,7 +290,7 @@ Namespace Controls
         End Function
 
         Private Function WatchArgs() As GameWatchArguments
-            Dim args = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs)
+            Dim args = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, New GameWatchArguments)
             args.GameTitle = _game.AwayAbbrev & " @ " & _game.HomeAbbrev
             Return args
         End Function
