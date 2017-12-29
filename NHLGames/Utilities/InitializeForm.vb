@@ -6,10 +6,7 @@ Namespace Utilities
         Private ReadOnly Shared Form As NHLGamesMetro = NHLGamesMetro.FormInstance
 
         Public Async Shared Function VersionCheck() As Task(Of Boolean)
-            Form.lblVersion.Text = String.Format("v {0}.{1}.{2}", My.Application.Info.Version.Major,
-                                                 My.Application.Info.Version.Minor,
-                                                 My.Application.Info.Version.Build)
-
+            
             Dim latestVersion As Version = Await Downloader.DownloadApplicationVersion()
             If latestVersion.Equals(New Version()) Then Return False
             
@@ -133,6 +130,10 @@ Namespace Utilities
             Dim windowSize = Split(ApplicationSettings.Read(Of String)(SettingsEnum.LastWindowSize, "990;655"), ";")
             Form.Width = If (windowSize.Length = 2, Convert.ToInt32(windowSize(0)), 990)
             Form.Height = If (windowSize.Length = 2, Convert.ToInt32(windowSize(1)), 655)
+
+            Form.lblVersion.Text = String.Format("v {0}.{1}.{2}", My.Application.Info.Version.Major,
+                                                 My.Application.Info.Version.Minor,
+                                                 My.Application.Info.Version.Build)
 
             Form.txtMPCPath.Text = GetApplication(SettingsEnum.MpcPath, PathFinder.GetPathOfMpc())
             Form.txtVLCPath.Text = GetApplication(SettingsEnum.VlcPath, PathFinder.GetPathOfVlc())

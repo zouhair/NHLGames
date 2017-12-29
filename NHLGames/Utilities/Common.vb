@@ -5,8 +5,8 @@ Imports NHLGames.My.Resources
 Namespace Utilities
     Public Class Common
 
-        Public Const UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"
-        Private Const Timeout = 10000
+        Public Const UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+        Public Const Timeout = 10000
 
         Public Shared Function GetRandomString(ByVal intLength As Integer)
             Const s = "abcdefghijklmnopqrstuvwxyz0123456789"
@@ -25,11 +25,14 @@ Namespace Utilities
             Dim defaultHttpWebRequest As HttpWebRequest = CType(WebRequest.Create(New Uri(address)), HttpWebRequest)
             defaultHttpWebRequest.UserAgent = UserAgent
             defaultHttpWebRequest.Method = WebRequestMethods.Http.Get
-            defaultHttpWebRequest.Proxy = Nothing
+            defaultHttpWebRequest.Proxy = WebRequest.DefaultWebProxy
             defaultHttpWebRequest.ContentType = "text/plain"
             defaultHttpWebRequest.CookieContainer = New CookieContainer()
             defaultHttpWebRequest.CookieContainer.Add(New Cookie("mediaAuth", GetRandomString(240), String.Empty, "nhl.com"))
             defaultHttpWebRequest.Timeout = Timeout
+            defaultHttpWebRequest.Accept = "text/plain,text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"
+            defaultHttpWebRequest.Referer = "https://www.google.ca"
+            defaultHttpWebRequest.Headers.Add("Origin", "https://wwww.google.ca")
 
             Return defaultHttpWebRequest
         End Function
