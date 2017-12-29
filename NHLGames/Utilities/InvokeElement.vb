@@ -4,16 +4,15 @@ Imports NHLGames.Objects
 Namespace Utilities
     Public Class InvokeElement
 
-        Public Shared Sub LoadGames()
+        Public Async Shared Sub LoadGames()
             NHLGamesMetro.FormInstance.ClearGamePanel()
-            Dim t = Task.Run(AddressOf GameFetcher.LoadGames)
-            t.Wait()
-            t.Dispose()
+            Await Task.Run(AddressOf GameFetcher.LoadGames)
         End Sub
 
         Public Shared Sub SetFormStatusLabel(msg As String)
             If NHLGamesMetro.FormInstance.InvokeRequired Then
-                NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String)(AddressOf SetFormStatusLabel), msg)
+                Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String)(AddressOf SetFormStatusLabel), msg)
+                EndInvokeOf(asyncResult)
             Else
                 NHLGamesMetro.FormInstance.lblStatus.Text = msg
             End If
