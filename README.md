@@ -34,6 +34,7 @@ Enjoy!
 * [Support](#support)
 * [Chromecast](#chromecast)
 * [Contribute](#contribute)
+* [Donation](#donation)
 * [Download](#download)
 
 ___
@@ -208,6 +209,15 @@ NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps 
 NHLGames is coded in VB.NET using Visual Studio and .Net Framework 4.5. If you want to contribute : [Follow the guidelines](CONTRIBUTING.md)
 
 Thanks to our [contributors](https://github.com/NHLGames/NHLGames/graphs/contributors)
+
+# /_Donation_
+
+If you want to donate to keep the project running, here is the donation link :
+#### [Donate via Paypal](https://www.donation-tracker.de/donate/kturris)
+#### Donate via Bitcoin: `17uSfctCE4n5uLAHqZQEozqEiLafSaUgQL`
+
+> If the nhl.tv account get banned, an even better donation would be someone willing to create a monthly nhl.tv account for us ($25 USD) - please get in touch if you'd be willing to help out :
+- [KTurris @reddit](https://www.reddit.com/message/compose/?to=KTurris)
 
 # /_Download_
 
