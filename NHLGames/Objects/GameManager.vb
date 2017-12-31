@@ -191,14 +191,14 @@ Namespace Objects
                 If index = 0 OrElse index + 5 <> spliter.Length - 1 Then 
                     Return String.Empty
                 Else
-                    Return String.Format("http://hlsvod-akc.med2.med.nhl.com/ps01/{0}/{1}/{2}/{3}/{4}/{5}",
-                                         spliter(index),
+                    Return String.Format("http://hlsvod-akc.med2.med.nhl.com/{0}/nhl/{1}/{2}/{3}/{4}/{5}",
+                                         spliter(index -1),
                                          spliter(index +1),
                                          spliter(index +2),
                                          spliter(index +3),
                                          spliter(index +4),
                                          spliter(index +5))
-                    '/ps01/nhl/2000/01/01/NHL_GAME_VIDEO_TEAMTEAM_M2_VISIT_20000101_1234567890123/master_wired{_web}{60}.m3u8
+                    '/ls07/nhl/2000/01/01/NHL_GAME_VIDEO_TEAMTEAM_M2_VISIT_20000101_1234567890123/master_wired{_web}{60}.m3u8
                 End If
             End If
 
