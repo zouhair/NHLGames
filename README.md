@@ -212,7 +212,6 @@ Thanks to our [contributors](https://github.com/NHLGames/NHLGames/graphs/contrib
 
 # /_Donation_
 
-If you want to donate to keep the project running, here is the donation link :
 #### [Donate via Paypal](https://www.donation-tracker.de/donate/kturris)
 #### Donate via Bitcoin: `17uSfctCE4n5uLAHqZQEozqEiLafSaUgQL`
 
