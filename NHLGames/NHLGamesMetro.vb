@@ -27,7 +27,7 @@ Public Class NHLGamesMetro
     Public Shared GamesDownloadedTime As Date
     Public Shared LabelDate As Label
     Private Const SubredditLink As String = "https://www.reddit.com/r/nhl_games/"
-    Private Const LatestReleaseLink As String = "https://github.com/NHLGames/NHLGames/releases"
+    Private Const LatestReleaseLink As String = "https://github.com/NHLGames/NHLGames/releases/latest"
     Public Shared GameDate As Date = DateHelper.GetPacificTime()
     Private _resizeDirection As Integer = -1
     Private Const ResizeBorderWidth As Integer = 8

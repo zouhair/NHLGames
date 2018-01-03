@@ -42,7 +42,8 @@ Translate
 ---------
 
 Help us to translate the app by translating the file using Visual Studio, located in:   
-`NHLGames\NHLGames\res\EnglishTemplate.resx`
+`NHLGames\NHLGames\English.resx`    
+Do not translate the lines that have `Console` in the Comment column, you can actually remove those.
 
 Contributors
 ------------
