@@ -79,6 +79,7 @@
         Me.btnBeforeYear = New System.Windows.Forms.Button()
         Me.btnNextMonth = New System.Windows.Forms.Button()
         Me.btnNextYear = New System.Windows.Forms.Button()
+        Me.tt = New MetroFramework.Components.MetroToolTip()
         Me.SuspendLayout
         '
         'lnkToday
@@ -897,6 +898,12 @@
         Me.btnNextYear.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnNextYear.UseVisualStyleBackColor = false
         '
+        'tt
+        '
+        Me.tt.Style = MetroFramework.MetroColorStyle.Blue
+        Me.tt.StyleManager = Nothing
+        Me.tt.Theme = MetroFramework.MetroThemeStyle.Light
+        '
         'CalendarControl
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1020,5 +1027,6 @@ End Sub
         Friend WithEvents Thu As MetroFramework.Controls.MetroLabel
         Friend WithEvents Fri As MetroFramework.Controls.MetroLabel
         Friend WithEvents Sat As MetroFramework.Controls.MetroLabel
+        Friend WithEvents tt As MetroFramework.Components.MetroToolTip
     End Class
 End Namespace

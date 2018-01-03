@@ -11,6 +11,10 @@ Namespace Controls
         Public Sub ReloadCal(ByVal ldate As Date, ByVal selected As Integer)
             _currentDate = ldate
             lnkToday.Text = NHLGamesMetro.RmText.GetString("lnkCalendarToday")
+            tt.SetToolTip(btnBeforeMonth, NHLGamesMetro.RmText.GetString("tipMonthLeft"))
+            tt.SetToolTip(_btnBeforeYear, NHLGamesMetro.RmText.GetString("tipYearUp"))
+            tt.SetToolTip(btnNextMonth, NHLGamesMetro.RmText.GetString("tipMonthRight"))
+            tt.SetToolTip(btnNextYear, NHLGamesMetro.RmText.GetString("tipYearDown"))
             Clearall()
             lblDate.Text = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(ldate.Month) & $" " & ldate.Year.ToString
             Sun.Text = DateHelper.GetFormattedWeek(0)
