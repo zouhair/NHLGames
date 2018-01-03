@@ -59,9 +59,16 @@ Namespace Utilities
             Form.tabMenu.TabPages.Item(0).Text = NHLGamesMetro.RmText.GetString("tabGames")
             Form.tabMenu.TabPages.Item(1).Text = NHLGamesMetro.RmText.GetString("tabSettings")
             Form.tabMenu.TabPages.Item(2).Text = NHLGamesMetro.RmText.GetString("tabConsole")
+            Form.tt.SetToolTip(Form.btnHelp, NHLGamesMetro.RmText.GetString("tipHelp"))
 
             Form.lblNoGames.Text = NHLGamesMetro.RmText.GetString("lblNoGames")
             Form.lblStatus.Text = String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"), NHLGamesMetro.FormInstance.flpGames.Controls.Count())
+
+            'Games
+            Form.tt.SetToolTip(Form.btnYesterday, NHLGamesMetro.RmText.GetString("tipDayLeft"))
+            Form.tt.SetToolTip(Form.btnDate, NHLGamesMetro.RmText.GetString("tipCalendar"))
+            Form.tt.SetToolTip(Form.btnTomorrow, NHLGamesMetro.RmText.GetString("tipDayRight"))
+            Form.tt.SetToolTip(Form.btnRefresh, NHLGamesMetro.RmText.GetString("tipRefresh"))
 
             'Settings
             Form.lblGamePanel.Text = NHLGamesMetro.RmText.GetString("lblShowScores")

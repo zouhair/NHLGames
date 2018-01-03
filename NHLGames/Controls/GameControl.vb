@@ -31,6 +31,7 @@ Namespace Controls
 
             If _game.IsLive Then
                 picLive.Visible = True
+                tt.SetToolTip(picLive, NHLGamesMetro.RmText.GetString("tipLiveGame"))
                 lblGameStatus.Visible = Not showLiveScores
                 lblHomeScore.Visible = showLiveScores
                 lblAwayScore.Visible = showLiveScores
