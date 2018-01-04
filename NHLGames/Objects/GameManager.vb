@@ -165,6 +165,7 @@ Namespace Objects
                 If streamUrlReturned <> String.Empty Then
                     Dim request = Common.SetHttpWebRequest(streamUrlReturned)
 
+                    'the server script should test url before returning it and apply the fix below if the test fails
                     If Await Common.SendWebRequestAsync(Nothing, request) Then
                         result = streamUrlReturned
                     Else
@@ -183,6 +184,7 @@ Namespace Objects
                                     result = generatedStreamUrlFix
                                 End If
                             End If
+                            request.Abort()
                         End If
                     End If
                     request.Abort()
