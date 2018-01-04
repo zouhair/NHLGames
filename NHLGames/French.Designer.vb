@@ -272,15 +272,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to {0}.
-        '''</summary>
-        Friend Shared ReadOnly Property enumundefined() As String
-            Get
-                Return ResourceManager.GetString("enumundefined", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to 1ère.
         '''</summary>
         Friend Shared ReadOnly Property gamePeriod1() As String
