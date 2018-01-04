@@ -7,6 +7,11 @@
         InProgress = 3
         Ending = 4
         Final = 5
+        Unknown1 = 6
+        Unknown2 = 7
+        Unknown3 = 8
+        Postponed = 9
+        Unknown4 = 10
     End Enum
 
     Public Enum GameTypeEnum
