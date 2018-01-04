@@ -132,12 +132,13 @@ Namespace Utilities
             Form.flpCalendarPanel.Controls.Add(New Controls.CalendarControl)
         End Sub
 
-        Public Shared Sub SetSettings()
-
+        Public Shared Sub SetWindow()
             Dim windowSize = Split(ApplicationSettings.Read(Of String)(SettingsEnum.LastWindowSize, "990;655"), ";")
             Form.Width = If (windowSize.Length = 2, Convert.ToInt32(windowSize(0)), 990)
             Form.Height = If (windowSize.Length = 2, Convert.ToInt32(windowSize(1)), 655)
+        End Sub
 
+        Public Shared Sub SetSettings()        
             Form.lblVersion.Text = String.Format("v {0}.{1}.{2}", My.Application.Info.Version.Major,
                                                  My.Application.Info.Version.Minor,
                                                  My.Application.Info.Version.Build)
