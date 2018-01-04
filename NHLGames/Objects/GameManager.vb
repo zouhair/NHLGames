@@ -67,7 +67,7 @@ Namespace Objects
                     currentGame.AwayAbbrev = game.SelectToken("teams.away.team.abbreviation").ToString()
                     currentGame.AwayTeam = game.SelectToken("teams.away.team.teamName").ToString()
 
-                    currentGame.GameState = CType(If(game.SelectToken("status.statusCode").ToString() > 7, 0, Convert.ToInt16(game.SelectToken("status.statusCode").ToString())), GameStateEnum)
+                    currentGame.GameState = CType(If(game.SelectToken("status.statusCode").ToString() > "7", 0, Convert.ToInt16(game.SelectToken("status.statusCode").ToString())), GameStateEnum)
                     currentGame.GameStateDetailed = game.SelectToken("status.detailedState").ToString()
 
                     If currentGame.GameState >= GameStateEnum.InProgress Then
@@ -159,7 +159,7 @@ Namespace Objects
         Private Shared Async Function GetGameFeedUrlAsync(gameStream As GameStream) As Task(Of String)
             Dim result = String.Empty
 
-            If gameStream.GameUrl <> String.Empty Then
+            If Not gameStream.GameUrl.Equals(String.Empty) Then
                 Dim streamUrlReturned = Await Common.SendWebRequestAndGetContentAsync(gameStream.GameUrl & gameStream.CdnParameter.ToString().ToLower())
 
                 If streamUrlReturned <> String.Empty Then
@@ -168,30 +168,30 @@ Namespace Objects
                     If Await Common.SendWebRequestAsync(Nothing, request) Then
                         result = streamUrlReturned
                     Else
-                        Dim generatedStreamUrlFix As String = GetStreamUrlFix(streamUrlReturned)
+                        Dim generatedStreamUrlFix As String = GetStreamUrlFix(streamUrlReturned, gameStream.CdnParameter.ToString().ToLower())
 
-                        If generatedStreamUrlFix = String.Empty Then Return String.Empty
-                        request = Common.SetHttpWebRequest(generatedStreamUrlFix)
-
-                        If Await Common.SendWebRequestAsync(Nothing, request) Then
-                            result = generatedStreamUrlFix
-                        Else
-                            generatedStreamUrlFix = GetStreamUrlFix(streamUrlReturned, true)
+                        If Not generatedStreamUrlFix.Equals(String.Empty) Then
                             request = Common.SetHttpWebRequest(generatedStreamUrlFix)
 
                             If Await Common.SendWebRequestAsync(Nothing, request) Then
                                 result = generatedStreamUrlFix
+                            Else
+                                generatedStreamUrlFix = GetStreamUrlFix(streamUrlReturned, gameStream.CdnParameter.ToString().ToLower(), true)
+                                request = Common.SetHttpWebRequest(generatedStreamUrlFix)
+
+                                If Await Common.SendWebRequestAsync(Nothing, request) Then
+                                    result = generatedStreamUrlFix
+                                End If
                             End If
                         End If
                     End If
                     request.Abort()
                 End If
             End If
-            
             Return result
         End Function
 
-        Private Shared Function GetStreamUrlFix(url As String, Optional forceMainServer As Boolean = false)
+        Private Shared Function GetStreamUrlFix(url As String, cdn As String, Optional forceMainServer As Boolean = false)
             If url.Contains("http://hlslive") Then
                 Dim spliter = url.Split("/")
                 Dim index As Integer = Array.FindIndex(spliter, Function(x) x.ToString().Equals("nhl"))
@@ -199,14 +199,15 @@ Namespace Objects
                 If index = 0 OrElse index + 5 <> spliter.Length - 1 Then 
                     Return String.Empty
                 Else
-                    Return String.Format("http://hlsvod-akc.med2.med.nhl.com/{0}/nhl/{1}/{2}/{3}/{4}/{5}",
-                                         If (forceMainServer, "ps01", (index -1)),
+                    Return String.Format("http://hlsvod-{0}.med2.med.nhl.com/{1}/nhl/{2}/{3}/{4}/{5}/{6}",
+                                         cdn,
+                                         If (forceMainServer, "ps01", spliter(index -1)),
                                          spliter(index +1),
                                          spliter(index +2),
                                          spliter(index +3),
                                          spliter(index +4),
                                          spliter(index +5))
-                    '/ls07/nhl/2000/01/01/NHL_GAME_VIDEO_TEAMTEAM_M2_VISIT_20000101_1234567890123/master_wired{_web}{60}.m3u8
+                    '/ps01{ls04}/nhl/2000/01/01/NHL_GAME_VIDEO_TEAMTEAM_M2_VISIT_20000101_1234567890123/master_wired{_web}{60}.m3u8
                 End If
             End If
 
