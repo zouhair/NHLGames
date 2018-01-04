@@ -1,6 +1,7 @@
 ﻿Namespace Utilities
 
     Public Enum GameStateEnum
+#Disable Warning InconsistentNaming
         Scheduled = 1
         Pregame = 2
         InProgress = 3
@@ -34,7 +35,6 @@
     End Enum
 
     Public Enum StreamQuality
-#Disable Warning InconsistentNaming
         best = 0
         _720p = 1
         _540p = 2
@@ -43,7 +43,6 @@
         _288p = 5
         _224p = 6
         worst = 7
-#Enable Warning InconsistentNaming
     End Enum
 
     Public Enum PlayerTypeEnum
@@ -93,7 +92,6 @@
     End Enum
 
     Public Enum WindowsCode
-#Disable Warning InconsistentNaming
         WM_NCLBUTTONDOWN = &HA1
         HTLEFT = 10
         HTRIGHT = 11
@@ -105,11 +103,9 @@
         HTBOTTOMRIGHT = 17
         VKMNEXT = 176
         VKMPREVIOUS = 177
-#Enable Warning InconsistentNaming
     End Enum
 
     Public Enum ShowWindowCode
-#Disable Warning InconsistentNaming
         SW_HIDE = 0
         SW_SHOWNORMAL = 1
         SW_SHOWMINIMIZED = 2
@@ -120,6 +116,14 @@
         SW_SHOWMINNOACTIVE = 7
         SW_SHOWNA = 8
         SW_RESTORE = 9
-#Enable Warning InconsistentNaming
     End Enum
+
+    Public Enum LiveReplayCode
+        Live = 0
+        _5 = 1
+        _10 = 2
+        _30 = 3
+        Full = 4
+    End Enum
+#Enable Warning InconsistentNaming
 End Namespace

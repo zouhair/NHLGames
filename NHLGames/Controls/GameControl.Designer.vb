@@ -15,19 +15,17 @@
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GameControl))
         Me.tt = New MetroFramework.Components.MetroToolTip()
         Me.bpGameControl = New NHLGames.Controls.BorderPanel()
+        Me.lnkLive = New MetroFramework.Controls.MetroLink()
         Me.lblGameStatus = New MetroFramework.Controls.MetroLabel()
         Me.lblDivider = New MetroFramework.Controls.MetroLabel()
+        Me.picAway = New System.Windows.Forms.PictureBox()
         Me.lblHomeScore = New MetroFramework.Controls.MetroLabel()
         Me.lblAwayScore = New MetroFramework.Controls.MetroLabel()
         Me.lblAwayTeam = New MetroFramework.Controls.MetroLabel()
+        Me.picHome = New System.Windows.Forms.PictureBox()
         Me.lblHomeTeam = New MetroFramework.Controls.MetroLabel()
         Me.lblPeriod = New MetroFramework.Controls.MetroLabel()
         Me.flpStreams = New System.Windows.Forms.FlowLayoutPanel()
-        Me.lblNotInSeason = New MetroFramework.Controls.MetroLabel()
-        Me.lblStreamStatus = New MetroFramework.Controls.MetroLabel()
-        Me.picAway = New System.Windows.Forms.PictureBox()
-        Me.picLive = New System.Windows.Forms.PictureBox()
-        Me.picHome = New System.Windows.Forms.PictureBox()
         Me.lnkHome = New System.Windows.Forms.Button()
         Me.lnkAway = New System.Windows.Forms.Button()
         Me.lnkNational = New System.Windows.Forms.Button()
@@ -38,11 +36,12 @@
         Me.lnkEnd2 = New System.Windows.Forms.Button()
         Me.lnkRef = New System.Windows.Forms.Button()
         Me.lnkStar = New System.Windows.Forms.Button()
+        Me.lblNotInSeason = New MetroFramework.Controls.MetroLabel()
+        Me.lblStreamStatus = New MetroFramework.Controls.MetroLabel()
         Me.bpGameControl.SuspendLayout
-        Me.flpStreams.SuspendLayout
         CType(Me.picAway,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picLive,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.picHome,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.flpStreams.SuspendLayout
         Me.SuspendLayout
         '
         'tt
@@ -56,12 +55,12 @@
         Me.bpGameControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.bpGameControl.BorderColour = System.Drawing.Color.LightGray
         Me.bpGameControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.bpGameControl.Controls.Add(Me.lnkLive)
         Me.bpGameControl.Controls.Add(Me.lblGameStatus)
         Me.bpGameControl.Controls.Add(Me.lblDivider)
         Me.bpGameControl.Controls.Add(Me.picAway)
         Me.bpGameControl.Controls.Add(Me.lblHomeScore)
         Me.bpGameControl.Controls.Add(Me.lblAwayScore)
-        Me.bpGameControl.Controls.Add(Me.picLive)
         Me.bpGameControl.Controls.Add(Me.lblAwayTeam)
         Me.bpGameControl.Controls.Add(Me.picHome)
         Me.bpGameControl.Controls.Add(Me.lblHomeTeam)
@@ -74,6 +73,21 @@
         Me.bpGameControl.Name = "bpGameControl"
         Me.bpGameControl.Size = New System.Drawing.Size(312, 151)
         Me.bpGameControl.TabIndex = 9
+        '
+        'lnkLive
+        '
+        Me.lnkLive.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
+        Me.lnkLive.BackgroundImage = Global.NHLGames.My.Resources.Resources.live0
+        Me.lnkLive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.lnkLive.ForeColor = System.Drawing.Color.Black
+        Me.lnkLive.Location = New System.Drawing.Point(0, 0)
+        Me.lnkLive.Name = "lnkLive"
+        Me.lnkLive.Size = New System.Drawing.Size(20, 20)
+        Me.lnkLive.TabIndex = 30
+        Me.lnkLive.UseCustomBackColor = true
+        Me.lnkLive.UseCustomForeColor = true
+        Me.lnkLive.UseSelectable = true
+        Me.lnkLive.Visible = false
         '
         'lblGameStatus
         '
@@ -96,6 +110,16 @@
         Me.lblDivider.Size = New System.Drawing.Size(1, 50)
         Me.lblDivider.TabIndex = 29
         Me.lblDivider.UseCustomBackColor = true
+        '
+        'picAway
+        '
+        Me.picAway.BackgroundImage = Global.NHLGames.My.Resources.Resources.nhl
+        Me.picAway.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.picAway.Location = New System.Drawing.Point(31, 35)
+        Me.picAway.Name = "picAway"
+        Me.picAway.Size = New System.Drawing.Size(60, 50)
+        Me.picAway.TabIndex = 0
+        Me.picAway.TabStop = false
         '
         'lblHomeScore
         '
@@ -137,6 +161,16 @@
         Me.lblAwayTeam.Text = "AWAY"
         Me.lblAwayTeam.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblAwayTeam.UseCustomBackColor = true
+        '
+        'picHome
+        '
+        Me.picHome.BackgroundImage = Global.NHLGames.My.Resources.Resources.nhl
+        Me.picHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.picHome.Location = New System.Drawing.Point(220, 35)
+        Me.picHome.Name = "picHome"
+        Me.picHome.Size = New System.Drawing.Size(60, 50)
+        Me.picHome.TabIndex = 1
+        Me.picHome.TabStop = false
         '
         'lblHomeTeam
         '
@@ -186,66 +220,6 @@
         Me.flpStreams.Size = New System.Drawing.Size(307, 38)
         Me.flpStreams.TabIndex = 10
         Me.flpStreams.WrapContents = false
-        '
-        'lblNotInSeason
-        '
-        Me.lblNotInSeason.BackColor = System.Drawing.Color.Transparent
-        Me.lblNotInSeason.FontSize = MetroFramework.MetroLabelSize.Small
-        Me.lblNotInSeason.Location = New System.Drawing.Point(2, 88)
-        Me.lblNotInSeason.Name = "lblNotInSeason"
-        Me.lblNotInSeason.Size = New System.Drawing.Size(306, 20)
-        Me.lblNotInSeason.TabIndex = 13
-        Me.lblNotInSeason.Text = "NOT_IN_SEASON"
-        Me.lblNotInSeason.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.lblNotInSeason.UseCustomBackColor = true
-        '
-        'lblStreamStatus
-        '
-        Me.lblStreamStatus.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.lblStreamStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        Me.lblStreamStatus.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.lblStreamStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
-        Me.lblStreamStatus.Location = New System.Drawing.Point(1, 109)
-        Me.lblStreamStatus.Name = "lblStreamStatus"
-        Me.lblStreamStatus.Size = New System.Drawing.Size(307, 38)
-        Me.lblStreamStatus.TabIndex = 27
-        Me.lblStreamStatus.Text = "STREAM_STATUS"
-        Me.lblStreamStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.lblStreamStatus.UseCustomBackColor = true
-        Me.lblStreamStatus.UseCustomForeColor = true
-        '
-        'picAway
-        '
-        Me.picAway.BackgroundImage = Global.NHLGames.My.Resources.Resources.nhl
-        Me.picAway.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picAway.Location = New System.Drawing.Point(31, 35)
-        Me.picAway.Name = "picAway"
-        Me.picAway.Size = New System.Drawing.Size(60, 50)
-        Me.picAway.TabIndex = 0
-        Me.picAway.TabStop = false
-        '
-        'picLive
-        '
-        Me.picLive.BackgroundImage = Global.NHLGames.My.Resources.Resources.live
-        Me.picLive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picLive.InitialImage = Global.NHLGames.My.Resources.Resources.live
-        Me.picLive.Location = New System.Drawing.Point(1, 1)
-        Me.picLive.Name = "picLive"
-        Me.picLive.Size = New System.Drawing.Size(18, 18)
-        Me.picLive.TabIndex = 14
-        Me.picLive.TabStop = false
-        Me.picLive.Visible = false
-        '
-        'picHome
-        '
-        Me.picHome.BackgroundImage = Global.NHLGames.My.Resources.Resources.nhl
-        Me.picHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picHome.Location = New System.Drawing.Point(220, 35)
-        Me.picHome.Name = "picHome"
-        Me.picHome.Size = New System.Drawing.Size(60, 50)
-        Me.picHome.TabIndex = 1
-        Me.picHome.TabStop = false
         '
         'lnkHome
         '
@@ -417,6 +391,34 @@
         Me.lnkStar.UseVisualStyleBackColor = true
         Me.lnkStar.Visible = false
         '
+        'lblNotInSeason
+        '
+        Me.lblNotInSeason.BackColor = System.Drawing.Color.Transparent
+        Me.lblNotInSeason.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.lblNotInSeason.Location = New System.Drawing.Point(2, 88)
+        Me.lblNotInSeason.Name = "lblNotInSeason"
+        Me.lblNotInSeason.Size = New System.Drawing.Size(306, 20)
+        Me.lblNotInSeason.TabIndex = 13
+        Me.lblNotInSeason.Text = "NOT_IN_SEASON"
+        Me.lblNotInSeason.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblNotInSeason.UseCustomBackColor = true
+        '
+        'lblStreamStatus
+        '
+        Me.lblStreamStatus.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lblStreamStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lblStreamStatus.FontWeight = MetroFramework.MetroLabelWeight.Regular
+        Me.lblStreamStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.lblStreamStatus.Location = New System.Drawing.Point(1, 109)
+        Me.lblStreamStatus.Name = "lblStreamStatus"
+        Me.lblStreamStatus.Size = New System.Drawing.Size(307, 38)
+        Me.lblStreamStatus.TabIndex = 27
+        Me.lblStreamStatus.Text = "STREAM_STATUS"
+        Me.lblStreamStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblStreamStatus.UseCustomBackColor = true
+        Me.lblStreamStatus.UseCustomForeColor = true
+        '
         'GameControl
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -428,10 +430,9 @@
         Me.Padding = New System.Windows.Forms.Padding(3)
         Me.Size = New System.Drawing.Size(318, 157)
         Me.bpGameControl.ResumeLayout(false)
-        Me.flpStreams.ResumeLayout(false)
         CType(Me.picAway,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picLive,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.picHome,System.ComponentModel.ISupportInitialize).EndInit
+        Me.flpStreams.ResumeLayout(false)
         Me.ResumeLayout(false)
 
 End Sub
@@ -445,7 +446,6 @@ End Sub
         Friend WithEvents lblPeriod As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblNotInSeason As MetroFramework.Controls.MetroLabel
         Friend WithEvents picHome As PictureBox
-        Friend WithEvents picLive As PictureBox
         Friend WithEvents lblHomeScore As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblAwayScore As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblStreamStatus As MetroFramework.Controls.MetroLabel
@@ -461,5 +461,6 @@ End Sub
         Friend WithEvents lblGameStatus As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblDivider As MetroFramework.Controls.MetroLabel
         Friend WithEvents lnkStar As Button
+        Friend WithEvents lnkLive As MetroFramework.Controls.MetroLink
     End Class
 End Namespace

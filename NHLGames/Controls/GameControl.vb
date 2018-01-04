@@ -11,6 +11,7 @@ Namespace Controls
         Private ReadOnly _showSeriesRecord As Boolean
         Private ReadOnly _showTeamCityAbr As Boolean
         Private ReadOnly _broadcasters As Dictionary(Of String, String)
+        Private _liveReplay As Integer = 0
 
         Public ReadOnly Property GameId() As String
             Get
@@ -30,8 +31,8 @@ Namespace Controls
             lblNotInSeason.Text = ""
 
             If _game.IsLive Then
-                picLive.Visible = True
-                tt.SetToolTip(picLive, NHLGamesMetro.RmText.GetString("tipLiveGame"))
+                lnkLive.Visible = True
+                tt.SetToolTip(lnkLive, NHLGamesMetro.RmText.GetString("tipLiveGame"))
                 lblGameStatus.Visible = Not showLiveScores
                 lblHomeScore.Visible = showLiveScores
                 lblAwayScore.Visible = showLiveScores
@@ -345,42 +346,62 @@ Namespace Controls
         Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)
             Try
                 If disposing Then
-                    If Me.tt IsNot Nothing Then Me.tt.Dispose()
-                    If Me.lblGameStatus IsNot Nothing Then Me.lblGameStatus.Dispose()
-                    If Me.lblDivider IsNot Nothing Then Me.lblDivider.Dispose()
-                    If Me.picAway IsNot Nothing Then Me.picAway.Dispose()
-                    If Me.lblHomeScore IsNot Nothing Then Me.lblHomeScore.Dispose()
-                    If Me.lblAwayScore IsNot Nothing Then Me.lblAwayScore.Dispose()
-                    If Me.picLive IsNot Nothing Then Me.picLive.Dispose()
-                    If Me.lblAwayTeam IsNot Nothing Then Me.lblAwayTeam.Dispose()
-                    If Me.picHome IsNot Nothing Then Me.picHome.Dispose()
-                    If Me.lblHomeTeam IsNot Nothing Then Me.lblHomeTeam.Dispose()
-                    If Me.lblPeriod IsNot Nothing Then Me.lblPeriod.Dispose()
-                    If Me.flpStreams IsNot Nothing Then Me.flpStreams.Dispose()
-                    If Me.lnkHome IsNot Nothing Then Me.lnkHome.Dispose()
-                    If Me.lnkAway IsNot Nothing Then Me.lnkAway.Dispose()
-                    If Me.lnkNational IsNot Nothing Then Me.lnkNational.Dispose()
-                    If Me.lnkFrench IsNot Nothing Then Me.lnkFrench.Dispose()
-                    If Me.lnkThree IsNot Nothing Then Me.lnkThree.Dispose()
-                    If Me.lnkSix IsNot Nothing Then Me.lnkSix.Dispose()
-                    If Me.lnkEnd1 IsNot Nothing Then Me.lnkEnd1.Dispose()
-                    If Me.lnkEnd2 IsNot Nothing Then Me.lnkEnd2.Dispose()
-                    If Me.lnkRef IsNot Nothing Then Me.lnkRef.Dispose()
-                    If Me.lnkStar IsNot Nothing Then Me.lnkStar.Dispose()
-                    If Me.lblNotInSeason IsNot Nothing Then Me.lblNotInSeason.Dispose()
-                    If Me.lblStreamStatus IsNot Nothing Then Me.lblStreamStatus.Dispose()
-                    If Me.bpGameControl IsNot Nothing Then
-                        Me.bpGameControl.Controls.Clear()
-                        Me.bpGameControl.Dispose()
+                    If tt IsNot Nothing Then tt.Dispose()
+                    If lnkLive IsNot Nothing Then lnkLive.Dispose()
+                    If lblGameStatus IsNot Nothing Then lblGameStatus.Dispose()
+                    If lblDivider IsNot Nothing Then lblDivider.Dispose()
+                    If picAway IsNot Nothing Then picAway.Dispose()
+                    If lblHomeScore IsNot Nothing Then lblHomeScore.Dispose()
+                    If lblAwayScore IsNot Nothing Then lblAwayScore.Dispose()
+                    If lblAwayTeam IsNot Nothing Then lblAwayTeam.Dispose()
+                    If picHome IsNot Nothing Then picHome.Dispose()
+                    If lblHomeTeam IsNot Nothing Then lblHomeTeam.Dispose()
+                    If lblPeriod IsNot Nothing Then lblPeriod.Dispose()
+                    If flpStreams IsNot Nothing Then flpStreams.Dispose()
+                    If lnkHome IsNot Nothing Then lnkHome.Dispose()
+                    If lnkAway IsNot Nothing Then lnkAway.Dispose()
+                    If lnkNational IsNot Nothing Then lnkNational.Dispose()
+                    If lnkFrench IsNot Nothing Then lnkFrench.Dispose()
+                    If lnkThree IsNot Nothing Then lnkThree.Dispose()
+                    If lnkSix IsNot Nothing Then lnkSix.Dispose()
+                    If lnkEnd1 IsNot Nothing Then lnkEnd1.Dispose()
+                    If lnkEnd2 IsNot Nothing Then lnkEnd2.Dispose()
+                    If lnkRef IsNot Nothing Then lnkRef.Dispose()
+                    If lnkStar IsNot Nothing Then lnkStar.Dispose()
+                    If lblNotInSeason IsNot Nothing Then lblNotInSeason.Dispose()
+                    If lblStreamStatus IsNot Nothing Then lblStreamStatus.Dispose()
+                    If bpGameControl IsNot Nothing Then
+                        bpGameControl.Controls.Clear()
+                        bpGameControl.Dispose()
                     End If
-                    If Me.components IsNot Nothing Then Me.components.Dispose()
-                    Me._broadcasters.Clear()
-                    Me._game.Dispose()
+                    If components IsNot Nothing Then components.Dispose()
+                    _broadcasters.Clear()
+                    _game.Dispose()
                 End If
             Finally
                 MyBase.Dispose(disposing)
             End Try
         End Sub
 
+        Private Sub lnkLive_Click(sender As Object, e As EventArgs) Handles lnkLive.Click
+            _liveReplay = If (_liveReplay + 1 > LiveReplayCode.Full, 0, _liveReplay + 1)
+            
+            If _liveReplay <= 1 Then
+                lnkLive.BackgroundImage.Dispose()
+                lnkLive.BackgroundImage = 
+                    ImageFetcher.GetEmbeddedImage(_getBroadcasterPicFor(If (_liveReplay = 0, "live0", "live1")))
+            End If
+            
+            If _liveReplay.Equals(LiveReplayCode.Live) Then
+                tt.SetToolTip(lnkLive, "Live")
+            Else If _liveReplay > LiveReplayCode.Live AndAlso _liveReplay < LiveReplayCode.Full Then
+                Dim min = CType(_liveReplay,LiveReplayCode).ToString().Substring(1)
+                tt.SetToolTip(lnkLive, "Replay " & min)
+                lnkLive.Text = min
+            Else
+                tt.SetToolTip(lnkLive, "Replay Full")
+                lnkLive.Text = String.Empty
+            End If
+        End Sub
     End Class
 End Namespace
