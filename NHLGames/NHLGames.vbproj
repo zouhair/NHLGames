@@ -192,7 +192,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>English.resx</DependentUpon>
     </Compile>
-    <Compile Include="French1.Designer.vb">
+    <Compile Include="French.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>French.resx</DependentUpon>
@@ -254,6 +254,7 @@
     <EmbeddedResource Include="French.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>French.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="English.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>

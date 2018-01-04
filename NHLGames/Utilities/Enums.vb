@@ -6,12 +6,12 @@
         Pregame = 2
         InProgress = 3
         Ending = 4
-        Final = 5
+        Ended = 5
         Unknown1 = 6
-        Unknown2 = 7
-        Unknown3 = 8
+        Final = 7
+        Unknown2 = 8
         Postponed = 9
-        Unknown4 = 10
+        Unknown3 = 10
     End Enum
 
     Public Enum GameTypeEnum

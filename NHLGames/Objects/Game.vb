@@ -15,6 +15,7 @@ Namespace Objects
         Public Property GameType As GameTypeEnum 'Get type of the game : 1 preseason, 2 regular, 3 series
         Public Property GameDate As DateTime
         Public Property GameState As GameStateEnum
+        Public Property GameStateDetailed As String
         Public Property GamePeriod As String '1st 2nd 3rd OT SO OT2..
         Public Property GameTimeLeft As String 'Final, 12:34, 20:00
 

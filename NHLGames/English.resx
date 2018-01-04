@@ -825,8 +825,4 @@
     <value>Live</value>
     <comment>Game panel</comment>
   </data>
-  <data name="enumundefined" xml:space="preserve">
-    <value>Undefined</value>
-    <comment>Game State Enum</comment>
-  </data>
 </root>

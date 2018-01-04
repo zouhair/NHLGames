@@ -67,8 +67,9 @@ Namespace Objects
                     currentGame.AwayAbbrev = game.SelectToken("teams.away.team.abbreviation").ToString()
                     currentGame.AwayTeam = game.SelectToken("teams.away.team.teamName").ToString()
 
-                    currentGame.GameState = CType(If(game.SelectToken("status.statusCode").ToString() > 5, 0, Convert.ToInt16(game.SelectToken("status.statusCode").ToString())), GameStateEnum)
-                    
+                    currentGame.GameState = CType(If(game.SelectToken("status.statusCode").ToString() > 7, 0, Convert.ToInt16(game.SelectToken("status.statusCode").ToString())), GameStateEnum)
+                    currentGame.GameStateDetailed = game.SelectToken("status.detailedState").ToString()
+
                     If currentGame.GameState >= GameStateEnum.InProgress Then
                         currentGame.SetLiveInfo(game)
                     End If
@@ -174,6 +175,13 @@ Namespace Objects
 
                         If Await Common.SendWebRequestAsync(Nothing, request) Then
                             result = generatedStreamUrlFix
+                        Else
+                            generatedStreamUrlFix = GetStreamUrlFix(streamUrlReturned, true)
+                            request = Common.SetHttpWebRequest(generatedStreamUrlFix)
+
+                            If Await Common.SendWebRequestAsync(Nothing, request) Then
+                                result = generatedStreamUrlFix
+                            End If
                         End If
                     End If
                     request.Abort()
@@ -183,7 +191,7 @@ Namespace Objects
             Return result
         End Function
 
-        Private Shared Function GetStreamUrlFix(url As String)
+        Private Shared Function GetStreamUrlFix(url As String, Optional forceMainServer As Boolean = false)
             If url.Contains("http://hlslive") Then
                 Dim spliter = url.Split("/")
                 Dim index As Integer = Array.FindIndex(spliter, Function(x) x.ToString().Equals("nhl"))
@@ -192,7 +200,7 @@ Namespace Objects
                     Return String.Empty
                 Else
                     Return String.Format("http://hlsvod-akc.med2.med.nhl.com/{0}/nhl/{1}/{2}/{3}/{4}/{5}",
-                                         spliter(index -1),
+                                         If (forceMainServer, "ps01", (index -1)),
                                          spliter(index +1),
                                          spliter(index +2),
                                          spliter(index +3),

@@ -65,7 +65,7 @@ Namespace Controls
                 End If
 
                 If Not showLiveScores Then lblPeriod.Text = String.Empty
-            ElseIf _game.GameState.Equals(GameStateEnum.Final) Then
+            ElseIf _game.GameState >= GameStateEnum.Ended Then
                 lblHomeScore.Visible = showScores
                 lblAwayScore.Visible = showScores
                 lblGameStatus.Visible = Not showScores
@@ -114,9 +114,9 @@ Namespace Controls
                     lblPeriod.BackColor = Color.FromKnownColor(KnownColor.Orange)
                     If showLiveScores Then
                         lblPeriod.ForeColor = Color.White
-                        lblPeriod.Text = NHLGamesMetro.RmText.GetString("enumundefined").ToUpper()
+                        lblPeriod.Text = _game.GameStateDetailed.ToUpper()
                     Else
-                        lblGameStatus.Text &= String.Format("{0}{1}", vbCrLf, NHLGamesMetro.RmText.GetString("enumundefined").ToUpper())
+                        lblGameStatus.Text &= String.Format("{0}{1}", vbCrLf, _game.GameStateDetailed.ToUpper())
                     End If
                 End If
             End If
