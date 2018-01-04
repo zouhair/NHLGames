@@ -613,4 +613,8 @@
     <value>En direct</value>
     <comment>Game panel</comment>
   </data>
+  <data name="enumundefined" xml:space="preserve">
+    <value>Non défini</value>
+    <comment>Game State Enum</comment>
+  </data>
 </root>

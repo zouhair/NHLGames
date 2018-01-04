@@ -253,7 +253,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="French.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <LastGenOutput>French1.Designer.vb</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="English.resx">

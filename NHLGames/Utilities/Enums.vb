@@ -2,6 +2,7 @@
 
     Public Enum GameStateEnum
 #Disable Warning InconsistentNaming
+        Undefined = 0
         Scheduled = 1
         Pregame = 2
         InProgress = 3

@@ -272,6 +272,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Undefined.
+        '''</summary>
+        Friend Shared ReadOnly Property enumundefined() As String
+            Get
+                Return ResourceManager.GetString("enumundefined", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Error: Checking access to path: {0}.
         '''</summary>
         Friend Shared ReadOnly Property errorAccessPath() As String
