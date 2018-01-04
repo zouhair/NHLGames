@@ -1,6 +1,7 @@
 ﻿Namespace Utilities
 
     Public Enum GameStateEnum
+        Undefined = 0
         Scheduled = 1
         Pregame = 2
         InProgress = 3
