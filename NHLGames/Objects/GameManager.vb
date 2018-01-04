@@ -168,7 +168,7 @@ Namespace Objects
                     'the server script should test url before returning it and apply the fix below if the test fails
                     If Await Common.SendWebRequestAsync(Nothing, request) Then
                         result = streamUrlReturned
-                    Else
+                    Else If streamUrlReturned.Contains("http://hlslive") Then
                         Dim generatedStreamUrlFix As String = GetStreamUrlFix(streamUrlReturned, gameStream.CdnParameter.ToString().ToLower())
 
                         If Not generatedStreamUrlFix.Equals(String.Empty) Then
@@ -194,26 +194,22 @@ Namespace Objects
         End Function
 
         Private Shared Function GetStreamUrlFix(url As String, cdn As String, Optional forceMainServer As Boolean = false)
-            If url.Contains("http://hlslive") Then
-                Dim spliter = url.Split("/")
-                Dim index As Integer = Array.FindIndex(spliter, Function(x) x.ToString().Equals("nhl"))
+            Dim spliter = url.Split("/")
+            Dim index As Integer = Array.FindIndex(spliter, Function(x) x.ToString().Equals("nhl"))
 
-                If index = 0 OrElse index + 5 <> spliter.Length - 1 Then 
-                    Return String.Empty
-                Else
-                    Return String.Format("http://hlsvod-{0}.med2.med.nhl.com/{1}/nhl/{2}/{3}/{4}/{5}/{6}",
-                                         cdn,
-                                         If (forceMainServer, "ps01", spliter(index -1)),
-                                         spliter(index +1),
-                                         spliter(index +2),
-                                         spliter(index +3),
-                                         spliter(index +4),
-                                         spliter(index +5))
-                    '/ps01{ls04}/nhl/2000/01/01/NHL_GAME_VIDEO_TEAMTEAM_M2_VISIT_20000101_1234567890123/master_wired{_web}{60}.m3u8
-                End If
+            If index = 0 OrElse index + 5 <> spliter.Length - 1 Then 
+                Return String.Empty
+            Else
+                Return String.Format("http://hlsvod-{0}.med2.med.nhl.com/{1}/nhl/{2}/{3}/{4}/{5}/{6}",
+                                        cdn,
+                                        If (forceMainServer, "ps01", spliter(index -1)),
+                                        spliter(index +1),
+                                        spliter(index +2),
+                                        spliter(index +3),
+                                        spliter(index +4),
+                                        spliter(index +5))
+                '/ps01{ls04}/nhl/2000/01/01/NHL_GAME_VIDEO_TEAMTEAM_M2_VISIT_20000101_1234567890123/master_wired{_web}{60}.m3u8
             End If
-
-            Return String.Empty
         End Function
 
         Private Shared Function ValidJsonGame(game As JObject)
