@@ -115,8 +115,9 @@ Namespace Controls
                     If showLiveScores Then
                         lblPeriod.ForeColor = Color.White
                         lblPeriod.Text = _game.GameStateDetailed.ToUpper()
+                        lblGameStatus.Text = _game.GameStateDetailed.ToUpper()
                     Else
-                        lblGameStatus.Text &= String.Format("{0}{1}", vbCrLf, _game.GameStateDetailed.ToUpper())
+                        lblGameStatus.Text = _game.GameStateDetailed.ToUpper()
                     End If
                 End If
             End If
