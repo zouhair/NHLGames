@@ -168,7 +168,7 @@ Namespace Objects
                     'the server script should test url before returning it and apply the fix below if the test fails
                     If Await Common.SendWebRequestAsync(Nothing, request) Then
                         result = streamUrlReturned
-                    Else If streamUrlReturned.Contains("http://hlslive") Then
+                    Else If streamUrlReturned.Contains("http://hlslive") AndAlso gameStream.CdnParameter.Equals(CdnType.Akc) Then
                         Dim generatedStreamUrlFix As String = GetStreamUrlFix(streamUrlReturned, gameStream.CdnParameter.ToString().ToLower())
 
                         If Not generatedStreamUrlFix.Equals(String.Empty) Then
