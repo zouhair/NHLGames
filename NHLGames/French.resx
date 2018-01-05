@@ -573,4 +573,44 @@
     <value>NHLGames serveur non disponible!</value>
     <comment>Message</comment>
   </data>
+  <data name="tipCalendar" xml:space="preserve">
+    <value>Calendrier</value>
+    <comment>Games tab</comment>
+  </data>
+  <data name="tipRefresh" xml:space="preserve">
+    <value>Rafraîchir</value>
+    <comment>Games tab</comment>
+  </data>
+  <data name="tipDayRight" xml:space="preserve">
+    <value>Jour suivant</value>
+    <comment>Games tab</comment>
+  </data>
+  <data name="tipDayLeft" xml:space="preserve">
+    <value>Jour précédent</value>
+    <comment>Games tab</comment>
+  </data>
+  <data name="tipHelp" xml:space="preserve">
+    <value>Documentation</value>
+    <comment>Main</comment>
+  </data>
+  <data name="tipMonthLeft" xml:space="preserve">
+    <value>Mois précédent</value>
+    <comment>Calendar</comment>
+  </data>
+  <data name="tipMonthRight" xml:space="preserve">
+    <value>Mois suivant</value>
+    <comment>Calendar</comment>
+  </data>
+  <data name="tipYearDown" xml:space="preserve">
+    <value>Année précédente</value>
+    <comment>Calendar</comment>
+  </data>
+  <data name="tipYearUp" xml:space="preserve">
+    <value>Année suivante</value>
+    <comment>Calendar</comment>
+  </data>
+  <data name="tipLiveGame" xml:space="preserve">
+    <value>En direct</value>
+    <comment>Game panel</comment>
+  </data>
 </root>

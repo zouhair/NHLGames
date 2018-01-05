@@ -59,9 +59,16 @@ Namespace Utilities
             Form.tabMenu.TabPages.Item(0).Text = NHLGamesMetro.RmText.GetString("tabGames")
             Form.tabMenu.TabPages.Item(1).Text = NHLGamesMetro.RmText.GetString("tabSettings")
             Form.tabMenu.TabPages.Item(2).Text = NHLGamesMetro.RmText.GetString("tabConsole")
+            Form.tt.SetToolTip(Form.btnHelp, NHLGamesMetro.RmText.GetString("tipHelp"))
 
             Form.lblNoGames.Text = NHLGamesMetro.RmText.GetString("lblNoGames")
             Form.lblStatus.Text = String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"), NHLGamesMetro.FormInstance.flpGames.Controls.Count())
+
+            'Games
+            Form.tt.SetToolTip(Form.btnYesterday, NHLGamesMetro.RmText.GetString("tipDayLeft"))
+            Form.tt.SetToolTip(Form.btnDate, NHLGamesMetro.RmText.GetString("tipCalendar"))
+            Form.tt.SetToolTip(Form.btnTomorrow, NHLGamesMetro.RmText.GetString("tipDayRight"))
+            Form.tt.SetToolTip(Form.btnRefresh, NHLGamesMetro.RmText.GetString("tipRefresh"))
 
             'Settings
             Form.lblGamePanel.Text = NHLGamesMetro.RmText.GetString("lblShowScores")
@@ -125,12 +132,13 @@ Namespace Utilities
             Form.flpCalendarPanel.Controls.Add(New Controls.CalendarControl)
         End Sub
 
-        Public Shared Sub SetSettings()
-
+        Public Shared Sub SetWindow()
             Dim windowSize = Split(ApplicationSettings.Read(Of String)(SettingsEnum.LastWindowSize, "990;655"), ";")
             Form.Width = If (windowSize.Length = 2, Convert.ToInt32(windowSize(0)), 990)
             Form.Height = If (windowSize.Length = 2, Convert.ToInt32(windowSize(1)), 655)
+        End Sub
 
+        Public Shared Sub SetSettings()        
             Form.lblVersion.Text = String.Format("v {0}.{1}.{2}", My.Application.Info.Version.Major,
                                                  My.Application.Info.Version.Minor,
                                                  My.Application.Info.Version.Build)

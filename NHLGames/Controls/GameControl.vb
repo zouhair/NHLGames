@@ -31,6 +31,7 @@ Namespace Controls
 
             If _game.IsLive Then
                 picLive.Visible = True
+                tt.SetToolTip(picLive, NHLGamesMetro.RmText.GetString("tipLiveGame"))
                 lblGameStatus.Visible = Not showLiveScores
                 lblHomeScore.Visible = showLiveScores
                 lblAwayScore.Visible = showLiveScores
@@ -64,7 +65,7 @@ Namespace Controls
                 End If
 
                 If Not showLiveScores Then lblPeriod.Text = String.Empty
-            ElseIf _game.GameState.Equals(GameStateEnum.Final) Then
+            ElseIf _game.GameState >= GameStateEnum.Ended Then
                 lblHomeScore.Visible = showScores
                 lblAwayScore.Visible = showScores
                 lblGameStatus.Visible = Not showScores
@@ -108,6 +109,15 @@ Namespace Controls
                         lblPeriod.Text = NHLGamesMetro.RmText.GetString("enumpregame").ToUpper()
                     Else
                         lblGameStatus.Text &= String.Format("{0}{1}", vbCrLf, NHLGamesMetro.RmText.GetString("enumpregame").ToUpper())
+                    End If
+                Else If _game.GameState.Equals(GameStateEnum.Undefined) Then
+                    lblPeriod.BackColor = Color.FromKnownColor(KnownColor.Orange)
+                    If showLiveScores Then
+                        lblPeriod.ForeColor = Color.White
+                        lblPeriod.Text = _game.GameStateDetailed.ToUpper()
+                        lblGameStatus.Text = _game.GameStateDetailed.ToUpper()
+                    Else
+                        lblGameStatus.Text = _game.GameStateDetailed.ToUpper()
                     End If
                 End If
             End If
@@ -202,10 +212,14 @@ Namespace Controls
             lnkEnd1.Visible = _game.IsStreamDefined(StreamType.EndzoneCam1)
             lnkEnd2.Visible = _game.IsStreamDefined(StreamType.EndzoneCam2)
 
-            If _game.GameState < GameStateEnum.Final And _game.GameDate.ToLocalTime() <= Date.Today.AddDays(1) Then
-                bpGameControl.BorderColour = Color.FromArgb(255, 0, 170, 210)
-            Else
-                bpGameControl.BorderColour = Color.DarkGray
+            If _game.GameState > GameStateEnum.Undefined Then
+                If _game.GameState < GameStateEnum.Final And _game.GameDate.ToLocalTime() <= Date.Today.AddDays(1) Then
+                    bpGameControl.BorderColour = Color.FromArgb(255, 0, 170, 210)
+                Else
+                    bpGameControl.BorderColour = Color.DarkGray
+                End If
+            Else 
+                bpGameControl.BorderColour = Color.Orange
             End If
 
             UpdateGame(_showScores, _showLiveScores, _showSeriesRecord, _showTeamCityAbr)

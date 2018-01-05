@@ -1064,6 +1064,33 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Calendrier.
+        '''</summary>
+        Friend Shared ReadOnly Property tipCalendar() As String
+            Get
+                Return ResourceManager.GetString("tipCalendar", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Jour précédent.
+        '''</summary>
+        Friend Shared ReadOnly Property tipDayLeft() As String
+            Get
+                Return ResourceManager.GetString("tipDayLeft", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Jour suivant.
+        '''</summary>
+        Friend Shared ReadOnly Property tipDayRight() As String
+            Get
+                Return ResourceManager.GetString("tipDayRight", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Download MPC.
         '''</summary>
         Friend Shared ReadOnly Property tipGetMpc() As String
@@ -1082,11 +1109,74 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Documentation.
+        '''</summary>
+        Friend Shared ReadOnly Property tipHelp() As String
+            Get
+                Return ResourceManager.GetString("tipHelp", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Exécuter l&apos;action.
         '''</summary>
         Friend Shared ReadOnly Property tipHostsExecuteAction() As String
             Get
                 Return ResourceManager.GetString("tipHostsExecuteAction", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to En direct.
+        '''</summary>
+        Friend Shared ReadOnly Property tipLiveGame() As String
+            Get
+                Return ResourceManager.GetString("tipLiveGame", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Mois précédent.
+        '''</summary>
+        Friend Shared ReadOnly Property tipMonthLeft() As String
+            Get
+                Return ResourceManager.GetString("tipMonthLeft", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Mois suivant.
+        '''</summary>
+        Friend Shared ReadOnly Property tipMonthRight() As String
+            Get
+                Return ResourceManager.GetString("tipMonthRight", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Rafraîchir.
+        '''</summary>
+        Friend Shared ReadOnly Property tipRefresh() As String
+            Get
+                Return ResourceManager.GetString("tipRefresh", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Année précédente.
+        '''</summary>
+        Friend Shared ReadOnly Property tipYearDown() As String
+            Get
+                Return ResourceManager.GetString("tipYearDown", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Année suivante.
+        '''</summary>
+        Friend Shared ReadOnly Property tipYearUp() As String
+            Get
+                Return ResourceManager.GetString("tipYearUp", resourceCulture)
             End Get
         End Property
     End Class

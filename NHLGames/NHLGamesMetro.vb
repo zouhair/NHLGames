@@ -64,6 +64,8 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Async Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
+        InitializeForm.SetWindow()
+
         SuspendLayout()
 
         Common.GetLanguage()
