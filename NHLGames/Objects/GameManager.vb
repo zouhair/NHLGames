@@ -67,10 +67,11 @@ Namespace Objects
                     currentGame.AwayAbbrev = game.SelectToken("teams.away.team.abbreviation").ToString()
                     currentGame.AwayTeam = game.SelectToken("teams.away.team.teamName").ToString()
 
-                    currentGame.GameState = CType(If(game.SelectToken("status.statusCode").ToString() > "7", 0, Convert.ToInt16(game.SelectToken("status.statusCode").ToString())), GameStateEnum)
+                    Dim statusCode = Convert.ToInt16(game.SelectToken("status.statusCode").ToString())
+                    currentGame.GameState = CType(If(statusCode > 10, 11, statusCode), GameStateEnum)
                     currentGame.GameStateDetailed = game.SelectToken("status.detailedState").ToString()
 
-                    If currentGame.GameState >= GameStateEnum.InProgress Then
+                    If currentGame.IsStreamable Then
                         currentGame.SetLiveInfo(game)
                     End If
                     

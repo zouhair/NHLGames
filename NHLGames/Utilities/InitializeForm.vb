@@ -165,6 +165,7 @@ Namespace Utilities
             End If
 
             PopulateComboBox(Form.cbServers, SettingsEnum.SelectedServer, settingsenum.ServerList, String.Empty)
+            Common.SetRedirectionServerInApp()
 
             BindWatchArgsToForm(watchArgs) 
 
