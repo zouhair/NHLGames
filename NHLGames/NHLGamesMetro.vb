@@ -421,7 +421,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub ResizeForm()
-        If _resizeDirection <> -1 Then
+        If Not _resizeDirection.Equals(-1) Then
             NativeMethods.ReleaseCaptureOfForm()
             NativeMethods.SendMessageToHandle(Handle, WindowsCode.WM_NCLBUTTONDOWN, _resizeDirection, 0)
         End If
@@ -432,19 +432,9 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub cbServers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbServers.SelectedIndexChanged 
+        If Not FormLoaded Then Return
         tlpSettings.Focus()
-        HostName = cbServers.SelectedItem.ToString()
-        Try
-            If HostName Is String.Empty Then
-                ServerIp = String.Empty
-            Else
-                ServerIp = Net.Dns.GetHostEntry(HostName).AddressList.First.ToString()
-            End If
-        Catch ex As Exception
-            ServerIp = String.Empty
-        End Try
-        HostNameResolved = HostsFile.TestEntry(DomainName, ServerIp)
-        ApplicationSettings.SetValue(SettingsEnum.SelectedServer, cbServers.SelectedItem.ToString())
+        Common.SetRedirectionServerInApp()
         InvokeElement.LoadGames()
     End Sub
 

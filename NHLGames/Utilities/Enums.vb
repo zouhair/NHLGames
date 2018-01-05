@@ -2,17 +2,18 @@
 
     Public Enum GameStateEnum
 #Disable Warning InconsistentNaming
-        Undefined = 0
+        ToBeDetermined = 0
         Scheduled = 1
         Pregame = 2
         InProgress = 3
         Ending = 4
-        Ended = 5
-        Unknown1 = 6
-        Final = 7
-        Unknown2 = 8
+        Final = 5
+        OffTheAir = 6
+        StreamEnded = 7
+        Delayed = 8
         Postponed = 9
-        Unknown3 = 10
+        Cancelled = 10
+        Undefined = 11
     End Enum
 
     Public Enum GameTypeEnum

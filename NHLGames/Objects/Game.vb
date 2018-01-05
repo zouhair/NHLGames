@@ -42,10 +42,30 @@ Namespace Objects
             End Get
         End Property
 
+        Public ReadOnly Property IsDone As Boolean
+            Get
+                Return GameState.Equals(GameStateEnum.Final) OrElse
+                    GameState.Equals(GameStateEnum.OffTheAir) OrElse
+                    GameState.Equals(GameStateEnum.StreamEnded)
+            End Get
+        End Property
+
+        Public ReadOnly Property IsUnplayable As Boolean
+            Get
+                Return GameState > GameStateEnum.StreamEnded
+            End Get
+        End Property
+
+        Public ReadOnly Property IsStreamable As Boolean
+            Get
+                Return GameState > GameStateEnum.Pregame AndAlso  GameState < GameStateEnum.Delayed
+            End Get
+        End Property
+
         Public ReadOnly Property AreAnyStreamsAvailable As Boolean
             Get
                 Return (StreamsDict IsNot Nothing) AndAlso (StreamsDict.Count > 0) AndAlso
-                    (StreamsDict.Any(Function(x) x.Value IsNot Nothing AndAlso Not x.Value.IsBroken) OrElse GameState > GameStateEnum.Pregame)
+                    (StreamsDict.Any(Function(x) x.Value IsNot Nothing AndAlso Not x.Value.IsBroken) OrElse IsStreamable)
             End Get
         End Property
 
