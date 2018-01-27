@@ -11,9 +11,9 @@ Namespace Utilities
 
             If myStream IsNot Nothing Then
                 image = Image.FromStream(myStream)
-            End If
 
-            myStream.Close()
+                myStream.Close()
+            End If
 
             Return image
         End Function
