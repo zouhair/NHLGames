@@ -12,10 +12,10 @@
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GameControl))
         Me.tt = New MetroFramework.Components.MetroToolTip()
         Me.bpGameControl = New NHLGames.Controls.BorderPanel()
-        Me.lnkLive = New MetroFramework.Controls.MetroLink()
+        Me.btnLiveReplay = New System.Windows.Forms.Button()
+        Me.btnRecordOne = New System.Windows.Forms.Button()
         Me.lblGameStatus = New MetroFramework.Controls.MetroLabel()
         Me.lblDivider = New MetroFramework.Controls.MetroLabel()
         Me.picAway = New System.Windows.Forms.PictureBox()
@@ -36,6 +36,9 @@
         Me.lnkEnd2 = New System.Windows.Forms.Button()
         Me.lnkRef = New System.Windows.Forms.Button()
         Me.lnkStar = New System.Windows.Forms.Button()
+        Me.lnkMultiAngle1 = New System.Windows.Forms.Button()
+        Me.lnkMultiAngle2 = New System.Windows.Forms.Button()
+        Me.lnkMultiAngle3 = New System.Windows.Forms.Button()
         Me.lblNotInSeason = New MetroFramework.Controls.MetroLabel()
         Me.lblStreamStatus = New MetroFramework.Controls.MetroLabel()
         Me.bpGameControl.SuspendLayout
@@ -55,7 +58,8 @@
         Me.bpGameControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.bpGameControl.BorderColour = System.Drawing.Color.LightGray
         Me.bpGameControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.bpGameControl.Controls.Add(Me.lnkLive)
+        Me.bpGameControl.Controls.Add(Me.btnLiveReplay)
+        Me.bpGameControl.Controls.Add(Me.btnRecordOne)
         Me.bpGameControl.Controls.Add(Me.lblGameStatus)
         Me.bpGameControl.Controls.Add(Me.lblDivider)
         Me.bpGameControl.Controls.Add(Me.picAway)
@@ -74,20 +78,39 @@
         Me.bpGameControl.Size = New System.Drawing.Size(312, 151)
         Me.bpGameControl.TabIndex = 9
         '
-        'lnkLive
+        'btnLiveReplay
         '
-        Me.lnkLive.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
-        Me.lnkLive.BackgroundImage = Global.NHLGames.My.Resources.Resources.live0
-        Me.lnkLive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.lnkLive.ForeColor = System.Drawing.Color.Black
-        Me.lnkLive.Location = New System.Drawing.Point(0, 0)
-        Me.lnkLive.Name = "lnkLive"
-        Me.lnkLive.Size = New System.Drawing.Size(20, 20)
-        Me.lnkLive.TabIndex = 30
-        Me.lnkLive.UseCustomBackColor = true
-        Me.lnkLive.UseCustomForeColor = true
-        Me.lnkLive.UseSelectable = true
-        Me.lnkLive.Visible = false
+        Me.btnLiveReplay.BackColor = System.Drawing.Color.Red
+        Me.btnLiveReplay.BackgroundImage = Global.NHLGames.My.Resources.Resources.live0
+        Me.btnLiveReplay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLiveReplay.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
+        Me.btnLiveReplay.FlatAppearance.BorderSize = 0
+        Me.btnLiveReplay.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
+        Me.btnLiveReplay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.btnLiveReplay.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLiveReplay.ForeColor = System.Drawing.Color.Black
+        Me.btnLiveReplay.Location = New System.Drawing.Point(1, 1)
+        Me.btnLiveReplay.Name = "btnLiveReplay"
+        Me.btnLiveReplay.Size = New System.Drawing.Size(20, 20)
+        Me.btnLiveReplay.TabIndex = 32
+        Me.btnLiveReplay.UseVisualStyleBackColor = false
+        Me.btnLiveReplay.Visible = false
+        '
+        'btnRecordOne
+        '
+        Me.btnRecordOne.BackColor = System.Drawing.Color.White
+        Me.btnRecordOne.BackgroundImage = Global.NHLGames.My.Resources.Resources.baddrecord
+        Me.btnRecordOne.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnRecordOne.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
+        Me.btnRecordOne.FlatAppearance.BorderSize = 0
+        Me.btnRecordOne.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
+        Me.btnRecordOne.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.btnRecordOne.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRecordOne.Location = New System.Drawing.Point(284, 1)
+        Me.btnRecordOne.Name = "btnRecordOne"
+        Me.btnRecordOne.Size = New System.Drawing.Size(20, 20)
+        Me.btnRecordOne.TabIndex = 31
+        Me.btnRecordOne.UseVisualStyleBackColor = false
         '
         'lblGameStatus
         '
@@ -213,6 +236,9 @@
         Me.flpStreams.Controls.Add(Me.lnkEnd2)
         Me.flpStreams.Controls.Add(Me.lnkRef)
         Me.flpStreams.Controls.Add(Me.lnkStar)
+        Me.flpStreams.Controls.Add(Me.lnkMultiAngle1)
+        Me.flpStreams.Controls.Add(Me.lnkMultiAngle2)
+        Me.flpStreams.Controls.Add(Me.lnkMultiAngle3)
         Me.flpStreams.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.flpStreams.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.flpStreams.Location = New System.Drawing.Point(1, 109)
@@ -240,7 +266,7 @@
         '
         'lnkAway
         '
-        Me.lnkAway.BackgroundImage = CType(resources.GetObject("lnkAway.BackgroundImage"),System.Drawing.Image)
+        Me.lnkAway.BackgroundImage = Global.NHLGames.My.Resources.Resources.nhltv
         Me.lnkAway.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkAway.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkAway.FlatAppearance.BorderSize = 0
@@ -257,7 +283,7 @@
         '
         'lnkNational
         '
-        Me.lnkNational.BackgroundImage = CType(resources.GetObject("lnkNational.BackgroundImage"),System.Drawing.Image)
+        Me.lnkNational.BackgroundImage = Global.NHLGames.My.Resources.Resources.nhltv
         Me.lnkNational.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkNational.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkNational.FlatAppearance.BorderSize = 0
@@ -274,7 +300,7 @@
         '
         'lnkFrench
         '
-        Me.lnkFrench.BackgroundImage = CType(resources.GetObject("lnkFrench.BackgroundImage"),System.Drawing.Image)
+        Me.lnkFrench.BackgroundImage = Global.NHLGames.My.Resources.Resources.nhltv
         Me.lnkFrench.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkFrench.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkFrench.FlatAppearance.BorderSize = 0
@@ -391,6 +417,57 @@
         Me.lnkStar.UseVisualStyleBackColor = true
         Me.lnkStar.Visible = false
         '
+        'lnkMultiAngle1
+        '
+        Me.lnkMultiAngle1.BackgroundImage = Global.NHLGames.My.Resources.Resources.anglec
+        Me.lnkMultiAngle1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.lnkMultiAngle1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkMultiAngle1.FlatAppearance.BorderSize = 0
+        Me.lnkMultiAngle1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
+        Me.lnkMultiAngle1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lnkMultiAngle1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkMultiAngle1.Location = New System.Drawing.Point(344, 6)
+        Me.lnkMultiAngle1.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.lnkMultiAngle1.Name = "lnkMultiAngle1"
+        Me.lnkMultiAngle1.Size = New System.Drawing.Size(26, 26)
+        Me.lnkMultiAngle1.TabIndex = 31
+        Me.lnkMultiAngle1.UseVisualStyleBackColor = false
+        Me.lnkMultiAngle1.Visible = false
+        '
+        'lnkMultiAngle2
+        '
+        Me.lnkMultiAngle2.BackgroundImage = Global.NHLGames.My.Resources.Resources.anglec
+        Me.lnkMultiAngle2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.lnkMultiAngle2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkMultiAngle2.FlatAppearance.BorderSize = 0
+        Me.lnkMultiAngle2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
+        Me.lnkMultiAngle2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lnkMultiAngle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkMultiAngle2.Location = New System.Drawing.Point(378, 6)
+        Me.lnkMultiAngle2.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.lnkMultiAngle2.Name = "lnkMultiAngle2"
+        Me.lnkMultiAngle2.Size = New System.Drawing.Size(26, 26)
+        Me.lnkMultiAngle2.TabIndex = 32
+        Me.lnkMultiAngle2.UseVisualStyleBackColor = false
+        Me.lnkMultiAngle2.Visible = false
+        '
+        'lnkMultiAngle3
+        '
+        Me.lnkMultiAngle3.BackgroundImage = Global.NHLGames.My.Resources.Resources.anglec
+        Me.lnkMultiAngle3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.lnkMultiAngle3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkMultiAngle3.FlatAppearance.BorderSize = 0
+        Me.lnkMultiAngle3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
+        Me.lnkMultiAngle3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lnkMultiAngle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.lnkMultiAngle3.Location = New System.Drawing.Point(412, 6)
+        Me.lnkMultiAngle3.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.lnkMultiAngle3.Name = "lnkMultiAngle3"
+        Me.lnkMultiAngle3.Size = New System.Drawing.Size(26, 26)
+        Me.lnkMultiAngle3.TabIndex = 33
+        Me.lnkMultiAngle3.UseVisualStyleBackColor = false
+        Me.lnkMultiAngle3.Visible = false
+        '
         'lblNotInSeason
         '
         Me.lblNotInSeason.BackColor = System.Drawing.Color.Transparent
@@ -442,25 +519,29 @@ End Sub
         Friend WithEvents lblHomeTeam As MetroFramework.Controls.MetroLabel
         Friend WithEvents bpGameControl As BorderPanel
         Friend WithEvents tt As MetroFramework.Components.MetroToolTip
-        Friend WithEvents flpStreams As FlowLayoutPanel
         Friend WithEvents lblPeriod As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblNotInSeason As MetroFramework.Controls.MetroLabel
         Friend WithEvents picHome As PictureBox
         Friend WithEvents lblHomeScore As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblAwayScore As MetroFramework.Controls.MetroLabel
         Friend WithEvents lblStreamStatus As MetroFramework.Controls.MetroLabel
+        Friend WithEvents lblGameStatus As MetroFramework.Controls.MetroLabel
+        Friend WithEvents lblDivider As MetroFramework.Controls.MetroLabel
+        Friend WithEvents btnRecordOne As Button
+        Friend WithEvents btnLiveReplay As Button
+        Friend WithEvents flpStreams As FlowLayoutPanel
         Friend WithEvents lnkHome As Button
         Friend WithEvents lnkAway As Button
         Friend WithEvents lnkNational As Button
         Friend WithEvents lnkFrench As Button
         Friend WithEvents lnkThree As Button
         Friend WithEvents lnkSix As Button
-        Friend WithEvents lnkEnd1 As Button
         Friend WithEvents lnkEnd2 As Button
         Friend WithEvents lnkRef As Button
-        Friend WithEvents lblGameStatus As MetroFramework.Controls.MetroLabel
-        Friend WithEvents lblDivider As MetroFramework.Controls.MetroLabel
         Friend WithEvents lnkStar As Button
-        Friend WithEvents lnkLive As MetroFramework.Controls.MetroLink
+        Friend WithEvents lnkMultiAngle1 As Button
+        Friend WithEvents lnkMultiAngle2 As Button
+        Friend WithEvents lnkMultiAngle3 As Button
+        Friend WithEvents lnkEnd1 As Button
     End Class
 End Namespace
