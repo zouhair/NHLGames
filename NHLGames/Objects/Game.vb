@@ -38,15 +38,19 @@ Namespace Objects
 
         Public ReadOnly Property IsLive As Boolean
             Get
-                Return GameState.Equals(GameStateEnum.InProgress) OrElse GameState.Equals(GameStateEnum.Ending)
+                Return GameState.Equals(GameStateEnum.InProgress) OrElse GameState.Equals(GameStateEnum.Ending) OrElse GameState.Equals(GameStateEnum.Ended)
             End Get
         End Property
 
-        Public ReadOnly Property IsDone As Boolean
+        Public ReadOnly Property IsFinal As Boolean
             Get
-                Return GameState.Equals(GameStateEnum.Final) OrElse
-                    GameState.Equals(GameStateEnum.OffTheAir) OrElse
-                    GameState.Equals(GameStateEnum.StreamEnded)
+                Return GameState.Equals(GameStateEnum.Ended) OrElse GameState.Equals(GameStateEnum.OffTheAir) OrElse GameState.Equals(GameStateEnum.StreamEnded)
+            End Get
+        End Property
+
+        Public ReadOnly Property IsOffTheAir As Boolean
+            Get
+                Return GameState.Equals(GameStateEnum.OffTheAir) OrElse GameState.Equals(GameStateEnum.StreamEnded)
             End Get
         End Property
 

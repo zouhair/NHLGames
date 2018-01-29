@@ -2,6 +2,7 @@
 Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Resources
+Imports System.Windows
 Imports MetroFramework.Controls
 Imports NHLGames.Controls
 Imports NHLGames.My.Resources
@@ -39,8 +40,8 @@ Public Class NHLGamesMetro
 
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
     Public Shared Sub Main()
-        AddHandler Application.ThreadException, AddressOf Form1_UIThreadException
-        Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
+        AddHandler Forms.Application.ThreadException, AddressOf Form1_UIThreadException
+        Forms.Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
         AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf CurrentDomain_UnhandledException
 
         Dim form As New NHLGamesMetro()
@@ -48,7 +49,7 @@ Public Class NHLGamesMetro
 
         Dim writer = New ConsoleRedirectStreamWriter(form.txtConsole)
         Console.SetOut(writer)
-        Application.Run(form)
+        Forms.Application.Run(form)
     End Sub
 
     Private Shared Sub Form1_UIThreadException(ByVal sender As Object, ByVal t As ThreadExceptionEventArgs)
@@ -72,7 +73,6 @@ Public Class NHLGamesMetro
         tabMenu.SelectedIndex = 0
         FlpCalendar = flpCalendarPanel
         InitializeForm.SetSettings()
-
         Await Common.CheckAppCanRun()
         Common.CheckHostsFile()
         
@@ -535,19 +535,19 @@ Public Class NHLGamesMetro
 
     Private Sub btnHostsFileActions_Click(sender As Object, e As EventArgs) Handles btnHostsFileActions.Click
         If cbHostsFileActions.SelectedIndex = 0 Then
-            If HostsFile.TestEntry(DomainName, ServerIp) Then
+            If HostsFile.TestEntry() Then
                 InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsSuccess"), RmText.GetString("msgSuccess"), MessageBoxButtons.OK)
             Else
                 InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsFailure"), RmText.GetString("msgFailure"), MessageBoxButtons.OK)
             End If
         ElseIf cbHostsFileActions.SelectedIndex = 1 Then
-            HostsFile.AddEntry(ServerIp, DomainName)
+            HostsFile.AddEntry()
         ElseIf cbHostsFileActions.SelectedIndex = 2 Then
-            HostsFile.CleanHosts(DomainName)
+            HostsFile.CleanHosts()
         ElseIf cbHostsFileActions.SelectedIndex = 3 Then
             HostsFile.OpenHostsFile()
         ElseIf cbHostsFileActions.SelectedIndex = 4 Then
-            Clipboard.SetText(ServerIp & vbTab & DomainName)
+            Forms.Clipboard.SetText(ServerIp & vbTab & DomainName)
             InvokeElement.MsgBoxBlue(String.Format(RmText.GetString("msgHostsCopyEntry"), ServerIp & " " & DomainName), RmText.GetString("msgSuccess"), MessageBoxButtons.OK)
         Else 
             HostsFile.OpenHostsFile(false)
@@ -625,24 +625,40 @@ Public Class NHLGamesMetro
         Dim vlcExists = vlcPath <> "" AndAlso File.Exists(vlcPath)
         Dim mpcExists = mpcPath <> "" AndAlso File.Exists(mpcPath)
         Dim mpvExists = mpvPath <> "" AndAlso File.Exists(mpvPath)
-        Dim report = $"NHLGames Bug Report {lblVersion.Text}{vbCrLf}{vbCrLf}" &
+        Dim version = String.Format("v {0}.{1}.{2}.{3}", My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
+        Dim report = $"NHLGames Bug Report {version}{vbCrLf}{vbCrLf}" &
                      $"Operating system: {My.Computer.Info.OSFullName.ToString()} {x64.ToString()}{vbCrLf}{vbCrLf}" &
                      $"Form: {If (Not String.IsNullOrEmpty(lblDate.Text), "loaded", "not loaded")}, " &
                      $"{flpGames.Controls.Count} games currently on form, " &
                      $"Spinner (games) {If (SpnLoadingVisible, "visible", "invisible")} {SpnLoadingValue.ToString()}/{SpnLoadingMaxValue.ToString()}, " &
                      $"Spinner (stream) {If (SpnStreamingVisible, "visible", "invisible")} {SpnStreamingValue.ToString()}/{SpnStreamingMaxValue.ToString()}{vbCrLf}{vbCrLf}" &
                      $"Servers: NHLGames IP {If (My.Computer.Network.Ping(ServerIp), "found", "not found")} ({cbServers.SelectedItem.ToString()}), " &
-                     $"NHL.TV redirection is{If (HostsFile.TestEntry(DomainName, ServerIp), " working", "n't working")} (Hosts file tested){vbCrLf}{vbCrLf}" &
+                     $"NHL.TV redirection is{If (HostsFile.TestEntry(), " working", "n't working")} (Hosts file tested){vbCrLf}{vbCrLf}" &
                      $"Selected player: {player.ToString()}{vbCrLf}{vbCrLf}" &
                      $"Streamer path: {streamerPath.ToString()} [{If (streamerPath.Equals(txtStreamerPath.Text), "on form", "not on form")}] [{If (streamerExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
                      $"VLC path: {vlcPath.ToString()} [{If (vlcPath.Equals(txtVLCPath.Text), "on form", "not on form")}] [{If (vlcExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
                      $"MPC path: {mpcPath.ToString()} [{If (mpcPath.Equals(txtMPCPath.Text), "on form", "not on form")}] [{If (mpcExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
                      $"MPV path: {mpvPath.ToString()} [{If (mpvPath.Equals(txtMpvPath.Text), "on form", "not on form")}] [{If (mpvExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
                      $"Console log: {vbCrLf}{vbCrLf}{txtConsole.Text.ToString()}"
-        Clipboard.SetText(report)
+        Forms.Clipboard.SetText(report)
     End Sub
 
     Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         If btnMaximize.Visible Then ApplicationSettings.SetValue(SettingsEnum.LastWindowSize, Width & ";" & Height)
+    End Sub
+
+    Private Sub tbLiveRewind_MouseUp(sender As Object, e As MouseEventArgs) Handles tbLiveRewind.MouseUp
+        _writeToConsoleSettingsChanged(lblLiveRewind.Text, tbLiveRewind.Value)
+    End Sub
+
+    Private Sub tbLiveRewind_ValueChanged(sender As Object, e As EventArgs) Handles tbLiveRewind.ValueChanged
+        lblLiveRewindDetails.Text = String.Format(RmText.GetString("lblLiveRewindDetails"), tbLiveRewind.Value)
+        Player.RenewArgs()
+        
+        For each game As GameControl In flpGames.Controls
+            If game.LiveReplayCode = LiveReplayCode.Rewind Then
+                game.SetLiveStatusIcon()
+            End If
+        Next
     End Sub
 End Class

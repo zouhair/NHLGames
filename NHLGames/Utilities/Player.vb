@@ -69,7 +69,7 @@ Namespace Utilities
                         taskPlayerWatcher.Start()
                     End If
                     Console.WriteLine(line)
-                    If line.ToLower().Contains("could not open stream") Then
+                    If line.ToLower().Contains("could not open stream") OrElse line.ToLower().Contains("failed to read") Then
                         Console.WriteLine(English.errorStreamFailed)
                     End If
                     Thread.Sleep(30) 'to let some time for the progress bar to move
@@ -110,6 +110,7 @@ Namespace Utilities
 
                 watchArgs.Is60Fps = form.cbStreamQuality.SelectedIndex = 0
                 watchArgs.Quality =  CType(form.cbStreamQuality.SelectedIndex, StreamQuality)
+                watchArgs.StreamLiveRewind = form.tbLiveRewind.Value
 
                 If form.rbMpv.Checked Then
                     watchArgs.PlayerType = PlayerTypeEnum.Mpv
@@ -131,11 +132,13 @@ Namespace Utilities
                     watchArgs.Cdn = CdnType.Akc
                 End If
 
-                watchArgs.UsePlayerArgs = form.tgPlayer.Checked
-                watchArgs.PlayerArgs = form.txtPlayerArgs.Text
+                watchArgs.UseCustomPlayerArgs = form.tgPlayer.Checked
+                watchArgs.CustomPlayerArgs = form.txtPlayerArgs.Text
 
-                watchArgs.UseStreamerArgs = form.tgStreamer.Checked
-                watchArgs.StreamerArgs = form.txtStreamerArgs.Text
+                watchArgs.UseCustomStreamerArgs = form.tgStreamer.Checked
+                watchArgs.CustomStreamerArgs = form.txtStreamerArgs.Text
+
+                watchArgs.StreamLiveRewind = form.tbLiveRewind.Value
 
                 watchArgs.UseOutputArgs = form.tgOutput.Checked
                 watchArgs.PlayerOutputPath = form.txtOutputArgs.Text

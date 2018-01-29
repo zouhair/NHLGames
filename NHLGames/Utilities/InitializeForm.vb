@@ -86,6 +86,8 @@ Namespace Utilities
             Form.lblStreamerArgs.Text = NHLGamesMetro.RmText.GetString("lblStreamerArgs")
             Form.lblLanguage.Text = NHLGamesMetro.RmText.GetString("lblLanguage")
             Form.lblUseAlternateCdn.Text = NHLGamesMetro.RmText.GetString("lblAlternateCdn")
+            Form.lblLiveRewind.Text = NHLGamesMetro.RmText.GetString("lblLiveRewind")
+            Form.lblLiveRewindDetails.Text = String.Format(NHLGamesMetro.RmText.GetString("lblLiveRewindDetails"), NHLGamesMetro.FormInstance.tbLiveRewind.Value)
 
             Form.lblGamePanel.Text = NHLGamesMetro.RmText.GetString("lblGamePanel")
             Form.lblShowFinalScores.Text = NHLGamesMetro.RmText.GetString("lblShowFinalScores")
@@ -242,6 +244,8 @@ Namespace Utilities
 
                 Form.tgAlternateCdn.Checked = watchArgs.Cdn = CdnType.L3C
 
+                Form.tbLiveRewind.Value = watchArgs.StreamLiveRewind
+
                 Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc
                 Form.rbMPC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpc
                 Form.rbMpv.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpv
@@ -254,13 +258,13 @@ Namespace Utilities
                     Player.RenewArgs()
                 End If
 
-                Form.tgPlayer.Checked = watchArgs.UsePlayerArgs
-                Form.txtPlayerArgs.Enabled = watchArgs.UsePlayerArgs
-                Form.txtPlayerArgs.Text = watchArgs.PlayerArgs
+                Form.tgPlayer.Checked = watchArgs.UseCustomPlayerArgs
+                Form.txtPlayerArgs.Enabled = watchArgs.UseCustomPlayerArgs
+                Form.txtPlayerArgs.Text = watchArgs.CustomPlayerArgs
 
-                Form.tgStreamer.Checked = watchArgs.UsestreamerArgs
-                Form.txtStreamerArgs.Enabled = watchArgs.UsestreamerArgs
-                Form.txtStreamerArgs.Text = watchArgs.streamerArgs
+                Form.tgStreamer.Checked = watchArgs.UseCustomStreamerArgs
+                Form.txtStreamerArgs.Enabled = watchArgs.UseCustomStreamerArgs
+                Form.txtStreamerArgs.Text = watchArgs.CustomStreamerArgs
 
                 Form.txtOutputArgs.Text = watchArgs.PlayerOutputPath
                 Form.txtOutputArgs.Enabled = watchArgs.UseOutputArgs

@@ -138,28 +138,18 @@ Namespace Utilities
 
         Public Shared Sub SetRedirectionServerInApp()
             NHLGamesMetro.HostName = NHLGamesMetro.FormInstance.cbServers.SelectedItem.ToString()
-
-            If NHLGamesMetro.HostName.Equals(String.Empty) Then
-                NHLGamesMetro.ServerIp = String.Empty
-            Else
-                Try
-                    NHLGamesMetro.ServerIp = Dns.GetHostEntry(NHLGamesMetro.HostName).AddressList.First.ToString()
-                Catch ex As Exception
-                    NHLGamesMetro.ServerIp = String.Empty
-                End Try
-            End If
-
-            NHLGamesMetro.HostNameResolved = HostsFile.TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp)
+            HostsFile.SetServerIp()
+            NHLGamesMetro.HostNameResolved = HostsFile.TestEntry()
             ApplicationSettings.SetValue(SettingsEnum.SelectedServer, NHLGamesMetro.FormInstance.cbServers.SelectedItem.ToString())
         End Sub
 
         Public Shared Sub CheckHostsFile
-            If (HostsFile.TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp) = False) Then
+            If (HostsFile.TestEntry() = False) Then
                 If HostsFile.EnsureAdmin() Then
                     If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgHostnameSet"), 
                                                 NHLGamesMetro.RmText.GetString("msgAddHost"), 
                                                 MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                        HostsFile.AddEntry(NHLGamesMetro.ServerIp,  NHLGamesMetro.DomainName, False)
+                        HostsFile.AddEntry(False)
                     End If
                 End If
             Else 

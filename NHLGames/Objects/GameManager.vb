@@ -10,7 +10,8 @@ Namespace Objects
                                           {"HOME", StreamType.Home}, {"AWAY", StreamType.Away}, {"NATIONAL", StreamType.National}, {"FRENCH", StreamType.French},
                                           {"Multi-Cam 1", StreamType.MultiCam1}, {"Multi-Cam 2", StreamType.MultiCam2},
                                           {"Endzone Cam 1", StreamType.EndzoneCam1},{"Endzone Cam 2", StreamType.EndzoneCam2},
-                                          {"Ref Cam", StreamType.RefCam}, {"Star Cam", StreamType.StarCam}}
+                                          {"Ref Cam", StreamType.RefCam}, {"Star Cam", StreamType.StarCam},
+                                          {"Multi-Angle 1", StreamType.MultiAngle1}, {"Multi-Angle 2", StreamType.MultiAngle2}, {"Multi-Angle 3", StreamType.MultiAngle3}}
 
         Private Const MediaOff = "MEDIA_OFF"
 
@@ -68,6 +69,7 @@ Namespace Objects
                     currentGame.AwayTeam = game.SelectToken("teams.away.team.teamName").ToString()
 
                     Dim statusCode = Convert.ToInt16(game.SelectToken("status.statusCode").ToString())
+
                     currentGame.GameState = CType(If(statusCode > 10, 11, statusCode), GameStateEnum)
                     currentGame.GameStateDetailed = game.SelectToken("status.detailedState").ToString()
 

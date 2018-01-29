@@ -7,7 +7,7 @@
         Pregame = 2
         InProgress = 3
         Ending = 4
-        Final = 5
+        Ended = 5
         OffTheAir = 6
         StreamEnded = 7
         Delayed = 8
@@ -34,6 +34,9 @@
         MultiCam2
         RefCam
         StarCam
+        MultiAngle1
+        MultiAngle2
+        MultiAngle3
     End Enum
 
     Public Enum CdnType
@@ -127,10 +130,8 @@
 
     Public Enum LiveReplayCode
         Live = 0
-        _5 = 1
-        _10 = 2
-        _30 = 3
-        Full = 4
+        Rewind
+        Replay
     End Enum
 #Enable Warning InconsistentNaming
 End Namespace
