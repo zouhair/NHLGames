@@ -78,7 +78,7 @@ Namespace Objects
 
         Private Function ReplayArgs() As String
             If PlayerType.Equals(PlayerTypeEnum.Vlc) Then
-                Return $"--ringbuffer-size=8M --hls-segment-threads=2 "
+                Return $"--ringbuffer-size=8M --hls-segment-threads=4 "
             Else If GameIsOnAir AndAlso Not StreamLiveReplayCode.Equals(LiveReplayCode.Live) Then
                 Return $"--ringbuffer-size=1M --hls-segment-threads=2 --hls-live-edge={ReplayMinutes()} "
             Else
