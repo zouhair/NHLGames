@@ -875,6 +875,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Now.
+        '''</summary>
+        Friend Shared ReadOnly Property lblNow() As String
+            Get
+                Return ResourceManager.GetString("lblNow", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to OBS.
         '''</summary>
         Friend Shared ReadOnly Property lblObs() As String

@@ -14,6 +14,7 @@
         Private Sub InitializeComponent()
         Me.tt = New MetroFramework.Components.MetroToolTip()
         Me.bpGameControl = New NHLGames.Controls.BorderPanel()
+        Me.flpSetRecording = New System.Windows.Forms.FlowLayoutPanel()
         Me.btnLiveReplay = New System.Windows.Forms.Button()
         Me.btnRecordOne = New System.Windows.Forms.Button()
         Me.lblGameStatus = New MetroFramework.Controls.MetroLabel()
@@ -58,6 +59,7 @@
         Me.bpGameControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.bpGameControl.BorderColour = System.Drawing.Color.LightGray
         Me.bpGameControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.bpGameControl.Controls.Add(Me.flpSetRecording)
         Me.bpGameControl.Controls.Add(Me.btnLiveReplay)
         Me.bpGameControl.Controls.Add(Me.btnRecordOne)
         Me.bpGameControl.Controls.Add(Me.lblGameStatus)
@@ -78,6 +80,19 @@
         Me.bpGameControl.Size = New System.Drawing.Size(312, 151)
         Me.bpGameControl.TabIndex = 9
         '
+        'flpSetRecording
+        '
+        Me.flpSetRecording.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.flpSetRecording.AutoSize = true
+        Me.flpSetRecording.BackColor = System.Drawing.Color.White
+        Me.flpSetRecording.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft
+        Me.flpSetRecording.Location = New System.Drawing.Point(294, 22)
+        Me.flpSetRecording.Margin = New System.Windows.Forms.Padding(0)
+        Me.flpSetRecording.Name = "flpSetRecording"
+        Me.flpSetRecording.Size = New System.Drawing.Size(12, 12)
+        Me.flpSetRecording.TabIndex = 33
+        Me.flpSetRecording.Visible = false
+        '
         'btnLiveReplay
         '
         Me.btnLiveReplay.BackColor = System.Drawing.Color.Red
@@ -89,9 +104,9 @@
         Me.btnLiveReplay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
         Me.btnLiveReplay.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLiveReplay.ForeColor = System.Drawing.Color.Black
-        Me.btnLiveReplay.Location = New System.Drawing.Point(1, 1)
+        Me.btnLiveReplay.Location = New System.Drawing.Point(2, 1)
         Me.btnLiveReplay.Name = "btnLiveReplay"
-        Me.btnLiveReplay.Size = New System.Drawing.Size(20, 20)
+        Me.btnLiveReplay.Size = New System.Drawing.Size(18, 18)
         Me.btnLiveReplay.TabIndex = 32
         Me.btnLiveReplay.UseVisualStyleBackColor = false
         Me.btnLiveReplay.Visible = false
@@ -103,14 +118,16 @@
         Me.btnRecordOne.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnRecordOne.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
         Me.btnRecordOne.FlatAppearance.BorderSize = 0
-        Me.btnRecordOne.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
-        Me.btnRecordOne.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.btnRecordOne.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.btnRecordOne.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
         Me.btnRecordOne.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRecordOne.Location = New System.Drawing.Point(284, 1)
+        Me.btnRecordOne.Location = New System.Drawing.Point(288, 2)
+        Me.btnRecordOne.Margin = New System.Windows.Forms.Padding(0)
         Me.btnRecordOne.Name = "btnRecordOne"
-        Me.btnRecordOne.Size = New System.Drawing.Size(20, 20)
+        Me.btnRecordOne.Size = New System.Drawing.Size(18, 18)
         Me.btnRecordOne.TabIndex = 31
         Me.btnRecordOne.UseVisualStyleBackColor = false
+        Me.btnRecordOne.Visible = false
         '
         'lblGameStatus
         '
@@ -507,6 +524,7 @@
         Me.Padding = New System.Windows.Forms.Padding(3)
         Me.Size = New System.Drawing.Size(318, 157)
         Me.bpGameControl.ResumeLayout(false)
+        Me.bpGameControl.PerformLayout
         CType(Me.picAway,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.picHome,System.ComponentModel.ISupportInitialize).EndInit
         Me.flpStreams.ResumeLayout(false)
@@ -543,5 +561,6 @@ End Sub
         Friend WithEvents lnkMultiAngle2 As Button
         Friend WithEvents lnkMultiAngle3 As Button
         Friend WithEvents lnkEnd1 As Button
+        Friend WithEvents flpSetRecording As FlowLayoutPanel
     End Class
 End Namespace

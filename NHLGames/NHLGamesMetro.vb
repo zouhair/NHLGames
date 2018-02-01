@@ -270,8 +270,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnDate_Click(sender As Object, e As EventArgs) Handles btnDate.Click
-        Dim val = Not flpCalendarPanel.Visible
-        flpCalendarPanel.Visible = val
+        flpCalendarPanel.Visible = Not flpCalendarPanel.Visible
     End Sub
 
     Private Sub lblDate_TextChanged(sender As Object, e As EventArgs) Handles lblDate.TextChanged
@@ -660,5 +659,17 @@ Public Class NHLGamesMetro
                 game.SetLiveStatusIcon()
             End If
         Next
+    End Sub
+
+    Private Sub btnRecord_Click(sender As Object, e As EventArgs) Handles btnRecord.Click
+        flpRecordList.Visible = Not flpRecordList.Visible
+    End Sub
+
+    Private Sub flpRecordList_VisibleChanged(sender As Object, e As EventArgs) Handles flpRecordList.VisibleChanged
+        If flpRecordList.Visible Then 
+            btnRecord.BackColor = Color.FromArgb(0, 170, 210)
+        Else
+            btnRecord.BackColor = Color.FromArgb(64, 64, 64)
+        End If
     End Sub
 End Class

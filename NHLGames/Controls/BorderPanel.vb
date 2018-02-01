@@ -4,8 +4,8 @@
         Implements IDisposable
 
         Public Sub New()
-            SetStyle(ControlStyles.UserPaint Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
-            BorderColour = Color.Black
+            'SetStyle(ControlStyles.UserPaint Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
+            BorderColour = Color.Gray
         End Sub
 
         Protected Overrides Sub OnPaint(e As PaintEventArgs)

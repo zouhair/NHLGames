@@ -71,6 +71,7 @@ Namespace Utilities
                     Console.WriteLine(line)
                     If line.ToLower().Contains("could not open stream") OrElse line.ToLower().Contains("failed to read") Then
                         Console.WriteLine(English.errorStreamFailed)
+                        Throw New Exception()
                     End If
                     Thread.Sleep(30) 'to let some time for the progress bar to move
                 End While

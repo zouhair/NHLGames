@@ -187,6 +187,18 @@
     <Compile Include="Controls\GameControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\SetRecordControl.Designer.vb">
+      <DependentUpon>SetRecordControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SetRecordControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OneRecordControl.Designer.vb">
+      <DependentUpon>OneRecordControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OneRecordControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="English.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -251,6 +263,12 @@
     <EmbeddedResource Include="Controls\GameControl.resx">
       <DependentUpon>GameControl.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SetRecordControl.resx">
+      <DependentUpon>SetRecordControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OneRecordControl.resx">
+      <DependentUpon>OneRecordControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="French.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <Generator>ResXFileCodeGenerator</Generator>
@@ -260,7 +278,6 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>English.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="NHLGamesMetro.resx">
       <DependentUpon>NHLGamesMetro.vb</DependentUpon>

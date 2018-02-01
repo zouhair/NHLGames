@@ -893,4 +893,16 @@
     <value>Added to recordings</value>
     <comment>Game panel</comment>
   </data>
+  <data name="lblNow" xml:space="preserve">
+    <value>Now</value>
+    <comment>Set record panel</comment>
+  </data>
+  <data name="lblStream" xml:space="preserve">
+    <value>Stream</value>
+    <comment>Set record panel</comment>
+  </data>
+  <data name="lblTime" xml:space="preserve">
+    <value>Time</value>
+    <comment>Set record panel</comment>
+  </data>
 </root>

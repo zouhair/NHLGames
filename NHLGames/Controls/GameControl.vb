@@ -19,6 +19,12 @@ Namespace Controls
             End Get
         End Property
 
+        Public ReadOnly Property GetGameStreamsDict As Dictionary(Of StreamType, GameStream)
+            Get
+                Return _game.StreamsDict
+            End Get
+        End Property
+
         Public Sub UpdateGame(showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean, showTeamCityAbr As Boolean, Optional game As Game = Nothing) 
             If game IsNot Nothing Then 
                 If game.StreamsDict Is Nothing Then Return
@@ -73,7 +79,7 @@ Namespace Controls
                 lblAwayScore.Visible = showScores
                 lblGameStatus.Visible = Not showScores
 
-                SetRecordIcon(True, False)
+                SetRecordIcon()
 
                 If _game.HomeScore < _game.AwayScore Then
                     lblHomeScore.ForeColor = Color.Gray
@@ -108,7 +114,7 @@ Namespace Controls
                 lblGameStatus.Visible = True
                 lblGameStatus.Text = _game.GameDate.ToLocalTime().ToString("h:mm tt")
 
-                SetRecordIcon(True, False)
+                SetRecordIcon()
 
                 If _game.GameState.Equals(GameStateEnum.Pregame) Then
                     lblPeriod.BackColor = Color.FromArgb(255, 0, 170, 210)
@@ -171,19 +177,26 @@ Namespace Controls
             tt.SetToolTip(picHome, String.Format(NHLGamesMetro.RmText.GetString("lblHomeTeam"), _game.Home, _game.HomeTeam))
 
             SetLiveStatusIcon()
+
+            flpSetRecording.Controls.Clear()
+            flpSetRecording.Controls.Add(new SetRecordControl)
         End Sub
 
-        Public Sub SetRecordIcon(Optional isVisible As Boolean = True, Optional isBlue As Boolean = True, Optional isAdded As Boolean = False)
-            btnRecordOne.Visible = isVisible
-            If isVisible Then
+        Public Sub SetRecordIcon(Optional isAdded As Boolean = False)
+            Dim isBlue = _game.IsLive OrElse _game.GameState.Equals(GameStateEnum.Pregame)
+            If btnRecordOne.Visible Then
                 If btnRecordOne.BackgroundImage IsNot Nothing Then btnRecordOne.BackgroundImage.Dispose()
                 btnRecordOne.BackgroundImage = 
                     ImageFetcher.GetEmbeddedImage($"{If (isBlue, "b", "w")}{If (isAdded, "recording", "addrecord")}", True)
-                btnRecordOne.BackColor = If (isBlue, Color.White, Color.FromArgb(64, 64, 64))
                 btnRecordOne.FlatAppearance.BorderColor = If (isBlue, Color.FromArgb(0, 170, 210), Color.FromArgb(224, 224, 224))
-                btnRecordOne.FlatAppearance.MouseDownBackColor = If (isBlue, Color.FromArgb(64, 64, 64), Color.White)
-                btnRecordOne.FlatAppearance.MouseOverBackColor = If (isBlue, Color.FromArgb(224, 224, 224), Color.FromArgb(0, 170, 210))
+                btnRecordOne.FlatAppearance.MouseDownBackColor = If (isBlue, Color.FromArgb(224, 224, 224), Color.White)
+                btnRecordOne.FlatAppearance.MouseOverBackColor = If (isBlue, Color.FromArgb(64, 64, 64), Color.FromArgb(0, 170, 210))
                 tt.SetToolTip(btnRecordOne, NHLGamesMetro.RmText.GetString(If (isAdded, "tipRecording", "tipAddRecord")))
+                If isBlue Then
+                    btnRecordOne.BackColor = If (flpSetRecording.Visible,Color.Red,  Color.White)
+                Else
+                    btnRecordOne.BackColor = If (flpSetRecording.Visible, Color.FromArgb(0, 170, 210), Color.FromArgb(64, 64, 64))
+                End If
             End If
         End Sub
 
@@ -218,6 +231,8 @@ Namespace Controls
             _showSeriesRecord = showSeriesRecord
             _showTeamCityAbr = showTeamCityAbr
             _game = game
+
+            flpSetRecording.Controls.Add(new SetRecordControl)
 
             SetWholeGamePanel()
         End Sub
@@ -460,6 +475,7 @@ Namespace Controls
                     If lblNotInSeason IsNot Nothing Then lblNotInSeason.Dispose()
                     If lblStreamStatus IsNot Nothing Then lblStreamStatus.Dispose()
                     If btnRecordOne IsNot Nothing Then btnRecordOne.Dispose()
+                    If flpSetRecording IsNot Nothing Then flpSetRecording.Dispose()
                     If bpGameControl IsNot Nothing Then
                         bpGameControl.Controls.Clear()
                         bpGameControl.Dispose()
@@ -474,11 +490,13 @@ Namespace Controls
         End Sub
 
         Private Sub btnRecordOne_Click(sender As Object, e As EventArgs) Handles btnRecordOne.Click
-           SetRecordIcon(True, _game.IsLive, True)
+            flpSetRecording.Visible = Not flpSetRecording.Visible
+            SetRecordIcon(True)
         End Sub
 
         Private Sub btnLiveReplay_Click(sender As Object, e As EventArgs)  Handles btnLiveReplay.Click
             SetLiveStatusIcon(true)
         End Sub
+
     End Class
 End Namespace

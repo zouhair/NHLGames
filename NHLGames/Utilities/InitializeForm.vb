@@ -131,7 +131,13 @@ Namespace Utilities
 
             'Calendar
             Form.flpCalendarPanel.Controls.Clear()
-            Form.flpCalendarPanel.Controls.Add(New Controls.CalendarControl)
+            Form.flpCalendarPanel.Controls.Add(New Controls.CalendarControl())
+
+            'RecordList
+            Form.flpRecordList.Controls.Clear()
+            Form.flpRecordList.Controls.Add(New Controls.OneRecordControl())
+            Form.flpRecordList.Controls.Add(New Controls.OneRecordControl())
+            Form.btnRecord.Text = Form.flpRecordList.Controls.Count
         End Sub
 
         Public Shared Sub SetWindow()

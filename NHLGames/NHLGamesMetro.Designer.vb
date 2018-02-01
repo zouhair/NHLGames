@@ -31,6 +31,7 @@ Partial Class NHLGamesMetro
         Me.txtConsole = New System.Windows.Forms.RichTextBox()
         Me.tabMenu = New MetroFramework.Controls.MetroTabControl()
         Me.tabGames = New MetroFramework.Controls.MetroTabPage()
+        Me.flpRecordList = New System.Windows.Forms.FlowLayoutPanel()
         Me.spnLoading = New MetroFramework.Controls.MetroProgressSpinner()
         Me.lblDate = New MetroFramework.Controls.MetroLabel()
         Me.lblNoGames = New System.Windows.Forms.Label()
@@ -238,6 +239,7 @@ Partial Class NHLGamesMetro
         '
         'tabGames
         '
+        Me.tabGames.Controls.Add(Me.flpRecordList)
         Me.tabGames.Controls.Add(Me.spnLoading)
         Me.tabGames.Controls.Add(Me.lblDate)
         Me.tabGames.Controls.Add(Me.lblNoGames)
@@ -259,6 +261,19 @@ Partial Class NHLGamesMetro
         Me.tabGames.VerticalScrollbarBarColor = false
         Me.tabGames.VerticalScrollbarHighlightOnWheel = false
         Me.tabGames.VerticalScrollbarSize = 10
+        '
+        'flpRecordList
+        '
+        Me.flpRecordList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.flpRecordList.AutoSize = true
+        Me.flpRecordList.BackColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
+        Me.flpRecordList.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
+        Me.flpRecordList.Location = New System.Drawing.Point(890, 41)
+        Me.flpRecordList.Name = "flpRecordList"
+        Me.flpRecordList.Padding = New System.Windows.Forms.Padding(3)
+        Me.flpRecordList.Size = New System.Drawing.Size(38, 30)
+        Me.flpRecordList.TabIndex = 20
+        Me.flpRecordList.Visible = false
         '
         'spnLoading
         '
@@ -308,14 +323,15 @@ Partial Class NHLGamesMetro
         '
         'flpCalendarPanel
         '
+        Me.flpCalendarPanel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.flpCalendarPanel.AutoSize = true
         Me.flpCalendarPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
         Me.flpCalendarPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
-        Me.flpCalendarPanel.Location = New System.Drawing.Point(35, 41)
+        Me.flpCalendarPanel.Location = New System.Drawing.Point(290, 41)
         Me.flpCalendarPanel.Margin = New System.Windows.Forms.Padding(0)
         Me.flpCalendarPanel.Name = "flpCalendarPanel"
         Me.flpCalendarPanel.Padding = New System.Windows.Forms.Padding(2)
-        Me.flpCalendarPanel.Size = New System.Drawing.Size(34, 30)
+        Me.flpCalendarPanel.Size = New System.Drawing.Size(30, 30)
         Me.flpCalendarPanel.TabIndex = 10
         Me.flpCalendarPanel.Visible = false
         '
@@ -369,14 +385,16 @@ Partial Class NHLGamesMetro
         Me.btnRecord.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White
         Me.btnRecord.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
         Me.btnRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRecord.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!)
-        Me.btnRecord.ForeColor = System.Drawing.Color.Black
+        Me.btnRecord.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.btnRecord.ForeColor = System.Drawing.Color.White
         Me.btnRecord.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnRecord.Location = New System.Drawing.Point(891, 6)
         Me.btnRecord.Name = "btnRecord"
+        Me.btnRecord.Padding = New System.Windows.Forms.Padding(0, 0, 5, 0)
         Me.btnRecord.Size = New System.Drawing.Size(28, 28)
         Me.btnRecord.TabIndex = 141
         Me.btnRecord.UseVisualStyleBackColor = false
+        Me.btnRecord.Visible = false
         '
         'btnTomorrow
         '
@@ -2025,7 +2043,7 @@ Partial Class NHLGamesMetro
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.tabMenu)
         Me.Controls.Add(Me.btnNormal)
-        Me.Font = New System.Drawing.Font("Segoe UI", 9!)
+        Me.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
         Me.ImeMode = System.Windows.Forms.ImeMode.Close
@@ -2224,4 +2242,5 @@ End Sub
     Friend WithEvents lblLiveRewindDetails As MetroLabel
     Friend WithEvents lblLiveRewind As MetroLabel
     Friend WithEvents btnRecord As Button
+    Friend WithEvents flpRecordList As FlowLayoutPanel
 End Class
