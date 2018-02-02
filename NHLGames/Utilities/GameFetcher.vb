@@ -84,9 +84,12 @@ Namespace Utilities
 
         Private Shared Function SortGames(games As Game()) As List(Of Game)
             If NHLGamesMetro.TodayLiveGamesFirst Then
-                Return games.OrderBy(Of Boolean)(Function(val) val.GameState.Equals(GameStateEnum.Final)).ThenBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
+                Return games.OrderBy(Of Boolean)(Function(val) val.IsUnplayable).
+                    ThenBy(Of Boolean)(Function(val) val.IsFinal).
+                    ThenBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
             Else
-                Return games.OrderBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
+                Return games.OrderBy(Of Boolean)(Function(val) val.IsUnplayable).
+                    ThenBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
             End If
         End Function
 

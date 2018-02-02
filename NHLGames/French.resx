@@ -329,26 +329,6 @@
     <value>Paramètres</value>
     <comment>Main</comment>
   </data>
-  <data name="enumending" xml:space="preserve">
-    <value>En cours</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enumfinal" xml:space="preserve">
-    <value>Terminé</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enuminprogress" xml:space="preserve">
-    <value>En cours</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enumpregame" xml:space="preserve">
-    <value>Avant-match</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enumscheduled" xml:space="preserve">
-    <value>À venir</value>
-    <comment>Game State Enum</comment>
-  </data>
   <data name="gamePeriod1" xml:space="preserve">
     <value>1ère</value>
     <comment>Game panel</comment>
@@ -609,8 +589,108 @@
     <value>Année suivante</value>
     <comment>Calendar</comment>
   </data>
-  <data name="tipLiveGame" xml:space="preserve">
+  <data name="cbLiveStatusLive" xml:space="preserve">
+    <value>En direct - Les matchs du jour suivent le stream en direct (Default)</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbLiveStatusReplay" xml:space="preserve">
+    <value>Rejouer - Les matchs du jour ignorent le stream en direct</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbLiveStatusRewind" xml:space="preserve">
+    <value>Reculer - Les matchs du jour sont positionnés derrière le stream en direct</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="lblLiveRewind" xml:space="preserve">
+    <value>Reculer (stream en direct)</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="lblLiveRewindDetails" xml:space="preserve">
+    <value>{0} minutes derrière le stream en direct</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="tipLiveStatusLive" xml:space="preserve">
     <value>En direct</value>
     <comment>Game panel</comment>
+  </data>
+  <data name="tipLiveStatusReplay" xml:space="preserve">
+    <value>Rejouer</value>
+    <comment>Game panel</comment>
+  </data>
+  <data name="tipLiveStatusRewind" xml:space="preserve">
+    <value>Reculer de {0} min</value>
+    <comment>Game panel</comment>
+  </data>
+  <data name="lblMultiAngleCam" xml:space="preserve">
+    <value>Vue de caméra {0}</value>
+    <comment>Game panel</comment>
+  </data>
+  <data name="enumcancelled" xml:space="preserve">
+    <value>Annulé</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumdelayed" xml:space="preserve">
+    <value>En retard</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumended" xml:space="preserve">
+    <value>Terminé</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumending" xml:space="preserve">
+    <value>En cours</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enuminprogress" xml:space="preserve">
+    <value>En cours</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumofftheair" xml:space="preserve">
+    <value>Final</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumpostponed" xml:space="preserve">
+    <value>Reporté</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumpregame" xml:space="preserve">
+    <value>Avant-match</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumscheduled" xml:space="preserve">
+    <value>À venir</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumstreamended" xml:space="preserve">
+    <value>Final</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumtobedetermined" xml:space="preserve">
+    <value>À déterminer</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumundefined" xml:space="preserve">
+    <value>Non défini</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="tipAddRecord" xml:space="preserve">
+    <value>Ajouter aux enregistrements</value>
+    <comment>Game panel</comment>
+  </data>
+  <data name="tipRecording" xml:space="preserve">
+    <value>Ajoutée aux enregistrements</value>
+    <comment>Game panel</comment>
+  </data>
+  <data name="lblNow" xml:space="preserve">
+    <value>Maintenant</value>
+    <comment>Set record panel</comment>
+  </data>
+  <data name="lblStream" xml:space="preserve">
+    <value>Stream</value>
+    <comment>Set record panel</comment>
+  </data>
+  <data name="lblTime" xml:space="preserve">
+    <value>Heure</value>
+    <comment>Set record panel</comment>
   </data>
 </root>

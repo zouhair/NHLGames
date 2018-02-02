@@ -7,18 +7,19 @@ Namespace Utilities
 
     Public Class HostsFile
 
+        Public Shared ReadOnly Property HostsPath As String = String.Format("{0}\drivers\etc\", Environment.SystemDirectory)
         Public Shared ReadOnly Property HostsFilePath As String = String.Format("{0}\drivers\etc\hosts", Environment.SystemDirectory)
 
-        Public Shared Function TestEntry(domain As String, ip As String) As Boolean
+        Public Shared Function TestEntry() As Boolean
             Dim resolvedIp As String = ""
             Try
-                resolvedIp = Dns.GetHostAddresses(domain)(0).ToString()
+                resolvedIp = Dns.GetHostAddresses(NHLGamesMetro.DomainName)(0).ToString()
             Catch ex As Exception
             End Try
-            Return ip = resolvedIp
+            Return NHLGamesMetro.ServerIp = resolvedIp
         End Function
 
-        Private Shared Function RemoveOldEntries(host As String, contents As String) As String
+        Private Shared Function RemoveOldEntries(contents As String) As String
             Dim newContents As String = String.Empty
 
             Console.WriteLine(English.msgCleanHostsFile)
@@ -26,7 +27,7 @@ Namespace Utilities
             Dim hostsFile = contents.Replace(vbCr, String.Empty).Split(vbLf)
 
             For lineCount As Integer = 0 To hostsFile.Length - 1
-                If hostsFile(lineCount).Contains(host) = False Then
+                If Not ValidHostFileLine(hostsFile(lineCount)) Then
                     newContents &= hostsFile(lineCount).Replace(vbLf, String.Empty)
                     If lineCount < hostsFile.Length - 1 Then
                         newContents &= vbCrLf
@@ -39,7 +40,11 @@ Namespace Utilities
             Return newContents
         End Function
 
-        Public Shared Sub CleanHosts(host As String)
+        Private Shared Function ValidHostFileLine(line As String) As Boolean
+            Return line.Contains(NHLGamesMetro.DomainName) OrElse line.Contains(ApplicationSettings.Read(Of String)(SettingsEnum.SelectedServer, String.Empty))
+        End Function
+
+        Public Shared Sub CleanHosts()
 
             If FileAccess.HasAccess(HostsFilePath, false, true) AndAlso EnsureAdmin() Then
                 Dim fileIsReadonly As Boolean = FileAccess.IsFileReadonly(HostsFilePath)
@@ -56,17 +61,18 @@ Namespace Utilities
                     input = sr.ReadToEnd()
                 End Using
 
-                Dim output As String = RemoveOldEntries(host, input)
+                Dim output As String = RemoveOldEntries(input)
 
                 Using sw As New StreamWriter(HostsFilePath)
                     sw.Write(output)
+                    SetServerIp()
                 End Using
 
                 If fileIsReadonly Then
                     FileAccess.AddReadonly(HostsFilePath)
                 End If
 
-                NHLGamesMetro.HostNameResolved = TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp)
+                NHLGamesMetro.HostNameResolved = TestEntry()
                 InvokeElement.LoadGames()
                 MessageOpenHostsFile()
             End If
@@ -82,7 +88,7 @@ Namespace Utilities
             End If
         End Sub
 
-        Public Shared Sub AddEntry(ip As String, host As String, Optional viewChanges As Boolean = True)
+        Public Shared Sub AddEntry(Optional viewChanges As Boolean = True)
 
             If FileAccess.HasAccess(HostsFilePath, false, true) AndAlso EnsureAdmin() Then
                 Dim fileIsReadonly As Boolean = FileAccess.IsFileReadonly(HostsFilePath)
@@ -99,23 +105,35 @@ Namespace Utilities
                     input = sr.ReadToEnd()
                 End Using
 
-                Dim output As String = RemoveOldEntries(host, input)
-
-                output = output & vbNewLine & ip & vbTab & host
+                Dim output As String = RemoveOldEntries(input)
 
                 Using sw As New StreamWriter(HostsFilePath)
                     sw.Write(output)
+                    SetServerIp()
+                    sw.WriteLine(vbNewLine & NHLGamesMetro.ServerIp & vbTab & NHLGamesMetro.DomainName)
                 End Using
 
                 If fileIsReadonly Then
                     FileAccess.AddReadonly(HostsFilePath)
                 End If
 
-                NHLGamesMetro.HostNameResolved = TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp)
+                NHLGamesMetro.HostNameResolved = TestEntry()
                 InvokeElement.LoadGames()
                 If viewChanges Then MessageOpenHostsFile()
             End If
 
+        End Sub
+
+        Public Shared Sub SetServerIp()
+            If NHLGamesMetro.HostName.Equals(String.Empty) Then
+                NHLGamesMetro.ServerIp = String.Empty
+            Else
+                Try
+                    NHLGamesMetro.ServerIp = Dns.GetHostEntry(NHLGamesMetro.HostName).AddressList.First.ToString()
+                Catch ex As Exception
+                    NHLGamesMetro.ServerIp = String.Empty
+                End Try
+            End If
         End Sub
 
         Public Shared Function EnsureAdmin() As Boolean
@@ -151,11 +169,10 @@ Namespace Utilities
         End Function
 
         Public Shared Sub OpenHostsFile(Optional viewContent As Boolean = True)
-            Dim path = Environment.SystemDirectory & "\drivers\etc\"
             If viewContent Then
-                Process.Start("NOTEPAD", path & "hosts")
+                Process.Start("NOTEPAD", HostsFilePath)
             Else
-                Process.Start(path)
+                Process.Start(HostsPath)
             End If
         End Sub
 
