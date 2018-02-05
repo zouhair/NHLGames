@@ -88,9 +88,9 @@ Namespace Controls
                 End If
 
                 If showScores Then
-                    lblPeriod.Text = NHLGamesMetro.RmText.GetString("enumfinal").ToUpper()
+                    lblPeriod.Text = NHLGamesMetro.RmText.GetString("enumofftheair").ToUpper()
                     If Not [String].Equals(_game.GamePeriod, $"3rd", StringComparison.CurrentCultureIgnoreCase) And _game.GamePeriod <> "" Then
-                        lblPeriod.Text =  (NHLGamesMetro.RmText.GetString($"enumfinal") & 
+                        lblPeriod.Text =  (NHLGamesMetro.RmText.GetString($"enumofftheair") & 
                             $"/" & _game.GamePeriod.Replace($"OT",NHLGamesMetro.RmText.GetString("gamePeriodOt")).
                             Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo"))).ToUpper() 'FINAL/SO.. OT.. 2OT
                     End If
