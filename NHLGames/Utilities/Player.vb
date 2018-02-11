@@ -110,8 +110,9 @@ Namespace Utilities
                 Dim watchArgs As New GameWatchArguments
 
                 watchArgs.Is60Fps = form.cbStreamQuality.SelectedIndex = 0
-                watchArgs.Quality =  CType(form.cbStreamQuality.SelectedIndex, StreamQuality)
-                watchArgs.StreamLiveRewind = form.tbLiveRewind.Value
+                watchArgs.Quality =  CType(form.cbStreamQuality.SelectedIndex, StreamQualityEnum)
+                watchArgs.StreamLiveRewind = form.tbLiveRewind.Value * 5
+                watchArgs.StreamLiveReplay = CType(form.cbLiveReplay.SelectedIndex, LiveReplayEnum)
 
                 If form.rbMpv.Checked Then
                     watchArgs.PlayerType = PlayerTypeEnum.Mpv
@@ -128,9 +129,9 @@ Namespace Utilities
                 watchArgs.StreamerType = GetStreamerType(watchArgs.StreamerPath)
 
                 If form.tgAlternateCdn.Checked Then
-                    watchArgs.Cdn = CdnType.L3C
+                    watchArgs.Cdn = CdnTypeEnum.L3C
                 Else
-                    watchArgs.Cdn = CdnType.Akc
+                    watchArgs.Cdn = CdnTypeEnum.Akc
                 End If
 
                 watchArgs.UseCustomPlayerArgs = form.tgPlayer.Checked
@@ -138,8 +139,6 @@ Namespace Utilities
 
                 watchArgs.UseCustomStreamerArgs = form.tgStreamer.Checked
                 watchArgs.CustomStreamerArgs = form.txtStreamerArgs.Text
-
-                watchArgs.StreamLiveRewind = form.tbLiveRewind.Value
 
                 watchArgs.UseOutputArgs = form.tgOutput.Checked
                 watchArgs.PlayerOutputPath = form.txtOutputArgs.Text

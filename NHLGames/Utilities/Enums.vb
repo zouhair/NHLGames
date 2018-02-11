@@ -22,7 +22,7 @@
         Series = 3
     End Enum
 
-    Public Enum StreamType
+    Public Enum StreamTypeEnum
         None = 0
         Away
         Home
@@ -39,12 +39,12 @@
         MultiAngle3
     End Enum
 
-    Public Enum CdnType
+    Public Enum CdnTypeEnum
         Akc = 0
         L3C
     End Enum
 
-    Public Enum StreamQuality
+    Public Enum StreamQualityEnum
         best = 0
         _720p = 1
         _540p = 2
@@ -64,25 +64,24 @@
 
     Public Enum SettingsEnum
         Version = 1
-        DefaultWatchArgs = 2
-        VlcPath = 3
-        MpcPath = 4
-        MpvPath = 5
-        StreamerPath = 6
-        ServerList = 7
-        ShowScores = 8
-        SelectedServer = 9
-        SelectedLanguage = 10
-        ShowLiveScores = 11
-        ShowSeriesRecord = 12
-        LanguageList = 13
-        AdDetection = 14
-        ShowTeamCityAbr = 15
-        ShowTodayLiveGamesFirst = 16
-        LastWindowSize = 17
+        DefaultWatchArgs
+        VlcPath
+        MpcPath
+        MpvPath
+        StreamerPath
+        ServerList
+        ShowScores
+        SelectedServer
+        SelectedLanguage
+        ShowLiveScores
+        ShowSeriesRecord
+        AdDetection
+        ShowTeamCityAbr
+        ShowTodayLiveGamesFirst
+        LastWindowSize
     End Enum
 
-    Public Enum OutputType
+    Public Enum OutputTypeEnum
         Normal = 0
         Status = 1
         [Error] = 2
@@ -99,6 +98,18 @@
         None = 0
         LiveStreamer
         StreamLink
+    End Enum
+
+    Public Enum LiveStatusCodeEnum
+        Live = 0
+        Rewind
+        Replay
+    End Enum
+
+    Public Enum LiveReplayEnum
+        PuckDrop = 0
+        GameTime
+        StreamStarts
     End Enum
 
     Public Enum WindowsCode
@@ -126,12 +137,6 @@
         SW_SHOWMINNOACTIVE = 7
         SW_SHOWNA = 8
         SW_RESTORE = 9
-    End Enum
-
-    Public Enum LiveReplayCode
-        Live = 0
-        Rewind
-        Replay
     End Enum
 #Enable Warning InconsistentNaming
 End Namespace

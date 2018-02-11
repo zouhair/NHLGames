@@ -28,34 +28,34 @@ Namespace Utilities
                     Function()
                         Dim startIndex As Integer = -1
                         Dim length As Integer = -1
-                        Dim type As OutputType = OutputType.Normal
+                        Dim type As OutputTypeEnum = OutputTypeEnum.Normal
                         Dim timestamp As String = String.Format(English.msgDateTimeNow,Now.ToString("HH:mm:ss"))
 
                         If value.ToLower().IndexOf(English.errorDetection, StringComparison.Ordinal) = 0 OrElse
                             value.ToLower().IndexOf(English.errorExceptionDetection, StringComparison.Ordinal) = 0 Then
-                            type = OutputType.Error
+                            type = OutputTypeEnum.Error
                             startIndex = _output.TextLength
                             length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
                             _output.AppendText(vbCr)
                         ElseIf value.ToLower().IndexOf(English.errorCliStreamer, StringComparison.Ordinal) = 0 Then
                             value = English.msgStreamer & regex.Replace(value, String.Empty)
-                            type = OutputType.Cli
+                            type = OutputTypeEnum.Cli
                             startIndex = _output.TextLength
                             length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
                             _output.AppendText(vbCr)
                         ElseIf value.ToLower().IndexOf(English.errorWarning, StringComparison.Ordinal) = 0 Then
-                            type = OutputType.Warning
+                            type = OutputTypeEnum.Warning
                             startIndex = _output.TextLength
                             length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
                             _output.AppendText(vbCr)
                         ElseIf value.IndexOf(":", StringComparison.Ordinal) > -1 Then
-                            type = OutputType.Status
+                            type = OutputTypeEnum.Status
                             startIndex = _output.TextLength
                             length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
                             _output.AppendText(vbCr)
                         End If
 
-                        If type = OutputType.Error Then
+                        If type = OutputTypeEnum.Error Then
                             lastError = value
                         End If
 
@@ -66,13 +66,13 @@ Namespace Utilities
                         If startIndex > -1 Then
                             _output.Select(startIndex, length)
 
-                            If type = OutputType.Error Then
+                            If type = OutputTypeEnum.Error Then
                                 _output.SelectionColor = Color.Red
-                            ElseIf type = OutputType.Status Then
+                            ElseIf type = OutputTypeEnum.Status Then
                                 _output.SelectionColor = Color.Lime
-                            ElseIf type = OutputType.Warning Then
+                            ElseIf type = OutputTypeEnum.Warning Then
                                 _output.SelectionColor = Color.Yellow
-                            ElseIf type = OutputType.Cli Then
+                            ElseIf type = OutputTypeEnum.Cli Then
                                 _output.SelectionColor = Color.DeepSkyBlue
                             End If
 

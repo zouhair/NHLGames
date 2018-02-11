@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Globalization
+Imports System.IO
 Imports NHLGames.Objects
 
 Namespace Utilities
@@ -54,6 +55,12 @@ Namespace Utilities
                 NHLGamesMetro.RmText.GetString("cbQualityLow"),
                 NHLGamesMetro.RmText.GetString("cbQualityMobile")
             }
+            
+            Dim lstLiveReplayPreferences = New String() {
+                NHLGamesMetro.RmText.GetString("cbLiveReplayPuckDrop"),
+                NHLGamesMetro.RmText.GetString("cbLiveReplayGameTime"),
+                NHLGamesMetro.RmText.GetString("cbLiveReplayFeedStart")    
+            }
 
             'Main
             Form.tabMenu.TabPages.Item(0).Text = NHLGamesMetro.RmText.GetString("tabGames")
@@ -71,6 +78,7 @@ Namespace Utilities
             Form.tt.SetToolTip(Form.btnRefresh, NHLGamesMetro.RmText.GetString("tipRefresh"))
 
             'Settings
+            Dim minutesBehind = Form.tbLiveRewind.Value * 5
             Form.lblGamePanel.Text = NHLGamesMetro.RmText.GetString("lblShowScores")
             Form.lblPlayer.Text = NHLGamesMetro.RmText.GetString("lblPlayer")
             Form.lblQuality.Text = NHLGamesMetro.RmText.GetString("lblQuality")
@@ -86,8 +94,9 @@ Namespace Utilities
             Form.lblStreamerArgs.Text = NHLGamesMetro.RmText.GetString("lblStreamerArgs")
             Form.lblLanguage.Text = NHLGamesMetro.RmText.GetString("lblLanguage")
             Form.lblUseAlternateCdn.Text = NHLGamesMetro.RmText.GetString("lblAlternateCdn")
+            Form.lblLiveReplay.Text = NHLGamesMetro.RmText.GetString("lblLiveReplay")
             Form.lblLiveRewind.Text = NHLGamesMetro.RmText.GetString("lblLiveRewind")
-            Form.lblLiveRewindDetails.Text = String.Format(NHLGamesMetro.RmText.GetString("lblLiveRewindDetails"), NHLGamesMetro.FormInstance.tbLiveRewind.Value)
+            Form.lblLiveRewindDetails.Text = String.Format(NHLGamesMetro.RmText.GetString("lblLiveRewindDetails"), minutesBehind, Now.AddMinutes(-minutesBehind).ToString("h:mm tt", CultureInfo.InvariantCulture))
 
             Form.lblGamePanel.Text = NHLGamesMetro.RmText.GetString("lblGamePanel")
             Form.lblShowFinalScores.Text = NHLGamesMetro.RmText.GetString("lblShowFinalScores")
@@ -103,6 +112,10 @@ Namespace Utilities
             Form.cbHostsFileActions.Items.Clear()
             Form.cbHostsFileActions.Items.AddRange(lstHostsFileActions)
             Form.cbHostsFileActions.SelectedIndex = 0
+
+            Form.cbLiveReplay.Items.Clear()
+            Form.cbLiveReplay.Items.AddRange(lstLiveReplayPreferences)
+            Form.cbLiveReplay.SelectedIndex = 0
 
             Form.tt.SetToolTip(Form.lnkGetVlc, NHLGamesMetro.RmText.GetString("tipGetVlc"))
             Form.tt.SetToolTip(Form.lnkGetMpc, NHLGamesMetro.RmText.GetString("tipGetMpc"))
@@ -146,7 +159,16 @@ Namespace Utilities
             Form.Height = If (windowSize.Length = 2, Convert.ToInt32(windowSize(1)), 655)
         End Sub
 
-        Public Shared Sub SetSettings()        
+        Public Shared Sub SetSettings()  
+            Dim lstLanguages = New String() {
+                NHLGamesMetro.RmText.GetString("cbEnglish"),
+                NHLGamesMetro.RmText.GetString("cbFrench")  
+            }
+
+            Form.cbLanguage.Items.Clear()
+            Form.cbLanguage.Items.AddRange(lstLanguages)
+            Form.cbLanguage.SelectedIndex = 0
+                  
             Form.lblVersion.Text = String.Format("v {0}.{1}.{2}", My.Application.Info.Version.Major,
                                                  My.Application.Info.Version.Minor,
                                                  My.Application.Info.Version.Build)
@@ -161,8 +183,6 @@ Namespace Utilities
             Form.tgShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, False)
             Form.tgShowTeamCityAbr.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, False)
             Form.tgShowTodayLiveGamesFirst.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTodayLiveGamesFirst, False)
-
-            PopulateComboBox(Form.cbLanguage, SettingsEnum.SelectedLanguage, SettingsEnum.LanguageList, "English")
 
             Dim playersPath As String() = New String() {Form.txtMpvPath.Text, Form.txtMPCPath.Text, Form.txtVLCPath.Text}
             Dim watchArgs As GameWatchArguments = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, Nothing)
@@ -248,9 +268,9 @@ Namespace Utilities
             If watchArgs IsNot Nothing Then
                 Form.cbStreamQuality.SelectedIndex = CType(watchArgs.Quality, Integer)
 
-                Form.tgAlternateCdn.Checked = watchArgs.Cdn = CdnType.L3C
+                Form.tgAlternateCdn.Checked = watchArgs.Cdn = CdnTypeEnum.L3C
 
-                Form.tbLiveRewind.Value = watchArgs.StreamLiveRewind
+                Form.tbLiveRewind.Value = If (watchArgs.StreamLiveRewind Mod 5 = 0, watchArgs.StreamLiveRewind /5, 1)
 
                 Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc
                 Form.rbMPC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpc

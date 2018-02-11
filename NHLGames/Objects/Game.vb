@@ -9,7 +9,7 @@ Namespace Objects
     Public Class Game: Implements IDisposable
         Private _disposedValue As Boolean
 
-        Public Property StreamsDict As Dictionary(Of StreamType, GameStream)
+        Public Property StreamsDict As Dictionary(Of StreamTypeEnum, GameStream)
         Public Property Id As Guid = Guid.NewGuid()
         Public Property GameId As String
         Public Property GameType As GameTypeEnum 'Get type of the game : 1 preseason, 2 regular, 3 series
@@ -73,11 +73,11 @@ Namespace Objects
             End Get
         End Property
 
-        Public Function GetStream(streamType As StreamType) As GameStream
+        Public Function GetStream(streamType As StreamTypeEnum) As GameStream
             Return If (StreamsDict IsNot Nothing, StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value, New GameStream())
         End Function
 
-        Public Function IsStreamDefined(streamType As StreamType) As Boolean
+        Public Function IsStreamDefined(streamType As StreamTypeEnum) As Boolean
             Return (StreamsDict IsNot Nothing) AndAlso StreamsDict.ContainsKey(streamType)
         End Function
 
@@ -110,7 +110,7 @@ Namespace Objects
         End Sub
 
         Public Sub New()
-            StreamsDict = New Dictionary(Of StreamType, GameStream)
+            StreamsDict = New Dictionary(Of StreamTypeEnum, GameStream)
         End Sub
 
         Protected Overridable Sub Dispose(disposing As Boolean)

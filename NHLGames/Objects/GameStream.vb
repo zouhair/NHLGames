@@ -5,12 +5,12 @@ Namespace Objects
 
     Public Class GameStream: Implements IDisposable
         Private _disposedValue As Boolean
-        Public ReadOnly Property Type As StreamType
+        Public ReadOnly Property Type As StreamTypeEnum
         Public ReadOnly Property Game As Game
         Public ReadOnly Property Network As String
         Public ReadOnly Property PlayBackId As String
         Public Property GameUrl As String = String.Empty
-        Public Property CdnParameter As CdnType = CdnType.Akc
+        Public Property CdnParameter As CdnTypeEnum = CdnTypeEnum.Akc
         Public Property Title As String = String.Empty
         Public Property StreamUrl As String = String.Empty
 
@@ -23,7 +23,7 @@ Namespace Objects
         Public Sub New()
         End Sub
 
-        Public Sub New(game As Game, stream As JObject, type As StreamType)
+        Public Sub New(game As Game, stream As JObject, type As StreamTypeEnum)
             Me.Game = game
             Network = stream.Property("callLetters")
             If Network = String.Empty Then Network = "NHLTV"

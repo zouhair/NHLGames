@@ -113,9 +113,9 @@ Namespace Utilities
         Public Shared Sub GetLanguage()
             Dim lang = ApplicationSettings.Read(Of String)(SettingsEnum.SelectedLanguage, "English")
 
-            If lang = NHLGamesMetro.RmText.GetString("lblEnglish") Then
+            If lang = NHLGamesMetro.RmText.GetString("cbEnglish") Then
                 NHLGamesMetro.RmText = English.ResourceManager
-            ElseIf lang = NHLGamesMetro.RmText.GetString("lblFrench") Then
+            ElseIf lang = NHLGamesMetro.RmText.GetString("cbFrench") Then
                 NHLGamesMetro.RmText = French.ResourceManager
             End If
         End Sub

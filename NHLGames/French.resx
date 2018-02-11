@@ -153,11 +153,11 @@
     <value>Caméra zone {0}</value>
     <comment>Game panel</comment>
   </data>
-  <data name="lblEnglish" xml:space="preserve">
+  <data name="cbEnglish" xml:space="preserve">
     <value>English</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblFrench" xml:space="preserve">
+  <data name="cbFrench" xml:space="preserve">
     <value>Français</value>
     <comment>Settings tab</comment>
   </data>
@@ -602,11 +602,11 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblLiveRewind" xml:space="preserve">
-    <value>Reculer (stream en direct)</value>
+    <value>Reculer en direct</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblLiveRewindDetails" xml:space="preserve">
-    <value>{0} minutes derrière le stream en direct</value>
+    <value>{0} minutes derrière le stream en direct ({1})</value>
     <comment>Settings tab</comment>
   </data>
   <data name="tipLiveStatusLive" xml:space="preserve">
@@ -692,5 +692,21 @@
   <data name="lblTime" xml:space="preserve">
     <value>Heure</value>
     <comment>Set record panel</comment>
+  </data>
+  <data name="cbLiveReplayFeedStart" xml:space="preserve">
+    <value>Au tout début du stream</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbLiveReplayGameTime" xml:space="preserve">
+    <value>Quand l'évènement débute (heure du match)</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbLiveReplayPuckDrop" xml:space="preserve">
+    <value>Quand le match commence (puck en jeu)</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="lblLiveReplay" xml:space="preserve">
+    <value>Rejoue en direct</value>
+    <comment>Settings tab</comment>
   </data>
 </root>

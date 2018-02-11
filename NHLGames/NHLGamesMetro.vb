@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Globalization
+Imports System.IO
 Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Resources
@@ -217,7 +218,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub tgAlternateCdn_CheckedChanged(sender As Object, e As EventArgs) Handles tgAlternateCdn.CheckedChanged
-        Dim cdn = If(tgAlternateCdn.Checked, CdnType.L3C, CdnType.Akc)
+        Dim cdn = If(tgAlternateCdn.Checked, CdnTypeEnum.L3C, CdnTypeEnum.Akc)
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(lblCdn.Text, cdn.ToString())
         InvokeElement.LoadGames()
@@ -647,15 +648,16 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub tbLiveRewind_MouseUp(sender As Object, e As MouseEventArgs) Handles tbLiveRewind.MouseUp
-        _writeToConsoleSettingsChanged(lblLiveRewind.Text, tbLiveRewind.Value)
+        _writeToConsoleSettingsChanged(lblLiveRewind.Text, tbLiveRewind.Value * 5)
     End Sub
 
     Private Sub tbLiveRewind_ValueChanged(sender As Object, e As EventArgs) Handles tbLiveRewind.ValueChanged
-        lblLiveRewindDetails.Text = String.Format(RmText.GetString("lblLiveRewindDetails"), tbLiveRewind.Value)
+        Dim minutesBehind = tbLiveRewind.Value * 5
+        lblLiveRewindDetails.Text = String.Format(RmText.GetString("lblLiveRewindDetails"), minutesBehind, Now.AddMinutes(-minutesBehind).ToString("h:mm tt", CultureInfo.InvariantCulture))
         Player.RenewArgs()
         
         For each game As GameControl In flpGames.Controls
-            If game.LiveReplayCode = LiveReplayCode.Rewind Then
+            If game.LiveReplayCode = LiveStatusCodeEnum.Rewind Then
                 game.SetLiveStatusIcon()
             End If
         Next
@@ -671,5 +673,11 @@ Public Class NHLGamesMetro
         Else
             btnRecord.BackColor = Color.FromArgb(64, 64, 64)
         End If
+    End Sub
+
+    Private Sub cbLiveReplay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLiveReplay.SelectedIndexChanged
+        Player.RenewArgs()
+        _writeToConsoleSettingsChanged(_lblLiveReplay.Text, cbLiveReplay.SelectedItem)
+        tlpSettings.Focus()
     End Sub
 End Class
