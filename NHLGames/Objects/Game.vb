@@ -16,8 +16,11 @@ Namespace Objects
         Public Property GameDate As DateTime
         Public Property GameState As GameStateEnum
         Public Property GameStateDetailed As String
+
         Public Property GamePeriod As String '1st 2nd 3rd OT SO OT2..
         Public Property GameTimeLeft As String 'Final, 12:34, 20:00
+        Public Property IsInIntermission As Boolean
+        Public Property IntermissionTimeRemaining As Date 'seconds
 
         Public Property SeriesGameNumber As String 'Series: Game 1.. 7
         Public Property SeriesGameStatus As String 'Series: Team wins 4-2, Tied 2-2, Team leads 1-0
@@ -105,8 +108,13 @@ Namespace Objects
         Public Sub SetLiveInfo(game As JObject)
             GamePeriod = game.SelectToken("linescore.currentPeriodOrdinal").ToString()
             GameTimeLeft = game.SelectToken("linescore.currentPeriodTimeRemaining").ToString()
+            IsInIntermission = game.SelectToken("linescore.intermissionInfo.inIntermission").ToString().Equals("true")
             HomeScore = game.SelectToken("teams.home.score").ToString()
             AwayScore = game.SelectToken("teams.away.score").ToString()
+
+            If IsInIntermission Then
+                IntermissionTimeRemaining = Date.MinValue.AddSeconds(CType(game.SelectToken("linescore.intermissionInfo.intermissionTimeRemaining").ToString(), Integer))
+            End If
         End Sub
 
         Public Sub New()

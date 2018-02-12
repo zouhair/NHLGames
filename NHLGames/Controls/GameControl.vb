@@ -42,27 +42,31 @@ Namespace Controls
                 lblGameStatus.Visible = Not showLiveScores
                 lblHomeScore.Visible = showLiveScores
                 lblAwayScore.Visible = showLiveScores
-                lblPeriod.BackColor = Color.FromArgb(255, 0, 170, 210)
-                lblPeriod.ForeColor = Color.White
 
                 SetRecordIcon()
 
-                lblPeriod.Text = $"{_game.GamePeriod.
-                    Replace($"1st",NHLGamesMetro.RmText.GetString("gamePeriod1")).
-                    Replace($"2nd",NHLGamesMetro.RmText.GetString("gamePeriod2")).
-                    Replace($"3rd",NHLGamesMetro.RmText.GetString("gamePeriod3")).
-                    Replace($"OT", NHLGamesMetro.RmText.GetString("gamePeriodOt")).
-                    Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo")).
-                    ToUpper()}          {_game.GameTimeLeft.ToLower().
-                    Replace("final",NHLGamesMetro.RmText.GetString("gamePeriodFinal")).
-                    Replace("end", "00:00")}".
-                    ToUpper() '1st 2nd 3rd OT SO... Final, 12:34, 20:00 
+                If showLiveScores Then
+                    lblPeriod.BackColor = Color.FromArgb(255, 0, 170, 210)
+                    lblPeriod.ForeColor = Color.White
+                    If _game.IsInIntermission Then
+                        lblPeriod.Text = $"{NHLGamesMetro.RmText.GetString("gameIntermission")} {_game.IntermissionTimeRemaining.ToString("mm:ss")}"
+                    Else
+                        lblPeriod.Text = $"{_game.GamePeriod.
+                            Replace($"1st",NHLGamesMetro.RmText.GetString("gamePeriod1")).
+                            Replace($"2nd",NHLGamesMetro.RmText.GetString("gamePeriod2")).
+                            Replace($"3rd",NHLGamesMetro.RmText.GetString("gamePeriod3")).
+                            Replace($"OT", NHLGamesMetro.RmText.GetString("gamePeriodOt")).
+                            Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo")).
+                            ToUpper()}          {_game.GameTimeLeft.ToLower().
+                                Replace("final",NHLGamesMetro.RmText.GetString("gamePeriodFinal")).
+                                Replace("end", "00:00")}".
+                            ToUpper() '1st 2nd 3rd OT SO... Final, 12:34, 20:00 
 
-                If _game.GamePeriod.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt")) And IsNumeric(_game.GamePeriod(0)) Then
-                    lblPeriod.Text = String.Format(NHLGamesMetro.RmText.GetString("gamePeriodOtMore"), _game.GamePeriod(0)).ToUpper() '2OT..
-                End If
-                
-                If Not showLiveScores Then
+                        If _game.GamePeriod.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt")) And IsNumeric(_game.GamePeriod(0)) Then
+                            lblPeriod.Text = String.Format(NHLGamesMetro.RmText.GetString("gamePeriodOtMore"), _game.GamePeriod(0)).ToUpper() '2OT..
+                        End If
+                    End If
+                Else
                     lblGameStatus.Text = String.Format("{0}{1}{2}",
                                                        _game.GameDate.ToLocalTime().ToString("h:mm tt"),
                                                        vbCrLf,
@@ -73,7 +77,6 @@ Namespace Controls
                     lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
                 End If
 
-                If Not showLiveScores Then lblPeriod.Text = String.Empty
             ElseIf _game.IsOffTheAir Then
                 lblHomeScore.Visible = showScores
                 lblAwayScore.Visible = showScores
@@ -106,11 +109,8 @@ Namespace Controls
                                                            NHLGamesMetro.RmText.GetString("gamePeriodFinal").ToUpper())
                     End If
                 End If
-
-                If Not showScores Then lblPeriod.Text = String.Empty
             ElseIf _game.GameState <= GameStateEnum.Pregame Then
                 lblDivider.Visible = False
-                lblPeriod.Text = String.Empty
                 lblGameStatus.Visible = True
                 lblGameStatus.Text = _game.GameDate.ToLocalTime().ToString("h:mm tt")
 
@@ -127,7 +127,6 @@ Namespace Controls
                 End If
             Else If _game.IsUnplayable Then
                 lblDivider.Visible = False
-                lblPeriod.Text = String.Empty
                 lblGameStatus.Visible = True
                 lblGameStatus.Text = _game.GameStateDetailed.ToUpper()
                 lblPeriod.BackColor = Color.FromKnownColor(KnownColor.DarkOrange)
