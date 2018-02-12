@@ -709,4 +709,8 @@
     <value>Rejoue en direct</value>
     <comment>Settings tab</comment>
   </data>
+  <data name="gameIntermission" xml:space="preserve">
+    <value>Entracte</value>
+    <comment>Game panel</comment>
+  </data>
 </root>

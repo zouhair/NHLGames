@@ -121,19 +121,19 @@ Namespace Utilities
         End Sub
 
         Public Async Shared Function CheckAppCanRun() As Task(Of Boolean)
+            Dim errorMessage = String.Empty
             If NHLGamesMetro.ServerIp.Equals(String.Empty) Then
-                FatalError(NHLGamesMetro.RmText.GetString("noGameServer"))
-                Return False
+                errorMessage = "noGameServer"
+            ElseIf Not Await SendWebRequestAsync("https://www.google.com") Then
+                errorMessage = "noWebAccess"
+            ElseIf Not Await InitializeForm.VersionCheck() Then
+                errorMessage = "noAppServer"
             End If
-            If Not Await SendWebRequestAsync("https://www.google.com") Then
-                FatalError(NHLGamesMetro.RmText.GetString("noWebAccess"))
-                Return False
+            If Not errorMessage.Equals(String.Empty) Then
+                FatalError(NHLGamesMetro.RmText.GetString(errorMessage))
+                Console.WriteLine($"Status: {English.ResourceManager.GetString(errorMessage)}")
             End If
-            If Not Await InitializeForm.VersionCheck() Then
-                FatalError(NHLGamesMetro.RmText.GetString("noAppServer"))
-                Return False
-            End If
-            Return True
+            Return errorMessage.Equals(String.Empty)
         End Function
 
         Public Shared Sub SetRedirectionServerInApp()

@@ -53,21 +53,18 @@ Namespace Utilities
             NHLGamesMetro.GamesDict.Clear()
 
             Dim games As Game()
-            Dim sortedGames As List(Of Game)
 
             InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgLoadingGames"))
 
+            Dim gm = new GameManager()
             Try
-                Dim gm = new GameManager()
                 games = Await gm.GetGamesAsync()
-                gm.Dispose()
 
                 NHLGamesMetro.SpnLoadingValue = NHLGamesMetro.spnLoadingMaxValue - 1
                 Await Task.Delay(100)
 
                 If games IsNot Nothing Then
-                    sortedGames = SortGames(games)
-                    AddGamesToDict(sortedGames)
+                    AddGamesToDict(SortGames(games))
                 End If
 
                 InvokeElement.NewGamesFound(NHLGamesMetro.GamesDict.Values.ToList())
@@ -76,6 +73,8 @@ Namespace Utilities
             Catch ex As Exception
                 Console.WriteLine(ex.ToString())
                 Return
+            Finally
+                gm.Dispose()
             End Try
 
             NHLGamesMetro.SpnLoadingVisible = False

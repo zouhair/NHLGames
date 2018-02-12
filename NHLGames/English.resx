@@ -762,7 +762,7 @@
     <comment>Message</comment>
   </data>
   <data name="noAppServer" xml:space="preserve">
-    <value>NHLGames server not avaible!</value>
+    <value>NHLGames server not available!</value>
     <comment>Message</comment>
   </data>
   <data name="tipCalendar" xml:space="preserve">
@@ -920,5 +920,9 @@
   <data name="lblLiveReplay" xml:space="preserve">
     <value>Live Replay</value>
     <comment>Settings tab</comment>
+  </data>
+  <data name="gameIntermission" xml:space="preserve">
+    <value>Intermission</value>
+    <comment>Game panel</comment>
   </data>
 </root>

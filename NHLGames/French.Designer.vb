@@ -407,6 +407,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Entracte.
+        '''</summary>
+        Friend Shared ReadOnly Property gameIntermission() As String
+            Get
+                Return ResourceManager.GetString("gameIntermission", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to 1ère.
         '''</summary>
         Friend Shared ReadOnly Property gamePeriod1() As String
