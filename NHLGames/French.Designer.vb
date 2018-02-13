@@ -416,7 +416,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 1ère.
+        '''  Looks up a localized string similar to 1ière.
         '''</summary>
         Friend Shared ReadOnly Property gamePeriod1() As String
             Get

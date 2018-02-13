@@ -37,6 +37,7 @@
         MultiAngle1
         MultiAngle2
         MultiAngle3
+        RoboCam
     End Enum
 
     Public Enum CdnTypeEnum

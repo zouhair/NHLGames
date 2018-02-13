@@ -8,10 +8,10 @@ Namespace Objects
         Private _disposedValue As Boolean
         Private Shared ReadOnly DictStreamType = New Dictionary(Of String, StreamTypeEnum)() From {
                                           {"HOME", StreamTypeEnum.Home}, {"AWAY", StreamTypeEnum.Away}, {"NATIONAL", StreamTypeEnum.National}, {"FRENCH", StreamTypeEnum.French},
-                                          {"Multi-Cam 1", StreamTypeEnum.MultiCam1}, {"Multi-Cam 2", StreamTypeEnum.MultiCam2},
-                                          {"Endzone Cam 1", StreamTypeEnum.EndzoneCam1},{"Endzone Cam 2", StreamTypeEnum.EndzoneCam2},
-                                          {"Ref Cam", StreamTypeEnum.RefCam}, {"Star Cam", StreamTypeEnum.StarCam},
-                                          {"Multi-Angle 1", StreamTypeEnum.MultiAngle1}, {"Multi-Angle 2", StreamTypeEnum.MultiAngle2}, {"Multi-Angle 3", StreamTypeEnum.MultiAngle3}}
+                                          {"MULTI-CAM 1", StreamTypeEnum.MultiCam1}, {"MULTI-CAM 2", StreamTypeEnum.MultiCam2},
+                                          {"ENDZONE CAM 1", StreamTypeEnum.EndzoneCam1},{"ENDZONE CAM 2", StreamTypeEnum.EndzoneCam2},
+                                          {"Ref Cam", StreamTypeEnum.RefCam}, {"STAR CAM", StreamTypeEnum.StarCam}, {"ROBO CAM", StreamTypeEnum.RoboCam},
+                                          {"MULTI-ANGLE 1", StreamTypeEnum.MultiAngle1}, {"MULTI-ANGLE 2", StreamTypeEnum.MultiAngle2}, {"MULTI-ANGLE 3", StreamTypeEnum.MultiAngle3}}
 
         Private Const MediaOff = "MEDIA_OFF"
 
@@ -87,7 +87,7 @@ Namespace Objects
                                     For Each innerStream As JObject In item.Children(Of JObject)
                                         NHLGamesMetro.SpnLoadingValue += progressPerStream
                                         Dim streamOff = innerStream.SelectToken("mediaState").ToString().Equals(MediaOff)
-                                        Dim streamType As StreamTypeEnum = GetStreamType(innerStream.Property("mediaFeedType").Value.ToString(), innerStream.Property("feedName").Value.ToString())
+                                        Dim streamType As StreamTypeEnum = GetStreamType(innerStream.Property("mediaFeedType").Value.ToString(), innerStream.Property("feedName").Value.ToString().ToUpper())
 
                                         If Not streamOff AndAlso streamType <> StreamTypeEnum.None AndAlso numberOfStreams <> 0 Then
                                             Dim tCurrentGame = currentGame
@@ -152,8 +152,8 @@ Namespace Objects
         Private Shared Function GetStreamType(mediaFeedType As String, feedName As String) As StreamTypeEnum
             Dim streamTypeAsText = If (feedName = String.Empty, mediaFeedType, feedName)
 
-            If DictStreamType.ContainsKey(streamTypeAsText) Then
-                Return DictStreamType(streamTypeAsText)
+            If DictStreamType.ContainsKey(streamTypeAsText.ToUpper()) Then
+                Return DictStreamType(streamTypeAsText.ToUpper())
             Else 
                 Return StreamTypeEnum.None
             End If
