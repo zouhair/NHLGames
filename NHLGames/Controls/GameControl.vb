@@ -42,12 +42,12 @@ Namespace Controls
                 lblGameStatus.Visible = Not showLiveScores
                 lblHomeScore.Visible = showLiveScores
                 lblAwayScore.Visible = showLiveScores
+                lblPeriod.BackColor = Color.FromArgb(255, 0, 170, 210)
+                lblPeriod.ForeColor = Color.White
 
                 SetRecordIcon()
 
                 If showLiveScores Then
-                    lblPeriod.BackColor = Color.FromArgb(255, 0, 170, 210)
-                    lblPeriod.ForeColor = Color.White
                     If _game.IsInIntermission Then
                         lblPeriod.Text = $"{NHLGamesMetro.RmText.GetString("gameIntermission")} {_game.IntermissionTimeRemaining.ToString("mm:ss")}"
                     Else
