@@ -686,7 +686,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Emplacement MPC.
+        '''  Looks up a localized string similar to Emplacement MPC-HC.
         '''</summary>
         Friend Shared ReadOnly Property lblMpcPath() As String
             Get
@@ -1289,7 +1289,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Download MPC.
+        '''  Looks up a localized string similar to Download MPC-HC.
         '''</summary>
         Friend Shared ReadOnly Property tipGetMpc() As String
             Get

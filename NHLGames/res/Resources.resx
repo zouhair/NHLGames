@@ -169,6 +169,12 @@
   <data name="minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\minimize.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="mpc_hc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\mpc-hc.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mpv" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\mpv.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="nhl" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\nhl.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -189,6 +195,9 @@
   </data>
   <data name="threec" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\threec.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vlc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Icons\vlc.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="waddrecord" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\waddrecord.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -127,8 +127,11 @@ Partial Class NHLGamesMetro
         Me.lblPlayer = New MetroFramework.Controls.MetroLabel()
         Me.flpSelectedPlayer = New System.Windows.Forms.FlowLayoutPanel()
         Me.rbVLC = New MetroFramework.Controls.MetroRadioButton()
+        Me.lblVLCLogo = New System.Windows.Forms.Label()
         Me.rbMPC = New MetroFramework.Controls.MetroRadioButton()
+        Me.lvlMPCHCLogo = New System.Windows.Forms.Label()
         Me.rbMPV = New MetroFramework.Controls.MetroRadioButton()
+        Me.lblMPVLogo = New System.Windows.Forms.Label()
         Me.tlpCdnSettings = New System.Windows.Forms.TableLayoutPanel()
         Me.tgAlternateCdn = New MetroFramework.Controls.MetroToggle()
         Me.lblUseAlternateCdn = New MetroFramework.Controls.MetroLabel()
@@ -1569,8 +1572,11 @@ Partial Class NHLGamesMetro
         'flpSelectedPlayer
         '
         Me.flpSelectedPlayer.Controls.Add(Me.rbVLC)
+        Me.flpSelectedPlayer.Controls.Add(Me.lblVLCLogo)
         Me.flpSelectedPlayer.Controls.Add(Me.rbMPC)
+        Me.flpSelectedPlayer.Controls.Add(Me.lvlMPCHCLogo)
         Me.flpSelectedPlayer.Controls.Add(Me.rbMPV)
+        Me.flpSelectedPlayer.Controls.Add(Me.lblMPVLogo)
         Me.flpSelectedPlayer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.flpSelectedPlayer.Location = New System.Drawing.Point(177, 433)
         Me.flpSelectedPlayer.Name = "flpSelectedPlayer"
@@ -1583,34 +1589,66 @@ Partial Class NHLGamesMetro
         Me.rbVLC.FontSize = MetroFramework.MetroCheckBoxSize.Medium
         Me.rbVLC.Location = New System.Drawing.Point(3, 3)
         Me.rbVLC.Name = "rbVLC"
-        Me.rbVLC.Size = New System.Drawing.Size(80, 21)
+        Me.rbVLC.Size = New System.Drawing.Size(60, 21)
         Me.rbVLC.TabIndex = 0
         Me.rbVLC.Text = "VLC"
         Me.rbVLC.UseSelectable = true
+        '
+        'lblVLCLogo
+        '
+        Me.lblVLCLogo.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblVLCLogo.Image = Global.NHLGames.My.Resources.Resources.vlc
+        Me.lblVLCLogo.Location = New System.Drawing.Point(66, 0)
+        Me.lblVLCLogo.Margin = New System.Windows.Forms.Padding(0)
+        Me.lblVLCLogo.Name = "lblVLCLogo"
+        Me.lblVLCLogo.Size = New System.Drawing.Size(25, 27)
+        Me.lblVLCLogo.TabIndex = 3
         '
         'rbMPC
         '
         Me.rbMPC.Enabled = false
         Me.rbMPC.FontSize = MetroFramework.MetroCheckBoxSize.Medium
-        Me.rbMPC.Location = New System.Drawing.Point(89, 3)
+        Me.rbMPC.Location = New System.Drawing.Point(141, 3)
+        Me.rbMPC.Margin = New System.Windows.Forms.Padding(50, 3, 3, 3)
         Me.rbMPC.Name = "rbMPC"
-        Me.rbMPC.Size = New System.Drawing.Size(80, 21)
+        Me.rbMPC.Size = New System.Drawing.Size(86, 21)
         Me.rbMPC.TabIndex = 1
-        Me.rbMPC.Text = "MPC"
+        Me.rbMPC.Text = "MPC-HC"
         Me.rbMPC.UseSelectable = true
+        '
+        'lvlMPCHCLogo
+        '
+        Me.lvlMPCHCLogo.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lvlMPCHCLogo.Image = Global.NHLGames.My.Resources.Resources.mpc_hc
+        Me.lvlMPCHCLogo.Location = New System.Drawing.Point(230, 0)
+        Me.lvlMPCHCLogo.Margin = New System.Windows.Forms.Padding(0)
+        Me.lvlMPCHCLogo.Name = "lvlMPCHCLogo"
+        Me.lvlMPCHCLogo.Size = New System.Drawing.Size(25, 27)
+        Me.lvlMPCHCLogo.TabIndex = 4
         '
         'rbMPV
         '
         Me.rbMPV.Checked = true
         Me.rbMPV.Enabled = false
         Me.rbMPV.FontSize = MetroFramework.MetroCheckBoxSize.Medium
-        Me.rbMPV.Location = New System.Drawing.Point(175, 3)
+        Me.rbMPV.Location = New System.Drawing.Point(305, 3)
+        Me.rbMPV.Margin = New System.Windows.Forms.Padding(50, 3, 3, 3)
         Me.rbMPV.Name = "rbMPV"
-        Me.rbMPV.Size = New System.Drawing.Size(80, 21)
+        Me.rbMPV.Size = New System.Drawing.Size(60, 21)
         Me.rbMPV.TabIndex = 2
         Me.rbMPV.TabStop = true
         Me.rbMPV.Text = "MPV"
         Me.rbMPV.UseSelectable = true
+        '
+        'lblMPVLogo
+        '
+        Me.lblMPVLogo.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblMPVLogo.Image = Global.NHLGames.My.Resources.Resources.mpv
+        Me.lblMPVLogo.Location = New System.Drawing.Point(368, 0)
+        Me.lblMPVLogo.Margin = New System.Windows.Forms.Padding(0)
+        Me.lblMPVLogo.Name = "lblMPVLogo"
+        Me.lblMPVLogo.Size = New System.Drawing.Size(25, 27)
+        Me.lblMPVLogo.TabIndex = 5
         '
         'tlpCdnSettings
         '
@@ -2272,4 +2310,7 @@ End Sub
     Friend WithEvents flpRecordList As FlowLayoutPanel
     Friend WithEvents lblLiveReplay As MetroLabel
     Friend WithEvents cbLiveReplay As MetroComboBox
+    Friend WithEvents lblVLCLogo As Label
+    Friend WithEvents lvlMPCHCLogo As Label
+    Friend WithEvents lblMPVLogo As Label
 End Class

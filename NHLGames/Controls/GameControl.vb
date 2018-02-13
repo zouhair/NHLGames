@@ -49,7 +49,7 @@ Namespace Controls
 
                 If showLiveScores Then
                     If _game.IsInIntermission Then
-                        lblPeriod.Text = $"{NHLGamesMetro.RmText.GetString("gameIntermission")} {_game.IntermissionTimeRemaining.ToString("mm:ss")}"
+                        lblPeriod.Text = $"{NHLGamesMetro.RmText.GetString("gameIntermission")} {_game.IntermissionTimeRemaining.ToString("mm:ss")}".ToUpper()
                     Else
                         lblPeriod.Text = $"{_game.GamePeriod.
                             Replace($"1st",NHLGamesMetro.RmText.GetString("gamePeriod1")).
@@ -57,7 +57,7 @@ Namespace Controls
                             Replace($"3rd",NHLGamesMetro.RmText.GetString("gamePeriod3")).
                             Replace($"OT", NHLGamesMetro.RmText.GetString("gamePeriodOt")).
                             Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo")).
-                            ToUpper()}          {_game.GameTimeLeft.ToLower().
+                            ToUpper()}              {_game.GameTimeLeft.ToLower().
                                 Replace("final",NHLGamesMetro.RmText.GetString("gamePeriodFinal")).
                                 Replace("end", "00:00")}".
                             ToUpper() '1st 2nd 3rd OT SO... Final, 12:34, 20:00 

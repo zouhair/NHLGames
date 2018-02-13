@@ -108,7 +108,7 @@ Namespace Objects
         Public Sub SetLiveInfo(game As JObject)
             GamePeriod = game.SelectToken("linescore.currentPeriodOrdinal").ToString()
             GameTimeLeft = game.SelectToken("linescore.currentPeriodTimeRemaining").ToString()
-            IsInIntermission = game.SelectToken("linescore.intermissionInfo.inIntermission").ToString().Equals("true")
+            IsInIntermission = game.SelectToken("linescore.intermissionInfo.inIntermission").ToString().ToLower().Equals("true")
             HomeScore = game.SelectToken("teams.home.score").ToString()
             AwayScore = game.SelectToken("teams.away.score").ToString()
 
