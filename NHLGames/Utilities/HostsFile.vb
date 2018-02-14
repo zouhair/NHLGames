@@ -19,6 +19,21 @@ Namespace Utilities
             Return NHLGamesMetro.ServerIp = resolvedIp
         End Function
 
+        Public Shared Function GetEntries() As String
+            Dim input As String
+            Using sr As New StreamReader(HostsFilePath)
+                input = sr.ReadToEnd()
+            End Using
+
+            Dim hostsFileLines = input.Replace(vbCr, String.Empty).Replace(vbTab, " ").Split(vbLf)
+
+            Return (From entry In hostsFileLines
+                    Where Not entry.Contains("#") AndAlso 
+                        Not entry.Equals(String.Empty)).
+                        Aggregate(String.Empty, 
+                                  Function(current, entry) current & entry & "; ")
+        End Function
+
         Private Shared Function RemoveOldEntries(contents As String) As String
             Dim newContents As String = String.Empty
 

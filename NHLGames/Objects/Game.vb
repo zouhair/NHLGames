@@ -9,15 +9,18 @@ Namespace Objects
     Public Class Game: Implements IDisposable
         Private _disposedValue As Boolean
 
-        Public Property StreamsDict As Dictionary(Of StreamType, GameStream)
+        Public Property StreamsDict As Dictionary(Of StreamTypeEnum, GameStream)
         Public Property Id As Guid = Guid.NewGuid()
         Public Property GameId As String
         Public Property GameType As GameTypeEnum 'Get type of the game : 1 preseason, 2 regular, 3 series
         Public Property GameDate As DateTime
         Public Property GameState As GameStateEnum
         Public Property GameStateDetailed As String
+
         Public Property GamePeriod As String '1st 2nd 3rd OT SO OT2..
         Public Property GameTimeLeft As String 'Final, 12:34, 20:00
+        Public Property IsInIntermission As Boolean
+        Public Property IntermissionTimeRemaining As Date 'seconds
 
         Public Property SeriesGameNumber As String 'Series: Game 1.. 7
         Public Property SeriesGameStatus As String 'Series: Team wins 4-2, Tied 2-2, Team leads 1-0
@@ -73,11 +76,11 @@ Namespace Objects
             End Get
         End Property
 
-        Public Function GetStream(streamType As StreamType) As GameStream
+        Public Function GetStream(streamType As StreamTypeEnum) As GameStream
             Return If (StreamsDict IsNot Nothing, StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value, New GameStream())
         End Function
 
-        Public Function IsStreamDefined(streamType As StreamType) As Boolean
+        Public Function IsStreamDefined(streamType As StreamTypeEnum) As Boolean
             Return (StreamsDict IsNot Nothing) AndAlso StreamsDict.ContainsKey(streamType)
         End Function
 
@@ -105,12 +108,17 @@ Namespace Objects
         Public Sub SetLiveInfo(game As JObject)
             GamePeriod = game.SelectToken("linescore.currentPeriodOrdinal").ToString()
             GameTimeLeft = game.SelectToken("linescore.currentPeriodTimeRemaining").ToString()
+            IsInIntermission = game.SelectToken("linescore.intermissionInfo.inIntermission").ToString().ToLower().Equals("true")
             HomeScore = game.SelectToken("teams.home.score").ToString()
             AwayScore = game.SelectToken("teams.away.score").ToString()
+
+            If IsInIntermission Then
+                IntermissionTimeRemaining = Date.MinValue.AddSeconds(CType(game.SelectToken("linescore.intermissionInfo.intermissionTimeRemaining").ToString(), Integer))
+            End If
         End Sub
 
         Public Sub New()
-            StreamsDict = New Dictionary(Of StreamType, GameStream)
+            StreamsDict = New Dictionary(Of StreamTypeEnum, GameStream)
         End Sub
 
         Protected Overridable Sub Dispose(disposing As Boolean)

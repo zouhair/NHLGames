@@ -11,7 +11,7 @@ Namespace Controls
         Private ReadOnly _showSeriesRecord As Boolean
         Private ReadOnly _showTeamCityAbr As Boolean
         Private ReadOnly _broadcasters As Dictionary(Of String, String)
-        Public LiveReplayCode As LiveReplayCode = LiveReplayCode.Live
+        Public LiveReplayCode As LiveStatusCodeEnum = LiveStatusCodeEnum.Live
 
         Public ReadOnly Property GameId() As String
             Get
@@ -19,7 +19,7 @@ Namespace Controls
             End Get
         End Property
 
-        Public ReadOnly Property GetGameStreamsDict As Dictionary(Of StreamType, GameStream)
+        Public ReadOnly Property GetGameStreamsDict As Dictionary(Of StreamTypeEnum, GameStream)
             Get
                 Return _game.StreamsDict
             End Get
@@ -47,22 +47,26 @@ Namespace Controls
 
                 SetRecordIcon()
 
-                lblPeriod.Text = $"{_game.GamePeriod.
-                    Replace($"1st",NHLGamesMetro.RmText.GetString("gamePeriod1")).
-                    Replace($"2nd",NHLGamesMetro.RmText.GetString("gamePeriod2")).
-                    Replace($"3rd",NHLGamesMetro.RmText.GetString("gamePeriod3")).
-                    Replace($"OT", NHLGamesMetro.RmText.GetString("gamePeriodOt")).
-                    Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo")).
-                    ToUpper()}          {_game.GameTimeLeft.ToLower().
-                    Replace("final",NHLGamesMetro.RmText.GetString("gamePeriodFinal")).
-                    Replace("end", "00:00")}".
-                    ToUpper() '1st 2nd 3rd OT SO... Final, 12:34, 20:00 
+                If showLiveScores Then
+                    If _game.IsInIntermission Then
+                        lblPeriod.Text = $"{NHLGamesMetro.RmText.GetString("gameIntermission")} {_game.IntermissionTimeRemaining.ToString("mm:ss")}".ToUpper()
+                    Else
+                        lblPeriod.Text = $"{_game.GamePeriod.
+                            Replace($"1st",NHLGamesMetro.RmText.GetString("gamePeriod1")).
+                            Replace($"2nd",NHLGamesMetro.RmText.GetString("gamePeriod2")).
+                            Replace($"3rd",NHLGamesMetro.RmText.GetString("gamePeriod3")).
+                            Replace($"OT", NHLGamesMetro.RmText.GetString("gamePeriodOt")).
+                            Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo")).
+                            ToUpper()}              {_game.GameTimeLeft.ToLower().
+                                Replace("final",NHLGamesMetro.RmText.GetString("gamePeriodFinal")).
+                                Replace("end", "00:00")}".
+                            ToUpper() '1st 2nd 3rd OT SO... Final, 12:34, 20:00 
 
-                If _game.GamePeriod.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt")) And IsNumeric(_game.GamePeriod(0)) Then
-                    lblPeriod.Text = String.Format(NHLGamesMetro.RmText.GetString("gamePeriodOtMore"), _game.GamePeriod(0)).ToUpper() '2OT..
-                End If
-                
-                If Not showLiveScores Then
+                        If _game.GamePeriod.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt")) And IsNumeric(_game.GamePeriod(0)) Then
+                            lblPeriod.Text = String.Format(NHLGamesMetro.RmText.GetString("gamePeriodOtMore"), _game.GamePeriod(0)).ToUpper() '2OT..
+                        End If
+                    End If
+                Else
                     lblGameStatus.Text = String.Format("{0}{1}{2}",
                                                        _game.GameDate.ToLocalTime().ToString("h:mm tt"),
                                                        vbCrLf,
@@ -73,7 +77,6 @@ Namespace Controls
                     lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
                 End If
 
-                If Not showLiveScores Then lblPeriod.Text = String.Empty
             ElseIf _game.IsOffTheAir Then
                 lblHomeScore.Visible = showScores
                 lblAwayScore.Visible = showScores
@@ -106,11 +109,8 @@ Namespace Controls
                                                            NHLGamesMetro.RmText.GetString("gamePeriodFinal").ToUpper())
                     End If
                 End If
-
-                If Not showScores Then lblPeriod.Text = String.Empty
             ElseIf _game.GameState <= GameStateEnum.Pregame Then
                 lblDivider.Visible = False
-                lblPeriod.Text = String.Empty
                 lblGameStatus.Visible = True
                 lblGameStatus.Text = _game.GameDate.ToLocalTime().ToString("h:mm tt")
 
@@ -127,7 +127,6 @@ Namespace Controls
                 End If
             Else If _game.IsUnplayable Then
                 lblDivider.Visible = False
-                lblPeriod.Text = String.Empty
                 lblGameStatus.Visible = True
                 lblGameStatus.Text = _game.GameStateDetailed.ToUpper()
                 lblPeriod.BackColor = Color.FromKnownColor(KnownColor.DarkOrange)
@@ -244,23 +243,23 @@ Namespace Controls
             lblAwayScore.Text = _game.AwayScore
             lblAwayTeam.Text = _game.AwayAbbrev
    
-            lnkAway.Visible = _game.IsStreamDefined(StreamType.Away)
-            lnkHome.Visible = _game.IsStreamDefined(StreamType.Home)
-            lnkFrench.Visible = _game.IsStreamDefined(StreamType.French)
-            lnkNational.Visible = _game.IsStreamDefined(StreamType.National)
+            lnkAway.Visible = _game.IsStreamDefined(StreamTypeEnum.Away)
+            lnkHome.Visible = _game.IsStreamDefined(StreamTypeEnum.Home)
+            lnkFrench.Visible = _game.IsStreamDefined(StreamTypeEnum.French)
+            lnkNational.Visible = _game.IsStreamDefined(StreamTypeEnum.National)
 
-            lnkThree.Visible = _game.IsStreamDefined(StreamType.MultiCam1)
-            lnkSix.Visible = _game.IsStreamDefined(StreamType.MultiCam2)
+            lnkThree.Visible = _game.IsStreamDefined(StreamTypeEnum.MultiCam1)
+            lnkSix.Visible = _game.IsStreamDefined(StreamTypeEnum.MultiCam2)
 
-            lnkRef.Visible = _game.IsStreamDefined(StreamType.RefCam)
-            lnkStar.Visible = _game.IsStreamDefined(StreamType.StarCam)
+            lnkRef.Visible = _game.IsStreamDefined(StreamTypeEnum.RefCam)
+            lnkStar.Visible = _game.IsStreamDefined(StreamTypeEnum.StarCam)
 
-            lnkEnd1.Visible = _game.IsStreamDefined(StreamType.EndzoneCam1)
-            lnkEnd2.Visible = _game.IsStreamDefined(StreamType.EndzoneCam2)
+            lnkEnd1.Visible = _game.IsStreamDefined(StreamTypeEnum.EndzoneCam1)
+            lnkEnd2.Visible = _game.IsStreamDefined(StreamTypeEnum.EndzoneCam2)
 
-            lnkMultiAngle1.Visible = _game.IsStreamDefined(StreamType.MultiAngle1)
-            lnkMultiAngle2.Visible = _game.IsStreamDefined(StreamType.MultiAngle2)
-            lnkMultiAngle3.Visible = _game.IsStreamDefined(StreamType.MultiAngle3)
+            lnkMultiAngle1.Visible = _game.IsStreamDefined(StreamTypeEnum.MultiAngle1)
+            lnkMultiAngle2.Visible = _game.IsStreamDefined(StreamTypeEnum.MultiAngle2)
+            lnkMultiAngle3.Visible = _game.IsStreamDefined(StreamTypeEnum.MultiAngle3)
 
             If Not _game.IsUnplayable Then
                 If _game.GameState < GameStateEnum.Ended And _game.GameDate.ToLocalTime() <= Date.Today.AddDays(1) Then
@@ -279,28 +278,28 @@ Namespace Controls
             SetTeamLogo(picAway, _game.AwayTeam)
             SetTeamLogo(picHome, _game.HomeTeam)
 
-            SetStreamButtonLink(StreamType.Away, lnkAway, String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"), _game.AwayAbbrev))
-            SetStreamButtonLink(StreamType.Home, lnkHome, String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"), _game.HomeAbbrev))
-            SetStreamButtonLink(StreamType.French, lnkFrench, NHLGamesMetro.RmText.GetString("lblFrenchNetwork"))
-            SetStreamButtonLink(StreamType.National, lnkNational, NHLGamesMetro.RmText.GetString("lblNationalNetwork"))
+            SetStreamButtonLink(StreamTypeEnum.Away, lnkAway, String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"), _game.AwayAbbrev))
+            SetStreamButtonLink(StreamTypeEnum.Home, lnkHome, String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"), _game.HomeAbbrev))
+            SetStreamButtonLink(StreamTypeEnum.French, lnkFrench, NHLGamesMetro.RmText.GetString("lblFrenchNetwork"))
+            SetStreamButtonLink(StreamTypeEnum.National, lnkNational, NHLGamesMetro.RmText.GetString("lblNationalNetwork"))
 
-            SetStreamButtonLink(StreamType.MultiCam1, lnkThree, String.Format(NHLGamesMetro.RmText.GetString("lblCamViews"), 3))
-            SetStreamButtonLink(StreamType.MultiCam2, lnkSix, String.Format(NHLGamesMetro.RmText.GetString("lblCamViews"), 6))
+            SetStreamButtonLink(StreamTypeEnum.MultiCam1, lnkThree, String.Format(NHLGamesMetro.RmText.GetString("lblCamViews"), 3))
+            SetStreamButtonLink(StreamTypeEnum.MultiCam2, lnkSix, String.Format(NHLGamesMetro.RmText.GetString("lblCamViews"), 6))
 
-            SetStreamButtonLink(StreamType.EndzoneCam1, lnkEnd1, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), _game.AwayAbbrev))
-            SetStreamButtonLink(StreamType.EndzoneCam2, lnkEnd2, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), _game.HomeAbbrev))
+            SetStreamButtonLink(StreamTypeEnum.EndzoneCam1, lnkEnd1, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), _game.AwayAbbrev))
+            SetStreamButtonLink(StreamTypeEnum.EndzoneCam2, lnkEnd2, String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), _game.HomeAbbrev))
 
-            SetStreamButtonLink(StreamType.RefCam, lnkRef, NHLGamesMetro.RmText.GetString("lblRefCam"))
-            SetStreamButtonLink(StreamType.StarCam, lnkStar, NHLGamesMetro.RmText.GetString("lblStarCam"))
+            SetStreamButtonLink(StreamTypeEnum.RefCam, lnkRef, NHLGamesMetro.RmText.GetString("lblRefCam"))
+            SetStreamButtonLink(StreamTypeEnum.StarCam, lnkStar, NHLGamesMetro.RmText.GetString("lblStarCam"))
 
-            SetStreamButtonLink(StreamType.MultiAngle1, lnkMultiAngle1, String.Format(NHLGamesMetro.RmText.GetString("lblMultiAngleCam"), 1))
-            SetStreamButtonLink(StreamType.MultiAngle2, lnkMultiAngle2, String.Format(NHLGamesMetro.RmText.GetString("lblMultiAngleCam"), 2))
-            SetStreamButtonLink(StreamType.MultiAngle3, lnkMultiAngle3, String.Format(NHLGamesMetro.RmText.GetString("lblMultiAngleCam"), 3))
+            SetStreamButtonLink(StreamTypeEnum.MultiAngle1, lnkMultiAngle1, String.Format(NHLGamesMetro.RmText.GetString("lblMultiAngleCam"), 1))
+            SetStreamButtonLink(StreamTypeEnum.MultiAngle2, lnkMultiAngle2, String.Format(NHLGamesMetro.RmText.GetString("lblMultiAngleCam"), 2))
+            SetStreamButtonLink(StreamTypeEnum.MultiAngle3, lnkMultiAngle3, String.Format(NHLGamesMetro.RmText.GetString("lblMultiAngleCam"), 3))
 
             UpdateGameStreams()
         End Sub
 
-        Private Sub SetStreamButtonLink(streamType As StreamType, btnLink As Button, tooltip As String)
+        Private Sub SetStreamButtonLink(streamType As StreamTypeEnum, btnLink As Button, tooltip As String)
             If _game.IsStreamDefined(streamType) Then
                 Dim stream = _game.GetStream(streamType)
 
@@ -312,7 +311,7 @@ Namespace Controls
                     btnLink.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 224, 224, 224)
                     tt.SetToolTip(btnLink, String.Format(NHLGamesMetro.RmText.GetString("tipBrokenStream")))
                 Else 
-                    If streamType < StreamType.EndzoneCam1 Then
+                    If streamType < StreamTypeEnum.EndzoneCam1 Then
                         If _game.GetStream(streamType).Network <> String.Empty Then
                             Dim img As String = GetBroadcasterPicFor(stream.Network)
                             If img <> "" Then
@@ -361,17 +360,17 @@ Namespace Controls
 
         Public Sub SetLiveStatusIcon(Optional increase As Boolean = False)
             If increase Then
-                LiveReplayCode = If (LiveReplayCode + 1 > LiveReplayCode.Replay, 0, LiveReplayCode + 1)
+                LiveReplayCode = If (LiveReplayCode + 1 > LiveStatusCodeEnum.Replay, 0, LiveReplayCode + 1)
             End If
 
-            btnLiveReplay.BackColor = If (LiveReplayCode.Equals(LiveReplayCode.Live), Color.Red, Color.White)
+            btnLiveReplay.BackColor = If (LiveReplayCode.Equals(LiveStatusCodeEnum.Live), Color.Red, Color.White)
             
             If btnLiveReplay.BackgroundImage IsNot Nothing Then btnLiveReplay.BackgroundImage.Dispose()
             btnLiveReplay.BackgroundImage = 
                 ImageFetcher.GetEmbeddedImage($"live{CType(LiveReplayCode, Integer)}", True)
             
             Dim type = LiveReplayCode.ToString()
-            If Not LiveReplayCode.Equals(LiveReplayCode.Rewind) Then
+            If Not LiveReplayCode.Equals(LiveStatusCodeEnum.Rewind) Then
                 tt.SetToolTip(btnLiveReplay, NHLGamesMetro.RmText.GetString("tipLiveStatus" & type))
             Else 
                 tt.SetToolTip(btnLiveReplay, String.Format(NHLGamesMetro.RmText.GetString("tipLiveStatus" & type), 
@@ -385,6 +384,7 @@ Namespace Controls
 
         Private Sub WatchStream(streamType As StreamerTypeEnum)
             Dim args = WatchArgs()
+            args.GameDate = _game.GameDate
             args.Stream = _game.GetStream(streamType)
             args.GameTitle = _game.AwayAbbrev & " @ " & _game.HomeAbbrev
             args.StreamLiveReplayCode = LiveReplayCode
@@ -393,55 +393,55 @@ Namespace Controls
         End Sub
 
         Private Sub lnkAway_Click(sender As Object, e As EventArgs) Handles lnkAway.Click
-            WatchStream(StreamType.Away)
+            WatchStream(StreamTypeEnum.Away)
         End Sub
 
         Private Sub lnkFrench_Click(sender As Object, e As EventArgs) Handles lnkFrench.Click 
-            WatchStream(StreamType.French)
+            WatchStream(StreamTypeEnum.French)
         End Sub
 
         Private Sub lnkNational_Click(sender As Object, e As EventArgs) Handles lnkNational.Click 
-            WatchStream(StreamType.National)
+            WatchStream(StreamTypeEnum.National)
         End Sub
 
         Private Sub lnkHome_Click(sender As Object, e As EventArgs) Handles lnkHome.Click 
-            WatchStream(StreamType.Home)
+            WatchStream(StreamTypeEnum.Home)
         End Sub
 
         Private Sub lnkThree_Click(sender As Object, e As EventArgs) Handles lnkThree.Click 
-            WatchStream(StreamType.MultiCam1)
+            WatchStream(StreamTypeEnum.MultiCam1)
         End Sub
 
         Private Sub lnkSix_Click(sender As Object, e As EventArgs) Handles lnkSix.Click 
-            WatchStream(StreamType.MultiCam2)
+            WatchStream(StreamTypeEnum.MultiCam2)
         End Sub
 
         Private Sub lnkEnd1_Click(sender As Object, e As EventArgs) Handles lnkEnd1.Click  
-            WatchStream(StreamType.EndzoneCam1)
+            WatchStream(StreamTypeEnum.EndzoneCam1)
         End Sub
 
         Private Sub lnkEnd2_Click(sender As Object, e As EventArgs) Handles lnkEnd2.Click 
-            WatchStream(StreamType.EndzoneCam2)
+            WatchStream(StreamTypeEnum.EndzoneCam2)
         End Sub
 
         Private Sub lnkRef_Click(sender As Object, e As EventArgs) Handles lnkRef.Click 
-            WatchStream(StreamType.RefCam)
+            WatchStream(StreamTypeEnum.RefCam)
         End Sub
 
         Private Sub lnkStar_Click(sender As Object, e As EventArgs) Handles lnkStar.Click
-            WatchStream(StreamType.StarCam)
+            WatchStream(StreamTypeEnum.StarCam)
         End Sub
 
         Private Sub lnkMultiAngle1_Click(sender As Object, e As EventArgs) Handles lnkMultiAngle1.Click
-            WatchStream(StreamType.MultiAngle1)
+            WatchStream(StreamTypeEnum.MultiAngle1)
         End Sub
 
         Private Sub lnkMultiAngle2_Click(sender As Object, e As EventArgs) Handles lnkMultiAngle2.Click
-            WatchStream(StreamType.MultiAngle2)
+            WatchStream(StreamTypeEnum.MultiAngle2)
         End Sub
 
         Private Sub lnkMultiAngle3_Click(sender As Object, e As EventArgs) Handles lnkMultiAngle3.Click
-            WatchStream(StreamType.MultiAngle3)
+            WatchStream(StreamTypeEnum.MultiAngle3)
         End Sub
 
         Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)

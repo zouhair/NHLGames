@@ -185,11 +185,11 @@
     <value>{0} endzone camera</value>
     <comment>Game panel</comment>
   </data>
-  <data name="lblEnglish" xml:space="preserve">
+  <data name="cbEnglish" xml:space="preserve">
     <value>English</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblFrench" xml:space="preserve">
+  <data name="cbFrench" xml:space="preserve">
     <value>Français</value>
     <comment>Settings tab</comment>
   </data>
@@ -206,7 +206,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="tipGetMpc" xml:space="preserve">
-    <value>Download MPC</value>
+    <value>Download MPC-HC</value>
     <comment>Settings tab</comment>
   </data>
   <data name="tipGetVlc" xml:space="preserve">
@@ -226,7 +226,7 @@
     <comment>Settings tab</comment>
   </data>
   <data name="lblMpcPath" xml:space="preserve">
-    <value>MPC Path</value>
+    <value>MPC-HC Path</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblMpvPath" xml:space="preserve">
@@ -762,7 +762,7 @@
     <comment>Message</comment>
   </data>
   <data name="noAppServer" xml:space="preserve">
-    <value>NHLGames server not avaible!</value>
+    <value>NHLGames server not available!</value>
     <comment>Message</comment>
   </data>
   <data name="tipCalendar" xml:space="preserve">
@@ -802,11 +802,11 @@
     <comment>Main</comment>
   </data>
   <data name="lblLiveRewind" xml:space="preserve">
-    <value>Rewind (live stream)</value>
+    <value>Live Rewind</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblLiveRewindDetails" xml:space="preserve">
-    <value>{0} minutes behind live stream</value>
+    <value>{0} minutes behind live stream ({1})</value>
     <comment>Settings tab</comment>
   </data>
   <data name="cbLiveStatusLive" xml:space="preserve">
@@ -904,5 +904,25 @@
   <data name="lblTime" xml:space="preserve">
     <value>Time</value>
     <comment>Set record panel</comment>
+  </data>
+  <data name="cbLiveReplayFeedStart" xml:space="preserve">
+    <value>At the beginning of the stream</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbLiveReplayGameTime" xml:space="preserve">
+    <value>When the event starts (game time)</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="cbLiveReplayPuckDrop" xml:space="preserve">
+    <value>When the game starts (drops the puck)</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="lblLiveReplay" xml:space="preserve">
+    <value>Live Replay</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="gameIntermission" xml:space="preserve">
+    <value>Intermission</value>
+    <comment>Game panel</comment>
   </data>
 </root>

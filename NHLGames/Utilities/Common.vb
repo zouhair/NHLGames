@@ -113,27 +113,27 @@ Namespace Utilities
         Public Shared Sub GetLanguage()
             Dim lang = ApplicationSettings.Read(Of String)(SettingsEnum.SelectedLanguage, "English")
 
-            If lang = NHLGamesMetro.RmText.GetString("lblEnglish") Then
+            If lang = NHLGamesMetro.RmText.GetString("cbEnglish") Then
                 NHLGamesMetro.RmText = English.ResourceManager
-            ElseIf lang = NHLGamesMetro.RmText.GetString("lblFrench") Then
+            ElseIf lang = NHLGamesMetro.RmText.GetString("cbFrench") Then
                 NHLGamesMetro.RmText = French.ResourceManager
             End If
         End Sub
 
         Public Async Shared Function CheckAppCanRun() As Task(Of Boolean)
+            Dim errorMessage = String.Empty
             If NHLGamesMetro.ServerIp.Equals(String.Empty) Then
-                FatalError(NHLGamesMetro.RmText.GetString("noGameServer"))
-                Return False
+                errorMessage = "noGameServer"
+            ElseIf Not Await SendWebRequestAsync("https://www.google.com") Then
+                errorMessage = "noWebAccess"
+            ElseIf Not Await InitializeForm.VersionCheck() Then
+                errorMessage = "noAppServer"
             End If
-            If Not Await SendWebRequestAsync("https://www.google.com") Then
-                FatalError(NHLGamesMetro.RmText.GetString("noWebAccess"))
-                Return False
+            If Not errorMessage.Equals(String.Empty) Then
+                FatalError(NHLGamesMetro.RmText.GetString(errorMessage))
+                Console.WriteLine($"Status: {English.ResourceManager.GetString(errorMessage)}")
             End If
-            If Not Await InitializeForm.VersionCheck() Then
-                FatalError(NHLGamesMetro.RmText.GetString("noAppServer"))
-                Return False
-            End If
-            Return True
+            Return errorMessage.Equals(String.Empty)
         End Function
 
         Public Shared Sub SetRedirectionServerInApp()

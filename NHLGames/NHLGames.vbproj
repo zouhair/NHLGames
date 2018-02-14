@@ -273,11 +273,13 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>French.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="English.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>English1.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="NHLGamesMetro.resx">
       <DependentUpon>NHLGamesMetro.vb</DependentUpon>
@@ -422,11 +424,15 @@
     <EmbeddedResource Include="Icons\live1.png" />
     <EmbeddedResource Include="Icons\live2.png" />
     <EmbeddedResource Include="Icons\waddrecord.png" />
+    <None Include="Icons\mpc-hc.gif" />
+    <None Include="Icons\mpv.gif" />
+    <None Include="Icons\vlc.gif" />
     <Content Include="Icons\wdatew.png" />
     <Content Include="Icons\wrecord.png" />
     <EmbeddedResource Include="Icons\wrecording.png" />
     <Content Include="Icons\wrefreshw.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

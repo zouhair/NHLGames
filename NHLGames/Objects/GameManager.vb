@@ -6,12 +6,12 @@ Namespace Objects
 
     Public Class GameManager: Implements IDisposable
         Private _disposedValue As Boolean
-        Private Shared ReadOnly DictStreamType = New Dictionary(Of String, StreamType)() From {
-                                          {"HOME", StreamType.Home}, {"AWAY", StreamType.Away}, {"NATIONAL", StreamType.National}, {"FRENCH", StreamType.French},
-                                          {"Multi-Cam 1", StreamType.MultiCam1}, {"Multi-Cam 2", StreamType.MultiCam2},
-                                          {"Endzone Cam 1", StreamType.EndzoneCam1},{"Endzone Cam 2", StreamType.EndzoneCam2},
-                                          {"Ref Cam", StreamType.RefCam}, {"Star Cam", StreamType.StarCam},
-                                          {"Multi-Angle 1", StreamType.MultiAngle1}, {"Multi-Angle 2", StreamType.MultiAngle2}, {"Multi-Angle 3", StreamType.MultiAngle3}}
+        Private Shared ReadOnly DictStreamType = New Dictionary(Of String, StreamTypeEnum)() From {
+                                          {"HOME", StreamTypeEnum.Home}, {"AWAY", StreamTypeEnum.Away}, {"NATIONAL", StreamTypeEnum.National}, {"FRENCH", StreamTypeEnum.French},
+                                          {"MULTI-CAM 1", StreamTypeEnum.MultiCam1}, {"MULTI-CAM 2", StreamTypeEnum.MultiCam2},
+                                          {"ENDZONE CAM 1", StreamTypeEnum.EndzoneCam1},{"ENDZONE CAM 2", StreamTypeEnum.EndzoneCam2},
+                                          {"Ref Cam", StreamTypeEnum.RefCam}, {"STAR CAM", StreamTypeEnum.StarCam}, {"ROBO CAM", StreamTypeEnum.RoboCam},
+                                          {"MULTI-ANGLE 1", StreamTypeEnum.MultiAngle1}, {"MULTI-ANGLE 2", StreamTypeEnum.MultiAngle2}, {"MULTI-ANGLE 3", StreamTypeEnum.MultiAngle3}}
 
         Private Const MediaOff = "MEDIA_OFF"
 
@@ -87,9 +87,9 @@ Namespace Objects
                                     For Each innerStream As JObject In item.Children(Of JObject)
                                         NHLGamesMetro.SpnLoadingValue += progressPerStream
                                         Dim streamOff = innerStream.SelectToken("mediaState").ToString().Equals(MediaOff)
-                                        Dim streamType As StreamType = GetStreamType(innerStream.Property("mediaFeedType").Value.ToString(), innerStream.Property("feedName").Value.ToString())
+                                        Dim streamType As StreamTypeEnum = GetStreamType(innerStream.Property("mediaFeedType").Value.ToString(), innerStream.Property("feedName").Value.ToString().ToUpper())
 
-                                        If Not streamOff AndAlso streamType <> StreamType.None AndAlso numberOfStreams <> 0 Then
+                                        If Not streamOff AndAlso streamType <> StreamTypeEnum.None AndAlso numberOfStreams <> 0 Then
                                             Dim tCurrentGame = currentGame
                                             Dim tInnerStream = innerStream
                                             Dim tStreamType = streamType
@@ -138,7 +138,7 @@ Namespace Objects
                 Sum(Function(stream) stream.Property("items").Value.Count))
         End Function
 
-        Private Shared Async Function SetNewGameStream(currentGame As Game, innerStream As JObject, streamType As StreamType) As Task(Of GameStream)
+        Private Shared Async Function SetNewGameStream(currentGame As Game, innerStream As JObject, streamType As StreamTypeEnum) As Task(Of GameStream)
             Dim gs = New GameStream(currentGame, innerStream, streamType)
             gs.streamUrl = Await GetGameFeedUrlAsync(gs)
 
@@ -149,13 +149,13 @@ Namespace Objects
             Return gs
         End Function
 
-        Private Shared Function GetStreamType(mediaFeedType As String, feedName As String) As StreamType
+        Private Shared Function GetStreamType(mediaFeedType As String, feedName As String) As StreamTypeEnum
             Dim streamTypeAsText = If (feedName = String.Empty, mediaFeedType, feedName)
 
-            If DictStreamType.ContainsKey(streamTypeAsText) Then
-                Return DictStreamType(streamTypeAsText)
+            If DictStreamType.ContainsKey(streamTypeAsText.ToUpper()) Then
+                Return DictStreamType(streamTypeAsText.ToUpper())
             Else 
-                Return StreamType.None
+                Return StreamTypeEnum.None
             End If
         End Function
 
@@ -171,7 +171,7 @@ Namespace Objects
                     'the server script should test url before returning it and apply the fix below if the test fails
                     If Await Common.SendWebRequestAsync(Nothing, request) Then
                         result = streamUrlReturned
-                    Else If streamUrlReturned.Contains("http://hlslive") AndAlso gameStream.CdnParameter.Equals(CdnType.Akc) Then
+                    Else If streamUrlReturned.Contains("http://hlslive") AndAlso gameStream.CdnParameter.Equals(CdnTypeEnum.Akc) Then
                         Dim generatedStreamUrlFix As String = GetStreamUrlFix(streamUrlReturned, gameStream.CdnParameter.ToString().ToLower())
 
                         If Not generatedStreamUrlFix.Equals(String.Empty) Then

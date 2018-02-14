@@ -1,9 +1,11 @@
-﻿Imports System.IO
+﻿Imports System.Globalization
+Imports System.IO
 Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Resources
 Imports System.Windows
 Imports MetroFramework.Controls
+Imports Microsoft.VisualBasic.Devices
 Imports NHLGames.Controls
 Imports NHLGames.My.Resources
 Imports NHLGames.Objects
@@ -217,7 +219,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub tgAlternateCdn_CheckedChanged(sender As Object, e As EventArgs) Handles tgAlternateCdn.CheckedChanged
-        Dim cdn = If(tgAlternateCdn.Checked, CdnType.L3C, CdnType.Akc)
+        Dim cdn = If(tgAlternateCdn.Checked, CdnTypeEnum.L3C, CdnTypeEnum.Akc)
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(lblCdn.Text, cdn.ToString())
         InvokeElement.LoadGames()
@@ -626,19 +628,20 @@ Public Class NHLGamesMetro
         Dim mpvExists = mpvPath <> "" AndAlso File.Exists(mpvPath)
         Dim version = String.Format("v {0}.{1}.{2}.{3}", My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
         Dim report = $"NHLGames Bug Report {version}{vbCrLf}{vbCrLf}" &
-                     $"Operating system: {My.Computer.Info.OSFullName.ToString()} {x64.ToString()}{vbCrLf}{vbCrLf}" &
+                     $"Operating system: {My.Computer.Info.OSFullName.ToString()} {x64.ToString()}{vbTab}{vbCrLf}" &
+                     $"Internet: Connection test {If (My.Computer.Network.IsAvailable, "succeeded", "failed")}, ping google.com {If (My.Computer.Network.Ping("www.google.com"), "succeeded", "failed")}{vbTab}{vbCrLf}" &
                      $"Form: {If (Not String.IsNullOrEmpty(lblDate.Text), "loaded", "not loaded")}, " &
                      $"{flpGames.Controls.Count} games currently on form, " &
                      $"Spinner (games) {If (SpnLoadingVisible, "visible", "invisible")} {SpnLoadingValue.ToString()}/{SpnLoadingMaxValue.ToString()}, " &
-                     $"Spinner (stream) {If (SpnStreamingVisible, "visible", "invisible")} {SpnStreamingValue.ToString()}/{SpnStreamingMaxValue.ToString()}{vbCrLf}{vbCrLf}" &
-                     $"Servers: NHLGames IP {If (My.Computer.Network.Ping(ServerIp), "found", "not found")} ({cbServers.SelectedItem.ToString()}), " &
-                     $"NHL.TV redirection is{If (HostsFile.TestEntry(), " working", "n't working")} (Hosts file tested){vbCrLf}{vbCrLf}" &
-                     $"Selected player: {player.ToString()}{vbCrLf}{vbCrLf}" &
-                     $"Streamer path: {streamerPath.ToString()} [{If (streamerPath.Equals(txtStreamerPath.Text), "on form", "not on form")}] [{If (streamerExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
-                     $"VLC path: {vlcPath.ToString()} [{If (vlcPath.Equals(txtVLCPath.Text), "on form", "not on form")}] [{If (vlcExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
-                     $"MPC path: {mpcPath.ToString()} [{If (mpcPath.Equals(txtMPCPath.Text), "on form", "not on form")}] [{If (mpcExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
+                     $"Spinner (stream) {If (SpnStreamingVisible, "visible", "invisible")} {SpnStreamingValue.ToString()}/{SpnStreamingMaxValue.ToString()}{vbTab}{vbCrLf}" &
+                     $"Servers: NHLGames IP {If (My.Computer.Network.Ping(ServerIp), "found", "not found")} ({cbServers.SelectedItem.ToString()}){vbTab}{vbCrLf}" &
+                     $"Hosts file: NHL.TV redirection is{If (HostsFile.TestEntry(), " working", "n't working")} (Hosts file tested) Entries: {HostsFile.GetEntries()}{vbTab}{vbCrLf}" &
+                     $"Selected player: {player.ToString()}{vbTab}{vbCrLf}" &
+                     $"Streamer path: {streamerPath.ToString()} [{If (streamerPath.Equals(txtStreamerPath.Text), "on form", "not on form")}] [{If (streamerExists, "exe found", "exe not found")}]{vbTab}{vbCrLf}" &
+                     $"VLC path: {vlcPath.ToString()} [{If (vlcPath.Equals(txtVLCPath.Text), "on form", "not on form")}] [{If (vlcExists, "exe found", "exe not found")}]{vbTab}{vbCrLf}" &
+                     $"MPC path: {mpcPath.ToString()} [{If (mpcPath.Equals(txtMPCPath.Text), "on form", "not on form")}] [{If (mpcExists, "exe found", "exe not found")}]{vbTab}{vbCrLf}" &
                      $"MPV path: {mpvPath.ToString()} [{If (mpvPath.Equals(txtMpvPath.Text), "on form", "not on form")}] [{If (mpvExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
-                     $"Console log: {vbCrLf}{vbCrLf}{txtConsole.Text.ToString()}"
+                     $"Console log: {vbTab}{txtConsole.Text.Replace($"{vbLf}{vbLf}", $"{vbTab}{vbCrLf}").ToString()}"
         Forms.Clipboard.SetText(report)
     End Sub
 
@@ -647,15 +650,16 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub tbLiveRewind_MouseUp(sender As Object, e As MouseEventArgs) Handles tbLiveRewind.MouseUp
-        _writeToConsoleSettingsChanged(lblLiveRewind.Text, tbLiveRewind.Value)
+        _writeToConsoleSettingsChanged(lblLiveRewind.Text, tbLiveRewind.Value * 5)
     End Sub
 
     Private Sub tbLiveRewind_ValueChanged(sender As Object, e As EventArgs) Handles tbLiveRewind.ValueChanged
-        lblLiveRewindDetails.Text = String.Format(RmText.GetString("lblLiveRewindDetails"), tbLiveRewind.Value)
+        Dim minutesBehind = tbLiveRewind.Value * 5
+        lblLiveRewindDetails.Text = String.Format(RmText.GetString("lblLiveRewindDetails"), minutesBehind, Now.AddMinutes(-minutesBehind).ToString("h:mm tt", CultureInfo.InvariantCulture))
         Player.RenewArgs()
         
         For each game As GameControl In flpGames.Controls
-            If game.LiveReplayCode = LiveReplayCode.Rewind Then
+            If game.LiveReplayCode = LiveStatusCodeEnum.Rewind Then
                 game.SetLiveStatusIcon()
             End If
         Next
@@ -671,5 +675,11 @@ Public Class NHLGamesMetro
         Else
             btnRecord.BackColor = Color.FromArgb(64, 64, 64)
         End If
+    End Sub
+
+    Private Sub cbLiveReplay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLiveReplay.SelectedIndexChanged
+        Player.RenewArgs()
+        _writeToConsoleSettingsChanged(_lblLiveReplay.Text, cbLiveReplay.SelectedItem)
+        tlpSettings.Focus()
     End Sub
 End Class
