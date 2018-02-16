@@ -20,6 +20,8 @@ Namespace Utilities
         End Function
 
         Public Shared Function GetEntries() As String
+            If Not File.Exists(HostsFilePath) Then Return String.Empty
+
             Dim input As String
             Using sr As New StreamReader(HostsFilePath)
                 input = sr.ReadToEnd()
@@ -105,7 +107,8 @@ Namespace Utilities
 
         Public Shared Sub AddEntry(Optional viewChanges As Boolean = True)
 
-            If FileAccess.HasAccess(HostsFilePath, false, true) AndAlso EnsureAdmin() Then
+            If FileAccess.HasAccess(HostsFilePath, true, true) AndAlso EnsureAdmin() Then
+
                 Dim fileIsReadonly As Boolean = FileAccess.IsFileReadonly(HostsFilePath)
 
                 If fileIsReadonly Then
