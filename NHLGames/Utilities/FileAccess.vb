@@ -30,9 +30,9 @@ Namespace Utilities
             Return attributes And Not attributesToRemove
         End Function
 
-        Public Shared Function HasAccess(filePath As String, Optional createIt As Boolean = true, Optional reportException As Boolean = false)
+        Public Shared Function HasAccess(filePath As String, Optional createIt As Boolean = true, Optional reportException As Boolean = false, Optional contentText As String = "")
             Try
-                If createIt Then File.WriteAllText(filePath, English.msgTestTxtContent)
+                If createIt AndAlso Not File.Exists(filePath) Then File.WriteAllText(filePath, contentText)
 
                 Using New StreamReader(filePath)
                 End Using
@@ -40,7 +40,6 @@ Namespace Utilities
                 Using File.Open(filePath, FileMode.Open, IO.FileAccess.ReadWrite, FileShare.None)
                 End Using
 
-                If createIt Then File.Delete(filePath)
                 Return True
             Catch ex As Exception
                 If reportException Then 
