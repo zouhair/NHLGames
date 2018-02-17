@@ -10,6 +10,7 @@ Namespace Controls
         Private ReadOnly _showScores As Boolean
         Private ReadOnly _showSeriesRecord As Boolean
         Private ReadOnly _showTeamCityAbr As Boolean
+        Private ReadOnly _showLiveTime As Boolean
         Private ReadOnly _broadcasters As Dictionary(Of String, String)
         Public LiveReplayCode As LiveStatusCodeEnum = LiveStatusCodeEnum.Live
 
@@ -25,7 +26,7 @@ Namespace Controls
             End Get
         End Property
 
-        Public Sub UpdateGame(showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean, showTeamCityAbr As Boolean, Optional game As Game = Nothing) 
+        Public Sub UpdateGame(showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean, showTeamCityAbr As Boolean, showLiveTime As Boolean, Optional game As Game = Nothing) 
             If game IsNot Nothing Then 
                 If game.StreamsDict Is Nothing Then Return
                 _game = game
@@ -47,7 +48,7 @@ Namespace Controls
 
                 SetRecordIcon()
 
-                If showLiveScores Then
+                If showLiveTime OrElse showLiveScores Then
                     If _game.IsInIntermission Then
                         lblPeriod.Text = $"{NHLGamesMetro.RmText.GetString("gameIntermission")} {_game.IntermissionTimeRemaining.ToString("mm:ss")}".ToUpper()
                     Else
@@ -66,7 +67,9 @@ Namespace Controls
                             lblPeriod.Text = String.Format(NHLGamesMetro.RmText.GetString("gamePeriodOtMore"), _game.GamePeriod(0)).ToUpper() '2OT..
                         End If
                     End If
-                Else
+                End If
+
+                If Not showLiveScores Then
                     lblGameStatus.Text = String.Format("{0}{1}{2}",
                                                        _game.GameDate.ToLocalTime().ToString("h:mm tt"),
                                                        vbCrLf,
@@ -199,7 +202,7 @@ Namespace Controls
             End If
         End Sub
 
-        Public Sub New(game As Game, showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean, showTeamCityAbr As Boolean)
+        Public Sub New(game As Game, showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean, showTeamCityAbr As Boolean, showLiveTime As Boolean)
 
             InitializeComponent()
             _broadcasters = New Dictionary(Of String, String)() From {
@@ -229,6 +232,7 @@ Namespace Controls
             _showLiveScores = showLiveScores
             _showSeriesRecord = showSeriesRecord
             _showTeamCityAbr = showTeamCityAbr
+            _showLiveTime = showLiveTime
             _game = game
 
             flpSetRecording.Controls.Add(new SetRecordControl)
@@ -271,7 +275,7 @@ Namespace Controls
                 bpGameControl.BorderColour = Color.DarkOrange
             End If
 
-            UpdateGame(_showScores, _showLiveScores, _showSeriesRecord, _showTeamCityAbr)
+            UpdateGame(_showScores, _showLiveScores, _showSeriesRecord, _showTeamCityAbr, _showLiveTime)
         End Sub
 
         Public Sub SetWholeGamePanel()

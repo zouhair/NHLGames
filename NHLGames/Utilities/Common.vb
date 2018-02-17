@@ -72,7 +72,7 @@ Namespace Utilities
             End If
 
             Try
-                Using myHttpWebResponse As HttpWebResponse = Await myHttpWebRequest.GetResponseAsync()
+                Using myHttpWebResponse As HttpWebResponse = Await myHttpWebRequest.GetResponseAsync().ConfigureAwait(false)
                     result = (myHttpWebResponse.StatusCode = HttpStatusCode.OK)
                 End Using
             Catch
@@ -92,7 +92,7 @@ Namespace Utilities
             End If
 
             Try
-                Using myHttpWebResponse As HttpWebResponse = Await myHttpWebRequest.GetResponseAsync()
+                Using myHttpWebResponse As HttpWebResponse = Await myHttpWebRequest.GetResponseAsync().ConfigureAwait(false)
                     If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
                         Using reader As Stream = myHttpWebResponse.GetResponseStream()
                             reader.CopyTo(content)

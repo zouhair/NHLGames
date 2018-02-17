@@ -722,7 +722,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="lblShowTodayLiveGamesFirst" xml:space="preserve">
-    <value>Live games first</value>
+    <value>Order by live games first</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lnkSubreddit" xml:space="preserve">
@@ -919,6 +919,10 @@
   </data>
   <data name="gameIntermission" xml:space="preserve">
     <value>Intermission</value>
+    <comment>Game panel</comment>
+  </data>
+  <data name="lblShowLiveTime" xml:space="preserve">
+    <value>Live remaining time</value>
     <comment>Game panel</comment>
   </data>
 </root>

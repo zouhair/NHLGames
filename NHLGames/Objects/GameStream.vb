@@ -35,12 +35,12 @@ Namespace Objects
         End Sub
 
         Protected Overridable Sub Dispose(disposing As Boolean)
-            If Not Me._disposedValue Then
+            If Not _disposedValue Then
                 If disposing Then
-                    Me.Game.Dispose()
+                    Game.Dispose()
                 End If
             End If
-            Me._disposedValue = True
+            _disposedValue = True
         End Sub
 
         Public Sub Dispose() Implements IDisposable.Dispose

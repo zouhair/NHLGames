@@ -866,6 +866,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Temps restant en direct.
+        '''</summary>
+        Friend Shared ReadOnly Property lblShowLiveTime() As String
+            Get
+                Return ResourceManager.GetString("lblShowLiveTime", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Détails des séries.
         '''</summary>
         Friend Shared ReadOnly Property lblShowSeriesRecord() As String
@@ -884,7 +893,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Parties en direct en premier.
+        '''  Looks up a localized string similar to Classer les parties en direct en premier.
         '''</summary>
         Friend Shared ReadOnly Property lblShowTodayLiveGamesFirst() As String
             Get

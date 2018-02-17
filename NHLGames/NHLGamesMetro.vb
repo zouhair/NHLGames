@@ -183,6 +183,7 @@ Public Class NHLGamesMetro
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,
                             tgShowTeamCityAbr.Checked,
+                            tgShowLiveTime.Checked,
                             GamesDict(game.GameId))
         Next
     End Sub
@@ -288,6 +289,7 @@ Public Class NHLGamesMetro
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,
                             tgShowTeamCityAbr.Checked,
+                            tgShowLiveTime.Checked,
                             GamesDict(game.GameId))
         Next
     End Sub
@@ -331,6 +333,7 @@ Public Class NHLGamesMetro
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,
                             tgShowTeamCityAbr.Checked,
+                            tgShowLiveTime.Checked,
                             GamesDict(game.GameId))
         Next
     End Sub
@@ -453,6 +456,7 @@ Public Class NHLGamesMetro
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,
                             tgShowTeamCityAbr.Checked,
+                            tgShowLiveTime.Checked,
                             GamesDict(game.GameId))
         Next
     End Sub
@@ -582,6 +586,7 @@ Public Class NHLGamesMetro
                             tgShowLiveScores.Checked,
                             tgShowSeriesRecord.Checked,
                             tgShowTeamCityAbr.Checked,
+                            tgShowLiveTime.Checked,
                             GamesDict(game.GameId))
         Next
     End Sub
@@ -681,5 +686,17 @@ Public Class NHLGamesMetro
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(_lblLiveReplay.Text, cbLiveReplay.SelectedItem)
         tlpSettings.Focus()
+    End Sub
+
+    Private Sub tgShowLiveTime_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowLiveTime.CheckedChanged
+        ApplicationSettings.SetValue(SettingsEnum.ShowLiveTime, tgShowLiveTime.Checked)
+        For each game As GameControl In flpGames.Controls
+            game.UpdateGame(tgShowFinalScores.Checked,
+                            tgShowLiveScores.Checked,
+                            tgShowSeriesRecord.Checked,
+                            tgShowTeamCityAbr.Checked,
+                            tgShowLiveTime.Checked,
+                            GamesDict(game.GameId))
+        Next
     End Sub
 End Class

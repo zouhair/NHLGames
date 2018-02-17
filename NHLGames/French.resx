@@ -526,7 +526,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="lblShowTodayLiveGamesFirst" xml:space="preserve">
-    <value>Parties en direct en premier</value>
+    <value>Classer les parties en direct en premier</value>
     <comment>Settings tab</comment>
   </data>
   <data name="tipBrokenStream" xml:space="preserve">
@@ -711,6 +711,10 @@
   </data>
   <data name="gameIntermission" xml:space="preserve">
     <value>Entracte</value>
+    <comment>Game panel</comment>
+  </data>
+  <data name="lblShowLiveTime" xml:space="preserve">
+    <value>Temps restant en direct</value>
     <comment>Game panel</comment>
   </data>
 </root>

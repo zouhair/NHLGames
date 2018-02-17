@@ -80,6 +80,7 @@
         ShowTeamCityAbr
         ShowTodayLiveGamesFirst
         LastWindowSize
+        ShowLiveTime
     End Enum
 
     Public Enum OutputTypeEnum

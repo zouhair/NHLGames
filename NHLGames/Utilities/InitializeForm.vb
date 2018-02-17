@@ -93,6 +93,7 @@ Namespace Utilities
             Form.lblPlayerArgs.Text = NHLGamesMetro.RmText.GetString("lblPlayerArgs")
             Form.lblStreamerArgs.Text = NHLGamesMetro.RmText.GetString("lblStreamerArgs")
             Form.lblLanguage.Text = NHLGamesMetro.RmText.GetString("lblLanguage")
+            Form.lblShowLiveTime.Text = NHLGamesMetro.RmText.GetString("lblShowLiveTime")
             Form.lblUseAlternateCdn.Text = NHLGamesMetro.RmText.GetString("lblAlternateCdn")
             Form.lblLiveReplay.Text = NHLGamesMetro.RmText.GetString("lblLiveReplay")
             Form.lblLiveRewind.Text = NHLGamesMetro.RmText.GetString("lblLiveRewind")
@@ -182,6 +183,7 @@ Namespace Utilities
             Form.tgShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, False)
             Form.tgShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, False)
             Form.tgShowTeamCityAbr.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, False)
+            Form.tgShowLiveTime.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveTime, False)
             Form.tgShowTodayLiveGamesFirst.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTodayLiveGamesFirst, False)
 
             Dim playersPath As String() = New String() {Form.txtMpvPath.Text, Form.txtMPCPath.Text, Form.txtVLCPath.Text}
