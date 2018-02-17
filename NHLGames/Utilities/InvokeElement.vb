@@ -6,7 +6,7 @@ Namespace Utilities
 
         Public Async Shared Sub LoadGames()
             NHLGamesMetro.FormInstance.ClearGamePanel()
-            Await Task.Run(AddressOf GameFetcher.LoadGames)
+            Await Task.Run(AddressOf GameFetcher.LoadGames).ConfigureAwait(False)
         End Sub
 
         Public Shared Sub SetFormStatusLabel(msg As String)
@@ -58,7 +58,8 @@ Namespace Utilities
                     ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, False),
                     ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, False),
                     ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, False),
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, False))).ToArray())
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveTime, False))).ToArray())
             End If
         End Sub
 
