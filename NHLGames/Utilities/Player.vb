@@ -78,15 +78,12 @@ Namespace Utilities
                         Throw New IOException()
                     End If
                     If line.Contains("player closed") Then Throw New IOException()
-                    Thread.Sleep(30) 'to let some time for the progress bar to move
+                    Thread.Sleep(50) 'to let some time for the progress bar to move
                 End While
             Catch ex As IOException
             Catch ex As Exception
                 Console.WriteLine(English.errorGeneral, $"Starting stream", ex.Message.ToString())
             Finally
-                NHLGamesMetro.SpnStreamingValue = 0
-                NHLGamesMetro.SpnStreamingVisible = False
-                Thread.Sleep(2000)
                 NHLGamesMetro.StreamStarted = False
             End Try
         End Sub
@@ -101,10 +98,7 @@ Namespace Utilities
                 i += 1
             End While
             NHLGamesMetro.SpnStreamingValue = NHLGamesMetro.spnStreamingMaxValue - 1
-            Thread.Sleep(2000)
-            NHLGamesMetro.SpnStreamingValue = 0
-            NHLGamesMetro.SpnStreamingVisible = False
-            Thread.Sleep(2000)
+            Thread.Sleep(1000)
             NHLGamesMetro.StreamStarted = False
         End Sub
 

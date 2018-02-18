@@ -3,6 +3,7 @@
 Namespace Utilities
     Public Class GameFetcher
         Public Shared Sub StreamingProgress
+            ResetLoadingProgress()
             NHLGamesMetro.FormInstance.spnStreaming.Visible = NHLGamesMetro.SpnStreamingVisible
             If NHLGamesMetro.SpnStreamingValue < NHLGamesMetro.FormInstance.spnStreaming.Maximum And
                 NHLGamesMetro.SpnStreamingValue >= 0 Then
@@ -17,7 +18,22 @@ Namespace Utilities
             End If
         End Sub
 
+        Private Shared Sub ResetStreaminProgress
+            NHLGamesMetro.SpnStreamingVisible = False
+            NHLGamesMetro.SpnStreamingValue = 0
+            NHLGamesMetro.FormInstance.spnStreaming.Value = 0
+            NHLGamesMetro.FormInstance.spnStreaming.Visible = False
+        End Sub
+
+        Private Shared Sub ResetLoadingProgress
+            NHLGamesMetro.SpnLoadingVisible = False
+            NHLGamesMetro.SpnLoadingValue = 0
+            NHLGamesMetro.FormInstance.spnLoading.Value = 0
+            NHLGamesMetro.FormInstance.spnLoading.Visible = False
+        End Sub
+
         Public Shared Sub LoadingProgress
+            ResetStreaminProgress()
             NHLGamesMetro.FormInstance.spnLoading.Visible = NHLGamesMetro.SpnLoadingVisible
             If NHLGamesMetro.SpnLoadingValue < NHLGamesMetro.FormInstance.spnLoading.Maximum And
                 NHLGamesMetro.SpnLoadingValue >= 0 Then
