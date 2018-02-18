@@ -1,10 +1,11 @@
 ﻿Imports System.Globalization
 
 Namespace Controls
-    Public Class SetRecordControl : Inherits UserControl : Implements IDisposable
+    Public Class SetRecordControl
+        Inherits UserControl
+        Implements IDisposable
 
-        Private ReadOnly _defaultTime As String = 
-            $"{Now.ToString("h:mm tt", CultureInfo.InvariantCulture)} ({NHLGamesMetro.RmText.GetString("lblNow")})"
+        Private ReadOnly _defaultTime As String = $"{Now.ToString("h:mm tt", CultureInfo.InvariantCulture)} ({NHLGamesMetro.RmText.GetString("lblNow")})"
 
         Public Sub New()
             InitializeComponent()
@@ -12,17 +13,16 @@ Namespace Controls
             lblTimeValue.Text = _defaultTime
             lblStream.Text = NHLGamesMetro.RmText.GetString("lblStream")
             lblTime.Text = NHLGamesMetro.RmText.GetString("lblTime")
-            
         End Sub
 
         Private Sub tbTime_Scroll(sender As Object, e As ScrollEventArgs) Handles tbTime.Scroll
-            lblTimeValue.Text = If (tbTime.Value.Equals(0), 
-                Now.ToString(_defaultTime), 
-                Now.AddMinutes(-Now.Minute + If((Now.Minute Mod 30) > 0, 30, 0)).AddMinutes(tbTime.Value * 30).
-                    ToString("h:mm tt (ddd)", CultureInfo.InvariantCulture))
+            lblTimeValue.Text = If (tbTime.Value.Equals(0),
+                                    Now.ToString(_defaultTime),
+                                    Now.AddMinutes(- Now.Minute + If((Now.Minute Mod 30) > 0, 30, 0)).AddMinutes(tbTime.Value*30).
+                                    ToString("h:mm tt (ddd)", CultureInfo.InvariantCulture))
         End Sub
 
-        Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)
+        Protected Overloads Overrides Sub Dispose(disposing As Boolean)
             Try
                 If disposing Then
                     If lblTimeValue IsNot Nothing Then lblTimeValue.Dispose()

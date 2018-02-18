@@ -1,14 +1,13 @@
 ﻿Imports System.IO
 
 Namespace Utilities
-
     Public Class PathFinder
         Private Shared Function _ProgramFiles(programPath As String) As String
             Dim drives As String() = Environment.GetLogicalDrives
-            Dim dirPrgFiles As ArrayList = New ArrayList
+            Dim dirPrgFiles = New ArrayList
             For Each d As String In drives
                 Try
-                    Dim dType As DriveInfo = New DriveInfo(d.Substring(0, 1).ToUpper)
+                    Dim dType = New DriveInfo(d.Substring(0, 1).ToUpper)
                     If dType.DriveType <> DriveType.CDRom Then
                         dirPrgFiles.Add(Directory.GetDirectories(d, "Program Files"))
                         If (_is64bits()) Then dirPrgFiles.Add(Directory.GetDirectories(d, "Program Files (x86)"))
@@ -16,7 +15,8 @@ Namespace Utilities
                 Catch
                 End Try
             Next
-            Return (From dirFound As Object In dirPrgFiles Where dirFound.Length <> 0 Where My.Computer.FileSystem.FileExists(dirFound(0) & programPath)
+            Return (From dirFound As Object In dirPrgFiles Where dirFound.Length <> 0
+                    Where My.Computer.FileSystem.FileExists(dirFound(0) & programPath)
                     Select dirFound(0) & programPath).FirstOrDefault()
         End Function
 
@@ -42,6 +42,5 @@ Namespace Utilities
             If path = Nothing Then path = String.Empty
             Return path
         End Function
-
     End Class
 End Namespace

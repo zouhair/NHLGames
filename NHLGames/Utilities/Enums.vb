@@ -1,5 +1,4 @@
 ﻿Namespace Utilities
-
     Public Enum GameStateEnum
 #Disable Warning InconsistentNaming
         ToBeDetermined = 0
@@ -140,5 +139,6 @@
         SW_SHOWNA = 8
         SW_RESTORE = 9
     End Enum
+
 #Enable Warning InconsistentNaming
 End Namespace

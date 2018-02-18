@@ -1,5 +1,5 @@
-﻿Imports System.Resources
-Imports System.Reflection
+﻿Imports System.Reflection
+Imports System.Resources
 Imports System.Runtime.InteropServices
 
 ' General Information about an assembly is controlled through the following 
@@ -13,7 +13,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyCompany("NHLGames")>
 <Assembly: AssemblyProduct("NHLGames")>
 <Assembly: AssemblyCopyright("NHLGames")>
-<Assembly: AssemblyTrademark("NHLGames")> 
+<Assembly: AssemblyTrademark("NHLGames")>
 
 <Assembly: ComVisible(False)>
 

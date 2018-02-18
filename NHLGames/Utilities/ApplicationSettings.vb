@@ -2,10 +2,8 @@
 Imports NHLGames.My.Resources
 
 Namespace Utilities
-
     Public Class ApplicationSettings
-
-        Public Shared Function Read(Of T)(key As SettingsEnum, defaultReturnValue As Object) As T
+        Public Shared Function Read (Of T)(key As SettingsEnum, defaultReturnValue As Object) As T
             Try
                 Dim configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
                 If (Not configFile.HasFile) OrElse configFile.AppSettings.Settings(key.ToString()) Is Nothing Then
@@ -29,7 +27,7 @@ Namespace Utilities
                 End If
 
                 Try
-                    Return Serialization.DeserializeObject(Of T)(result)
+                    Return Serialization.DeserializeObject (Of T)(result)
                 Catch ex As Exception
                     Console.WriteLine(English.errorDeserialize, key.ToString(), GetType(T).ToString())
                     Return defaultReturnValue
@@ -64,6 +62,5 @@ Namespace Utilities
                 Console.WriteLine(English.errorWritingSettings)
             End Try
         End Sub
-
     End Class
 End Namespace
