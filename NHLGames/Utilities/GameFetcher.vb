@@ -2,15 +2,15 @@
 
 Namespace Utilities
     Public Class GameFetcher
-        
-
         Public Shared Sub StreamingProgress
+            ResetLoadingProgress()
             NHLGamesMetro.FormInstance.spnStreaming.Visible = NHLGamesMetro.SpnStreamingVisible
-            If NHLGamesMetro.SpnStreamingValue < NHLGamesMetro.FormInstance.spnStreaming.Maximum And NHLGamesMetro.SpnStreamingValue >= 0 Then
+            If NHLGamesMetro.SpnStreamingValue < NHLGamesMetro.FormInstance.spnStreaming.Maximum And
+                NHLGamesMetro.SpnStreamingValue >= 0 Then
                 NHLGamesMetro.FormInstance.spnStreaming.Value = NHLGamesMetro.SpnStreamingValue
             End If
 
-            If  NHLGamesMetro.FormInstance.spnStreaming.Value > 0 Then
+            If NHLGamesMetro.FormInstance.spnStreaming.Value > 0 Then
                 NHLGamesMetro.FormInstance.spnStreaming.Visible = True
             Else
                 NHLGamesMetro.SpnStreamingVisible = False
@@ -18,13 +18,29 @@ Namespace Utilities
             End If
         End Sub
 
+        Private Shared Sub ResetStreaminProgress
+            NHLGamesMetro.SpnStreamingVisible = False
+            NHLGamesMetro.SpnStreamingValue = 0
+            NHLGamesMetro.FormInstance.spnStreaming.Value = 0
+            NHLGamesMetro.FormInstance.spnStreaming.Visible = False
+        End Sub
+
+        Private Shared Sub ResetLoadingProgress
+            NHLGamesMetro.SpnLoadingVisible = False
+            NHLGamesMetro.SpnLoadingValue = 0
+            NHLGamesMetro.FormInstance.spnLoading.Value = 0
+            NHLGamesMetro.FormInstance.spnLoading.Visible = False
+        End Sub
+
         Public Shared Sub LoadingProgress
+            ResetStreaminProgress()
             NHLGamesMetro.FormInstance.spnLoading.Visible = NHLGamesMetro.SpnLoadingVisible
-            If NHLGamesMetro.SpnLoadingValue < NHLGamesMetro.FormInstance.spnLoading.Maximum And NHLGamesMetro.SpnLoadingValue >= 0 Then
+            If NHLGamesMetro.SpnLoadingValue < NHLGamesMetro.FormInstance.spnLoading.Maximum And
+                NHLGamesMetro.SpnLoadingValue >= 0 Then
                 NHLGamesMetro.FormInstance.spnLoading.Value = NHLGamesMetro.SpnLoadingValue
             End If
 
-            If  NHLGamesMetro.FormInstance.spnLoading.Value > 0 Then
+            If NHLGamesMetro.FormInstance.spnLoading.Value > 0 Then
                 InvokeElement.SetGameTabControls(False)
                 NHLGamesMetro.FormInstance.lblNoGames.Visible = False
             Else
@@ -68,7 +84,8 @@ Namespace Utilities
                 End If
 
                 InvokeElement.NewGamesFound(NHLGamesMetro.GamesDict.Values.ToList())
-                InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"), NHLGamesMetro.GamesDict.Values.Count.ToString()))
+                InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"),
+                                                               NHLGamesMetro.GamesDict.Values.Count.ToString()))
 
             Catch ex As Exception
                 Console.WriteLine(ex.ToString())
@@ -83,12 +100,12 @@ Namespace Utilities
 
         Private Shared Function SortGames(games As Game()) As List(Of Game)
             If NHLGamesMetro.TodayLiveGamesFirst Then
-                Return games.OrderBy(Of Boolean)(Function(val) val.IsUnplayable).
-                    ThenBy(Of Boolean)(Function(val) val.IsFinal).
-                    ThenBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
+                Return games.OrderBy (Of Boolean)(Function(val) val.IsUnplayable).
+                    ThenBy (Of Boolean)(Function(val) val.IsFinal).
+                    ThenBy (Of Long)(Function(val) val.GameDate.Ticks).ToList()
             Else
-                Return games.OrderBy(Of Boolean)(Function(val) val.IsUnplayable).
-                    ThenBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
+                Return games.OrderBy (Of Boolean)(Function(val) val.IsUnplayable).
+                    ThenBy (Of Long)(Function(val) val.GameDate.Ticks).ToList()
             End If
         End Function
 
@@ -98,6 +115,5 @@ Namespace Utilities
                 NHLGamesMetro.GamesDict.Add(game.GameId, game)
             Next
         End Sub
-
     End Class
 End Namespace

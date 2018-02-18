@@ -4,7 +4,6 @@
         Implements IDisposable
 
         Public Sub New()
-            'SetStyle(ControlStyles.UserPaint Or ControlStyles.ResizeRedraw Or ControlStyles.DoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
             BorderColour = Color.Gray
         End Sub
 
@@ -20,7 +19,7 @@
         Public Property BorderColour As Color
 
         Protected Overrides Sub Dispose(disposing As Boolean)
-            Me.Controls.Clear()
+            Controls.Clear()
             MyBase.Dispose(disposing)
         End Sub
     End Class

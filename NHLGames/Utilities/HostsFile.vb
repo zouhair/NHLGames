@@ -4,14 +4,13 @@ Imports System.Security.Principal
 Imports NHLGames.My.Resources
 
 Namespace Utilities
-
     Public Class HostsFile
+        Private Shared ReadOnly Property HostsPath As String = String.Format("{0}\drivers\etc\", Environment.SystemDirectory)
 
-        Public Shared ReadOnly Property HostsPath As String = String.Format("{0}\drivers\etc\", Environment.SystemDirectory)
-        Public Shared ReadOnly Property HostsFilePath As String = String.Format("{0}\drivers\etc\hosts", Environment.SystemDirectory)
+        Private Shared ReadOnly Property HostsFilePath As String = String.Format("{0}\drivers\etc\hosts", Environment.SystemDirectory)
 
         Public Shared Function TestEntry() As Boolean
-            Dim resolvedIp As String = ""
+            Dim resolvedIp = ""
             Try
                 resolvedIp = Dns.GetHostAddresses(NHLGamesMetro.DomainName)(0).ToString()
             Catch ex As Exception
@@ -30,10 +29,10 @@ Namespace Utilities
             Dim hostsFileLines = input.Replace(vbCr, String.Empty).Replace(vbTab, " ").Split(vbLf)
 
             Return (From entry In hostsFileLines
-                    Where Not entry.Contains("#") AndAlso 
-                        Not entry.Equals(String.Empty)).
-                        Aggregate(String.Empty, 
-                                  Function(current, entry) current & entry & "; ")
+                Where Not entry.Contains("#") AndAlso
+                      Not entry.Equals(String.Empty)).
+                Aggregate(String.Empty,
+                          Function(current, entry) current & entry & "; ")
         End Function
 
         Private Shared Function RemoveOldEntries(contents As String) As String
@@ -43,7 +42,7 @@ Namespace Utilities
 
             Dim hostsFile = contents.Replace(vbCr, String.Empty).Split(vbLf)
 
-            For lineCount As Integer = 0 To hostsFile.Length - 1
+            For lineCount = 0 To hostsFile.Length - 1
                 If Not ValidHostFileLine(hostsFile(lineCount)) Then
                     newContents &= hostsFile(lineCount).Replace(vbLf, String.Empty)
                     If lineCount < hostsFile.Length - 1 Then
@@ -58,7 +57,8 @@ Namespace Utilities
         End Function
 
         Private Shared Function ValidHostFileLine(line As String) As Boolean
-            Return line.Contains(NHLGamesMetro.DomainName) OrElse line.Contains(ApplicationSettings.Read(Of String)(SettingsEnum.SelectedServer, String.Empty))
+            Return line.Contains(NHLGamesMetro.DomainName) OrElse
+                line.Contains(ApplicationSettings.Read (Of String)(SettingsEnum.SelectedServer, String.Empty))
         End Function
 
         Public Shared Sub CleanHosts()
@@ -93,14 +93,14 @@ Namespace Utilities
                 InvokeElement.LoadGames()
                 MessageOpenHostsFile()
             End If
-
         End Sub
 
         Private Shared Sub MessageOpenHostsFile()
             If InvokeElement.MsgBoxBlue(
                 NHLGamesMetro.RmText.GetString("msgViewHostsText"),
                 NHLGamesMetro.RmText.GetString("msgViewHosts"),
-                MessageBoxButtons.YesNo) = DialogResult.Yes AndAlso FileAccess.HasAccess(HostsFilePath, false, true) Then
+                MessageBoxButtons.YesNo) = DialogResult.Yes AndAlso FileAccess.HasAccess(HostsFilePath, false, true) _
+                Then
                 Process.Start("NOTEPAD", HostsFilePath)
             End If
         End Sub
@@ -139,7 +139,6 @@ Namespace Utilities
                 InvokeElement.LoadGames()
                 If viewChanges Then MessageOpenHostsFile()
             End If
-
         End Sub
 
         Public Shared Sub SetServerIp()
@@ -158,13 +157,13 @@ Namespace Utilities
 
             If IsNotAdministrator() Then
                 If InvokeElement.MsgBoxBlue(
-                    NHLGamesMetro.RmText.GetString("msgRunAsAdminText"), 
+                    NHLGamesMetro.RmText.GetString("msgRunAsAdminText"),
                     NHLGamesMetro.RmText.GetString("msgRunAsAdmin"),
                     MessageBoxButtons.YesNo) = DialogResult.Yes Then
 
                     ' Restart program And run as admin
                     Dim exeName = Process.GetCurrentProcess().MainModule.FileName
-                    Dim startInfo As ProcessStartInfo = New ProcessStartInfo(exeName)
+                    Dim startInfo = New ProcessStartInfo(exeName)
                     startInfo.Verb = "runas"
                     startInfo.UseShellExecute = True
                     Try
@@ -177,12 +176,11 @@ Namespace Utilities
                 Return False
             End If
             Return True
-
         End Function
 
-        Public Shared Function IsNotAdministrator() As Boolean
+        Private Shared Function IsNotAdministrator() As Boolean
             Dim identity As WindowsIdentity = WindowsIdentity.GetCurrent()
-            Dim principal As WindowsPrincipal = New WindowsPrincipal(identity)
+            Dim principal = New WindowsPrincipal(identity)
             Return Not principal.IsInRole(WindowsBuiltInRole.Administrator)
         End Function
 
@@ -193,6 +191,5 @@ Namespace Utilities
                 Process.Start(HostsPath)
             End If
         End Sub
-
     End Class
 End Namespace

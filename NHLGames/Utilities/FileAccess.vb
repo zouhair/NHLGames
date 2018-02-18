@@ -2,9 +2,7 @@
 Imports NHLGames.My.Resources
 
 Namespace Utilities
-
     Public Class FileAccess
-
         Public Shared Function IsFileReadonly(path As String) As Boolean
             Dim attributes As FileAttributes = File.GetAttributes(path)
             Return (attributes And FileAttributes.[ReadOnly]) = FileAttributes.[ReadOnly]
@@ -26,11 +24,14 @@ Namespace Utilities
             Console.WriteLine(English.msgAddReadOnly, path)
         End Sub
 
-        Public Shared Function RemoveAttribute(attributes As FileAttributes, attributesToRemove As FileAttributes) As FileAttributes
+        Private Shared Function RemoveAttribute(attributes As FileAttributes, attributesToRemove As FileAttributes) _
+            As FileAttributes
             Return attributes And Not attributesToRemove
         End Function
 
-        Public Shared Function HasAccess(filePath As String, Optional createIt As Boolean = true, Optional reportException As Boolean = false, Optional contentText As String = "")
+        Public Shared Function HasAccess(filePath As String, Optional createIt As Boolean = true,
+                                         Optional reportException As Boolean = false,
+                                         Optional contentText As String = "")
             Try
                 If createIt AndAlso Not File.Exists(filePath) Then File.WriteAllText(filePath, contentText)
 
@@ -42,12 +43,11 @@ Namespace Utilities
 
                 Return True
             Catch ex As Exception
-                If reportException Then 
+                If reportException Then
                     Console.WriteLine(English.errorAccessPath, ex.Message)
                 End If
                 Return False
             End Try
         End Function
-
     End Class
 End Namespace

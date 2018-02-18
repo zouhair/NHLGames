@@ -1,9 +1,9 @@
-﻿Imports NHLGames.Controls
+﻿Imports MetroFramework
+Imports NHLGames.Controls
 Imports NHLGames.Objects
 
 Namespace Utilities
     Public Class InvokeElement
-
         Public Async Shared Sub LoadGames()
             NHLGamesMetro.FormInstance.ClearGamePanel()
             Await Task.Run(AddressOf GameFetcher.LoadGames).ConfigureAwait(False)
@@ -55,41 +55,43 @@ Namespace Utilities
                 NHLGamesMetro.FormInstance.ClearGamePanel()
                 NHLGamesMetro.FormInstance.flpGames.Controls.AddRange((From game In gamesDict Select New GameControl(
                     game,
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, False),
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, False),
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, False),
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, False),
-                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveTime, False))).ToArray())
+                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowScores, False),
+                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowLiveScores, False),
+                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowSeriesRecord, False),
+                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowTeamCityAbr, False),
+                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowLiveTime, False))).ToArray())
             End If
         End Sub
 
-        Public Shared Function MsgBoxRed(message As String, title As String, buttons As MessageBoxButtons) As DialogResult
-            Dim result As DialogResult = New DialogResult()
+        Public Shared Function MsgBoxRed(message As String, title As String, buttons As MessageBoxButtons) _
+            As DialogResult
+            Dim result = New DialogResult()
             If NHLGamesMetro.FormInstance.InvokeRequired Then
                 Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxRed), message, title, buttons)
                 EndInvokeOf(asyncResult)
             Else
                 NHLGamesMetro.FormInstance.tabMenu.SelectedIndex = 2
-                result = MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance,
-                                                           message,
-                                                           title, 
-                                                           buttons,
-                                                           MessageBoxIcon.Error)
+                result = MetroMessageBox.Show(NHLGamesMetro.FormInstance,
+                                              message,
+                                              title,
+                                              buttons,
+                                              MessageBoxIcon.Error)
             End If
             Return result
         End Function
 
-        Public Shared Function MsgBoxBlue(message As String, title As String, buttons As MessageBoxButtons) As DialogResult
-            Dim result As DialogResult = New DialogResult()
+        Public Shared Function MsgBoxBlue(message As String, title As String, buttons As MessageBoxButtons) _
+            As DialogResult
+            Dim result = New DialogResult()
             If NHLGamesMetro.FormInstance.InvokeRequired Then
                 Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxBlue), message, title, buttons)
                 EndInvokeOf(asyncResult)
             Else
-                result = MetroFramework.MetroMessageBox.Show(NHLGamesMetro.FormInstance,
-                                                             message,
-                                                             title, 
-                                                             buttons,
-                                                             MessageBoxIcon.Information)
+                result = MetroMessageBox.Show(NHLGamesMetro.FormInstance,
+                                              message,
+                                              title,
+                                              buttons,
+                                              MessageBoxIcon.Information)
             End If
             Return result
         End Function
@@ -101,7 +103,6 @@ Namespace Utilities
             Catch
             End Try
         End Sub
-
     End Class
 End Namespace
 

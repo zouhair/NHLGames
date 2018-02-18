@@ -1,11 +1,9 @@
 ﻿Imports System.Globalization
 Imports System.IO
+Imports System.Resources
 Imports System.Security.Permissions
 Imports System.Threading
-Imports System.Resources
-Imports System.Windows
 Imports MetroFramework.Controls
-Imports Microsoft.VisualBasic.Devices
 Imports NHLGames.Controls
 Imports NHLGames.My.Resources
 Imports NHLGames.Objects
@@ -13,7 +11,6 @@ Imports NHLGames.Objects.Modules
 Imports NHLGames.Utilities
 
 Public Class NHLGamesMetro
-
     Public Shared ServerIp As String = String.Empty
     Public Const DomainName As String = "mf.svc.nhl.com"
     Public Shared HostName As String = String.Empty
@@ -32,7 +29,7 @@ Public Class NHLGamesMetro
     Private Const SubredditLink As String = "https://www.reddit.com/r/nhl_games/"
     Private Const LatestReleaseLink As String = "https://github.com/NHLGames/NHLGames/releases/latest"
     Public Shared GameDate As Date = DateHelper.GetPacificTime()
-    Private _resizeDirection As Integer = -1
+    Private _resizeDirection As Integer = - 1
     Private Const ResizeBorderWidth As Integer = 8
     Public Shared RmText As ResourceManager = English.ResourceManager
     Public Shared FormLoaded As Boolean = False
@@ -40,10 +37,10 @@ Public Class NHLGamesMetro
     Private Shared _adDetectionEngine As AdDetection
     Public Shared ReadOnly GamesDict As New Dictionary(Of String, Game)
 
-    <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
+    <SecurityPermission(SecurityAction.Demand, Flags := SecurityPermissionFlag.ControlAppDomain)>
     Public Shared Sub Main()
-        AddHandler Forms.Application.ThreadException, AddressOf Form1_UIThreadException
-        Forms.Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
+        AddHandler Application.ThreadException, AddressOf Form1_UIThreadException
+        Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
         AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf CurrentDomain_UnhandledException
 
         Dim form As New NHLGamesMetro()
@@ -51,19 +48,19 @@ Public Class NHLGamesMetro
 
         Dim writer = New ConsoleRedirectStreamWriter(form.txtConsole)
         Console.SetOut(writer)
-        Forms.Application.Run(form)
+        Application.Run(form)
     End Sub
 
-    Private Shared Sub Form1_UIThreadException(ByVal sender As Object, ByVal t As ThreadExceptionEventArgs)
+    Private Shared Sub Form1_UIThreadException(sender As Object, t As ThreadExceptionEventArgs)
         Console.WriteLine(English.errorGeneral, $"Running UI thread", t.Exception.ToString())
     End Sub
 
-    Private Shared Sub CurrentDomain_UnhandledException(ByVal sender As Object, ByVal e As UnhandledExceptionEventArgs)
+    Private Shared Sub CurrentDomain_UnhandledException(sender As Object, e As UnhandledExceptionEventArgs)
         Console.WriteLine(English.errorGeneral, $"Using NHLGames domain", e.ExceptionObject.ToString())
     End Sub
 
     Public Sub HandleException(e As Exception)
-        Console.WriteLine(English.errorGeneral, $"Running main thread",e.ToString())
+        Console.WriteLine(English.errorGeneral, $"Running main thread", e.ToString())
     End Sub
 
     Private Async Sub NHLGames_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -77,7 +74,7 @@ Public Class NHLGamesMetro
         InitializeForm.SetSettings()
         Await Common.CheckAppCanRun()
         Common.CheckHostsFile()
-        
+
         FormLoaded = True
         ResumeLayout()
 
@@ -88,7 +85,7 @@ Public Class NHLGamesMetro
     Public Sub ClearGamePanel()
         SyncLock flpGames.Controls
             If flpGames.Controls.Count > 0 Then
-                For index = flpGames.Controls.Count -1 To 0 Step -1
+                For index = flpGames.Controls.Count - 1 To 0 Step - 1
                     CType(flpGames.Controls(index), GameControl).Dispose()
                 Next
             End If
@@ -118,7 +115,7 @@ Public Class NHLGamesMetro
         txtConsole.ScrollToCaret()
     End Sub
 
-    Private Sub btnVLCPath_Click(sender As Object, e As EventArgs) Handles btnVLCPath.Click 
+    Private Sub btnVLCPath_Click(sender As Object, e As EventArgs) Handles btnVLCPath.Click
         ofd.Filter = $"VLC|vlc.exe|All files (*.*)|*.*"
         ofd.Multiselect = False
         ofd.InitialDirectory = If(txtVLCPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtVLCPath.Text))
@@ -131,7 +128,7 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub btnMPCPath_Click(sender As Object, e As EventArgs) Handles btnMPCPath.Click 
+    Private Sub btnMPCPath_Click(sender As Object, e As EventArgs) Handles btnMPCPath.Click
         ofd.Filter = $"MPC|mpc-hc64.exe;mpc-hc.exe|All files (*.*)|*.*"
         ofd.Multiselect = False
         ofd.InitialDirectory = If(txtMPCPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtMPCPath.Text))
@@ -146,7 +143,7 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub btnMpvPath_Click(sender As Object, e As EventArgs) Handles btnMpvPath.Click 
+    Private Sub btnMpvPath_Click(sender As Object, e As EventArgs) Handles btnMpvPath.Click
         ofd.Filter = $"mpv|mpv.exe|All files (*.*)|*.*"
         ofd.Multiselect = False
         ofd.InitialDirectory = If(txtMpvPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtMpvPath.Text))
@@ -161,10 +158,11 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub btnstreamerPath_Click(sender As Object, e As EventArgs) Handles btnStreamerPath.Click 
+    Private Sub btnstreamerPath_Click(sender As Object, e As EventArgs) Handles btnStreamerPath.Click
         ofd.Filter = $"streamer|streamlink.exe;livestreamer.exe|All files (*.*)|*.*"
         ofd.Multiselect = False
-        ofd.InitialDirectory = If(txtStreamerPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtStreamerPath.Text))
+        ofd.InitialDirectory =
+            If(txtStreamerPath.Text.Equals(String.Empty), "C:\", Path.GetDirectoryName(txtStreamerPath.Text))
 
         If ofd.ShowDialog() = DialogResult.OK Then
 
@@ -192,28 +190,28 @@ Public Class NHLGamesMetro
         txtConsole.Clear()
     End Sub
 
-    Private Sub txtVLCPath_TextChanged(sender As Object, e As EventArgs) Handles txtVLCPath.TextChanged 
+    Private Sub txtVLCPath_TextChanged(sender As Object, e As EventArgs) Handles txtVLCPath.TextChanged
         If Not rbVLC.Enabled Then rbVLC.Enabled = True
         Player.RenewArgs()
     End Sub
 
-    Private Sub txtMPCPath_TextChanged(sender As Object, e As EventArgs) Handles txtMPCPath.TextChanged 
+    Private Sub txtMPCPath_TextChanged(sender As Object, e As EventArgs) Handles txtMPCPath.TextChanged
         If Not rbMPC.Enabled Then rbMPC.Enabled = True
         Player.RenewArgs()
     End Sub
 
-    Private Sub txtMpvPath_TextChanged(sender As Object, e As EventArgs) Handles txtMpvPath.TextChanged 
+    Private Sub txtMpvPath_TextChanged(sender As Object, e As EventArgs) Handles txtMpvPath.TextChanged
         If Not rbMPV.Enabled Then rbMPV.Enabled = True
         Player.RenewArgs()
     End Sub
 
-    Private Sub txtStreamerPath_TextChanged(sender As Object, e As EventArgs) Handles txtStreamerPath.TextChanged 
+    Private Sub txtStreamerPath_TextChanged(sender As Object, e As EventArgs) Handles txtStreamerPath.TextChanged
         Player.RenewArgs()
     End Sub
 
-    Private Sub player_CheckedChanged(sender As Object, e As EventArgs) Handles rbVLC.CheckedChanged, rbMPV.CheckedChanged, rbMPC.CheckedChanged  
+    Private Sub player_CheckedChanged(sender As Object, e As EventArgs) Handles rbVLC.CheckedChanged, rbMPV.CheckedChanged, rbMPC.CheckedChanged
         Dim rb As RadioButton = sender
-        If (rb.Checked) Then 
+        If (rb.Checked) Then
             Player.RenewArgs()
             _writeToConsoleSettingsChanged(lblPlayer.Text, rb.Text)
         End If
@@ -226,26 +224,25 @@ Public Class NHLGamesMetro
         InvokeElement.LoadGames()
     End Sub
 
-    Private Sub txtOutputPath_TextChanged(sender As Object, e As EventArgs) Handles txtOutputArgs.TextChanged 
+    Private Sub txtOutputPath_TextChanged(sender As Object, e As EventArgs) Handles txtOutputArgs.TextChanged
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(lblOutput.Text, txtOutputArgs.Text)
     End Sub
 
-    Private Sub txtPlayerArgs_TextChanged(sender As Object, e As EventArgs) Handles txtPlayerArgs.TextChanged 
+    Private Sub txtPlayerArgs_TextChanged(sender As Object, e As EventArgs) Handles txtPlayerArgs.TextChanged
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(lblPlayerArgs.Text, txtPlayerArgs.Text)
     End Sub
 
-    Private Sub txtStreamerArgs_TextChanged(sender As Object, e As EventArgs) Handles txtStreamerArgs.TextChanged 
+    Private Sub txtStreamerArgs_TextChanged(sender As Object, e As EventArgs) Handles txtStreamerArgs.TextChanged
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(lblStreamerArgs.Text, txtStreamerArgs.Text)
     End Sub
 
     Private Sub btnOuput_Click(sender As Object, e As EventArgs) Handles btnOutput.Click
-        fbd.SelectedPath = If (txtOutputArgs.Text <> String.Empty, 
-                                            Path.GetDirectoryName(txtOutputArgs.Text), 
-                                            Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
-                                            )
+        fbd.SelectedPath = If (txtOutputArgs.Text <> String.Empty,
+                               Path.GetDirectoryName(txtOutputArgs.Text),
+                               Environment.GetFolderPath(Environment.SpecialFolder.MyVideos))
         If fbd.ShowDialog() = DialogResult.OK Then
             txtOutputArgs.Text = fbd.SelectedPath & $"\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(NETWORK).mp4"
             Player.RenewArgs()
@@ -253,7 +250,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub btnYesterday_Click(sender As Object, e As EventArgs) Handles btnYesterday.Click
-        GameDate = GameDate.AddDays(-1)
+        GameDate = GameDate.AddDays(- 1)
         lblDate.Text = DateHelper.GetFormattedDate(GameDate)
     End Sub
 
@@ -262,13 +259,13 @@ Public Class NHLGamesMetro
         lblDate.Text = DateHelper.GetFormattedDate(GameDate)
     End Sub
 
-    Private Sub lnkVLCDownload_Click(sender As Object, e As EventArgs) Handles lnkGetVlc.Click 
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("http://www.videolan.org/vlc/download-windows.html")
+    Private Sub lnkVLCDownload_Click(sender As Object, e As EventArgs) Handles lnkGetVlc.Click
+        Dim sInfo = New ProcessStartInfo("http://www.videolan.org/vlc/download-windows.html")
         Process.Start(sInfo)
     End Sub
 
-    Private Sub lnkMPCDownload_Click(sender As Object, e As EventArgs) Handles lnkGetMpc.Click 
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://mpc-hc.org/downloads/")
+    Private Sub lnkMPCDownload_Click(sender As Object, e As EventArgs) Handles lnkGetMpc.Click
+        Dim sInfo = New ProcessStartInfo("https://mpc-hc.org/downloads/")
         Process.Start(sInfo)
     End Sub
 
@@ -302,31 +299,32 @@ Public Class NHLGamesMetro
         Process.Start(sInfo)
     End Sub
 
-    Private Sub tgStreamer_CheckedChanged(sender As Object, e As EventArgs) Handles tgStreamer.CheckedChanged 
+    Private Sub tgStreamer_CheckedChanged(sender As Object, e As EventArgs) Handles tgStreamer.CheckedChanged
         txtStreamerArgs.Enabled = tgStreamer.Checked
         Player.RenewArgs()
-        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblStreamerArgs.Text), 
-                                       if(tgStreamer.Checked, English.msgOn, English.msgOff))
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblStreamerArgs.Text),
+                                       If (tgStreamer.Checked, English.msgOn, English.msgOff))
     End Sub
 
-    Private Sub tgPlayer_CheckedChanged(sender As Object, e As EventArgs) Handles tgPlayer.CheckedChanged 
+    Private Sub tgPlayer_CheckedChanged(sender As Object, e As EventArgs) Handles tgPlayer.CheckedChanged
         txtPlayerArgs.Enabled = tgPlayer.Checked
         Player.RenewArgs()
-        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblPlayerArgs.Text), 
-                                       if(tgPlayer.Checked, English.msgOn, English.msgOff))
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblPlayerArgs.Text),
+                                       If (tgPlayer.Checked, English.msgOn, English.msgOff))
     End Sub
 
-    Private Sub tgOutput_CheckedChanged(sender As Object, e As EventArgs) Handles tgOutput.CheckedChanged 
+    Private Sub tgOutput_CheckedChanged(sender As Object, e As EventArgs) Handles tgOutput.CheckedChanged
         txtOutputArgs.Enabled = tgOutput.Checked
         If txtOutputArgs.Text = String.Empty Then
             txtOutputArgs.Text = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)}\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(NETWORK).mp4"
         End If
         Player.RenewArgs()
-        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblOutput.Text),
-                                       if(tgOutput.Checked, English.msgOn, English.msgOff))
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblOutput.Text),
+                                       If (tgOutput.Checked, English.msgOn, English.msgOff))
     End Sub
 
-    Private Sub chkShowSeriesRecord_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowSeriesRecord.CheckedChanged
+    Private Sub chkShowSeriesRecord_CheckedChanged(sender As Object, e As EventArgs) _
+        Handles tgShowSeriesRecord.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowSeriesRecord, tgShowSeriesRecord.Checked)
         For each game As GameControl In flpGames.Controls
             game.UpdateGame(tgShowFinalScores.Checked,
@@ -339,7 +337,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Shared Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("https://github.com/NHLGames/NHLGames/wiki")
+        Dim sInfo = New ProcessStartInfo("https://github.com/NHLGames/NHLGames/wiki")
         Process.Start(sInfo)
     End Sub
 
@@ -372,13 +370,13 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub RefreshFocus()
-        If tabGames.Visible Then 
+        If tabGames.Visible Then
             flpGames.Focus()
         ElseIf tabSettings.Visible Then
             tlpSettings.Focus()
         ElseIf tabConsole.Visible Then
             txtConsole.Focus()
-        Else 
+        Else
             tabMenu.Focus()
         End If
     End Sub
@@ -388,7 +386,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub NHLGamesMetro_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
-        _resizeDirection = -1
+        _resizeDirection = - 1
         If e.Location.X < ResizeBorderWidth And e.Location.Y < ResizeBorderWidth Then
             Cursor = Cursors.SizeNWSE
             _resizeDirection = WindowsCode.HTTOPLEFT
@@ -425,7 +423,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub ResizeForm()
-        If Not _resizeDirection.Equals(-1) Then
+        If Not _resizeDirection.Equals(- 1) Then
             NativeMethods.ReleaseCaptureOfForm()
             NativeMethods.SendMessageToHandle(Handle, WindowsCode.WM_NCLBUTTONDOWN, _resizeDirection, 0)
         End If
@@ -435,7 +433,7 @@ Public Class NHLGamesMetro
         Cursor = Cursors.Default
     End Sub
 
-    Private Sub cbServers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbServers.SelectedIndexChanged 
+    Private Sub cbServers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbServers.SelectedIndexChanged
         If Not FormLoaded Then Return
         tlpSettings.Focus()
         Common.SetRedirectionServerInApp()
@@ -446,7 +444,8 @@ Public Class NHLGamesMetro
         CopyConsoleToClipBoard
     End Sub
 
-    Private Sub cbLanguage_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLanguage.SelectedIndexChanged 
+    Private Sub cbLanguage_SelectedIndexChanged(sender As Object, e As EventArgs) _
+        Handles cbLanguage.SelectedIndexChanged
         tlpSettings.Focus()
         ApplicationSettings.SetValue(SettingsEnum.SelectedLanguage, cbLanguage.SelectedItem.ToString())
         Common.GetLanguage()
@@ -461,7 +460,7 @@ Public Class NHLGamesMetro
         Next
     End Sub
 
-    Private Sub tgModules_Click(sender As Object, e As EventArgs) Handles tgModules.CheckedChanged 
+    Private Sub tgModules_Click(sender As Object, e As EventArgs) Handles tgModules.CheckedChanged
         Dim tg As MetroToggle = sender
 
         If tg.Checked Then
@@ -479,11 +478,11 @@ Public Class NHLGamesMetro
         _adDetectionEngine.IsEnabled = tg.checked
         If tg.Checked Then _adDetectionEngine.Start()
         AdDetection.Renew()
-        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblModules.Text), 
-                                       if(tgModules.Checked, English.msgOn, English.msgOff))
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblModules.Text),
+                                       If (tgModules.Checked, English.msgOn, English.msgOff))
     End Sub
 
-    Private Sub tgOBS_CheckedChanged(sender As Object, e As EventArgs) Handles tgOBS.CheckedChanged  
+    Private Sub tgOBS_CheckedChanged(sender As Object, e As EventArgs) Handles tgOBS.CheckedChanged
         Dim tg As MetroToggle = sender
         Dim obs As New Obs
 
@@ -501,18 +500,16 @@ Public Class NHLGamesMetro
             obs.HotkeyGame.Shift = chkGameShift.Checked
 
             _adDetectionEngine.AddModule(obs)
-        Else 
-            If _adDetectionEngine.IsInAdModulesList(obs.Title) Then
-                _adDetectionEngine.RemoveModule(obs.Title)
-            End If
+        ElseIf _adDetectionEngine.IsInAdModulesList(obs.Title) Then
+            _adDetectionEngine.RemoveModule(obs.Title)
         End If
 
         AdDetection.Renew()
-        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblOBS.Text), 
-                                       if(tgOBS.Checked, English.msgOn, English.msgOff))
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblOBS.Text),
+                                       If (tgOBS.Checked, English.msgOn, English.msgOff))
     End Sub
 
-    Private Sub tgSpotify_CheckedChanged(sender As Object, e As EventArgs) Handles tgSpotify.CheckedChanged  
+    Private Sub tgSpotify_CheckedChanged(sender As Object, e As EventArgs) Handles tgSpotify.CheckedChanged
         Dim tg As MetroToggle = sender
         Dim spotify As New Spotify
 
@@ -523,15 +520,13 @@ Public Class NHLGamesMetro
             spotify.PlayNextSong = chkSpotifyPlayNextSong.Checked
             spotify.AnyMediaPlayer = chkSpotifyAnyMediaPlayer.Checked
             _adDetectionEngine.AddModule(spotify)
-        Else 
-            If _adDetectionEngine.IsInAdModulesList(spotify.Title) Then
-                _adDetectionEngine.RemoveModule(spotify.Title)
-            End If
+        ElseIf _adDetectionEngine.IsInAdModulesList(spotify.Title) Then
+            _adDetectionEngine.RemoveModule(spotify.Title)
         End If
 
         AdDetection.Renew()
-        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable,lblSpotify.Text), 
-                                       if(tgSpotify.Checked, English.msgOn, English.msgOff))
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblSpotify.Text),
+                                       If (tgSpotify.Checked, English.msgOn, English.msgOff))
     End Sub
 
     Private Sub cbHostsFileActions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbHostsFileActions.SelectedIndexChanged
@@ -541,9 +536,11 @@ Public Class NHLGamesMetro
     Private Sub btnHostsFileActions_Click(sender As Object, e As EventArgs) Handles btnHostsFileActions.Click
         If cbHostsFileActions.SelectedIndex = 0 Then
             If HostsFile.TestEntry() Then
-                InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsSuccess"), RmText.GetString("msgSuccess"), MessageBoxButtons.OK)
+                InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsSuccess"), RmText.GetString("msgSuccess"),
+                                         MessageBoxButtons.OK)
             Else
-                InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsFailure"), RmText.GetString("msgFailure"), MessageBoxButtons.OK)
+                InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsFailure"), RmText.GetString("msgFailure"),
+                                         MessageBoxButtons.OK)
             End If
         ElseIf cbHostsFileActions.SelectedIndex = 1 Then
             HostsFile.AddEntry()
@@ -552,9 +549,10 @@ Public Class NHLGamesMetro
         ElseIf cbHostsFileActions.SelectedIndex = 3 Then
             HostsFile.OpenHostsFile()
         ElseIf cbHostsFileActions.SelectedIndex = 4 Then
-            Forms.Clipboard.SetText(ServerIp & vbTab & DomainName)
-            InvokeElement.MsgBoxBlue(String.Format(RmText.GetString("msgHostsCopyEntry"), ServerIp & " " & DomainName), RmText.GetString("msgSuccess"), MessageBoxButtons.OK)
-        Else 
+            Clipboard.SetText(ServerIp & vbTab & DomainName)
+            InvokeElement.MsgBoxBlue(String.Format(RmText.GetString("msgHostsCopyEntry"), ServerIp & " " & DomainName),
+                                     RmText.GetString("msgSuccess"), MessageBoxButtons.OK)
+        Else
             HostsFile.OpenHostsFile(false)
         End If
     End Sub
@@ -607,7 +605,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub flpCalendarPanel_VisibleChanged(sender As Object, e As EventArgs) Handles flpCalendarPanel.VisibleChanged
-        If flpCalendarPanel.Visible Then 
+        If flpCalendarPanel.Visible Then
             btnDate.BackColor = Color.FromArgb(0, 170, 210)
         Else
             btnDate.BackColor = Color.FromArgb(64, 64, 64)
@@ -621,17 +619,19 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub CopyConsoleToClipBoard()
-        dim player As String = If (rbMpv.Checked,"MPV",If(rbMPC.Checked,"MPC",If(rbVLC.Checked,"VLC","none")))
-        Dim x64 As String = if(Environment.Is64BitOperatingSystem,"64 Bits","32 Bits")
-        Dim streamerPath = ApplicationSettings.Read(Of String)(SettingsEnum.StreamerPath, String.Empty).ToString()
-        Dim vlcPath = ApplicationSettings.Read(Of String)(SettingsEnum.VlcPath, String.Empty).ToString()
-        Dim mpcPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpcPath, String.Empty).ToString()
-        Dim mpvPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpvPath, String.Empty).ToString()
+        Dim player As String = If (rbMpv.Checked, "MPV", If (rbMPC.Checked, "MPC", If (rbVLC.Checked, "VLC", "none")))
+        Dim x64 As String = If (Environment.Is64BitOperatingSystem, "64 Bits", "32 Bits")
+        Dim streamerPath = ApplicationSettings.Read (Of String)(SettingsEnum.StreamerPath, String.Empty).ToString()
+        Dim vlcPath = ApplicationSettings.Read (Of String)(SettingsEnum.VlcPath, String.Empty).ToString()
+        Dim mpcPath = ApplicationSettings.Read (Of String)(SettingsEnum.MpcPath, String.Empty).ToString()
+        Dim mpvPath = ApplicationSettings.Read (Of String)(SettingsEnum.MpvPath, String.Empty).ToString()
         Dim streamerExists = streamerPath <> "" AndAlso File.Exists(streamerPath)
         Dim vlcExists = vlcPath <> "" AndAlso File.Exists(vlcPath)
         Dim mpcExists = mpcPath <> "" AndAlso File.Exists(mpcPath)
         Dim mpvExists = mpvPath <> "" AndAlso File.Exists(mpvPath)
-        Dim version = String.Format("v {0}.{1}.{2}.{3}", My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
+        Dim version = String.Format("v {0}.{1}.{2}.{3}", My.Application.Info.Version.Major,
+                                    My.Application.Info.Version.Minor, My.Application.Info.Version.Build,
+                                    My.Application.Info.Version.Revision)
         Dim report = $"NHLGames Bug Report {version}{vbCrLf}{vbCrLf}" &
                      $"Operating system: {My.Computer.Info.OSFullName.ToString()} {x64.ToString()}{vbTab}{vbCrLf}" &
                      $"Internet: Connection test {If (My.Computer.Network.IsAvailable, "succeeded", "failed")}, ping google.com {If (My.Computer.Network.Ping("www.google.com"), "succeeded", "failed")}{vbTab}{vbCrLf}" &
@@ -647,7 +647,7 @@ Public Class NHLGamesMetro
                      $"MPC path: {mpcPath.ToString()} [{If (mpcPath.Equals(txtMPCPath.Text), "on form", "not on form")}] [{If (mpcExists, "exe found", "exe not found")}]{vbTab}{vbCrLf}" &
                      $"MPV path: {mpvPath.ToString()} [{If (mpvPath.Equals(txtMpvPath.Text), "on form", "not on form")}] [{If (mpvExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
                      $"Console log: {vbTab}{txtConsole.Text.Replace($"{vbLf}{vbLf}", $"{vbTab}{vbCrLf}").ToString()}"
-        Forms.Clipboard.SetText(report)
+        Clipboard.SetText(report)
     End Sub
 
     Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -655,14 +655,16 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub tbLiveRewind_MouseUp(sender As Object, e As MouseEventArgs) Handles tbLiveRewind.MouseUp
-        _writeToConsoleSettingsChanged(lblLiveRewind.Text, tbLiveRewind.Value * 5)
+        _writeToConsoleSettingsChanged(lblLiveRewind.Text, tbLiveRewind.Value*5)
     End Sub
 
     Private Sub tbLiveRewind_ValueChanged(sender As Object, e As EventArgs) Handles tbLiveRewind.ValueChanged
-        Dim minutesBehind = tbLiveRewind.Value * 5
-        lblLiveRewindDetails.Text = String.Format(RmText.GetString("lblLiveRewindDetails"), minutesBehind, Now.AddMinutes(-minutesBehind).ToString("h:mm tt", CultureInfo.InvariantCulture))
+        Dim minutesBehind = tbLiveRewind.Value*5
+        lblLiveRewindDetails.Text = String.Format(
+            RmText.GetString("lblLiveRewindDetails"), 
+            minutesBehind, Now.AddMinutes(- minutesBehind).ToString("h:mm tt", CultureInfo.InvariantCulture))
         Player.RenewArgs()
-        
+
         For each game As GameControl In flpGames.Controls
             If game.LiveReplayCode = LiveStatusCodeEnum.Rewind Then
                 game.SetLiveStatusIcon()
@@ -675,7 +677,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub flpRecordList_VisibleChanged(sender As Object, e As EventArgs) Handles flpRecordList.VisibleChanged
-        If flpRecordList.Visible Then 
+        If flpRecordList.Visible Then
             btnRecord.BackColor = Color.FromArgb(0, 170, 210)
         Else
             btnRecord.BackColor = Color.FromArgb(64, 64, 64)

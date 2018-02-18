@@ -3,7 +3,6 @@ Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
 
 Namespace Objects
-
     Public Class GameWatchArguments
         Const DefaultSegment = 12
         Public Property GameDate As Date = Now
@@ -31,7 +30,7 @@ Namespace Objects
             Return OutputArgs(False)
         End Function
 
-        Public Overloads Function ToString(ByVal safeOutput As Boolean)
+        Public Overloads Function ToString(safeOutput As Boolean)
             Return OutputArgs(safeOutput)
         End Function
 
@@ -47,10 +46,11 @@ Namespace Objects
             Return selectedQualities
         End Function
 
-        Private Function OutputArgs(ByVal safeOutput As Boolean) As String
+        Private Function OutputArgs(safeOutput As Boolean) As String
 
-            If String.IsNullOrEmpty(PlayerPath) OrElse PlayerType.Equals(PlayerTypeEnum.None) Then Console.WriteLine(English.errorPlayerPathEmpty)
-            
+            If String.IsNullOrEmpty(PlayerPath) OrElse PlayerType.Equals(PlayerTypeEnum.None) Then _
+                Console.WriteLine(English.errorPlayerPathEmpty)
+
             Dim result = PlayerArgs() & ReplayArgs()
             If UseCustomStreamerArgs Then result &= CustomStreamerArgs
             If Not safeOutput Then result &= NhlCookieArgs()
@@ -60,7 +60,6 @@ Namespace Objects
             If UseOutputArgs Then result &= OutputArgs()
 
             Return result
-            
         End Function
 
         Private Function PlayerArgs() As String
@@ -85,7 +84,7 @@ Namespace Objects
                 Else
                     Return $"--ringbuffer-size=2500K --hls-segment-threads=2 --player-passthrough=hls "
                 End If
-            Else 
+            Else
                 If PlayerType.Equals(PlayerTypeEnum.Vlc) Then
                     Return $"--ringbuffer-size=8M --hls-segment-threads=2 "
                 Else
@@ -97,13 +96,13 @@ Namespace Objects
         Private Function ReplayMinutes() As Integer
             Select Case StreamLiveReplayCode
                 Case LiveStatusCodeEnum.Rewind
-                    Return StreamLiveRewind * DefaultSegment
+                    Return StreamLiveRewind*DefaultSegment
                 Case LiveStatusCodeEnum.Replay
-                    Dim segments = CType((Date.UtcNow - GameDate).TotalMinutes, Integer) * DefaultSegment
+                    Dim segments = CType((Date.UtcNow - GameDate).TotalMinutes, Integer)*DefaultSegment
                     If segments <= 0 Then StreamLiveReplay = LiveReplayEnum.StreamStarts
                     Select Case StreamLiveReplay
                         Case LiveReplayEnum.PuckDrop
-                            Return segments - (DefaultSegment * 10)
+                            Return segments - (DefaultSegment*10)
                         Case LiveReplayEnum.GameTime
                             Return segments
                     End Select
@@ -115,18 +114,23 @@ Namespace Objects
         Private Function NhlCookieArgs As String
             Return $" --http-cookie=""mediaAuth={Common.GetRandomString(240)} """
         End Function
+
         Private Function UserAgentArgs As String
             Return $" --http-header=""User-Agent={Common.UserAgent}"" "
         End Function
+
         Private Function StreamLinkArgs As String
             Return $"""hlsvariant://{Stream.StreamUrl.Replace("CDN", cdn.ToString().ToLower())} "
         End Function
+
         Private Function StreamLinkCensoredArgs() As String
             Return $"""hlsvariant://{English.msgCensoredStream} "
         End Function
+
         Private Function StreamBestQualityArgs As String
             Return $"name_key=bitrate"" best --http-no-ssl-verify "
         End Function
+
         Private Function StreamQualityArgs As String
             Return $""" {GetStreamQuality} --http-no-ssl-verify "
         End Function
@@ -138,15 +142,16 @@ Namespace Objects
                     Replace("(AWAY)", Stream.Game.AwayAbbrev).
                     Replace("(TYPE)", Stream.Type.ToString()).
                     Replace("(NETWORK)", Stream.Network)
-            Dim suffix As Integer = 1
+            Dim suffix = 1
             Dim originalName = Path.GetFileNameWithoutExtension(outputPath)
             Dim originalExt = Path.GetExtension(outputPath)
             While (My.Computer.FileSystem.FileExists(outputPath))
-                outputPath = Path.ChangeExtension(Path.Combine(Path.GetDirectoryName(outputPath), originalName & "_" & suffix), originalExt)
+                outputPath = Path.ChangeExtension(
+                    Path.Combine(Path.GetDirectoryName(outputPath), originalName & "_" & suffix), originalExt)
                 suffix += 1
             End While
 
             Return $"-f -o ""{outputPath}"" "
         End Function
-End Class
+    End Class
 End Namespace

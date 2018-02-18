@@ -4,9 +4,9 @@ Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
 
 Namespace Objects
-
     <DebuggerDisplay("{HomeTeam} vs. {AwayTeam} at {[Date]}")>
-    Public Class Game: Implements IDisposable
+    Public NotInheritable Class Game
+        Implements IDisposable
         Private _disposedValue As Boolean
 
         Public Property StreamsDict As Dictionary(Of StreamTypeEnum, GameStream)
@@ -41,19 +41,24 @@ Namespace Objects
 
         Public ReadOnly Property IsLive As Boolean
             Get
-                Return GameState.Equals(GameStateEnum.InProgress) OrElse GameState.Equals(GameStateEnum.Ending) OrElse GameState.Equals(GameStateEnum.Ended)
+                Return GameState.Equals(GameStateEnum.InProgress) OrElse
+                    GameState.Equals(GameStateEnum.Ending) OrElse
+                    GameState.Equals(GameStateEnum.Ended)
             End Get
         End Property
 
         Public ReadOnly Property IsFinal As Boolean
             Get
-                Return GameState.Equals(GameStateEnum.Ended) OrElse GameState.Equals(GameStateEnum.OffTheAir) OrElse GameState.Equals(GameStateEnum.StreamEnded)
+                Return GameState.Equals(GameStateEnum.Ended) OrElse
+                    GameState.Equals(GameStateEnum.OffTheAir) OrElse
+                    GameState.Equals(GameStateEnum.StreamEnded)
             End Get
         End Property
 
         Public ReadOnly Property IsOffTheAir As Boolean
             Get
-                Return GameState.Equals(GameStateEnum.OffTheAir) OrElse GameState.Equals(GameStateEnum.StreamEnded)
+                Return GameState.Equals(GameStateEnum.OffTheAir) OrElse
+                    GameState.Equals(GameStateEnum.StreamEnded)
             End Get
         End Property
 
@@ -65,19 +70,22 @@ Namespace Objects
 
         Public ReadOnly Property IsStreamable As Boolean
             Get
-                Return GameState > GameStateEnum.Pregame AndAlso  GameState < GameStateEnum.Delayed
+                Return GameState > GameStateEnum.Pregame AndAlso GameState < GameStateEnum.Delayed
             End Get
         End Property
 
         Public ReadOnly Property AreAnyStreamsAvailable As Boolean
             Get
                 Return (StreamsDict IsNot Nothing) AndAlso (StreamsDict.Count > 0) AndAlso
-                    (StreamsDict.Any(Function(x) x.Value IsNot Nothing AndAlso Not x.Value.IsBroken) OrElse IsStreamable)
+                       (StreamsDict.Any(Function(x) x.Value IsNot Nothing AndAlso Not x.Value.IsBroken) OrElse
+                        IsStreamable)
             End Get
         End Property
 
         Public Function GetStream(streamType As StreamTypeEnum) As GameStream
-            Return If (StreamsDict IsNot Nothing, StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value, New GameStream())
+            Return If (StreamsDict IsNot Nothing,
+                StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value,
+                New GameStream())
         End Function
 
         Public Function IsStreamDefined(streamType As StreamTypeEnum) As Boolean
@@ -95,12 +103,13 @@ Namespace Objects
         End Sub
 
         Public Function SetSeriesInfo(game As JObject) As Boolean
-            If Not game.TryGetValue("seriesSummary", "gameNumber") And game.TryGetValue("seriesSummary", "seriesStatusShort") Then
+            If Not game.TryGetValue("seriesSummary", "gameNumber") And
+                game.TryGetValue("seriesSummary", "seriesStatusShort") Then
                 Console.WriteLine(English.errorUnableToDecodeJson)
                 Return False
             End If
 
-            SeriesGameNumber = game.SelectToken("seriesSummary.gameNumber").ToString() 
+            SeriesGameNumber = game.SelectToken("seriesSummary.gameNumber").ToString()
             SeriesGameStatus = game.SelectToken("seriesSummary.seriesStatusShort").ToString()
             Return True
         End Function
@@ -109,8 +118,6 @@ Namespace Objects
             GamePeriod = game.SelectToken("linescore.currentPeriodOrdinal").ToString()
             GameTimeLeft = game.SelectToken("linescore.currentPeriodTimeRemaining").ToString()
             IsInIntermission = game.SelectToken("linescore.intermissionInfo.inIntermission").ToString().ToLower().Equals("true")
-            HomeScore = game.SelectToken("teams.home.score").ToString()
-            AwayScore = game.SelectToken("teams.away.score").ToString()
 
             If IsInIntermission Then
                 IntermissionTimeRemaining = Date.MinValue.AddSeconds(CType(game.SelectToken("linescore.intermissionInfo.intermissionTimeRemaining").ToString(), Integer))
@@ -121,7 +128,7 @@ Namespace Objects
             StreamsDict = New Dictionary(Of StreamTypeEnum, GameStream)
         End Sub
 
-        Protected Overridable Sub Dispose(disposing As Boolean)
+        Private Sub Dispose(disposing As Boolean)
             If Not _disposedValue Then
                 _disposedValue = True
             End If
@@ -135,6 +142,5 @@ Namespace Objects
         Protected Overrides Sub Finalize()
             Dispose(False)
         End Sub
-
     End Class
 End Namespace
