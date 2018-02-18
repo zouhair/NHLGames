@@ -490,9 +490,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Warning: Starting stream failed. Make sure your player and streamer are set or try to use a different quality in settings, so it will try another stream..
         '''</summary>
-        Friend Shared ReadOnly Property errorStreamFailed() As String
+        Friend Shared ReadOnly Property errorStreamFailedCantRead() As String
             Get
-                Return ResourceManager.GetString("errorStreamFailed", resourceCulture)
+                Return ResourceManager.GetString("errorStreamFailedCantRead", resourceCulture)
             End Get
         End Property
         

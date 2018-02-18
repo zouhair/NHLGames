@@ -78,7 +78,11 @@ Namespace Objects
                     currentGame.GameStateDetailed = game.SelectToken("status.detailedState").ToString()
 
                     If currentGame.IsStreamable Then
-                        currentGame.SetLiveInfo(game)
+                        If currentGame.IsLive Then
+                            currentGame.SetLiveInfo(game)
+                        End If
+                        currentGame.HomeScore = game.SelectToken("teams.home.score").ToString()
+                        currentGame.AwayScore = game.SelectToken("teams.away.score").ToString()
                     End If
 
                     'set stream feeds for the current game
