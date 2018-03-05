@@ -282,9 +282,9 @@ Namespace Utilities
 
                 Form.tbLiveRewind.Value = If (watchArgs.StreamLiveRewind Mod 5 = 0, watchArgs.StreamLiveRewind/5, 1)
 
-                Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc
-                Form.rbMPC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpc
-                Form.rbMpv.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpv
+                Form.rbMpv.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpv AndAlso Form.rbMpv.Enabled
+                Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc AndAlso Form.rbVLC.Enabled
+                Form.rbMPC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpc AndAlso Form.rbMPC.Enabled
 
                 If Form.rbVLC.Checked AndAlso watchArgs.PlayerPath <> Form.txtVLCPath.Text Then
                     Player.RenewArgs()

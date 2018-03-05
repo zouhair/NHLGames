@@ -10,7 +10,6 @@ Namespace Objects
         Private _disposedValue As Boolean
 
         Public Property StreamsDict As Dictionary(Of StreamTypeEnum, GameStream)
-        Public Property Id As Guid = Guid.NewGuid()
         Public Property GameId As String
         Public Property GameType As GameTypeEnum 'Get type of the game : 1 preseason, 2 regular, 3 series
         Public Property GameDate As DateTime
@@ -114,7 +113,9 @@ Namespace Objects
             Return True
         End Function
 
-        Public Sub SetLiveInfo(game As JObject)
+        Public Sub SetStatsInfo(game As JObject)
+            HomeScore = game.SelectToken("teams.home.score").ToString()
+            AwayScore = game.SelectToken("teams.away.score").ToString()
             GamePeriod = game.SelectToken("linescore.currentPeriodOrdinal").ToString()
             GameTimeLeft = game.SelectToken("linescore.currentPeriodTimeRemaining").ToString()
             IsInIntermission = game.SelectToken("linescore.intermissionInfo.inIntermission").ToString().ToLower().Equals("true")
