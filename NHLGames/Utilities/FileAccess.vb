@@ -24,28 +24,23 @@ Namespace Utilities
             Console.WriteLine(English.msgAddReadOnly, path)
         End Sub
 
-        Private Shared Function RemoveAttribute(attributes As FileAttributes, attributesToRemove As FileAttributes) _
-            As FileAttributes
+        Private Shared Function RemoveAttribute(attributes As FileAttributes, attributesToRemove As FileAttributes) As FileAttributes
             Return attributes And Not attributesToRemove
         End Function
 
-        Public Shared Function HasAccess(filePath As String, Optional createIt As Boolean = true,
-                                         Optional reportException As Boolean = false,
-                                         Optional contentText As String = "")
+        Public Shared Function HasAccess(filePath As String, Optional writeAccess As Boolean = true) As Boolean
             Try
-                If createIt AndAlso Not File.Exists(filePath) Then File.WriteAllText(filePath, contentText)
+                If writeAccess Then
+                    Using File.Open(filePath & ".bak", FileMode.OpenOrCreate, IO.FileAccess.ReadWrite, FileShare.None)
+                    End Using
+                End If
 
-                Using New StreamReader(filePath)
-                End Using
-
-                Using File.Open(filePath, FileMode.Open, IO.FileAccess.ReadWrite, FileShare.None)
+                Using File.Open(filePath, FileMode.OpenOrCreate, IO.FileAccess.ReadWrite, FileShare.None)
                 End Using
 
                 Return True
             Catch ex As Exception
-                If reportException Then
-                    Console.WriteLine(English.errorAccessPath, ex.Message)
-                End If
+                Console.WriteLine(English.errorAccessPath, ex.Message)
                 Return False
             End Try
         End Function
