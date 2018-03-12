@@ -22,7 +22,7 @@ Enjoy!
    * [Settings](#settings)
      * [Customize game panels](#customize-game-panels)
      * [Stream Quality](#stream-quality)
-     * [Replay/Rewind](#replayrewind)
+     * [Replay and Rewind](#replay-and-rewind)
      * [Content Delivery Network (CDN)](#content-delivery-network-cdn)
      * [Server's Hostname](#servers-hostname)
      * [Server Hosts Entry](#server-hosts-entry)
@@ -34,7 +34,7 @@ Enjoy!
    * [Console](#console)
 * [Support](#support)
 * [Chromecast](#chromecast)
-* [Phones/TV](#phonestv)
+* [Phones and TVs](#phones-and-tvs)
 * [Contribute](#contribute)
 * [Donation](#donation)
 * [Download](#download)
@@ -104,7 +104,7 @@ The selected value will defined which quality will be sent to your media player,
 - Low: 228p ~500 Mb/hr
 - Mobile: 224p or worst ~300/hr
 
-### ///_Replay/Rewind_
+### ///_Replay and Rewind_
 The Replay/Rewind feature is only available for Live games. If you see a blue game panel with a red live icon in the left corner, you can click on it once to turn on Rewind and twice to turn on Replay. It will go back to default (Live) if clicked three times. 
 
 If you use the replay or rewind feature and you want to change the default behaviour, you can set your preferences here.
@@ -214,7 +214,7 @@ NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps 
 
 <img src="https://cloud.githubusercontent.com/assets/23088305/25556617/a6caab1e-2ccd-11e7-89d3-c9177a997ed1.png" width="300"/>
 
-# /_Phones/TV_
+# /_Phones and TVs_
 You can redirect the stream over the Internet by using VLC player output and host it.   
 Open NHLGames, go to settings, select VLC as your default and turn on player args.    
 Type `--sout=#http{mux=ts,dst=:8080/stream}`.   
