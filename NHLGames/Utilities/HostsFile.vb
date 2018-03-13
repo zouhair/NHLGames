@@ -62,36 +62,12 @@ Namespace Utilities
         End Function
 
         Public Shared Sub CleanHosts()
+            If UpdateHosts(True) Then MessageOpenHostsFile()
+        End Sub
 
-            If FileAccess.HasAccess(HostsFilePath, false, true) AndAlso EnsureAdmin() Then
-                Dim fileIsReadonly As Boolean = FileAccess.IsFileReadonly(HostsFilePath)
-
-                If fileIsReadonly Then
-                    FileAccess.RemoveReadOnly(HostsFilePath)
-                End If
-
-                Console.WriteLine(English.msgBackingHostsFile, HostsFilePath)
-                File.Copy(HostsFilePath, HostsFilePath & ".bak", True)
-
-                Dim input As String
-                Using sr As New StreamReader(HostsFilePath)
-                    input = sr.ReadToEnd()
-                End Using
-
-                Dim output As String = RemoveOldEntries(input)
-
-                Using sw As New StreamWriter(HostsFilePath)
-                    sw.Write(output)
-                    SetServerIp()
-                End Using
-
-                If fileIsReadonly Then
-                    FileAccess.AddReadonly(HostsFilePath)
-                End If
-
-                NHLGamesMetro.HostNameResolved = TestEntry()
-                InvokeElement.LoadGames()
-                MessageOpenHostsFile()
+        Public Shared Sub AddEntry(Optional viewChanges As Boolean = True)
+            If UpdateHosts() Then 
+                If viewChanges Then MessageOpenHostsFile()
             End If
         End Sub
 
@@ -99,48 +75,47 @@ Namespace Utilities
             If InvokeElement.MsgBoxBlue(
                 NHLGamesMetro.RmText.GetString("msgViewHostsText"),
                 NHLGamesMetro.RmText.GetString("msgViewHosts"),
-                MessageBoxButtons.YesNo) = DialogResult.Yes AndAlso FileAccess.HasAccess(HostsFilePath, false, true) _
-                Then
+                MessageBoxButtons.YesNo) = DialogResult.Yes AndAlso FileAccess.HasAccess(HostsFilePath) Then 
                 Process.Start("NOTEPAD", HostsFilePath)
             End If
         End Sub
 
-        Public Shared Sub AddEntry(Optional viewChanges As Boolean = True)
+        Private Shared Function UpdateHosts(Optional clean As Boolean = False) As Boolean
+            If Not (EnsureAdmin() AndAlso FileAccess.HasAccess(HostsFilePath, true)) Then Return False
 
-            If FileAccess.HasAccess(HostsFilePath, true, true) AndAlso EnsureAdmin() Then
+            Dim fileIsReadonly As Boolean = FileAccess.IsFileReadonly(HostsFilePath)
 
-                Dim fileIsReadonly As Boolean = FileAccess.IsFileReadonly(HostsFilePath)
-
-                If fileIsReadonly Then
-                    FileAccess.RemoveReadOnly(HostsFilePath)
-                End If
-
-                Console.WriteLine(English.msgBackingHostsFile, HostsFilePath)
-                File.Copy(HostsFilePath, HostsFilePath & ".bak", True)
-
-                Dim input As String
-                Using sr As New StreamReader(HostsFilePath)
-                    input = sr.ReadToEnd()
-                End Using
-
-                Dim output As String = RemoveOldEntries(input)
-
-                Using sw As New StreamWriter(HostsFilePath)
-                    sw.Write(output)
-                    SetServerIp()
-                    sw.WriteLine(vbNewLine & NHLGamesMetro.ServerIp & vbTab & NHLGamesMetro.DomainName)
-                End Using
-
-                If fileIsReadonly Then
-                    FileAccess.AddReadonly(HostsFilePath)
-                End If
-
-                NHLGamesMetro.HostNameResolved = TestEntry()
-                InvokeElement.LoadGames()
-                If viewChanges Then MessageOpenHostsFile()
+            If fileIsReadonly Then
+                FileAccess.RemoveReadOnly(HostsFilePath)
             End If
-        End Sub
 
+            Console.WriteLine(English.msgBackingHostsFile, HostsFilePath)
+            File.Copy(HostsFilePath, HostsFilePath & ".bak", True)
+
+            Dim input As String
+            Using sr As New StreamReader(HostsFilePath)
+                input = sr.ReadToEnd()
+            End Using
+            Dim output = RemoveOldEntries(input)
+
+            Using sw As New StreamWriter(HostsFilePath)
+                sw.Write(output)
+                SetServerIp()
+                If Not clean Then
+                    sw.WriteLine(vbNewLine & NHLGamesMetro.ServerIp & vbTab & NHLGamesMetro.DomainName)
+                End If
+            End Using
+
+            If fileIsReadonly Then
+                FileAccess.AddReadonly(HostsFilePath)
+            End If
+
+            NHLGamesMetro.HostNameResolved = TestEntry()
+            InvokeElement.LoadGames()
+
+            Return True
+        End Function
+        
         Public Shared Sub SetServerIp()
             If NHLGamesMetro.HostName.Equals(String.Empty) Then
                 NHLGamesMetro.ServerIp = String.Empty
