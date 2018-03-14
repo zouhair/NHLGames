@@ -34,6 +34,8 @@ Enjoy!
    * [Console](#console)
 * [Support](#support)
 * [Chromecast](#chromecast)
+  * [VLC 3.0](#vlc-30)
+  * [Google Chrome](#google-chrome)
 * [Phones and TVs](#phones-and-tvs)
 * [Contribute](#contribute)
 * [Donation](#donation)
@@ -202,8 +204,12 @@ Go to this tab to see everything that NHLGames does. Also, any error or warning 
 Having an issue with NHLGames? Head to our [Wiki](https://github.com/NHLGames/NHLGames/wiki) to find a fix. Look at the side bar, on the right, to navigate between known issues. If you can't find it, feel free to open an [issue](https://github.com/NHLGames/NHLGames/issues).
 
 # /_Chromecast_
-NHLGames doesn't support Chromecast, but VLC 3.0 player and Google Chrome does. Follow these steps if you want to play the game on your TV with Chrome.
+NHLGames doesn't support Chromecast, but VLC 3.0 player and Google Chrome does. Follow these steps if you want to play the game on your TV.
 
+## //_VLC 3.0_
+![image](https://user-images.githubusercontent.com/23088305/37436787-15ef5fe2-27c0-11e8-8a47-b0a25b40a598.png)
+
+## //_Google Chrome_
 ![image](https://cloud.githubusercontent.com/assets/23088305/25557771/3570cf2a-2ce6-11e7-980a-b605b93c66dc.png)
 
 3. Select a pc monitor you want to share. Make sure audio share is checked.
