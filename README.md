@@ -202,7 +202,7 @@ Go to this tab to see everything that NHLGames does. Also, any error or warning 
 Having an issue with NHLGames? Head to our [Wiki](https://github.com/NHLGames/NHLGames/wiki) to find a fix. Look at the side bar, on the right, to navigate between known issues. If you can't find it, feel free to open an [issue](https://github.com/NHLGames/NHLGames/issues).
 
 # /_Chromecast_
-NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps if you want to play the game on your TV.
+NHLGames doesn't support Chromecast, but VLC 3.0 player and Google Chrome does. Follow these steps if you want to play the game on your TV with Chrome.
 
 ![image](https://cloud.githubusercontent.com/assets/23088305/25557771/3570cf2a-2ce6-11e7-980a-b605b93c66dc.png)
 
