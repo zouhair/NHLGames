@@ -29,6 +29,8 @@ In general, we follow the "fork-and-pull" Git workflow.
  4. **Push** your work back up to your fork
  5. Submit a **Pull request** to `NHLGames\master` so that we can review your changes
 
+> Work on open issues only. If you create a new issue, discuss about it, before starting to work on it
+
 > Refactoring should not be consider, except if every user is affected by the issue.   
 
 > Avoid any merge conflicts by merging the latest from "upstream" before making a pull request!
