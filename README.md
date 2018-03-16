@@ -225,7 +225,7 @@ You can redirect the stream over the Internet by using VLC player output and hos
 Open NHLGames, go to settings, select VLC as your default and turn on player args.    
 Type `--sout=#http{mux=ts,dst=:8080/stream}`.   
 Click on a stream, VLC should open after accepting new configs to your firewall.   
-Go to your other device and use a player such as MPV to open the link `ip:8080/stream` replace `ip` by your external ip (internet/WAN) (google `my ip`) or by your internal ip (local/LAN) (cmd.exe `ipconfig`)
+Go on your phone and use a player such as *MPV Mobile App* to open the link `ip:8080/stream` replace `ip` by your external ip (internet/WAN) (google `my ip`) or by your internal ip (local/LAN) (cmd.exe `ipconfig`)
 
 # /_Contribute_
 NHLGames is coded in VB.NET using Visual Studio and .Net Framework 4.5. If you want to contribute : [Follow the guidelines](CONTRIBUTING.md)
