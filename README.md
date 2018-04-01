@@ -109,6 +109,8 @@ The selected value will defined which quality will be sent to your media player,
 ### ///_Replay and Rewind_
 The Replay/Rewind feature is only available for Live games. If you see a blue game panel with a red live icon in the left corner, you can click on it once to turn on Rewind and twice to turn on Replay. It will go back to default (Live) if clicked three times. 
 
+![image](https://user-images.githubusercontent.com/23088305/35660550-a8ccfe3e-06da-11e8-974c-141f6d3b3d31.gif)
+
 If you use the replay or rewind feature and you want to change the default behaviour, you can set your preferences here.
 - Live Replay: If Replay is enabled, it will start the stream from the selected value.
 - Live Rewind: If Rewind is enabled, it will use the value to set the stream x minutes behind the live stream.
