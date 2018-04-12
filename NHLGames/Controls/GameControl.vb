@@ -151,7 +151,7 @@ Namespace Controls
                                   Replace("leads", NHLGamesMetro.RmText.GetString("gameSeriesLead"))).
                                   ToUpper(), seriesStatusShort)
 
-                lblNotInSeason.Text = If (showSeriesRecord, seriesStatusLong, seriesStatusShort)
+                lblNotInSeason.Text = If (showSeriesRecord AndAlso _game.SeriesGameStatus.Length > 0, seriesStatusLong, seriesStatusShort)
             End If
 
             If Not _game.AreAnyStreamsAvailable OrElse Not NHLGamesMetro.HostNameResolved Then
