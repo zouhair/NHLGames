@@ -1,17 +1,18 @@
 ﻿Namespace Utilities
-
     Public Enum GameStateEnum
-        Undefined = 0
+#Disable Warning InconsistentNaming
+        ToBeDetermined = 0
         Scheduled = 1
         Pregame = 2
         InProgress = 3
         Ending = 4
         Ended = 5
-        Unknown1 = 6
-        Final = 7
-        Unknown2 = 8
+        OffTheAir = 6
+        StreamEnded = 7
+        Delayed = 8
         Postponed = 9
-        Unknown3 = 10
+        Cancelled = 10
+        Undefined = 11
     End Enum
 
     Public Enum GameTypeEnum
@@ -20,7 +21,7 @@
         Series = 3
     End Enum
 
-    Public Enum StreamType
+    Public Enum StreamTypeEnum
         None = 0
         Away
         Home
@@ -32,15 +33,18 @@
         MultiCam2
         RefCam
         StarCam
+        MultiAngle1
+        MultiAngle2
+        MultiAngle3
+        RoboCam
     End Enum
 
-    Public Enum CdnType
+    Public Enum CdnTypeEnum
         Akc = 0
         L3C
     End Enum
 
-    Public Enum StreamQuality
-#Disable Warning InconsistentNaming
+    Public Enum StreamQualityEnum
         best = 0
         _720p = 1
         _540p = 2
@@ -49,7 +53,6 @@
         _288p = 5
         _224p = 6
         worst = 7
-#Enable Warning InconsistentNaming
     End Enum
 
     Public Enum PlayerTypeEnum
@@ -61,25 +64,25 @@
 
     Public Enum SettingsEnum
         Version = 1
-        DefaultWatchArgs = 2
-        VlcPath = 3
-        MpcPath = 4
-        MpvPath = 5
-        StreamerPath = 6
-        ServerList = 7
-        ShowScores = 8
-        SelectedServer = 9
-        SelectedLanguage = 10
-        ShowLiveScores = 11
-        ShowSeriesRecord = 12
-        LanguageList = 13
-        AdDetection = 14
-        ShowTeamCityAbr = 15
-        ShowTodayLiveGamesFirst = 16
-        LastWindowSize = 17
+        DefaultWatchArgs
+        VlcPath
+        MpcPath
+        MpvPath
+        StreamerPath
+        ServerList
+        ShowScores
+        SelectedServer
+        SelectedLanguage
+        ShowLiveScores
+        ShowSeriesRecord
+        AdDetection
+        ShowTeamCityAbr
+        ShowTodayLiveGamesFirst
+        LastWindowSize
+        ShowLiveTime
     End Enum
 
-    Public Enum OutputType
+    Public Enum OutputTypeEnum
         Normal = 0
         Status = 1
         [Error] = 2
@@ -98,8 +101,19 @@
         StreamLink
     End Enum
 
+    Public Enum LiveStatusCodeEnum
+        Live = 0
+        Rewind
+        Replay
+    End Enum
+
+    Public Enum LiveReplayEnum
+        PuckDrop = 0
+        GameTime
+        StreamStarts
+    End Enum
+
     Public Enum WindowsCode
-#Disable Warning InconsistentNaming
         WM_NCLBUTTONDOWN = &HA1
         HTLEFT = 10
         HTRIGHT = 11
@@ -111,11 +125,9 @@
         HTBOTTOMRIGHT = 17
         VKMNEXT = 176
         VKMPREVIOUS = 177
-#Enable Warning InconsistentNaming
     End Enum
 
     Public Enum ShowWindowCode
-#Disable Warning InconsistentNaming
         SW_HIDE = 0
         SW_SHOWNORMAL = 1
         SW_SHOWMINIMIZED = 2
@@ -126,6 +138,7 @@
         SW_SHOWMINNOACTIVE = 7
         SW_SHOWNA = 8
         SW_RESTORE = 9
-#Enable Warning InconsistentNaming
     End Enum
+
+#Enable Warning InconsistentNaming
 End Namespace

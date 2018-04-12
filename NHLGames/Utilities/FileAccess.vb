@@ -2,9 +2,7 @@
 Imports NHLGames.My.Resources
 
 Namespace Utilities
-
     Public Class FileAccess
-
         Public Shared Function IsFileReadonly(path As String) As Boolean
             Dim attributes As FileAttributes = File.GetAttributes(path)
             Return (attributes And FileAttributes.[ReadOnly]) = FileAttributes.[ReadOnly]
@@ -26,29 +24,25 @@ Namespace Utilities
             Console.WriteLine(English.msgAddReadOnly, path)
         End Sub
 
-        Public Shared Function RemoveAttribute(attributes As FileAttributes, attributesToRemove As FileAttributes) As FileAttributes
+        Private Shared Function RemoveAttribute(attributes As FileAttributes, attributesToRemove As FileAttributes) As FileAttributes
             Return attributes And Not attributesToRemove
         End Function
 
-        Public Shared Function HasAccess(filePath As String, Optional createIt As Boolean = true, Optional reportException As Boolean = false)
+        Public Shared Function HasAccess(filePath As String, Optional writeAccess As Boolean = true) As Boolean
             Try
-                If createIt Then File.WriteAllText(filePath, English.msgTestTxtContent)
+                If writeAccess Then
+                    Using File.Open(filePath & ".bak", FileMode.OpenOrCreate, IO.FileAccess.ReadWrite, FileShare.None)
+                    End Using
+                End If
 
-                Using New StreamReader(filePath)
+                Using File.Open(filePath, FileMode.OpenOrCreate, IO.FileAccess.ReadWrite, FileShare.None)
                 End Using
 
-                Using File.Open(filePath, FileMode.Open, IO.FileAccess.ReadWrite, FileShare.None)
-                End Using
-
-                If createIt Then File.Delete(filePath)
                 Return True
             Catch ex As Exception
-                If reportException Then 
-                    Console.WriteLine(English.errorAccessPath, ex.Message)
-                End If
+                Console.WriteLine(English.errorAccessPath, ex.Message)
                 Return False
             End Try
         End Function
-
     End Class
 End Namespace

@@ -137,6 +137,33 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Live - Today&apos;s games follow the live stream (Default).
+        '''</summary>
+        Friend Shared ReadOnly Property cbLiveStatusLive() As String
+            Get
+                Return ResourceManager.GetString("cbLiveStatusLive", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Replay - Today&apos;s games ignore live stream.
+        '''</summary>
+        Friend Shared ReadOnly Property cbLiveStatusReplay() As String
+            Get
+                Return ResourceManager.GetString("cbLiveStatusReplay", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Rewind - Today&apos;s games are set behind live stream.
+        '''</summary>
+        Friend Shared ReadOnly Property cbLiveStatusRewind() As String
+            Get
+                Return ResourceManager.GetString("cbLiveStatusRewind", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Good - 504p - 950Mb/hour.
         '''</summary>
         Friend Shared ReadOnly Property cbQualityGood() As String
@@ -227,20 +254,38 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Ending.
+        '''  Looks up a localized string similar to Cancelled.
         '''</summary>
-        Friend Shared ReadOnly Property enumending() As String
+        Friend Shared ReadOnly Property enumcancelled() As String
             Get
-                Return ResourceManager.GetString("enumending", resourceCulture)
+                Return ResourceManager.GetString("enumcancelled", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Final.
+        '''  Looks up a localized string similar to Delayed.
         '''</summary>
-        Friend Shared ReadOnly Property enumfinal() As String
+        Friend Shared ReadOnly Property enumdelayed() As String
             Get
-                Return ResourceManager.GetString("enumfinal", resourceCulture)
+                Return ResourceManager.GetString("enumdelayed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Ended.
+        '''</summary>
+        Friend Shared ReadOnly Property enumended() As String
+            Get
+                Return ResourceManager.GetString("enumended", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to In progress.
+        '''</summary>
+        Friend Shared ReadOnly Property enumending() As String
+            Get
+                Return ResourceManager.GetString("enumending", resourceCulture)
             End Get
         End Property
         
@@ -250,6 +295,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property enuminprogress() As String
             Get
                 Return ResourceManager.GetString("enuminprogress", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Final.
+        '''</summary>
+        Friend Shared ReadOnly Property enumofftheair() As String
+            Get
+                Return ResourceManager.GetString("enumofftheair", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Postponed.
+        '''</summary>
+        Friend Shared ReadOnly Property enumpostponed() As String
+            Get
+                Return ResourceManager.GetString("enumpostponed", resourceCulture)
             End Get
         End Property
         
@@ -268,6 +331,33 @@ Namespace My.Resources
         Friend Shared ReadOnly Property enumscheduled() As String
             Get
                 Return ResourceManager.GetString("enumscheduled", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Final.
+        '''</summary>
+        Friend Shared ReadOnly Property enumstreamended() As String
+            Get
+                Return ResourceManager.GetString("enumstreamended", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to To Be Determined.
+        '''</summary>
+        Friend Shared ReadOnly Property enumtobedetermined() As String
+            Get
+                Return ResourceManager.GetString("enumtobedetermined", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Undefined.
+        '''</summary>
+        Friend Shared ReadOnly Property enumundefined() As String
+            Get
+                Return ResourceManager.GetString("enumundefined", resourceCulture)
             End Get
         End Property
         
@@ -400,9 +490,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Warning: Starting stream failed. Make sure your player and streamer are set or try to use a different quality in settings, so it will try another stream..
         '''</summary>
-        Friend Shared ReadOnly Property errorStreamFailed() As String
+        Friend Shared ReadOnly Property errorStreamFailedCantRead() As String
             Get
-                Return ResourceManager.GetString("errorStreamFailed", resourceCulture)
+                Return ResourceManager.GetString("errorStreamFailedCantRead", resourceCulture)
             End Get
         End Property
         
@@ -695,6 +785,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Rewind (live stream).
+        '''</summary>
+        Friend Shared ReadOnly Property lblLiveRewind() As String
+            Get
+                Return ResourceManager.GetString("lblLiveRewind", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to {0} minutes behind live stream.
+        '''</summary>
+        Friend Shared ReadOnly Property lblLiveRewindDetails() As String
+            Get
+                Return ResourceManager.GetString("lblLiveRewindDetails", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Ad detection.
         '''</summary>
         Friend Shared ReadOnly Property lblModules() As String
@@ -731,6 +839,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Camera view {0}.
+        '''</summary>
+        Friend Shared ReadOnly Property lblMultiAngleCam() As String
+            Get
+                Return ResourceManager.GetString("lblMultiAngleCam", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to National stream.
         '''</summary>
         Friend Shared ReadOnly Property lblNationalNetwork() As String
@@ -754,6 +871,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property lblNoStreamAvailable() As String
             Get
                 Return ResourceManager.GetString("lblNoStreamAvailable", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Now.
+        '''</summary>
+        Friend Shared ReadOnly Property lblNow() As String
+            Get
+                Return ResourceManager.GetString("lblNow", resourceCulture)
             End Get
         End Property
         
@@ -1523,6 +1649,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Add to recordings.
+        '''</summary>
+        Friend Shared ReadOnly Property tipAddRecord() As String
+            Get
+                Return ResourceManager.GetString("tipAddRecord", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Broken stream.
         '''</summary>
         Friend Shared ReadOnly Property tipBrokenStream() As String
@@ -1606,9 +1741,27 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Live.
         '''</summary>
-        Friend Shared ReadOnly Property tipLiveGame() As String
+        Friend Shared ReadOnly Property tipLiveStatusLive() As String
             Get
-                Return ResourceManager.GetString("tipLiveGame", resourceCulture)
+                Return ResourceManager.GetString("tipLiveStatusLive", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Replay.
+        '''</summary>
+        Friend Shared ReadOnly Property tipLiveStatusReplay() As String
+            Get
+                Return ResourceManager.GetString("tipLiveStatusReplay", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Rewind {0} min.
+        '''</summary>
+        Friend Shared ReadOnly Property tipLiveStatusRewind() As String
+            Get
+                Return ResourceManager.GetString("tipLiveStatusRewind", resourceCulture)
             End Get
         End Property
         
@@ -1627,6 +1780,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property tipMonthRight() As String
             Get
                 Return ResourceManager.GetString("tipMonthRight", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Added to recordings.
+        '''</summary>
+        Friend Shared ReadOnly Property tipRecording() As String
+            Get
+                Return ResourceManager.GetString("tipRecording", resourceCulture)
             End Get
         End Property
         
