@@ -199,7 +199,7 @@
     <Compile Include="Controls\OneRecordControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="English.Designer.vb">
+    <Compile Include="English1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>English.resx</DependentUpon>
