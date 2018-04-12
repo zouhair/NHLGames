@@ -1,18 +1,19 @@
 ﻿Imports System.Runtime.InteropServices
+Imports System.Threading
 
 Namespace Utilities
     Public Class NativeMethods
-
         <DllImport("user32.dll")>
         Private Shared Function ReleaseCapture() As Boolean
         End Function
 
         <DllImport("user32.dll")>
-        Private Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+        Private Shared Function SendMessage(hWnd As IntPtr, msg As Integer, wParam As IntPtr, lParam As IntPtr) _
+            As IntPtr
         End Function
 
         <DllImport("user32.dll")>
-        Private Shared Function SetForegroundWindow(ByVal point As IntPtr) As Boolean
+        Private Shared Function SetForegroundWindow(point As IntPtr) As Boolean
         End Function
 
         <DllImport("user32.dll")>
@@ -28,18 +29,19 @@ Namespace Utilities
         End Function
 
         <DllImport("user32.dll")>
-        Private Shared Sub keybd_event(ByVal bVk As Byte, ByVal bScan As Byte, ByVal dwFlags As UInteger, ByVal dwExtraInfo As UIntPtr)
+        Private Shared Sub keybd_event(bVk As Byte, bScan As Byte, dwFlags As UInteger, dwExtraInfo As UIntPtr)
         End Sub
 
         Public Shared Function ReleaseCaptureOfForm() As Boolean
             Return ReleaseCapture()
         End Function
 
-        Public Shared Function SendMessageToHandle(ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+        Public Shared Function SendMessageToHandle(hWnd As IntPtr, msg As Integer, wParam As IntPtr, lParam As IntPtr) _
+            As IntPtr
             Return SendMessage(hWnd, msg, wParam, lParam)
         End Function
 
-        Public Shared Sub PressKey(ByVal keyCode As Byte)
+        Public Shared Sub PressKey(keyCode As Byte)
             keybd_event(KeyCode, &H45, &H01, 0)
             keybd_event(KeyCode, &H45, &H02, 0)
         End Sub
@@ -47,7 +49,7 @@ Namespace Utilities
         Public Shared Function SetForegroundWindowFromHandle(hWnd As IntPtr) As Boolean
             If IsIconic(hWnd) Then
                 ShowWindow(hWnd, ShowWindowCode.SW_RESTORE)
-                Threading.Thread.Sleep(50)
+                Thread.Sleep(50)
             End If
             Return SetForegroundWindow(hWnd)
         End Function
@@ -63,6 +65,5 @@ Namespace Utilities
         Public Shared Function GetForegroundWindowFromHandle() As IntPtr
             Return GetForegroundWindow()
         End Function
-       
     End Class
 End Namespace

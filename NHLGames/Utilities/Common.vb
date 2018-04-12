@@ -1,17 +1,18 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Text
 Imports NHLGames.My.Resources
 
 Namespace Utilities
     Public Class Common
-
         Public Const UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+
         Public Const Timeout = 10000
 
-        Public Shared Function GetRandomString(ByVal intLength As Integer)
+        Public Shared Function GetRandomString(intLength As Integer)
             Const s = "abcdefghijklmnopqrstuvwxyz0123456789"
             Dim r As New Random
-            Dim sb As New Text.StringBuilder
+            Dim sb As New StringBuilder
 
             For i = 1 To intLength
                 Dim idx As Integer = r.Next(0, 35)
@@ -20,11 +21,11 @@ Namespace Utilities
 
             Return sb.ToString()
         End Function
-        
+
         Public Shared Function SetHttpWebRequest(address As String) As HttpWebRequest
-            Dim defaultHttpWebRequest As HttpWebRequest = CType(WebRequest.Create(New Uri(address)), HttpWebRequest)
+            Dim defaultHttpWebRequest = CType(WebRequest.Create(New Uri(address)), HttpWebRequest)
             defaultHttpWebRequest.UserAgent = UserAgent
-            defaultHttpWebRequest.Method = WebRequestMethods.Http.Get
+            defaultHttpWebRequest.Method = WebRequestMethods.Http.Head
             defaultHttpWebRequest.Proxy = WebRequest.DefaultWebProxy
             defaultHttpWebRequest.ContentType = "text/plain"
             defaultHttpWebRequest.CookieContainer = New CookieContainer()
@@ -37,15 +38,15 @@ Namespace Utilities
             Return defaultHttpWebRequest
         End Function
 
-        Public Shared Function SendWebRequest(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Boolean
+        Public Shared Function SendWebRequest(address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Boolean
             If address Is Nothing AndAlso httpWebRequest Is Nothing Then Return False
 
             Dim myHttpWebRequest As HttpWebRequest
-            Dim result As Boolean = False
+            Dim result = False
 
             If httpWebRequest Is Nothing Then
                 myHttpWebRequest = SetHttpWebRequest(address)
-            Else 
+            Else
                 myHttpWebRequest = httpWebRequest
             End If
 
@@ -59,20 +60,20 @@ Namespace Utilities
             Return result
         End Function
 
-        Public Shared Async Function SendWebRequestAsync(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Task(Of Boolean)
+        Public Shared Async Function SendWebRequestAsync(address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Task(Of Boolean)
             If address Is Nothing AndAlso httpWebRequest Is Nothing Then Return False
 
             Dim myHttpWebRequest As HttpWebRequest
-            Dim result As Boolean = False
+            Dim result = False
 
             If httpWebRequest Is Nothing Then
                 myHttpWebRequest = SetHttpWebRequest(address)
-            Else 
+            Else
                 myHttpWebRequest = httpWebRequest
             End If
 
             Try
-                Using myHttpWebResponse As HttpWebResponse = Await myHttpWebRequest.GetResponseAsync()
+                Using myHttpWebResponse As HttpWebResponse = Await myHttpWebRequest.GetResponseAsync().ConfigureAwait(false)
                     result = (myHttpWebResponse.StatusCode = HttpStatusCode.OK)
                 End Using
             Catch
@@ -81,18 +82,20 @@ Namespace Utilities
             Return result
         End Function
 
-        Public Shared Async Function SendWebRequestAndGetContentAsync(ByVal address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Task(Of String)
+        Public Shared Async Function SendWebRequestAndGetContentAsync(address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Task(Of String)
             Dim content = New MemoryStream()
             Dim myHttpWebRequest As HttpWebRequest
 
             If httpWebRequest Is Nothing Then
                 myHttpWebRequest = SetHttpWebRequest(address)
-            Else 
+                myHttpWebRequest.Method = WebRequestMethods.Http.Get
+            Else
                 myHttpWebRequest = httpWebRequest
+                myHttpWebRequest.Method = WebRequestMethods.Http.Get
             End If
 
             Try
-                Using myHttpWebResponse As HttpWebResponse = Await myHttpWebRequest.GetResponseAsync()
+                Using myHttpWebResponse As HttpWebResponse = Await myHttpWebRequest.GetResponseAsync().ConfigureAwait(false)
                     If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
                         Using reader As Stream = myHttpWebResponse.GetResponseStream()
                             reader.CopyTo(content)
@@ -104,65 +107,55 @@ Namespace Utilities
                 Return String.Empty
             End Try
 
-            Dim result = Text.Encoding.UTF8.GetString(content.ToArray())
+            Dim result = Encoding.UTF8.GetString(content.ToArray())
             content.Dispose()
 
             Return result
         End Function
 
         Public Shared Sub GetLanguage()
-            Dim lang = ApplicationSettings.Read(Of String)(SettingsEnum.SelectedLanguage, "English")
+            Dim lang = ApplicationSettings.Read (Of String)(SettingsEnum.SelectedLanguage, "English")
 
-            If lang = NHLGamesMetro.RmText.GetString("lblEnglish") Then
+            If lang = NHLGamesMetro.RmText.GetString("cbEnglish") Then
                 NHLGamesMetro.RmText = English.ResourceManager
-            ElseIf lang = NHLGamesMetro.RmText.GetString("lblFrench") Then
+            ElseIf lang = NHLGamesMetro.RmText.GetString("cbFrench") Then
                 NHLGamesMetro.RmText = French.ResourceManager
             End If
         End Sub
 
         Public Async Shared Function CheckAppCanRun() As Task(Of Boolean)
+            Dim errorMessage = String.Empty
             If NHLGamesMetro.ServerIp.Equals(String.Empty) Then
-                FatalError(NHLGamesMetro.RmText.GetString("noGameServer"))
-                Return False
+                errorMessage = "noGameServer"
+            ElseIf Not Await SendWebRequestAsync("https://www.google.com") Then
+                errorMessage = "noWebAccess"
+            ElseIf Not Await InitializeForm.VersionCheck() Then
+                errorMessage = "noAppServer"
             End If
-            If Not Await SendWebRequestAsync("https://www.google.com") Then
-                FatalError(NHLGamesMetro.RmText.GetString("noWebAccess"))
-                Return False
+            If Not errorMessage.Equals(String.Empty) Then
+                FatalError(NHLGamesMetro.RmText.GetString(errorMessage))
+                Console.WriteLine($"Status: {English.ResourceManager.GetString(errorMessage)}")
             End If
-            If Not Await InitializeForm.VersionCheck() Then
-                FatalError(NHLGamesMetro.RmText.GetString("noAppServer"))
-                Return False
-            End If
-            Return True
+            Return errorMessage.Equals(String.Empty)
         End Function
 
         Public Shared Sub SetRedirectionServerInApp()
             NHLGamesMetro.HostName = NHLGamesMetro.FormInstance.cbServers.SelectedItem.ToString()
-
-            If NHLGamesMetro.HostName.Equals(String.Empty) Then
-                NHLGamesMetro.ServerIp = String.Empty
-            Else
-                Try
-                    NHLGamesMetro.ServerIp = Dns.GetHostEntry(NHLGamesMetro.HostName).AddressList.First.ToString()
-                Catch ex As Exception
-                    NHLGamesMetro.ServerIp = String.Empty
-                End Try
-            End If
-
-            NHLGamesMetro.HostNameResolved = HostsFile.TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp)
+            HostsFile.SetServerIp()
+            NHLGamesMetro.HostNameResolved = HostsFile.TestEntry()
             ApplicationSettings.SetValue(SettingsEnum.SelectedServer, NHLGamesMetro.FormInstance.cbServers.SelectedItem.ToString())
         End Sub
 
         Public Shared Sub CheckHostsFile
-            If (HostsFile.TestEntry(NHLGamesMetro.DomainName, NHLGamesMetro.ServerIp) = False) Then
+            If (HostsFile.TestEntry() = False) Then
                 If HostsFile.EnsureAdmin() Then
-                    If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgHostnameSet"), 
-                                                NHLGamesMetro.RmText.GetString("msgAddHost"), 
+                    If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgHostnameSet"),
+                                                NHLGamesMetro.RmText.GetString("msgAddHost"),
                                                 MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                        HostsFile.AddEntry(NHLGamesMetro.ServerIp,  NHLGamesMetro.DomainName, False)
+                        HostsFile.AddEntry(False)
                     End If
                 End If
-            Else 
+            Else
                 NHLGamesMetro.HostNameResolved = True
             End If
         End Sub
@@ -174,6 +167,5 @@ Namespace Utilities
                 NHLGamesMetro.FormInstance.Close
             End If
         End Sub
-
     End Class
 End Namespace

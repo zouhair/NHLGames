@@ -6,12 +6,13 @@ Imports Newtonsoft.Json.Linq
 Imports NHLGames.My.Resources
 
 Namespace Utilities
-
     Public Class Downloader
-
         Private Const AppUrl As String = "https://showtimes.ninja/"
         Private Const ApiUrl As String = "http://statsapi.web.nhl.com/api/v1/schedule"
-        Private Const ScheduleApiurl As String = ApiUrl & "?startDate={0}&endDate={1}&expand=schedule.teams,schedule.linescore,schedule.game.seriesSummary,schedule.game.content.media.epg"
+
+        Private Const ScheduleApiurl As String = ApiUrl &
+            "?startDate={0}&endDate={1}&expand=schedule.teams,schedule.linescore,schedule.game.seriesSummary,schedule.game.content.media.epg"
+
         Private Const AppVersionUrl As String = AppUrl & "static/version.txt"
         Private Const AppChangelogUrl As String = AppUrl & "static/changelog.txt"
         Private Const AppAnnouncementUrl As String = AppUrl & "static/announcement.txt"
@@ -52,7 +53,7 @@ Namespace Utilities
 
             Dim data = Await Common.SendWebRequestAndGetContentAsync(url)
 
-            If data.Equals(String.Empty) Then 
+            If data.Equals(String.Empty) Then
                 Console.WriteLine(English.msgServerSeemsDown, ApiUrl)
                 Return New JObject()
             End If
@@ -63,6 +64,5 @@ Namespace Utilities
 
             Return returnValue
         End Function
-
     End Class
 End Namespace

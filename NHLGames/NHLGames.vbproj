@@ -187,6 +187,18 @@
     <Compile Include="Controls\GameControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\SetRecordControl.Designer.vb">
+      <DependentUpon>SetRecordControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SetRecordControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OneRecordControl.Designer.vb">
+      <DependentUpon>OneRecordControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OneRecordControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="English.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -251,16 +263,23 @@
     <EmbeddedResource Include="Controls\GameControl.resx">
       <DependentUpon>GameControl.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SetRecordControl.resx">
+      <DependentUpon>SetRecordControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OneRecordControl.resx">
+      <DependentUpon>OneRecordControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="French.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>French.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="English.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>English.Designer.vb</LastGenOutput>
+      <LastGenOutput>English1.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="NHLGamesMetro.resx">
       <DependentUpon>NHLGamesMetro.vb</DependentUpon>
@@ -365,7 +384,6 @@
     <EmbeddedResource Include="broadcasters\wgn.gif" />
     <None Include="Icons\close.gif" />
     <None Include="Icons\helpgit.gif" />
-    <None Include="Icons\live.gif" />
     <None Include="Icons\nhltv.gif" />
     <None Include="Icons\refc.gif" />
     <None Include="Icons\sixc.gif" />
@@ -398,6 +416,23 @@
   <ItemGroup>
     <None Include="Icons\nhl.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icons\anglec.gif" />
+    <EmbeddedResource Include="Icons\baddrecord.png" />
+    <EmbeddedResource Include="Icons\brecording.png" />
+    <EmbeddedResource Include="Icons\live0.png" />
+    <EmbeddedResource Include="Icons\live1.png" />
+    <EmbeddedResource Include="Icons\live2.png" />
+    <EmbeddedResource Include="Icons\waddrecord.png" />
+    <None Include="Icons\mpc-hc.gif" />
+    <None Include="Icons\mpv.gif" />
+    <None Include="Icons\vlc.gif" />
+    <Content Include="Icons\wdatew.png" />
+    <Content Include="Icons\wrecord.png" />
+    <EmbeddedResource Include="Icons\wrecording.png" />
+    <Content Include="Icons\wrefreshw.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

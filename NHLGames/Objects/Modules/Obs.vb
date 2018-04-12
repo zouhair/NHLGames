@@ -1,25 +1,29 @@
-﻿Imports NHLGames.My.Resources
+﻿Imports System.Threading
+Imports NHLGames.My.Resources
 Imports NHLGames.Utilities
 
 Namespace Objects.Modules
     Public Class Obs
         Implements IAdModule
-        Public HotkeyAd As Hotkey = New Hotkey()
-        Public HotkeyGame As Hotkey = New Hotkey()
+        Public ReadOnly HotkeyAd As Hotkey = New Hotkey()
+        Public ReadOnly HotkeyGame As Hotkey = New Hotkey()
         Private _obsHandle As IntPtr?
         Private _obsIdProcess As Integer
 
         Private Function IsHotkeyAdSet As Boolean
             Return HotkeyAd.Key <> vbNullChar
         End Function
+
         Private Function IsHotkeyAdHasSpecialKeys As Boolean
             Return HotkeyAd.Ctrl OrElse HotkeyAd.Alt OrElse HotkeyAd.Shift
         End Function
+
         Private Function IsHotkeyGameSet As Boolean
             Return HotkeyGame.Key <> vbNullChar
         End Function
+
         Private Function IsHotkeyGameHasSpecialKeys As Boolean
-            Return HotkeyGame.Ctrl OrElse  HotkeyGame.Alt OrElse HotkeyGame.Shift
+            Return HotkeyGame.Ctrl OrElse HotkeyGame.Alt OrElse HotkeyGame.Shift
         End Function
 
         Public Sub New()
@@ -48,7 +52,7 @@ Namespace Objects.Modules
             End If
 
             Dim toSend = String.Empty
-            
+
             If hotkey.Ctrl Then
                 toSend &= "^"
             End If
@@ -61,14 +65,14 @@ Namespace Objects.Modules
 
             If specialKey Then
                 toSend &= "{" & hotkey.Key & "}"
-            Else 
+            Else
                 toSend &= hotkey.Key
             End If
 
             If Not String.IsNullOrEmpty(toSend) Then
                 If _obsHandle Is Nothing Then
                     HookObs()
-                Else 
+                Else
                     Try
                         Process.GetProcessById(_obsIdProcess)
                     Catch ex As Exception
@@ -79,7 +83,7 @@ Namespace Objects.Modules
                 Dim curr? = NativeMethods.GetForegroundWindowFromHandle()
                 Console.WriteLine(English.msgObsChangingScene, scene)
                 NativeMethods.SetForegroundWindowFromHandle(_obsHandle)
-                Threading.Thread.Sleep(50)
+                Thread.Sleep(50)
                 SendKeys.SendWait(toSend)
                 NativeMethods.SetBackgroundWindowFromHandle(_obsHandle)
                 NativeMethods.SetForegroundWindowFromHandle(curr)
@@ -88,8 +92,8 @@ Namespace Objects.Modules
 
         Private Sub HookObs()
             Dim processNames = new List(Of string) From {"obs32", "obs64"}
-            Dim processes  As Process()
-            For i = 0 To processNames.Count -1
+            Dim processes As Process()
+            For i = 0 To processNames.Count - 1
                 processes = Process.GetProcessesByName(processNames(i))
                 If processes.Length <> 0 Then
                     _obsHandle = processes(0).MainWindowHandle
@@ -97,6 +101,5 @@ Namespace Objects.Modules
                 End If
             Next
         End Sub
-
     End Class
 End Namespace

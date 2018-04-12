@@ -21,18 +21,22 @@ Enjoy!
       * [Game panel](#game-panel)
    * [Settings](#settings)
      * [Customize game panels](#customize-game-panels)
-     * [Language](#language)
      * [Stream Quality](#stream-quality)
+     * [Replay and Rewind](#replay-and-rewind)
      * [Content Delivery Network (CDN)](#content-delivery-network-cdn)
      * [Server's Hostname](#servers-hostname)
      * [Server Hosts Entry](#server-hosts-entry)
      * [Players](#players)
      * [Streamer](#streamer)
+     * [Language](#language)
      * [Arguments](#arguments)
      * [Ad Detection](#ad-detection)
    * [Console](#console)
 * [Support](#support)
 * [Chromecast](#chromecast)
+  * [VLC 3.0](#vlc-30)
+  * [Google Chrome](#google-chrome)
+* [Phones and TVs](#phones-and-tvs)
 * [Contribute](#contribute)
 * [Donation](#donation)
 * [Download](#download)
@@ -47,7 +51,7 @@ NHLGames is an app built on .NET Framework 4.5. So, it's only available on Windo
 First time you start NHLGames it will ask if you wish to view the Hosts file. That means the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [Server Hosts Entry](#server-hosts-entry) section.
 
 ## //_Is this app safe?_
-So, you might wonder if this application is safe. You can look at our code to find out by yourself, you will see the reason why anti-virus don't like us. We modify your hosts file in Windows/System32/drivers/etc/ and we do that to make sure that the app will be able to get the stream links for games that are available. The other reason is that the app sends web request to a server that might be blacklisted. But don't worry, this server only responds with plain text.
+Yes, it is. You can look at our code to find out by yourself, you will see the reason why anti-virus don't like us. We modify your hosts file in Windows/System32/drivers/etc/ and we do that to make sure that the app will be able to get the stream links for games that are available. The other reason is that the app sends web request to a server that might be blacklisted. But don't worry, this server only responds with plain text.
 
 ## //_Setup_
 To be able to play streams properly, you have to choose a media player in the ![image](https://user-images.githubusercontent.com/23088305/32304695-9589db88-bf47-11e7-9af5-867c8db0d4a3.png) tab. Make sure the player that you choose has a valid path to the EXE file.
@@ -92,13 +96,6 @@ NHLGames gives you some options to change how a game panel will appear.
 *Teams city abbreviation*: If on, it shows team city abbreviation under the team logo, like: MTL   
 *Live games first*: If on, games list will be ordered by live games first
 
-### ///_Language_
-NHLGames supports two languages: English and French.
-More can be added, but we are waiting for contributions.
-
-Contribute:
-> If you want to contribute. Translate the file `NHLGames/NHLGames/English.resx`. It can be modified in Visual Studio, remove any lines tagged as Console lines (these are not translated), rename the file and open a Pull Request.
-
 ### ///_Stream Quality_
 The selected value will defined which quality will be sent to your media player, from the worst to the best quality. Selecting the highest quality also means bigger files to download :
 - Excellent: 720p or better at 60fps ~2.50 Gb/hr
@@ -108,6 +105,15 @@ The selected value will defined which quality will be sent to your media player,
 - Normal: 360p ~700 Mb/hr
 - Low: 228p ~500 Mb/hr
 - Mobile: 224p or worst ~300/hr
+
+### ///_Replay and Rewind_
+The Replay/Rewind feature is only available for Live games. If you see a blue game panel with a red live icon in the left corner, you can click on it once to turn on Rewind and twice to turn on Replay. It will go back to default (Live) if clicked three times. 
+
+![image](https://user-images.githubusercontent.com/23088305/35660550-a8ccfe3e-06da-11e8-974c-141f6d3b3d31.gif)
+
+If you use the replay or rewind feature and you want to change the default behaviour, you can set your preferences here.
+- Live Replay: If Replay is enabled, it will start the stream from the selected value.
+- Live Rewind: If Rewind is enabled, it will use the value to set the stream x minutes behind the live stream.
 
 ### ///_Content Delivery Network (CDN)_
 NHLGames uses by default Akamai CDN, but Level 3 can be activated by turn on the alternate network in settings.
@@ -174,6 +180,13 @@ If your antivirus or Windows Defender removes the streamer, try to install anoth
 
 If you find one that works great for you, keep it, you will just have to change the path in settings when a new update of NHLGames will come out.
 
+### ///_Language_
+NHLGames supports two languages: English and French.
+More can be added, but we are waiting for contributions.
+
+Contribute:
+> If you want to contribute. Translate the file `NHLGames/NHLGames/English.resx`. It can be modified in Visual Studio, remove any lines tagged as Console lines (these are not translated), rename the file and open a Pull Request.
+
 ### ///_Arguments_
 If you wish to customise the way your player or the streamer opens, turn on one of these options and add your arguments:
 - Player args : If you want to add more arguments (commands) to be sent to your media player with the default args that NHLGames send.
@@ -193,8 +206,12 @@ Go to this tab to see everything that NHLGames does. Also, any error or warning 
 Having an issue with NHLGames? Head to our [Wiki](https://github.com/NHLGames/NHLGames/wiki) to find a fix. Look at the side bar, on the right, to navigate between known issues. If you can't find it, feel free to open an [issue](https://github.com/NHLGames/NHLGames/issues).
 
 # /_Chromecast_
-NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps if you want to play the game on your TV.
+NHLGames doesn't support Chromecast, but VLC 3.0 player and Google Chrome does. Follow these steps if you want to play the game on your TV.
 
+## //_VLC 3.0_
+![image](https://user-images.githubusercontent.com/23088305/37436787-15ef5fe2-27c0-11e8-8a47-b0a25b40a598.png)
+
+## //_Google Chrome_
 ![image](https://cloud.githubusercontent.com/assets/23088305/25557771/3570cf2a-2ce6-11e7-980a-b605b93c66dc.png)
 
 3. Select a pc monitor you want to share. Make sure audio share is checked.
@@ -204,6 +221,13 @@ NHLGames doesn't support Chromecast, but Google Chrome does. Follow these steps 
 4. Use NHLGames to get a stream, once the game plays, move the media player window to the right monitor and enjoy the show.
 
 <img src="https://cloud.githubusercontent.com/assets/23088305/25556617/a6caab1e-2ccd-11e7-89d3-c9177a997ed1.png" width="300"/>
+
+# /_Phones and TVs_
+You can redirect the stream over the Internet by using VLC player output and host it.   
+Open NHLGames, go to settings, select VLC as your default and turn on player args.    
+Type `--sout=#http{mux=ts,dst=:8080/stream}`.   
+Click on a stream, VLC should open after accepting new configs to your firewall.   
+Go on your phone and use a player such as *MPV Mobile App* to open the link `ip:8080/stream` replace `ip` by your external ip (internet/WAN) (google `my ip`) or by your internal ip (local/LAN) (cmd.exe `ipconfig`)
 
 # /_Contribute_
 NHLGames is coded in VB.NET using Visual Studio and .Net Framework 4.5. If you want to contribute : [Follow the guidelines](CONTRIBUTING.md)

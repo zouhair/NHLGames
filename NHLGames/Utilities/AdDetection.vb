@@ -1,13 +1,13 @@
 ﻿Imports System.Collections.ObjectModel
+Imports System.Threading
 Imports NAudio.CoreAudioApi
 Imports NHLGames.My.Resources
 Imports NHLGames.Objects.Modules
 
 Namespace Utilities
     Public Class AdDetection
-        
         Private _mediaPlayerProcesses As List(Of Integer)
-        Private _adModules As List(Of IAdModule) = new List(Of IAdModule)
+        Private ReadOnly _adModules As List(Of IAdModule) = new List(Of IAdModule)
         Private _previousAdPlayingState As Boolean
         Private _firstAdCheck As Boolean
         Private _initializationTasks As List(Of Task)
@@ -15,33 +15,25 @@ Namespace Utilities
         Private ReadOnly _lastSoundTime As Dictionary(Of Integer, DateTime) = new Dictionary(Of Integer, DateTime)
 
         Private Property RequiredSilenceMilliseconds As Integer = 500
-        Public ReadOnly Property PollPeriodMilliseconds As Integer = 500
-        Public Property DetectionEnabled() As Boolean
-        Public ReadOnly Property MediaPlayerProcesses As ReadOnlyCollection(Of Integer)
+        Private ReadOnly Property PollPeriodMilliseconds As Integer = 500
+        Private Property DetectionEnabled As Boolean
+
+        Private ReadOnly Property MediaPlayerProcesses As ReadOnlyCollection(Of Integer)
             Get
                 Return new ReadOnlyCollection(of Integer)(_mediaPlayerProcesses)
             End Get
-        End Property
-
-        Public Property AdModulesList As List(Of IAdModule)
-            Get
-                Return _adModules
-            End Get
-            Set(value As List(Of IAdModule))
-                _adModules = value
-            End Set
         End Property
 
         Public Property IsEnabled As Boolean
             Get
                 Return DetectionEnabled
             End Get
-            Set(value As Boolean)
+            Set
                 DetectionEnabled = value
             End Set
         End Property
 
-        Public Function IsAdCurrentlyPlaying() As Boolean
+        Private Function IsAdCurrentlyPlaying() As Boolean
             Dim closedProcesses = _lastSoundTime.Keys.Where(Function(x) Not MediaPlayerProcesses.Contains(x)).ToList()
             Dim newProcesses = MediaPlayerProcesses.Where(Function(x) Not _lastSoundTime.Keys.Contains(x)).ToList()
 
@@ -65,24 +57,25 @@ Namespace Utilities
         Private Sub AddOrUpdateLastSoundOccured(processId As Integer)
             If _lastSoundTime.ContainsKey(processId) Then
                 _lastSoundTime(processId) = DateTime.Now
-            Else 
+            Else
                 _lastSoundTime.Add(processId, DateTime.MinValue)
             End If
         End Sub
 
-        Public Shared Function GetCurrentVolume(processId As Integer) As Double
+        Private Shared Function GetCurrentVolume(processId As Integer) As Double
             Dim aMmDevices As New MMDeviceEnumerator()
             Dim defaultAudioEndPointDevice = aMmDevices.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia)
             Dim sessionsDefaultAudioEndPointDevice = defaultAudioEndPointDevice.AudioSessionManager.Sessions
             For i = 0 To sessionsDefaultAudioEndPointDevice.Count - 1
                 If sessionsDefaultAudioEndPointDevice(i).GetProcessID <> processId Then Continue For
-                Dim volumeList As List(Of Double) = new List(Of Double)
+                Dim volumeList = new List(Of Double)
                 For j = 0 To 1
-                    Dim audioMeter As audioMeterInformation = sessionsDefaultAudioEndPointDevice(i).AudioMeterInformation
-                    volumeList.Add( audioMeter.MasterPeakValue)
-                    Threading.Thread.Sleep(100)
+                    Dim audioMeter As audioMeterInformation =
+                            sessionsDefaultAudioEndPointDevice(i).AudioMeterInformation
+                    volumeList.Add(audioMeter.MasterPeakValue)
+                    Thread.Sleep(100)
                 Next
-                Return (volumeList.Item(0) + volumeList.Item(1)) / 2.0
+                Return (volumeList.Item(0) + volumeList.Item(1))/2.0
             Next
             Return 0.0
         End Function
@@ -97,7 +90,7 @@ Namespace Utilities
             SyncLock _adModules
                 _adModules.Add(m)
                 Return Task.Run(Sub()
-                                    m.Initialize()
+                    m.Initialize()
                                 End Sub)
             End SyncLock
         End Function
@@ -125,12 +118,12 @@ Namespace Utilities
                     Dim m = adModule
                     If _previousAdPlayingState Then
                         Task.Run(Sub()
-                                     m.AdStarted()
+                            m.AdStarted()
                                  End Sub)
-                    Else 
+                    Else
                         Task.Run(Sub()
                             m.AdEnded()
-                                End Sub)
+                                 End Sub)
                     End If
                 Next
             End SyncLock
@@ -156,20 +149,26 @@ Namespace Utilities
                         NotifyModules()
                     End If
                 Catch ex As Exception
-                    Console.WriteLine(English.msgAdDetectionException,ex.Message)
+                    Console.WriteLine(English.msgAdDetectionException, ex.Message)
                 End Try
             End While
         End Sub
-  
+
         Private Function IsMediaPlayerCurrentlyPlaying() As Boolean
-            Dim vlcProcesses = Process.GetProcessesByName("vlc").Where(Function(x) x.MainWindowTitle = "fd://0 - VLC media player" OrElse x.MainWindowTitle.ToLower().Contains(" @ ")).Select(Function(x) x.Id)
-            Dim mpc64Processes = Process.GetProcessesByName("MPC-HC64").Where(Function(x) x.MainWindowTitle = "stdin" OrElse x.MainWindowTitle.ToLower().Contains(" @ ")).Select(Function(x) x.Id)
-            Dim mpc32Processes = Process.GetProcessesByName("MPC-HC").Where(Function(x) x.MainWindowTitle = "stdin" OrElse x.MainWindowTitle.ToLower().Contains(" @ ")).Select(Function(x) x.Id)
+            Dim vlcProcesses = Process.GetProcessesByName("vlc").Where(
+                Function(x) x.MainWindowTitle = "fd://0 - VLC media player" OrElse x.MainWindowTitle.ToLower().Contains(" @ ")).
+                Select(Function(x) x.Id)
+            Dim mpc64Processes = Process.GetProcessesByName("MPC-HC64").Where(
+                Function(x) x.MainWindowTitle = "stdin" OrElse x.MainWindowTitle.ToLower().Contains(" @ ")).
+                Select(Function(x) x.Id)
+            Dim mpc32Processes = Process.GetProcessesByName("MPC-HC").Where(
+                Function(x) x.MainWindowTitle = "stdin" OrElse x.MainWindowTitle.ToLower().Contains(" @ ")).
+                Select(Function(x) x.Id)
             Dim mpvProcesses = Process.GetProcessesByName("mpv").Select(Function(x) x.Id)
 
             _mediaPlayerProcesses = vlcProcesses.Concat(mpc64Processes).Concat(mpc32Processes).Concat(mpvProcesses).ToList()
             return _mediaPlayerProcesses.Count <> 0
-         End Function
+        End Function
 
         Public Shared Sub Renew(Optional forceSet As Boolean = False)
             Dim form = NHLGamesMetro.FormInstance
@@ -193,9 +192,8 @@ Namespace Utilities
                 _settings.EnabledObsAdSceneHotKey.Alt = form.chkAdAlt.Checked
                 _settings.EnabledObsAdSceneHotKey.Shift = form.chkAdShift.Checked
 
-                ApplicationSettings.SetValue(SettingsEnum.AdDetection, Serialization.SerializeObject(Of AdDetectionConfigs)(_settings))
+                ApplicationSettings.SetValue(SettingsEnum.AdDetection, Serialization.SerializeObject (Of AdDetectionConfigs)(_settings))
             End If
         End Sub
-
     End Class
 End Namespace

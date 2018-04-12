@@ -1,5 +1,5 @@
-﻿Imports System.Resources
-Imports System.Reflection
+﻿Imports System.Reflection
+Imports System.Resources
 Imports System.Runtime.InteropServices
 
 ' General Information about an assembly is controlled through the following 
@@ -13,12 +13,12 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyCompany("NHLGames")>
 <Assembly: AssemblyProduct("NHLGames")>
 <Assembly: AssemblyCopyright("NHLGames")>
-<Assembly: AssemblyTrademark("NHLGames")> 
+<Assembly: AssemblyTrademark("NHLGames")>
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("a45bd884-b41d-4642-8a61-47ebb7068af0")> 
+<Assembly: Guid("a45bd884-b41d-4642-8a61-47ebb7068af0")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,6 +31,6 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.1.1.2")> 
-<Assembly: AssemblyFileVersion("1.1.1.2")>
+<Assembly: AssemblyVersion("1.2.0.0")>
+<Assembly: AssemblyFileVersion("1.2.0.0")>
 <Assembly: NeutralResourcesLanguage("en-CA")>
