@@ -12,7 +12,7 @@ Namespace Objects
             {"FRENCH", StreamTypeEnum.French},
             {"MULTI-CAM 1", StreamTypeEnum.MultiCam1}, {"MULTI-CAM 2", StreamTypeEnum.MultiCam2},
             {"ENDZONE CAM 1", StreamTypeEnum.EndzoneCam1}, {"ENDZONE CAM 2", StreamTypeEnum.EndzoneCam2},
-            {"Ref Cam", StreamTypeEnum.RefCam}, {"STAR CAM", StreamTypeEnum.StarCam},
+            {"REF CAM", StreamTypeEnum.RefCam}, {"STAR CAM", StreamTypeEnum.StarCam},
             {"ROBO CAM", StreamTypeEnum.RoboCam},
             {"MULTI-ANGLE 1", StreamTypeEnum.MultiAngle1}, {"MULTI-ANGLE 2", StreamTypeEnum.MultiAngle2},
             {"MULTI-ANGLE 3", StreamTypeEnum.MultiAngle3}}
