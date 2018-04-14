@@ -88,7 +88,7 @@ Namespace Utilities
                               End If
 
                         Return Nothing
-                    End Function))
+                              End Function))
         End Sub
     End Class
 End Namespace

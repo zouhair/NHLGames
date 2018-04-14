@@ -16,8 +16,8 @@ Namespace Utilities
                 End Try
             Next
             Return (From dirFound As Object In dirPrgFiles Where dirFound.Length <> 0
-                    Where My.Computer.FileSystem.FileExists(dirFound(0) & programPath)
-                    Select dirFound(0) & programPath).FirstOrDefault()
+                Where My.Computer.FileSystem.FileExists(dirFound(0) & programPath)
+                Select dirFound(0) & programPath).FirstOrDefault()
         End Function
 
         Private Shared Function _is64bits() As Boolean
@@ -25,7 +25,9 @@ Namespace Utilities
         End Function
 
         Public Shared Function GetPathOfVlc() As String
-            Dim path = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\vlc.exe", "", Nothing)
+            Dim path =
+                    My.Computer.Registry.GetValue(
+                        "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\vlc.exe", "", Nothing)
             If path = Nothing Then
                 path = _ProgramFiles("\VideoLAN\VLC\vlc.exe")
             End If

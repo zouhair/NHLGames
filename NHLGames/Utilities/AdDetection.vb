@@ -51,7 +51,9 @@ Namespace Utilities
                 End If
             Next
 
-            Return _lastSoundTime.Values.All(Function(x) DateTime.Now - x > TimeSpan.FromMilliseconds(RequiredSilenceMilliseconds))
+            Return _
+                _lastSoundTime.Values.All(
+                    Function(x) DateTime.Now - x > TimeSpan.FromMilliseconds(RequiredSilenceMilliseconds))
         End Function
 
         Private Sub AddOrUpdateLastSoundOccured(processId As Integer)
@@ -91,7 +93,7 @@ Namespace Utilities
                 _adModules.Add(m)
                 Return Task.Run(Sub()
                     m.Initialize()
-                                End Sub)
+                                   End Sub)
             End SyncLock
         End Function
 
@@ -119,11 +121,11 @@ Namespace Utilities
                     If _previousAdPlayingState Then
                         Task.Run(Sub()
                             m.AdStarted()
-                                 End Sub)
+                                    End Sub)
                     Else
                         Task.Run(Sub()
                             m.AdEnded()
-                                 End Sub)
+                                    End Sub)
                     End If
                 Next
             End SyncLock
@@ -156,17 +158,21 @@ Namespace Utilities
 
         Private Function IsMediaPlayerCurrentlyPlaying() As Boolean
             Dim vlcProcesses = Process.GetProcessesByName("vlc").Where(
-                Function(x) x.MainWindowTitle = "fd://0 - VLC media player" OrElse x.MainWindowTitle.ToLower().Contains(" @ ")).
-                Select(Function(x) x.Id)
+                Function(x) _
+                                                                          x.MainWindowTitle =
+                                                                          "fd://0 - VLC media player" OrElse
+                                                                          x.MainWindowTitle.ToLower().Contains(" @ ")).
+                    Select(Function(x) x.Id)
             Dim mpc64Processes = Process.GetProcessesByName("MPC-HC64").Where(
                 Function(x) x.MainWindowTitle = "stdin" OrElse x.MainWindowTitle.ToLower().Contains(" @ ")).
-                Select(Function(x) x.Id)
+                    Select(Function(x) x.Id)
             Dim mpc32Processes = Process.GetProcessesByName("MPC-HC").Where(
                 Function(x) x.MainWindowTitle = "stdin" OrElse x.MainWindowTitle.ToLower().Contains(" @ ")).
-                Select(Function(x) x.Id)
+                    Select(Function(x) x.Id)
             Dim mpvProcesses = Process.GetProcessesByName("mpv").Select(Function(x) x.Id)
 
-            _mediaPlayerProcesses = vlcProcesses.Concat(mpc64Processes).Concat(mpc32Processes).Concat(mpvProcesses).ToList()
+            _mediaPlayerProcesses =
+                vlcProcesses.Concat(mpc64Processes).Concat(mpc32Processes).Concat(mpvProcesses).ToList()
             return _mediaPlayerProcesses.Count <> 0
         End Function
 
@@ -192,7 +198,8 @@ Namespace Utilities
                 _settings.EnabledObsAdSceneHotKey.Alt = form.chkAdAlt.Checked
                 _settings.EnabledObsAdSceneHotKey.Shift = form.chkAdShift.Checked
 
-                ApplicationSettings.SetValue(SettingsEnum.AdDetection, Serialization.SerializeObject (Of AdDetectionConfigs)(_settings))
+                ApplicationSettings.SetValue(SettingsEnum.AdDetection,
+                                             Serialization.SerializeObject (Of AdDetectionConfigs)(_settings))
             End If
         End Sub
     End Class

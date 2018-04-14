@@ -66,7 +66,9 @@ Namespace Objects
             Dim literalPlayerArgs = If (UseCustomPlayerArgs, CustomPlayerArgs, String.Empty)
             Select Case PlayerType
                 Case PlayerTypeEnum.Mpv
-                    Return $"--player ""{PlayerPath} --force-window=immediate --title """"{GameTitle}"""" --user-agent=User-Agent=""""{Common.UserAgent}"""" {literalPlayerArgs} "" "
+                    Return _
+                        $"--player ""{PlayerPath} --force-window=immediate --title """"{GameTitle _
+                            }"""" --user-agent=User-Agent=""""{Common.UserAgent}"""" {literalPlayerArgs} "" "
                 Case PlayerTypeEnum.Vlc
                     Return $"--player ""{PlayerPath} --meta-title """"{GameTitle}"""" {literalPlayerArgs} "" "
                 Case PlayerTypeEnum.Mpc
@@ -77,7 +79,10 @@ Namespace Objects
 
         Private Function ReplayArgs() As String
             If GameIsOnAir Then
-                Dim preset = If (PlayerType.Equals(PlayerTypeEnum.Mpv), "--player-passthrough=hls", "--ringbuffer-size=4M --hls-segment-threads=2")
+                Dim preset =
+                        If _
+                        (PlayerType.Equals(PlayerTypeEnum.Mpv), "--player-passthrough=hls",
+                         "--ringbuffer-size=4M --hls-segment-threads=2")
                 If Not StreamLiveReplayCode.Equals(LiveStatusCodeEnum.Live) Then
                     Return $"{preset} --hls-live-edge={ReplayMinutes()} "
                 Else

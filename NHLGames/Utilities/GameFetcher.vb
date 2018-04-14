@@ -6,7 +6,7 @@ Namespace Utilities
             ResetLoadingProgress()
             NHLGamesMetro.FormInstance.spnStreaming.Visible = NHLGamesMetro.SpnStreamingVisible
             If NHLGamesMetro.SpnStreamingValue < NHLGamesMetro.FormInstance.spnStreaming.Maximum And
-                NHLGamesMetro.SpnStreamingValue >= 0 Then
+               NHLGamesMetro.SpnStreamingValue >= 0 Then
                 NHLGamesMetro.FormInstance.spnStreaming.Value = NHLGamesMetro.SpnStreamingValue
             End If
 
@@ -36,7 +36,7 @@ Namespace Utilities
             ResetStreaminProgress()
             NHLGamesMetro.FormInstance.spnLoading.Visible = NHLGamesMetro.SpnLoadingVisible
             If NHLGamesMetro.SpnLoadingValue < NHLGamesMetro.FormInstance.spnLoading.Maximum And
-                NHLGamesMetro.SpnLoadingValue >= 0 Then
+               NHLGamesMetro.SpnLoadingValue >= 0 Then
                 NHLGamesMetro.FormInstance.spnLoading.Value = NHLGamesMetro.SpnLoadingValue
             End If
 
