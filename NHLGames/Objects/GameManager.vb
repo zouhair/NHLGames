@@ -38,17 +38,17 @@ Namespace Objects
                 If numberOfGames = 0 Then Return Nothing
 
                 Dim numberOfStreams =
-                        GetNumberOfStreams(jsonSchedule.SelectToken("dates[0].games").Children (Of JObject))
+                        GetNumberOfStreams(jsonSchedule.SelectToken("dates[0].games").Children(Of JObject))
 
                 gamesArray = New Game(numberOfGames - 1) {}
                 lstStreamsTask = New Task(numberOfStreams - 1) {}
 
                 Dim progressPerGame =
                         Convert.ToInt32(
-                            ((NHLGamesMetro.SpnLoadingMaxValue - 1) - NHLGamesMetro.SpnLoadingValue)/numberOfGames)
+                            ((NHLGamesMetro.SpnLoadingMaxValue - 1) - NHLGamesMetro.SpnLoadingValue) / numberOfGames)
                 Dim currentGame As Game
 
-                For Each game As JObject In jsonSchedule.SelectToken("dates[0].games").Children (Of JObject)
+                For Each game As JObject In jsonSchedule.SelectToken("dates[0].games").Children(Of JObject)
                     currentGame = New Game()
 
                     If Not ValidJsonGame(game) Then
@@ -91,8 +91,8 @@ Namespace Objects
                                 stream.SelectToken("title").ToString().Equals("NHLTV") AndAlso
                                 stream.Property("items").Value.Count > 0 Then
                                 For Each item As JArray In stream.Property("items")
-                                    Dim progressPerStream = Convert.ToInt32(progressPerGame/item.Count)
-                                    For Each innerStream As JObject In item.Children (Of JObject)
+                                    Dim progressPerStream = Convert.ToInt32(progressPerGame / item.Count)
+                                    For Each innerStream As JObject In item.Children(Of JObject)
                                         NHLGamesMetro.SpnLoadingValue += progressPerStream
                                         Dim streamOff = innerStream.SelectToken("mediaState").ToString().Equals(MediaOff)
                                         Dim streamType As StreamTypeEnum =
@@ -106,10 +106,10 @@ Namespace Objects
                                             Dim tStreamType = streamType
                                             Dim tCurrentGameIndex = currentGameIndex
                                             Dim t = Task.Run(Async Function()
-                                                Dim newStream =
-                                                        Await SetNewGameStream(tCurrentGame, tInnerStream, tStreamType)
-                                                gamesArray(tCurrentGameIndex).StreamsDict.Add(streamType, newStream)
-                                                                End Function)
+                                                                 Dim newStream =
+                                                                         Await SetNewGameStream(tCurrentGame, tInnerStream, tStreamType)
+                                                                 gamesArray(tCurrentGameIndex).StreamsDict.Add(streamType, newStream)
+                                                             End Function)
                                             lstStreamsTask(currentStreamIndex) = t
                                         Else
                                             If Not streamOff Then
@@ -150,7 +150,7 @@ Namespace Objects
             Return (From game In gamesJson Where game.SelectToken("content.media") IsNot Nothing).
                 Sum(Function(game) _
                        (From stream As JObject In game.SelectToken("content.media.epg")
-                       Where stream.SelectToken("title").ToString().Equals("NHLTV")).
+                        Where stream.SelectToken("title").ToString().Equals("NHLTV")).
                        Sum(Function(stream) stream.Property("items").Value.Count))
         End Function
 
