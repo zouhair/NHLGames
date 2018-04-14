@@ -74,10 +74,6 @@ Namespace Controls
                                                        NHLGamesMetro.RmText.GetString($"enum{_game.GameState.ToString().ToLower()}").ToUpper())
                 End If
 
-                If (Not showLiveScores OrElse Not showSeriesRecord) And _game.GameType.Equals(GameTypeEnum.Series) Then
-                    lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPlayoffs").ToUpper()
-                End If
-
             ElseIf _game.IsOffTheAir Then
                 lblHomeScore.Visible = showScores
                 lblAwayScore.Visible = showScores
