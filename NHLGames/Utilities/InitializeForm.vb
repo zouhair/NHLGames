@@ -6,9 +6,9 @@ Imports NHLGames.Objects
 
 Namespace Utilities
     Public Class InitializeForm
-        Private ReadOnly Shared Form As NHLGamesMetro = NHLGamesMetro.FormInstance
+        Private Shared ReadOnly Form As NHLGamesMetro = NHLGamesMetro.FormInstance
 
-        Public Async Shared Function VersionCheck() As Task(Of Boolean)
+        Public Shared Async Function VersionCheck() As Task(Of Boolean)
 
             Dim latestVersion As Version = Await Downloader.DownloadApplicationVersion()
             If latestVersion.Equals(New Version()) Then Return False
@@ -30,7 +30,7 @@ Namespace Utilities
             Return True
         End Function
 
-        Private Async Shared Function AnnouncementCheck() As Task(Of Boolean)
+        Private Shared Async Function AnnouncementCheck() As Task(Of Boolean)
             Dim latestAnnouncement As String = Await Downloader.DownloadAnnouncement()
             If Not latestAnnouncement.Equals(String.Empty) Then
                 InvokeElement.MsgBoxBlue(latestAnnouncement,
@@ -41,7 +41,7 @@ Namespace Utilities
         End Function
 
         Public Shared Sub SetLanguage()
-            Dim lstHostsFileActions = New String() { _
+            Dim lstHostsFileActions = New String() {
                                                        NHLGamesMetro.RmText.GetString("cbHostsTest"),
                                                        NHLGamesMetro.RmText.GetString("cbHostsAdd"),
                                                        NHLGamesMetro.RmText.GetString("cbHostsRemove"),
@@ -50,7 +50,7 @@ Namespace Utilities
                                                        NHLGamesMetro.RmText.GetString("cbHostsLocation")
                                                    }
 
-            Dim lstStreamQualities = New String() { _
+            Dim lstStreamQualities = New String() {
                                                       NHLGamesMetro.RmText.GetString("cbQualitySuperb60fps"),
                                                       NHLGamesMetro.RmText.GetString("cbQualitySuperb"),
                                                       NHLGamesMetro.RmText.GetString("cbQualityGreat"),
@@ -60,7 +60,7 @@ Namespace Utilities
                                                       NHLGamesMetro.RmText.GetString("cbQualityMobile")
                                                   }
 
-            Dim lstLiveReplayPreferences = New String() { _
+            Dim lstLiveReplayPreferences = New String() {
                                                             NHLGamesMetro.RmText.GetString("cbLiveReplayPuckDrop"),
                                                             NHLGamesMetro.RmText.GetString("cbLiveReplayGameTime"),
                                                             NHLGamesMetro.RmText.GetString("cbLiveReplayFeedStart")
@@ -83,7 +83,7 @@ Namespace Utilities
             Form.tt.SetToolTip(Form.btnRefresh, NHLGamesMetro.RmText.GetString("tipRefresh"))
 
             'Settings
-            Dim minutesBehind = Form.tbLiveRewind.Value*5
+            Dim minutesBehind = Form.tbLiveRewind.Value * 5
             Form.lblGamePanel.Text = NHLGamesMetro.RmText.GetString("lblShowScores")
             Form.lblPlayer.Text = NHLGamesMetro.RmText.GetString("lblPlayer")
             Form.lblQuality.Text = NHLGamesMetro.RmText.GetString("lblQuality")
@@ -104,7 +104,7 @@ Namespace Utilities
             Form.lblLiveRewind.Text = NHLGamesMetro.RmText.GetString("lblLiveRewind")
             Form.lblLiveRewindDetails.Text = String.Format(
                 NHLGamesMetro.RmText.GetString("lblLiveRewindDetails"),
-                minutesBehind, Now.AddMinutes(- minutesBehind).ToString("h:mm tt", CultureInfo.InvariantCulture))
+                minutesBehind, Now.AddMinutes(-minutesBehind).ToString("h:mm tt", CultureInfo.InvariantCulture))
 
             Form.lblGamePanel.Text = NHLGamesMetro.RmText.GetString("lblGamePanel")
             Form.lblShowFinalScores.Text = NHLGamesMetro.RmText.GetString("lblShowFinalScores")
@@ -131,7 +131,7 @@ Namespace Utilities
             Form.tt.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.tt.SetToolTip(Form.btnMpvPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.tt.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
-            Form.tt.SetToolTip(Form.btnstreamerPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.tt.SetToolTip(Form.btnStreamerPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.tt.SetToolTip(Form.btnOutput, NHLGamesMetro.RmText.GetString("tipBrowse"))
 
             Form.lblModules.Text = NHLGamesMetro.RmText.GetString("lblModules")
@@ -162,13 +162,13 @@ Namespace Utilities
         End Sub
 
         Public Shared Sub SetWindow()
-            Dim windowSize = Split(ApplicationSettings.Read (Of String)(SettingsEnum.LastWindowSize, "990;655"), ";")
-            Form.Width = If (windowSize.Length = 2, Convert.ToInt32(windowSize(0)), 990)
-            Form.Height = If (windowSize.Length = 2, Convert.ToInt32(windowSize(1)), 655)
+            Dim windowSize = Split(ApplicationSettings.Read(Of String)(SettingsEnum.LastWindowSize, "990;655"), ";")
+            Form.Width = If(windowSize.Length = 2, Convert.ToInt32(windowSize(0)), 990)
+            Form.Height = If(windowSize.Length = 2, Convert.ToInt32(windowSize(1)), 655)
         End Sub
 
         Public Shared Sub SetSettings()
-            Dim lstLanguages = New String() { _
+            Dim lstLanguages = New String() {
                                                 NHLGamesMetro.RmText.GetString("cbEnglish"),
                                                 NHLGamesMetro.RmText.GetString("cbFrench")
                                             }
@@ -190,47 +190,47 @@ Namespace Utilities
                                                        Path.Combine(Application.StartupPath,
                                                                     "livestreamer\livestreamer.exe"))
 
-            Form.tgShowFinalScores.Checked = ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowScores, False)
-            Form.tgShowLiveScores.Checked = ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowLiveScores, False)
-            Form.tgShowSeriesRecord.Checked = ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowSeriesRecord, False)
-            Form.tgShowTeamCityAbr.Checked = ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowTeamCityAbr, False)
-            Form.tgShowLiveTime.Checked = ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowLiveTime, False)
+            Form.tgShowFinalScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, False)
+            Form.tgShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, False)
+            Form.tgShowSeriesRecord.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, False)
+            Form.tgShowTeamCityAbr.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, False)
+            Form.tgShowLiveTime.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveTime, False)
             Form.tgShowTodayLiveGamesFirst.Checked =
-                ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowTodayLiveGamesFirst, False)
+                ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTodayLiveGamesFirst, False)
 
             Dim playersPath = New String() {Form.txtMpvPath.Text, Form.txtMPCPath.Text, Form.txtVLCPath.Text}
-            Dim watchArgs = ApplicationSettings.Read (Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, Nothing)
+            Dim watchArgs = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, Nothing)
 
             If ValidWatchArgs(watchArgs, playersPath, Form.txtStreamerPath.Text) Then
                 Player.RenewArgs(True)
-                watchArgs = ApplicationSettings.Read (Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs,
+                watchArgs = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs,
                                                                              New GameWatchArguments)
             End If
 
-            PopulateComboBox(Form.cbServers, SettingsEnum.SelectedServer, settingsenum.ServerList, String.Empty)
+            PopulateComboBox(Form.cbServers, SettingsEnum.SelectedServer, SettingsEnum.ServerList, String.Empty)
             Common.SetRedirectionServerInApp()
 
             BindWatchArgsToForm(watchArgs)
 
-            Dim adDetectionConfigs = ApplicationSettings.Read (Of AdDetectionConfigs)(SettingsEnum.AdDetection, Nothing)
+            Dim adDetectionConfigs = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection, Nothing)
 
             If adDetectionConfigs Is Nothing Then
                 AdDetection.Renew(True)
-                adDetectionConfigs = ApplicationSettings.Read (Of AdDetectionConfigs)(SettingsEnum.AdDetection,
+                adDetectionConfigs = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection,
                                                                                       New AdDetectionConfigs)
             End If
 
             BindAdDetectionConfigsToForm(adDetectionConfigs)
 
-            Form.lblNoGames.Location = New Point(((Form.tabGames.Width - Form.lblNoGames.Width)/2),
-                                                 Form.tabGames.Height/2)
-            Form.spnLoading.Location = New Point(((Form.tabGames.Width - Form.lblNoGames.Width)/2) + 40,
-                                                 (Form.tabGames.Height/2) - 20)
+            Form.lblNoGames.Location = New Point(((Form.tabGames.Width - Form.lblNoGames.Width) / 2),
+                                                 Form.tabGames.Height / 2)
+            Form.spnLoading.Location = New Point(((Form.tabGames.Width - Form.lblNoGames.Width) / 2) + 40,
+                                                 (Form.tabGames.Height / 2) - 20)
 
             Form.spnLoading.Value = NHLGamesMetro.SpnLoadingValue
-            Form.spnLoading.Maximum = NHLGamesMetro.spnLoadingMaxValue
+            Form.spnLoading.Maximum = NHLGamesMetro.SpnLoadingMaxValue
             Form.spnStreaming.Value = NHLGamesMetro.SpnStreamingValue
-            Form.spnStreaming.Maximum = NHLGamesMetro.spnStreamingMaxValue
+            Form.spnStreaming.Maximum = NHLGamesMetro.SpnStreamingMaxValue
             Form.lblDate.Text = DateHelper.GetFormattedDate(NHLGamesMetro.GameDate)
 
             NHLGamesMetro.LabelDate = Form.lblDate
@@ -238,7 +238,7 @@ Namespace Utilities
         End Sub
 
         Private Shared Function GetApplication(varPath As SettingsEnum, currentPath As String)
-            Dim savedPathFromConfig = ApplicationSettings.Read (Of String)(varPath, String.Empty)
+            Dim savedPathFromConfig = ApplicationSettings.Read(Of String)(varPath, String.Empty)
             Dim currentPathIfFound As String = currentPath
 
             If File.Exists(savedPathFromConfig) Then Return savedPathFromConfig
@@ -254,11 +254,11 @@ Namespace Utilities
 
         Private Shared Sub PopulateComboBox(cb As MetroComboBox, selectedItem As SettingsEnum, items As SettingsEnum,
                                             defaultValue As String)
-            Dim cbItemsFromConfig = ApplicationSettings.Read (Of String)(items, defaultValue)
+            Dim cbItemsFromConfig = ApplicationSettings.Read(Of String)(items, defaultValue)
 
             cb.Items.AddRange(cbItemsFromConfig.Split(";"))
 
-            cb.SelectedItem = ApplicationSettings.Read (Of String)(selectedItem, String.Empty)
+            cb.SelectedItem = ApplicationSettings.Read(Of String)(selectedItem, String.Empty)
             If cb.SelectedItem Is Nothing Then
                 cb.SelectedItem = cb.Items(0)
             End If
@@ -269,7 +269,7 @@ Namespace Utilities
             If watchArgs Is Nothing Then Return True
 
             Dim hasPlayerSet As Boolean = playersPath.Any(Function(x) x = watchArgs.PlayerPath)
-            If Not watchArgs.streamerPath.Equals(streamerPath) Then Return True
+            If Not watchArgs.StreamerPath.Equals(streamerPath) Then Return True
             If Not hasPlayerSet Then
                 watchArgs.PlayerType = PlayerTypeEnum.None
                 watchArgs.StreamerType = StreamerTypeEnum.None
@@ -277,7 +277,7 @@ Namespace Utilities
                 watchArgs.StreamerPath = String.Empty
                 Form.rbMPC.Enabled = False
                 Form.rbVLC.Enabled = False
-                Form.rbMpv.Enabled = False
+                Form.rbMPV.Enabled = False
                 Return True
             End If
 
@@ -290,9 +290,9 @@ Namespace Utilities
 
                 Form.tgAlternateCdn.Checked = watchArgs.Cdn = CdnTypeEnum.L3C
 
-                Form.tbLiveRewind.Value = If (watchArgs.StreamLiveRewind Mod 5 = 0, watchArgs.StreamLiveRewind/5, 1)
+                Form.tbLiveRewind.Value = If(watchArgs.StreamLiveRewind Mod 5 = 0, watchArgs.StreamLiveRewind / 5, 1)
 
-                Form.rbMpv.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpv AndAlso Form.rbMpv.Enabled
+                Form.rbMPV.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpv AndAlso Form.rbMPV.Enabled
                 Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc AndAlso Form.rbVLC.Enabled
                 Form.rbMPC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpc AndAlso Form.rbMPC.Enabled
 
@@ -300,7 +300,7 @@ Namespace Utilities
                     Player.RenewArgs()
                 ElseIf Form.rbMPC.Checked AndAlso watchArgs.PlayerPath <> Form.txtMPCPath.Text Then
                     Player.RenewArgs()
-                ElseIf Form.rbMpv.Checked AndAlso watchArgs.PlayerPath <> Form.txtMpvPath.Text Then
+                ElseIf Form.rbMPV.Checked AndAlso watchArgs.PlayerPath <> Form.txtMpvPath.Text Then
                     Player.RenewArgs()
                 End If
 
@@ -321,24 +321,24 @@ Namespace Utilities
         Private Shared Sub BindAdDetectionConfigsToForm(configs As AdDetectionConfigs)
             If configs IsNot Nothing Then
 
-                form.tgModules.Checked = configs.IsEnabled
+                Form.tgModules.Checked = configs.IsEnabled
 
-                form.chkSpotifyForceToStart.Checked = configs.EnabledSpotifyForceToOpen
-                form.chkSpotifyPlayNextSong.Checked = configs.EnabledSpotifyPlayNextSong
+                Form.chkSpotifyForceToStart.Checked = configs.EnabledSpotifyForceToOpen
+                Form.chkSpotifyPlayNextSong.Checked = configs.EnabledSpotifyPlayNextSong
                 Form.chkSpotifyAnyMediaPlayer.Checked = configs.EnabledSpotifyAndAnyMediaPlayer
 
-                form.txtAdKey.Text = configs.EnabledObsAdSceneHotKey.Key
-                form.chkAdCtrl.Checked = configs.EnabledObsAdSceneHotKey.Ctrl
-                form.chkAdAlt.Checked = configs.EnabledObsAdSceneHotKey.Alt
-                form.chkAdShift.Checked = configs.EnabledObsAdSceneHotKey.Shift
+                Form.txtAdKey.Text = configs.EnabledObsAdSceneHotKey.Key
+                Form.chkAdCtrl.Checked = configs.EnabledObsAdSceneHotKey.Ctrl
+                Form.chkAdAlt.Checked = configs.EnabledObsAdSceneHotKey.Alt
+                Form.chkAdShift.Checked = configs.EnabledObsAdSceneHotKey.Shift
 
-                form.txtGameKey.Text = configs.EnabledObsGameSceneHotKey.Key
-                form.chkGameCtrl.Checked = configs.EnabledObsGameSceneHotKey.Ctrl
-                form.chkGameAlt.Checked = configs.EnabledObsGameSceneHotKey.Alt
-                form.chkGameShift.Checked = configs.EnabledObsGameSceneHotKey.Shift
+                Form.txtGameKey.Text = configs.EnabledObsGameSceneHotKey.Key
+                Form.chkGameCtrl.Checked = configs.EnabledObsGameSceneHotKey.Ctrl
+                Form.chkGameAlt.Checked = configs.EnabledObsGameSceneHotKey.Alt
+                Form.chkGameShift.Checked = configs.EnabledObsGameSceneHotKey.Shift
 
-                form.tgSpotify.Checked = configs.EnabledSpotifyModule
-                form.tgOBS.Checked = configs.EnabledObsModule
+                Form.tgSpotify.Checked = configs.EnabledSpotifyModule
+                Form.tgOBS.Checked = configs.EnabledObsModule
 
             End If
         End Sub

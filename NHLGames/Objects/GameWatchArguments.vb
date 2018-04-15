@@ -55,15 +55,15 @@ Namespace Objects
             If UseCustomStreamerArgs Then result &= CustomStreamerArgs
             If Not safeOutput Then result &= NhlCookieArgs()
             result &= UserAgentArgs()
-            result &= If (safeOutput, StreamLinkCensoredArgs(), StreamLinkArgs())
-            result &= If (Is60Fps, StreamBestQualityArgs(), StreamQualityArgs)
+            result &= If(safeOutput, StreamLinkCensoredArgs(), StreamLinkArgs())
+            result &= If(Is60Fps, StreamBestQualityArgs(), StreamQualityArgs())
             If UseOutputArgs Then result &= OutputArgs()
 
             Return result
         End Function
 
         Private Function PlayerArgs() As String
-            Dim literalPlayerArgs = If (UseCustomPlayerArgs, CustomPlayerArgs, String.Empty)
+            Dim literalPlayerArgs = If(UseCustomPlayerArgs, CustomPlayerArgs, String.Empty)
             Select Case PlayerType
                 Case PlayerTypeEnum.Mpv
                     Return _
@@ -100,13 +100,13 @@ Namespace Objects
         Private Function ReplayMinutes() As Integer
             Select Case StreamLiveReplayCode
                 Case LiveStatusCodeEnum.Rewind
-                    Return StreamLiveRewind*DefaultSegment
+                    Return StreamLiveRewind * DefaultSegment
                 Case LiveStatusCodeEnum.Replay
-                    Dim segments = CType((Date.UtcNow - GameDate).TotalMinutes, Integer)*DefaultSegment
+                    Dim segments = CType((Date.UtcNow - GameDate).TotalMinutes, Integer) * DefaultSegment
                     If segments <= 0 Then StreamLiveReplay = LiveReplayEnum.StreamStarts
                     Select Case StreamLiveReplay
                         Case LiveReplayEnum.PuckDrop
-                            Return segments - (DefaultSegment*10)
+                            Return segments - (DefaultSegment * 10)
                         Case LiveReplayEnum.GameTime
                             Return segments
                     End Select
@@ -115,31 +115,31 @@ Namespace Objects
             Return DefaultSegment
         End Function
 
-        Private Function NhlCookieArgs As String
+        Private Function NhlCookieArgs() As String
             Return $" --http-cookie=""mediaAuth={Common.GetRandomString(240)} """
         End Function
 
-        Private Function UserAgentArgs As String
+        Private Function UserAgentArgs() As String
             Return $" --http-header=""User-Agent={Common.UserAgent}"" "
         End Function
 
-        Private Function StreamLinkArgs As String
-            Return $"""hlsvariant://{Stream.StreamUrl.Replace("CDN", cdn.ToString().ToLower())} "
+        Private Function StreamLinkArgs() As String
+            Return $"""hlsvariant://{Stream.StreamUrl.Replace("CDN", Cdn.ToString().ToLower())} "
         End Function
 
         Private Function StreamLinkCensoredArgs() As String
             Return $"""hlsvariant://{English.msgCensoredStream} "
         End Function
 
-        Private Function StreamBestQualityArgs As String
+        Private Function StreamBestQualityArgs() As String
             Return $"name_key=bitrate"" best --http-no-ssl-verify "
         End Function
 
-        Private Function StreamQualityArgs As String
-            Return $""" {GetStreamQuality} --http-no-ssl-verify "
+        Private Function StreamQualityArgs() As String
+            Return $""" {GetStreamQuality()} --http-no-ssl-verify "
         End Function
 
-        Private Function OutputArgs As String
+        Private Function OutputArgs() As String
             Dim outputPath As String = PlayerOutputPath.
                     Replace("(DATE)", DateHelper.GetPacificTime(Stream.Game.GameDate).ToString("yyyy-MM-dd")).
                     Replace("(HOME)", Stream.Game.HomeAbbrev).

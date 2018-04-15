@@ -29,7 +29,7 @@ Namespace Utilities
             Return attributes And Not attributesToRemove
         End Function
 
-        Public Shared Function HasAccess(filePath As String, Optional writeAccess As Boolean = true) As Boolean
+        Public Shared Function HasAccess(filePath As String, Optional writeAccess As Boolean = True) As Boolean
             Try
                 If writeAccess Then
                     Using File.Open(filePath & ".bak", FileMode.OpenOrCreate, IO.FileAccess.ReadWrite, FileShare.None)

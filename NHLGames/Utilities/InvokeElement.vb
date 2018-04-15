@@ -4,7 +4,7 @@ Imports NHLGames.Objects
 
 Namespace Utilities
     Public Class InvokeElement
-        Public Async Shared Sub LoadGames()
+        Public Shared Async Sub LoadGames()
             NHLGamesMetro.FormInstance.ClearGamePanel()
             Await Task.Run(AddressOf GameFetcher.LoadGames).ConfigureAwait(False)
         End Sub
@@ -60,11 +60,11 @@ Namespace Utilities
                 NHLGamesMetro.FormInstance.ClearGamePanel()
                 NHLGamesMetro.FormInstance.flpGames.Controls.AddRange((From game In gamesDict Select New GameControl(
                     game,
-                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowScores, False),
-                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowLiveScores, False),
-                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowSeriesRecord, False),
-                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowTeamCityAbr, False),
-                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowLiveTime, False))).ToArray())
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveTime, False))).ToArray())
             End If
         End Sub
 

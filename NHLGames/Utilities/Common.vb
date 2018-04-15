@@ -82,7 +82,7 @@ Namespace Utilities
             Try
                 Using _
                     myHttpWebResponse As HttpWebResponse =
-                        Await myHttpWebRequest.GetResponseAsync().ConfigureAwait(false)
+                        Await myHttpWebRequest.GetResponseAsync().ConfigureAwait(False)
                     result = (myHttpWebResponse.StatusCode = HttpStatusCode.OK)
                 End Using
             Catch
@@ -108,7 +108,7 @@ Namespace Utilities
             Try
                 Using _
                     myHttpWebResponse As HttpWebResponse =
-                        Await myHttpWebRequest.GetResponseAsync().ConfigureAwait(false)
+                        Await myHttpWebRequest.GetResponseAsync().ConfigureAwait(False)
                     If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
                         Using reader As Stream = myHttpWebResponse.GetResponseStream()
                             reader.CopyTo(content)
@@ -127,7 +127,7 @@ Namespace Utilities
         End Function
 
         Public Shared Sub GetLanguage()
-            Dim lang = ApplicationSettings.Read (Of String)(SettingsEnum.SelectedLanguage, "English")
+            Dim lang = ApplicationSettings.Read(Of String)(SettingsEnum.SelectedLanguage, "English")
 
             If lang = NHLGamesMetro.RmText.GetString("cbEnglish") Then
                 NHLGamesMetro.RmText = English.ResourceManager
@@ -136,7 +136,7 @@ Namespace Utilities
             End If
         End Sub
 
-        Public Async Shared Function CheckAppCanRun() As Task(Of Boolean)
+        Public Shared Async Function CheckAppCanRun() As Task(Of Boolean)
             Dim errorMessage = String.Empty
             If NHLGamesMetro.ServerIp.Equals(String.Empty) Then
                 errorMessage = "noGameServer"
@@ -160,7 +160,7 @@ Namespace Utilities
                                          NHLGamesMetro.FormInstance.cbServers.SelectedItem.ToString())
         End Sub
 
-        Public Shared Sub CheckHostsFile
+        Public Shared Sub CheckHostsFile()
             If (HostsFile.TestEntry() = False) Then
                 If HostsFile.EnsureAdmin() Then
                     If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgHostnameSet"),
@@ -178,7 +178,7 @@ Namespace Utilities
             If InvokeElement.MsgBoxRed($"{message} {NHLGamesMetro.RmText.GetString("msgNotStarting")}",
                                        NHLGamesMetro.RmText.GetString("msgFailure"),
                                        MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                NHLGamesMetro.FormInstance.Close
+                NHLGamesMetro.FormInstance.Close()
             End If
         End Sub
     End Class
