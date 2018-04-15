@@ -1,5 +1,5 @@
 # NHLGames
-Tool to watch NHL games in High Definition      
+Tool to watch NHL games in High Definition for free      
 
 Choose a date.    
 Choose a game.    
