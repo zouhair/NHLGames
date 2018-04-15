@@ -200,11 +200,16 @@ If you wish to customise the way your player or the streamer opens, turn on one 
 - Streamer args : If you want to add more arguments (commands) to be sent to streamlink with the default args that NHLGames send.
 
 ### ///_Ad Detection_
-NHLGames doesn't use any Ad Detection modules by default, but you can activate it and select the app you want to use during commercials. If you don't use any, it's better if you disable the Ad Detection module. 
+NHLGames doesn't use any Ad Detection by default, but you can activate it and select the app you want to use during commercials. If you don't use any, it's better if you keept the Ad Detection disabled. 
 
-Ad detection only supports these applications:
-- Spotify Windows: If you want to play music during ads.
+Ad detection supports these applications:
+- Spotify Windows / Other music player: If you want to play music during ads.
+   - Force to start: It will open Spotify when you start NHLGames
+   - Always play next song: It won't pause Spotify when the ad ends, but skip to the next song.
+   - (Experimental) Try with the detected media player: If you do not have Spotify running, but another (like Windows Media Player or iTunes), it will play/pause this player instead, by simulating the media hotkey [Play/Pause] on the keyboard
 - OBS Scene Changer : If you want to switch between windows when an ad hits.
+   - Ad ending hotkey: Set the same hotkey that the one in OBS to display the window that the game is on.
+   - Ad starting hotkey: Set the same hotkey that you use in OBS to display the window when a commercial plays.
 
 ## //_Console_
 Go to this tab to see everything that NHLGames does. Also, any error or warning will show up here.
