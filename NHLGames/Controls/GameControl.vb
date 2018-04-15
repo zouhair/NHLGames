@@ -34,6 +34,7 @@ Namespace Controls
             lblPeriod.Text = String.Empty
             lblGameStatus.Text = String.Empty
             lblNotInSeason.Text = String.Empty
+            Dim gameState = NHLGamesMetro.RmText.GetString($"enumGameState{Convert.ToInt32(_game.GameState)}").ToUpper()
 
             If _game.IsLive Then
                 btnLiveReplay.Visible = True
@@ -71,7 +72,7 @@ Namespace Controls
                     lblGameStatus.Text = String.Format("{0}{1}{2}",
                                                        _game.GameDate.ToLocalTime().ToString("h:mm tt"),
                                                        vbCrLf,
-                                                       NHLGamesMetro.RmText.GetString($"enum{_game.GameState.ToString().ToLower()}").ToUpper())
+                                                       gameState)
                 End If
 
             ElseIf _game.IsOffTheAir Then
@@ -88,19 +89,19 @@ Namespace Controls
                 End If
 
                 If showScores Then
-                    lblPeriod.Text = NHLGamesMetro.RmText.GetString("enumofftheair").ToUpper()
+                    lblPeriod.Text = gameState
                     If Not String.Equals(_game.GamePeriod, $"3rd", StringComparison.CurrentCultureIgnoreCase) And _game.GamePeriod <> "" Then
-                        lblPeriod.Text = (NHLGamesMetro.RmText.GetString($"enumofftheair") & $"/" &
+                        lblPeriod.Text = (gameState & $"/" &
                                           _game.GamePeriod.
                                           Replace($"OT", NHLGamesMetro.RmText.GetString("gamePeriodOt")).
                                           Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo"))).
-                                          ToUpper()'FINAL/SO.. OT.. 2OT
+                                          ToUpper() 'FINAL/SO.. OT.. 2OT
                     End If
                 Else
                     lblGameStatus.Text = String.Format("{0}{1}{2}",
                                                        _game.GameDate.ToLocalTime().ToString("h:mm tt"),
                                                        vbCrLf,
-                                                       NHLGamesMetro.RmText.GetString($"enum{_game.GameState.ToString().ToLower()}").ToUpper())
+                                                       gameState)
                     If lblPeriod.Text.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt")) Then
                         lblGameStatus.Text = String.Format("{0}{1}{2}",
                                                            _game.GameDate.ToLocalTime().ToString("h:mm tt"),
@@ -119,16 +120,16 @@ Namespace Controls
                     lblPeriod.BackColor = Color.FromArgb(255, 0, 170, 210)
                     If showLiveScores Then
                         lblPeriod.ForeColor = Color.White
-                        lblPeriod.Text = NHLGamesMetro.RmText.GetString("enumpregame").ToUpper()
+                        lblPeriod.Text = gameState
                     Else
-                        lblGameStatus.Text &= String.Format("{0}{1}", vbCrLf, NHLGamesMetro.RmText.GetString("enumpregame").ToUpper())
+                        lblGameStatus.Text &= String.Format("{0}{1}", vbCrLf, gameState)
                     End If
                 End If
             Else If _game.IsUnplayable Then
                 lblDivider.Visible = False
                 lblGameStatus.Visible = True
                 lblPeriod.Text = _game.GameStateDetailed.ToUpper()
-                lblGameStatus.Text = NHLGamesMetro.RmText.GetString($"enumGameState{_game.GameState}").ToUpper()
+                lblGameStatus.Text = gameState
                 lblPeriod.BackColor = Color.FromKnownColor(KnownColor.DarkOrange)
 
                 SetRecordIcon(False)
@@ -151,8 +152,8 @@ Namespace Controls
                                   Replace("wins", NHLGamesMetro.RmText.GetString("gameSeriesWin")).
                                   Replace("leads", NHLGamesMetro.RmText.GetString("gameSeriesLead"))).
                                   ToUpper(), seriesStatusShort)
-
-                lblNotInSeason.Text = If (showSeriesRecord AndAlso _game.SeriesGameStatus.Length > 0, seriesStatusLong, seriesStatusShort)
+                Dim isSeriesRecordVisible = showSeriesRecord AndAlso _game.SeriesGameStatus.Length > 0 AndAlso (showScores And _game.IsOffTheAir)
+                lblNotInSeason.Text = If(isSeriesRecordVisible, seriesStatusLong, seriesStatusShort)
             End If
 
             If Not _game.AreAnyStreamsAvailable OrElse Not NHLGamesMetro.HostNameResolved Then
