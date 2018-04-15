@@ -22,7 +22,7 @@ Enjoy!
    * [Settings](#settings)
      * [Customize game panels](#customize-game-panels)
      * [Stream Quality](#stream-quality)
-     * [Replay and Rewind](#replay-and-rewind)
+     * [Rewind and Replay](#rewind-and-replay)
      * [Content Delivery Network (CDN)](#content-delivery-network-cdn)
      * [Server's Hostname](#servers-hostname)
      * [Server Hosts Entry](#server-hosts-entry)
@@ -106,18 +106,18 @@ The selected value will defined which quality will be sent to your media player,
 - Low: 228p ~500 Mb/hr
 - Mobile: 224p or worst ~300/hr
 
-### ///_Replay and Rewind_
-The Replay/Rewind feature is only available for Live games only. If you see a blue game panel with a red live icon in the left corner that means you will have access to the Replay or Rewind feature. To use it, you have to click on it once to turn on the "Rewind", or twice to turn on "Replay". It will go back to default "Live", if clicked three times. Finally, you just have to play a stream.
+### ///_Rewind and Replay_
+The Rewind/Replay feature is only available for Live games only. If you see a blue game panel with a red live icon in the left corner that means you will have access to the Replay or Rewind feature. To use it, you have to click on it once to turn on the "Rewind", or twice to turn on "Replay". It will go back to default "Live", if clicked three times. Finally, you just have to play a stream.
 
 ![image](https://user-images.githubusercontent.com/23088305/35660550-a8ccfe3e-06da-11e8-974c-141f6d3b3d31.gif)
 
 > *WARNING: If you want to use the Rewind/Replay feature, but you don't click on the ![image](https://user-images.githubusercontent.com/23088305/38781081-37d9d68a-40ae-11e8-8c37-50388470b299.png) icon before starting a stream, you will still be in live mode !*
 
-If you use the replay or rewind feature and you want to change the default behaviour, you can set your preferences here.
-- Live Replay: If Replay is enabled, it will start the stream from the selected value.
-- Live Rewind: If Rewind is enabled, it will use the value to set the stream x minutes behind the live stream.
+If you use the rewind or replay feature and you want to change the default behaviour, you can set your preferences here.
+- Live Rewind: If Rewind is enabled ![image](https://user-images.githubusercontent.com/23088305/38781195-9eecf626-40af-11e8-85fb-857c7d50d385.png), it will use the value to set the stream x minutes behind the live stream.
+- Live Replay: If Replay is enabled ![image](https://user-images.githubusercontent.com/23088305/38781187-9418e818-40af-11e8-86df-d8025473574c.png), it will start the stream from the selected value.
 
-> *NOTE: If you use the rewind slider, but set it before game time and the stream has no data before game time, it will start in live mode.*
+> *NOTE: If you use the rewind slider in settings, but you set it before game time and the stream has no data at this time, it will start from live.*
 
 ### ///_Content Delivery Network (CDN)_
 NHLGames uses by default Akamai CDN, but Level 3 can be activated by turn on the alternate network in settings.
