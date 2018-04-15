@@ -24,7 +24,8 @@ Namespace Utilities
             Console.WriteLine(English.msgAddReadOnly, path)
         End Sub
 
-        Private Shared Function RemoveAttribute(attributes As FileAttributes, attributesToRemove As FileAttributes) As FileAttributes
+        Private Shared Function RemoveAttribute(attributes As FileAttributes, attributesToRemove As FileAttributes) _
+            As FileAttributes
             Return attributes And Not attributesToRemove
         End Function
 

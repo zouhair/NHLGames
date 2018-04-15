@@ -3,7 +3,8 @@
 Namespace Utilities
     Public Class DateHelper
         Public Shared Function GetPacificTime() As DateTime
-            Return TimeZoneInfo.ConvertTime(DateTime.Now(), TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time"))
+            Return _
+                TimeZoneInfo.ConvertTime(DateTime.Now(), TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time"))
         End Function
 
         Public Shared Function GetPacificTime(utcDate As DateTime) As DateTime
@@ -12,7 +13,7 @@ Namespace Utilities
 
         Public Shared Function GetFormattedDate(dt As Date) As String
             Return String.Format(NHLGamesMetro.RmText.GetString("lblFormatWeekMonthDayYear"), dt.ToString("ddd"),
-                              dt.ToString("MMM"), dt.Day.ToString, dt.Year.ToString)
+                                 dt.ToString("MMM"), dt.Day.ToString, dt.Year.ToString)
         End Function
 
         Public Shared Function GetFormattedWeek(number As DayOfWeek) As String
@@ -20,6 +21,5 @@ Namespace Utilities
                       CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(number).Substring(0, 2),
                       CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(number).ToString())
         End Function
-
     End Class
 End Namespace
