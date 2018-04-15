@@ -22,10 +22,17 @@ Namespace Objects.Modules
             WebRequestParams = "&ref=&cors=&_=" &
                                Convert.ToInt32((Datetime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds)
 
-        Private ReadOnly _spotifyPossiblePaths() = New String() {
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "spotify\\spotify.exe"),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft\\WindowsApps\\Spotify.exe")
-        }
+        Private ReadOnly _spotifyPossiblePaths() = New String() { _
+                                                                    Path.Combine(
+                                                                        Environment.GetFolderPath(
+                                                                            Environment.SpecialFolder.ApplicationData),
+                                                                        "spotify\\spotify.exe"),
+                                                                    Path.Combine(
+                                                                        Environment.GetFolderPath(
+                                                                            Environment.SpecialFolder.
+                                                                                                     LocalApplicationData),
+                                                                        "Microsoft\\WindowsApps\\Spotify.exe")
+                                                                }
 
         Private _authKey As String
         Private _cfIdKey As String

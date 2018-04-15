@@ -85,7 +85,9 @@ Namespace Objects
                     'set stream feeds for the current game
                     If game.SelectToken("content.media") IsNot Nothing Then
                         For Each stream As JObject In game.SelectToken("content.media.epg")
-                            If stream.SelectToken("title").ToString().Equals("NHLTV") AndAlso stream.Property("items").Value.Count > 0 Then
+                            If _
+                                stream.SelectToken("title").ToString().Equals("NHLTV") AndAlso
+                                stream.Property("items").Value.Count > 0 Then
                                 For Each item As JArray In stream.Property("items")
                                     Dim progressPerStream = Convert.ToInt32(progressPerGame / item.Count)
                                     For Each innerStream As JObject In item.Children(Of JObject)
@@ -148,7 +150,8 @@ Namespace Objects
                        Sum(Function(stream) stream.Property("items").Value.Count))
         End Function
 
-        Private Shared Async Function SetNewGameStream(currentGame As Game, innerStream As JObject, streamType As StreamTypeEnum) As Task(Of GameStream)
+        Private Shared Async Function SetNewGameStream(currentGame As Game, innerStream As JObject,
+                                                       streamType As StreamTypeEnum) As Task(Of GameStream)
             Dim gs = New GameStream(currentGame, innerStream, streamType)
             gs.StreamUrl = Await GetGameFeedUrlAsync(gs)
 
@@ -172,7 +175,10 @@ Namespace Objects
             Dim result = String.Empty
 
             If Not gameStream.GameUrl.Equals(String.Empty) Then
-                Dim streamUrlReturned = Await Common.SendWebRequestAndGetContentAsync(gameStream.GameUrl & gameStream.CdnParameter.ToString().ToLower())
+                Dim streamUrlReturned =
+                        Await _
+                        Common.SendWebRequestAndGetContentAsync(
+                            gameStream.GameUrl & gameStream.CdnParameter.ToString().ToLower())
 
                 If streamUrlReturned <> String.Empty Then
                     Dim request = Common.SetHttpWebRequest(streamUrlReturned)

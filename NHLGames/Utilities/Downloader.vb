@@ -11,7 +11,7 @@ Namespace Utilities
         Private Const ApiUrl As String = "http://statsapi.web.nhl.com/api/v1/schedule"
 
         Private Const ScheduleApiurl As String = ApiUrl &
-            "?startDate={0}&endDate={1}&expand=schedule.teams,schedule.linescore,schedule.game.seriesSummary,schedule.game.content.media.epg"
+                                                 "?startDate={0}&endDate={1}&expand=schedule.teams,schedule.linescore,schedule.game.seriesSummary,schedule.game.content.media.epg"
 
         Private Const AppVersionUrl As String = AppUrl & "static/version.txt"
         Private Const AppChangelogUrl As String = AppUrl & "static/changelog.txt"
@@ -49,7 +49,8 @@ Namespace Utilities
             Dim dateTimeString As String = startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
             Dim url As String = String.Format(ScheduleApiurl, dateTimeString, dateTimeString)
 
-            Console.WriteLine(English.msgGettingSchedule, English.msgFetching, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
+            Console.WriteLine(English.msgGettingSchedule, English.msgFetching,
+                              startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
 
             Dim data = Await Common.SendWebRequestAndGetContentAsync(url)
 

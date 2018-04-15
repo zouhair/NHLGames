@@ -104,7 +104,7 @@ Namespace Utilities
             Form.lblLiveRewind.Text = NHLGamesMetro.RmText.GetString("lblLiveRewind")
             Form.lblLiveRewindDetails.Text = String.Format(
                 NHLGamesMetro.RmText.GetString("lblLiveRewindDetails"),
-                minutesBehind, Now.AddMinutes(- minutesBehind).ToString("h:mm tt", CultureInfo. InvariantCulture))
+                minutesBehind, Now.AddMinutes(- minutesBehind).ToString("h:mm tt", CultureInfo.InvariantCulture))
 
             Form.lblGamePanel.Text = NHLGamesMetro.RmText.GetString("lblGamePanel")
             Form.lblShowFinalScores.Text = NHLGamesMetro.RmText.GetString("lblShowFinalScores")
@@ -184,22 +184,27 @@ Namespace Utilities
 
             Form.txtMPCPath.Text = GetApplication(SettingsEnum.MpcPath, PathFinder.GetPathOfMpc())
             Form.txtVLCPath.Text = GetApplication(SettingsEnum.VlcPath, PathFinder.GetPathOfVlc())
-            Form.txtMpvPath.Text = GetApplication(SettingsEnum.MpvPath, Path.Combine(Application.StartupPath, "mpv\mpv.exe"))
-            Form.txtStreamerPath.Text = GetApplication(SettingsEnum.StreamerPath, Path.Combine(Application.StartupPath, "livestreamer\livestreamer.exe"))
+            Form.txtMpvPath.Text = GetApplication(SettingsEnum.MpvPath,
+                                                  Path.Combine(Application.StartupPath, "mpv\mpv.exe"))
+            Form.txtStreamerPath.Text = GetApplication(SettingsEnum.StreamerPath,
+                                                       Path.Combine(Application.StartupPath,
+                                                                    "livestreamer\livestreamer.exe"))
 
             Form.tgShowFinalScores.Checked = ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowScores, False)
             Form.tgShowLiveScores.Checked = ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowLiveScores, False)
             Form.tgShowSeriesRecord.Checked = ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowSeriesRecord, False)
             Form.tgShowTeamCityAbr.Checked = ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowTeamCityAbr, False)
             Form.tgShowLiveTime.Checked = ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowLiveTime, False)
-            Form.tgShowTodayLiveGamesFirst.Checked = ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowTodayLiveGamesFirst, False)
+            Form.tgShowTodayLiveGamesFirst.Checked =
+                ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowTodayLiveGamesFirst, False)
 
             Dim playersPath = New String() {Form.txtMpvPath.Text, Form.txtMPCPath.Text, Form.txtVLCPath.Text}
             Dim watchArgs = ApplicationSettings.Read (Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, Nothing)
 
             If ValidWatchArgs(watchArgs, playersPath, Form.txtStreamerPath.Text) Then
                 Player.RenewArgs(True)
-                watchArgs = ApplicationSettings.Read (Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, New GameWatchArguments)
+                watchArgs = ApplicationSettings.Read (Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs,
+                                                                             New GameWatchArguments)
             End If
 
             PopulateComboBox(Form.cbServers, SettingsEnum.SelectedServer, settingsenum.ServerList, String.Empty)
@@ -211,13 +216,16 @@ Namespace Utilities
 
             If adDetectionConfigs Is Nothing Then
                 AdDetection.Renew(True)
-                adDetectionConfigs = ApplicationSettings.Read (Of AdDetectionConfigs)(SettingsEnum.AdDetection, New AdDetectionConfigs)
+                adDetectionConfigs = ApplicationSettings.Read (Of AdDetectionConfigs)(SettingsEnum.AdDetection,
+                                                                                      New AdDetectionConfigs)
             End If
 
             BindAdDetectionConfigsToForm(adDetectionConfigs)
 
-            Form.lblNoGames.Location = New Point(((Form.tabGames.Width - Form.lblNoGames.Width)/2), Form.tabGames.Height/2)
-            Form.spnLoading.Location = New Point(((Form.tabGames.Width - Form.lblNoGames.Width)/2) + 40, (Form.tabGames.Height/2) - 20)
+            Form.lblNoGames.Location = New Point(((Form.tabGames.Width - Form.lblNoGames.Width)/2),
+                                                 Form.tabGames.Height/2)
+            Form.spnLoading.Location = New Point(((Form.tabGames.Width - Form.lblNoGames.Width)/2) + 40,
+                                                 (Form.tabGames.Height/2) - 20)
 
             Form.spnLoading.Value = NHLGamesMetro.SpnLoadingValue
             Form.spnLoading.Maximum = NHLGamesMetro.spnLoadingMaxValue
@@ -244,7 +252,8 @@ Namespace Utilities
             End If
         End Function
 
-        Private Shared Sub PopulateComboBox(cb As MetroComboBox, selectedItem As SettingsEnum, items As SettingsEnum, defaultValue As String)
+        Private Shared Sub PopulateComboBox(cb As MetroComboBox, selectedItem As SettingsEnum, items As SettingsEnum,
+                                            defaultValue As String)
             Dim cbItemsFromConfig = ApplicationSettings.Read (Of String)(items, defaultValue)
 
             cb.Items.AddRange(cbItemsFromConfig.Split(";"))
@@ -255,7 +264,8 @@ Namespace Utilities
             End If
         End Sub
 
-        Private Shared Function ValidWatchArgs(watchArgs As GameWatchArguments, playersPath As String(), streamerPath As String) As Boolean
+        Private Shared Function ValidWatchArgs(watchArgs As GameWatchArguments, playersPath As String(),
+                                               streamerPath As String) As Boolean
             If watchArgs Is Nothing Then Return True
 
             Dim hasPlayerSet As Boolean = playersPath.Any(Function(x) x = watchArgs.PlayerPath)

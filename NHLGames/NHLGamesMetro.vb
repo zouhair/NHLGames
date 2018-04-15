@@ -174,7 +174,8 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub tgShowFinalScores_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowFinalScores.CheckedChanged
+    Private Sub tgShowFinalScores_CheckedChanged(sender As Object, e As EventArgs) _
+        Handles tgShowFinalScores.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowScores, tgShowFinalScores.Checked)
         For each game As GameControl In flpGames.Controls
             game.UpdateGame(tgShowFinalScores.Checked,
@@ -209,7 +210,8 @@ Public Class NHLGamesMetro
         Player.RenewArgs()
     End Sub
 
-    Private Sub player_CheckedChanged(sender As Object, e As EventArgs) Handles rbVLC.CheckedChanged, rbMPV.CheckedChanged, rbMPC.CheckedChanged
+    Private Sub player_CheckedChanged(sender As Object, e As EventArgs) _
+        Handles rbVLC.CheckedChanged, rbMPV.CheckedChanged, rbMPC.CheckedChanged
         Dim rb As RadioButton = sender
         If (rb.Checked) Then
             Player.RenewArgs()
@@ -279,7 +281,8 @@ Public Class NHLGamesMetro
         flpGames.Focus()
     End Sub
 
-    Private Sub chkShowLiveScores_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowLiveScores.CheckedChanged
+    Private Sub chkShowLiveScores_CheckedChanged(sender As Object, e As EventArgs) _
+        Handles tgShowLiveScores.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowLiveScores, tgShowLiveScores.Checked)
         For each game As GameControl In flpGames.Controls
             game.UpdateGame(tgShowFinalScores.Checked,
@@ -316,7 +319,9 @@ Public Class NHLGamesMetro
     Private Sub tgOutput_CheckedChanged(sender As Object, e As EventArgs) Handles tgOutput.CheckedChanged
         txtOutputArgs.Enabled = tgOutput.Checked
         If txtOutputArgs.Text = String.Empty Then
-            txtOutputArgs.Text = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)}\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(NETWORK).mp4"
+            txtOutputArgs.Text =
+                $"{Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) _
+                    }\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(NETWORK).mp4"
         End If
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblOutput.Text),
@@ -529,7 +534,8 @@ Public Class NHLGamesMetro
                                        If (tgSpotify.Checked, English.msgOn, English.msgOff))
     End Sub
 
-    Private Sub cbHostsFileActions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbHostsFileActions.SelectedIndexChanged
+    Private Sub cbHostsFileActions_SelectedIndexChanged(sender As Object, e As EventArgs) _
+        Handles cbHostsFileActions.SelectedIndexChanged
         tlpSettings.Focus()
     End Sub
 
@@ -557,7 +563,8 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub cbStreamQuality_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbStreamQuality.SelectedIndexChanged
+    Private Sub cbStreamQuality_SelectedIndexChanged(sender As Object, e As EventArgs) _
+        Handles cbStreamQuality.SelectedIndexChanged
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(lblQuality.Text, cbStreamQuality.SelectedItem)
         tlpSettings.Focus()
@@ -589,11 +596,13 @@ Public Class NHLGamesMetro
         Next
     End Sub
 
-    Private Sub txtObsKey_TextChanged(sender As Object, e As EventArgs) Handles txtGameKey.TextChanged, txtAdKey.TextChanged
+    Private Sub txtObsKey_TextChanged(sender As Object, e As EventArgs) _
+        Handles txtGameKey.TextChanged, txtAdKey.TextChanged
         tgOBS.Enabled = txtAdKey.Text <> String.Empty AndAlso txtGameKey.Text <> String.Empty AndAlso tgModules.Checked
     End Sub
 
-    Private Sub chkSpotifyAnyMediaPlayer_CheckedChanged(sender As Object, e As EventArgs) Handles chkSpotifyAnyMediaPlayer.CheckedChanged
+    Private Sub chkSpotifyAnyMediaPlayer_CheckedChanged(sender As Object, e As EventArgs) _
+        Handles chkSpotifyAnyMediaPlayer.CheckedChanged
         If chkSpotifyAnyMediaPlayer.Checked Then
             chkSpotifyForceToStart.Checked = False
         End If
@@ -601,10 +610,12 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub pnlCalendar_MouseLeave(sender As Object, e As EventArgs) Handles flpCalendarPanel.MouseLeave
-        flpCalendarPanel.Visible = flpCalendarPanel.ClientRectangle.Contains(flpCalendarPanel.PointToClient(Cursor.Position))
+        flpCalendarPanel.Visible =
+            flpCalendarPanel.ClientRectangle.Contains(flpCalendarPanel.PointToClient(Cursor.Position))
     End Sub
 
-    Private Sub flpCalendarPanel_VisibleChanged(sender As Object, e As EventArgs) Handles flpCalendarPanel.VisibleChanged
+    Private Sub flpCalendarPanel_VisibleChanged(sender As Object, e As EventArgs) _
+        Handles flpCalendarPanel.VisibleChanged
         If flpCalendarPanel.Visible Then
             btnDate.BackColor = Color.FromArgb(0, 170, 210)
         Else
@@ -612,7 +623,8 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub tgShowTodayLiveGamesFirst_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowTodayLiveGamesFirst.CheckedChanged
+    Private Sub tgShowTodayLiveGamesFirst_CheckedChanged(sender As Object, e As EventArgs) _
+        Handles tgShowTodayLiveGamesFirst.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowTodayLiveGamesFirst, tgShowTodayLiveGamesFirst.Checked)
         TodayLiveGamesFirst = tgShowTodayLiveGamesFirst.Checked
         InvokeElement.LoadGames()
@@ -634,18 +646,29 @@ Public Class NHLGamesMetro
                                     My.Application.Info.Version.Revision)
         Dim report = $"NHLGames Bug Report {version}{vbCrLf}{vbCrLf}" &
                      $"Operating system: {My.Computer.Info.OSFullName.ToString()} {x64.ToString()}{vbTab}{vbCrLf}" &
-                     $"Internet: Connection test {If (My.Computer.Network.IsAvailable, "succeeded", "failed")}, ping google.com {If (My.Computer.Network.Ping("www.google.com"), "succeeded", "failed")}{vbTab}{vbCrLf}" &
+                     $"Internet: Connection test {If (My.Computer.Network.IsAvailable, "succeeded", "failed") _
+                         }, ping google.com {If (My.Computer.Network.Ping("www.google.com"), "succeeded", "failed")}{ _
+                         vbTab}{vbCrLf}" &
                      $"Form: {If (Not String.IsNullOrEmpty(lblDate.Text), "loaded", "not loaded")}, " &
                      $"{flpGames.Controls.Count} games currently on form, " &
-                     $"Spinner (games) {If (SpnLoadingVisible, "visible", "invisible")} {SpnLoadingValue.ToString()}/{SpnLoadingMaxValue.ToString()}, " &
-                     $"Spinner (stream) {If (SpnStreamingVisible, "visible", "invisible")} {SpnStreamingValue.ToString()}/{SpnStreamingMaxValue.ToString()}{vbTab}{vbCrLf}" &
-                     $"Servers: NHLGames IP {If (My.Computer.Network.Ping(ServerIp), "found", "not found")} ({cbServers.SelectedItem.ToString()}){vbTab}{vbCrLf}" &
-                     $"Hosts file: NHL.TV redirection is{If (HostsFile.TestEntry(), " working", "n't working")} (Hosts file tested) Entries: {HostsFile.GetEntries()}{vbTab}{vbCrLf}" &
+                     $"Spinner (games) {If (SpnLoadingVisible, "visible", "invisible")} {SpnLoadingValue.ToString()}/{ _
+                         SpnLoadingMaxValue.ToString()}, " &
+                     $"Spinner (stream) {If (SpnStreamingVisible, "visible", "invisible")} {SpnStreamingValue.ToString() _
+                         }/{SpnStreamingMaxValue.ToString()}{vbTab}{vbCrLf}" &
+                     $"Servers: NHLGames IP {If (My.Computer.Network.Ping(ServerIp), "found", "not found")} ({ _
+                         cbServers.SelectedItem.ToString()}){vbTab}{vbCrLf}" &
+                     $"Hosts file: NHL.TV redirection is{If (HostsFile.TestEntry(), " working", "n't working") _
+                         } (Hosts file tested) Entries: {HostsFile.GetEntries()}{vbTab}{vbCrLf}" &
                      $"Selected player: {player.ToString()}{vbTab}{vbCrLf}" &
-                     $"Streamer path: {streamerPath.ToString()} [{If (streamerPath.Equals(txtStreamerPath.Text), "on form", "not on form")}] [{If (streamerExists, "exe found", "exe not found")}]{vbTab}{vbCrLf}" &
-                     $"VLC path: {vlcPath.ToString()} [{If (vlcPath.Equals(txtVLCPath.Text), "on form", "not on form")}] [{If (vlcExists, "exe found", "exe not found")}]{vbTab}{vbCrLf}" &
-                     $"MPC path: {mpcPath.ToString()} [{If (mpcPath.Equals(txtMPCPath.Text), "on form", "not on form")}] [{If (mpcExists, "exe found", "exe not found")}]{vbTab}{vbCrLf}" &
-                     $"MPV path: {mpvPath.ToString()} [{If (mpvPath.Equals(txtMpvPath.Text), "on form", "not on form")}] [{If (mpvExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
+                     $"Streamer path: {streamerPath.ToString()} [{ _
+                         If (streamerPath.Equals(txtStreamerPath.Text), "on form", "not on form")}] [{ _
+                         If (streamerExists, "exe found", "exe not found")}]{vbTab}{vbCrLf}" &
+                     $"VLC path: {vlcPath.ToString()} [{If (vlcPath.Equals(txtVLCPath.Text), "on form", "not on form") _
+                         }] [{If (vlcExists, "exe found", "exe not found")}]{vbTab}{vbCrLf}" &
+                     $"MPC path: {mpcPath.ToString()} [{If (mpcPath.Equals(txtMPCPath.Text), "on form", "not on form") _
+                         }] [{If (mpcExists, "exe found", "exe not found")}]{vbTab}{vbCrLf}" &
+                     $"MPV path: {mpvPath.ToString()} [{If (mpvPath.Equals(txtMpvPath.Text), "on form", "not on form") _
+                         }] [{If (mpvExists, "exe found", "exe not found")}]{vbCrLf}{vbCrLf}" &
                      $"Console log: {vbTab}{txtConsole.Text.Replace($"{vbLf}{vbLf}", $"{vbTab}{vbCrLf}").ToString()}"
         Clipboard.SetText(report)
     End Sub
@@ -661,7 +684,7 @@ Public Class NHLGamesMetro
     Private Sub tbLiveRewind_ValueChanged(sender As Object, e As EventArgs) Handles tbLiveRewind.ValueChanged
         Dim minutesBehind = tbLiveRewind.Value*5
         lblLiveRewindDetails.Text = String.Format(
-            RmText.GetString("lblLiveRewindDetails"), 
+            RmText.GetString("lblLiveRewindDetails"),
             minutesBehind, Now.AddMinutes(- minutesBehind).ToString("h:mm tt", CultureInfo.InvariantCulture))
         Player.RenewArgs()
 
@@ -684,7 +707,8 @@ Public Class NHLGamesMetro
         End If
     End Sub
 
-    Private Sub cbLiveReplay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLiveReplay.SelectedIndexChanged
+    Private Sub cbLiveReplay_SelectedIndexChanged(sender As Object, e As EventArgs) _
+        Handles cbLiveReplay.SelectedIndexChanged
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(_lblLiveReplay.Text, cbLiveReplay.SelectedItem)
         tlpSettings.Focus()

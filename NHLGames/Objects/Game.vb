@@ -41,23 +41,23 @@ Namespace Objects
         Public ReadOnly Property IsLive As Boolean
             Get
                 Return GameState.Equals(GameStateEnum.InProgress) OrElse
-                    GameState.Equals(GameStateEnum.Ending) OrElse
-                    GameState.Equals(GameStateEnum.Ended)
+                       GameState.Equals(GameStateEnum.Ending) OrElse
+                       GameState.Equals(GameStateEnum.Ended)
             End Get
         End Property
 
         Public ReadOnly Property IsFinal As Boolean
             Get
                 Return GameState.Equals(GameStateEnum.Ended) OrElse
-                    GameState.Equals(GameStateEnum.OffTheAir) OrElse
-                    GameState.Equals(GameStateEnum.StreamEnded)
+                       GameState.Equals(GameStateEnum.OffTheAir) OrElse
+                       GameState.Equals(GameStateEnum.StreamEnded)
             End Get
         End Property
 
         Public ReadOnly Property IsOffTheAir As Boolean
             Get
                 Return GameState.Equals(GameStateEnum.OffTheAir) OrElse
-                    GameState.Equals(GameStateEnum.StreamEnded)
+                       GameState.Equals(GameStateEnum.StreamEnded)
             End Get
         End Property
 
@@ -83,8 +83,8 @@ Namespace Objects
 
         Public Function GetStream(streamType As StreamTypeEnum) As GameStream
             Return If (StreamsDict IsNot Nothing,
-                StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value,
-                New GameStream())
+                       StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value,
+                       New GameStream())
         End Function
 
         Public Function IsStreamDefined(streamType As StreamTypeEnum) As Boolean
@@ -94,7 +94,9 @@ Namespace Objects
         Public Sub SetGameDate(jDate As String)
             Dim dateTimeVal As DateTime
 
-            If (DateTime.TryParseExact(jDate, "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.None, dateTimeVal) = False) Then
+            If _
+                (DateTime.TryParseExact(jDate, "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.None,
+                                        dateTimeVal) = False) Then
                 dateTimeVal = Date.Parse(jDate)
             End If
 
@@ -103,7 +105,7 @@ Namespace Objects
 
         Public Function SetSeriesInfo(game As JObject) As Boolean
             If Not game.TryGetValue("seriesSummary", "gameNumber") And
-                game.TryGetValue("seriesSummary", "seriesStatusShort") Then
+               game.TryGetValue("seriesSummary", "seriesStatusShort") Then
                 Console.WriteLine(English.errorUnableToDecodeJson)
                 Return False
             End If
@@ -118,10 +120,14 @@ Namespace Objects
             AwayScore = game.SelectToken("teams.away.score").ToString()
             GamePeriod = game.SelectToken("linescore.currentPeriodOrdinal").ToString()
             GameTimeLeft = game.SelectToken("linescore.currentPeriodTimeRemaining").ToString()
-            IsInIntermission = game.SelectToken("linescore.intermissionInfo.inIntermission").ToString().ToLower().Equals("true")
+            IsInIntermission =
+                game.SelectToken("linescore.intermissionInfo.inIntermission").ToString().ToLower().Equals("true")
 
             If IsInIntermission Then
-                IntermissionTimeRemaining = Date.MinValue.AddSeconds(CType(game.SelectToken("linescore.intermissionInfo.intermissionTimeRemaining").ToString(), Integer))
+                IntermissionTimeRemaining =
+                    Date.MinValue.AddSeconds(
+                        CType(game.SelectToken("linescore.intermissionInfo.intermissionTimeRemaining").ToString(),
+                              Integer))
             End If
         End Sub
 
