@@ -69,7 +69,7 @@ Namespace Objects
 
         Public ReadOnly Property IsStreamable As Boolean
             Get
-                Return GameState > GameStateEnum.Pregame AndAlso GameState < GameStateEnum.Delayed
+                Return GameState > GameStateEnum.Pregame AndAlso GameState <= GameStateEnum.StreamEnded
             End Get
         End Property
 

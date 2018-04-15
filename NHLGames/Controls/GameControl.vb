@@ -127,7 +127,8 @@ Namespace Controls
             Else If _game.IsUnplayable Then
                 lblDivider.Visible = False
                 lblGameStatus.Visible = True
-                lblGameStatus.Text = _game.GameStateDetailed.ToUpper()
+                lblPeriod.Text = _game.GameStateDetailed.ToUpper()
+                lblGameStatus.Text = NHLGamesMetro.RmText.GetString($"enumGameState{_game.GameState}").ToUpper()
                 lblPeriod.BackColor = Color.FromKnownColor(KnownColor.DarkOrange)
 
                 SetRecordIcon(False)

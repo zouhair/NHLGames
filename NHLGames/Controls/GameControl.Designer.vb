@@ -133,11 +133,11 @@
         '
         Me.lblGameStatus.BackColor = System.Drawing.Color.Transparent
         Me.lblGameStatus.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.lblGameStatus.Location = New System.Drawing.Point(97, 35)
-        Me.lblGameStatus.Name = "lblGameStatus"
-        Me.lblGameStatus.Size = New System.Drawing.Size(117, 50)
-        Me.lblGameStatus.TabIndex = 25
-        Me.lblGameStatus.Text = "GAME_STATUS"
+            Me.lblGameStatus.Location = New System.Drawing.Point(97, 35)
+            Me.lblGameStatus.Name = "lblGameStatus"
+            Me.lblGameStatus.Size = New System.Drawing.Size(117, 50)
+            Me.lblGameStatus.TabIndex = 25
+            Me.lblGameStatus.Text = "GAME_STATUS"
         Me.lblGameStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblGameStatus.UseCustomBackColor = true
         Me.lblGameStatus.Visible = false

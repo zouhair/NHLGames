@@ -833,51 +833,51 @@
     <value>Camera view {0}</value>
     <comment>Game panel</comment>
   </data>
-  <data name="enumcancelled" xml:space="preserve">
+  <data name="enumGameState10" xml:space="preserve">
     <value>Cancelled</value>
     <comment>Game State Enum</comment>
   </data>
-  <data name="enumdelayed" xml:space="preserve">
+  <data name="enumGameState11" xml:space="preserve">
     <value>Delayed</value>
     <comment>Game State Enum</comment>
   </data>
-  <data name="enumended" xml:space="preserve">
+  <data name="enumGameState5" xml:space="preserve">
     <value>Ended</value>
     <comment>Game State Enum</comment>
   </data>
-  <data name="enumending" xml:space="preserve">
+  <data name="enumGameState3" xml:space="preserve">
     <value>In progress</value>
     <comment>Game State Enum</comment>
   </data>
-  <data name="enuminprogress" xml:space="preserve">
+  <data name="enumGameState4" xml:space="preserve">
     <value>In progress</value>
     <comment>Game State Enum</comment>
   </data>
-  <data name="enumofftheair" xml:space="preserve">
+  <data name="enumGameState6" xml:space="preserve">
     <value>Final</value>
     <comment>Game State Enum</comment>
   </data>
-  <data name="enumpostponed" xml:space="preserve">
+  <data name="enumGameState9" xml:space="preserve">
     <value>Postponed</value>
     <comment>Game State Enum</comment>
   </data>
-  <data name="enumpregame" xml:space="preserve">
+  <data name="enumGameState2" xml:space="preserve">
     <value>Pregame</value>
     <comment>Game State Enum</comment>
   </data>
-  <data name="enumscheduled" xml:space="preserve">
+  <data name="enumGameState1" xml:space="preserve">
     <value>Scheduled</value>
     <comment>Game State Enum</comment>
   </data>
-  <data name="enumstreamended" xml:space="preserve">
+  <data name="enumGameState7" xml:space="preserve">
     <value>Final</value>
     <comment>Game State Enum</comment>
   </data>
-  <data name="enumtobedetermined" xml:space="preserve">
-    <value>To Be Determined</value>
+  <data name="enumGameState8" xml:space="preserve">
+    <value>TBD</value>
     <comment>Game State Enum</comment>
   </data>
-  <data name="enumundefined" xml:space="preserve">
+  <data name="enumGameState0" xml:space="preserve">
     <value>Undefined</value>
     <comment>Game State Enum</comment>
   </data>

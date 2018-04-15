@@ -299,110 +299,110 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Cancelled.
+        '''  Looks up a localized string similar to Undefined.
         '''</summary>
-        Friend Shared ReadOnly Property enumcancelled() As String
+        Friend Shared ReadOnly Property enumGameState0() As String
             Get
-                Return ResourceManager.GetString("enumcancelled", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Delayed.
-        '''</summary>
-        Friend Shared ReadOnly Property enumdelayed() As String
-            Get
-                Return ResourceManager.GetString("enumdelayed", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Ended.
-        '''</summary>
-        Friend Shared ReadOnly Property enumended() As String
-            Get
-                Return ResourceManager.GetString("enumended", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to In progress.
-        '''</summary>
-        Friend Shared ReadOnly Property enumending() As String
-            Get
-                Return ResourceManager.GetString("enumending", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to In progress.
-        '''</summary>
-        Friend Shared ReadOnly Property enuminprogress() As String
-            Get
-                Return ResourceManager.GetString("enuminprogress", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Final.
-        '''</summary>
-        Friend Shared ReadOnly Property enumofftheair() As String
-            Get
-                Return ResourceManager.GetString("enumofftheair", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Postponed.
-        '''</summary>
-        Friend Shared ReadOnly Property enumpostponed() As String
-            Get
-                Return ResourceManager.GetString("enumpostponed", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Pregame.
-        '''</summary>
-        Friend Shared ReadOnly Property enumpregame() As String
-            Get
-                Return ResourceManager.GetString("enumpregame", resourceCulture)
+                Return ResourceManager.GetString("enumGameState0", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Looks up a localized string similar to Scheduled.
         '''</summary>
-        Friend Shared ReadOnly Property enumscheduled() As String
+        Friend Shared ReadOnly Property enumGameState1() As String
             Get
-                Return ResourceManager.GetString("enumscheduled", resourceCulture)
+                Return ResourceManager.GetString("enumGameState1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Cancelled.
+        '''</summary>
+        Friend Shared ReadOnly Property enumGameState10() As String
+            Get
+                Return ResourceManager.GetString("enumGameState10", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Delayed.
+        '''</summary>
+        Friend Shared ReadOnly Property enumGameState11() As String
+            Get
+                Return ResourceManager.GetString("enumGameState11", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Pregame.
+        '''</summary>
+        Friend Shared ReadOnly Property enumGameState2() As String
+            Get
+                Return ResourceManager.GetString("enumGameState2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to In progress.
+        '''</summary>
+        Friend Shared ReadOnly Property enumGameState3() As String
+            Get
+                Return ResourceManager.GetString("enumGameState3", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to In progress.
+        '''</summary>
+        Friend Shared ReadOnly Property enumGameState4() As String
+            Get
+                Return ResourceManager.GetString("enumGameState4", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Ended.
+        '''</summary>
+        Friend Shared ReadOnly Property enumGameState5() As String
+            Get
+                Return ResourceManager.GetString("enumGameState5", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Looks up a localized string similar to Final.
         '''</summary>
-        Friend Shared ReadOnly Property enumstreamended() As String
+        Friend Shared ReadOnly Property enumGameState6() As String
             Get
-                Return ResourceManager.GetString("enumstreamended", resourceCulture)
+                Return ResourceManager.GetString("enumGameState6", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to To Be Determined.
+        '''  Looks up a localized string similar to Final.
         '''</summary>
-        Friend Shared ReadOnly Property enumtobedetermined() As String
+        Friend Shared ReadOnly Property enumGameState7() As String
             Get
-                Return ResourceManager.GetString("enumtobedetermined", resourceCulture)
+                Return ResourceManager.GetString("enumGameState7", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Undefined.
+        '''  Looks up a localized string similar to TBD.
         '''</summary>
-        Friend Shared ReadOnly Property enumundefined() As String
+        Friend Shared ReadOnly Property enumGameState8() As String
             Get
-                Return ResourceManager.GetString("enumundefined", resourceCulture)
+                Return ResourceManager.GetString("enumGameState8", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Postponed.
+        '''</summary>
+        Friend Shared ReadOnly Property enumGameState9() As String
+            Get
+                Return ResourceManager.GetString("enumGameState9", resourceCulture)
             End Get
         End Property
         

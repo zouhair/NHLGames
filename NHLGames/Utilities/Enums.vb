@@ -1,7 +1,7 @@
 ﻿Namespace Utilities
     Public Enum GameStateEnum
 #Disable Warning InconsistentNaming
-        ToBeDetermined = 0
+        Undefined = 0
         Scheduled = 1
         Pregame = 2
         InProgress = 3
@@ -9,10 +9,10 @@
         Ended = 5
         OffTheAir = 6
         StreamEnded = 7
-        Delayed = 8
-        Postponed = 9
+        ToBeDetermined = 8 'playoff game5,6,7
+        Postponed = 9 'snow storm
         Cancelled = 10
-        Undefined = 11
+        Delayed = 11
     End Enum
 
     Public Enum GameTypeEnum
