@@ -42,8 +42,8 @@ Namespace Utilities
         End Function
 
         Public Shared Sub PressKey(keyCode As Byte)
-            keybd_event(KeyCode, &H45, &H01, 0)
-            keybd_event(KeyCode, &H45, &H02, 0)
+            keybd_event(keyCode, &H45, &H1, 0)
+            keybd_event(keyCode, &H45, &H2, 0)
         End Sub
 
         Public Shared Function SetForegroundWindowFromHandle(hWnd As IntPtr) As Boolean

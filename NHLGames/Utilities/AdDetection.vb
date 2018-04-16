@@ -7,12 +7,12 @@ Imports NHLGames.Objects.Modules
 Namespace Utilities
     Public Class AdDetection
         Private _mediaPlayerProcesses As List(Of Integer)
-        Private ReadOnly _adModules As List(Of IAdModule) = new List(Of IAdModule)
+        Private ReadOnly _adModules As List(Of IAdModule) = New List(Of IAdModule)
         Private _previousAdPlayingState As Boolean
         Private _firstAdCheck As Boolean
         Private _initializationTasks As List(Of Task)
         Private Shared _settings As AdDetectionConfigs
-        Private ReadOnly _lastSoundTime As Dictionary(Of Integer, DateTime) = new Dictionary(Of Integer, DateTime)
+        Private ReadOnly _lastSoundTime As Dictionary(Of Integer, DateTime) = New Dictionary(Of Integer, DateTime)
 
         Private Property RequiredSilenceMilliseconds As Integer = 500
         Private ReadOnly Property PollPeriodMilliseconds As Integer = 500
@@ -20,7 +20,7 @@ Namespace Utilities
 
         Private ReadOnly Property MediaPlayerProcesses As ReadOnlyCollection(Of Integer)
             Get
-                Return new ReadOnlyCollection(of Integer)(_mediaPlayerProcesses)
+                Return New ReadOnlyCollection(Of Integer)(_mediaPlayerProcesses)
             End Get
         End Property
 
@@ -29,7 +29,7 @@ Namespace Utilities
                 Return DetectionEnabled
             End Get
             Set
-                DetectionEnabled = value
+                DetectionEnabled = Value
             End Set
         End Property
 
@@ -51,7 +51,9 @@ Namespace Utilities
                 End If
             Next
 
-            Return _lastSoundTime.Values.All(Function(x) DateTime.Now - x > TimeSpan.FromMilliseconds(RequiredSilenceMilliseconds))
+            Return _
+                _lastSoundTime.Values.All(
+                    Function(x) DateTime.Now - x > TimeSpan.FromMilliseconds(RequiredSilenceMilliseconds))
         End Function
 
         Private Sub AddOrUpdateLastSoundOccured(processId As Integer)
@@ -68,14 +70,14 @@ Namespace Utilities
             Dim sessionsDefaultAudioEndPointDevice = defaultAudioEndPointDevice.AudioSessionManager.Sessions
             For i = 0 To sessionsDefaultAudioEndPointDevice.Count - 1
                 If sessionsDefaultAudioEndPointDevice(i).GetProcessID <> processId Then Continue For
-                Dim volumeList = new List(Of Double)
+                Dim volumeList = New List(Of Double)
                 For j = 0 To 1
-                    Dim audioMeter As audioMeterInformation =
+                    Dim audioMeter As AudioMeterInformation =
                             sessionsDefaultAudioEndPointDevice(i).AudioMeterInformation
                     volumeList.Add(audioMeter.MasterPeakValue)
                     Thread.Sleep(100)
                 Next
-                Return (volumeList.Item(0) + volumeList.Item(1))/2.0
+                Return (volumeList.Item(0) + volumeList.Item(1)) / 2.0
             Next
             Return 0.0
         End Function
@@ -90,7 +92,7 @@ Namespace Utilities
             SyncLock _adModules
                 _adModules.Add(m)
                 Return Task.Run(Sub()
-                    m.Initialize()
+                                    m.Initialize()
                                 End Sub)
             End SyncLock
         End Function
@@ -118,11 +120,11 @@ Namespace Utilities
                     Dim m = adModule
                     If _previousAdPlayingState Then
                         Task.Run(Sub()
-                            m.AdStarted()
+                                     m.AdStarted()
                                  End Sub)
                     Else
                         Task.Run(Sub()
-                            m.AdEnded()
+                                     m.AdEnded()
                                  End Sub)
                     End If
                 Next
@@ -137,13 +139,13 @@ Namespace Utilities
             End Try
             While DetectionEnabled
                 Try
-                    If Not IsMediaPlayerCurrentlyPlaying()
+                    If Not IsMediaPlayerCurrentlyPlaying() Then
                         Await Task.Delay(TimeSpan.FromSeconds(2))
                         Continue While
                     End If
                     Await Task.Delay(PollPeriodMilliseconds)
                     Dim newAdPlayingState = IsAdCurrentlyPlaying()
-                    If _firstAdCheck OrElse newAdPlayingState <> _previousAdPlayingState
+                    If _firstAdCheck OrElse newAdPlayingState <> _previousAdPlayingState Then
                         _firstAdCheck = False
                         _previousAdPlayingState = newAdPlayingState
                         NotifyModules()
@@ -156,18 +158,22 @@ Namespace Utilities
 
         Private Function IsMediaPlayerCurrentlyPlaying() As Boolean
             Dim vlcProcesses = Process.GetProcessesByName("vlc").Where(
-                Function(x) x.MainWindowTitle = "fd://0 - VLC media player" OrElse x.MainWindowTitle.ToLower().Contains(" @ ")).
-                Select(Function(x) x.Id)
+                Function(x) _
+                                                                          x.MainWindowTitle =
+                                                                          "fd://0 - VLC media player" OrElse
+                                                                          x.MainWindowTitle.ToLower().Contains(" @ ")).
+                    Select(Function(x) x.Id)
             Dim mpc64Processes = Process.GetProcessesByName("MPC-HC64").Where(
                 Function(x) x.MainWindowTitle = "stdin" OrElse x.MainWindowTitle.ToLower().Contains(" @ ")).
-                Select(Function(x) x.Id)
+                    Select(Function(x) x.Id)
             Dim mpc32Processes = Process.GetProcessesByName("MPC-HC").Where(
                 Function(x) x.MainWindowTitle = "stdin" OrElse x.MainWindowTitle.ToLower().Contains(" @ ")).
-                Select(Function(x) x.Id)
+                    Select(Function(x) x.Id)
             Dim mpvProcesses = Process.GetProcessesByName("mpv").Select(Function(x) x.Id)
 
-            _mediaPlayerProcesses = vlcProcesses.Concat(mpc64Processes).Concat(mpc32Processes).Concat(mpvProcesses).ToList()
-            return _mediaPlayerProcesses.Count <> 0
+            _mediaPlayerProcesses =
+                vlcProcesses.Concat(mpc64Processes).Concat(mpc32Processes).Concat(mpvProcesses).ToList()
+            Return _mediaPlayerProcesses.Count <> 0
         End Function
 
         Public Shared Sub Renew(Optional forceSet As Boolean = False)
@@ -192,7 +198,8 @@ Namespace Utilities
                 _settings.EnabledObsAdSceneHotKey.Alt = form.chkAdAlt.Checked
                 _settings.EnabledObsAdSceneHotKey.Shift = form.chkAdShift.Checked
 
-                ApplicationSettings.SetValue(SettingsEnum.AdDetection, Serialization.SerializeObject (Of AdDetectionConfigs)(_settings))
+                ApplicationSettings.SetValue(SettingsEnum.AdDetection,
+                                             Serialization.SerializeObject(Of AdDetectionConfigs)(_settings))
             End If
         End Sub
     End Class

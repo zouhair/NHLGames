@@ -5,9 +5,11 @@ Imports NHLGames.My.Resources
 
 Namespace Utilities
     Public Class HostsFile
-        Private Shared ReadOnly Property HostsPath As String = String.Format("{0}\drivers\etc\", Environment.SystemDirectory)
+        Private Shared ReadOnly Property HostsPath As String _
+            = String.Format("{0}\drivers\etc\", Environment.SystemDirectory)
 
-        Private Shared ReadOnly Property HostsFilePath As String = String.Format("{0}\drivers\etc\hosts", Environment.SystemDirectory)
+        Private Shared ReadOnly Property HostsFilePath As String _
+            = String.Format("{0}\drivers\etc\hosts", Environment.SystemDirectory)
 
         Public Shared Function TestEntry() As Boolean
             Dim resolvedIp = ""
@@ -29,8 +31,8 @@ Namespace Utilities
             Dim hostsFileLines = input.Replace(vbCr, String.Empty).Replace(vbTab, " ").Split(vbLf)
 
             Return (From entry In hostsFileLines
-                Where Not entry.Contains("#") AndAlso
-                      Not entry.Equals(String.Empty)).
+                    Where Not entry.Contains("#") AndAlso
+                          Not entry.Equals(String.Empty)).
                 Aggregate(String.Empty,
                           Function(current, entry) current & entry & "; ")
         End Function
@@ -58,7 +60,7 @@ Namespace Utilities
 
         Private Shared Function ValidHostFileLine(line As String) As Boolean
             Return line.Contains(NHLGamesMetro.DomainName) OrElse
-                line.Contains(ApplicationSettings.Read (Of String)(SettingsEnum.SelectedServer, String.Empty))
+                   line.Contains(ApplicationSettings.Read(Of String)(SettingsEnum.SelectedServer, String.Empty))
         End Function
 
         Public Shared Sub CleanHosts()
@@ -66,7 +68,7 @@ Namespace Utilities
         End Sub
 
         Public Shared Sub AddEntry(Optional viewChanges As Boolean = True)
-            If UpdateHosts() Then 
+            If UpdateHosts() Then
                 If viewChanges Then MessageOpenHostsFile()
             End If
         End Sub
@@ -75,13 +77,13 @@ Namespace Utilities
             If InvokeElement.MsgBoxBlue(
                 NHLGamesMetro.RmText.GetString("msgViewHostsText"),
                 NHLGamesMetro.RmText.GetString("msgViewHosts"),
-                MessageBoxButtons.YesNo) = DialogResult.Yes AndAlso FileAccess.HasAccess(HostsFilePath) Then 
+                MessageBoxButtons.YesNo) = DialogResult.Yes AndAlso FileAccess.HasAccess(HostsFilePath) Then
                 Process.Start("NOTEPAD", HostsFilePath)
             End If
         End Sub
 
         Private Shared Function UpdateHosts(Optional clean As Boolean = False) As Boolean
-            If Not (EnsureAdmin() AndAlso FileAccess.HasAccess(HostsFilePath, true)) Then Return False
+            If Not (EnsureAdmin() AndAlso FileAccess.HasAccess(HostsFilePath, True)) Then Return False
 
             Dim fileIsReadonly As Boolean = FileAccess.IsFileReadonly(HostsFilePath)
 
@@ -115,7 +117,7 @@ Namespace Utilities
 
             Return True
         End Function
-        
+
         Public Shared Sub SetServerIp()
             If NHLGamesMetro.HostName.Equals(String.Empty) Then
                 NHLGamesMetro.ServerIp = String.Empty

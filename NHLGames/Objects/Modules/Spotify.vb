@@ -20,12 +20,19 @@ Namespace Objects.Modules
 
         Private Shared ReadOnly _
             WebRequestParams = "&ref=&cors=&_=" &
-                               Convert.ToInt32((Datetime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds)
+                               Convert.ToInt32((DateTime.UtcNow - New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds)
 
         Private ReadOnly _spotifyPossiblePaths() = New String() {
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "spotify\\spotify.exe"),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft\\WindowsApps\\Spotify.exe")
-        }
+                                                                    Path.Combine(
+                                                                        Environment.GetFolderPath(
+                                                                            Environment.SpecialFolder.ApplicationData),
+                                                                        "spotify\\spotify.exe"),
+                                                                    Path.Combine(
+                                                                        Environment.GetFolderPath(
+                                                                            Environment.SpecialFolder.
+                                                                                                     LocalApplicationData),
+                                                                        "Microsoft\\WindowsApps\\Spotify.exe")
+                                                                }
 
         Private _authKey As String
         Private _cfIdKey As String
@@ -63,7 +70,7 @@ Namespace Objects.Modules
                 Dim spotifyHandle? = Process.GetProcessById(_spotifyId).MainWindowHandle
                 NativeMethods.SetForegroundWindowFromHandle(spotifyHandle)
                 Thread.Sleep(100)
-                SendKeys.SendWait(keyTab) 'to unfocus any current field on spotify
+                SendKeys.SendWait(KeyTab) 'to unfocus any current field on spotify
                 SendKeys.SendWait(KeyNextSong)
                 NativeMethods.SetBackgroundWindowFromHandle(spotifyHandle)
                 NativeMethods.SetForegroundWindowFromHandle(curr)
@@ -95,7 +102,7 @@ Namespace Objects.Modules
                     Process.GetProcessById(_spotifyId)
                 Catch ex As Exception
                     InvokeElement.ModuleSpotifyOff()
-                    _initialized = false
+                    _initialized = False
                 End Try
             End If
             Return _initialized
@@ -119,7 +126,7 @@ Namespace Objects.Modules
             End If
             If Not SpotifyIsInstalled() Then
                 _stopIt = True
-                InvokeElement.ModuleSpotifyOff
+                InvokeElement.ModuleSpotifyOff()
                 Console.WriteLine(English.msgSpotifyIsntInstalled)
             End If
 
@@ -145,7 +152,7 @@ Namespace Objects.Modules
                     If ConnectInternal() Then Return
                 Catch ex As Exception
                     _stopIt = True
-                    InvokeElement.ModuleSpotifyOff
+                    InvokeElement.ModuleSpotifyOff()
                     Console.WriteLine(English.msgSpotifyException, ex.Message)
                 End Try
                 Task.Delay(_connectSleep)
@@ -177,8 +184,8 @@ Namespace Objects.Modules
         End Function
 
         Private Sub Query(request As String)
-            Dim auth = If (_authKey IsNot Nothing, $"&oauth={_authKey}", "")
-            Dim cfid = If (_cfIdKey IsNot Nothing, $"&csrf={_cfIdKey}", "")
+            Dim auth = If(_authKey IsNot Nothing, $"&oauth={_authKey}", "")
+            Dim cfid = If(_cfIdKey IsNot Nothing, $"&csrf={_cfIdKey}", "")
             Dim address = $"http://127.0.0.1:4381/{request}{WebRequestParams}{auth}{cfid}"
 
             Dim myHttpWebRequest As HttpWebRequest = GetMyHttpWebRequest(address)
@@ -194,8 +201,8 @@ Namespace Objects.Modules
             Dim address = $"http://open.spotify.com/token"
             Dim myHttpWebRequest = GetMyHttpWebRequest(address)
             raw = GetResponseToString(myHttpWebRequest)
-            Dim dict = JsonConvert.DeserializeObject (Of Dictionary(Of string, Object))(raw)
-            Return If (dict Is Nothing, "", dict("t").ToString())
+            Dim dict = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(raw)
+            Return If(dict Is Nothing, "", dict("t").ToString())
         End Function
 
         Private Shared Function GetCfId() As String
@@ -205,12 +212,12 @@ Namespace Objects.Modules
             raw = $"[{GetResponseToString(myHttpWebRequest)}]"
 
             Dim res = raw.Replace($"\", $"")
-            Dim cfIdList = JsonConvert.DeserializeObject (Of List(Of CfId))(res)
+            Dim cfIdList = JsonConvert.DeserializeObject(Of List(Of CfId))(res)
 
             If cfIdList Is Nothing Or cfIdList.Count <> 1 Then
                 Return ""
             End If
-            Return If (cfidList(0).Error Is Nothing, cfIdList(0).Token, "")
+            Return If(cfIdList(0).Error Is Nothing, cfIdList(0).Token, "")
         End Function
 
         Private Shared Function GetResponseToString(webRequest As HttpWebRequest) As String

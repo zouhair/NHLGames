@@ -24,11 +24,12 @@ Namespace Utilities
             Console.WriteLine(English.msgAddReadOnly, path)
         End Sub
 
-        Private Shared Function RemoveAttribute(attributes As FileAttributes, attributesToRemove As FileAttributes) As FileAttributes
+        Private Shared Function RemoveAttribute(attributes As FileAttributes, attributesToRemove As FileAttributes) _
+            As FileAttributes
             Return attributes And Not attributesToRemove
         End Function
 
-        Public Shared Function HasAccess(filePath As String, Optional writeAccess As Boolean = true) As Boolean
+        Public Shared Function HasAccess(filePath As String, Optional writeAccess As Boolean = True) As Boolean
             Try
                 If writeAccess Then
                     Using File.Open(filePath & ".bak", FileMode.OpenOrCreate, IO.FileAccess.ReadWrite, FileShare.None)

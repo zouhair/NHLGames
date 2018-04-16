@@ -31,9 +31,11 @@ Namespace Objects
             Me.Type = type
             CdnParameter = If(game.IsOffTheAir,
                               CdnTypeEnum.Akc,
-                              ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, New GameWatchArguments).Cdn)
-            GameUrl = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName, DateHelper.GetPacificTime(Game.GameDate).ToString("yyyy-MM-dd"), PlayBackId)
-            Title = $"{Game.AwayAbbrev} vs {Game.HomeAbbrev} on {Network}"
+                              ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs,
+                                                                               New GameWatchArguments).Cdn)
+            GameUrl = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName,
+                                    DateHelper.GetPacificTime(game.GameDate).ToString("yyyy-MM-dd"), PlayBackId)
+            Title = $"{game.AwayAbbrev} vs {game.HomeAbbrev} on {Network}"
         End Sub
 
         Protected Overridable Sub Dispose(disposing As Boolean)

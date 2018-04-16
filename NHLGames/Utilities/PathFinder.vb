@@ -25,7 +25,9 @@ Namespace Utilities
         End Function
 
         Public Shared Function GetPathOfVlc() As String
-            Dim path = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\vlc.exe", "", Nothing)
+            Dim path =
+                    My.Computer.Registry.GetValue(
+                        "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\vlc.exe", "", Nothing)
             If path = Nothing Then
                 path = _ProgramFiles("\VideoLAN\VLC\vlc.exe")
             End If

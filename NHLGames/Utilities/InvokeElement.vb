@@ -4,14 +4,15 @@ Imports NHLGames.Objects
 
 Namespace Utilities
     Public Class InvokeElement
-        Public Async Shared Sub LoadGames()
+        Public Shared Async Sub LoadGames()
             NHLGamesMetro.FormInstance.ClearGamePanel()
             Await Task.Run(AddressOf GameFetcher.LoadGames).ConfigureAwait(False)
         End Sub
 
         Public Shared Sub SetFormStatusLabel(msg As String)
             If NHLGamesMetro.FormInstance.InvokeRequired Then
-                Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String)(AddressOf SetFormStatusLabel), msg)
+                Dim asyncResult =
+                        NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String)(AddressOf SetFormStatusLabel), msg)
                 EndInvokeOf(asyncResult)
             Else
                 NHLGamesMetro.FormInstance.lblStatus.Text = msg
@@ -20,7 +21,9 @@ Namespace Utilities
 
         Public Shared Sub SetGameTabControls(enabled As Boolean)
             If NHLGamesMetro.FormInstance.InvokeRequired Then
-                Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of Boolean)(AddressOf SetGameTabControls), enabled)
+                Dim asyncResult =
+                        NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of Boolean)(AddressOf SetGameTabControls),
+                                                               enabled)
                 EndInvokeOf(asyncResult)
             Else
                 NHLGamesMetro.FormInstance.btnDate.Enabled = enabled
@@ -49,17 +52,19 @@ Namespace Utilities
 
         Public Shared Sub NewGamesFound(gamesDict As List(Of Game))
             If NHLGamesMetro.FormInstance.InvokeRequired Then
-                Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of List(Of Game))(AddressOf NewGamesFound), gamesDict)
+                Dim asyncResult =
+                        NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of List(Of Game))(AddressOf NewGamesFound),
+                                                               gamesDict)
                 EndInvokeOf(asyncResult)
             Else
                 NHLGamesMetro.FormInstance.ClearGamePanel()
                 NHLGamesMetro.FormInstance.flpGames.Controls.AddRange((From game In gamesDict Select New GameControl(
                     game,
-                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowScores, False),
-                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowLiveScores, False),
-                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowSeriesRecord, False),
-                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowTeamCityAbr, False),
-                    ApplicationSettings.Read (Of Boolean)(SettingsEnum.ShowLiveTime, False))).ToArray())
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowSeriesRecord, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowTeamCityAbr, False),
+                    ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveTime, False))).ToArray())
             End If
         End Sub
 
@@ -67,7 +72,10 @@ Namespace Utilities
             As DialogResult
             Dim result = New DialogResult()
             If NHLGamesMetro.FormInstance.InvokeRequired Then
-                Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxRed), message, title, buttons)
+                Dim asyncResult =
+                        NHLGamesMetro.FormInstance.BeginInvoke(
+                            New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxRed), message, title,
+                            buttons)
                 EndInvokeOf(asyncResult)
             Else
                 NHLGamesMetro.FormInstance.tabMenu.SelectedIndex = 2
@@ -84,7 +92,10 @@ Namespace Utilities
             As DialogResult
             Dim result = New DialogResult()
             If NHLGamesMetro.FormInstance.InvokeRequired Then
-                Dim asyncResult = NHLGamesMetro.FormInstance.BeginInvoke(New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxBlue), message, title, buttons)
+                Dim asyncResult =
+                        NHLGamesMetro.FormInstance.BeginInvoke(
+                            New Action(Of String, String, MessageBoxButtons)(AddressOf MsgBoxBlue), message, title,
+                            buttons)
                 EndInvokeOf(asyncResult)
             Else
                 result = MetroMessageBox.Show(NHLGamesMetro.FormInstance,

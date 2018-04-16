@@ -2,11 +2,11 @@
 
 Namespace Utilities
     Public Class GameFetcher
-        Public Shared Sub StreamingProgress
+        Public Shared Sub StreamingProgress()
             ResetLoadingProgress()
             NHLGamesMetro.FormInstance.spnStreaming.Visible = NHLGamesMetro.SpnStreamingVisible
             If NHLGamesMetro.SpnStreamingValue < NHLGamesMetro.FormInstance.spnStreaming.Maximum And
-                NHLGamesMetro.SpnStreamingValue >= 0 Then
+               NHLGamesMetro.SpnStreamingValue >= 0 Then
                 NHLGamesMetro.FormInstance.spnStreaming.Value = NHLGamesMetro.SpnStreamingValue
             End If
 
@@ -18,25 +18,25 @@ Namespace Utilities
             End If
         End Sub
 
-        Private Shared Sub ResetStreaminProgress
+        Private Shared Sub ResetStreaminProgress()
             NHLGamesMetro.SpnStreamingVisible = False
             NHLGamesMetro.SpnStreamingValue = 0
             NHLGamesMetro.FormInstance.spnStreaming.Value = 0
             NHLGamesMetro.FormInstance.spnStreaming.Visible = False
         End Sub
 
-        Private Shared Sub ResetLoadingProgress
+        Private Shared Sub ResetLoadingProgress()
             NHLGamesMetro.SpnLoadingVisible = False
             NHLGamesMetro.SpnLoadingValue = 0
             NHLGamesMetro.FormInstance.spnLoading.Value = 0
             NHLGamesMetro.FormInstance.spnLoading.Visible = False
         End Sub
 
-        Public Shared Sub LoadingProgress
+        Public Shared Sub LoadingProgress()
             ResetStreaminProgress()
             NHLGamesMetro.FormInstance.spnLoading.Visible = NHLGamesMetro.SpnLoadingVisible
             If NHLGamesMetro.SpnLoadingValue < NHLGamesMetro.FormInstance.spnLoading.Maximum And
-                NHLGamesMetro.SpnLoadingValue >= 0 Then
+               NHLGamesMetro.SpnLoadingValue >= 0 Then
                 NHLGamesMetro.FormInstance.spnLoading.Value = NHLGamesMetro.SpnLoadingValue
             End If
 
@@ -72,11 +72,11 @@ Namespace Utilities
 
             InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgLoadingGames"))
 
-            Dim gm = new GameManager()
+            Dim gm = New GameManager()
             Try
                 games = Await gm.GetGamesAsync()
 
-                NHLGamesMetro.SpnLoadingValue = NHLGamesMetro.spnLoadingMaxValue - 1
+                NHLGamesMetro.SpnLoadingValue = NHLGamesMetro.SpnLoadingMaxValue - 1
                 Await Task.Delay(100)
 
                 If games IsNot Nothing Then
@@ -100,12 +100,12 @@ Namespace Utilities
 
         Private Shared Function SortGames(games As Game()) As List(Of Game)
             If NHLGamesMetro.TodayLiveGamesFirst Then
-                Return games.OrderBy (Of Boolean)(Function(val) val.IsUnplayable).
-                    ThenBy (Of Boolean)(Function(val) val.IsOffTheAir).
-                    ThenBy (Of Long)(Function(val) val.GameDate.Ticks).ToList()
+                Return games.OrderBy(Of Boolean)(Function(val) val.IsUnplayable).
+                    ThenBy(Of Boolean)(Function(val) val.IsOffTheAir).
+                    ThenBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
             Else
-                Return games.OrderBy (Of Boolean)(Function(val) val.IsUnplayable).
-                    ThenBy (Of Long)(Function(val) val.GameDate.Ticks).ToList()
+                Return games.OrderBy(Of Boolean)(Function(val) val.IsUnplayable).
+                    ThenBy(Of Long)(Function(val) val.GameDate.Ticks).ToList()
             End If
         End Function
 
