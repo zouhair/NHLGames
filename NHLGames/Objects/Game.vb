@@ -47,14 +47,6 @@ Namespace Objects
             End Get
         End Property
 
-        'Public ReadOnly Property IsFinal As Boolean
-        '    Get
-        '        Return GameState.Equals(GameStateEnum.Ended) OrElse
-        '               GameState.Equals(GameStateEnum.OffTheAir) OrElse
-        '               GameState.Equals(GameStateEnum.StreamEnded)
-        '    End Get
-        'End Property
-
         Public ReadOnly Property IsOffTheAir As Boolean
             Get
                 Return GameState.Equals(GameStateEnum.OffTheAir) OrElse
