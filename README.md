@@ -75,7 +75,7 @@ Use the refresh button (at the right) to refresh the current day games.
 ### ///_Game panel_
 Game panels can be customize to show or hide infos, it can be set in settings. Only today's games will show with a blue frame, like the one below :
 
-![image](https://user-images.githubusercontent.com/23088305/32305019-40a1e596-bf49-11e7-89ab-ad12d2cfa573.png)
+![image](https://user-images.githubusercontent.com/23088305/38785698-79bfe94e-40f0-11e8-85c6-505119cdd0c1.png)
 
 Today's games are blue:
 - Upcoming games : blue frame
