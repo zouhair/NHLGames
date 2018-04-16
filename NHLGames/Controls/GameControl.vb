@@ -162,7 +162,7 @@ Namespace Controls
                                   Replace("wins", NHLGamesMetro.RmText.GetString("gameSeriesWin")).
                                   Replace("leads", NHLGamesMetro.RmText.GetString("gameSeriesLead"))).
                                   ToUpper(), seriesStatusShort)
-                Dim isSeriesRecordVisible = showSeriesRecord AndAlso _game.SeriesGameStatus.Length > 0 AndAlso (showScores OrElse _game.IsLive)
+                Dim isSeriesRecordVisible = showSeriesRecord AndAlso _game.SeriesGameStatus.Length > 0 AndAlso (showScores OrElse Not _game.IsOffTheAir)
                 lblNotInSeason.Text = If(isSeriesRecordVisible, seriesStatusLong, seriesStatusShort)
             End If
 
