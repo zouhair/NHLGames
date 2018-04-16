@@ -10,6 +10,7 @@ Namespace Objects
         Private _disposedValue As Boolean
 
         Public Property StreamsDict As Dictionary(Of StreamTypeEnum, GameStream)
+        Public Property StreamsUnknown As List(Of GameStream)
         Public Property GameId As String
         Public Property GameType As GameTypeEnum 'Get type of the game : 1 preseason, 2 regular, 3 series
         Public Property GameDate As DateTime
@@ -46,13 +47,13 @@ Namespace Objects
             End Get
         End Property
 
-        Public ReadOnly Property IsFinal As Boolean
-            Get
-                Return GameState.Equals(GameStateEnum.Ended) OrElse
-                       GameState.Equals(GameStateEnum.OffTheAir) OrElse
-                       GameState.Equals(GameStateEnum.StreamEnded)
-            End Get
-        End Property
+        'Public ReadOnly Property IsFinal As Boolean
+        '    Get
+        '        Return GameState.Equals(GameStateEnum.Ended) OrElse
+        '               GameState.Equals(GameStateEnum.OffTheAir) OrElse
+        '               GameState.Equals(GameStateEnum.StreamEnded)
+        '    End Get
+        'End Property
 
         Public ReadOnly Property IsOffTheAir As Boolean
             Get
@@ -75,16 +76,14 @@ Namespace Objects
 
         Public ReadOnly Property AreAnyStreamsAvailable As Boolean
             Get
-                Return (StreamsDict IsNot Nothing) AndAlso (StreamsDict.Count > 0) AndAlso
-                       (StreamsDict.Any(Function(x) x.Value IsNot Nothing AndAlso Not x.Value.IsBroken) OrElse
-                        IsStreamable)
+                Return (StreamsDict IsNot Nothing AndAlso StreamsDict.Count > 0 OrElse StreamsUnknown IsNot Nothing AndAlso StreamsUnknown.Count > 0) AndAlso IsStreamable
             End Get
         End Property
 
         Public Function GetStream(streamType As StreamTypeEnum) As GameStream
             Return If(StreamsDict IsNot Nothing,
                        StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value,
-                       New GameStream())
+                       Nothing)
         End Function
 
         Public Function IsStreamDefined(streamType As StreamTypeEnum) As Boolean
@@ -92,10 +91,9 @@ Namespace Objects
         End Function
 
         Public Sub SetGameDate(jDate As String)
-            Dim dateTimeVal As DateTime
+            Dim dateTimeVal As Date
 
-            If _
-                (DateTime.TryParseExact(jDate, "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.None,
+            If (Date.TryParseExact(jDate, "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.None,
                                         dateTimeVal) = False) Then
                 dateTimeVal = Date.Parse(jDate)
             End If
@@ -132,7 +130,8 @@ Namespace Objects
         End Sub
 
         Public Sub New()
-            StreamsDict = New Dictionary(Of StreamTypeEnum, GameStream)
+            StreamsDict = New Dictionary(Of StreamTypeEnum, GameStream)()
+            StreamsUnknown = New List(Of GameStream)()
         End Sub
 
         Private Sub Dispose(disposing As Boolean)

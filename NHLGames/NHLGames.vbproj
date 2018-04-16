@@ -417,7 +417,7 @@
     <None Include="Icons\nhl.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icons\anglec.gif" />
+    <EmbeddedResource Include="Icons\anglec.gif" />
     <EmbeddedResource Include="Icons\baddrecord.png" />
     <EmbeddedResource Include="Icons\brecording.png" />
     <EmbeddedResource Include="Icons\live0.png" />

@@ -1,5 +1,6 @@
 ﻿Imports System.Globalization
 Imports System.Text
+Imports MetroFramework.Drawing
 Imports NHLGames.Objects
 Imports NHLGames.Utilities
 
@@ -15,6 +16,7 @@ Namespace Controls
         Private ReadOnly _showLiveTime As Boolean
         Private ReadOnly _broadcasters As Dictionary(Of String, String)
         Public LiveReplayCode As LiveStatusCodeEnum = LiveStatusCodeEnum.Live
+        Private _lnkUnknowns() As Button
 
         Public ReadOnly Property GameId As String
             Get
@@ -273,9 +275,30 @@ Namespace Controls
             lnkEnd1.Visible = _game.IsStreamDefined(StreamTypeEnum.EndzoneCam1)
             lnkEnd2.Visible = _game.IsStreamDefined(StreamTypeEnum.EndzoneCam2)
 
-            lnkMultiAngle1.Visible = _game.IsStreamDefined(StreamTypeEnum.MultiAngle1)
-            lnkMultiAngle2.Visible = _game.IsStreamDefined(StreamTypeEnum.MultiAngle2)
-            lnkMultiAngle3.Visible = _game.IsStreamDefined(StreamTypeEnum.MultiAngle3)
+            If _game.StreamsUnknown IsNot Nothing Then
+                Dim unknownStreams = _game.StreamsUnknown
+                ReDim _lnkUnknowns(unknownStreams.Count() - 1)
+                For i = 0 To unknownStreams.Count() - 1
+                    _lnkUnknowns(i) = New Button
+                    With _lnkUnknowns(i)
+                        .Height = 26
+                        .Width = 26
+                        .ForeColor = Color.FromArgb(255, 224, 224, 224)
+                        .FlatStyle = FlatStyle.Flat
+                        .FlatAppearance.BorderSize = 0
+                        .FlatAppearance.BorderColor = Color.FromArgb(255, 224, 224, 224)
+                        .FlatAppearance.MouseOverBackColor = Color.White
+                        .BackgroundImageLayout = ImageLayout.Zoom
+                        .BackColor = Color.FromArgb(255, 224, 224, 224)
+                        .BackgroundImage = ImageFetcher.GetEmbeddedImage("anglec")
+                        .Name = "lnk" & i
+                        .Tag = unknownStreams(i)
+                    End With
+                    SetStreamButtonLink(unknownStreams(i), _lnkUnknowns(i), unknownStreams(i).StreamTypeSelected)
+                    AddHandler _lnkUnknowns(i).Click, AddressOf WatchStream
+                    flpStreams.Controls.Add(_lnkUnknowns(i))
+                Next
+            End If
 
             If Not _game.IsUnplayable Then
                 If _game.GameState < GameStateEnum.Ended And _game.GameDate.ToLocalTime() <= Date.Today.AddDays(1) Then
@@ -294,71 +317,56 @@ Namespace Controls
             SetTeamLogo(picAway, _game.AwayTeam)
             SetTeamLogo(picHome, _game.HomeTeam)
 
-            SetStreamButtonLink(StreamTypeEnum.Away, lnkAway,
+            SetStreamButtonLink(_game.GetStream(StreamTypeEnum.Away), lnkAway,
                                 String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"), _game.AwayAbbrev))
-            SetStreamButtonLink(StreamTypeEnum.Home, lnkHome,
+            SetStreamButtonLink(_game.GetStream(StreamTypeEnum.Home), lnkHome,
                                 String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"), _game.HomeAbbrev))
-            SetStreamButtonLink(StreamTypeEnum.French, lnkFrench, NHLGamesMetro.RmText.GetString("lblFrenchNetwork"))
-            SetStreamButtonLink(StreamTypeEnum.National, lnkNational,
+            SetStreamButtonLink(_game.GetStream(StreamTypeEnum.French), lnkFrench, NHLGamesMetro.RmText.GetString("lblFrenchNetwork"))
+            SetStreamButtonLink(_game.GetStream(StreamTypeEnum.National), lnkNational,
                                 NHLGamesMetro.RmText.GetString("lblNationalNetwork"))
 
-            SetStreamButtonLink(StreamTypeEnum.MultiCam1, lnkThree,
+            SetStreamButtonLink(_game.GetStream(StreamTypeEnum.MultiCam1), lnkThree,
                                 String.Format(NHLGamesMetro.RmText.GetString("lblCamViews"), 3))
-            SetStreamButtonLink(StreamTypeEnum.MultiCam2, lnkSix,
+            SetStreamButtonLink(_game.GetStream(StreamTypeEnum.MultiCam2), lnkSix,
                                 String.Format(NHLGamesMetro.RmText.GetString("lblCamViews"), 6))
 
-            SetStreamButtonLink(StreamTypeEnum.EndzoneCam1, lnkEnd1,
+            SetStreamButtonLink(_game.GetStream(StreamTypeEnum.EndzoneCam1), lnkEnd1,
                                 String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), _game.AwayAbbrev))
-            SetStreamButtonLink(StreamTypeEnum.EndzoneCam2, lnkEnd2,
+            SetStreamButtonLink(_game.GetStream(StreamTypeEnum.EndzoneCam2), lnkEnd2,
                                 String.Format(NHLGamesMetro.RmText.GetString("lblEndzoneCam"), _game.HomeAbbrev))
 
-            SetStreamButtonLink(StreamTypeEnum.RefCam, lnkRef, NHLGamesMetro.RmText.GetString("lblRefCam"))
-            SetStreamButtonLink(StreamTypeEnum.StarCam, lnkStar, NHLGamesMetro.RmText.GetString("lblStarCam"))
-
-            SetStreamButtonLink(StreamTypeEnum.MultiAngle1, lnkMultiAngle1,
-                                String.Format(NHLGamesMetro.RmText.GetString("lblMultiAngleCam"), 1))
-            SetStreamButtonLink(StreamTypeEnum.MultiAngle2, lnkMultiAngle2,
-                                String.Format(NHLGamesMetro.RmText.GetString("lblMultiAngleCam"), 2))
-            SetStreamButtonLink(StreamTypeEnum.MultiAngle3, lnkMultiAngle3,
-                                String.Format(NHLGamesMetro.RmText.GetString("lblMultiAngleCam"), 3))
-
+            SetStreamButtonLink(_game.GetStream(StreamTypeEnum.RefCam), lnkRef, NHLGamesMetro.RmText.GetString("lblRefCam"))
+            SetStreamButtonLink(_game.GetStream(StreamTypeEnum.StarCam), lnkStar, NHLGamesMetro.RmText.GetString("lblStarCam"))
             UpdateGameStreams()
         End Sub
 
-        Private Sub SetStreamButtonLink(streamType As StreamTypeEnum, btnLink As Button, tooltip As String)
-            If _game.IsStreamDefined(streamType) Then
-                Dim stream = _game.GetStream(streamType)
-
-                If stream.IsBroken Then
-                    Dim brokenImage = ImageFetcher.GetEmbeddedImage("broken")
-                    btnLink.BackgroundImage.Dispose()
-                    btnLink.BackgroundImage = brokenImage
-                    btnLink.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 224, 224)
-                    btnLink.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 224, 224, 224)
-                    tt.SetToolTip(btnLink, String.Format(NHLGamesMetro.RmText.GetString("tipBrokenStream")))
-                Else
-                    If streamType < StreamTypeEnum.EndzoneCam1 Then
-                        If _game.GetStream(streamType).Network <> String.Empty Then
-                            Dim img As String = GetBroadcasterPicFor(stream.Network)
-                            If img <> "" Then
-                                Dim networkImage = ImageFetcher.GetEmbeddedImage(img)
-                                btnLink.BackgroundImage.Dispose()
-                                btnLink.BackgroundImage = networkImage
-                            End If
-                            tooltip &= String.Format(NHLGamesMetro.RmText.GetString("lblOnNetwork"), stream.Network)
-                        End If
+        Private Sub SetStreamButtonLink(stream As GameStream, btnLink As Button, tooltip As String)
+            If stream Is Nothing Then Return
+            If stream.IsBroken Then
+                Dim brokenImage = ImageFetcher.GetEmbeddedImage("broken")
+                btnLink.BackgroundImage.Dispose()
+                btnLink.BackgroundImage = brokenImage
+                btnLink.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 224, 224)
+                btnLink.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 224, 224, 224)
+                tt.SetToolTip(btnLink, String.Format(NHLGamesMetro.RmText.GetString("tipBrokenStream")))
+            Else
+                If stream.Type <= StreamTypeEnum.French Then
+                    Dim img As String = GetBroadcasterPicFor(stream.Network)
+                    If img <> "" Then
+                        Dim networkImage = ImageFetcher.GetEmbeddedImage(img)
+                        btnLink.BackgroundImage.Dispose()
+                        btnLink.BackgroundImage = networkImage
                     End If
-                    tt.SetToolTip(btnLink, tooltip)
+                    tooltip &= String.Format(NHLGamesMetro.RmText.GetString("lblOnNetwork"), stream.Network)
                 End If
-
+                tt.SetToolTip(btnLink, tooltip)
             End If
         End Sub
 
         Private Sub SetTeamLogo(pic As PictureBox, team As String)
             pic.SizeMode = PictureBoxSizeMode.Zoom
             If String.IsNullOrEmpty(team) = False Then
-                Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(team).Replace(" ", "").Replace(".",
-                                                                                                                  ""))
+                Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(team).Replace(" ", "").Replace(".", ""))
                 If Not img Is Nothing Then
                     pic.BackgroundImage.Dispose()
                     pic.BackgroundImage = img
@@ -381,8 +389,7 @@ Namespace Controls
         End Function
 
         Private Function GetBroadcasterPicFor(network As String) As String
-            Dim value As String =
-                    _broadcasters.Where(Function(kvp) network.ToUpper().StartsWith(kvp.Key.ToString())).Select(
+            Dim value As String = _broadcasters.Where(Function(kvp) network.ToUpper().StartsWith(kvp.Key.ToString())).Select(
                         Function(kvp) kvp.Value).FirstOrDefault()
             Return If(value <> Nothing, value.ToLower, String.Empty)
         End Function
@@ -407,14 +414,24 @@ Namespace Controls
         End Sub
 
         Private Function WatchArgs() As GameWatchArguments
-            Return _
-                ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, New GameWatchArguments)
+            Return ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, New GameWatchArguments)
         End Function
 
         Private Sub WatchStream(streamType As StreamerTypeEnum)
             Dim args = WatchArgs()
             args.GameDate = _game.GameDate
             args.Stream = _game.GetStream(streamType)
+            args.GameTitle = _game.AwayAbbrev & " @ " & _game.HomeAbbrev
+            args.StreamLiveReplayCode = LiveReplayCode
+            args.GameIsOnAir = _game.GameState < GameStateEnum.StreamEnded AndAlso
+                               _game.GameState > GameStateEnum.Pregame
+            If Not args.Stream.IsBroken Then Player.Watch(args)
+        End Sub
+
+        Private Sub WatchStream(sender As Object, e As EventArgs)
+            Dim args = WatchArgs()
+            args.GameDate = _game.GameDate
+            args.Stream = CType(sender, Button).Tag
             args.GameTitle = _game.AwayAbbrev & " @ " & _game.HomeAbbrev
             args.StreamLiveReplayCode = LiveReplayCode
             args.GameIsOnAir = _game.GameState < GameStateEnum.StreamEnded AndAlso
@@ -462,21 +479,14 @@ Namespace Controls
             WatchStream(StreamTypeEnum.StarCam)
         End Sub
 
-        Private Sub lnkMultiAngle1_Click(sender As Object, e As EventArgs) Handles lnkMultiAngle1.Click
-            WatchStream(StreamTypeEnum.MultiAngle1)
-        End Sub
-
-        Private Sub lnkMultiAngle2_Click(sender As Object, e As EventArgs) Handles lnkMultiAngle2.Click
-            WatchStream(StreamTypeEnum.MultiAngle2)
-        End Sub
-
-        Private Sub lnkMultiAngle3_Click(sender As Object, e As EventArgs) Handles lnkMultiAngle3.Click
-            WatchStream(StreamTypeEnum.MultiAngle3)
-        End Sub
-
         Protected Overloads Overrides Sub Dispose(disposing As Boolean)
             Try
                 If disposing Then
+                    If _game.IsStreamDefined(StreamTypeEnum.Unknown) Then
+                        For Each lnk In _lnkUnknowns
+                            RemoveHandler lnk.Click, AddressOf WatchStream
+                        Next
+                    End If
                     If tt IsNot Nothing Then tt.Dispose()
                     If btnLiveReplay IsNot Nothing Then btnLiveReplay.Dispose()
                     If lblGameStatus IsNot Nothing Then lblGameStatus.Dispose()
@@ -499,9 +509,6 @@ Namespace Controls
                     If lnkEnd2 IsNot Nothing Then lnkEnd2.Dispose()
                     If lnkRef IsNot Nothing Then lnkRef.Dispose()
                     If lnkStar IsNot Nothing Then lnkStar.Dispose()
-                    If lnkMultiAngle1 IsNot Nothing Then lnkMultiAngle1.Dispose()
-                    If lnkMultiAngle2 IsNot Nothing Then lnkMultiAngle2.Dispose()
-                    If lnkMultiAngle3 IsNot Nothing Then lnkMultiAngle3.Dispose()
                     If lblNotInSeason IsNot Nothing Then lblNotInSeason.Dispose()
                     If lblStreamStatus IsNot Nothing Then lblStreamStatus.Dispose()
                     If btnRecordOne IsNot Nothing Then btnRecordOne.Dispose()

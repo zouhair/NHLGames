@@ -37,9 +37,6 @@
             Me.lnkEnd2 = New System.Windows.Forms.Button()
             Me.lnkRef = New System.Windows.Forms.Button()
             Me.lnkStar = New System.Windows.Forms.Button()
-            Me.lnkMultiAngle1 = New System.Windows.Forms.Button()
-            Me.lnkMultiAngle2 = New System.Windows.Forms.Button()
-            Me.lnkMultiAngle3 = New System.Windows.Forms.Button()
             Me.lblNotInSeason = New MetroFramework.Controls.MetroLabel()
             Me.lblStreamStatus = New MetroFramework.Controls.MetroLabel()
             Me.bpGameControl.SuspendLayout()
@@ -241,7 +238,7 @@
             'flpStreams
             '
             Me.flpStreams.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
             Me.flpStreams.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
             Me.flpStreams.Controls.Add(Me.lnkHome)
             Me.flpStreams.Controls.Add(Me.lnkAway)
@@ -253,9 +250,6 @@
             Me.flpStreams.Controls.Add(Me.lnkEnd2)
             Me.flpStreams.Controls.Add(Me.lnkRef)
             Me.flpStreams.Controls.Add(Me.lnkStar)
-            Me.flpStreams.Controls.Add(Me.lnkMultiAngle1)
-            Me.flpStreams.Controls.Add(Me.lnkMultiAngle2)
-            Me.flpStreams.Controls.Add(Me.lnkMultiAngle3)
             Me.flpStreams.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
             Me.flpStreams.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.flpStreams.Location = New System.Drawing.Point(1, 109)
@@ -434,57 +428,6 @@
             Me.lnkStar.UseVisualStyleBackColor = True
             Me.lnkStar.Visible = False
             '
-            'lnkMultiAngle1
-            '
-            Me.lnkMultiAngle1.BackgroundImage = Global.NHLGames.My.Resources.Resources.anglec
-            Me.lnkMultiAngle1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-            Me.lnkMultiAngle1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-            Me.lnkMultiAngle1.FlatAppearance.BorderSize = 0
-            Me.lnkMultiAngle1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
-            Me.lnkMultiAngle1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.lnkMultiAngle1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-            Me.lnkMultiAngle1.Location = New System.Drawing.Point(344, 6)
-            Me.lnkMultiAngle1.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-            Me.lnkMultiAngle1.Name = "lnkMultiAngle1"
-            Me.lnkMultiAngle1.Size = New System.Drawing.Size(26, 26)
-            Me.lnkMultiAngle1.TabIndex = 31
-            Me.lnkMultiAngle1.UseVisualStyleBackColor = False
-            Me.lnkMultiAngle1.Visible = False
-            '
-            'lnkMultiAngle2
-            '
-            Me.lnkMultiAngle2.BackgroundImage = Global.NHLGames.My.Resources.Resources.anglec
-            Me.lnkMultiAngle2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-            Me.lnkMultiAngle2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-            Me.lnkMultiAngle2.FlatAppearance.BorderSize = 0
-            Me.lnkMultiAngle2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
-            Me.lnkMultiAngle2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.lnkMultiAngle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-            Me.lnkMultiAngle2.Location = New System.Drawing.Point(378, 6)
-            Me.lnkMultiAngle2.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-            Me.lnkMultiAngle2.Name = "lnkMultiAngle2"
-            Me.lnkMultiAngle2.Size = New System.Drawing.Size(26, 26)
-            Me.lnkMultiAngle2.TabIndex = 32
-            Me.lnkMultiAngle2.UseVisualStyleBackColor = False
-            Me.lnkMultiAngle2.Visible = False
-            '
-            'lnkMultiAngle3
-            '
-            Me.lnkMultiAngle3.BackgroundImage = Global.NHLGames.My.Resources.Resources.anglec
-            Me.lnkMultiAngle3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-            Me.lnkMultiAngle3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-            Me.lnkMultiAngle3.FlatAppearance.BorderSize = 0
-            Me.lnkMultiAngle3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
-            Me.lnkMultiAngle3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-            Me.lnkMultiAngle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-            Me.lnkMultiAngle3.Location = New System.Drawing.Point(412, 6)
-            Me.lnkMultiAngle3.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-            Me.lnkMultiAngle3.Name = "lnkMultiAngle3"
-            Me.lnkMultiAngle3.Size = New System.Drawing.Size(26, 26)
-            Me.lnkMultiAngle3.TabIndex = 33
-            Me.lnkMultiAngle3.UseVisualStyleBackColor = False
-            Me.lnkMultiAngle3.Visible = False
-            '
             'lblNotInSeason
             '
             Me.lblNotInSeason.BackColor = System.Drawing.Color.Transparent
@@ -500,7 +443,7 @@
             'lblStreamStatus
             '
             Me.lblStreamStatus.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
             Me.lblStreamStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
             Me.lblStreamStatus.FontWeight = MetroFramework.MetroLabelWeight.Regular
             Me.lblStreamStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
@@ -557,9 +500,6 @@
         Friend WithEvents lnkEnd2 As Button
         Friend WithEvents lnkRef As Button
         Friend WithEvents lnkStar As Button
-        Friend WithEvents lnkMultiAngle1 As Button
-        Friend WithEvents lnkMultiAngle2 As Button
-        Friend WithEvents lnkMultiAngle3 As Button
         Friend WithEvents lnkEnd1 As Button
         Friend WithEvents flpSetRecording As FlowLayoutPanel
     End Class

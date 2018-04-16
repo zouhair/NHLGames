@@ -158,11 +158,11 @@
     <comment>Console</comment>
   </data>
   <data name="errorReadingSettings" xml:space="preserve">
-    <value>Error: Failed to read app setting: {0}</value>
+    <value>Warning: Failed to read app setting: {0}</value>
     <comment>Console</comment>
   </data>
   <data name="errorSetAdModule" xml:space="preserve">
-    <value>Error: Can't set Ad Detection Modules. Verify if a Nugget package has a dependency of an older nugget package that you have installed (ex: Spotify and Json): {0}</value>
+    <value>Warning: Can't set Ad Detection Modules. Verify if a Nugget package has a dependency of an older nugget package that you have installed: {0}</value>
     <comment>Console</comment>
   </data>
   <data name="errorStreamerExe" xml:space="preserve">
@@ -170,7 +170,7 @@
     <comment>Console</comment>
   </data>
   <data name="errorWritingSettings" xml:space="preserve">
-    <value>Error: Failed to write app settings</value>
+    <value>Warning: Failed to write app settings</value>
     <comment>Console</comment>
   </data>
   <data name="lblAwayTeam" xml:space="preserve">
@@ -742,7 +742,7 @@
     <comment>Announcement</comment>
   </data>
   <data name="errorStreamTypeUnknown" xml:space="preserve">
-    <value>Warning: Stream type unknown for the game {0} vs {1} : {2} - {3}</value>
+    <value>Game stream: Stream type unknown for the game {0} vs {1} : {2} - {3}</value>
     <comment>Console</comment>
   </data>
   <data name="lblStarCam" xml:space="preserve">
@@ -827,10 +827,6 @@
   </data>
   <data name="tipLiveStatusRewind" xml:space="preserve">
     <value>Rewind {0} min</value>
-    <comment>Game panel</comment>
-  </data>
-  <data name="lblMultiAngleCam" xml:space="preserve">
-    <value>Camera view {0}</value>
     <comment>Game panel</comment>
   </data>
   <data name="enumGameState10" xml:space="preserve">

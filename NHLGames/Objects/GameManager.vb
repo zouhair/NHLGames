@@ -13,10 +13,7 @@ Namespace Objects
             {"FRENCH", StreamTypeEnum.French},
             {"MULTICAM1", StreamTypeEnum.MultiCam1}, {"MULTICAM2", StreamTypeEnum.MultiCam2},
             {"ENDZONECAM1", StreamTypeEnum.EndzoneCam1}, {"ENDZONECAM2", StreamTypeEnum.EndzoneCam2},
-            {"REFCAM", StreamTypeEnum.RefCam}, {"STARCAM", StreamTypeEnum.StarCam},
-            {"ROBOCAM", StreamTypeEnum.RoboCam},
-            {"MULTIANGLE1", StreamTypeEnum.MultiAngle1}, {"MULTIANGLE2", StreamTypeEnum.MultiAngle2},
-            {"MULTIANGLE3", StreamTypeEnum.MultiAngle3}}
+            {"REFCAM", StreamTypeEnum.RefCam}, {"STARCAM", StreamTypeEnum.StarCam}}
 
         Private Const MediaOff = "MEDIA_OFF"
 
@@ -95,23 +92,27 @@ Namespace Objects
                                         Dim streamOff = innerStream.SelectToken("mediaState").ToString().Equals(MediaOff)
                                         Dim streamTypeSelected = If(innerStream.Property("feedName").Value.ToString() = String.Empty, innerStream.Property("mediaFeedType").Value.ToString(), innerStream.Property("feedName").Value.ToString())
                                         Dim streamType As StreamTypeEnum = GetStreamType(streamTypeSelected)
-                                        If Not streamOff Then
-                                            If streamType <> StreamTypeEnum.None AndAlso numberOfStreams <> 0 Then
-                                                Dim tCurrentGame = currentGame
-                                                Dim tInnerStream = innerStream
-                                                Dim tStreamType = streamType
-                                                Dim tCurrentGameIndex = currentGameIndex
-                                                Dim t = Task.Run(Async Function()
-                                                                     Dim newStream = Await SetNewGameStream(tCurrentGame, tInnerStream, tStreamType)
+                                        If Not streamOff AndAlso numberOfStreams <> 0 Then
+                                            Dim tCurrentGame = currentGame
+                                            Dim tInnerStream = innerStream
+                                            Dim tStreamType = streamType
+                                            Dim tCurrentGameIndex = currentGameIndex
+                                            Dim tStreamTypeSelected = streamTypeSelected
+                                            Dim t = Task.Run(Async Function()
+                                                                 Dim newStream = Await SetNewGameStream(tCurrentGame, tInnerStream, tStreamType, tStreamTypeSelected)
+                                                                 If streamType <> StreamTypeEnum.Unknown Then
                                                                      gamesArray(tCurrentGameIndex).StreamsDict.Add(streamType, newStream)
-                                                                 End Function)
-                                                lstStreamsTask(currentStreamIndex) = t
-                                            Else
+                                                                 Else
+                                                                     gamesArray(tCurrentGameIndex).StreamsUnknown.Add(newStream)
+                                                                 End If
+                                                             End Function)
+                                            lstStreamsTask(currentStreamIndex) = t
+
+                                            If streamType = StreamTypeEnum.Unknown Then
                                                 Console.WriteLine(English.errorStreamTypeUnknown, currentGame.AwayAbbrev,
                                                                   currentGame.HomeAbbrev,
                                                                   innerStream.Property("mediaFeedType").Value.ToString(),
                                                                   innerStream.Property("feedName").Value)
-                                                lstStreamsTask(currentStreamIndex) = Task.Run(Sub() Return)
                                             End If
                                         Else
                                             lstStreamsTask(currentStreamIndex) = Task.Run(Sub() Return)
@@ -151,8 +152,8 @@ Namespace Objects
         End Function
 
         Private Shared Async Function SetNewGameStream(currentGame As Game, innerStream As JObject,
-                                                       streamType As StreamTypeEnum) As Task(Of GameStream)
-            Dim gs = New GameStream(currentGame, innerStream, streamType)
+                                                       streamType As StreamTypeEnum, streamTypeSelected As String) As Task(Of GameStream)
+            Dim gs = New GameStream(currentGame, innerStream, streamType, streamTypeSelected)
             gs.StreamUrl = Await GetGameFeedUrlAsync(gs)
 
             If gs.StreamUrl.Equals(String.Empty) Then
@@ -164,10 +165,11 @@ Namespace Objects
 
         Private Shared Function GetStreamType(streamTypeSelected As String) As StreamTypeEnum
             Dim streamTypeAsText = Regex.Replace(streamTypeSelected.ToUpper(), "[^A-Z0-9]", "")
+
             If DictStreamType.ContainsKey(streamTypeAsText) Then
                 Return DictStreamType(streamTypeAsText)
             Else
-                Return StreamTypeEnum.None
+                Return StreamTypeEnum.Unknown
             End If
         End Function
 
