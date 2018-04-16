@@ -83,6 +83,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to English.
+        '''</summary>
+        Friend Shared ReadOnly Property cbEnglish() As String
+            Get
+                Return ResourceManager.GetString("cbEnglish", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Français.
+        '''</summary>
+        Friend Shared ReadOnly Property cbFrench() As String
+            Get
+                Return ResourceManager.GetString("cbFrench", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Add the NHL.tv authentication bypass line to Hosts file.
         '''</summary>
         Friend Shared ReadOnly Property cbHostsAdd() As String
@@ -133,6 +151,33 @@ Namespace My.Resources
         Friend Shared ReadOnly Property cbHostsView() As String
             Get
                 Return ResourceManager.GetString("cbHostsView", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to At the beginning of the stream.
+        '''</summary>
+        Friend Shared ReadOnly Property cbLiveReplayFeedStart() As String
+            Get
+                Return ResourceManager.GetString("cbLiveReplayFeedStart", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to When the event starts (game time).
+        '''</summary>
+        Friend Shared ReadOnly Property cbLiveReplayGameTime() As String
+            Get
+                Return ResourceManager.GetString("cbLiveReplayGameTime", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to When the game starts (drops the puck).
+        '''</summary>
+        Friend Shared ReadOnly Property cbLiveReplayPuckDrop() As String
+            Get
+                Return ResourceManager.GetString("cbLiveReplayPuckDrop", resourceCulture)
             End Get
         End Property
         
@@ -488,7 +533,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Warning: Starting stream failed. Make sure your player and streamer are set or try to use a different quality in settings, so it will try another stream..
+        '''  Looks up a localized string similar to Warning: Starting stream failed. Try to use a different quality in settings, so it will try another stream..
         '''</summary>
         Friend Shared ReadOnly Property errorStreamFailedCantRead() As String
             Get
@@ -538,6 +583,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property errorWritingSettings() As String
             Get
                 Return ResourceManager.GetString("errorWritingSettings", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Intermission.
+        '''</summary>
+        Friend Shared ReadOnly Property gameIntermission() As String
+            Get
+                Return ResourceManager.GetString("gameIntermission", resourceCulture)
             End Get
         End Property
         
@@ -677,29 +731,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to English.
-        '''</summary>
-        Friend Shared ReadOnly Property lblEnglish() As String
-            Get
-                Return ResourceManager.GetString("lblEnglish", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to {0}, {1} {2}, {3}.
         '''</summary>
         Friend Shared ReadOnly Property lblFormatWeekMonthDayYear() As String
             Get
                 Return ResourceManager.GetString("lblFormatWeekMonthDayYear", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Français.
-        '''</summary>
-        Friend Shared ReadOnly Property lblFrench() As String
-            Get
-                Return ResourceManager.GetString("lblFrench", resourceCulture)
             End Get
         End Property
         
@@ -785,7 +821,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Rewind (live stream).
+        '''  Looks up a localized string similar to Live Replay.
+        '''</summary>
+        Friend Shared ReadOnly Property lblLiveReplay() As String
+            Get
+                Return ResourceManager.GetString("lblLiveReplay", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Live Rewind.
         '''</summary>
         Friend Shared ReadOnly Property lblLiveRewind() As String
             Get
@@ -794,7 +839,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to {0} minutes behind live stream.
+        '''  Looks up a localized string similar to {0} minutes behind live stream ({1}).
         '''</summary>
         Friend Shared ReadOnly Property lblLiveRewindDetails() As String
             Get
@@ -821,7 +866,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to MPC Path.
+        '''  Looks up a localized string similar to MPC-HC Path.
         '''</summary>
         Friend Shared ReadOnly Property lblMpcPath() As String
             Get
@@ -1001,6 +1046,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Live remaining time.
+        '''</summary>
+        Friend Shared ReadOnly Property lblShowLiveTime() As String
+            Get
+                Return ResourceManager.GetString("lblShowLiveTime", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Series record.
         '''</summary>
         Friend Shared ReadOnly Property lblShowSeriesRecord() As String
@@ -1019,7 +1073,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Live games first.
+        '''  Looks up a localized string similar to Order by live games first.
         '''</summary>
         Friend Shared ReadOnly Property lblShowTodayLiveGamesFirst() As String
             Get
@@ -1064,6 +1118,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Stream.
+        '''</summary>
+        Friend Shared ReadOnly Property lblStream() As String
+            Get
+                Return ResourceManager.GetString("lblStream", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Streams available at game time.
         '''</summary>
         Friend Shared ReadOnly Property lblStreamAvailableAtGameTime() As String
@@ -1087,6 +1150,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property lblTeamStream() As String
             Get
                 Return ResourceManager.GetString("lblTeamStream", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Time.
+        '''</summary>
+        Friend Shared ReadOnly Property lblTime() As String
+            Get
+                Return ResourceManager.GetString("lblTime", resourceCulture)
             End Get
         End Property
         
@@ -1532,15 +1604,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Test ability to write to this directory.
-        '''</summary>
-        Friend Shared ReadOnly Property msgTestTxtContent() As String
-            Get
-                Return ResourceManager.GetString("msgTestTxtContent", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to {0} enable.
         '''</summary>
         Friend Shared ReadOnly Property msgThisEnable() As String
@@ -1586,7 +1649,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to NHLGames server not avaible!.
+        '''  Looks up a localized string similar to NHLGames server not available!.
         '''</summary>
         Friend Shared ReadOnly Property noAppServer() As String
             Get
@@ -1703,7 +1766,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Download MPC.
+        '''  Looks up a localized string similar to Download MPC-HC.
         '''</summary>
         Friend Shared ReadOnly Property tipGetMpc() As String
             Get
