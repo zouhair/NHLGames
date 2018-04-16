@@ -506,7 +506,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Error: Failed to read app setting: {0}.
+        '''  Looks up a localized string similar to Warning: Failed to read app setting: {0}.
         '''</summary>
         Friend Shared ReadOnly Property errorReadingSettings() As String
             Get
@@ -515,7 +515,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Error: Can&apos;t set Ad Detection Modules. Verify if a Nugget package has a dependency of an older nugget package that you have installed (ex: Spotify and Json): {0}.
+        '''  Looks up a localized string similar to Warning: Can&apos;t set Ad Detection Modules. Verify if a Nugget package has a dependency of an older nugget package that you have installed: {0}.
         '''</summary>
         Friend Shared ReadOnly Property errorSetAdModule() As String
             Get
@@ -542,7 +542,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Warning: Stream type unknown for the game {0} vs {1} : {2} - {3}.
+        '''  Looks up a localized string similar to Game stream: Stream type unknown for the game {0} vs {1} : {2} - {3}.
         '''</summary>
         Friend Shared ReadOnly Property errorStreamTypeUnknown() As String
             Get
@@ -578,7 +578,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Error: Failed to write app settings.
+        '''  Looks up a localized string similar to Warning: Failed to write app settings.
         '''</summary>
         Friend Shared ReadOnly Property errorWritingSettings() As String
             Get
@@ -880,15 +880,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property lblMpvPath() As String
             Get
                 Return ResourceManager.GetString("lblMpvPath", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Camera view {0}.
-        '''</summary>
-        Friend Shared ReadOnly Property lblMultiAngleCam() As String
-            Get
-                Return ResourceManager.GetString("lblMultiAngleCam", resourceCulture)
             End Get
         End Property
         

@@ -704,15 +704,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Vue de caméra {0}.
-        '''</summary>
-        Friend Shared ReadOnly Property lblMultiAngleCam() As String
-            Get
-                Return ResourceManager.GetString("lblMultiAngleCam", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Stream national.
         '''</summary>
         Friend Shared ReadOnly Property lblNationalNetwork() As String
