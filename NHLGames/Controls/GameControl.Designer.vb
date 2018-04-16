@@ -473,7 +473,7 @@
             Me.flpStreams.ResumeLayout(False)
             Me.ResumeLayout(False)
 
-End Sub
+        End Sub
 
         Friend WithEvents picAway As PictureBox
         Friend WithEvents lblAwayTeam As MetroFramework.Controls.MetroLabel

@@ -1,5 +1,5 @@
 # NHLGames
-Tool to watch NHL games in High Definition      
+Tool to watch NHL games in High Definition for free      
 
 Choose a date.    
 Choose a game.    
@@ -22,7 +22,7 @@ Enjoy!
    * [Settings](#settings)
      * [Customize game panels](#customize-game-panels)
      * [Stream Quality](#stream-quality)
-     * [Replay and Rewind](#replay-and-rewind)
+     * [Rewind and Replay](#rewind-and-replay)
      * [Content Delivery Network (CDN)](#content-delivery-network-cdn)
      * [Server's Hostname](#servers-hostname)
      * [Server Hosts Entry](#server-hosts-entry)
@@ -51,7 +51,7 @@ NHLGames is an app built on .NET Framework 4.5. So, it's only available on Windo
 First time you start NHLGames it will ask if you wish to view the Hosts file. That means the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [Server Hosts Entry](#server-hosts-entry) section.
 
 ## //_Is this app safe?_
-Yes, it is. You can look at our code to find out by yourself, you will see the reason why anti-virus don't like us. We modify your hosts file in Windows/System32/drivers/etc/ and we do that to make sure that the app will be able to get the stream links for games that are available. The other reason is that the app sends web request to a server that might be blacklisted. But don't worry, this server only responds with plain text.
+Yes, it is. However, some anti-virus or anti-malware won't agree because we edit your hosts file in Windows/System32/drivers/etc/, a file used to redirect nhl.com to another ip. We do that, to make sure the app will get stream links for games that are available. But don't worry, this server only responds in plain text and won't hurt your pc. If you don't trust us, find out by yourself by looking at our code.
 
 ## //_Setup_
 To be able to play streams properly, you have to choose a media player in the ![image](https://user-images.githubusercontent.com/23088305/32304695-9589db88-bf47-11e7-9af5-867c8db0d4a3.png) tab. Make sure the player that you choose has a valid path to the EXE file.
@@ -106,14 +106,21 @@ The selected value will defined which quality will be sent to your media player,
 - Low: 228p ~500 Mb/hr
 - Mobile: 224p or worst ~300/hr
 
-### ///_Replay and Rewind_
-The Replay/Rewind feature is only available for Live games. If you see a blue game panel with a red live icon in the left corner, you can click on it once to turn on Rewind and twice to turn on Replay. It will go back to default (Live) if clicked three times. 
+### ///_Rewind and Replay_
+The Rewind/Replay feature is only available for Live games only. If you see a blue game panel with ![image](https://user-images.githubusercontent.com/23088305/38781081-37d9d68a-40ae-11e8-8c37-50388470b299.png) icon in the left corner that means you will have access to the Replay or Rewind feature. To use it you have click on ![image](https://user-images.githubusercontent.com/23088305/38781081-37d9d68a-40ae-11e8-8c37-50388470b299.png) icon (top-left corner of the game panel), and click on a stream to start watching.
+- ![image](https://user-images.githubusercontent.com/23088305/38781195-9eecf626-40af-11e8-85fb-857c7d50d385.png) Rewind: click it once.
+- ![image](https://user-images.githubusercontent.com/23088305/38781187-9418e818-40af-11e8-86df-d8025473574c.png) Replay: click it twice. 
+- ![image](https://user-images.githubusercontent.com/23088305/38781081-37d9d68a-40ae-11e8-8c37-50388470b299.png) Live (default): Click it three times to set it back to Live. 
 
 ![image](https://user-images.githubusercontent.com/23088305/35660550-a8ccfe3e-06da-11e8-974c-141f6d3b3d31.gif)
 
-If you use the replay or rewind feature and you want to change the default behaviour, you can set your preferences here.
-- Live Replay: If Replay is enabled, it will start the stream from the selected value.
-- Live Rewind: If Rewind is enabled, it will use the value to set the stream x minutes behind the live stream.
+> *WARNING: If you want to use the Rewind/Replay feature, but you don't click on the ![image](https://user-images.githubusercontent.com/23088305/38781081-37d9d68a-40ae-11e8-8c37-50388470b299.png) icon before starting a stream, you will still be in live mode !*
+
+If you use the rewind or replay feature and you want to change the default behaviour, you can set your preferences here.
+- Live Rewind: If Rewind is enabled , it will use the value to set the stream x minutes behind the live stream.
+- Live Replay: If Replay is enabled , it will start the stream from the selected value.
+
+> *NOTE: If you use the rewind slider in settings, but you set it before game time and the stream has no data at this time, it will start from live.*
 
 ### ///_Content Delivery Network (CDN)_
 NHLGames uses by default Akamai CDN, but Level 3 can be activated by turn on the alternate network in settings.
@@ -193,11 +200,16 @@ If you wish to customise the way your player or the streamer opens, turn on one 
 - Streamer args : If you want to add more arguments (commands) to be sent to streamlink with the default args that NHLGames send.
 
 ### ///_Ad Detection_
-NHLGames doesn't use any Ad Detection modules by default, but you can activate it and select the app you want to use during commercials. If you don't use any, it's better if you disable the Ad Detection module. 
+NHLGames doesn't use any Ad Detection by default, but you can activate it and select the app you want to use during commercials. If you don't use any, it's better if you keept the Ad Detection disabled. 
 
-Ad detection only supports these applications:
-- Spotify Windows: If you want to play music during ads.
+Ad detection supports these applications:
+- Spotify Windows / Other music player: If you want to play music during ads.
+   - Force to start: It will open Spotify when you start NHLGames
+   - Always play next song: It won't pause Spotify when the ad ends, but skip to the next song.
+   - (Experimental) Try with the detected media player: If you do not have Spotify running, but another (like Windows Media Player or iTunes), it will play/pause this player instead, by simulating the media hotkey [Play/Pause] on the keyboard
 - OBS Scene Changer : If you want to switch between windows when an ad hits.
+   - Ad ending hotkey: Set the same hotkey that the one in OBS to display the window that the game is on.
+   - Ad starting hotkey: Set the same hotkey that you use in OBS to display the window when a commercial plays.
 
 ## //_Console_
 Go to this tab to see everything that NHLGames does. Also, any error or warning will show up here.

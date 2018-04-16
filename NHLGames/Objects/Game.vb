@@ -81,7 +81,7 @@ Namespace Objects
         End Property
 
         Public Function GetStream(streamType As StreamTypeEnum) As GameStream
-            Return If (StreamsDict IsNot Nothing,
+            Return If(StreamsDict IsNot Nothing,
                        StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value,
                        Nothing)
         End Function

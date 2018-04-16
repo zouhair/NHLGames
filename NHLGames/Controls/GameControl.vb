@@ -133,7 +133,7 @@ Namespace Controls
                         lblGameStatus.Text &= String.Format("{0}{1}", vbCrLf, gameState)
                     End If
                 End If
-            Else If _game.IsUnplayable Then
+            ElseIf _game.IsUnplayable Then
                 lblDivider.Visible = False
                 lblGameStatus.Visible = True
                 lblPeriod.Text = _game.GameStateDetailed.ToUpper()
@@ -150,7 +150,7 @@ Namespace Controls
 
             If _game.GameType.Equals(GameTypeEnum.Preseason) Then
                 lblNotInSeason.Text = NHLGamesMetro.RmText.GetString("lblPreseason").ToUpper()
-            Else If _game.GameType.Equals(GameTypeEnum.Series) Then
+            ElseIf _game.GameType.Equals(GameTypeEnum.Series) Then
                 Dim seriesStatusShort =
                         String.Format(NHLGamesMetro.RmText.GetString("lblGame"), _game.SeriesGameNumber.ToString()).
                         ToUpper() 'Game 1
@@ -190,7 +190,7 @@ Namespace Controls
             SetLiveStatusIcon()
 
             flpSetRecording.Controls.Clear()
-            flpSetRecording.Controls.Add(new SetRecordControl)
+            flpSetRecording.Controls.Add(New SetRecordControl)
         End Sub
 
         Private Sub SetRecordIcon(Optional isAdded As Boolean = False)
@@ -198,19 +198,19 @@ Namespace Controls
             If btnRecordOne.Visible Then
                 If btnRecordOne.BackgroundImage IsNot Nothing Then btnRecordOne.BackgroundImage.Dispose()
                 btnRecordOne.BackgroundImage =
-                    ImageFetcher.GetEmbeddedImage($"{If (isBlue, "b", "w")}{If (isAdded, "recording", "addrecord")}",
+                    ImageFetcher.GetEmbeddedImage($"{If(isBlue, "b", "w")}{If(isAdded, "recording", "addrecord")}",
                                                   True)
                 btnRecordOne.FlatAppearance.BorderColor =
-                    If (isBlue, Color.FromArgb(0, 170, 210), Color.FromArgb(224, 224, 224))
-                btnRecordOne.FlatAppearance.MouseDownBackColor = If (isBlue, Color.FromArgb(224, 224, 224), Color.White)
+                    If(isBlue, Color.FromArgb(0, 170, 210), Color.FromArgb(224, 224, 224))
+                btnRecordOne.FlatAppearance.MouseDownBackColor = If(isBlue, Color.FromArgb(224, 224, 224), Color.White)
                 btnRecordOne.FlatAppearance.MouseOverBackColor =
-                    If (isBlue, Color.FromArgb(64, 64, 64), Color.FromArgb(0, 170, 210))
-                tt.SetToolTip(btnRecordOne, NHLGamesMetro.RmText.GetString(If (isAdded, "tipRecording", "tipAddRecord")))
+                    If(isBlue, Color.FromArgb(64, 64, 64), Color.FromArgb(0, 170, 210))
+                tt.SetToolTip(btnRecordOne, NHLGamesMetro.RmText.GetString(If(isAdded, "tipRecording", "tipAddRecord")))
                 If isBlue Then
-                    btnRecordOne.BackColor = If (flpSetRecording.Visible, Color.Red, Color.White)
+                    btnRecordOne.BackColor = If(flpSetRecording.Visible, Color.Red, Color.White)
                 Else
                     btnRecordOne.BackColor =
-                        If (flpSetRecording.Visible, Color.FromArgb(0, 170, 210), Color.FromArgb(64, 64, 64))
+                        If(flpSetRecording.Visible, Color.FromArgb(0, 170, 210), Color.FromArgb(64, 64, 64))
                 End If
             End If
         End Sub
@@ -249,7 +249,7 @@ Namespace Controls
             _showLiveTime = showLiveTime
             _game = game
 
-            flpSetRecording.Controls.Add(new SetRecordControl)
+            flpSetRecording.Controls.Add(New SetRecordControl)
 
             SetWholeGamePanel()
         End Sub
@@ -396,10 +396,10 @@ Namespace Controls
 
         Public Sub SetLiveStatusIcon(Optional increase As Boolean = False)
             If increase Then
-                LiveReplayCode = If (LiveReplayCode + 1 > LiveStatusCodeEnum.Replay, 0, LiveReplayCode + 1)
+                LiveReplayCode = If(LiveReplayCode + 1 > LiveStatusCodeEnum.Replay, 0, LiveReplayCode + 1)
             End If
 
-            btnLiveReplay.BackColor = If (LiveReplayCode.Equals(LiveStatusCodeEnum.Live), Color.Red, Color.White)
+            btnLiveReplay.BackColor = If(LiveReplayCode.Equals(LiveStatusCodeEnum.Live), Color.Red, Color.White)
 
             If btnLiveReplay.BackgroundImage IsNot Nothing Then btnLiveReplay.BackgroundImage.Dispose()
             btnLiveReplay.BackgroundImage = ImageFetcher.GetEmbeddedImage($"live{CType(LiveReplayCode, Integer)}", True)
@@ -532,7 +532,7 @@ Namespace Controls
         End Sub
 
         Private Sub btnLiveReplay_Click(sender As Object, e As EventArgs) Handles btnLiveReplay.Click
-            SetLiveStatusIcon(true)
+            SetLiveStatusIcon(True)
         End Sub
     End Class
 End Namespace
