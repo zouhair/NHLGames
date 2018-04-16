@@ -78,21 +78,20 @@ Namespace Objects
         End Function
 
         Private Function ReplayArgs() As String
+            Dim presetHls = If(Not PlayerType.Equals(PlayerTypeEnum.Vlc),
+                               "--player-passthrough=hls",
+                               String.Empty)
             If GameIsOnAir Then
-                Dim preset =
-                        If _
-                        (PlayerType.Equals(PlayerTypeEnum.Mpv), "--player-passthrough=hls",
-                         "--ringbuffer-size=4M --hls-segment-threads=2")
                 If Not StreamLiveReplayCode.Equals(LiveStatusCodeEnum.Live) Then
-                    Return $"{preset} --hls-live-edge={ReplayMinutes()} "
+                    Return $"--ringbuffer-size=4M --hls-segment-threads=2 --hls-live-edge={ReplayMinutes()} "
                 Else
-                    Return $"{preset} "
+                    Return $"{presetHls} "
                 End If
             Else
                 If PlayerType.Equals(PlayerTypeEnum.Vlc) Then
                     Return $"--ringbuffer-size=8M --hls-segment-threads=2 "
                 Else
-                    Return $"--player-passthrough=hls "
+                    Return $"{presetHls} "
                 End If
             End If
         End Function
