@@ -613,10 +613,6 @@
     <value>Reculer de {0} min</value>
     <comment>Game panel</comment>
   </data>
-  <data name="lblMultiAngleCam" xml:space="preserve">
-    <value>Vue de caméra {0}</value>
-    <comment>Game panel</comment>
-  </data>
   <data name="tipAddRecord" xml:space="preserve">
     <value>Ajouter aux enregistrements</value>
     <comment>Game panel</comment>

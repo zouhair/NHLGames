@@ -22,8 +22,7 @@
     End Enum
 
     Public Enum StreamTypeEnum
-        None = 0
-        Away
+        Away = 0
         Home
         National
         French
@@ -33,10 +32,7 @@
         MultiCam2
         RefCam
         StarCam
-        MultiAngle1
-        MultiAngle2
-        MultiAngle3
-        RoboCam
+        Unknown
     End Enum
 
     Public Enum CdnTypeEnum

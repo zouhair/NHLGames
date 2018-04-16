@@ -13,6 +13,7 @@ Namespace Objects
         Public Property CdnParameter As CdnTypeEnum = CdnTypeEnum.Akc
         Public Property Title As String = String.Empty
         Public Property StreamUrl As String = String.Empty
+        Public Property StreamTypeSelected As String = String.Empty
 
         Public ReadOnly Property IsBroken As Boolean
             Get
@@ -23,12 +24,15 @@ Namespace Objects
         Public Sub New()
         End Sub
 
-        Public Sub New(game As Game, stream As JObject, type As StreamTypeEnum)
+        Public Sub New(game As Game, stream As JObject, type As StreamTypeEnum, streamTypeSelected As String)
             Me.Game = game
             Network = stream.Property("callLetters")
             If Network = String.Empty Then Network = "NHLTV"
             PlayBackId = stream.Property("mediaPlaybackId").Value.ToString()
             Me.Type = type
+            If type = StreamTypeEnum.Unknown Then
+                Me.StreamTypeSelected = streamTypeSelected
+            End If
             CdnParameter = If(game.IsOffTheAir,
                               CdnTypeEnum.Akc,
                               ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs,
