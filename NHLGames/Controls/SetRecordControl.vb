@@ -18,10 +18,10 @@ Namespace Controls
         End Sub
 
         Private Sub tbTime_Scroll(sender As Object, e As ScrollEventArgs) Handles tbTime.Scroll
-            lblTimeValue.Text = If (tbTime.Value.Equals(0),
+            lblTimeValue.Text = If(tbTime.Value.Equals(0),
                                     Now.ToString(_defaultTime),
-                                    Now.AddMinutes(- Now.Minute + If((Now.Minute Mod 30) > 0, 30, 0)).AddMinutes(
-                                        tbTime.Value*30).
+                                    Now.AddMinutes(-Now.Minute + If((Now.Minute Mod 30) > 0, 30, 0)).AddMinutes(
+                                        tbTime.Value * 30).
                                        ToString("h:mm tt (ddd)", CultureInfo.InvariantCulture))
         End Sub
 

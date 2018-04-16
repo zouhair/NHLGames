@@ -83,7 +83,7 @@ Namespace Controls
 
         Public Sub New()
             InitializeComponent()
-            _arrayButtons = New Button(,) { _
+            _arrayButtons = New Button(,) {
                                               {Su1, Mo1, Tu1, We1, Th1, Fr1, Sa1},
                                               {Su2, Mo2, Tu2, We2, Th2, Fr2, Sa2},
                                               {Su3, Mo3, Tu3, We3, Th3, Fr3, Sa3},
@@ -95,7 +95,7 @@ Namespace Controls
         End Sub
 
         Private Sub btnBeforeMonth_Click(sender As Object, e As EventArgs) Handles btnBeforeMonth.Click
-            ReloadCal(_currentDate.AddMonths(- 1), _currentDate.AddMonths(- 1).Day)
+            ReloadCal(_currentDate.AddMonths(-1), _currentDate.AddMonths(-1).Day)
         End Sub
 
         Private Sub btnNextMonth_Click(sender As Object, e As EventArgs) Handles btnNextMonth.Click
@@ -117,8 +117,8 @@ Namespace Controls
                     Fr6.Click, Fr5.Click, Fr4.Click, Fr3.Click, Fr2.Click, Fr1.Click
             Dim btn As Button
             btn = sender
-            Dim myDate = _currentDate.AddDays(- _currentDate.Day + btn.Text)
-            NHLGamesMetro.GameDate = _currentDate.AddDays(- _currentDate.Day + btn.Text)
+            Dim myDate = _currentDate.AddDays(-_currentDate.Day + btn.Text)
+            NHLGamesMetro.GameDate = _currentDate.AddDays(-_currentDate.Day + btn.Text)
             NHLGamesMetro.LabelDate.Text = DateHelper.GetFormattedDate(myDate)
             NHLGamesMetro.FlpCalendar.Visible = False
         End Sub
@@ -128,7 +128,7 @@ Namespace Controls
         End Sub
 
         Private Sub btnNextYear_Click(sender As Object, e As EventArgs) Handles btnNextYear.Click
-            ReloadCal(_currentDate.AddYears(- 1), _currentDate.AddYears(- 1).Day)
+            ReloadCal(_currentDate.AddYears(-1), _currentDate.AddYears(-1).Day)
         End Sub
     End Class
 End Namespace

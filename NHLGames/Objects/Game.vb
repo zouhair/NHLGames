@@ -69,7 +69,7 @@ Namespace Objects
 
         Public ReadOnly Property IsStreamable As Boolean
             Get
-                Return GameState > GameStateEnum.Pregame AndAlso GameState < GameStateEnum.Delayed
+                Return GameState > GameStateEnum.Pregame AndAlso GameState <= GameStateEnum.StreamEnded
             End Get
         End Property
 
@@ -82,7 +82,7 @@ Namespace Objects
         End Property
 
         Public Function GetStream(streamType As StreamTypeEnum) As GameStream
-            Return If (StreamsDict IsNot Nothing,
+            Return If(StreamsDict IsNot Nothing,
                        StreamsDict.FirstOrDefault(Function(x) x.Key = streamType).Value,
                        New GameStream())
         End Function

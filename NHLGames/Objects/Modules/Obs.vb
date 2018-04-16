@@ -10,19 +10,19 @@ Namespace Objects.Modules
         Private _obsHandle As IntPtr?
         Private _obsIdProcess As Integer
 
-        Private Function IsHotkeyAdSet As Boolean
+        Private Function IsHotkeyAdSet() As Boolean
             Return HotkeyAd.Key <> vbNullChar
         End Function
 
-        Private Function IsHotkeyAdHasSpecialKeys As Boolean
+        Private Function IsHotkeyAdHasSpecialKeys() As Boolean
             Return HotkeyAd.Ctrl OrElse HotkeyAd.Alt OrElse HotkeyAd.Shift
         End Function
 
-        Private Function IsHotkeyGameSet As Boolean
+        Private Function IsHotkeyGameSet() As Boolean
             Return HotkeyGame.Key <> vbNullChar
         End Function
 
-        Private Function IsHotkeyGameHasSpecialKeys As Boolean
+        Private Function IsHotkeyGameHasSpecialKeys() As Boolean
             Return HotkeyGame.Ctrl OrElse HotkeyGame.Alt OrElse HotkeyGame.Shift
         End Function
 
@@ -91,7 +91,7 @@ Namespace Objects.Modules
         End Sub
 
         Private Sub HookObs()
-            Dim processNames = new List(Of string) From {"obs32", "obs64"}
+            Dim processNames = New List(Of String) From {"obs32", "obs64"}
             Dim processes As Process()
             For i = 0 To processNames.Count - 1
                 processes = Process.GetProcessesByName(processNames(i))

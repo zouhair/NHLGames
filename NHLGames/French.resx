@@ -617,54 +617,6 @@
     <value>Vue de caméra {0}</value>
     <comment>Game panel</comment>
   </data>
-  <data name="enumcancelled" xml:space="preserve">
-    <value>Annulé</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enumdelayed" xml:space="preserve">
-    <value>En retard</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enumended" xml:space="preserve">
-    <value>Terminé</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enumending" xml:space="preserve">
-    <value>En cours</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enuminprogress" xml:space="preserve">
-    <value>En cours</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enumofftheair" xml:space="preserve">
-    <value>Final</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enumpostponed" xml:space="preserve">
-    <value>Reporté</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enumpregame" xml:space="preserve">
-    <value>Avant-match</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enumscheduled" xml:space="preserve">
-    <value>À venir</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enumstreamended" xml:space="preserve">
-    <value>Final</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enumtobedetermined" xml:space="preserve">
-    <value>À déterminer</value>
-    <comment>Game State Enum</comment>
-  </data>
-  <data name="enumundefined" xml:space="preserve">
-    <value>Non défini</value>
-    <comment>Game State Enum</comment>
-  </data>
   <data name="tipAddRecord" xml:space="preserve">
     <value>Ajouter aux enregistrements</value>
     <comment>Game panel</comment>
@@ -716,5 +668,53 @@
   <data name="cbLiveReplayPuckDrop" xml:space="preserve">
     <value>Quand le match commence (puck en jeu)</value>
     <comment>Settings tab</comment>
+  </data>
+  <data name="enumGameState0" xml:space="preserve">
+    <value>Non défini</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumGameState1" xml:space="preserve">
+    <value>À venir</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumGameState10" xml:space="preserve">
+    <value>Annulé</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumGameState11" xml:space="preserve">
+    <value>En retard</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumGameState2" xml:space="preserve">
+    <value>Avant-match</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumGameState3" xml:space="preserve">
+    <value>En cours</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumGameState4" xml:space="preserve">
+    <value>En cours</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumGameState5" xml:space="preserve">
+    <value>Terminé</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumGameState6" xml:space="preserve">
+    <value>Final</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumGameState7" xml:space="preserve">
+    <value>Final</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumGameState8" xml:space="preserve">
+    <value>À déterminer</value>
+    <comment>Game State Enum</comment>
+  </data>
+  <data name="enumGameState9" xml:space="preserve">
+    <value>Reporté</value>
+    <comment>Game State Enum</comment>
   </data>
 </root>

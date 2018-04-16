@@ -24,11 +24,11 @@ Namespace Utilities
             End If
 
             Dim taskLaunchingStream = New Task(Sub()
-                NHLGamesMetro.StreamStarted = True
-                LaunchingStream(args)
-                Thread.Sleep(100)
-                NHLGamesMetro.StreamStarted = False
-                                                  End Sub)
+                                                   NHLGamesMetro.StreamStarted = True
+                                                   LaunchingStream(args)
+                                                   Thread.Sleep(100)
+                                                   NHLGamesMetro.StreamStarted = False
+                                               End Sub)
 
             taskLaunchingStream.Start()
         End Sub
@@ -39,7 +39,7 @@ Namespace Utilities
                     New List(Of String) _
                     From {"found matching plugin stream", "available streams", "opening stream", "starting player"}
             Dim lstInvalidLines As New List(Of String) From {"could not open stream", "failed to read"}
-            Dim progressStep As Integer = (NHLGamesMetro.spnLoadingMaxValue)/(lstValidLines.Count + 1)
+            Dim progressStep As Integer = (NHLGamesMetro.SpnLoadingMaxValue) / (lstValidLines.Count + 1)
             NHLGamesMetro.SpnStreamingValue = 1
             Thread.Sleep(100)
 
@@ -57,8 +57,8 @@ Namespace Utilities
             procStreaming.EnableRaisingEvents = True
 
             Dim taskPlayerWatcher = New Task(Sub()
-                PlayerWatcher(args)
-                                                End Sub)
+                                                 PlayerWatcher(args)
+                                             End Sub)
 
             Try
                 procStreaming.Start()
@@ -104,7 +104,7 @@ Namespace Utilities
                 Thread.Sleep(500)
                 i += 1
             End While
-            NHLGamesMetro.SpnStreamingValue = NHLGamesMetro.spnStreamingMaxValue - 1
+            NHLGamesMetro.SpnStreamingValue = NHLGamesMetro.SpnStreamingMaxValue - 1
             Thread.Sleep(1000)
             NHLGamesMetro.StreamStarted = False
         End Sub
@@ -118,10 +118,10 @@ Namespace Utilities
 
                 watchArgs.Is60Fps = form.cbStreamQuality.SelectedIndex = 0
                 watchArgs.Quality = CType(form.cbStreamQuality.SelectedIndex, StreamQualityEnum)
-                watchArgs.StreamLiveRewind = form.tbLiveRewind.Value*5
+                watchArgs.StreamLiveRewind = form.tbLiveRewind.Value * 5
                 watchArgs.StreamLiveReplay = CType(form.cbLiveReplay.SelectedIndex, LiveReplayEnum)
 
-                If form.rbMpv.Checked Then
+                If form.rbMPV.Checked Then
                     watchArgs.PlayerType = PlayerTypeEnum.Mpv
                     watchArgs.PlayerPath = form.txtMpvPath.Text
                 ElseIf form.rbMPC.Checked Then
@@ -150,7 +150,7 @@ Namespace Utilities
                 watchArgs.UseOutputArgs = form.tgOutput.Checked
                 watchArgs.PlayerOutputPath = form.txtOutputArgs.Text
                 ApplicationSettings.SetValue(SettingsEnum.DefaultWatchArgs,
-                                             Serialization.SerializeObject (Of GameWatchArguments)(watchArgs))
+                                             Serialization.SerializeObject(Of GameWatchArguments)(watchArgs))
             End If
         End Sub
 
@@ -158,7 +158,7 @@ Namespace Utilities
             Dim selectedStreamerExe = Path.GetFileNameWithoutExtension(streamerPath).ToLower()
             If selectedStreamerExe = StreamerTypeEnum.LiveStreamer.ToString().ToLower() Then
                 Return StreamerTypeEnum.LiveStreamer
-            Else If selectedStreamerExe = StreamerTypeEnum.StreamLink.ToString().ToLower() Then
+            ElseIf selectedStreamerExe = StreamerTypeEnum.StreamLink.ToString().ToLower() Then
                 Return StreamerTypeEnum.StreamLink
             Else
                 Return StreamerTypeEnum.None

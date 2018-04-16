@@ -31,8 +31,8 @@ Namespace Utilities
             Dim hostsFileLines = input.Replace(vbCr, String.Empty).Replace(vbTab, " ").Split(vbLf)
 
             Return (From entry In hostsFileLines
-                Where Not entry.Contains("#") AndAlso
-                      Not entry.Equals(String.Empty)).
+                    Where Not entry.Contains("#") AndAlso
+                          Not entry.Equals(String.Empty)).
                 Aggregate(String.Empty,
                           Function(current, entry) current & entry & "; ")
         End Function
@@ -60,7 +60,7 @@ Namespace Utilities
 
         Private Shared Function ValidHostFileLine(line As String) As Boolean
             Return line.Contains(NHLGamesMetro.DomainName) OrElse
-                   line.Contains(ApplicationSettings.Read (Of String)(SettingsEnum.SelectedServer, String.Empty))
+                   line.Contains(ApplicationSettings.Read(Of String)(SettingsEnum.SelectedServer, String.Empty))
         End Function
 
         Public Shared Sub CleanHosts()
@@ -83,7 +83,7 @@ Namespace Utilities
         End Sub
 
         Private Shared Function UpdateHosts(Optional clean As Boolean = False) As Boolean
-            If Not (EnsureAdmin() AndAlso FileAccess.HasAccess(HostsFilePath, true)) Then Return False
+            If Not (EnsureAdmin() AndAlso FileAccess.HasAccess(HostsFilePath, True)) Then Return False
 
             Dim fileIsReadonly As Boolean = FileAccess.IsFileReadonly(HostsFilePath)
 

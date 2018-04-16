@@ -26,8 +26,8 @@ Namespace Utilities
             _output.BeginInvoke(
                 New Action(
                     Function()
-                        Dim startIndex As Integer = - 1
-                        Dim length As Integer = - 1
+                        Dim startIndex As Integer = -1
+                        Dim length As Integer = -1
                         Dim type = OutputTypeEnum.Normal
                         Dim timestamp As String = String.Format(English.msgDateTimeNow, Now.ToString("HH:mm:ss"))
 
@@ -48,22 +48,22 @@ Namespace Utilities
                             startIndex = _output.TextLength
                             length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
                             _output.AppendText(vbCr)
-                        ElseIf value.IndexOf(":", StringComparison.Ordinal) > - 1 Then
+                        ElseIf value.IndexOf(":", StringComparison.Ordinal) > -1 Then
                             type = OutputTypeEnum.Status
                             startIndex = _output.TextLength
                             length = value.IndexOf(English.errorDoubleDot, StringComparison.Ordinal) + 2
                             _output.AppendText(vbCr)
-                              End If
+                        End If
 
                         If type = OutputTypeEnum.Error Then
                             lastError = value
-                              End If
+                        End If
 
                         value = timestamp & value
                         startIndex += timestamp.Length
                         _output.AppendText(value.ToString() & vbCr)
 
-                        If startIndex > - 1 Then
+                        If startIndex > -1 Then
                             _output.Select(startIndex, length)
 
                             If type = OutputTypeEnum.Error Then
@@ -74,21 +74,21 @@ Namespace Utilities
                                 _output.SelectionColor = Color.Yellow
                             ElseIf type = OutputTypeEnum.Cli Then
                                 _output.SelectionColor = Color.DeepSkyBlue
-                              End If
+                            End If
 
                             _output.Select(startIndex, length)
                             _output.SelectionFont = New Font(_output.Font, FontStyle.Bold)
-                              End If
+                        End If
 
                         If lastError <> Nothing Then
                             InvokeElement.MsgBoxRed(
                                 String.Format(NHLGamesMetro.RmText.GetString("msgErrorGeneralText"), vbCrLf, lastError),
                                 NHLGamesMetro.RmText.GetString("msgFailure"),
                                 MessageBoxButtons.OK)
-                              End If
+                        End If
 
                         Return Nothing
-                              End Function))
+                    End Function))
         End Sub
     End Class
 End Namespace
