@@ -279,7 +279,7 @@ Namespace Controls
                 Dim unknownStreams = _game.StreamsUnknown
                 ReDim _lnkUnknowns(unknownStreams.Count() - 1)
                 For i = 0 To unknownStreams.Count() - 1
-                    _lnkUnknowns(i) = New Button
+                    _lnkUnknowns(i) = New Button()
                     With _lnkUnknowns(i)
                         .Height = 26
                         .Width = 26

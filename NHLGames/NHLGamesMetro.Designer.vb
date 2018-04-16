@@ -330,15 +330,14 @@ Partial Class NHLGamesMetro
         '
         'flpCalendarPanel
         '
-        Me.flpCalendarPanel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.flpCalendarPanel.AutoSize = True
         Me.flpCalendarPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
         Me.flpCalendarPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
-        Me.flpCalendarPanel.Location = New System.Drawing.Point(290, 41)
+        Me.flpCalendarPanel.Location = New System.Drawing.Point(38, 41)
         Me.flpCalendarPanel.Margin = New System.Windows.Forms.Padding(0)
         Me.flpCalendarPanel.Name = "flpCalendarPanel"
         Me.flpCalendarPanel.Padding = New System.Windows.Forms.Padding(2)
-        Me.flpCalendarPanel.Size = New System.Drawing.Size(30, 30)
+        Me.flpCalendarPanel.Size = New System.Drawing.Size(274, 20)
         Me.flpCalendarPanel.TabIndex = 10
         Me.flpCalendarPanel.Visible = False
         '
