@@ -174,62 +174,12 @@ Namespace Objects
         End Function
 
         Private Shared Async Function GetGameFeedUrlAsync(gameStream As GameStream) As Task(Of String)
-            Dim result = String.Empty
+            If gameStream.GameUrl.Equals(String.Empty) Then Return String.Empty
 
-            If Not gameStream.GameUrl.Equals(String.Empty) Then
-                Dim streamUrlReturned =
-                        Await _
-                        Common.SendWebRequestAndGetContentAsync(
-                            gameStream.GameUrl & gameStream.CdnParameter.ToString().ToLower())
+            Dim streamUrlReturned = Await Common.SendWebRequestAndGetContentAsync(gameStream.GameUrl)
+            If streamUrlReturned.Equals(String.Empty) Then Return String.Empty
 
-                If streamUrlReturned <> String.Empty Then
-                    Dim request = Common.SetHttpWebRequest(streamUrlReturned)
-
-                    'the server script should test url before returning it and apply the fix below if the test fails
-                    If Await Common.SendWebRequestAsync(Nothing, request) Then
-                        result = streamUrlReturned
-                    ElseIf streamUrlReturned.Contains("http://hlslive") AndAlso gameStream.CdnParameter.Equals(CdnTypeEnum.Akc) Then
-                        Dim generatedStreamUrlFix As String = GetStreamUrlFix(streamUrlReturned, gameStream.CdnParameter.ToString().ToLower())
-
-                        If Not generatedStreamUrlFix.Equals(String.Empty) Then
-                            request = Common.SetHttpWebRequest(generatedStreamUrlFix)
-
-                            If Await Common.SendWebRequestAsync(Nothing, request) Then
-                                result = generatedStreamUrlFix
-                            Else
-                                generatedStreamUrlFix = GetStreamUrlFix(streamUrlReturned, gameStream.CdnParameter.ToString().ToLower(), True)
-                                request = Common.SetHttpWebRequest(generatedStreamUrlFix)
-
-                                If Await Common.SendWebRequestAsync(Nothing, request) Then
-                                    result = generatedStreamUrlFix
-                                End If
-                            End If
-                            request.Abort()
-                        End If
-                    End If
-                    request.Abort()
-                End If
-            End If
-            Return result
-        End Function
-
-        Private Shared Function GetStreamUrlFix(url As String, cdn As String, Optional forceMainServer As Boolean = False)
-            Dim spliter = url.Split("/")
-            Dim index As Integer = Array.FindIndex(spliter, Function(x) x.ToString().Equals("nhl"))
-
-            If index = 0 OrElse index + 5 <> spliter.Length - 1 Then
-                Return String.Empty
-            Else
-                Return String.Format("http://hlsvod-{0}.med2.med.nhl.com/{1}/nhl/{2}/{3}/{4}/{5}/{6}",
-                                     cdn,
-                                     If(forceMainServer, "ps01", spliter(index - 1)),
-                                     spliter(index + 1),
-                                     spliter(index + 2),
-                                     spliter(index + 3),
-                                     spliter(index + 4),
-                                     spliter(index + 5))
-                '/ps01{ls04}/nhl/2000/01/01/NHL_GAME_VIDEO_TEAMTEAM_M2_VISIT_20000101_1234567890123/master_wired{_web}{60}.m3u8
-            End If
+            Return If(Await Common.SendWebRequestAsync(streamUrlReturned), streamUrlReturned, String.Empty)
         End Function
 
         Private Shared Function ValidJsonGame(game As JObject)

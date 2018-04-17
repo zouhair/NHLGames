@@ -37,8 +37,7 @@ Namespace Objects
                               CdnTypeEnum.Akc,
                               ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs,
                                                                                New GameWatchArguments).Cdn)
-            GameUrl = String.Format("http://{0}/m3u8/{1}/{2}", NHLGamesMetro.HostName,
-                                    DateHelper.GetPacificTime(game.GameDate).ToString("yyyy-MM-dd"), PlayBackId)
+            GameUrl = $"http://{NHLGamesMetro.HostName}/getM3U8.php?league=NHL&id={PlayBackId}&cdn={CdnParameter.ToString().ToLower()}&date={DateHelper.GetPacificTime(game.GameDate).ToString("yyyy-MM-dd")}"
             Title = $"{game.AwayAbbrev} vs {game.HomeAbbrev} on {Network}"
         End Sub
 
