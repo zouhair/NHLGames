@@ -135,9 +135,10 @@ Alternate: Level 3
 This drop down list shows all NHLGames server hostname, so if you can't play games, try another hostname.
 
 ### ///_Server Hosts Entry_
-If the selected hostname (above) can be resolve by your network, it will get and save the related IP adress into the Windows Hosts file. 
+If the selected hostname (above) can be resolved by your network, it will get and save the related IP address in the Windows Hosts file. 
 
-To test your Hosts file, go to Settings and use the *Hosts File* drop down list:     
+To test your Hosts file, go to Settings and use the *Hosts File* drop down list (like shown below):
+![image](https://user-images.githubusercontent.com/23088305/38848831-35bc5420-41d7-11e8-9a92-10a541bfa9d0.png)
 > Select ***Test if the NHL.tv authentication bypass works*** and click on GO.    
 It should tells you if everything is fine.
 
