@@ -36,6 +36,7 @@ Namespace Controls
             lblPeriod.Text = String.Empty
             lblGameStatus.Text = String.Empty
             lblNotInSeason.Text = String.Empty
+            lblStreamStatus.Text = String.Empty
             Dim gameState = NHLGamesMetro.RmText.GetString($"enumGameState{Convert.ToInt32(_game.GameState)}").ToUpper()
 
             If _game.IsLive Then
@@ -166,16 +167,15 @@ Namespace Controls
                 lblNotInSeason.Text = If(isSeriesRecordVisible, seriesStatusLong, seriesStatusShort)
             End If
 
-            If Not _game.AreAnyStreamsAvailable OrElse Not NHLGamesMetro.HostNameResolved Then
-                If _game.GameDate.AddMinutes(15).ToLocalTime() > Date.UtcNow.ToLocalTime() And
-                   _game.GameState < GameStateEnum.InProgress Then
+            If Not _game.AreAnyStreamsAvailable Then
+                If _game.GameDate.ToLocalTime() > Date.UtcNow.ToLocalTime() And _game.GameState < GameStateEnum.InProgress Then
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblStreamAvailableAtGameTime")
                 Else
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblNoStreamAvailable")
                 End If
-                If Not NHLGamesMetro.HostNameResolved Then
-                    lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblHostFileNotWorking")
-                End If
+                flpStreams.Visible = False
+            ElseIf Not NHLGamesMetro.HostNameResolved Then
+                lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblHostFileNotWorking")
                 flpStreams.Visible = False
             End If
 

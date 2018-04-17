@@ -68,7 +68,7 @@ Namespace Objects
 
         Public ReadOnly Property AreAnyStreamsAvailable As Boolean
             Get
-                Return (StreamsDict IsNot Nothing AndAlso StreamsDict.Count > 0) OrElse (StreamsUnknown IsNot Nothing AndAlso StreamsUnknown.Count > 0) AndAlso IsStreamable
+                Return ((StreamsDict IsNot Nothing AndAlso StreamsDict.Count > 0) OrElse (StreamsUnknown IsNot Nothing AndAlso StreamsUnknown.Count > 0)) AndAlso IsStreamable
             End Get
         End Property
 
