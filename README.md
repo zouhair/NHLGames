@@ -120,7 +120,7 @@ If you use the rewind or replay feature and you want to change the default behav
 - Live Rewind: If Rewind is enabled , it will use the value to set the stream x minutes behind the live stream.
 - Live Replay: If Replay is enabled , it will start the stream from the selected value.
 
-> *NOTE: If you use the rewind slider in settings, but you set it before game time and the stream has no data at this time, it will start from live.*
+> *NOTE: If you use the rewind slider in settings, but you set it before game time and the stream has no data at this time, it might start from live.*
 
 ### ///_Content Delivery Network (CDN)_
 NHLGames uses by default Akamai CDN, but Level 3 can be activated by turn on the alternate network in settings.
