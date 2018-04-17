@@ -56,7 +56,7 @@ Namespace Objects
 
         Public ReadOnly Property IsUnplayable As Boolean
             Get
-                Return GameState > GameStateEnum.StreamEnded
+                Return GameState > GameStateEnum.StreamEnded OrElse GameState = GameStateEnum.Undefined
             End Get
         End Property
 
@@ -68,7 +68,7 @@ Namespace Objects
 
         Public ReadOnly Property AreAnyStreamsAvailable As Boolean
             Get
-                Return ((StreamsDict IsNot Nothing AndAlso StreamsDict.Count > 0) OrElse (StreamsUnknown IsNot Nothing AndAlso StreamsUnknown.Count > 0)) AndAlso IsStreamable
+                Return ((StreamsDict IsNot Nothing AndAlso StreamsDict.Count > 0) OrElse (StreamsUnknown IsNot Nothing AndAlso StreamsUnknown.Count > 0)) AndAlso Not IsUnplayable
             End Get
         End Property
 
