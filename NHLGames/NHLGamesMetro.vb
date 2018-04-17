@@ -76,7 +76,7 @@ Public Class NHLGamesMetro
         Common.CheckHostsFile()
 
         FormLoaded = True
-        ResumeLayout()
+        ResumeLayout(True)
 
         tmr.Enabled = True
         InvokeElement.LoadGames()

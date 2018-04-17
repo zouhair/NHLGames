@@ -91,9 +91,7 @@ Namespace Utilities
             Return result
         End Function
 
-        Public Shared Async Function SendWebRequestAndGetContentAsync(address As String,
-                                                                      Optional httpWebRequest As HttpWebRequest =
-                                                                         Nothing) As Task(Of String)
+        Public Shared Async Function SendWebRequestAndGetContentAsync(address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Task(Of String)
             Dim content = New MemoryStream()
             Dim myHttpWebRequest As HttpWebRequest
 
