@@ -85,7 +85,7 @@
             'lnkToday
             '
             Me.lnkToday.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
             Me.lnkToday.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(210, Byte), Integer))
             Me.lnkToday.FlatAppearance.BorderSize = 0
             Me.lnkToday.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray
@@ -690,7 +690,7 @@
             'lblWeeksBackground
             '
             Me.lblWeeksBackground.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
             Me.lblWeeksBackground.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
             Me.lblWeeksBackground.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.lblWeeksBackground.ForeColor = System.Drawing.Color.White
@@ -860,7 +860,7 @@
             'btnNextMonth
             '
             Me.btnNextMonth.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
             Me.btnNextMonth.BackColor = System.Drawing.Color.Gray
             Me.btnNextMonth.BackgroundImage = Global.NHLGames.My.Resources.Resources.wrightw
             Me.btnNextMonth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch

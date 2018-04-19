@@ -1,5 +1,6 @@
 ﻿Imports System.Globalization
 Imports System.Text
+Imports MetroFramework
 Imports MetroFramework.Drawing
 Imports NHLGames.Objects
 Imports NHLGames.Utilities
@@ -249,6 +250,23 @@ Namespace Controls
             _showLiveTime = showLiveTime
             _game = game
 
+            If False Then
+                'dark
+                Me.BackColor = Color.FromArgb(60, 60, 60)
+                Me.flpStreams.BackColor = Color.FromArgb(80, 80, 80)
+                Me.lblPeriod.BackColor = Color.FromArgb(80, 80, 80)
+                Me.lblStreamStatus.BackColor = Color.FromArgb(80, 80, 80)
+                Me.lblStreamStatus.ForeColor = Color.LightGray
+                Me.lblAwayTeam.Theme = MetroThemeStyle.Dark
+                Me.lblHomeTeam.Theme = MetroThemeStyle.Dark
+                Me.lblGameStatus.Theme = MetroThemeStyle.Dark
+                Me.lblPeriod.ForeColor = Color.LightGray
+                Me.lblAwayScore.ForeColor = Color.LightGray
+                Me.lblHomeScore.ForeColor = Color.LightGray
+                Me.lblNotInSeason.Theme = MetroThemeStyle.Dark
+                Me.lblDivider.BackColor = Color.Black
+            End If
+
             flpSetRecording.Controls.Add(New SetRecordControl)
 
             SetWholeGamePanel()
@@ -304,7 +322,7 @@ Namespace Controls
                 If _game.GameState < GameStateEnum.Ended And _game.GameDate.ToLocalTime() <= Date.Today.AddDays(1) Then
                     bpGameControl.BorderColour = Color.FromArgb(255, 0, 170, 210)
                 Else
-                    bpGameControl.BorderColour = Color.DarkGray
+                    bpGameControl.BorderColour = Color.FromArgb(255, 100, 100, 100)
                 End If
             Else
                 bpGameControl.BorderColour = Color.DarkOrange

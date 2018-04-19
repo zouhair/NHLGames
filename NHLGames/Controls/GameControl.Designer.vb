@@ -72,7 +72,7 @@
             Me.bpGameControl.Controls.Add(Me.lblNotInSeason)
             Me.bpGameControl.Controls.Add(Me.lblStreamStatus)
             Me.bpGameControl.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.bpGameControl.Location = New System.Drawing.Point(3, 3)
+            Me.bpGameControl.Location = New System.Drawing.Point(0, 0)
             Me.bpGameControl.Name = "bpGameControl"
             Me.bpGameControl.Size = New System.Drawing.Size(312, 151)
             Me.bpGameControl.TabIndex = 9
@@ -462,10 +462,8 @@
             Me.BackColor = System.Drawing.Color.White
             Me.Controls.Add(Me.bpGameControl)
             Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.Margin = New System.Windows.Forms.Padding(0)
             Me.Name = "GameControl"
-            Me.Padding = New System.Windows.Forms.Padding(3)
-            Me.Size = New System.Drawing.Size(318, 157)
+            Me.Size = New System.Drawing.Size(312, 151)
             Me.bpGameControl.ResumeLayout(False)
             Me.bpGameControl.PerformLayout()
             CType(Me.picAway, System.ComponentModel.ISupportInitialize).EndInit()

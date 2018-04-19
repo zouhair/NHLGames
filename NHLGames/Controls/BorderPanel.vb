@@ -4,7 +4,7 @@
         Implements IDisposable
 
         Public Sub New()
-            BorderColour = Color.Gray
+            BorderColour = Color.FromArgb(255, 60, 60, 60)
         End Sub
 
         Protected Overrides Sub OnPaint(e As PaintEventArgs)

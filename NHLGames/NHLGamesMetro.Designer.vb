@@ -209,7 +209,7 @@ Partial Class NHLGamesMetro
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtConsole.AutoWordSelection = True
         Me.txtConsole.BackColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(42, Byte), Integer), CType(CType(42, Byte), Integer))
-        Me.txtConsole.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtConsole.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtConsole.Font = New System.Drawing.Font("Lucida Console", 8.25!)
         Me.txtConsole.ForeColor = System.Drawing.Color.White
         Me.txtConsole.Location = New System.Drawing.Point(0, 0)
@@ -241,7 +241,6 @@ Partial Class NHLGamesMetro
         Me.tabMenu.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabMenu.Style = MetroFramework.MetroColorStyle.Blue
         Me.tabMenu.TabIndex = 10
-        Me.tabMenu.UseCustomForeColor = True
         Me.tabMenu.UseSelectable = True
         '
         'tabGames
