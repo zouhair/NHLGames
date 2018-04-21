@@ -26,12 +26,12 @@ Namespace Controls
         End Property
 
         Public Sub UpdateGame(showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean,
-                              showTeamCityAbr As Boolean, showLiveTime As Boolean, Optional game As Game = Nothing)
+                              showTeamCityAbr As Boolean, showLiveTime As Boolean, Optional gameUpdated As Game = Nothing)
 
-            If game IsNot Nothing Then
-                If game.StreamsDict Is Nothing Then Return
-                _game = game
-                game.Dispose()
+            If gameUpdated IsNot Nothing Then
+                If gameUpdated.StreamsDict Is Nothing Then Return
+                _game = gameUpdated
+                gameUpdated.Dispose()
             End If
 
             lblPeriod.Text = String.Empty
@@ -63,13 +63,18 @@ Namespace Controls
                             Replace($"3rd", NHLGamesMetro.RmText.GetString("gamePeriod3")).
                             Replace($"OT", NHLGamesMetro.RmText.GetString("gamePeriodOt")).
                             Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo")).
-                            ToUpper()}              {_game.GameTimeLeft.ToLower().
-                                Replace("final", NHLGamesMetro.RmText.GetString("gamePeriodFinal")).
-                                Replace("end", "00:00")}".
-                            ToUpper() '1st 2nd 3rd OT SO... Final, 12:34, 20:00 
+                            ToUpper()}              {_game.GameTimeLeft.ToLower().Replace("end", "00:00")}".ToUpper() '1st 2nd 3rd OT SO... Final, 12:34, 20:00 
 
-                        If _
-                            _game.GamePeriod.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt")) And
+                        If _game.GameTimeLeft.ToLower() = "final" Then
+                            lblPeriod.Text = NHLGamesMetro.RmText.GetString("gamePeriodFinal").ToUpper()
+                            If _game.HomeScore < _game.AwayScore Then
+                                lblHomeScore.ForeColor = Color.Gray
+                            Else
+                                lblAwayScore.ForeColor = Color.Gray
+                            End If
+                        End If
+
+                        If _game.GamePeriod.Contains(NHLGamesMetro.RmText.GetString("gamePeriodOt")) And
                             IsNumeric(_game.GamePeriod(0)) Then
                             lblPeriod.Text =
                                 String.Format(NHLGamesMetro.RmText.GetString("gamePeriodOtMore"), _game.GamePeriod(0)).
@@ -85,7 +90,7 @@ Namespace Controls
                                                        gameState)
                 End If
 
-            ElseIf _game.IsOffTheAir Then
+            ElseIf _game.GameState = GameStateEnum.StreamEnded Then
                 lblHomeScore.Visible = showScores
                 lblAwayScore.Visible = showScores
                 lblGameStatus.Visible = Not showScores
@@ -222,27 +227,28 @@ Namespace Controls
             InitializeComponent()
             _broadcasters = New Dictionary(Of String, String)() From {
                 {"ALT", "ALT"},
+                {"ATT", "ATT"},
                 {"CBC", "CBC"},
+                {"CITY", "CBC"},
+                {"CNBC", "NBC"},
                 {"CSN", "CSN"},
                 {"ESPN", "ESPN"},
                 {"FS", "FS"},
+                {"GOLF", "NBC"},
+                {"KCOP", "FS"},
                 {"MSG", "MSG"},
                 {"NBC", "NBC"},
                 {"NESN", "NESN"},
+                {"PRIM", "FS"},
                 {"RDS", "RDS"},
                 {"ROOT", "ROOT"},
                 {"SN", "SN"},
+                {"SUN", "FS"},
+                {"TCN", "CSN"},
                 {"TSN", "TSN"},
                 {"TVAS", "TVAS"},
-                {"SUN", "FS"},
-                {"CITY", "CBC"},
-                {"WGN", "WGN"},
-                {"PRIM", "FS"},
-                {"CNBC", "NBC"},
-                {"KCOP", "FS"},
-                {"TCN", "CSN"},
                 {"USA", "NBC"},
-                {"ATT", "ATT"}}
+                {"WGN", "WGN"}}
             _showScores = showScores
             _showLiveScores = showLiveScores
             _showSeriesRecord = showSeriesRecord
@@ -250,8 +256,7 @@ Namespace Controls
             _showLiveTime = showLiveTime
             _game = game
 
-            If False Then
-                'dark
+            If NHLGamesMetro.IsDarkMode Then
                 Me.BackColor = Color.FromArgb(60, 60, 60)
                 Me.flpStreams.BackColor = Color.FromArgb(80, 80, 80)
                 Me.lblPeriod.BackColor = Color.FromArgb(80, 80, 80)
@@ -332,8 +337,8 @@ Namespace Controls
         End Sub
 
         Private Sub SetWholeGamePanel()
-            SetTeamLogo(picAway, _game.AwayTeam)
-            SetTeamLogo(picHome, _game.HomeTeam)
+            SetTeamLogo(picAway, $"{_game.AwayAbbrev}_{If(NHLGamesMetro.IsDarkMode, "d", "l")}")
+            SetTeamLogo(picHome, $"{_game.HomeAbbrev}_{If(NHLGamesMetro.IsDarkMode, "d", "l")}")
 
             SetStreamButtonLink(_game.GetStream(StreamTypeEnum.Away), lnkAway,
                                 String.Format(NHLGamesMetro.RmText.GetString("lblTeamStream"), _game.AwayAbbrev))
@@ -384,27 +389,13 @@ Namespace Controls
         Private Sub SetTeamLogo(pic As PictureBox, team As String)
             pic.SizeMode = PictureBoxSizeMode.Zoom
             If String.IsNullOrEmpty(team) = False Then
-                Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(RemoveDiacritics(team).Replace(" ", "").Replace(".", ""))
+                Dim img As Bitmap = ImageFetcher.GetImageFromEmbeddedSvg(team)
                 If Not img Is Nothing Then
                     pic.BackgroundImage.Dispose()
                     pic.BackgroundImage = img
                 End If
             End If
         End Sub
-
-        Private Shared Function RemoveDiacritics(text As String) As String
-            Dim normalizedString = text.Normalize(NormalizationForm.FormD)
-            Dim stringBuilder = New StringBuilder()
-
-            For Each c As String In normalizedString
-                Dim unicodeCategory1 = CharUnicodeInfo.GetUnicodeCategory(c)
-                If unicodeCategory1 <> UnicodeCategory.NonSpacingMark Then
-                    stringBuilder.Append(c)
-                End If
-            Next
-
-            Return stringBuilder.ToString().Normalize(NormalizationForm.FormC)
-        End Function
 
         Private Function GetBroadcasterPicFor(network As String) As String
             Dim value As String = _broadcasters.Where(Function(kvp) network.ToUpper().StartsWith(kvp.Key.ToString())).Select(

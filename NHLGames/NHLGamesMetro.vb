@@ -36,6 +36,7 @@ Public Class NHLGamesMetro
     Public Shared TodayLiveGamesFirst As Boolean = False
     Private Shared _adDetectionEngine As AdDetection
     Public Shared ReadOnly GamesDict As New Dictionary(Of String, Game)
+    Public Shared IsDarkMode As Boolean = False
 
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
     Public Shared Sub Main()
@@ -724,5 +725,9 @@ Public Class NHLGamesMetro
                             tgShowLiveTime.Checked,
                             GamesDict(game.GameId))
         Next
+    End Sub
+
+    Private Sub tgDarkMode_CheckedChanged(sender As Object, e As EventArgs) Handles tgDarkMode.CheckedChanged
+        IsDarkMode = tgDarkMode.Checked
     End Sub
 End Class

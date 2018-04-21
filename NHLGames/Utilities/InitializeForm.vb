@@ -161,8 +161,7 @@ Namespace Utilities
             Form.flpRecordList.Controls.Add(New OneRecordControl())
             Form.btnRecord.Text = Form.flpRecordList.Controls.Count
 
-            If False Then
-                'dark
+            If NHLGamesMetro.IsDarkMode Then
                 Form.Theme = MetroThemeStyle.Dark
                 Form.flpCalendarPanel.BackColor = Color.FromArgb(60, 60, 60)
                 Form.tabMenu.Theme = MetroThemeStyle.Dark
