@@ -76,6 +76,7 @@
         ShowTodayLiveGamesFirst
         LastWindowSize
         ShowLiveTime
+        DarkMode
     End Enum
 
     Public Enum OutputTypeEnum

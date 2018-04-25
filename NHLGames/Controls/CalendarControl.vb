@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports MetroFramework
 Imports NHLGames.Utilities
 
 Namespace Controls
@@ -7,6 +8,8 @@ Namespace Controls
 
         Private _currentDate As Date
         Private ReadOnly _arrayButtons(,) As Button
+        Private ReadOnly _btnBackColor As Color = Color.White
+        Private ReadOnly _btnForeColor As Color = Color.Black
 
         Private Sub ReloadCal(ldate As Date, selected As Integer)
             _currentDate = ldate
@@ -35,8 +38,8 @@ Namespace Controls
 
             While idate < Date.DaysInMonth(ldate.Year, ldate.Month) + 1
                 _arrayButtons(row, fdate).Text = idate
-                _arrayButtons(row, fdate).ForeColor = Color.Black
-                _arrayButtons(row, fdate).BackColor = Color.White
+                _arrayButtons(row, fdate).ForeColor = _btnForeColor
+                _arrayButtons(row, fdate).BackColor = _btnBackColor
                 If idate = selected And ldate.Month = Date.Today.Month And ldate.Year = Date.Today.Year Then
                     _arrayButtons(row, fdate).ForeColor = Color.White
                     _arrayButtons(row, fdate).BackColor = Color.FromArgb(CType(CType(0, Byte), Integer),
@@ -83,6 +86,7 @@ Namespace Controls
 
         Public Sub New()
             InitializeComponent()
+
             _arrayButtons = New Button(,) {
                                               {Su1, Mo1, Tu1, We1, Th1, Fr1, Sa1},
                                               {Su2, Mo2, Tu2, We2, Th2, Fr2, Sa2},
@@ -91,6 +95,47 @@ Namespace Controls
                                               {Su5, Mo5, Tu5, We5, Th5, Fr5, Sa5},
                                               {Su6, Mo6, Tu6, We6, Th6, Fr6, Sa6}
                                           }
+
+            Dim theme = If(NHLGamesMetro.IsDarkMode, "d", "l")
+            If NHLGamesMetro.IsDarkMode Then
+                _btnBackColor = Color.FromArgb(40, 40, 40)
+                _btnForeColor = Color.LightGray
+                BackColor = Color.FromArgb(40, 40, 40)
+                lblDate.BackColor = Color.FromArgb(80, 80, 80)
+                lblDate.ForeColor = Color.LightGray
+                btnNextYear.BackColor = Color.LightGray
+                btnBeforeYear.BackColor = Color.LightGray
+                btnBeforeMonth.BackColor = Color.LightGray
+                btnNextMonth.BackColor = Color.LightGray
+                lnkToday.FlatAppearance.MouseOverBackColor = Color.FromArgb(80, 80, 80)
+                lblWeeksBackground.BackColor = Color.FromArgb(60, 60, 60)
+                Sun.BackColor = Color.FromArgb(60, 60, 60)
+                Sun.ForeColor = _btnForeColor
+                Mon.BackColor = Color.FromArgb(60, 60, 60)
+                Mon.ForeColor = _btnForeColor
+                Tue.BackColor = Color.FromArgb(60, 60, 60)
+                Tue.ForeColor = _btnForeColor
+                Wed.BackColor = Color.FromArgb(60, 60, 60)
+                Wed.ForeColor = _btnForeColor
+                Thu.BackColor = Color.FromArgb(60, 60, 60)
+                Thu.ForeColor = _btnForeColor
+                Fri.BackColor = Color.FromArgb(60, 60, 60)
+                Fri.ForeColor = _btnForeColor
+                Sat.BackColor = Color.FromArgb(60, 60, 60)
+                Sat.ForeColor = _btnForeColor
+                lblWeeksBackground.ForeColor = Color.LightGray
+                For Each b In _arrayButtons
+                    b.ForeColor = _btnForeColor
+                    b.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60)
+                    b.BackColor = Color.FromArgb(40, 40, 40)
+                    b.FlatAppearance.MouseOverBackColor = Color.FromArgb(80, 80, 80)
+                Next
+            End If
+            btnNextMonth.BackgroundImage = ImageFetcher.GetEmbeddedImage($"right_{theme}")
+            btnBeforeMonth.BackgroundImage = ImageFetcher.GetEmbeddedImage($"left_{theme}")
+            btnBeforeYear.BackgroundImage = ImageFetcher.GetEmbeddedImage($"up_{theme}")
+            btnNextYear.BackgroundImage = ImageFetcher.GetEmbeddedImage($"down_{theme}")
+
             ReloadCal(Date.Today, Date.Today.Day)
         End Sub
 

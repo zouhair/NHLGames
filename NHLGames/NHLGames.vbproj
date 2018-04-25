@@ -69,7 +69,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
-    <ApplicationIcon>Icons\logo.ico</ApplicationIcon>
+    <ApplicationIcon>nhlgames.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>E3288C8884A4E9425CB92E7E90BECB75F15FA222</ManifestCertificateThumbprint>
@@ -142,6 +142,10 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Svg, Version=2.2.1.39233, Culture=neutral, PublicKeyToken=12a0bac221edeae2, processorArchitecture=MSIL">
+      <HintPath>..\packages\Svg.2.3.0\lib\net35\Svg.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -215,6 +219,11 @@
     <Compile Include="NHLGamesMetro.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="res\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\AdDetectionConfigs.vb" />
     <Compile Include="Objects\Modules\Hotkey.vb" />
     <Compile Include="Objects\Modules\Obs.vb" />
@@ -232,11 +241,6 @@
     <Compile Include="res\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
-    </Compile>
-    <Compile Include="res\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="res\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -286,9 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="res\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -329,110 +333,121 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Logos\Oilers.gif" />
-    <EmbeddedResource Include="Logos\Panthers.gif" />
-    <EmbeddedResource Include="Logos\Penguins.gif" />
-    <EmbeddedResource Include="Logos\Predators.gif" />
-    <EmbeddedResource Include="Logos\Rangers.gif" />
-    <EmbeddedResource Include="Logos\RedWings.gif" />
-    <EmbeddedResource Include="Logos\Sabres.gif" />
-    <EmbeddedResource Include="Logos\Senators.gif" />
-    <EmbeddedResource Include="Logos\Sharks.gif" />
-    <EmbeddedResource Include="Logos\Stars.gif" />
-    <EmbeddedResource Include="Logos\Wild.gif" />
-    <None Include="Icons\bdown.png" />
-    <None Include="Icons\bup.png" />
-    <None Include="Icons\wdate.png" />
-    <None Include="Icons\wleft.png" />
-    <None Include="Icons\wrefresh.png" />
-    <None Include="Icons\wright.png" />
-    <EmbeddedResource Include="Logos\Avalanche.gif" />
-    <EmbeddedResource Include="Logos\Blackhawks.gif" />
-    <EmbeddedResource Include="Logos\BlueJackets.gif" />
-    <EmbeddedResource Include="Logos\Blues.gif" />
-    <EmbeddedResource Include="Logos\Bruins.gif" />
-    <EmbeddedResource Include="Logos\Canadiens.gif" />
-    <EmbeddedResource Include="Logos\Canucks.gif" />
-    <EmbeddedResource Include="Logos\Capitals.gif" />
-    <EmbeddedResource Include="Logos\Coyotes.gif" />
-    <EmbeddedResource Include="Logos\Devils.gif" />
-    <EmbeddedResource Include="Logos\Ducks.gif" />
-    <EmbeddedResource Include="Logos\Flames.gif" />
-    <EmbeddedResource Include="Logos\Flyers.gif" />
-    <EmbeddedResource Include="Logos\GoldenKnights.gif" />
-    <EmbeddedResource Include="Logos\Hurricanes.gif" />
-    <EmbeddedResource Include="Logos\Islanders.gif" />
-    <EmbeddedResource Include="Logos\Jets.gif" />
-    <EmbeddedResource Include="Logos\Kings.gif" />
-    <EmbeddedResource Include="Logos\Lightning.gif" />
-    <EmbeddedResource Include="Logos\MapleLeafs.gif" />
-    <EmbeddedResource Include="broadcasters\alt.gif" />
-    <EmbeddedResource Include="broadcasters\cbc.gif" />
-    <EmbeddedResource Include="broadcasters\csn.gif" />
-    <EmbeddedResource Include="broadcasters\espn.gif" />
-    <EmbeddedResource Include="broadcasters\fs.gif" />
-    <EmbeddedResource Include="broadcasters\msg.gif" />
-    <EmbeddedResource Include="broadcasters\nbc.gif" />
-    <EmbeddedResource Include="broadcasters\nesn.gif" />
-    <EmbeddedResource Include="broadcasters\rds.gif" />
-    <EmbeddedResource Include="broadcasters\root.gif" />
-    <EmbeddedResource Include="broadcasters\sn.gif" />
-    <EmbeddedResource Include="broadcasters\tsn.gif" />
-    <EmbeddedResource Include="broadcasters\tvas.gif" />
-    <None Include="Icons\endz1.gif" />
-    <None Include="Icons\endz2.gif" />
-    <EmbeddedResource Include="broadcasters\wgn.gif" />
-    <None Include="Icons\close.gif" />
-    <None Include="Icons\helpgit.gif" />
-    <None Include="Icons\nhltv.gif" />
-    <None Include="Icons\refc.gif" />
-    <None Include="Icons\sixc.gif" />
-    <None Include="Icons\threec.gif" />
-    <None Include="Icons\maximize.gif" />
-    <None Include="Icons\minimize.gif" />
-    <None Include="Icons\normal.gif" />
-    <None Include="Icons\download.gif" />
-    <None Include="Icons\bg.png" />
-    <None Include="Icons\logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="broadcasters\att.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Objects\Modules\IAdModule.vb" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Icons\wrightw.png" />
+    <EmbeddedResource Include="res\images\alt.png" />
+    <EmbeddedResource Include="res\images\ana_d.png" />
+    <EmbeddedResource Include="res\images\ana_l.png" />
+    <EmbeddedResource Include="res\images\ari_d.png" />
+    <EmbeddedResource Include="res\images\ari_l.png" />
+    <EmbeddedResource Include="res\images\att.png" />
+    <EmbeddedResource Include="res\images\bos_d.png" />
+    <EmbeddedResource Include="res\images\bos_l.png" />
+    <EmbeddedResource Include="res\images\broken.png" />
+    <EmbeddedResource Include="res\images\buf_d.png" />
+    <EmbeddedResource Include="res\images\buf_l.png" />
+    <EmbeddedResource Include="res\images\cam.png" />
+    <EmbeddedResource Include="res\images\cam3way.png" />
+    <EmbeddedResource Include="res\images\cam6way.png" />
+    <EmbeddedResource Include="res\images\cam_left.png" />
+    <EmbeddedResource Include="res\images\cam_ref.png" />
+    <EmbeddedResource Include="res\images\cam_right.png" />
+    <EmbeddedResource Include="res\images\cam_star.png" />
+    <EmbeddedResource Include="res\images\car_d.png" />
+    <EmbeddedResource Include="res\images\car_l.png" />
+    <EmbeddedResource Include="res\images\cbc.png" />
+    <EmbeddedResource Include="res\images\cbj_d.png" />
+    <EmbeddedResource Include="res\images\cbj_l.png" />
+    <EmbeddedResource Include="res\images\cgy_d.png" />
+    <EmbeddedResource Include="res\images\cgy_l.png" />
+    <EmbeddedResource Include="res\images\chi_d.png" />
+    <EmbeddedResource Include="res\images\chi_l.png" />
+    <EmbeddedResource Include="res\images\col_d.png" />
+    <EmbeddedResource Include="res\images\col_l.png" />
+    <EmbeddedResource Include="res\images\dal_d.png" />
+    <EmbeddedResource Include="res\images\dal_l.png" />
+    <EmbeddedResource Include="res\images\date_d.png" />
+    <EmbeddedResource Include="res\images\date_l.png" />
+    <EmbeddedResource Include="res\images\det_d.png" />
+    <EmbeddedResource Include="res\images\det_l.png" />
+    <EmbeddedResource Include="res\images\download.png" />
+    <EmbeddedResource Include="res\images\down_d.png" />
+    <EmbeddedResource Include="res\images\down_l.png" />
+    <EmbeddedResource Include="res\images\edm_d.png" />
+    <EmbeddedResource Include="res\images\edm_l.png" />
+    <EmbeddedResource Include="res\images\espn.png" />
+    <EmbeddedResource Include="res\images\fla_d.png" />
+    <EmbeddedResource Include="res\images\fla_l.png" />
+    <EmbeddedResource Include="res\images\fs.png" />
+    <EmbeddedResource Include="res\images\lak_d.png" />
+    <EmbeddedResource Include="res\images\lak_l.png" />
+    <EmbeddedResource Include="res\images\left_d.png" />
+    <EmbeddedResource Include="res\images\left_l.png" />
+    <EmbeddedResource Include="res\images\live_0.png" />
+    <EmbeddedResource Include="res\images\live_1.png" />
+    <EmbeddedResource Include="res\images\live_2.png" />
+    <EmbeddedResource Include="res\images\min_d.png" />
+    <EmbeddedResource Include="res\images\min_l.png" />
+    <EmbeddedResource Include="res\images\mpc.png" />
+    <EmbeddedResource Include="res\images\mpv.png" />
+    <EmbeddedResource Include="res\images\msg.png" />
+    <EmbeddedResource Include="res\images\mtl_d.png" />
+    <EmbeddedResource Include="res\images\mtl_l.png" />
+    <EmbeddedResource Include="res\images\nbc.png" />
+    <EmbeddedResource Include="res\images\nesn.png" />
+    <EmbeddedResource Include="res\images\nhl_d.png" />
+    <EmbeddedResource Include="res\images\nhl_l.png" />
+    <EmbeddedResource Include="res\images\njd_d.png" />
+    <EmbeddedResource Include="res\images\njd_l.png" />
+    <EmbeddedResource Include="res\images\nsh_d.png" />
+    <EmbeddedResource Include="res\images\nsh_l.png" />
+    <EmbeddedResource Include="res\images\nyi_d.png" />
+    <EmbeddedResource Include="res\images\nyi_l.png" />
+    <EmbeddedResource Include="res\images\nyr_d.png" />
+    <EmbeddedResource Include="res\images\nyr_l.png" />
+    <EmbeddedResource Include="res\images\ott_d.png" />
+    <EmbeddedResource Include="res\images\ott_l.png" />
+    <EmbeddedResource Include="res\images\phi_d.png" />
+    <EmbeddedResource Include="res\images\phi_l.png" />
+    <EmbeddedResource Include="res\images\pit_d.png" />
+    <EmbeddedResource Include="res\images\pit_l.png" />
+    <EmbeddedResource Include="res\images\rds.png" />
+    <EmbeddedResource Include="res\images\refresh_d.png" />
+    <EmbeddedResource Include="res\images\refresh_l.png" />
+    <EmbeddedResource Include="res\images\right_d.png" />
+    <EmbeddedResource Include="res\images\right_l.png" />
+    <EmbeddedResource Include="res\images\root.png" />
+    <EmbeddedResource Include="res\images\sjs_d.png" />
+    <EmbeddedResource Include="res\images\sjs_l.png" />
+    <EmbeddedResource Include="res\images\sn.png" />
+    <EmbeddedResource Include="res\images\stl_d.png" />
+    <EmbeddedResource Include="res\images\stl_l.png" />
+    <EmbeddedResource Include="res\images\tbl_d.png" />
+    <EmbeddedResource Include="res\images\tbl_l.png" />
+    <EmbeddedResource Include="res\images\tor_d.png" />
+    <EmbeddedResource Include="res\images\tor_l.png" />
+    <EmbeddedResource Include="res\images\tsn.png" />
+    <EmbeddedResource Include="res\images\tvas.png" />
+    <EmbeddedResource Include="res\images\up_d.png" />
+    <EmbeddedResource Include="res\images\up_l.png" />
+    <EmbeddedResource Include="res\images\van_d.png" />
+    <EmbeddedResource Include="res\images\van_l.png" />
+    <EmbeddedResource Include="res\images\vgk_d.png" />
+    <EmbeddedResource Include="res\images\vgk_l.png" />
+    <EmbeddedResource Include="res\images\vlc.png" />
+    <EmbeddedResource Include="res\images\wgn.png" />
+    <EmbeddedResource Include="res\images\wpg_d.png" />
+    <EmbeddedResource Include="res\images\wpg_l.png" />
+    <EmbeddedResource Include="res\images\wsh_d.png" />
+    <EmbeddedResource Include="res\images\wsh_l.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Icons\wleftw.png" />
+    <EmbeddedResource Include="res\images\nhlgames.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="broadcasters\broken.gif" />
+    <EmbeddedResource Include="nhlgames.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Icons\starc.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Icons\nhl.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\anglec.gif" />
-    <EmbeddedResource Include="Icons\baddrecord.png" />
-    <EmbeddedResource Include="Icons\brecording.png" />
-    <EmbeddedResource Include="Icons\live0.png" />
-    <EmbeddedResource Include="Icons\live1.png" />
-    <EmbeddedResource Include="Icons\live2.png" />
-    <EmbeddedResource Include="Icons\waddrecord.png" />
-    <None Include="Icons\mpc-hc.gif" />
-    <None Include="Icons\mpv.gif" />
-    <None Include="Icons\vlc.gif" />
-    <Content Include="Icons\wdatew.png" />
-    <Content Include="Icons\wrecord.png" />
-    <EmbeddedResource Include="Icons\wrecording.png" />
-    <Content Include="Icons\wrefreshw.png" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

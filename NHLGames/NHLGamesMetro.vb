@@ -24,7 +24,6 @@ Public Class NHLGamesMetro
     Public Shared SpnStreamingMaxValue As Integer = 1000
     Public Shared SpnStreamingVisible As Boolean = False
     Public Shared FlpCalendar As FlowLayoutPanel
-    Public Shared GamesDownloadedTime As Date
     Public Shared LabelDate As Label
     Private Const SubredditLink As String = "https://www.reddit.com/r/nhl_games/"
     Private Const LatestReleaseLink As String = "https://github.com/NHLGames/NHLGames/releases/latest"
@@ -36,12 +35,15 @@ Public Class NHLGamesMetro
     Public Shared TodayLiveGamesFirst As Boolean = False
     Private Shared _adDetectionEngine As AdDetection
     Public Shared ReadOnly GamesDict As New Dictionary(Of String, Game)
+    Public Shared IsDarkMode As Boolean = False
 
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
     Public Shared Sub Main()
         AddHandler Application.ThreadException, AddressOf Form1_UIThreadException
         Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
         AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf CurrentDomain_UnhandledException
+
+        IsDarkMode = ApplicationSettings.Read(Of Boolean)(SettingsEnum.DarkMode, False)
 
         Dim form As New NHLGamesMetro()
         FormInstance = form
@@ -213,7 +215,7 @@ Public Class NHLGamesMetro
     Private Sub player_CheckedChanged(sender As Object, e As EventArgs) _
         Handles rbVLC.CheckedChanged, rbMPV.CheckedChanged, rbMPC.CheckedChanged
         Dim rb As RadioButton = sender
-        If (rb.Checked) Then
+        If rb.Checked Then
             Player.RenewArgs()
             _writeToConsoleSettingsChanged(lblPlayer.Text, rb.Text)
         End If
@@ -346,31 +348,8 @@ Public Class NHLGamesMetro
         Process.Start(sInfo)
     End Sub
 
-    Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
-        WindowState = FormWindowState.Maximized
-        btnMaximize.Visible = False
-        btnNormal.Visible = True
-        RefreshFocus()
-    End Sub
-
-    Private Sub btnMinimize_Click(sender As Object, e As EventArgs) Handles btnMinimize.Click
-        WindowState = FormWindowState.Minimized
-        RefreshFocus()
-    End Sub
-
-    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Close()
-    End Sub
-
     Private Sub NHLGamesMetro_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         Refresh()
-        RefreshFocus()
-    End Sub
-
-    Private Sub btnNormal_Click(sender As Object, e As EventArgs) Handles btnNormal.Click
-        WindowState = FormWindowState.Normal
-        btnMaximize.Visible = True
-        btnNormal.Visible = False
         RefreshFocus()
     End Sub
 
@@ -619,7 +598,7 @@ Public Class NHLGamesMetro
         If flpCalendarPanel.Visible Then
             btnDate.BackColor = Color.FromArgb(0, 170, 210)
         Else
-            btnDate.BackColor = Color.FromArgb(64, 64, 64)
+            btnDate.BackColor = If(IsDarkMode, Color.DarkGray, Color.FromArgb(80, 80, 80))
         End If
     End Sub
 
@@ -674,7 +653,7 @@ Public Class NHLGamesMetro
     End Sub
 
     Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If btnMaximize.Visible Then ApplicationSettings.SetValue(SettingsEnum.LastWindowSize, Width & ";" & Height)
+        If WindowState = FormWindowState.Normal Then ApplicationSettings.SetValue(SettingsEnum.LastWindowSize, Width & ";" & Height)
     End Sub
 
     Private Sub tbLiveRewind_MouseUp(sender As Object, e As MouseEventArgs) Handles tbLiveRewind.MouseUp
@@ -725,4 +704,20 @@ Public Class NHLGamesMetro
                             GamesDict(game.GameId))
         Next
     End Sub
+
+    Private Sub tgDarkMode_CheckedChanged(sender As Object, e As EventArgs) Handles tgDarkMode.CheckedChanged
+        Dim darkMode = ApplicationSettings.Read(Of Boolean)(SettingsEnum.DarkMode, False)
+        If Not darkMode.Equals(tgDarkMode.Checked) AndAlso InvokeElement.MsgBoxBlue(RmText.GetString("msgAcceptToRestart"),
+                                    RmText.GetString("msgDarkModeApplied"), MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            Dim exeName = Process.GetCurrentProcess().MainModule.FileName
+            Dim startInfo = New ProcessStartInfo(exeName)
+            Try
+                Process.Start(startInfo)
+                Application.Exit()
+            Catch ex As Exception
+            End Try
+        End If
+        ApplicationSettings.SetValue(SettingsEnum.DarkMode, tgDarkMode.Checked)
+    End Sub
+
 End Class

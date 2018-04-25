@@ -43,7 +43,8 @@ Namespace Objects
             Get
                 Return GameState.Equals(GameStateEnum.InProgress) OrElse
                        GameState.Equals(GameStateEnum.Ending) OrElse
-                       GameState.Equals(GameStateEnum.Ended)
+                       GameState.Equals(GameStateEnum.Ended) OrElse
+                       GameState.Equals(GameStateEnum.OffTheAir)
             End Get
         End Property
 

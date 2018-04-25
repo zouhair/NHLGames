@@ -11,16 +11,21 @@
 Option Strict On
 Option Explicit On
 
+Imports System.CodeDom.Compiler
+Imports System.ComponentModel
+Imports System.ComponentModel.Design
+Imports System.Configuration
+Imports System.Runtime.CompilerServices
 
 Namespace My
 
-    <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0"),
-     Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>
+    <CompilerGenerated(),
+     GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0"),
+     EditorBrowsable(EditorBrowsableState.Advanced)>
     Partial Friend NotInheritable Class MySettings
-        Inherits Global.System.Configuration.ApplicationSettingsBase
+        Inherits ApplicationSettingsBase
 
-        Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()), MySettings)
+        Private Shared defaultInstance As MySettings = CType(Synchronized(New MySettings()), MySettings)
 
 #Region "Fonctionnalité Enregistrement automatique My.Settings"
 #If _MyType = "WindowsForms" Then
@@ -58,15 +63,15 @@ End Namespace
 
 Namespace My
 
-    <Global.Microsoft.VisualBasic.HideModuleNameAttribute(),
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-     Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>
+    <HideModuleName(),
+     DebuggerNonUserCode(),
+     CompilerGenerated()>
     Friend Module MySettingsProperty
 
-        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>
-        Friend ReadOnly Property Settings() As Global.NHLGames.My.MySettings
+        <HelpKeyword("My.Settings")>
+        Friend ReadOnly Property Settings() As MySettings
             Get
-                Return Global.NHLGames.My.MySettings.Default
+                Return MySettings.Default
             End Get
         End Property
     End Module
