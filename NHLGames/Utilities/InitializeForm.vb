@@ -369,7 +369,7 @@ Namespace Utilities
                 Form.spnStreaming.Theme = MetroThemeStyle.Dark
                 Form.lblDate.ForeColor = Color.DarkGray
                 Form.lblDate.BackColor = Color.FromArgb(80, 80, 80)
-                Form.lblVersion.ForeColor =Color.LightGray
+                Form.lblVersion.ForeColor = Color.LightGray
                 Form.lblStatus.ForeColor = Color.LightGray
                 Form.lblGamePanel.Theme = MetroThemeStyle.Dark
                 Form.tgShowTodayLiveGamesFirst.Theme = MetroThemeStyle.Dark
@@ -406,7 +406,7 @@ Namespace Utilities
                 Form.lnkGetVlc.Theme = MetroThemeStyle.Dark
                 Form.lblVlcPath.Theme = MetroThemeStyle.Dark
                 Form.txtVLCPath.BackColor = Color.FromArgb(80, 80, 80)
-                Form.txtVLCPath.ForeColor =Color.LightGray
+                Form.txtVLCPath.ForeColor = Color.LightGray
                 Form.btnVLCPath.Theme = MetroThemeStyle.Dark
                 Form.lnkGetMpc.Theme = MetroThemeStyle.Dark
                 Form.lblMpcPath.Theme = MetroThemeStyle.Dark
@@ -415,11 +415,11 @@ Namespace Utilities
                 Form.btnMPCPath.Theme = MetroThemeStyle.Dark
                 Form.lblMpvPath.Theme = MetroThemeStyle.Dark
                 Form.txtMpvPath.BackColor = Color.FromArgb(80, 80, 80)
-                Form.txtMpvPath.ForeColor =Color.LightGray
+                Form.txtMpvPath.ForeColor = Color.LightGray
                 Form.btnMpvPath.Theme = MetroThemeStyle.Dark
                 Form.lblSlPath.Theme = MetroThemeStyle.Dark
-                Form.txtStreamerPath.BackColor =Color.FromArgb(80, 80, 80)
-                Form.txtStreamerPath.ForeColor =Color.LightGray
+                Form.txtStreamerPath.BackColor = Color.FromArgb(80, 80, 80)
+                Form.txtStreamerPath.ForeColor = Color.LightGray
                 Form.btnStreamerPath.Theme = MetroThemeStyle.Dark
                 Form.lblDarkMode.Theme = MetroThemeStyle.Dark
                 Form.tgDarkMode.Theme = MetroThemeStyle.Dark
@@ -428,8 +428,8 @@ Namespace Utilities
                 Form.lblOutput.Theme = MetroThemeStyle.Dark
                 Form.tgOutput.Theme = MetroThemeStyle.Dark
                 Form.btnOutput.Theme = MetroThemeStyle.Dark
-                Form.txtOutputArgs.BackColor =Color.FromArgb(80, 80, 80)
-                Form.txtOutputArgs.ForeColor =Color.LightGray
+                Form.txtOutputArgs.BackColor = Color.FromArgb(80, 80, 80)
+                Form.txtOutputArgs.ForeColor = Color.LightGray
                 Form.lblPlayerArgs.Theme = MetroThemeStyle.Dark
                 Form.tgPlayer.Theme = MetroThemeStyle.Dark
                 Form.txtPlayerArgs.BackColor = Color.FromArgb(80, 80, 80)
@@ -437,7 +437,7 @@ Namespace Utilities
                 Form.lblStreamerArgs.Theme = MetroThemeStyle.Dark
                 Form.tgStreamer.Theme = MetroThemeStyle.Dark
                 Form.txtStreamerArgs.BackColor = Color.FromArgb(80, 80, 80)
-                Form.txtStreamerArgs.ForeColor =Color.LightGray
+                Form.txtStreamerArgs.ForeColor = Color.LightGray
                 Form.lblModules.Theme = MetroThemeStyle.Dark
                 Form.tgModules.Theme = MetroThemeStyle.Dark
                 Form.lblModulesDesc.Theme = MetroThemeStyle.Dark
@@ -470,8 +470,8 @@ Namespace Utilities
                 Form.btnCopyConsole.Theme = MetroThemeStyle.Dark
                 Form.btnYesterday.BackColor = Color.DarkGray
                 Form.btnDate.BackColor = Color.DarkGray
-                Form.btnTomorrow.BackColor =Color.DarkGray
-                Form.btnRefresh.BackColor =Color.DarkGray
+                Form.btnTomorrow.BackColor = Color.DarkGray
+                Form.btnRefresh.BackColor = Color.DarkGray
             End If
             Form.pnlLogo.BackgroundImage = ImageFetcher.GetEmbeddedImage("nhlgames")
             Form.lblVLCLogo.Image = ImageFetcher.GetEmbeddedImage("vlc")

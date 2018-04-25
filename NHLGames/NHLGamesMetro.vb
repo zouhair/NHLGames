@@ -43,7 +43,7 @@ Public Class NHLGamesMetro
         Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
         AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf CurrentDomain_UnhandledException
 
-        NHLGamesMetro.IsDarkMode = ApplicationSettings.Read(Of Boolean)(SettingsEnum.DarkMode, False)
+        IsDarkMode = ApplicationSettings.Read(Of Boolean)(SettingsEnum.DarkMode, False)
 
         Dim form As New NHLGamesMetro()
         FormInstance = form
@@ -343,7 +343,7 @@ Public Class NHLGamesMetro
         Next
     End Sub
 
-    Private Shared Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click 
+    Private Shared Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Dim sInfo = New ProcessStartInfo("https://github.com/NHLGames/NHLGames/wiki")
         Process.Start(sInfo)
     End Sub
@@ -598,7 +598,7 @@ Public Class NHLGamesMetro
         If flpCalendarPanel.Visible Then
             btnDate.BackColor = Color.FromArgb(0, 170, 210)
         Else
-            btnDate.BackColor = If(IsDarkMode, Color.DarkGray, Color.FromArgb(80,80,80))
+            btnDate.BackColor = If(IsDarkMode, Color.DarkGray, Color.FromArgb(80, 80, 80))
         End If
     End Sub
 

@@ -96,17 +96,18 @@ Namespace Controls
                                               {Su6, Mo6, Tu6, We6, Th6, Fr6, Sa6}
                                           }
 
-            Dim theme = If(NHLGamesMetro.IsDarkMode,"d","l")
+            Dim theme = If(NHLGamesMetro.IsDarkMode, "d", "l")
             If NHLGamesMetro.IsDarkMode Then
                 _btnBackColor = Color.FromArgb(40, 40, 40)
                 _btnForeColor = Color.LightGray
-                Me.BackColor = Color.FromArgb(40, 40, 40)
-                lblDate.BackColor = Color.FromArgb(80,80,80)
+                BackColor = Color.FromArgb(40, 40, 40)
+                lblDate.BackColor = Color.FromArgb(80, 80, 80)
                 lblDate.ForeColor = Color.LightGray
                 btnNextYear.BackColor = Color.LightGray
                 btnBeforeYear.BackColor = Color.LightGray
                 btnBeforeMonth.BackColor = Color.LightGray
                 btnNextMonth.BackColor = Color.LightGray
+                lnkToday.FlatAppearance.MouseOverBackColor = Color.FromArgb(80, 80, 80)
                 lblWeeksBackground.BackColor = Color.FromArgb(60, 60, 60)
                 Sun.BackColor = Color.FromArgb(60, 60, 60)
                 Sun.ForeColor = _btnForeColor
