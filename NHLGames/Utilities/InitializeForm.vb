@@ -469,9 +469,13 @@ Namespace Utilities
                 Form.btnClearConsole.Theme = MetroThemeStyle.Dark
                 Form.btnCopyConsole.Theme = MetroThemeStyle.Dark
                 Form.btnYesterday.BackColor = Color.DarkGray
+                Form.btnYesterday.FlatAppearance.BorderColor =  Color.FromArgb(80, 80, 80)
                 Form.btnDate.BackColor = Color.DarkGray
+                Form.btnDate.FlatAppearance.BorderColor = Color.FromArgb(80, 80, 80)
                 Form.btnTomorrow.BackColor = Color.DarkGray
+                Form.btnTomorrow.FlatAppearance.BorderColor =  Color.FromArgb(80, 80, 80)
                 Form.btnRefresh.BackColor = Color.DarkGray
+                Form.btnRefresh.FlatAppearance.BorderColor =  Color.FromArgb(80, 80, 80)
             End If
             Form.pnlLogo.BackgroundImage = ImageFetcher.GetEmbeddedImage("nhlgames")
             Form.lblVLCLogo.Image = ImageFetcher.GetEmbeddedImage("vlc")

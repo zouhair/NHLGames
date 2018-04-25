@@ -71,8 +71,10 @@ Namespace Objects
                     currentGame.AwayTeam = game.SelectToken("teams.away.team.teamName").ToString()
 
                     Dim statusCode = Convert.ToInt16(game.SelectToken("status.statusCode").ToString())
-
                     currentGame.GameState = CType(If(statusCode > 10, 11, statusCode), GameStateEnum)
+                    If currentGame.GameDate.AddDays(2) < Date.UtcNow AndAlso currentGame.GameState > 0 AndAlso currentGame.GameState < 7 Then
+                        currentGame.GameState = GameStateEnum.StreamEnded
+                    End If
                     currentGame.GameStateDetailed = game.SelectToken("status.detailedState").ToString()
 
                     If currentGame.IsStreamable Then
