@@ -44,7 +44,6 @@
             '
             Me.lnkRemove.BackColor = System.Drawing.SystemColors.Control
             Me.lnkRemove.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.lnkRemove.Image = Global.NHLGames.My.Resources.Resources.close
             Me.lnkRemove.Location = New System.Drawing.Point(225, 1)
             Me.lnkRemove.Margin = New System.Windows.Forms.Padding(0)
             Me.lnkRemove.Name = "lnkRemove"

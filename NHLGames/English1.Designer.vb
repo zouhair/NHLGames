@@ -722,6 +722,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Dark theme.
+        '''</summary>
+        Friend Shared ReadOnly Property lblDark() As String
+            Get
+                Return ResourceManager.GetString("lblDark", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to {0} endzone camera.
         '''</summary>
         Friend Shared ReadOnly Property lblEndzoneCam() As String
@@ -1181,6 +1190,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Do you want to restart NHLGames to have the changes applied ?.
+        '''</summary>
+        Friend Shared ReadOnly Property msgAcceptToRestart() As String
+            Get
+                Return ResourceManager.GetString("msgAcceptToRestart", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Warning: Ad Detection: Unexpected Exception: {0}.
         '''</summary>
         Friend Shared ReadOnly Property msgAdDetectionException() As String
@@ -1258,6 +1276,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgCleanHostsFile() As String
             Get
                 Return ResourceManager.GetString("msgCleanHostsFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Dark theme applied.
+        '''</summary>
+        Friend Shared ReadOnly Property msgDarkModeApplied() As String
+            Get
+                Return ResourceManager.GetString("msgDarkModeApplied", resourceCulture)
             End Get
         End Property
         

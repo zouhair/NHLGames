@@ -542,6 +542,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Thème sombre.
+        '''</summary>
+        Friend Shared ReadOnly Property lblDark() As String
+            Get
+                Return ResourceManager.GetString("lblDark", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Caméra zone {0}.
         '''</summary>
         Friend Shared ReadOnly Property lblEndzoneCam() As String
@@ -992,6 +1001,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Voulez-vous redémarrer NHLGames pour appliquer les changements?.
+        '''</summary>
+        Friend Shared ReadOnly Property msgAcceptToRestart() As String
+            Get
+                Return ResourceManager.GetString("msgAcceptToRestart", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Ajouter l&apos;entrée du serveur au fichier Hosts.
         '''</summary>
         Friend Shared ReadOnly Property msgAddHost() As String
@@ -1015,6 +1033,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgChangeLog() As String
             Get
                 Return ResourceManager.GetString("msgChangeLog", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Thème sombre appliqué.
+        '''</summary>
+        Friend Shared ReadOnly Property msgDarkModeApplied() As String
+            Get
+                Return ResourceManager.GetString("msgDarkModeApplied", resourceCulture)
             End Get
         End Property
         
@@ -1195,6 +1222,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property noWebAccess() As String
             Get
                 Return ResourceManager.GetString("noWebAccess", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to .
+        '''</summary>
+        Friend Shared ReadOnly Property String1() As String
+            Get
+                Return ResourceManager.GetString("String1", resourceCulture)
             End Get
         End Property
         

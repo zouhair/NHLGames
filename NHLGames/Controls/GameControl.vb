@@ -203,9 +203,8 @@ Namespace Controls
             Dim isBlue = _game.IsLive OrElse _game.GameState.Equals(GameStateEnum.Pregame)
             If btnRecordOne.Visible Then
                 If btnRecordOne.BackgroundImage IsNot Nothing Then btnRecordOne.BackgroundImage.Dispose()
-                btnRecordOne.BackgroundImage =
-                    ImageFetcher.GetEmbeddedImage($"{If(isBlue, "b", "w")}{If(isAdded, "recording", "addrecord")}",
-                                                  True)
+               ' btnRecordOne.BackgroundImage =
+                    'ImageFetcher.GetImageFromEmbeddedSvg($"{If(isBlue, "b", "w")}{If(isAdded, "recording", "addrecord")}")
                 btnRecordOne.FlatAppearance.BorderColor =
                     If(isBlue, Color.FromArgb(0, 170, 210), Color.FromArgb(224, 224, 224))
                 btnRecordOne.FlatAppearance.MouseDownBackColor = If(isBlue, Color.FromArgb(224, 224, 224), Color.White)
@@ -231,7 +230,7 @@ Namespace Controls
                 {"CBC", "CBC"},
                 {"CITY", "CBC"},
                 {"CNBC", "NBC"},
-                {"CSN", "CSN"},
+                {"CSN", "NBC"},
                 {"ESPN", "ESPN"},
                 {"FS", "FS"},
                 {"GOLF", "NBC"},
@@ -256,21 +255,7 @@ Namespace Controls
             _showLiveTime = showLiveTime
             _game = game
 
-            If NHLGamesMetro.IsDarkMode Then
-                Me.BackColor = Color.FromArgb(60, 60, 60)
-                Me.flpStreams.BackColor = Color.FromArgb(80, 80, 80)
-                Me.lblPeriod.BackColor = Color.FromArgb(80, 80, 80)
-                Me.lblStreamStatus.BackColor = Color.FromArgb(80, 80, 80)
-                Me.lblStreamStatus.ForeColor = Color.LightGray
-                Me.lblAwayTeam.Theme = MetroThemeStyle.Dark
-                Me.lblHomeTeam.Theme = MetroThemeStyle.Dark
-                Me.lblGameStatus.Theme = MetroThemeStyle.Dark
-                Me.lblPeriod.ForeColor = Color.LightGray
-                Me.lblAwayScore.ForeColor = Color.LightGray
-                Me.lblHomeScore.ForeColor = Color.LightGray
-                Me.lblNotInSeason.Theme = MetroThemeStyle.Dark
-                Me.lblDivider.BackColor = Color.Black
-            End If
+            SetThemeAndSvgOnControl()
 
             flpSetRecording.Controls.Add(New SetRecordControl)
 
@@ -306,14 +291,14 @@ Namespace Controls
                     With _lnkUnknowns(i)
                         .Height = 26
                         .Width = 26
-                        .ForeColor = Color.FromArgb(255, 224, 224, 224)
+                        .Margin = New Padding(4,6,4,6)
                         .FlatStyle = FlatStyle.Flat
                         .FlatAppearance.BorderSize = 0
-                        .FlatAppearance.BorderColor = Color.FromArgb(255, 224, 224, 224)
+                        .FlatAppearance.BorderColor = If(NHLGamesMetro.IsDarkMode, Color.FromArgb(80,80,80), Color.FromArgb(224,224,224))
                         .FlatAppearance.MouseOverBackColor = Color.White
                         .BackgroundImageLayout = ImageLayout.Zoom
-                        .BackColor = Color.FromArgb(255, 224, 224, 224)
-                        .BackgroundImage = ImageFetcher.GetEmbeddedImage("anglec")
+                        .BackColor = If(NHLGamesMetro.IsDarkMode, Color.FromArgb(80,80,80), Color.FromArgb(224,224,224))
+                        .BackgroundImage = ImageFetcher.GetEmbeddedImage("cam")
                         .Name = "lnk" & i
                         .Tag = unknownStreams(i)
                     End With
@@ -367,18 +352,18 @@ Namespace Controls
             If stream Is Nothing Then Return
             If stream.IsBroken Then
                 Dim brokenImage = ImageFetcher.GetEmbeddedImage("broken")
-                btnLink.BackgroundImage.Dispose()
-                btnLink.BackgroundImage = brokenImage
-                btnLink.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 224, 224, 224)
-                btnLink.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 224, 224, 224)
+                If btnLink.BackgroundImage IsNot Nothing Then btnLink.BackgroundImage.Dispose()
+                If brokenImage IsNot Nothing Then btnLink.BackgroundImage = brokenImage
+                btnLink.FlatAppearance.MouseOverBackColor = If(NHLGamesMetro.IsDarkMode, Color.FromArgb(80,80,80), Color.FromArgb(224,224,224))
+                btnLink.FlatAppearance.MouseDownBackColor = If(NHLGamesMetro.IsDarkMode, Color.FromArgb(80,80,80), Color.FromArgb(224,224,224))
                 tt.SetToolTip(btnLink, String.Format(NHLGamesMetro.RmText.GetString("tipBrokenStream")))
             Else
                 If stream.Type <= StreamTypeEnum.French Then
                     Dim img As String = GetBroadcasterPicFor(stream.Network)
                     If img <> "" Then
                         Dim networkImage = ImageFetcher.GetEmbeddedImage(img)
-                        btnLink.BackgroundImage.Dispose()
-                        btnLink.BackgroundImage = networkImage
+                        If btnLink.BackgroundImage IsNot Nothing Then btnLink.BackgroundImage.Dispose()
+                        If networkImage IsNot Nothing Then btnLink.BackgroundImage = networkImage
                     End If
                     tooltip &= String.Format(NHLGamesMetro.RmText.GetString("lblOnNetwork"), stream.Network)
                 End If
@@ -389,10 +374,10 @@ Namespace Controls
         Private Sub SetTeamLogo(pic As PictureBox, team As String)
             pic.SizeMode = PictureBoxSizeMode.Zoom
             If String.IsNullOrEmpty(team) = False Then
-                Dim img As Bitmap = ImageFetcher.GetImageFromEmbeddedSvg(team)
+                Dim img As Bitmap = ImageFetcher.GetEmbeddedImage(team)
                 If Not img Is Nothing Then
-                    pic.BackgroundImage.Dispose()
-                    pic.BackgroundImage = img
+                    If pic.BackgroundImage IsNot Nothing Then pic.BackgroundImage.Dispose()
+                    If img IsNot Nothing Then pic.BackgroundImage = img
                 End If
             End If
         End Sub
@@ -411,7 +396,7 @@ Namespace Controls
             btnLiveReplay.BackColor = If(LiveReplayCode.Equals(LiveStatusCodeEnum.Live), Color.Red, Color.White)
 
             If btnLiveReplay.BackgroundImage IsNot Nothing Then btnLiveReplay.BackgroundImage.Dispose()
-            btnLiveReplay.BackgroundImage = ImageFetcher.GetEmbeddedImage($"live{CType(LiveReplayCode, Integer)}", True)
+            btnLiveReplay.BackgroundImage = ImageFetcher.GetEmbeddedImage($"live_{CType(LiveReplayCode, Integer)}")
 
             Dim type = LiveReplayCode.ToString()
             If Not LiveReplayCode.Equals(LiveStatusCodeEnum.Rewind) Then
@@ -542,6 +527,45 @@ Namespace Controls
 
         Private Sub btnLiveReplay_Click(sender As Object, e As EventArgs) Handles btnLiveReplay.Click
             SetLiveStatusIcon(True)
+        End Sub
+
+        Private Sub SetThemeAndSvgOnControl()
+            Dim themeChar = "l"
+
+            If NHLGamesMetro.IsDarkMode Then
+                themeChar = "d"
+                Me.BackColor = Color.FromArgb(60, 60, 60)
+                Me.flpStreams.BackColor = Color.FromArgb(80, 80, 80)
+                Me.lblPeriod.BackColor = Color.FromArgb(80, 80, 80)
+                Me.lblStreamStatus.BackColor = Color.FromArgb(80, 80, 80)
+                Me.lblStreamStatus.ForeColor = ForeColor
+                Me.lblAwayTeam.Theme = MetroThemeStyle.Dark
+                Me.lblHomeTeam.Theme = MetroThemeStyle.Dark
+                Me.lblGameStatus.Theme = MetroThemeStyle.Dark
+                Me.lblPeriod.ForeColor = Color.White
+                Me.lblAwayScore.ForeColor = Color.LightGray
+                Me.lblHomeScore.ForeColor = Color.LightGray
+                Me.lblNotInSeason.Theme = MetroThemeStyle.Dark
+                Me.lblDivider.BackColor = Color.Black
+                For Each lnk In New Button(){lnkHome, lnkAway, lnkFrench, lnkNational, lnkEnd1, lnkEnd2, lnkRef, lnkStar, lnkThree, lnkSix}
+                    lnk.FlatAppearance.BorderColor = Color.FromArgb(80, 80, 80)
+                    lnk.FlatAppearance.MouseOverBackColor = Color.FromArgb(100,100,100)
+                Next
+            End If
+
+            Dim nhl = $"nhl_{themeChar}"
+            Me.picHome.BackgroundImage = ImageFetcher.GetEmbeddedImage(nhl)
+            Me.picAway.BackgroundImage = ImageFetcher.GetEmbeddedImage(nhl)
+            Me.lnkHome.BackgroundImage = ImageFetcher.GetEmbeddedImage(nhl)
+            Me.lnkAway.BackgroundImage = ImageFetcher.GetEmbeddedImage(nhl)
+            Me.lnkFrench.BackgroundImage = ImageFetcher.GetEmbeddedImage(nhl)
+            Me.lnkNational.BackgroundImage = ImageFetcher.GetEmbeddedImage(nhl)
+            lnkEnd1.BackgroundImage = ImageFetcher.GetEmbeddedImage("cam_left")
+            lnkEnd2.BackgroundImage = ImageFetcher.GetEmbeddedImage("cam_right")
+            lnkRef.BackgroundImage = ImageFetcher.GetEmbeddedImage("cam_ref")
+            lnkStar.BackgroundImage = ImageFetcher.GetEmbeddedImage("cam_star")
+            lnkThree.BackgroundImage = ImageFetcher.GetEmbeddedImage("cam3way")
+            lnkSix.BackgroundImage = ImageFetcher.GetEmbeddedImage("cam6way")
         End Sub
     End Class
 End Namespace

@@ -1,4 +1,6 @@
-﻿Namespace Controls
+﻿Imports NHLGames.Utilities
+
+Namespace Controls
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class GameControl
         Inherits System.Windows.Forms.UserControl
@@ -12,6 +14,7 @@
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GameControl))
         Me.tt = New MetroFramework.Components.MetroToolTip()
         Me.bpGameControl = New NHLGames.Controls.BorderPanel()
         Me.flpSetRecording = New System.Windows.Forms.FlowLayoutPanel()
@@ -94,7 +97,6 @@
         'btnLiveReplay
         '
         Me.btnLiveReplay.BackColor = System.Drawing.Color.Red
-        Me.btnLiveReplay.BackgroundImage = Global.NHLGames.My.Resources.Resources.live0
         Me.btnLiveReplay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnLiveReplay.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
         Me.btnLiveReplay.FlatAppearance.BorderSize = 0
@@ -112,7 +114,6 @@
         'btnRecordOne
         '
         Me.btnRecordOne.BackColor = System.Drawing.Color.White
-        Me.btnRecordOne.BackgroundImage = Global.NHLGames.My.Resources.Resources.baddrecord
         Me.btnRecordOne.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnRecordOne.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(210,Byte),Integer))
         Me.btnRecordOne.FlatAppearance.BorderSize = 0
@@ -133,7 +134,7 @@
         Me.lblGameStatus.FontWeight = MetroFramework.MetroLabelWeight.Regular
         Me.lblGameStatus.Location = New System.Drawing.Point(97, 35)
         Me.lblGameStatus.Name = "lblGameStatus"
-        Me.lblGameStatus.Size = New System.Drawing.Size(117, 50)
+        Me.lblGameStatus.Size = New System.Drawing.Size(116, 50)
         Me.lblGameStatus.TabIndex = 25
         Me.lblGameStatus.Text = "GAME_STATUS"
         Me.lblGameStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -151,11 +152,11 @@
         '
         'picAway
         '
-        Me.picAway.BackgroundImage = Global.NHLGames.My.Resources.Resources.nhl
+        Me.picAway.BackgroundImage = CType(resources.GetObject("picAway.BackgroundImage"),System.Drawing.Image)
         Me.picAway.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picAway.Location = New System.Drawing.Point(30, 35)
+        Me.picAway.Location = New System.Drawing.Point(27, 35)
         Me.picAway.Name = "picAway"
-        Me.picAway.Size = New System.Drawing.Size(60, 50)
+        Me.picAway.Size = New System.Drawing.Size(65, 50)
         Me.picAway.TabIndex = 0
         Me.picAway.TabStop = false
         '
@@ -202,11 +203,11 @@
         '
         'picHome
         '
-        Me.picHome.BackgroundImage = Global.NHLGames.My.Resources.Resources.nhl
+        Me.picHome.BackgroundImage = CType(resources.GetObject("picHome.BackgroundImage"),System.Drawing.Image)
         Me.picHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picHome.Location = New System.Drawing.Point(222, 35)
+        Me.picHome.Location = New System.Drawing.Point(218, 35)
         Me.picHome.Name = "picHome"
-        Me.picHome.Size = New System.Drawing.Size(60, 50)
+        Me.picHome.Size = New System.Drawing.Size(65, 50)
         Me.picHome.TabIndex = 1
         Me.picHome.TabStop = false
         '
@@ -261,7 +262,7 @@
         '
         'lnkHome
         '
-        Me.lnkHome.BackgroundImage = Global.NHLGames.My.Resources.Resources.nhltv
+        Me.lnkHome.BackgroundImage = CType(resources.GetObject("lnkHome.BackgroundImage"),System.Drawing.Image)
         Me.lnkHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkHome.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkHome.FlatAppearance.BorderSize = 0
@@ -278,7 +279,7 @@
         '
         'lnkAway
         '
-        Me.lnkAway.BackgroundImage = Global.NHLGames.My.Resources.Resources.nhltv
+        Me.lnkAway.BackgroundImage = CType(resources.GetObject("lnkAway.BackgroundImage"),System.Drawing.Image)
         Me.lnkAway.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkAway.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkAway.FlatAppearance.BorderSize = 0
@@ -295,7 +296,7 @@
         '
         'lnkNational
         '
-        Me.lnkNational.BackgroundImage = Global.NHLGames.My.Resources.Resources.nhltv
+        Me.lnkNational.BackgroundImage = CType(resources.GetObject("lnkNational.BackgroundImage"),System.Drawing.Image)
         Me.lnkNational.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkNational.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkNational.FlatAppearance.BorderSize = 0
@@ -312,7 +313,7 @@
         '
         'lnkFrench
         '
-        Me.lnkFrench.BackgroundImage = Global.NHLGames.My.Resources.Resources.nhltv
+        Me.lnkFrench.BackgroundImage = CType(resources.GetObject("lnkFrench.BackgroundImage"),System.Drawing.Image)
         Me.lnkFrench.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkFrench.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkFrench.FlatAppearance.BorderSize = 0
@@ -329,7 +330,6 @@
         '
         'lnkThree
         '
-        Me.lnkThree.BackgroundImage = Global.NHLGames.My.Resources.Resources.threec
         Me.lnkThree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkThree.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkThree.FlatAppearance.BorderSize = 0
@@ -346,7 +346,6 @@
         '
         'lnkSix
         '
-        Me.lnkSix.BackgroundImage = Global.NHLGames.My.Resources.Resources.sixc
         Me.lnkSix.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkSix.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkSix.FlatAppearance.BorderSize = 0
@@ -363,7 +362,6 @@
         '
         'lnkEnd1
         '
-        Me.lnkEnd1.BackgroundImage = Global.NHLGames.My.Resources.Resources.endz1
         Me.lnkEnd1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkEnd1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkEnd1.FlatAppearance.BorderSize = 0
@@ -380,7 +378,6 @@
         '
         'lnkEnd2
         '
-        Me.lnkEnd2.BackgroundImage = Global.NHLGames.My.Resources.Resources.endz2
         Me.lnkEnd2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkEnd2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkEnd2.FlatAppearance.BorderSize = 0
@@ -397,7 +394,6 @@
         '
         'lnkRef
         '
-        Me.lnkRef.BackgroundImage = Global.NHLGames.My.Resources.Resources.refc
         Me.lnkRef.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkRef.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkRef.FlatAppearance.BorderSize = 0
@@ -414,7 +410,6 @@
         '
         'lnkStar
         '
-        Me.lnkStar.BackgroundImage = Global.NHLGames.My.Resources.Resources.starc
         Me.lnkStar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.lnkStar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.lnkStar.FlatAppearance.BorderSize = 0

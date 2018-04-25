@@ -96,12 +96,17 @@ Namespace Controls
                                               {Su6, Mo6, Tu6, We6, Th6, Fr6, Sa6}
                                           }
 
-            If False Then
+            Dim theme = If(NHLGamesMetro.IsDarkMode,"d","l")
+            If NHLGamesMetro.IsDarkMode Then
                 _btnBackColor = Color.FromArgb(40, 40, 40)
                 _btnForeColor = Color.LightGray
                 Me.BackColor = Color.FromArgb(40, 40, 40)
-                lblDate.Theme = MetroThemeStyle.Dark
+                lblDate.BackColor = Color.FromArgb(80,80,80)
                 lblDate.ForeColor = Color.LightGray
+                btnNextYear.BackColor = Color.LightGray
+                btnBeforeYear.BackColor = Color.LightGray
+                btnBeforeMonth.BackColor = Color.LightGray
+                btnNextMonth.BackColor = Color.LightGray
                 lblWeeksBackground.BackColor = Color.FromArgb(60, 60, 60)
                 Sun.BackColor = Color.FromArgb(60, 60, 60)
                 Sun.ForeColor = _btnForeColor
@@ -125,6 +130,10 @@ Namespace Controls
                     b.FlatAppearance.MouseOverBackColor = Color.FromArgb(80, 80, 80)
                 Next
             End If
+            btnNextMonth.BackgroundImage = ImageFetcher.GetEmbeddedImage($"right_{theme}")
+            btnBeforeMonth.BackgroundImage = ImageFetcher.GetEmbeddedImage($"left_{theme}")
+            btnBeforeYear.BackgroundImage = ImageFetcher.GetEmbeddedImage($"up_{theme}")
+            btnNextYear.BackgroundImage = ImageFetcher.GetEmbeddedImage($"down_{theme}")
 
             ReloadCal(Date.Today, Date.Today.Day)
         End Sub

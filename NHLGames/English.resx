@@ -921,4 +921,16 @@
     <value>Live remaining time</value>
     <comment>Game panel</comment>
   </data>
+  <data name="lblDark" xml:space="preserve">
+    <value>Dark theme</value>
+    <comment>Settings</comment>
+  </data>
+  <data name="msgAcceptToRestart" xml:space="preserve">
+    <value>Do you want to restart NHLGames to have the changes applied ?</value>
+    <comment>Message</comment>
+  </data>
+  <data name="msgDarkModeApplied" xml:space="preserve">
+    <value>Dark theme applied</value>
+    <comment>Message</comment>
+  </data>
 </root>

@@ -89,6 +89,7 @@ Namespace Utilities
             Form.lblPlayer.Text = NHLGamesMetro.RmText.GetString("lblPlayer")
             Form.lblQuality.Text = NHLGamesMetro.RmText.GetString("lblQuality")
             Form.lblCdn.Text = NHLGamesMetro.RmText.GetString("lblCdn")
+            Form.lblDarkMode.Text = NHLGamesMetro.RmText.GetString("lblDark")
             Form.lblHostname.Text = NHLGamesMetro.RmText.GetString("lblHostname")
             Form.lblHosts.Text = NHLGamesMetro.RmText.GetString("lblHosts")
             Form.lblVlcPath.Text = NHLGamesMetro.RmText.GetString("lblVlcPath")
@@ -161,118 +162,7 @@ Namespace Utilities
             Form.flpRecordList.Controls.Add(New OneRecordControl())
             Form.btnRecord.Text = Form.flpRecordList.Controls.Count
 
-            If NHLGamesMetro.IsDarkMode Then
-                Form.Theme = MetroThemeStyle.Dark
-                Form.flpCalendarPanel.BackColor = Color.FromArgb(60, 60, 60)
-                Form.tabMenu.Theme = MetroThemeStyle.Dark
-                Form.tabGames.Theme = MetroThemeStyle.Dark
-                Form.tabSettings.Theme = MetroThemeStyle.Dark
-                Form.tabConsole.Theme = MetroThemeStyle.Dark
-                Form.pnlBottom.BackColor = Color.FromArgb(80, 80, 80)
-                Form.pnlGameBar.BackColor = Color.FromArgb(80, 80, 80)
-                Form.flpGames.BackColor = Color.Black
-                Form.tlpSettings.BackColor = Color.Black
-                Form.spnLoading.Theme = MetroThemeStyle.Dark
-                Form.spnStreaming.Theme = MetroThemeStyle.Dark
-                Form.lblDate.ForeColor = Color.DarkGray
-                Form.lblDate.BackColor = Color.FromArgb(80, 80, 80)
-                Form.lblVersion.ForeColor = Color.LightGray
-                Form.lblStatus.ForeColor = Color.LightGray
-                Form.lblGamePanel.Theme = MetroThemeStyle.Dark
-                Form.tgShowTodayLiveGamesFirst.Theme = MetroThemeStyle.Dark
-                Form.tgShowLiveTime.Theme = MetroThemeStyle.Dark
-                Form.tgShowLiveScores.Theme = MetroThemeStyle.Dark
-                Form.tgShowSeriesRecord.Theme = MetroThemeStyle.Dark
-                Form.tgShowTeamCityAbr.Theme = MetroThemeStyle.Dark
-                Form.tgShowFinalScores.Theme = MetroThemeStyle.Dark
-                Form.lblShowTodayLiveGamesFirst.Theme = MetroThemeStyle.Dark
-                Form.lblShowLiveTime.Theme = MetroThemeStyle.Dark
-                Form.lblShowLiveScores.Theme = MetroThemeStyle.Dark
-                Form.lblShowSeriesRecord.Theme = MetroThemeStyle.Dark
-                Form.lblShowTeamCityAbr.Theme = MetroThemeStyle.Dark
-                Form.lblShowFinalScores.Theme = MetroThemeStyle.Dark
-                Form.lblQuality.Theme = MetroThemeStyle.Dark
-                Form.cbStreamQuality.Theme = MetroThemeStyle.Dark
-                Form.lblLiveReplay.Theme = MetroThemeStyle.Dark
-                Form.cbLiveReplay.Theme = MetroThemeStyle.Dark
-                Form.lblLiveRewind.Theme = MetroThemeStyle.Dark
-                Form.tbLiveRewind.Theme = MetroThemeStyle.Dark
-                Form.lblLiveRewindDetails.Theme = MetroThemeStyle.Dark
-                Form.lblCdn.Theme = MetroThemeStyle.Dark
-                Form.tgAlternateCdn.Theme = MetroThemeStyle.Dark
-                Form.lblUseAlternateCdn.Theme = MetroThemeStyle.Dark
-                Form.lblHostname.Theme = MetroThemeStyle.Dark
-                Form.cbServers.Theme = MetroThemeStyle.Dark
-                Form.lblHosts.Theme = MetroThemeStyle.Dark
-                Form.cbHostsFileActions.Theme = MetroThemeStyle.Dark
-                Form.btnHostsFileActions.Theme = MetroThemeStyle.Dark
-                Form.lblPlayer.Theme = MetroThemeStyle.Dark
-                Form.rbVLC.Theme = MetroThemeStyle.Dark
-                Form.rbMPC.Theme = MetroThemeStyle.Dark
-                Form.rbMPV.Theme = MetroThemeStyle.Dark
-                Form.lblVlcPath.Theme = MetroThemeStyle.Dark
-                Form.txtVLCPath.BackColor = Color.FromArgb(80, 80, 80)
-                Form.txtVLCPath.ForeColor = Color.LightGray
-                Form.btnVLCPath.Theme = MetroThemeStyle.Dark
-                Form.lblMpcPath.Theme = MetroThemeStyle.Dark
-                Form.txtMPCPath.BackColor = Color.FromArgb(80, 80, 80)
-                Form.txtMPCPath.ForeColor = Color.LightGray
-                Form.btnMPCPath.Theme = MetroThemeStyle.Dark
-                Form.lblMpvPath.Theme = MetroThemeStyle.Dark
-                Form.txtMpvPath.BackColor = Color.FromArgb(80, 80, 80)
-                Form.txtMpvPath.ForeColor = Color.LightGray
-                Form.btnMpvPath.Theme = MetroThemeStyle.Dark
-                Form.lblSlPath.Theme = MetroThemeStyle.Dark
-                Form.txtStreamerPath.BackColor = Color.FromArgb(80, 80, 80)
-                Form.txtStreamerPath.ForeColor = Color.LightGray
-                Form.btnStreamerPath.Theme = MetroThemeStyle.Dark
-                Form.lblLanguage.Theme = MetroThemeStyle.Dark
-                Form.cbLanguage.Theme = MetroThemeStyle.Dark
-                Form.lblOutput.Theme = MetroThemeStyle.Dark
-                Form.tgOutput.Theme = MetroThemeStyle.Dark
-                Form.btnOutput.Theme = MetroThemeStyle.Dark
-                Form.txtOutputArgs.BackColor = Color.FromArgb(80, 80, 80)
-                Form.txtOutputArgs.ForeColor = Color.LightGray
-                Form.lblPlayerArgs.Theme = MetroThemeStyle.Dark
-                Form.tgPlayer.Theme = MetroThemeStyle.Dark
-                Form.txtPlayerArgs.BackColor = Color.FromArgb(80, 80, 80)
-                Form.txtPlayerArgs.ForeColor = Color.LightGray
-                Form.lblStreamerArgs.Theme = MetroThemeStyle.Dark
-                Form.tgStreamer.Theme = MetroThemeStyle.Dark
-                Form.txtStreamerArgs.BackColor = Color.FromArgb(80, 80, 80)
-                Form.txtStreamerArgs.ForeColor = Color.LightGray
-                Form.lblModules.Theme = MetroThemeStyle.Dark
-                Form.tgModules.Theme = MetroThemeStyle.Dark
-                Form.lblModulesDesc.Theme = MetroThemeStyle.Dark
-                Form.lblSpotify.Theme = MetroThemeStyle.Dark
-                Form.tgSpotify.Theme = MetroThemeStyle.Dark
-                Form.lblSpotifyDesc.Theme = MetroThemeStyle.Dark
-                Form.chkSpotifyForceToStart.Theme = MetroThemeStyle.Dark
-                Form.chkSpotifyPlayNextSong.Theme = MetroThemeStyle.Dark
-                Form.chkSpotifyAnyMediaPlayer.Theme = MetroThemeStyle.Dark
-                Form.lblOBS.Theme = MetroThemeStyle.Dark
-                Form.tgOBS.Theme = MetroThemeStyle.Dark
-                Form.lblOBSDesc.Theme = MetroThemeStyle.Dark
-                Form.lblObsAdStartingHotkey.Theme = MetroThemeStyle.Dark
-                Form.lblObsAdEndingHotkey.Theme = MetroThemeStyle.Dark
-                Form.txtAdKey.Theme = MetroThemeStyle.Dark
-                Form.txtGameKey.Theme = MetroThemeStyle.Dark
-                Form.lblPlus1.Theme = MetroThemeStyle.Dark
-                Form.lblPlus2.Theme = MetroThemeStyle.Dark
-                Form.lblPlus3.Theme = MetroThemeStyle.Dark
-                Form.lblPlus4.Theme = MetroThemeStyle.Dark
-                Form.lblPlus5.Theme = MetroThemeStyle.Dark
-                Form.lblPlus6.Theme = MetroThemeStyle.Dark
-                Form.chkAdAlt.Theme = MetroThemeStyle.Dark
-                Form.chkAdCtrl.Theme = MetroThemeStyle.Dark
-                Form.chkAdShift.Theme = MetroThemeStyle.Dark
-                Form.chkGameAlt.Theme = MetroThemeStyle.Dark
-                Form.chkGameCtrl.Theme = MetroThemeStyle.Dark
-                Form.chkGameShift.Theme = MetroThemeStyle.Dark
-                Form.btnClearConsole.Theme = MetroThemeStyle.Dark
-                Form.btnCopyConsole.Theme = MetroThemeStyle.Dark
-            End If
-
+            SetThemeAndSvgOnForm()
         End Sub
 
         Public Shared Sub SetWindow()
@@ -303,6 +193,8 @@ Namespace Utilities
             Form.txtStreamerPath.Text = GetApplication(SettingsEnum.StreamerPath,
                                                        Path.Combine(Application.StartupPath,
                                                                     "livestreamer\livestreamer.exe"))
+
+            Form.tgDarkMode.Checked = NHLGamesMetro.IsDarkMode
 
             Form.tgShowFinalScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowScores, False)
             Form.tgShowLiveScores.Checked = ApplicationSettings.Read(Of Boolean)(SettingsEnum.ShowLiveScores, False)
@@ -348,7 +240,6 @@ Namespace Utilities
             Form.lblDate.Text = DateHelper.GetFormattedDate(NHLGamesMetro.GameDate)
 
             NHLGamesMetro.LabelDate = Form.lblDate
-            NHLGamesMetro.GamesDownloadedTime = Now
         End Sub
 
         Private Shared Function GetApplication(varPath As SettingsEnum, currentPath As String)
@@ -455,6 +346,143 @@ Namespace Utilities
                 Form.tgOBS.Checked = configs.EnabledObsModule
 
             End If
+        End Sub
+
+        Private Shared Sub SetThemeAndSvgOnForm()
+            Dim themeChar = "l"
+            If NHLGamesMetro.IsDarkMode Then
+                themeChar = "d"
+                Form.Theme = MetroThemeStyle.Dark
+                Form.lblNoGames.BackColor = Color.FromArgb(60, 60, 60)
+                Form.lblNoGames.ForeColor = Color.DarkGray
+                Form.flpCalendarPanel.BackColor = Color.FromArgb(60, 60, 60)
+                Form.tabMenu.Theme = MetroThemeStyle.Dark
+                Form.tabGames.Theme = MetroThemeStyle.Dark
+                Form.tabSettings.Theme = MetroThemeStyle.Dark
+                Form.tabConsole.Theme = MetroThemeStyle.Dark
+                Form.btnHelp.Theme = MetroThemeStyle.Dark
+                Form.pnlBottom.BackColor = Color.FromArgb(80, 80, 80)
+                Form.pnlGameBar.BackColor = Color.FromArgb(80, 80, 80)
+                Form.flpGames.BackColor = Color.Black
+                Form.tlpSettings.BackColor = Color.Black
+                Form.spnLoading.Theme = MetroThemeStyle.Dark
+                Form.spnStreaming.Theme = MetroThemeStyle.Dark
+                Form.lblDate.ForeColor = Color.DarkGray
+                Form.lblDate.BackColor = Color.FromArgb(80, 80, 80)
+                Form.lblVersion.ForeColor =Color.LightGray
+                Form.lblStatus.ForeColor = Color.LightGray
+                Form.lblGamePanel.Theme = MetroThemeStyle.Dark
+                Form.tgShowTodayLiveGamesFirst.Theme = MetroThemeStyle.Dark
+                Form.tgShowLiveTime.Theme = MetroThemeStyle.Dark
+                Form.tgShowLiveScores.Theme = MetroThemeStyle.Dark
+                Form.tgShowSeriesRecord.Theme = MetroThemeStyle.Dark
+                Form.tgShowTeamCityAbr.Theme = MetroThemeStyle.Dark
+                Form.tgShowFinalScores.Theme = MetroThemeStyle.Dark
+                Form.lblShowTodayLiveGamesFirst.Theme = MetroThemeStyle.Dark
+                Form.lblShowLiveTime.Theme = MetroThemeStyle.Dark
+                Form.lblShowLiveScores.Theme = MetroThemeStyle.Dark
+                Form.lblShowSeriesRecord.Theme = MetroThemeStyle.Dark
+                Form.lblShowTeamCityAbr.Theme = MetroThemeStyle.Dark
+                Form.lblShowFinalScores.Theme = MetroThemeStyle.Dark
+                Form.lblQuality.Theme = MetroThemeStyle.Dark
+                Form.cbStreamQuality.Theme = MetroThemeStyle.Dark
+                Form.lblLiveReplay.Theme = MetroThemeStyle.Dark
+                Form.cbLiveReplay.Theme = MetroThemeStyle.Dark
+                Form.lblLiveRewind.Theme = MetroThemeStyle.Dark
+                Form.tbLiveRewind.Theme = MetroThemeStyle.Dark
+                Form.lblLiveRewindDetails.Theme = MetroThemeStyle.Dark
+                Form.lblCdn.Theme = MetroThemeStyle.Dark
+                Form.tgAlternateCdn.Theme = MetroThemeStyle.Dark
+                Form.lblUseAlternateCdn.Theme = MetroThemeStyle.Dark
+                Form.lblHostname.Theme = MetroThemeStyle.Dark
+                Form.cbServers.Theme = MetroThemeStyle.Dark
+                Form.lblHosts.Theme = MetroThemeStyle.Dark
+                Form.cbHostsFileActions.Theme = MetroThemeStyle.Dark
+                Form.btnHostsFileActions.Theme = MetroThemeStyle.Dark
+                Form.lblPlayer.Theme = MetroThemeStyle.Dark
+                Form.rbVLC.Theme = MetroThemeStyle.Dark
+                Form.rbMPC.Theme = MetroThemeStyle.Dark
+                Form.rbMPV.Theme = MetroThemeStyle.Dark
+                Form.lnkGetVlc.Theme = MetroThemeStyle.Dark
+                Form.lblVlcPath.Theme = MetroThemeStyle.Dark
+                Form.txtVLCPath.BackColor = Color.FromArgb(80, 80, 80)
+                Form.txtVLCPath.ForeColor =Color.LightGray
+                Form.btnVLCPath.Theme = MetroThemeStyle.Dark
+                Form.lnkGetMpc.Theme = MetroThemeStyle.Dark
+                Form.lblMpcPath.Theme = MetroThemeStyle.Dark
+                Form.txtMPCPath.BackColor = Color.FromArgb(80, 80, 80)
+                Form.txtMPCPath.ForeColor = Color.LightGray
+                Form.btnMPCPath.Theme = MetroThemeStyle.Dark
+                Form.lblMpvPath.Theme = MetroThemeStyle.Dark
+                Form.txtMpvPath.BackColor = Color.FromArgb(80, 80, 80)
+                Form.txtMpvPath.ForeColor =Color.LightGray
+                Form.btnMpvPath.Theme = MetroThemeStyle.Dark
+                Form.lblSlPath.Theme = MetroThemeStyle.Dark
+                Form.txtStreamerPath.BackColor =Color.FromArgb(80, 80, 80)
+                Form.txtStreamerPath.ForeColor =Color.LightGray
+                Form.btnStreamerPath.Theme = MetroThemeStyle.Dark
+                Form.lblDarkMode.Theme = MetroThemeStyle.Dark
+                Form.tgDarkMode.Theme = MetroThemeStyle.Dark
+                Form.lblLanguage.Theme = MetroThemeStyle.Dark
+                Form.cbLanguage.Theme = MetroThemeStyle.Dark
+                Form.lblOutput.Theme = MetroThemeStyle.Dark
+                Form.tgOutput.Theme = MetroThemeStyle.Dark
+                Form.btnOutput.Theme = MetroThemeStyle.Dark
+                Form.txtOutputArgs.BackColor =Color.FromArgb(80, 80, 80)
+                Form.txtOutputArgs.ForeColor =Color.LightGray
+                Form.lblPlayerArgs.Theme = MetroThemeStyle.Dark
+                Form.tgPlayer.Theme = MetroThemeStyle.Dark
+                Form.txtPlayerArgs.BackColor = Color.FromArgb(80, 80, 80)
+                Form.txtPlayerArgs.ForeColor = Color.LightGray
+                Form.lblStreamerArgs.Theme = MetroThemeStyle.Dark
+                Form.tgStreamer.Theme = MetroThemeStyle.Dark
+                Form.txtStreamerArgs.BackColor = Color.FromArgb(80, 80, 80)
+                Form.txtStreamerArgs.ForeColor =Color.LightGray
+                Form.lblModules.Theme = MetroThemeStyle.Dark
+                Form.tgModules.Theme = MetroThemeStyle.Dark
+                Form.lblModulesDesc.Theme = MetroThemeStyle.Dark
+                Form.lblSpotify.Theme = MetroThemeStyle.Dark
+                Form.tgSpotify.Theme = MetroThemeStyle.Dark
+                Form.lblSpotifyDesc.Theme = MetroThemeStyle.Dark
+                Form.chkSpotifyForceToStart.Theme = MetroThemeStyle.Dark
+                Form.chkSpotifyPlayNextSong.Theme = MetroThemeStyle.Dark
+                Form.chkSpotifyAnyMediaPlayer.Theme = MetroThemeStyle.Dark
+                Form.lblOBS.Theme = MetroThemeStyle.Dark
+                Form.tgOBS.Theme = MetroThemeStyle.Dark
+                Form.lblOBSDesc.Theme = MetroThemeStyle.Dark
+                Form.lblObsAdStartingHotkey.Theme = MetroThemeStyle.Dark
+                Form.lblObsAdEndingHotkey.Theme = MetroThemeStyle.Dark
+                Form.txtAdKey.Theme = MetroThemeStyle.Dark
+                Form.txtGameKey.Theme = MetroThemeStyle.Dark
+                Form.lblPlus1.Theme = MetroThemeStyle.Dark
+                Form.lblPlus2.Theme = MetroThemeStyle.Dark
+                Form.lblPlus3.Theme = MetroThemeStyle.Dark
+                Form.lblPlus4.Theme = MetroThemeStyle.Dark
+                Form.lblPlus5.Theme = MetroThemeStyle.Dark
+                Form.lblPlus6.Theme = MetroThemeStyle.Dark
+                Form.chkAdAlt.Theme = MetroThemeStyle.Dark
+                Form.chkAdCtrl.Theme = MetroThemeStyle.Dark
+                Form.chkAdShift.Theme = MetroThemeStyle.Dark
+                Form.chkGameAlt.Theme = MetroThemeStyle.Dark
+                Form.chkGameCtrl.Theme = MetroThemeStyle.Dark
+                Form.chkGameShift.Theme = MetroThemeStyle.Dark
+                Form.btnClearConsole.Theme = MetroThemeStyle.Dark
+                Form.btnCopyConsole.Theme = MetroThemeStyle.Dark
+                Form.btnYesterday.BackColor = Color.DarkGray
+                Form.btnDate.BackColor = Color.DarkGray
+                Form.btnTomorrow.BackColor =Color.DarkGray
+                Form.btnRefresh.BackColor =Color.DarkGray
+            End If
+            Form.pnlLogo.BackgroundImage = ImageFetcher.GetEmbeddedImage("nhlgames")
+            Form.lblVLCLogo.Image = ImageFetcher.GetEmbeddedImage("vlc")
+            Form.lblMPVLogo.Image = ImageFetcher.GetEmbeddedImage("mpv")
+            Form.lvlMPCHCLogo.Image = ImageFetcher.GetEmbeddedImage("mpc")
+            Form.btnRefresh.BackgroundImage = ImageFetcher.GetEmbeddedImage($"refresh_{themeChar}")
+            Form.btnTomorrow.BackgroundImage = ImageFetcher.GetEmbeddedImage($"right_{themeChar}")
+            Form.btnYesterday.BackgroundImage = ImageFetcher.GetEmbeddedImage($"left_{themeChar}")
+            Form.btnDate.BackgroundImage = ImageFetcher.GetEmbeddedImage($"date_{themeChar}")
+            Form.lnkGetVlc.Image = ImageFetcher.GetEmbeddedImage($"download")
+            Form.lnkGetMpc.Image = ImageFetcher.GetEmbeddedImage($"download")
         End Sub
     End Class
 End Namespace
