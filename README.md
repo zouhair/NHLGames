@@ -1,4 +1,5 @@
-# NHLGames
+![image](https://user-images.githubusercontent.com/23088305/39225217-073f7dc8-4819-11e8-86f8-bcfdbc395d10.png)
+
 Tool to watch NHL games in High Definition for free      
 
 Choose a date.    
@@ -6,7 +7,7 @@ Choose a game.
 Choose a stream.    
 Enjoy!
 
-![image](https://user-images.githubusercontent.com/23088305/32304622-21de220c-bf47-11e7-8e7c-e63bbe57f994.png)
+![image](https://user-images.githubusercontent.com/23088305/39225241-269c99bc-4819-11e8-8f76-22e4d1f707ed.png)
 
 ## /_Index_
 * [First use](#first-use)
@@ -29,6 +30,7 @@ Enjoy!
      * [Players](#players)
      * [Streamer](#streamer)
      * [Language](#language)
+     * [Dark Theme](#dark-theme)
      * [Arguments](#arguments)
      * [Ad Detection](#ad-detection)
    * [Console](#console)
@@ -186,6 +188,9 @@ If you can't play any stream, you might need to install one of these streamer (t
 If your antivirus or Windows Defender removes the streamer, try to install another version (example: 1.0.7 instead of 1.0.8).
 
 If you find one that works great for you, keep it, you will just have to change the path in settings when a new update of NHLGames will come out.
+
+### ///_Dark Theme_
+Renders NHLGames with dark tones. An application restarts is needed for changes to take effect.
 
 ### ///_Language_
 NHLGames supports two languages: English and French.
