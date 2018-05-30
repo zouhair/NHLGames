@@ -1190,6 +1190,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Missing required Microsoft .NET 4.5 Framework! Do you want to download it?.
+        '''</summary>
+        Friend Shared ReadOnly Property missingFramework() As String
+            Get
+                Return ResourceManager.GetString("missingFramework", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Do you want to restart NHLGames to have the changes applied ?.
         '''</summary>
         Friend Shared ReadOnly Property msgAcceptToRestart() As String
