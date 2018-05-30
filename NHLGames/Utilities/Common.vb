@@ -138,13 +138,10 @@ Namespace Utilities
             Dim errorMessage = String.Empty
             If NHLGamesMetro.ServerIp.Equals(String.Empty) Then
                 errorMessage = "noGameServer"
+            ElseIf Environment.Version < New Version(4, 0, 30319, 0) Then
+                errorMessage = "missingFramework"
             ElseIf Not Await SendWebRequestAsync("https://www.google.com") Then
-                If Environment.Version < New Version(4, 0, 30319, 0) Then
-                    errorMessage = "missingFramework"
-                Else 
-                    errorMessage = "noWebAccess"
-                End If
-                
+                errorMessage = "noWebAccess"
             ElseIf Not Await InitializeForm.VersionCheck() Then
                 errorMessage = "noAppServer"
             End If
