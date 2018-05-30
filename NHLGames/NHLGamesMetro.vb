@@ -708,7 +708,7 @@ Public Class NHLGamesMetro
     Private Sub tgDarkMode_CheckedChanged(sender As Object, e As EventArgs) Handles tgDarkMode.CheckedChanged
         Dim darkMode = ApplicationSettings.Read(Of Boolean)(SettingsEnum.DarkMode, False)
         If Not darkMode.Equals(tgDarkMode.Checked) AndAlso InvokeElement.MsgBoxBlue(RmText.GetString("msgAcceptToRestart"),
-                                    RmText.GetString("msgDarkModeApplied"), MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                                    RmText.GetString("msgThemeApplied"), MessageBoxButtons.YesNo) = DialogResult.Yes Then
             Dim exeName = Process.GetCurrentProcess().MainModule.FileName
             Dim startInfo = New ProcessStartInfo(exeName)
             Try

@@ -724,8 +724,8 @@
     <value>Voulez-vous redémarrer NHLGames pour appliquer les changements?</value>
     <comment>Message</comment>
   </data>
-  <data name="msgDarkModeApplied" xml:space="preserve">
-    <value>Thème sombre appliqué</value>
+  <data name="msgThemeApplied" xml:space="preserve">
+    <value>Thème appliqué</value>
     <comment>Message</comment>
   </data>
 </root>
