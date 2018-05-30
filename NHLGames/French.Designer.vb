@@ -1001,7 +1001,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Microsoft .NET 4.5 Framework requis manquant! Voulez-vous le télécharger?.
+        '''  Looks up a localized string similar to Microsoft .NET 4.5 Framework requis manquant!.
         '''</summary>
         Friend Shared ReadOnly Property missingFramework() As String
             Get

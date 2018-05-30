@@ -729,7 +729,7 @@
     <comment>Message</comment>
   </data>
   <data name="missingFramework" xml:space="preserve">
-    <value>Microsoft .NET 4.5 Framework requis manquant! Voulez-vous le télécharger?</value>
+    <value>Microsoft .NET 4.5 Framework requis manquant!</value>
     <comment>Message</comment>
   </data>
 </root>
