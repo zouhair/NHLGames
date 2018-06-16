@@ -182,8 +182,8 @@ Namespace Controls
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblNoStreamAvailable")
                 End If
                 flpStreams.Visible = False
-            ElseIf Not NHLGamesMetro.HostNameResolved Then
-                lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblHostFileNotWorking")
+            ElseIf Not NHLGamesMetro.ProxyReady Then
+                lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblProxyNotReady")
                 flpStreams.Visible = False
             End If
 

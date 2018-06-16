@@ -717,7 +717,7 @@
     <value>Warning: Starting stream failed. Try to use a different quality in settings, so it will try another stream.</value>
     <comment>Console</comment>
   </data>
-  <data name="lblHostFileNotWorking" xml:space="preserve">
+  <data name="lblProxyNotReady" xml:space="preserve">
     <value>NHL.tv bypass failed</value>
     <comment>Game panel</comment>
   </data>

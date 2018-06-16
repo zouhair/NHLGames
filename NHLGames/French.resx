@@ -513,7 +513,7 @@
     <value>Abbréviation de la ville des équipes</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblHostFileNotWorking" xml:space="preserve">
+  <data name="lblProxyNotReady" xml:space="preserve">
     <value>Redirection NHL.tv impossible</value>
     <comment>Game panel</comment>
   </data>

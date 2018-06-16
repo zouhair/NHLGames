@@ -112,7 +112,7 @@ Namespace Utilities
                 FileAccess.AddReadonly(HostsFilePath)
             End If
 
-            NHLGamesMetro.HostNameResolved = TestEntry()
+            NHLGamesMetro.ProxyReady = TestEntry()
             InvokeElement.LoadGames()
 
             Return True

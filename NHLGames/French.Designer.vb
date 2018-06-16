@@ -612,16 +612,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblHomeTeam", resourceCulture)
             End Get
         End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Redirection NHL.tv impossible.
-        '''</summary>
-        Friend Shared ReadOnly Property lblHostFileNotWorking() As String
-            Get
-                Return ResourceManager.GetString("lblHostFileNotWorking", resourceCulture)
-            End Get
-        End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Nom de domaine.
         '''</summary>
@@ -817,6 +808,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property lblPreseason() As String
             Get
                 Return ResourceManager.GetString("lblPreseason", resourceCulture)
+            End Get
+        End Property
+
+        '''<summary>
+        '''  Looks up a localized string similar to Redirection NHL.tv impossible.
+        '''</summary>
+        Friend Shared ReadOnly Property lblProxyNotReady() As String
+            Get
+                Return ResourceManager.GetString("lblProxyNotReady", resourceCulture)
             End Get
         End Property
 

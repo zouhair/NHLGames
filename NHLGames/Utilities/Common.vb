@@ -137,7 +137,7 @@ Namespace Utilities
 
         Public Shared Async Function CheckAppCanRun() As Task(Of Boolean)
             Dim errorMessage = String.Empty
-            If NHLGamesMetro.HostNameResolved = False Then
+            If NHLGamesMetro.ProxyReady = False Then
                 errorMessage = "noGameServer"
             ElseIf Environment.Version < New Version(4, 0, 30319, 0) Then
                 errorMessage = "missingFramework"
@@ -156,7 +156,7 @@ Namespace Utilities
         Public Shared Sub SetRedirectionServerInApp()
             NHLGamesMetro.HostName = NHLGamesMetro.FormInstance.cbServers.SelectedItem.ToString()
             HostsFile.SetServerIp()
-            NHLGamesMetro.HostNameResolved = HostsFile.TestEntry()
+            NHLGamesMetro.ProxyReady = HostsFile.TestEntry()
             ApplicationSettings.SetValue(SettingsEnum.SelectedServer,
                                          NHLGamesMetro.FormInstance.cbServers.SelectedItem.ToString())
         End Sub
@@ -171,7 +171,7 @@ Namespace Utilities
                     End If
                 End If
             Else
-                NHLGamesMetro.HostNameResolved = True
+                NHLGamesMetro.ProxyReady = True
             End If
         End Sub
 

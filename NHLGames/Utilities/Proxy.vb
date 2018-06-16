@@ -10,6 +10,7 @@ Namespace Utilities
         Private ReadOnly strScriptPath As String = Path.Combine(Application.StartupPath, "mitm\proxy.py")
 
         Public Sub StartProxy()
+            Dim lstValidLines As New List(Of String) From {"proxy server listening"}
             procProxy = New Process() With {.StartInfo =
                     New ProcessStartInfo With {
                     .FileName = Path.Combine(Application.StartupPath, "mitm\win\mitmdump.exe"),
@@ -25,7 +26,9 @@ Namespace Utilities
 
                 While (procProxy.StandardOutput.EndOfStream = False)
                     Dim line = procProxy.StandardOutput.ReadLine().ToLower()
-                    Console.WriteLine(line)
+                    If lstValidLines.Any(Function(x) line.Contains(x)) Then
+                        Console.WriteLine(line)
+                    End If
                 End While
 
             Catch ex As Exception
@@ -39,11 +42,14 @@ Namespace Utilities
         End Function
 
         Public Sub StopProxy()
-            Try
-                procProxy.Kill()
-            Catch ex As Exception
-                Console.WriteLine(English.errorGeneral, $"Killing proxy", ex.Message.ToString())
-            End Try
+            Dim psi As ProcessStartInfo = New ProcessStartInfo
+            psi.Arguments = "/im mitmdump.exe /f"
+            psi.FileName = "taskkill"
+            psi.UseShellExecute = False
+            Dim p As Process = New Process With {
+                .StartInfo = psi
+            }
+            p.Start()
         End Sub
 
         Public Sub SetEnvironmentVariableForMpv()

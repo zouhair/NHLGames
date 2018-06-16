@@ -14,7 +14,7 @@ Public Class NHLGamesMetro
     Public Shared ServerIp As String = String.Empty
     Public Const DomainName As String = "mf.svc.nhl.com"
     Public Shared HostName As String = String.Empty
-    Public Shared HostNameResolved As Boolean = False
+    Public Shared ProxyReady As Boolean = False
     Public Shared FormInstance As NHLGamesMetro = Nothing
     Public Shared StreamStarted As Boolean = False
     Public Shared SpnLoadingValue As Integer = 0
@@ -27,7 +27,7 @@ Public Class NHLGamesMetro
     Public Shared LabelDate As Label
     Private Const SubredditLink As String = "https://www.reddit.com/r/nhl_games/"
     Private Const LatestReleaseLink As String = "https://github.com/NHLGames/NHLGames/releases/latest"
-    Public Shared GameDate As Date = DateHelper.GetPacificTime()
+    Public Shared GameDate As Date = New Date(2018, 5, 30) 'DateHelper.GetPacificTime()
     Private _resizeDirection As Integer = -1
     Private Const ResizeBorderWidth As Integer = 8
     Public Shared RmText As ResourceManager = English.ResourceManager
@@ -98,15 +98,15 @@ Public Class NHLGamesMetro
 
     Private Async Function CheckProxy() As Task(Of Boolean)
         If Await objProxy.IsRunning Then
-            HostNameResolved = True
+            ProxyReady = True
         Else
             While Await objProxy.IsRunning = False
                 If Await objProxy.IsRunning Then
-                    HostNameResolved = True
+                    ProxyReady = True
                 End If
             End While
         End If
-        Return HostNameResolved
+        Return ProxyReady
     End Function
 
     Public Sub ClearGamePanel()
