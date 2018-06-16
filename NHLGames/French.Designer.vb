@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Class French
@@ -630,16 +630,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblHostname", resourceCulture)
             End Get
         End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Fichier Hosts.
-        '''</summary>
-        Friend Shared ReadOnly Property lblHosts() As String
-            Get
-                Return ResourceManager.GetString("lblHosts", resourceCulture)
-            End Get
-        End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Langue.
         '''</summary>
@@ -648,7 +639,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblLanguage", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Rejoue en direct.
         '''</summary>
@@ -657,7 +648,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblLiveReplay", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Reculer en direct.
         '''</summary>
@@ -666,7 +657,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblLiveRewind", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to {0} minutes derrière le stream en direct ({1}).
         '''</summary>
@@ -675,7 +666,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblLiveRewindDetails", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Détection de publicité.
         '''</summary>
@@ -684,7 +675,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblModules", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Détecte les annonces et informe les applications activées ci-dessous.
         '''</summary>
@@ -693,7 +684,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblModulesDesc", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Emplacement MPC-HC.
         '''</summary>
@@ -702,7 +693,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblMpcPath", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Emplacement MPV.
         '''</summary>
@@ -711,7 +702,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblMpvPath", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Stream national.
         '''</summary>
@@ -720,7 +711,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblNationalNetwork", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Aucun match trouvé.
         '''</summary>
@@ -729,7 +720,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblNoGames", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Streams indisponible.
         '''</summary>
@@ -738,7 +729,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblNoStreamAvailable", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Maintenant.
         '''</summary>
@@ -747,7 +738,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblNow", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to OBS.
         '''</summary>
@@ -756,7 +747,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblObs", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Raccourci clavier: Fin d&apos;annonce.
         '''</summary>
@@ -765,7 +756,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblObsAdEndingHotkey", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Raccourci clavier: Début d&apos;annonce.
         '''</summary>
@@ -774,7 +765,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblObsAdStartingHotkey", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Change de fenêtre selon les touches configurées quand une annonce est détectée.
         '''</summary>
@@ -783,7 +774,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblObsDesc", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to  sur {0}.
         '''</summary>
@@ -792,7 +783,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblOnNetwork", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Enregistrement.
         '''</summary>
@@ -801,7 +792,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblOutput", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Lecteur par défaut.
         '''</summary>
@@ -810,7 +801,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblPlayer", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Lecteur args. supp..
         '''</summary>
@@ -819,7 +810,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblPlayerArgs", resourceCulture)
             End Get
         End Property
-        
+
         '''<summary>
         '''  Looks up a localized string similar to Présaison.
         '''</summary>
@@ -828,7 +819,16 @@ Namespace My.Resources
                 Return ResourceManager.GetString("lblPreseason", resourceCulture)
             End Get
         End Property
-        
+
+        '''<summary>
+        '''  Looks up a localized string similar to Port proxy:.
+        '''</summary>
+        Friend Shared ReadOnly Property lblProxyPort() As String
+            Get
+                Return ResourceManager.GetString("lblProxyPort", resourceCulture)
+            End Get
+        End Property
+
         '''<summary>
         '''  Looks up a localized string similar to Qualité vidéo.
         '''</summary>

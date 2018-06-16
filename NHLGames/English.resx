@@ -221,8 +221,8 @@
     <value>Server's Hostname</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblHosts" xml:space="preserve">
-    <value>Hosts file</value>
+  <data name="lblProxyPort" xml:space="preserve">
+    <value>Proxy Port:</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblMpcPath" xml:space="preserve">

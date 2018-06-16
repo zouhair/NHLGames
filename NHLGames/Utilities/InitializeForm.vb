@@ -42,15 +42,6 @@ Namespace Utilities
         End Function
 
         Public Shared Sub SetLanguage()
-            Dim lstHostsFileActions = New String() {
-                                                       NHLGamesMetro.RmText.GetString("cbHostsTest"),
-                                                       NHLGamesMetro.RmText.GetString("cbHostsAdd"),
-                                                       NHLGamesMetro.RmText.GetString("cbHostsRemove"),
-                                                       NHLGamesMetro.RmText.GetString("cbHostsView"),
-                                                       NHLGamesMetro.RmText.GetString("cbHostsEntry"),
-                                                       NHLGamesMetro.RmText.GetString("cbHostsLocation")
-                                                   }
-
             Dim lstStreamQualities = New String() {
                                                       NHLGamesMetro.RmText.GetString("cbQualitySuperb60fps"),
                                                       NHLGamesMetro.RmText.GetString("cbQualitySuperb"),
@@ -91,7 +82,7 @@ Namespace Utilities
             Form.lblCdn.Text = NHLGamesMetro.RmText.GetString("lblCdn")
             Form.lblDarkMode.Text = NHLGamesMetro.RmText.GetString("lblDark")
             Form.lblHostname.Text = NHLGamesMetro.RmText.GetString("lblHostname")
-            Form.lblHosts.Text = NHLGamesMetro.RmText.GetString("lblHosts")
+            Form.lblProxyPort.Text = NHLGamesMetro.RmText.GetString("lblProxyPort")
             Form.lblVlcPath.Text = NHLGamesMetro.RmText.GetString("lblVlcPath")
             Form.lblMpcPath.Text = NHLGamesMetro.RmText.GetString("lblMpcPath")
             Form.lblMpvPath.Text = NHLGamesMetro.RmText.GetString("lblMpvPath")
@@ -119,17 +110,12 @@ Namespace Utilities
             Form.cbStreamQuality.Items.AddRange(lstStreamQualities)
             Form.cbStreamQuality.SelectedIndex = 0
 
-            Form.cbHostsFileActions.Items.Clear()
-            Form.cbHostsFileActions.Items.AddRange(lstHostsFileActions)
-            Form.cbHostsFileActions.SelectedIndex = 0
-
             Form.cbLiveReplay.Items.Clear()
             Form.cbLiveReplay.Items.AddRange(lstLiveReplayPreferences)
             Form.cbLiveReplay.SelectedIndex = 0
 
             Form.tt.SetToolTip(Form.lnkGetVlc, NHLGamesMetro.RmText.GetString("tipGetVlc"))
             Form.tt.SetToolTip(Form.lnkGetMpc, NHLGamesMetro.RmText.GetString("tipGetMpc"))
-            Form.tt.SetToolTip(Form.btnHostsFileActions, NHLGamesMetro.RmText.GetString("tipHostsExecuteAction"))
             Form.tt.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.tt.SetToolTip(Form.btnMpvPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.tt.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
@@ -192,7 +178,8 @@ Namespace Utilities
                                                   Path.Combine(Application.StartupPath, "mpv\mpv.exe"))
             Form.txtStreamerPath.Text = GetApplication(SettingsEnum.StreamerPath,
                                                        Path.Combine(Application.StartupPath,
-                                                                    "livestreamer\livestreamer.exe"))
+                                                                    "streamlink\streamlink.exe"))
+            Form.txtProxyPort.Text = ApplicationSettings.Read(Of String)(SettingsEnum.ProxyPort, "8080")
 
             Form.tgDarkMode.Checked = NHLGamesMetro.IsDarkMode
 
@@ -396,9 +383,7 @@ Namespace Utilities
                 Form.lblUseAlternateCdn.Theme = MetroThemeStyle.Dark
                 Form.lblHostname.Theme = MetroThemeStyle.Dark
                 Form.cbServers.Theme = MetroThemeStyle.Dark
-                Form.lblHosts.Theme = MetroThemeStyle.Dark
-                Form.cbHostsFileActions.Theme = MetroThemeStyle.Dark
-                Form.btnHostsFileActions.Theme = MetroThemeStyle.Dark
+                Form.lblProxyPort.Theme = MetroThemeStyle.Dark
                 Form.lblPlayer.Theme = MetroThemeStyle.Dark
                 Form.rbVLC.Theme = MetroThemeStyle.Dark
                 Form.rbMPC.Theme = MetroThemeStyle.Dark

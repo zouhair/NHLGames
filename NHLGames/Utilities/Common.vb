@@ -2,6 +2,7 @@
 Imports System.Net
 Imports System.Text
 Imports NHLGames.My.Resources
+Imports NHLGames.Utilities
 
 Namespace Utilities
     Public Class Common
@@ -136,7 +137,7 @@ Namespace Utilities
 
         Public Shared Async Function CheckAppCanRun() As Task(Of Boolean)
             Dim errorMessage = String.Empty
-            If NHLGamesMetro.ServerIp.Equals(String.Empty) Then
+            If NHLGamesMetro.HostNameResolved = False Then
                 errorMessage = "noGameServer"
             ElseIf Environment.Version < New Version(4, 0, 30319, 0) Then
                 errorMessage = "missingFramework"

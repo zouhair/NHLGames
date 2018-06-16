@@ -36,6 +36,7 @@ Public Class NHLGamesMetro
     Private Shared _adDetectionEngine As AdDetection
     Public Shared ReadOnly GamesDict As New Dictionary(Of String, Game)
     Public Shared IsDarkMode As Boolean = False
+    Public Shared objProxy As Proxy = New Proxy()
 
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
     Public Shared Sub Main()
@@ -74,8 +75,19 @@ Public Class NHLGamesMetro
         tabMenu.SelectedIndex = 0
         FlpCalendar = flpCalendarPanel
         InitializeForm.SetSettings()
+
+        objProxy.SetEnvironmentVariableForMpv()
+
+        Dim taskLaunchProxy = New Task(Sub()
+                                           objProxy.StartProxy()
+                                           'Thread.Sleep(5000)
+                                       End Sub)
+
+        taskLaunchProxy.Start()
+
+        Await CheckProxy()
         Await Common.CheckAppCanRun()
-        Common.CheckHostsFile()
+        'Common.CheckHostsFile()
 
         FormLoaded = True
         ResumeLayout(True)
@@ -83,6 +95,19 @@ Public Class NHLGamesMetro
         tmr.Enabled = True
         InvokeElement.LoadGames()
     End Sub
+
+    Private Async Function CheckProxy() As Task(Of Boolean)
+        If Await objProxy.IsRunning Then
+            HostNameResolved = True
+        Else
+            While Await objProxy.IsRunning = False
+                If Await objProxy.IsRunning Then
+                    HostNameResolved = True
+                End If
+            End While
+        End If
+        Return HostNameResolved
+    End Function
 
     Public Sub ClearGamePanel()
         SyncLock flpGames.Controls
@@ -210,6 +235,11 @@ Public Class NHLGamesMetro
 
     Private Sub txtStreamerPath_TextChanged(sender As Object, e As EventArgs) Handles txtStreamerPath.TextChanged
         Player.RenewArgs()
+    End Sub
+
+    Private Sub txtProxyPort_TextChanged(sender As Object, e As EventArgs) Handles txtProxyPort.TextChanged
+        ApplicationSettings.SetValue(SettingsEnum.ProxyPort, txtProxyPort.Text)
+        _writeToConsoleSettingsChanged(lblProxyPort.Text, txtProxyPort.Text)
     End Sub
 
     Private Sub player_CheckedChanged(sender As Object, e As EventArgs) _
@@ -513,33 +543,9 @@ Public Class NHLGamesMetro
                                        If(tgSpotify.Checked, English.msgOn, English.msgOff))
     End Sub
 
-    Private Sub cbHostsFileActions_SelectedIndexChanged(sender As Object, e As EventArgs) _
-        Handles cbHostsFileActions.SelectedIndexChanged
-        tlpSettings.Focus()
-    End Sub
+    Private Sub cbHostsFileActions_SelectedIndexChanged(sender As Object, e As EventArgs)
 
-    Private Sub btnHostsFileActions_Click(sender As Object, e As EventArgs) Handles btnHostsFileActions.Click
-        If cbHostsFileActions.SelectedIndex = 0 Then
-            If HostsFile.TestEntry() Then
-                InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsSuccess"), RmText.GetString("msgSuccess"),
-                                         MessageBoxButtons.OK)
-            Else
-                InvokeElement.MsgBoxBlue(RmText.GetString("msgHostsFailure"), RmText.GetString("msgFailure"),
-                                         MessageBoxButtons.OK)
-            End If
-        ElseIf cbHostsFileActions.SelectedIndex = 1 Then
-            HostsFile.AddEntry()
-        ElseIf cbHostsFileActions.SelectedIndex = 2 Then
-            HostsFile.CleanHosts()
-        ElseIf cbHostsFileActions.SelectedIndex = 3 Then
-            HostsFile.OpenHostsFile()
-        ElseIf cbHostsFileActions.SelectedIndex = 4 Then
-            Clipboard.SetText(ServerIp & vbTab & DomainName)
-            InvokeElement.MsgBoxBlue(String.Format(RmText.GetString("msgHostsCopyEntry"), ServerIp & " " & DomainName),
-                                     RmText.GetString("msgSuccess"), MessageBoxButtons.OK)
-        Else
-            HostsFile.OpenHostsFile(False)
-        End If
+        tlpSettings.Focus()
     End Sub
 
     Private Sub cbStreamQuality_SelectedIndexChanged(sender As Object, e As EventArgs) _
@@ -655,6 +661,7 @@ Public Class NHLGamesMetro
 
     Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         If WindowState = FormWindowState.Normal Then ApplicationSettings.SetValue(SettingsEnum.LastWindowSize, Width & ";" & Height)
+        objProxy.StopProxy()
     End Sub
 
     Private Sub tbLiveRewind_MouseUp(sender As Object, e As MouseEventArgs) Handles tbLiveRewind.MouseUp

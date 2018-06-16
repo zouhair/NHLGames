@@ -256,6 +256,7 @@
     <Compile Include="Utilities\AdDetection.vb" />
     <Compile Include="Utilities\PathFinder.vb" />
     <Compile Include="Utilities\Player.vb" />
+    <Compile Include="Utilities\Proxy.vb" />
     <Compile Include="Utilities\Serialization.vb" />
     <Compile Include="Utilities\ConsoleRedirectStreamWriter.vb" />
     <Compile Include="Utilities\WindowsEvents.vb" />
@@ -266,6 +267,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\GameControl.resx">
       <DependentUpon>GameControl.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SetRecordControl.resx">
       <DependentUpon>SetRecordControl.vb</DependentUpon>

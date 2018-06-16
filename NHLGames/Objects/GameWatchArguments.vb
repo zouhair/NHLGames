@@ -51,7 +51,7 @@ Namespace Objects
             If String.IsNullOrEmpty(PlayerPath) OrElse PlayerType.Equals(PlayerTypeEnum.None) Then _
                 Console.WriteLine(English.errorPlayerPathEmpty)
 
-            Dim result = PlayerArgs() & ReplayArgs()
+            Dim result = PlayerArgs() & ReplayArgs() & ProxyArgs()
             If UseCustomStreamerArgs Then result &= CustomStreamerArgs
             If Not safeOutput Then result &= NhlCookieArgs()
             result &= UserAgentArgs()
@@ -112,6 +112,10 @@ Namespace Objects
                     Return 9999
             End Select
             Return DefaultSegment
+        End Function
+
+        Private Function ProxyArgs() As String
+            Return String.Format(" --https-proxy=""127.0.0.1:{0}"" ", ApplicationSettings.Read(Of String)(SettingsEnum.ProxyPort, "8080"))
         End Function
 
         Private Function NhlCookieArgs() As String

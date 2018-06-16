@@ -77,6 +77,7 @@
         LastWindowSize
         ShowLiveTime
         DarkMode
+        ProxyPort
     End Enum
 
     Public Enum OutputTypeEnum

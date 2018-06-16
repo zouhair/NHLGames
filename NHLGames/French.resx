@@ -173,8 +173,8 @@
     <value>Nom de domaine</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblHosts" xml:space="preserve">
-    <value>Fichier Hosts</value>
+  <data name="lblProxyPort" xml:space="preserve">
+    <value>Port proxy:</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblMpcPath" xml:space="preserve">
