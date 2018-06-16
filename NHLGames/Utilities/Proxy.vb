@@ -42,10 +42,11 @@ Namespace Utilities
         End Function
 
         Public Sub StopProxy()
-            Dim psi As ProcessStartInfo = New ProcessStartInfo
-            psi.Arguments = "/im mitmdump.exe /f"
-            psi.FileName = "taskkill"
-            psi.UseShellExecute = False
+            Dim psi As ProcessStartInfo = New ProcessStartInfo With {
+                .Arguments = "/im mitmdump.exe /f",
+                .FileName = "taskkill",
+                .UseShellExecute = False
+            }
             Dim p As Process = New Process With {
                 .StartInfo = psi
             }
