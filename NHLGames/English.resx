@@ -929,8 +929,12 @@
     <value>Do you want to restart NHLGames to have the changes applied ?</value>
     <comment>Message</comment>
   </data>
-  <data name="msgDarkModeApplied" xml:space="preserve">
-    <value>Dark theme applied</value>
+  <data name="msgThemeApplied" xml:space="preserve">
+    <value>Theme applied</value>
+    <comment>Message</comment>
+  </data>
+  <data name="missingFramework" xml:space="preserve">
+    <value>Missing required Microsoft .NET 4.5 Framework!</value>
     <comment>Message</comment>
   </data>
 </root>

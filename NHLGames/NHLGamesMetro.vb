@@ -609,14 +609,16 @@ Public Class NHLGamesMetro
         InvokeElement.LoadGames()
     End Sub
 
-    Private Sub CopyConsoleToClipBoard()
+    Private Async Sub CopyConsoleToClipBoard()
         Dim player As String = If(rbMPV.Checked, "MPV", If(rbMPC.Checked, "MPC", If(rbVLC.Checked, "VLC", "none")))
         Dim x64 As String = If(Environment.Is64BitOperatingSystem, "64 Bits", "32 Bits")
+        Dim framework As String = Environment.Version.ToString()
         Dim streamerPath = ApplicationSettings.Read(Of String)(SettingsEnum.StreamerPath, String.Empty).ToString()
         Dim vlcPath = ApplicationSettings.Read(Of String)(SettingsEnum.VlcPath, String.Empty).ToString()
         Dim mpcPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpcPath, String.Empty).ToString()
         Dim mpvPath = ApplicationSettings.Read(Of String)(SettingsEnum.MpvPath, String.Empty).ToString()
         Dim streamerExists = streamerPath <> "" AndAlso File.Exists(streamerPath)
+        Dim pingGoogle = Await Common.SendWebRequestAsync("https://www.google.com")
         Dim vlcExists = vlcPath <> "" AndAlso File.Exists(vlcPath)
         Dim mpcExists = mpcPath <> "" AndAlso File.Exists(mpcPath)
         Dim mpvExists = mpvPath <> "" AndAlso File.Exists(mpvPath)
@@ -624,10 +626,9 @@ Public Class NHLGamesMetro
                                     My.Application.Info.Version.Minor, My.Application.Info.Version.Build,
                                     My.Application.Info.Version.Revision)
         Dim report = $"NHLGames Bug Report {version}{vbCrLf}{vbCrLf}" &
-                     $"Operating system: {My.Computer.Info.OSFullName.ToString()} {x64.ToString()}{vbTab}{vbCrLf}" &
+                     $"Operating system: {My.Computer.Info.OSFullName.ToString()} {x64} - .Net build {framework}{vbTab}{vbCrLf}" &
                      $"Internet: Connection test {If(My.Computer.Network.IsAvailable, "succeeded", "failed") _
-                         }, ping google.com {If(My.Computer.Network.Ping("www.google.com"), "succeeded", "failed")}{ _
-                         vbTab}{vbCrLf}" &
+                         }, ping google.com {If(pingGoogle, "succeeded", "failed")}{ vbTab}{vbCrLf}" &
                      $"Form: {If(Not String.IsNullOrEmpty(lblDate.Text), "loaded", "not loaded")}, " &
                      $"{flpGames.Controls.Count} games currently on form, " &
                      $"Spinner (games) {If(SpnLoadingVisible, "visible", "invisible")} {SpnLoadingValue.ToString()}/{ _
@@ -708,7 +709,7 @@ Public Class NHLGamesMetro
     Private Sub tgDarkMode_CheckedChanged(sender As Object, e As EventArgs) Handles tgDarkMode.CheckedChanged
         Dim darkMode = ApplicationSettings.Read(Of Boolean)(SettingsEnum.DarkMode, False)
         If Not darkMode.Equals(tgDarkMode.Checked) AndAlso InvokeElement.MsgBoxBlue(RmText.GetString("msgAcceptToRestart"),
-                                    RmText.GetString("msgDarkModeApplied"), MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                                    RmText.GetString("msgThemeApplied"), MessageBoxButtons.YesNo) = DialogResult.Yes Then
             Dim exeName = Process.GetCurrentProcess().MainModule.FileName
             Dim startInfo = New ProcessStartInfo(exeName)
             Try
