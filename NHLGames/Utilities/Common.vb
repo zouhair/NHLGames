@@ -136,8 +136,12 @@ Namespace Utilities
         End Sub
 
         Public Shared Async Function CheckAppCanRun() As Task(Of Boolean)
+            InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgChekingRequirements"))
+
             Dim errorMessage = String.Empty
-            If NHLGamesMetro.ProxyReady = False Then
+            NHLGamesMetro.ProxyReady = Await NHLGamesMetro.MitmProxy.Ready()
+
+            If Not NHLGamesMetro.ProxyReady Then
                 errorMessage = "noGameServer"
             ElseIf Environment.Version < New Version(4, 0, 30319, 0) Then
                 errorMessage = "missingFramework"
@@ -155,24 +159,8 @@ Namespace Utilities
 
         Public Shared Sub SetRedirectionServerInApp()
             NHLGamesMetro.HostName = NHLGamesMetro.FormInstance.cbServers.SelectedItem.ToString()
-            HostsFile.SetServerIp()
-            NHLGamesMetro.ProxyReady = HostsFile.TestEntry()
             ApplicationSettings.SetValue(SettingsEnum.SelectedServer,
                                          NHLGamesMetro.FormInstance.cbServers.SelectedItem.ToString())
-        End Sub
-
-        Public Shared Sub CheckHostsFile()
-            If (HostsFile.TestEntry() = False) Then
-                If HostsFile.EnsureAdmin() Then
-                    If InvokeElement.MsgBoxBlue(NHLGamesMetro.RmText.GetString("msgHostnameSet"),
-                                                NHLGamesMetro.RmText.GetString("msgAddHost"),
-                                                MessageBoxButtons.YesNo) = DialogResult.Yes Then
-                        HostsFile.AddEntry(False)
-                    End If
-                End If
-            Else
-                NHLGamesMetro.ProxyReady = True
-            End If
         End Sub
 
         Private Shared Sub FatalError(message As String)

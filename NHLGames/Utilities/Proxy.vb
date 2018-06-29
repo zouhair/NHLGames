@@ -4,30 +4,36 @@ Imports NHLGames.My.Resources
 
 Namespace Utilities
     Public Class Proxy
-
-        Private procProxy As Process
-        Private ReadOnly strPort As String = ApplicationSettings.Read(Of String)(SettingsEnum.ProxyPort, "8080")
-        Private ReadOnly strScriptPath As String = Path.Combine(Application.StartupPath, "mitm\proxy.py")
+        Private _proxy As Process
+        Private ReadOnly _port As String = ApplicationSettings.Read(Of String)(SettingsEnum.ProxyPort, "8080")
+        Private ReadOnly _pathToScript As String = Path.Combine(Application.StartupPath, "mitm\proxy.py")
+        Private ReadOnly _pathToMitm As String = Path.Combine(Application.StartupPath, "mitm\win\mitmdump.exe")
 
         Public Sub StartProxy()
             Dim lstValidLines As New List(Of String) From {"proxy server listening"}
-            procProxy = New Process() With {.StartInfo =
+
+            'SET_CUSTOM_HOST_FROM_SETTINGS_IN_PYTHON_SCRIPT
+            
+            _proxy = New Process() With {.StartInfo =
                     New ProcessStartInfo With {
-                    .FileName = Path.Combine(Application.StartupPath, "mitm\win\mitmdump.exe"),
-                    .Arguments = String.Format("-p {0} -s {1}", strPort, strScriptPath),
+                    .FileName = _pathToMitm,
+                    .Arguments = $"-p {_port} -s {_pathToScript}",
                     .UseShellExecute = False,
                     .RedirectStandardOutput = True,
                     .CreateNoWindow = Not NHLGamesMetro.FormInstance.tgOutput.Checked}
                     }
-            procProxy.EnableRaisingEvents = True
+            _proxy.EnableRaisingEvents = True
 
             Try
-                procProxy.Start()
+                _proxy.Start()
 
-                While (procProxy.StandardOutput.EndOfStream = False)
-                    Dim line = procProxy.StandardOutput.ReadLine().ToLower()
-                    If lstValidLines.Any(Function(x) line.Contains(x)) Then
-                        Console.WriteLine(line)
+                While (_proxy.StandardOutput.EndOfStream = False)
+                    Dim line = _proxy.StandardOutput.ReadLine()
+                    If lstValidLines.Any(Function(x) line.ToLower().Contains(x)) Then
+                        Console.WriteLine(String.Format(English.msgProxyListening, _port))
+                        NHLGamesMetro.FormInstance.ProxyListening = Task.Run(Function() 
+                                                                                 Return True
+                                                                             End Function)
                     End If
                 End While
 
@@ -36,12 +42,22 @@ Namespace Utilities
             End Try
         End Sub
 
-        Public Async Function IsRunning() As Task(Of Boolean)
-            Await Task.Delay(100)
-            Return Not procProxy.HasExited
+        Public Sub New()
+            SetEnvironmentVariableForMpv()
+
+            If AreMitmProxyRequiredFilesFound() Then
+                Dim taskLaunchProxy = New Task(Sub()
+                                                   StartProxy()
+                                               End Sub)
+                taskLaunchProxy.Start()
+            End If
+        End Sub
+
+        Public Function AreMitmProxyRequiredFilesFound() As Boolean
+            Return (File.Exists(_pathToScript) AndAlso File.Exists(_pathToMitm))
         End Function
 
-        Public Sub StopProxy()
+        Public Shared Sub StopProxy()
             Dim psi As ProcessStartInfo = New ProcessStartInfo With {
                 .Arguments = "/im mitmdump.exe /f",
                 .FileName = "taskkill",
@@ -53,8 +69,27 @@ Namespace Utilities
             p.Start()
         End Sub
 
+        Public Async Function Ready() As Task(Of Boolean)
+            Dim isReady = False
+
+            Console.WriteLine(English.msgProxyStarting)
+            InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgProxyGettingReady"))
+
+            If AreMitmProxyRequiredFilesFound() Then
+                While NHLGamesMetro.FormInstance.ProxyListening Is Nothing OrElse Not Await NHLGamesMetro.FormInstance.ProxyListening
+                    Await Task.Delay(200)
+                End While
+                Return true
+            Else
+                Console.WriteLine(English.errorMitmProxyNotFound)
+            End If
+
+            Return isReady
+        End Function
+
+
         Public Sub SetEnvironmentVariableForMpv()
-            Environment.SetEnvironmentVariable("http_proxy", String.Format("http://127.0.0.1:{0}", strPort), EnvironmentVariableTarget.Process)
+            Environment.SetEnvironmentVariable("http_proxy", $"http://127.0.0.1:{_port}", EnvironmentVariableTarget.Process)
         End Sub
 
     End Class
