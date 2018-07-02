@@ -488,6 +488,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Error: Can&apos;t find mitmproxy : mitmproxy is a https proxy that we shipped with NHLGames. You probably moved it or deleted it. Please go to our GitHub page to get it back, NHLGames needs it.
+        '''</summary>
+        Friend Shared ReadOnly Property errorMitmProxyNotFound() As String
+            Get
+                Return ResourceManager.GetString("errorMitmProxyNotFound", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Error: mitmproxy did not connect in time or is not responding. Try restarting NHLGames..
+        '''</summary>
+        Friend Shared ReadOnly Property errorMitmProxyNotResponding() As String
+            Get
+                Return ResourceManager.GetString("errorMitmProxyNotResponding", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Error: Can&apos;t find mpv.exe : mpv is a media player that we shipped with NHLGames. You probably moved it or deleted it. Please set a player, NHLGames needs one..
         '''</summary>
         Friend Shared ReadOnly Property errorMpvExe() As String
@@ -1280,6 +1298,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Checking Requirements.
+        '''</summary>
+        Friend Shared ReadOnly Property msgChekingRequirements() As String
+            Get
+                Return ResourceManager.GetString("msgChekingRequirements", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Hosts: Removing existing entries from hosts file.
         '''</summary>
         Friend Shared ReadOnly Property msgCleanHostsFile() As String
@@ -1474,6 +1501,33 @@ Namespace My.Resources
         Friend Shared ReadOnly Property msgOn() As String
             Get
                 Return ResourceManager.GetString("msgOn", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Proxy is getting ready.
+        '''</summary>
+        Friend Shared ReadOnly Property msgProxyGettingReady() As String
+            Get
+                Return ResourceManager.GetString("msgProxyGettingReady", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Proxy: mitmproxy is listening on local port {0}.
+        '''</summary>
+        Friend Shared ReadOnly Property msgProxyListening() As String
+            Get
+                Return ResourceManager.GetString("msgProxyListening", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Proxy: mitmproxy is getting ready.
+        '''</summary>
+        Friend Shared ReadOnly Property msgProxyStarting() As String
+            Get
+                Return ResourceManager.GetString("msgProxyStarting", resourceCulture)
             End Get
         End Property
         

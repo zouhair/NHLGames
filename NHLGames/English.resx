@@ -937,4 +937,28 @@
     <value>Missing required Microsoft .NET 4.5 Framework!</value>
     <comment>Message</comment>
   </data>
+  <data name="errorMitmProxyNotFound" xml:space="preserve">
+    <value>Error: Can't find mitmproxy : mitmproxy is a https proxy that we shipped with NHLGames. You probably moved it or deleted it. Please go to our GitHub page to get it back, NHLGames needs it</value>
+    <comment>Console</comment>
+  </data>
+  <data name="errorMitmProxyNotResponding" xml:space="preserve">
+    <value>Error: mitmproxy did not connect in time or is not responding. Try restarting NHLGames.</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgProxyListening" xml:space="preserve">
+    <value>Proxy: mitmproxy is listening on local port {0}</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgProxyStarting" xml:space="preserve">
+    <value>Proxy: mitmproxy is getting ready</value>
+    <comment>Console</comment>
+  </data>
+  <data name="msgProxyGettingReady" xml:space="preserve">
+    <value>Proxy is getting ready</value>
+    <comment>Status bar</comment>
+  </data>
+  <data name="msgChekingRequirements" xml:space="preserve">
+    <value>Checking Requirements</value>
+    <comment>Status bar</comment>
+  </data>
 </root>

@@ -115,7 +115,6 @@ Partial Class NHLGamesMetro
         Me.lblProxyPort = New MetroFramework.Controls.MetroLabel()
         Me.cbServers = New MetroFramework.Controls.MetroComboBox()
         Me.flpHostsFile = New System.Windows.Forms.FlowLayoutPanel()
-        Me.txtProxyPort = New System.Windows.Forms.TextBox()
         Me.tlpGamePanelSettings = New System.Windows.Forms.TableLayoutPanel()
         Me.tgShowTodayLiveGamesFirst = New MetroFramework.Controls.MetroToggle()
         Me.lblShowTodayLiveGamesFirst = New MetroFramework.Controls.MetroLabel()
@@ -174,6 +173,7 @@ Partial Class NHLGamesMetro
         Me.bw = New System.ComponentModel.BackgroundWorker()
         Me.btnHelp = New MetroFramework.Controls.MetroLink()
         Me.pnlLogo = New System.Windows.Forms.Panel()
+        Me.txtProxyPort = New System.Windows.Forms.TextBox()
         Me.tabMenu.SuspendLayout()
         Me.tabGames.SuspendLayout()
         Me.pnlGameBar.SuspendLayout()
@@ -1398,17 +1398,6 @@ Partial Class NHLGamesMetro
         Me.flpHostsFile.Size = New System.Drawing.Size(771, 30)
         Me.flpHostsFile.TabIndex = 511
         '
-        'txtProxyPort
-        '
-        Me.txtProxyPort.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtProxyPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtProxyPort.Font = New System.Drawing.Font("Segoe UI", 8.25!)
-        Me.txtProxyPort.Location = New System.Drawing.Point(3, 3)
-        Me.txtProxyPort.Name = "txtProxyPort"
-        Me.txtProxyPort.Size = New System.Drawing.Size(600, 22)
-        Me.txtProxyPort.TabIndex = 1111
-        '
         'tlpGamePanelSettings
         '
         Me.tlpGamePanelSettings.ColumnCount = 4
@@ -2064,6 +2053,18 @@ Partial Class NHLGamesMetro
         Me.pnlLogo.Name = "pnlLogo"
         Me.pnlLogo.Size = New System.Drawing.Size(170, 58)
         Me.pnlLogo.TabIndex = 10000
+        '
+        'txtProxyPort
+        '
+        Me.txtProxyPort.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtProxyPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtProxyPort.Font = New System.Drawing.Font("Segoe UI", 8.25!)
+        Me.txtProxyPort.Location = New System.Drawing.Point(3, 3)
+        Me.txtProxyPort.MaxLength = 5
+        Me.txtProxyPort.Name = "txtProxyPort"
+        Me.txtProxyPort.Size = New System.Drawing.Size(600, 22)
+        Me.txtProxyPort.TabIndex = 1111
         '
         'NHLGamesMetro
         '

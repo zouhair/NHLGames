@@ -162,6 +162,12 @@ Namespace Utilities
                                                 NHLGamesMetro.RmText.GetString("cbEnglish"),
                                                 NHLGamesMetro.RmText.GetString("cbFrench")
                                             }
+            Dim livestreamerPath = GetApplication(SettingsEnum.StreamerPath,
+                                                       Path.Combine(Application.StartupPath,
+                                                                    "livestreamer\livestreamer.exe"))
+            Dim streamlinkPath = GetApplication(SettingsEnum.StreamerPath,
+                                                       Path.Combine(Application.StartupPath,
+                                                                    "streamlink\streamlink.exe"))
 
             Form.cbLanguage.Items.Clear()
             Form.cbLanguage.Items.AddRange(lstLanguages)
@@ -176,9 +182,8 @@ Namespace Utilities
             Form.txtVLCPath.Text = GetApplication(SettingsEnum.VlcPath, PathFinder.GetPathOfVlc())
             Form.txtMpvPath.Text = GetApplication(SettingsEnum.MpvPath,
                                                   Path.Combine(Application.StartupPath, "mpv\mpv.exe"))
-            Form.txtStreamerPath.Text = GetApplication(SettingsEnum.StreamerPath,
-                                                       Path.Combine(Application.StartupPath,
-                                                                    "streamlink\streamlink.exe"))
+
+            Form.txtStreamerPath.Text = If (livestreamerPath.Equals(String.Empty), streamlinkPath, livestreamerPath)
             Form.txtProxyPort.Text = ApplicationSettings.Read(Of String)(SettingsEnum.ProxyPort, "8080")
 
             Form.tgDarkMode.Checked = NHLGamesMetro.IsDarkMode

@@ -11,15 +11,6 @@ Namespace Utilities
         Private Shared ReadOnly Property HostsFilePath As String _
             = String.Format("{0}\drivers\etc\hosts", Environment.SystemDirectory)
 
-        Public Shared Function TestEntry() As Boolean
-            Dim resolvedIp = ""
-            Try
-                resolvedIp = Dns.GetHostAddresses(NHLGamesMetro.DomainName)(0).ToString()
-            Catch ex As Exception
-            End Try
-            Return NHLGamesMetro.ServerIp = resolvedIp
-        End Function
-
         Public Shared Function GetEntries() As String
             If Not File.Exists(HostsFilePath) Then Return String.Empty
 
@@ -67,9 +58,10 @@ Namespace Utilities
             If UpdateHosts(True) Then MessageOpenHostsFile()
         End Sub
 
-        Public Shared Sub AddEntry(Optional viewChanges As Boolean = True)
-            If UpdateHosts() Then
-                If viewChanges Then MessageOpenHostsFile()
+        Public Shared Sub ResetHost()
+            Dim lines = GetEntries().Replace("\r", String.Empty).Split("\n")
+            If lines.Any(Function(x) x.Contains(NHLGamesMetro.DomainName)) Then
+                CleanHosts()
             End If
         End Sub
 
@@ -102,33 +94,16 @@ Namespace Utilities
 
             Using sw As New StreamWriter(HostsFilePath)
                 sw.Write(output)
-                SetServerIp()
-                If Not clean Then
-                    sw.WriteLine(vbNewLine & NHLGamesMetro.ServerIp & vbTab & NHLGamesMetro.DomainName)
-                End If
             End Using
 
             If fileIsReadonly Then
                 FileAccess.AddReadonly(HostsFilePath)
             End If
 
-            NHLGamesMetro.ProxyReady = TestEntry()
             InvokeElement.LoadGames()
 
             Return True
         End Function
-
-        Public Shared Sub SetServerIp()
-            If NHLGamesMetro.HostName.Equals(String.Empty) Then
-                NHLGamesMetro.ServerIp = String.Empty
-            Else
-                Try
-                    NHLGamesMetro.ServerIp = Dns.GetHostEntry(NHLGamesMetro.HostName).AddressList.First.ToString()
-                Catch ex As Exception
-                    NHLGamesMetro.ServerIp = String.Empty
-                End Try
-            End If
-        End Sub
 
         Public Shared Function EnsureAdmin() As Boolean
 
@@ -161,12 +136,5 @@ Namespace Utilities
             Return Not principal.IsInRole(WindowsBuiltInRole.Administrator)
         End Function
 
-        Public Shared Sub OpenHostsFile(Optional viewContent As Boolean = True)
-            If viewContent Then
-                Process.Start("NOTEPAD", HostsFilePath)
-            Else
-                Process.Start(HostsPath)
-            End If
-        End Sub
     End Class
 End Namespace

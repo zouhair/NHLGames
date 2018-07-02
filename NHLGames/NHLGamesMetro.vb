@@ -27,7 +27,7 @@ Public Class NHLGamesMetro
     Public Shared LabelDate As Label
     Private Const SubredditLink As String = "https://www.reddit.com/r/nhl_games/"
     Private Const LatestReleaseLink As String = "https://github.com/NHLGames/NHLGames/releases/latest"
-    Public Shared GameDate As Date = New Date(2018, 5, 30) 'DateHelper.GetPacificTime()
+    Public Shared GameDate As Date = New Date(2018, 5, 30) 'DateHelper.GetPacificTime() TODO: uncomment
     Private _resizeDirection As Integer = -1
     Private Const ResizeBorderWidth As Integer = 8
     Public Shared RmText As ResourceManager = English.ResourceManager
@@ -36,7 +36,9 @@ Public Class NHLGamesMetro
     Private Shared _adDetectionEngine As AdDetection
     Public Shared ReadOnly GamesDict As New Dictionary(Of String, Game)
     Public Shared IsDarkMode As Boolean = False
-    Public Shared objProxy As Proxy = New Proxy()
+    Public Shared MitmProxy As Proxy
+    Public ProxyListening As Task(Of Boolean) = Nothing
+
 
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
     Public Shared Sub Main()
@@ -71,23 +73,15 @@ Public Class NHLGamesMetro
 
         SuspendLayout()
 
+        MitmProxy = New Proxy()
+
         Common.GetLanguage()
         tabMenu.SelectedIndex = 0
         FlpCalendar = flpCalendarPanel
         InitializeForm.SetSettings()
 
-        objProxy.SetEnvironmentVariableForMpv()
-
-        Dim taskLaunchProxy = New Task(Sub()
-                                           objProxy.StartProxy()
-                                           'Thread.Sleep(5000)
-                                       End Sub)
-
-        taskLaunchProxy.Start()
-
-        Await CheckProxy()
+        HostsFile.ResetHost() ' TODO: remove this line, once every user removed old hosts entries.
         Await Common.CheckAppCanRun()
-        'Common.CheckHostsFile()
 
         FormLoaded = True
         ResumeLayout(True)
@@ -95,19 +89,6 @@ Public Class NHLGamesMetro
         tmr.Enabled = True
         InvokeElement.LoadGames()
     End Sub
-
-    Private Async Function CheckProxy() As Task(Of Boolean)
-        If Await objProxy.IsRunning Then
-            ProxyReady = True
-        Else
-            While Await objProxy.IsRunning = False
-                If Await objProxy.IsRunning Then
-                    ProxyReady = True
-                End If
-            End While
-        End If
-        Return ProxyReady
-    End Function
 
     Public Sub ClearGamePanel()
         SyncLock flpGames.Controls
@@ -637,14 +618,6 @@ Public Class NHLGamesMetro
                          }, ping google.com {If(pingGoogle, "succeeded", "failed")}{ vbTab}{vbCrLf}" &
                      $"Form: {If(Not String.IsNullOrEmpty(lblDate.Text), "loaded", "not loaded")}, " &
                      $"{flpGames.Controls.Count} games currently on form, " &
-                     $"Spinner (games) {If(SpnLoadingVisible, "visible", "invisible")} {SpnLoadingValue.ToString()}/{ _
-                         SpnLoadingMaxValue.ToString()}, " &
-                     $"Spinner (stream) {If(SpnStreamingVisible, "visible", "invisible")} {SpnStreamingValue.ToString() _
-                         }/{SpnStreamingMaxValue.ToString()}{vbTab}{vbCrLf}" &
-                     $"Servers: NHLGames IP {If(My.Computer.Network.Ping(ServerIp), "found", "not found")} ({ _
-                         cbServers.SelectedItem.ToString()}){vbTab}{vbCrLf}" &
-                     $"Hosts file: NHL.TV redirection is{If(HostsFile.TestEntry(), " working", "n't working") _
-                         } (Hosts file tested) Entries: {HostsFile.GetEntries()}{vbTab}{vbCrLf}" &
                      $"Selected player: {player.ToString()}{vbTab}{vbCrLf}" &
                      $"Streamer path: {streamerPath.ToString()} [{ _
                          If(streamerPath.Equals(txtStreamerPath.Text), "on form", "not on form")}] [{ _
@@ -661,7 +634,7 @@ Public Class NHLGamesMetro
 
     Private Sub NHLGamesMetro_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         If WindowState = FormWindowState.Normal Then ApplicationSettings.SetValue(SettingsEnum.LastWindowSize, Width & ";" & Height)
-        objProxy.StopProxy()
+        Proxy.StopProxy()
     End Sub
 
     Private Sub tbLiveRewind_MouseUp(sender As Object, e As MouseEventArgs) Handles tbLiveRewind.MouseUp

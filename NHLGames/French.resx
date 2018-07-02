@@ -717,9 +717,6 @@
     <value>Thème sombre</value>
     <comment>Settings</comment>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
-  </data>
   <data name="msgAcceptToRestart" xml:space="preserve">
     <value>Voulez-vous redémarrer NHLGames pour appliquer les changements?</value>
     <comment>Message</comment>
@@ -731,5 +728,13 @@
   <data name="missingFramework" xml:space="preserve">
     <value>Microsoft .NET 4.5 Framework requis manquant!</value>
     <comment>Message</comment>
+  </data>
+  <data name="msgProxyGettingReady" xml:space="preserve">
+    <value>Le proxy démarre</value>
+    <comment>Status bar</comment>
+  </data>
+  <data name="msgChekingRequirements" xml:space="preserve">
+    <value>Validation des exigences</value>
+    <comment>Status bar</comment>
   </data>
 </root>
