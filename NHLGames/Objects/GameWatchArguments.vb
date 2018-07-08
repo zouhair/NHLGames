@@ -78,7 +78,7 @@ Namespace Objects
         End Function
 
         Private Function ReplayArgs() As String
-            Dim presetHls = If(Not PlayerType.Equals(PlayerTypeEnum.Vlc),
+            Dim presetHls = If(PlayerType.Equals(PlayerTypeEnum.Mpv), ' This only works with mpv (for seeking)
                                "--player-passthrough=hls",
                                String.Empty)
             If GameIsOnAir Then

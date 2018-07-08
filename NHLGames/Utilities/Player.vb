@@ -44,7 +44,7 @@ Namespace Utilities
             Thread.Sleep(100)
 
             Console.WriteLine(English.msgStreaming, args.GameTitle, args.Stream.Network, args.PlayerType.ToString())
-            Console.WriteLine(English.msgStartingStreamer, args.ToString(False)) 'TODO : safe args?
+            Console.WriteLine(English.msgStartingStreamer, args.ToString(True))
 
             Dim procStreaming = New Process() With {.StartInfo =
                     New ProcessStartInfo With {

@@ -286,7 +286,7 @@
     <comment>Message</comment>
   </data>
   <data name="msgRunAsAdminText" xml:space="preserve">
-    <value>NHLGames requiert une entrée au fichier Hosts qui est manquante. Voulez-vous qu'elle redémarre avec le droit d'administrateur et l'ajoute l'entrée manquante?</value>
+    <value>NHLGames a détecté une entrée au fichier Hosts qui n'est plus nécessaire.  Voulez-vous qu'elle redémarre avec le droit d'administrateur pour supprimer l'ancienne entrée?</value>
     <comment>Message</comment>
   </data>
   <data name="msgSuccess" xml:space="preserve">

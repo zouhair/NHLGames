@@ -362,7 +362,7 @@
     <comment>Message</comment>
   </data>
   <data name="msgRunAsAdminText" xml:space="preserve">
-    <value>NHLGames is missing the required hosts file entry. Do you want to restart this application as an Administrator and add the required entry?</value>
+    <value>NHLGames has detected a host entry which is no longer needed. Do you want to restart this application as an Administrator to remove the old entry?</value>
     <comment>Message</comment>
   </data>
   <data name="msgSettingUpdated" xml:space="preserve">

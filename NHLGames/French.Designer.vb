@@ -1172,7 +1172,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to NHLGames requiert une entrée au fichier Hosts qui est manquante. Voulez-vous qu&apos;elle redémarre avec le droit d&apos;administrateur et l&apos;ajoute l&apos;entrée manquante?.
+        '''  Looks up a localized string similar to NHLGames a détecté une entrée au fichier Hosts qui n&apos;est plus nécessaire.  Voulez-vous qu&apos;elle redémarre avec le droit d&apos;administrateur pour supprimer l&apos;ancienne entrée?.
         '''</summary>
         Friend Shared ReadOnly Property msgRunAsAdminText() As String
             Get

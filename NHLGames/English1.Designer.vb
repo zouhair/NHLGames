@@ -1550,7 +1550,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to NHLGames is missing the required hosts file entry. Do you want to restart this application as an Administrator and add the required entry?.
+        '''  Looks up a localized string similar to NHLGames has detected a host entry which is no longer needed. Do you want to restart this application as an Administrator to remove the old entry?.
         '''</summary>
         Friend Shared ReadOnly Property msgRunAsAdminText() As String
             Get
