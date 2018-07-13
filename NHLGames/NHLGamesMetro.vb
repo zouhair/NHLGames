@@ -423,7 +423,6 @@ Public Class NHLGamesMetro
 
     Private Sub cbServers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbServers.SelectedIndexChanged
         If Not FormLoaded Then Return
-        tlpSettings.Focus()
         Common.SetRedirectionServerInApp()
         InvokeElement.LoadGames()
     End Sub
@@ -434,7 +433,6 @@ Public Class NHLGamesMetro
 
     Private Sub cbLanguage_SelectedIndexChanged(sender As Object, e As EventArgs) _
         Handles cbLanguage.SelectedIndexChanged
-        tlpSettings.Focus()
         ApplicationSettings.SetValue(SettingsEnum.SelectedLanguage, cbLanguage.SelectedItem.ToString())
         Common.GetLanguage()
         InitializeForm.SetLanguage()
@@ -517,16 +515,10 @@ Public Class NHLGamesMetro
                                        If(tgSpotify.Checked, English.msgOn, English.msgOff))
     End Sub
 
-    Private Sub cbHostsFileActions_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-        tlpSettings.Focus()
-    End Sub
-
     Private Sub cbStreamQuality_SelectedIndexChanged(sender As Object, e As EventArgs) _
         Handles cbStreamQuality.SelectedIndexChanged
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(lblQuality.Text, cbStreamQuality.SelectedItem)
-        tlpSettings.Focus()
     End Sub
 
     Private Sub txtGameKey_TextChanged(sender As Object, e As EventArgs) Handles txtGameKey.TextChanged
@@ -664,7 +656,6 @@ Public Class NHLGamesMetro
         Handles cbLiveReplay.SelectedIndexChanged
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(_lblLiveReplay.Text, cbLiveReplay.SelectedItem)
-        tlpSettings.Focus()
     End Sub
 
     Private Sub tgShowLiveTime_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowLiveTime.CheckedChanged
@@ -704,4 +695,5 @@ Public Class NHLGamesMetro
         Dim value = tbProxyPort.Value * 10
         lblProxyPortNumber.Text = value.ToString()
     End Sub
+
 End Class

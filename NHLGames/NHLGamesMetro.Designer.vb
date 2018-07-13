@@ -74,7 +74,7 @@ Partial Class NHLGamesMetro
         Me.flpSpotifyDescSettings = New System.Windows.Forms.FlowLayoutPanel()
         Me.tgSpotify = New MetroFramework.Controls.MetroToggle()
         Me.lblSpotifyDesc = New MetroFramework.Controls.MetroLabel()
-        Me.cbStreamQuality = New MetroFramework.Controls.MetroComboBox()
+        Me.cbStreamQuality = New NHLGames.Controls.MetroComboBoxNoMW()
         Me.lblStreamerArgs = New MetroFramework.Controls.MetroLabel()
         Me.lblPlayerArgs = New MetroFramework.Controls.MetroLabel()
         Me.lblOutput = New MetroFramework.Controls.MetroLabel()
@@ -104,7 +104,7 @@ Partial Class NHLGamesMetro
         Me.lnkGetVlc = New MetroFramework.Controls.MetroLink()
         Me.lblLanguage = New MetroFramework.Controls.MetroLabel()
         Me.flpLanguage = New System.Windows.Forms.FlowLayoutPanel()
-        Me.cbLanguage = New MetroFramework.Controls.MetroComboBox()
+        Me.cbLanguage = New NHLGames.Controls.MetroComboBoxNoMW()
         Me.lblSlPath = New MetroFramework.Controls.MetroLabel()
         Me.lblMpvPath = New MetroFramework.Controls.MetroLabel()
         Me.lblMpcPath = New MetroFramework.Controls.MetroLabel()
@@ -113,10 +113,10 @@ Partial Class NHLGamesMetro
         Me.lblQuality = New MetroFramework.Controls.MetroLabel()
         Me.lblGamePanel = New MetroFramework.Controls.MetroLabel()
         Me.lblProxyPort = New MetroFramework.Controls.MetroLabel()
-        Me.cbServers = New MetroFramework.Controls.MetroComboBox()
+        Me.cbServers = New NHLGames.Controls.MetroComboBoxNoMW()
         Me.flpHostsFile = New System.Windows.Forms.FlowLayoutPanel()
         Me.lblProxyPortNumber = New MetroFramework.Controls.MetroLabel()
-        Me.tbProxyPort = New MetroFramework.Controls.MetroTrackBar()
+        Me.tbProxyPort = New NHLGames.Controls.MetroTrackBarNoMW()
         Me.tlpGamePanelSettings = New System.Windows.Forms.TableLayoutPanel()
         Me.tgShowTodayLiveGamesFirst = New MetroFramework.Controls.MetroToggle()
         Me.lblShowTodayLiveGamesFirst = New MetroFramework.Controls.MetroLabel()
@@ -153,11 +153,11 @@ Partial Class NHLGamesMetro
         Me.lblModulesDesc = New MetroFramework.Controls.MetroLabel()
         Me.tlpReplay = New System.Windows.Forms.TableLayoutPanel()
         Me.lblLiveRewindDetails = New MetroFramework.Controls.MetroLabel()
-        Me.tbLiveRewind = New MetroFramework.Controls.MetroTrackBar()
+        Me.tbLiveRewind = New NHLGames.Controls.MetroTrackBarNoMW()
         Me.lblLiveRewind = New MetroFramework.Controls.MetroLabel()
         Me.lblCdn = New MetroFramework.Controls.MetroLabel()
         Me.lblLiveReplay = New MetroFramework.Controls.MetroLabel()
-        Me.cbLiveReplay = New MetroFramework.Controls.MetroComboBox()
+        Me.cbLiveReplay = New NHLGames.Controls.MetroComboBoxNoMW()
         Me.tgDarkMode = New MetroFramework.Controls.MetroToggle()
         Me.lblDarkMode = New MetroFramework.Controls.MetroLabel()
         Me.tabConsole = New MetroFramework.Controls.MetroTabPage()
@@ -581,7 +581,7 @@ Partial Class NHLGamesMetro
         Me.tlpSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60!))
         Me.tlpSettings.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100!))
         Me.tlpSettings.Size = New System.Drawing.Size(982, 514)
-        Me.tlpSettings.TabIndex = 64
+        Me.tlpSettings.TabIndex = 2
         '
         'tlpOBSSettings
         '
@@ -928,7 +928,7 @@ Partial Class NHLGamesMetro
         Me.cbStreamQuality.Location = New System.Drawing.Point(177, 153)
         Me.cbStreamQuality.Name = "cbStreamQuality"
         Me.cbStreamQuality.Size = New System.Drawing.Size(600, 25)
-        Me.cbStreamQuality.TabIndex = 2
+        Me.cbStreamQuality.TabIndex = 500
         Me.cbStreamQuality.UseSelectable = true
         '
         'lblStreamerArgs
@@ -2210,10 +2210,8 @@ End Sub
     Friend WithEvents txtVLCPath As TextBox
     Friend WithEvents btnVLCPath As MetroButton
     Friend WithEvents lnkGetVlc As MetroLink
-    Friend WithEvents cbServers As MetroComboBox
     Friend WithEvents lblLanguage As MetroLabel
     Friend WithEvents flpLanguage As FlowLayoutPanel
-    Friend WithEvents cbLanguage As MetroComboBox
     Friend WithEvents lblSlPath As MetroLabel
     Friend WithEvents lblMpvPath As MetroLabel
     Friend WithEvents lblMpcPath As MetroLabel
@@ -2226,7 +2224,6 @@ End Sub
     Friend WithEvents lblProxyPort As MetroLabel
     Friend WithEvents flpHostsFile As FlowLayoutPanel
     Friend WithEvents fbd As FolderBrowserDialog
-    Friend WithEvents cbStreamQuality As MetroComboBox
     Friend WithEvents tlpGamePanelSettings As TableLayoutPanel
     Friend WithEvents lblShowFinalScores As MetroLabel
     Friend WithEvents lblShowLiveScores As MetroLabel
@@ -2282,14 +2279,12 @@ End Sub
     Friend WithEvents tgShowTodayLiveGamesFirst As MetroToggle
     Friend WithEvents lblShowTodayLiveGamesFirst As MetroLabel
     Friend WithEvents bw As BackgroundWorker
-    Friend WithEvents tbLiveRewind As MetroTrackBar
     Friend WithEvents tlpReplay As TableLayoutPanel
     Friend WithEvents lblLiveRewindDetails As MetroLabel
     Friend WithEvents lblLiveRewind As MetroLabel
     Friend WithEvents btnRecord As Button
     Friend WithEvents flpRecordList As FlowLayoutPanel
     Friend WithEvents lblLiveReplay As MetroLabel
-    Friend WithEvents cbLiveReplay As MetroComboBox
     Friend WithEvents lblVLCLogo As Label
     Friend WithEvents lvlMPCHCLogo As Label
     Friend WithEvents lblMPVLogo As Label
@@ -2299,6 +2294,11 @@ End Sub
     Friend WithEvents lblDarkMode As MetroLabel
     Friend WithEvents btnHelp As MetroLink
     Friend WithEvents pnlLogo As Panel
-    Friend WithEvents tbProxyPort As MetroTrackBar
     Friend WithEvents lblProxyPortNumber As MetroLabel
+    Friend WithEvents cbServers As Controls.MetroComboBoxNoMW
+    Friend WithEvents cbLanguage As Controls.MetroComboBoxNoMW
+    Friend WithEvents cbStreamQuality As Controls.MetroComboBoxNoMW
+    Friend WithEvents tbLiveRewind As Controls.MetroTrackBarNoMW
+    Friend WithEvents cbLiveReplay As Controls.MetroComboBoxNoMW
+    Friend WithEvents tbProxyPort As Controls.MetroTrackBarNoMW
 End Class

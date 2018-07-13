@@ -191,6 +191,12 @@
     <Compile Include="Controls\GameControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\MetroComboBoxNoMW.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MetroTrackBarNoMW.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\SetRecordControl.Designer.vb">
       <DependentUpon>SetRecordControl.vb</DependentUpon>
     </Compile>
