@@ -24,7 +24,14 @@ Namespace Utilities
                     }
             _proxy.EnableRaisingEvents = True
 
-            Try
+            Console.WriteLine(English.msgProxyStarting)
+            InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgProxyGettingReady"))
+
+            If Not AreMitmProxyRequiredFilesFound() Then
+                Console.WriteLine(English.errorMitmProxyNotFound)
+            End If
+
+             Try
                 _proxy.Start()
 
                 While (_proxy.StandardOutput.EndOfStream = False)
@@ -69,24 +76,22 @@ Namespace Utilities
             p.Start()
         End Sub
 
-        Public Async Function Ready() As Task(Of Boolean)
-            Dim isReady = False
-
-            Console.WriteLine(English.msgProxyStarting)
+        Public Shared Async Function WaitToBeReady() As Task(Of Boolean)
+            If Await Ready() Then Return True
             InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgProxyGettingReady"))
 
-            If AreMitmProxyRequiredFilesFound() Then
-                While NHLGamesMetro.FormInstance.ProxyListening Is Nothing OrElse Not Await NHLGamesMetro.FormInstance.ProxyListening
-                    Await Task.Delay(200)
-                End While
-                Return true
-            Else
-                Console.WriteLine(English.errorMitmProxyNotFound)
-            End If
+            While Not Await Ready()
+                Await Task.Delay(200)
+            End While
 
-            Return isReady
+            InvokeElement.SetFormStatusLabel(String.Format(NHLGamesMetro.RmText.GetString("msgGamesFound"),
+                                                               NHLGamesMetro.GamesDict.Values.Count.ToString()))
+            Return True
         End Function
 
+        Public Shared Async Function Ready() As Task(Of Boolean)
+            Return Not (NHLGamesMetro.FormInstance.ProxyListening Is Nothing OrElse Not Await NHLGamesMetro.FormInstance.ProxyListening)
+        End Function
 
         Public Sub SetEnvironmentVariableForMpv()
             Environment.SetEnvironmentVariable("http_proxy", $"http://127.0.0.1:{_port}", EnvironmentVariableTarget.Process)

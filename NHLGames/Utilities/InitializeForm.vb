@@ -121,6 +121,8 @@ Namespace Utilities
             Form.tt.SetToolTip(Form.btnMPCPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.tt.SetToolTip(Form.btnStreamerPath, NHLGamesMetro.RmText.GetString("tipBrowse"))
             Form.tt.SetToolTip(Form.btnOutput, NHLGamesMetro.RmText.GetString("tipBrowse"))
+            Form.tt.SetToolTip(Form.tbProxyPort, NHLGamesMetro.RmText.GetString("tipTrackBarMove"))
+            Form.tt.SetToolTip(Form.tbLiveRewind, NHLGamesMetro.RmText.GetString("tipTrackBarMove"))
 
             Form.lblModules.Text = NHLGamesMetro.RmText.GetString("lblModules")
             Form.lblModulesDesc.Text = NHLGamesMetro.RmText.GetString("lblModulesDesc")
@@ -184,7 +186,10 @@ Namespace Utilities
                                                   Path.Combine(Application.StartupPath, "mpv\mpv.exe"))
 
             Form.txtStreamerPath.Text = If (livestreamerPath.Equals(String.Empty), streamlinkPath, livestreamerPath)
-            Form.txtProxyPort.Text = ApplicationSettings.Read(Of String)(SettingsEnum.ProxyPort, "8080")
+
+            Dim proxyPort = ApplicationSettings.Read(Of Integer)(SettingsEnum.ProxyPort, 8080)
+            Form.tbProxyPort.Value = proxyPort /10
+            Form.lblProxyPortNumber.Text = proxyPort.ToString()
 
             Form.tgDarkMode.Checked = NHLGamesMetro.IsDarkMode
 
@@ -342,6 +347,7 @@ Namespace Utilities
 
         Private Shared Sub SetThemeAndSvgOnForm()
             Dim themeChar = "l"
+            Dim colorMetroThemeDark = Color.FromArgb(17, 17, 17)
             If NHLGamesMetro.IsDarkMode Then
                 themeChar = "d"
                 Form.Theme = MetroThemeStyle.Dark
@@ -355,8 +361,8 @@ Namespace Utilities
                 Form.btnHelp.Theme = MetroThemeStyle.Dark
                 Form.pnlBottom.BackColor = Color.FromArgb(80, 80, 80)
                 Form.pnlGameBar.BackColor = Color.FromArgb(80, 80, 80)
-                Form.flpGames.BackColor = Color.Black
-                Form.tlpSettings.BackColor = Color.Black
+                Form.flpGames.BackColor = colorMetroThemeDark
+                Form.tlpSettings.BackColor = colorMetroThemeDark
                 Form.spnLoading.Theme = MetroThemeStyle.Dark
                 Form.spnStreaming.Theme = MetroThemeStyle.Dark
                 Form.lblDate.ForeColor = Color.DarkGray
@@ -389,6 +395,8 @@ Namespace Utilities
                 Form.lblHostname.Theme = MetroThemeStyle.Dark
                 Form.cbServers.Theme = MetroThemeStyle.Dark
                 Form.lblProxyPort.Theme = MetroThemeStyle.Dark
+                Form.lblProxyPortNumber.Theme = MetroThemeStyle.Dark
+                Form.tbProxyPort.Theme = MetroThemeStyle.Dark
                 Form.lblPlayer.Theme = MetroThemeStyle.Dark
                 Form.rbVLC.Theme = MetroThemeStyle.Dark
                 Form.rbMPC.Theme = MetroThemeStyle.Dark

@@ -812,16 +812,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Redirection NHL.tv impossible.
-        '''</summary>
-        Friend Shared ReadOnly Property lblProxyNotReady() As String
-            Get
-                Return ResourceManager.GetString("lblProxyNotReady", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Port proxy:.
+        '''  Looks up a localized string similar to Port proxy.
         '''</summary>
         Friend Shared ReadOnly Property lblProxyPort() As String
             Get
@@ -1438,6 +1429,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property tipRefresh() As String
             Get
                 Return ResourceManager.GetString("tipRefresh", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Raccourcis claviers: (++)Page Haut/Bas(--) , (-)Gauche/Droite(+).
+        '''</summary>
+        Friend Shared ReadOnly Property tipTrackBarMove() As String
+            Get
+                Return ResourceManager.GetString("tipTrackBarMove", resourceCulture)
             End Get
         End Property
         
