@@ -23,11 +23,14 @@ Namespace Utilities
                 Return
             End If
 
-            Dim taskLaunchingStream = New Task(Sub()
-                                                   NHLGamesMetro.StreamStarted = True
-                                                   LaunchingStream(args)
-                                                   Thread.Sleep(100)
-                                                   NHLGamesMetro.StreamStarted = False
+            Dim taskLaunchingStream = New Task(Async Sub()
+                                                    NHLGamesMetro.StreamStarted = True
+                                                    NHLGamesMetro.SpnStreamingValue = 1
+                                                    Thread.Sleep(100)
+                                                    Await Proxy.WaitToBeReady()
+                                                    LaunchingStream(args)
+                                                    Thread.Sleep(100)
+                                                    NHLGamesMetro.StreamStarted = False
                                                End Sub)
 
             taskLaunchingStream.Start()
@@ -40,8 +43,7 @@ Namespace Utilities
                     From {"found matching plugin stream", "available streams", "opening stream", "starting player"}
             Dim lstInvalidLines As New List(Of String) From {"could not open stream", "failed to read"}
             Dim progressStep As Integer = (NHLGamesMetro.SpnLoadingMaxValue) / (lstValidLines.Count + 1)
-            NHLGamesMetro.SpnStreamingValue = 1
-            Thread.Sleep(100)
+
 
             Console.WriteLine(English.msgStreaming, args.GameTitle, args.Stream.Network, args.PlayerType.ToString())
             Console.WriteLine(English.msgStartingStreamer, args.ToString(True))
@@ -96,10 +98,10 @@ Namespace Utilities
         Private Shared Sub PlayerWatcher(args As GameWatchArguments)
             Dim processes As Process() = Process.GetProcesses()
             Dim i = 0
-            While _
-                Not _
-                processes.Any(Function(p) p.ProcessName.ToLower().Contains(args.PlayerType.ToString().ToLower()) OrElse
-                                          NHLGamesMetro.StreamStarted = False OrElse i = 30)
+            While Not _
+            processes.Any(Function(p) p.ProcessName.ToLower().Contains(args.PlayerType.ToString().ToLower()) _
+            OrElse NHLGamesMetro.StreamStarted = False _
+            OrElse i = 30)
                 processes = Process.GetProcesses()
                 Thread.Sleep(500)
                 i += 1
@@ -109,46 +111,57 @@ Namespace Utilities
             NHLGamesMetro.StreamStarted = False
         End Sub
 
+        Private Shared Function GetPlayerType(form As NHLGamesMetro) As PlayerTypeEnum
+            If form.rbMPV.Checked Then
+                Return PlayerTypeEnum.Mpv
+            Else If form.rbMPC.Checked Then
+                Return PlayerTypeEnum.Mpc
+            Else If form.rbVLC.Checked Then
+                Return PlayerTypeEnum.Vlc
+            Else
+                Return PlayerTypeEnum.None
+            End If
+        End Function
+
+        Private Shared Function GetPlayerPath(form As NHLGamesMetro) As String
+            If form.rbMPV.Checked Then
+                Return form.txtMpvPath.Text
+            Else If form.rbMPC.Checked Then
+                Return form.txtMPCPath.Text
+            Else If form.rbVLC.Checked Then
+                Return form.txtVLCPath.Text
+            Else
+                Return String.Empty
+            End If
+        End Function
+
+        Private Shared Function GetCdn(form As NHLGamesMetro) As CdnTypeEnum
+            Return If(form.tgAlternateCdn.Checked, CdnTypeEnum.L3C, CdnTypeEnum.Akc)
+        End Function
+
         Public Shared Sub RenewArgs(Optional forceSet As Boolean = False)
 
             Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
 
             If NHLGamesMetro.FormLoaded OrElse forceSet Then
-                Dim watchArgs As New GameWatchArguments
+                Dim watchArgs As New GameWatchArguments With {
+                    .Is60Fps = form.cbStreamQuality.SelectedIndex = 0,
+                    .Quality = CType(form.cbStreamQuality.SelectedIndex, StreamQualityEnum),
+                    .StreamLiveRewind = form.tbLiveRewind.Value * 5,
+                    .StreamLiveReplay = CType(form.cbLiveReplay.SelectedIndex, LiveReplayEnum),
+                    .StreamerPath = form.txtStreamerPath.Text,
+                    .StreamerType = GetStreamerType(form.txtStreamerPath.Text),
+                    .PlayerType = GetPlayerType(form),
+                    .PlayerPath = GetPlayerPath(form),
+                    .UseCustomPlayerArgs = form.tgPlayer.Checked,
+                    .CustomPlayerArgs = form.txtPlayerArgs.Text,
+                    .UseCustomStreamerArgs = form.tgStreamer.Checked,
+                    .CustomStreamerArgs = form.txtStreamerArgs.Text,
+                    .Cdn = GetCdn(form),
+                    .UseOutputArgs = form.tgOutput.Checked,
+                    .PlayerOutputPath = form.txtOutputArgs.Text
+                }
 
-                watchArgs.Is60Fps = form.cbStreamQuality.SelectedIndex = 0
-                watchArgs.Quality = CType(form.cbStreamQuality.SelectedIndex, StreamQualityEnum)
-                watchArgs.StreamLiveRewind = form.tbLiveRewind.Value * 5
-                watchArgs.StreamLiveReplay = CType(form.cbLiveReplay.SelectedIndex, LiveReplayEnum)
-
-                If form.rbMPV.Checked Then
-                    watchArgs.PlayerType = PlayerTypeEnum.Mpv
-                    watchArgs.PlayerPath = form.txtMpvPath.Text
-                ElseIf form.rbMPC.Checked Then
-                    watchArgs.PlayerType = PlayerTypeEnum.Mpc
-                    watchArgs.PlayerPath = form.txtMPCPath.Text
-                ElseIf form.rbVLC.Checked Then
-                    watchArgs.PlayerType = PlayerTypeEnum.Vlc
-                    watchArgs.PlayerPath = form.txtVLCPath.Text
-                End If
-
-                watchArgs.StreamerPath = form.txtStreamerPath.Text
-                watchArgs.StreamerType = GetStreamerType(watchArgs.StreamerPath)
-
-                If form.tgAlternateCdn.Checked Then
-                    watchArgs.Cdn = CdnTypeEnum.L3C
-                Else
-                    watchArgs.Cdn = CdnTypeEnum.Akc
-                End If
-
-                watchArgs.UseCustomPlayerArgs = form.tgPlayer.Checked
-                watchArgs.CustomPlayerArgs = form.txtPlayerArgs.Text
-
-                watchArgs.UseCustomStreamerArgs = form.tgStreamer.Checked
-                watchArgs.CustomStreamerArgs = form.txtStreamerArgs.Text
-
-                watchArgs.UseOutputArgs = form.tgOutput.Checked
-                watchArgs.PlayerOutputPath = form.txtOutputArgs.Text
                 ApplicationSettings.SetValue(SettingsEnum.DefaultWatchArgs,
                                              Serialization.SerializeObject(Of GameWatchArguments)(watchArgs))
             End If

@@ -173,10 +173,6 @@
     <value>Nom de domaine</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblProxyPort" xml:space="preserve">
-    <value>Port proxy:</value>
-    <comment>Settings tab</comment>
-  </data>
   <data name="lblMpcPath" xml:space="preserve">
     <value>Emplacement MPC-HC</value>
     <comment>Settings tab</comment>
@@ -513,10 +509,6 @@
     <value>Abbréviation de la ville des équipes</value>
     <comment>Settings tab</comment>
   </data>
-  <data name="lblProxyNotReady" xml:space="preserve">
-    <value>Redirection NHL.tv impossible</value>
-    <comment>Game panel</comment>
-  </data>
   <data name="lblShowTodayLiveGamesFirst" xml:space="preserve">
     <value>Classer les parties en direct en premier</value>
     <comment>Settings tab</comment>
@@ -736,5 +728,13 @@
   <data name="msgChekingRequirements" xml:space="preserve">
     <value>Validation des exigences</value>
     <comment>Status bar</comment>
+  </data>
+  <data name="lblProxyPort" xml:space="preserve">
+    <value>Port proxy</value>
+    <comment>Settings tab</comment>
+  </data>
+  <data name="tipTrackBarMove" xml:space="preserve">
+    <value>Raccourcis claviers: (++)Page Haut/Bas(--) , (-)Gauche/Droite(+)</value>
+    <comment>Settings tab</comment>
   </data>
 </root>

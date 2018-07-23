@@ -139,11 +139,8 @@ Namespace Utilities
             InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgChekingRequirements"))
 
             Dim errorMessage = String.Empty
-            NHLGamesMetro.ProxyReady = Await NHLGamesMetro.MitmProxy.Ready()
-
-            If Not NHLGamesMetro.ProxyReady Then
-                errorMessage = "noGameServer"
-            ElseIf Environment.Version < New Version(4, 0, 30319, 0) Then
+            
+            If Environment.Version < New Version(4, 0, 30319, 0) Then
                 errorMessage = "missingFramework"
             ElseIf Not Await SendWebRequestAsync("https://www.google.com") Then
                 errorMessage = "noWebAccess"

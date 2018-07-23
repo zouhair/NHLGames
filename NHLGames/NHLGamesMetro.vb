@@ -11,10 +11,8 @@ Imports NHLGames.Objects.Modules
 Imports NHLGames.Utilities
 
 Public Class NHLGamesMetro
-    Public Shared ServerIp As String = String.Empty
-    Public Const DomainName As String = "mf.svc.nhl.com"
+    Public Const DomainName As String = "mf.svc.nhl.com" 'TODO: Remove when we remove hosts class
     Public Shared HostName As String = String.Empty
-    Public Shared ProxyReady As Boolean = False
     Public Shared FormInstance As NHLGamesMetro = Nothing
     Public Shared StreamStarted As Boolean = False
     Public Shared SpnLoadingValue As Integer = 0
@@ -80,7 +78,7 @@ Public Class NHLGamesMetro
         FlpCalendar = flpCalendarPanel
         InitializeForm.SetSettings()
 
-        HostsFile.ResetHost() ' TODO: remove this line, once every user removed old hosts entries.
+        HostsFile.ResetHost() 'TODO: Remove when we remove hosts class
         Await Common.CheckAppCanRun()
 
         FormLoaded = True
@@ -216,11 +214,6 @@ Public Class NHLGamesMetro
 
     Private Sub txtStreamerPath_TextChanged(sender As Object, e As EventArgs) Handles txtStreamerPath.TextChanged
         Player.RenewArgs()
-    End Sub
-
-    Private Sub txtProxyPort_TextChanged(sender As Object, e As EventArgs) Handles txtProxyPort.TextChanged
-        ApplicationSettings.SetValue(SettingsEnum.ProxyPort, txtProxyPort.Text)
-        _writeToConsoleSettingsChanged(lblProxyPort.Text, txtProxyPort.Text)
     End Sub
 
     Private Sub player_CheckedChanged(sender As Object, e As EventArgs) _
@@ -430,7 +423,6 @@ Public Class NHLGamesMetro
 
     Private Sub cbServers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbServers.SelectedIndexChanged
         If Not FormLoaded Then Return
-        tlpSettings.Focus()
         Common.SetRedirectionServerInApp()
         InvokeElement.LoadGames()
     End Sub
@@ -441,7 +433,6 @@ Public Class NHLGamesMetro
 
     Private Sub cbLanguage_SelectedIndexChanged(sender As Object, e As EventArgs) _
         Handles cbLanguage.SelectedIndexChanged
-        tlpSettings.Focus()
         ApplicationSettings.SetValue(SettingsEnum.SelectedLanguage, cbLanguage.SelectedItem.ToString())
         Common.GetLanguage()
         InitializeForm.SetLanguage()
@@ -524,16 +515,10 @@ Public Class NHLGamesMetro
                                        If(tgSpotify.Checked, English.msgOn, English.msgOff))
     End Sub
 
-    Private Sub cbHostsFileActions_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-        tlpSettings.Focus()
-    End Sub
-
     Private Sub cbStreamQuality_SelectedIndexChanged(sender As Object, e As EventArgs) _
         Handles cbStreamQuality.SelectedIndexChanged
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(lblQuality.Text, cbStreamQuality.SelectedItem)
-        tlpSettings.Focus()
     End Sub
 
     Private Sub txtGameKey_TextChanged(sender As Object, e As EventArgs) Handles txtGameKey.TextChanged
@@ -671,7 +656,6 @@ Public Class NHLGamesMetro
         Handles cbLiveReplay.SelectedIndexChanged
         Player.RenewArgs()
         _writeToConsoleSettingsChanged(_lblLiveReplay.Text, cbLiveReplay.SelectedItem)
-        tlpSettings.Focus()
     End Sub
 
     Private Sub tgShowLiveTime_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowLiveTime.CheckedChanged
@@ -699,6 +683,17 @@ Public Class NHLGamesMetro
             End Try
         End If
         ApplicationSettings.SetValue(SettingsEnum.DarkMode, tgDarkMode.Checked)
+    End Sub
+
+    Private Sub tbProxyPort_MouseUp(sender As Object, e As MouseEventArgs) Handles tbProxyPort.MouseUp
+        Dim value = tbProxyPort.Value * 10
+        ApplicationSettings.SetValue(SettingsEnum.ProxyPort, value)
+        _writeToConsoleSettingsChanged(lblProxyPort.Text, value.ToString())
+    End Sub
+
+    Private Sub tbProxyPort_ValueChanged(sender As Object, e As EventArgs) Handles tbProxyPort.ValueChanged
+        Dim value = tbProxyPort.Value * 10
+        lblProxyPortNumber.Text = value.ToString()
     End Sub
 
 End Class

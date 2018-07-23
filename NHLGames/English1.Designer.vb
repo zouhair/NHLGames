@@ -497,15 +497,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Error: mitmproxy did not connect in time or is not responding. Try restarting NHLGames..
-        '''</summary>
-        Friend Shared ReadOnly Property errorMitmProxyNotResponding() As String
-            Get
-                Return ResourceManager.GetString("errorMitmProxyNotResponding", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Error: Can&apos;t find mpv.exe : mpv is a media player that we shipped with NHLGames. You probably moved it or deleted it. Please set a player, NHLGames needs one..
         '''</summary>
         Friend Shared ReadOnly Property errorMpvExe() As String
@@ -1010,16 +1001,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to NHL.tv bypass failed.
-        '''</summary>
-        Friend Shared ReadOnly Property lblProxyNotReady() As String
-            Get
-                Return ResourceManager.GetString("lblProxyNotReady", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Proxy Port:.
+        '''  Looks up a localized string similar to Proxy Port.
         '''</summary>
         Friend Shared ReadOnly Property lblProxyPort() As String
             Get
@@ -1942,6 +1924,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property tipRefresh() As String
             Get
                 Return ResourceManager.GetString("tipRefresh", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Keyboard shorcuts: (++)Page Up/Down(--) , (-)Arrow Left/Right(+).
+        '''</summary>
+        Friend Shared ReadOnly Property tipTrackBarMove() As String
+            Get
+                Return ResourceManager.GetString("tipTrackBarMove", resourceCulture)
             End Get
         End Property
         
