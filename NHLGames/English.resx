@@ -938,11 +938,11 @@
     <comment>Console</comment>
   </data>
   <data name="msgProxyListening" xml:space="preserve">
-    <value>Proxy: mitmproxy is listening on local port {0}</value>
+    <value>MLBAMProxy: Proxy is listening on local port {0}</value>
     <comment>Console</comment>
   </data>
   <data name="msgProxyStarting" xml:space="preserve">
-    <value>Proxy: mitmproxy is getting ready</value>
+    <value>MLBAMProxy: Proxy is getting ready</value>
     <comment>Console</comment>
   </data>
   <data name="msgProxyGettingReady" xml:space="preserve">

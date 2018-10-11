@@ -11,7 +11,7 @@ Imports NHLGames.Objects.Modules
 Imports NHLGames.Utilities
 
 Public Class NHLGamesMetro
-    Public Const DomainName As String = "mf.svc.nhl.com" 'TODO: Remove when we remove hosts class
+    Public Const DomainName As String = "mf.svc.nhl.com"
     Public Shared HostName As String = String.Empty
     Public Shared FormInstance As NHLGamesMetro = Nothing
     Public Shared StreamStarted As Boolean = False
@@ -71,12 +71,12 @@ Public Class NHLGamesMetro
 
         SuspendLayout()
 
-        MitmProxy = New Proxy()
-
         Common.GetLanguage()
         tabMenu.SelectedIndex = 0
         FlpCalendar = flpCalendarPanel
         InitializeForm.SetSettings()
+
+        MitmProxy = New Proxy()
 
         HostsFile.ResetHost() 'TODO: Remove when we remove hosts class
         Await Common.CheckAppCanRun()
@@ -685,15 +685,15 @@ Public Class NHLGamesMetro
         ApplicationSettings.SetValue(SettingsEnum.DarkMode, tgDarkMode.Checked)
     End Sub
 
-    Private Sub tbProxyPort_MouseUp(sender As Object, e As MouseEventArgs) Handles tbProxyPort.MouseUp
-        Dim value = tbProxyPort.Value * 10
-        ApplicationSettings.SetValue(SettingsEnum.ProxyPort, value)
-        _writeToConsoleSettingsChanged(lblProxyPort.Text, value.ToString())
-    End Sub
 
     Private Sub tbProxyPort_ValueChanged(sender As Object, e As EventArgs) Handles tbProxyPort.ValueChanged
         Dim value = tbProxyPort.Value * 10
         lblProxyPortNumber.Text = value.ToString()
     End Sub
 
+    Private Sub tbProxyPort_Scroll(sender As Object, e As ScrollEventArgs) Handles tbProxyPort.Scroll
+        Dim value = tbProxyPort.Value * 10
+        lblProxyPortNumber.Text = value.ToString()
+        ApplicationSettings.SetValue(SettingsEnum.ProxyPort, value)
+    End Sub
 End Class

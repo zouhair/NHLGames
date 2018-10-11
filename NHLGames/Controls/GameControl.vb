@@ -418,7 +418,7 @@ Namespace Controls
             args.StreamLiveReplayCode = LiveReplayCode
             args.GameIsOnAir = _game.GameState < GameStateEnum.StreamEnded AndAlso
                                _game.GameState > GameStateEnum.Pregame
-            If Not args.Stream.IsBroken Then Player.Watch(args)
+            If Not args.Stream?.IsBroken Then Player.Watch(args)
         End Sub
 
         Private Sub WatchStream(sender As Object, e As EventArgs)
@@ -429,7 +429,7 @@ Namespace Controls
             args.StreamLiveReplayCode = LiveReplayCode
             args.GameIsOnAir = _game.GameState < GameStateEnum.StreamEnded AndAlso
                                _game.GameState > GameStateEnum.Pregame
-            If Not args.Stream.IsBroken Then Player.Watch(args)
+            If Not args.Stream?.IsBroken Then Player.Watch(args)
         End Sub
 
         Private Sub lnkAway_Click(sender As Object, e As EventArgs) Handles lnkAway.Click

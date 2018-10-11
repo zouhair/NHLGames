@@ -1496,7 +1496,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Proxy: mitmproxy is listening on local port {0}.
+        '''  Looks up a localized string similar to MLBAMProxy: Proxy is listening on local port {0}.
         '''</summary>
         Friend Shared ReadOnly Property msgProxyListening() As String
             Get
@@ -1505,7 +1505,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Proxy: mitmproxy is getting ready.
+        '''  Looks up a localized string similar to MLBAMProxy: Proxy is getting ready.
         '''</summary>
         Friend Shared ReadOnly Property msgProxyStarting() As String
             Get

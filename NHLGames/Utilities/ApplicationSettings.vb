@@ -26,6 +26,11 @@ Namespace Utilities
                     Return CType(result, T)
                 End If
 
+                Dim integerReturn As Boolean
+                If Integer.TryParse(result, integerReturn) Then
+                    Return CType(result, T)
+                End If
+
                 Try
                     Return Serialization.DeserializeObject(Of T)(result)
                 Catch ex As Exception

@@ -1,33 +1,29 @@
 ﻿Imports System.IO
-Imports System.Threading
 Imports NHLGames.My.Resources
 
 Namespace Utilities
     Public Class Proxy
         Private _proxy As Process
-        Private ReadOnly _port As String = ApplicationSettings.Read(Of String)(SettingsEnum.ProxyPort, "8080")
-        Private ReadOnly _pathToScript As String = Path.Combine(Application.StartupPath, "mitm\proxy.py")
-        Private ReadOnly _pathToMitm As String = Path.Combine(Application.StartupPath, "mitm\win\mitmdump.exe")
+        Private const _stringToFind = "[MLBAMProxy] "
+        Private const _mlbamProxyExeName = "mlbamproxy.exe"
+        Private ReadOnly _port As String = ApplicationSettings.Read(Of String)(SettingsEnum.ProxyPort, "17070")
+        Private ReadOnly _pathToProxy As String = Path.Combine(Application.StartupPath, _mlbamProxyExeName)
 
         Public Sub StartProxy()
-            Dim lstValidLines As New List(Of String) From {"proxy server listening"}
-
-            'SET_CUSTOM_HOST_FROM_SETTINGS_IN_PYTHON_SCRIPT
-            
             _proxy = New Process() With {.StartInfo =
                     New ProcessStartInfo With {
-                    .FileName = _pathToMitm,
-                    .Arguments = $"-p {_port} -s {_pathToScript}",
+                    .FileName = _pathToProxy,
+                    .Arguments = $"-p {_port} -d {NHLGamesMetro.HostName} -s {NHLGamesMetro.DomainName}",
                     .UseShellExecute = False,
                     .RedirectStandardOutput = True,
-                    .CreateNoWindow = Not NHLGamesMetro.FormInstance.tgOutput.Checked}
-                    }
+                    .CreateNoWindow =  Not NHLGamesMetro.FormInstance.tgOutput.Checked}
+                }
             _proxy.EnableRaisingEvents = True
 
             Console.WriteLine(English.msgProxyStarting)
             InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgProxyGettingReady"))
 
-            If Not AreMitmProxyRequiredFilesFound() Then
+            If Not IsProxyFileFound() Then
                 Console.WriteLine(English.errorMitmProxyNotFound)
             End If
 
@@ -36,8 +32,10 @@ Namespace Utilities
 
                 While (_proxy.StandardOutput.EndOfStream = False)
                     Dim line = _proxy.StandardOutput.ReadLine()
-                    If lstValidLines.Any(Function(x) line.ToLower().Contains(x)) Then
-                        Console.WriteLine(String.Format(English.msgProxyListening, _port))
+                    Dim indexAfterMatch = line.IndexOf(_stringToFind)
+                    Dim log = If(indexAfterMatch <> -1, line.Substring(indexAfterMatch + _stringToFind.Length), Nothing)
+                    If log <> Nothing Then Console.WriteLine("MLBAMProxy: " & log)
+                    If line.ToLower().Contains("proxy server listening") Then
                         NHLGamesMetro.FormInstance.ProxyListening = Task.Run(Function() 
                                                                                  Return True
                                                                              End Function)
@@ -52,7 +50,7 @@ Namespace Utilities
         Public Sub New()
             SetEnvironmentVariableForMpv()
 
-            If AreMitmProxyRequiredFilesFound() Then
+            If IsProxyFileFound() Then
                 Dim taskLaunchProxy = New Task(Sub()
                                                    StartProxy()
                                                End Sub)
@@ -60,13 +58,13 @@ Namespace Utilities
             End If
         End Sub
 
-        Public Function AreMitmProxyRequiredFilesFound() As Boolean
-            Return (File.Exists(_pathToScript) AndAlso File.Exists(_pathToMitm))
+        Public Function IsProxyFileFound() As Boolean
+            Return File.Exists(_pathToProxy)
         End Function
 
         Public Shared Sub StopProxy()
             Dim psi As ProcessStartInfo = New ProcessStartInfo With {
-                .Arguments = "/im mitmdump.exe /f",
+                .Arguments = $"/im {_mlbamProxyExeName} /f",
                 .FileName = "taskkill",
                 .UseShellExecute = False
             }
