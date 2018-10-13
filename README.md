@@ -179,7 +179,7 @@ If you don't have one of these players installed and you want to install it, use
 ### ///_Streamer_
 A streamer is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The default streamer that NHLGames provided can be found in the **Complete** zip, the **Simplified** does not have any. If you use the Complete package, just don't move the provided streamer and media player out of NHLGames folder, otherwise you will to specified another streamer to be able to stream a game.       
 - [LiveStreamer](http://docs.livestreamer.io/install.html) : a tiny command-line tool that extracts and pipes streams into a media player    
-- [StreamLink](https://streamlink.github.io/install.html) : the same based command-line tool, but updated and with addons
+- [StreamLink](https://streamlink.github.io/install.html) : a livestream clone but updated and with addons
 
 If you can't play any stream, you might need to install one of these streamer (the portable version might not work for everyone), follow the link above (click on the streamer you want), download the installer and set the path in NHLGames settings
 
