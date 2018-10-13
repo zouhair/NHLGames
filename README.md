@@ -164,9 +164,9 @@ Note: If you need to remove NHLGames entry, go back into the Hosts file drop dow
 
 ### ///_Players_
 NHLGames supports up to 3 media players:     
-[MPV](https://mpv.io/installation/) : a simple and powerful cross-platform media player    
-[VLC](https://www.videolan.org/vlc/index.html) : a strong and popular cross-platform multimedia player     
-[MPC](https://mpc-hc.org/downloads/) : a light-weight media player
+- [MPV](https://mpv.io/installation/) : a simple and powerful cross-platform media player    
+- [VLC](https://www.videolan.org/vlc/index.html) : a strong and popular cross-platform multimedia player     
+- [MPC](https://mpc-hc.org/downloads/) : a light-weight media player
 
 If you don't have or want VLC/MPC players, use our default media player to watch games. Make sure you select MPV as the default player.
 
