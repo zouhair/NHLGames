@@ -164,9 +164,9 @@ Note: If you need to remove NHLGames entry, go back into the Hosts file drop dow
 
 ### ///_Players_
 NHLGames supports up to 3 media players:
-- MPV (default player, comes with NHLGames)
-- MPC
-- VLC
+[MPV](https://mpv.io/installation/) : a simple and powerful cross-platform media player    
+[VLC](https://www.videolan.org/vlc/index.html) : a strong and popular cross-platform multimedia player     
+[MPC](https://mpc-hc.org/downloads/) : a light-weight media player
 
 If you don't have or want VLC/MPC players, use our default media player to watch games. Make sure you select MPV as the default player.
 
@@ -176,8 +176,8 @@ If you don't have one of these players installed and you want to install it, use
 
 ### ///_Streamer_
 A streamer is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The default streamer that NHLGames provided can be found in the **Complete** zip, the **Simplified** does not have any. If you use the Complete package, just don't move the provided streamer and media player out of NHLGames folder, otherwise you will to specified another streamer to be able to stream a game.
-- [Livestreamer](http://docs.livestreamer.io/install.html)
-- [Streamlink](https://streamlink.github.io/install.html)
+- [LiveStreamer](http://docs.livestreamer.io/install.html) : a command-line tool that extracts and pipes streams into a media player    
+- [StreamLink](https://streamlink.github.io/install.html) : the same based command-line tool with many more plugins 
 
 If you can't play any stream, you might need to install one of these streamer (the portable version might not work for everyone), follow the link above (click on the streamer you want), download the installer and set the path in NHLGames settings
 
