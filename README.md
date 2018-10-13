@@ -49,6 +49,7 @@ ___
 ## //_Requirements_
 NHLGames is an app built on .NET Framework 4.5. So, it's only available on Windows, Windows XP and Vista are not supported, and it works on any CPU (x86/x64). If you run NHLGames on Windows 7 you will probably need to install :
 - [.NET Framework 4.5](https://www.microsoft.com/en-ca/download/details.aspx?id=30653)
+
 You will also need, if you downloaded the simplified version instead of the complete version in the Releases page:
 - A supported [streamer](#streamer)
 - A supported [media player](#players)
