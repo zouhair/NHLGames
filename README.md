@@ -163,7 +163,7 @@ On the save file dialog pops. Make sure:
 Note: If you need to remove NHLGames entry, go back into the Hosts file drop down list in Settings and select *Remove the NHL.tv authentication bypass line from Hosts file* or *View Hosts file content in Notepad* and remove our entry.
 
 ### ///_Players_
-NHLGames supports up to 3 media players:
+NHLGames supports up to 3 media players:     
 [MPV](https://mpv.io/installation/) : a simple and powerful cross-platform media player    
 [VLC](https://www.videolan.org/vlc/index.html) : a strong and popular cross-platform multimedia player     
 [MPC](https://mpc-hc.org/downloads/) : a light-weight media player
@@ -175,7 +175,7 @@ If you had previously installed VLC or MPC, NHLGames should find it automaticall
 If you don't have one of these players installed and you want to install it, use the links on the right to download it.
 
 ### ///_Streamer_
-A streamer is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The default streamer that NHLGames provided can be found in the **Complete** zip, the **Simplified** does not have any. If you use the Complete package, just don't move the provided streamer and media player out of NHLGames folder, otherwise you will to specified another streamer to be able to stream a game.
+A streamer is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The default streamer that NHLGames provided can be found in the **Complete** zip, the **Simplified** does not have any. If you use the Complete package, just don't move the provided streamer and media player out of NHLGames folder, otherwise you will to specified another streamer to be able to stream a game.       
 - [LiveStreamer](http://docs.livestreamer.io/install.html) : a command-line tool that extracts and pipes streams into a media player    
 - [StreamLink](https://streamlink.github.io/install.html) : the same based command-line tool with many more plugins 
 
