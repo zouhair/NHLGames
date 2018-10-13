@@ -144,12 +144,6 @@ Namespace Utilities
             Form.flpCalendarPanel.Controls.Clear()
             Form.flpCalendarPanel.Controls.Add(New CalendarControl())
 
-            'RecordList
-            Form.flpRecordList.Controls.Clear()
-            Form.flpRecordList.Controls.Add(New OneRecordControl())
-            Form.flpRecordList.Controls.Add(New OneRecordControl())
-            Form.btnRecord.Text = Form.flpRecordList.Controls.Count
-
             SetThemeAndSvgOnForm()
         End Sub
 
