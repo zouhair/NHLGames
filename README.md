@@ -49,8 +49,8 @@ NHLGames is an app built on .NET Framework 4.5. So, it's only available on Windo
 - [.NET Framework 4.5](https://www.microsoft.com/en-ca/download/details.aspx?id=30653)
 
 You will also need, if you downloaded the simplified version instead of the complete version in the Releases page:
-- A supported [streamer](#streamer)
 - A supported [media player](#players)
+- A supported [streamer](#streamer)
 
 ## //_Message about the hosts file_
 --- _v.1.3 and before_ ---    
