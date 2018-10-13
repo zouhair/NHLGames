@@ -53,6 +53,7 @@ You will also need, if you downloaded the simplified version instead of the comp
 - A supported [media player](#players)
 
 ## //_Message about the hosts file_
+--- _v.1.3 and before_ ---    
 First time you start NHLGames it will ask if you wish to view the Hosts file. That means the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [Server Hosts Entry](#server-hosts-entry) section.
 
 ## //_Is this app safe?_
@@ -130,6 +131,7 @@ Alternate: Level 3
 This drop down list shows all NHLGames server hostname, so if you can't play games, try another hostname.
 
 ### ///_Server Hosts Entry_
+--- _v.1.3 and before_ ---    
 If the selected hostname (above) can be resolved by your network, it will get and save the related IP address in the Windows Hosts file. 
 
 To test your Hosts file, go to Settings and use the *Hosts File* drop down list (like shown below):
