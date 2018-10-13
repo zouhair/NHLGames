@@ -12,10 +12,8 @@ Enjoy!
 ## /_Index_
 * [First use](#first-use)
   * [Requirements](#requirements)
-  * [Message about the hosts file](#message-about-the-hosts-file)
+  * [Message about the hosts file](#message-about-the-hosts-file) _v.1.3 and before_
   * [Is this app safe?](#is-this-app-safe)
-  * [Setup](#setup)
-     * [Hosts file](#hosts-file)  
  * [User interface](#user-interface)
    * [Games](#games)
       * [Navigation bar](#navigation-bar)
@@ -26,7 +24,7 @@ Enjoy!
      * [Rewind and Replay](#rewind-and-replay)
      * [Content Delivery Network (CDN)](#content-delivery-network-cdn)
      * [Server's Hostname](#servers-hostname)
-     * [Server Hosts Entry](#server-hosts-entry)
+     * [Server Hosts Entry](#server-hosts-entry) _v.1.3 and before_
      * [Players](#players)
      * [Streamer](#streamer)
      * [Language](#language)
@@ -59,16 +57,6 @@ First time you start NHLGames it will ask if you wish to view the Hosts file. Th
 
 ## //_Is this app safe?_
 Yes, it is. However, some anti-virus or anti-malware won't agree because we edit your hosts file in Windows/System32/drivers/etc/, a file used to redirect nhl.com to another ip. We do that, to make sure the app will get stream links for games that are available. But don't worry, this server only responds in plain text and won't hurt your pc. If you don't trust us, find out by yourself by looking at our code.
-
-## //_Setup_
-To be able to play streams properly, you have to choose a media player in the ![image](https://user-images.githubusercontent.com/23088305/32304695-9589db88-bf47-11e7-9af5-867c8db0d4a3.png) tab. Make sure the player that you choose has a valid path to the EXE file.
-
-MPV player comes with NHLGames. So if you don't have or want VLC/MPC players, just use our default media player to watch games. Make sure you select mpv as the default player.
-
-If you want to change some settings, see the [Settings](#settings) section.
-
-### ///_Hosts file_
-See the [Server Hosts Entry](#server-hosts-entry) section.
 
 # /_User interface_
 Everytime you launch NHLGames it will search for today's games. 
