@@ -187,11 +187,13 @@ If you had previously installed VLC or MPC, NHLGames should find it automaticall
 If you don't have one of these players installed and you want to install it, use the links on the right to download it.
 
 ### ///_Streamer_
-A streamer is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The default streamer that NHLGames provided is [Livestreamer](http://docs.livestreamer.io/install.html) and its path is inside NHLGames directory and it should not move, otherwise you will to specified the new one or you won't be able to stream any game. It's also possible to change from Livestreamer to [Streamlink](https://streamlink.github.io/install.html), but you will have to download it, install it and provide the path in settings.
+A streamer is not a media player, it's an application that NHLGames use to get the stream from Internet and parse it to your media player. The default streamer that NHLGames provided can be found in the **Complete** zip, the **Simplified** does not have any. If you use the Complete package, just don't move the provided streamer and media player out of NHLGames folder, otherwise you will to specified another streamer to be able to stream a game.
+- [Livestreamer](http://docs.livestreamer.io/install.html)
+- [Streamlink](https://streamlink.github.io/install.html)
 
-If you can't play any stream, you might need to install one of these streamer (the portable version might not work for everyone), follow the link above (click on the streamer you want) and download the installer.
+If you can't play any stream, you might need to install one of these streamer (the portable version might not work for everyone), follow the link above (click on the streamer you want), download the installer and set the path in NHLGames settings
 
-If your antivirus or Windows Defender removes the streamer, try to install another version (example: 1.0.7 instead of 1.0.8).
+If your antivirus or Windows Defender removes the streamer, try to install another version (e.g.: 1.0.7 instead of 1.0.8).
 
 If you find one that works great for you, keep it, you will just have to change the path in settings when a new update of NHLGames will come out.
 
