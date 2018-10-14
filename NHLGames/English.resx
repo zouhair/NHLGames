@@ -302,7 +302,7 @@
     <comment>Console</comment>
   </data>
   <data name="msgChangeLog" xml:space="preserve">
-    <value>Version {0} is available! Changes: {1}{2}{3}</value>
+    <value>Do you want to get the newest version on GitHub.com? Here the lastest changes:{0}{1}</value>
     <comment>Version</comment>
   </data>
   <data name="msgCleanHostsFile" xml:space="preserve">
@@ -338,11 +338,11 @@
     <comment>Status bar</comment>
   </data>
   <data name="msgNewVersionAvailable" xml:space="preserve">
-    <value>New Version Available</value>
+    <value>New Version {0} is available</value>
     <comment>Version</comment>
   </data>
-  <data name="msgNewVersionText" xml:space="preserve">
-    <value>A new version is available, download the latest version {0} on GitHub</value>
+  <data name="lnkNewVersionText" xml:space="preserve">
+    <value>A new version is available, download the latest version on GitHub</value>
     <comment>Status bar</comment>
   </data>
   <data name="msgOff" xml:space="preserve">
@@ -753,10 +753,6 @@
     <value>No redirection server found!</value>
     <comment>Message</comment>
   </data>
-  <data name="noAppServer" xml:space="preserve">
-    <value>NHLGames server not available!</value>
-    <comment>Message</comment>
-  </data>
   <data name="tipCalendar" xml:space="preserve">
     <value>Calendar</value>
     <comment>Games tab</comment>
@@ -905,10 +901,6 @@
     <value>Do you want to restart NHLGames to have the changes applied ?</value>
     <comment>Message</comment>
   </data>
-  <data name="msgThemeApplied" xml:space="preserve">
-    <value>Theme applied</value>
-    <comment>Message</comment>
-  </data>
   <data name="missingFramework" xml:space="preserve">
     <value>Missing required Microsoft .NET 4.5 Framework!</value>
     <comment>Message</comment>
@@ -936,5 +928,49 @@
   <data name="tipTrackBarMove" xml:space="preserve">
     <value>Keyboard shorcuts: (++)Page Up/Down(--) , (-)Arrow Left/Right(+)</value>
     <comment>Settings tab</comment>
+  </data>
+  <data name="msgChangeLogNone" xml:space="preserve">
+    <value>Do you want to view the change log on GitHub.com and download the newest version?</value>
+    <comment>Version</comment>
+  </data>
+  <data name="tipMessage1" xml:space="preserve">
+    <value>Rewind a live game by clicking once on the red Live icon at the top-left of a game panel</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage5" xml:space="preserve">
+    <value>Replay a live game by clicking twice on the red Live icon at the top-left of a game panel</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage3" xml:space="preserve">
+    <value>Show scores, remaining period time and team names by customizing the game panel in settings</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage4" xml:space="preserve">
+    <value>Record any game on Windows 10 by enabling the Output option in settings</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage2" xml:space="preserve">
+    <value>Display the interface in black when enabling the Dark theme in settings</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage6" xml:space="preserve">
+    <value>Find the documentation or an anwser to your issue on our Wiki. Click at the top-right on [?] to get there</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage7" xml:space="preserve">
+    <value>Report any bug by opening an issue on Github. Click at the top-right on [?] to get there</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage8" xml:space="preserve">
+    <value>Visit our subreddit /r/nhl_games to chat with other redditors about NHLGames</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage10" xml:space="preserve">
+    <value>Cast a game to your Chromecast with the VLC 3.0 player menu: Playback &gt; Rendered &gt;Cast</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage9" xml:space="preserve">
+    <value>Fast forward/rewind on a live game is only supported by the MPV player</value>
+    <comment>Tip</comment>
   </data>
 </root>

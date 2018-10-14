@@ -1,4 +1,4 @@
-﻿Imports System.Globalization
+Imports System.Globalization
 Imports System.IO
 Imports System.Resources
 Imports System.Security.Permissions
@@ -34,9 +34,11 @@ Public Class NHLGamesMetro
     Private Shared _adDetectionEngine As AdDetection
     Public Shared ReadOnly GamesDict As New Dictionary(Of String, Game)
     Public Shared IsDarkMode As Boolean = False
-    Public Shared MitmProxy As Proxy
+    Public Shared AnimateTipsTick As Integer = 0
+    Public Const AnimateTipsEveryTick As Integer = 10000
+    Public Shared Tips As New Dictionary(Of Integer, String)
+    Public Shared MLBAMProxy As Proxy
     Public ProxyListening As Task(Of Boolean) = Nothing
-
 
     <SecurityPermission(SecurityAction.Demand, Flags:=SecurityPermissionFlag.ControlAppDomain)>
     Public Shared Sub Main()
@@ -76,7 +78,7 @@ Public Class NHLGamesMetro
         FlpCalendar = flpCalendarPanel
         InitializeForm.SetSettings()
 
-        MitmProxy = New Proxy()
+        MLBAMProxy = New Proxy()
 
         HostsFile.ResetHost() 'TODO: Remove when we remove hosts class
         Await Common.CheckAppCanRun()
@@ -108,6 +110,8 @@ Public Class NHLGamesMetro
         Else
             GameFetcher.LoadingProgress()
         End If
+        AnimateTipsTick += NHLGamesMetro.tmr.Interval
+        InvokeElement.AnimateTips()
     End Sub
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
@@ -129,6 +133,7 @@ Public Class NHLGamesMetro
         If ofd.ShowDialog() = DialogResult.OK Then
             If String.IsNullOrEmpty(ofd.FileName) = False And txtVLCPath.Text <> ofd.FileName Then
                 ApplicationSettings.SetValue(SettingsEnum.VlcPath, ofd.FileName)
+                _writeToConsoleSettingsChanged(lblVlcPath.Text, ofd.FileName)
                 txtVLCPath.Text = ofd.FileName
             End If
         End If
@@ -143,6 +148,7 @@ Public Class NHLGamesMetro
 
             If String.IsNullOrEmpty(ofd.FileName) = False And txtMPCPath.Text <> ofd.FileName Then
                 ApplicationSettings.SetValue(SettingsEnum.MpcPath, ofd.FileName)
+                _writeToConsoleSettingsChanged(lblMpcPath.Text, ofd.FileName)
                 txtMPCPath.Text = ofd.FileName
             End If
 
@@ -158,6 +164,7 @@ Public Class NHLGamesMetro
 
             If String.IsNullOrEmpty(ofd.FileName) = False And txtMpvPath.Text <> ofd.FileName Then
                 ApplicationSettings.SetValue(SettingsEnum.MpvPath, ofd.FileName)
+                _writeToConsoleSettingsChanged(lblMpvPath.Text, ofd.FileName)
                 txtMpvPath.Text = ofd.FileName
             End If
 
@@ -174,6 +181,7 @@ Public Class NHLGamesMetro
 
             If String.IsNullOrEmpty(ofd.FileName) = False And txtStreamerPath.Text <> ofd.FileName Then
                 ApplicationSettings.SetValue(SettingsEnum.StreamerPath, ofd.FileName)
+                _writeToConsoleSettingsChanged(lblSlPath.Text, ofd.FileName)
                 txtStreamerPath.Text = ofd.FileName
             End If
 
@@ -183,6 +191,8 @@ Public Class NHLGamesMetro
     Private Sub tgShowFinalScores_CheckedChanged(sender As Object, e As EventArgs) _
         Handles tgShowFinalScores.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowScores, tgShowFinalScores.Checked)
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblShowFinalScores.Text),
+                                       If(tgShowFinalScores.Checked, English.msgOn, English.msgOff))
         For Each game As GameControl In flpGames.Controls
             game.UpdateGame(tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
@@ -254,6 +264,7 @@ Public Class NHLGamesMetro
         If fbd.ShowDialog() = DialogResult.OK Then
             txtOutputArgs.Text = fbd.SelectedPath & $"\(DATE)_(HOME)_vs_(AWAY)_(TYPE)_(NETWORK).mp4"
             Player.RenewArgs()
+            _writeToConsoleSettingsChanged(lblOutput.Text, txtOutputArgs.Text)
         End If
     End Sub
 
@@ -290,6 +301,8 @@ Public Class NHLGamesMetro
     Private Sub chkShowLiveScores_CheckedChanged(sender As Object, e As EventArgs) _
         Handles tgShowLiveScores.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowLiveScores, tgShowLiveScores.Checked)
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblShowLiveScores.Text),
+                                    If(tgShowLiveScores.Checked, English.msgOn, English.msgOff))
         For Each game As GameControl In flpGames.Controls
             game.UpdateGame(tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
@@ -300,11 +313,13 @@ Public Class NHLGamesMetro
         Next
     End Sub
 
-    Private Sub lnkDownload_Click(sender As Object, e As EventArgs) Handles lnkDownload.Click
-        Dim sInfo As ProcessStartInfo = If(
-            lnkDownload.Text.Equals(English.lnkSubreddit),
-            New ProcessStartInfo(SubredditLink),
-            New ProcessStartInfo(LatestReleaseLink))
+    Private Sub lnkReddit_Click(sender As Object, e As EventArgs) Handles lnkReddit.Click
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo(SubredditLink)
+        Process.Start(sInfo)
+    End Sub
+
+    Private Sub lnkRelease_Click(sender As Object, e As EventArgs) Handles lnkRelease.Click
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo(LatestReleaseLink)
         Process.Start(sInfo)
     End Sub
 
@@ -337,6 +352,8 @@ Public Class NHLGamesMetro
     Private Sub chkShowSeriesRecord_CheckedChanged(sender As Object, e As EventArgs) _
         Handles tgShowSeriesRecord.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowSeriesRecord, tgShowSeriesRecord.Checked)
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblShowSeriesRecord.Text),
+                                       If(tgShowSeriesRecord.Checked, English.msgOn, English.msgOff))
         For Each game As GameControl In flpGames.Controls
             game.UpdateGame(tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
@@ -434,6 +451,7 @@ Public Class NHLGamesMetro
     Private Sub cbLanguage_SelectedIndexChanged(sender As Object, e As EventArgs) _
         Handles cbLanguage.SelectedIndexChanged
         ApplicationSettings.SetValue(SettingsEnum.SelectedLanguage, cbLanguage.SelectedItem.ToString())
+        _writeToConsoleSettingsChanged(lblLanguage.Text, cbLanguage.SelectedItem.ToString())
         Common.GetLanguage()
         InitializeForm.SetLanguage()
         For Each game As GameControl In flpGames.Controls
@@ -537,6 +555,8 @@ Public Class NHLGamesMetro
 
     Private Sub tgTeamNamesAbr_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowTeamCityAbr.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowTeamCityAbr, tgShowTeamCityAbr.Checked)
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblShowTeamCityAbr.Text),
+                                       If(tgShowTeamCityAbr.Checked, English.msgOn, English.msgOff))
         For Each game As GameControl In flpGames.Controls
             game.UpdateGame(tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
@@ -577,6 +597,8 @@ Public Class NHLGamesMetro
     Private Sub tgShowTodayLiveGamesFirst_CheckedChanged(sender As Object, e As EventArgs) _
         Handles tgShowTodayLiveGamesFirst.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowTodayLiveGamesFirst, tgShowTodayLiveGamesFirst.Checked)
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblShowTodayLiveGamesFirst.Text),
+                                       If(tgShowTodayLiveGamesFirst.Checked, English.msgOn, English.msgOff))
         TodayLiveGamesFirst = tgShowTodayLiveGamesFirst.Checked
         InvokeElement.LoadGames()
     End Sub
@@ -648,6 +670,8 @@ Public Class NHLGamesMetro
 
     Private Sub tgShowLiveTime_CheckedChanged(sender As Object, e As EventArgs) Handles tgShowLiveTime.CheckedChanged
         ApplicationSettings.SetValue(SettingsEnum.ShowLiveTime, tgShowLiveTime.Checked)
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblShowLiveTime.Text),
+                                       If(tgShowLiveTime.Checked, English.msgOn, English.msgOff))
         For Each game As GameControl In flpGames.Controls
             game.UpdateGame(tgShowFinalScores.Checked,
                             tgShowLiveScores.Checked,
@@ -660,17 +684,25 @@ Public Class NHLGamesMetro
 
     Private Sub tgDarkMode_CheckedChanged(sender As Object, e As EventArgs) Handles tgDarkMode.CheckedChanged
         Dim darkMode = ApplicationSettings.Read(Of Boolean)(SettingsEnum.DarkMode, False)
-        If Not darkMode.Equals(tgDarkMode.Checked) AndAlso InvokeElement.MsgBoxBlue(RmText.GetString("msgAcceptToRestart"),
-                                    RmText.GetString("msgThemeApplied"), MessageBoxButtons.YesNo) = DialogResult.Yes Then
-            Dim exeName = Process.GetCurrentProcess().MainModule.FileName
-            Dim startInfo = New ProcessStartInfo(exeName)
-            Try
-                Process.Start(startInfo)
-                Application.Exit()
-            Catch ex As Exception
-            End Try
+        If Not darkMode.Equals(tgDarkMode.Checked) AndAlso InvokeElement.MsgBoxBlue(
+            RmText.GetString("msgAcceptToRestart"),
+            RmText.GetString("lblDark"),
+            MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            RestartNHLGames()
         End If
         ApplicationSettings.SetValue(SettingsEnum.DarkMode, tgDarkMode.Checked)
+        _writeToConsoleSettingsChanged(String.Format(English.msgThisEnable, lblDarkMode.Text),
+                                       If(tgDarkMode.Checked, English.msgOn, English.msgOff))
+    End Sub
+
+    Private Sub RestartNHLGames()
+        Dim exeName = Process.GetCurrentProcess().MainModule.FileName
+        Dim startInfo = New ProcessStartInfo(exeName)
+        Try
+            Process.Start(startInfo)
+            Application.Exit()
+        Catch ex As Exception
+        End Try
     End Sub
 
 
@@ -683,5 +715,7 @@ Public Class NHLGamesMetro
         Dim value = tbProxyPort.Value * 10
         lblProxyPortNumber.Text = value.ToString()
         ApplicationSettings.SetValue(SettingsEnum.ProxyPort, value)
+        _writeToConsoleSettingsChanged(lblProxyPort.Text, value.ToString())
     End Sub
+
 End Class

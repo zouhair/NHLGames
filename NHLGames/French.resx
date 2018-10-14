@@ -238,7 +238,7 @@
     <comment>Message</comment>
   </data>
   <data name="msgChangeLog" xml:space="preserve">
-    <value>Version {0} maintenant disponible! Changements: {1}{2}{3}</value>
+    <value>Voulez-vous obtenir la nouvelle version sur GitHub.com? Voici les derniers changements:{0}{1}</value>
     <comment>Version</comment>
   </data>
   <data name="msgErrorGeneralText" xml:space="preserve">
@@ -266,11 +266,11 @@
     <comment>Status bar</comment>
   </data>
   <data name="msgNewVersionAvailable" xml:space="preserve">
-    <value>Nouvelle version disponible</value>
+    <value>Nouvelle version {0} disponible</value>
     <comment>Version</comment>
   </data>
-  <data name="msgNewVersionText" xml:space="preserve">
-    <value>Une nouvelle version est disponible, téléchargez la plus récente version {0} sur GitHub</value>
+  <data name="lnkNewVersionText" xml:space="preserve">
+    <value>Une nouvelle version est disponible, téléchargez la plus récente version sur GitHub</value>
     <comment>Status bar</comment>
   </data>
   <data name="msgRunAsAdmin" xml:space="preserve">
@@ -529,10 +529,6 @@
     <value>Aucun serveur de redirection trouvé!</value>
     <comment>Message</comment>
   </data>
-  <data name="noAppServer" xml:space="preserve">
-    <value>NHLGames serveur non disponible!</value>
-    <comment>Message</comment>
-  </data>
   <data name="tipCalendar" xml:space="preserve">
     <value>Calendrier</value>
     <comment>Games tab</comment>
@@ -689,10 +685,6 @@
     <value>Voulez-vous redémarrer NHLGames pour appliquer les changements?</value>
     <comment>Message</comment>
   </data>
-  <data name="msgThemeApplied" xml:space="preserve">
-    <value>Thème appliqué</value>
-    <comment>Message</comment>
-  </data>
   <data name="missingFramework" xml:space="preserve">
     <value>Microsoft .NET 4.5 Framework requis manquant!</value>
     <comment>Message</comment>
@@ -712,5 +704,49 @@
   <data name="tipTrackBarMove" xml:space="preserve">
     <value>Raccourcis claviers: (++)Page Haut/Bas(--) , (-)Gauche/Droite(+)</value>
     <comment>Settings tab</comment>
+  </data>
+  <data name="msgChangeLogNone" xml:space="preserve">
+    <value>Voulez-vous voir la liste de changements sur GitHub.com et télécharger la nouvelle version?</value>
+    <comment>Version</comment>
+  </data>
+  <data name="tipMessage1" xml:space="preserve">
+    <value>Reculer un match en direct: En appuyant une fois sur l'icone Live au haut-gauche d'un panneau de match</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage5" xml:space="preserve">
+    <value>Rejouer un match en direct: En appuyant deux fois sur l'icone Live au haut-gauche d'un panneau de match</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage3" xml:space="preserve">
+    <value>Afficher le pointage, temps de période restant et le nom des équipes en personnalissant le panneau de match dans les paramètres</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage4" xml:space="preserve">
+    <value>Enregistrer n'importe quel match sur Windows 10 en activant l'option de sauvegarde dans les paramètres</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage2" xml:space="preserve">
+    <value>Afficher l'interface en noir en activant le thème Sombre dans les paramètres</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage6" xml:space="preserve">
+    <value>Trouvez la documentation ou réponse à un problème sur notre Wiki. Cliquez en haut-droite sur [?] pour y accéder</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage7" xml:space="preserve">
+    <value>Rapporter tout problème en ouvrant un issue sur GitHub. Cliquez en haut-droit sur [?] pour y accéder</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage8" xml:space="preserve">
+    <value>Visitez notre subreddit /r/nhl_games pour discuter avec d'autres redditeurs de NHLGames</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage10" xml:space="preserve">
+    <value>Castez un match à votre Chromecast avec le menu du lecteur VLC 3.0: Playback &gt; Rendered &gt;Cast</value>
+    <comment>Tip</comment>
+  </data>
+  <data name="tipMessage9" xml:space="preserve">
+    <value>L'avance/recule rapide d'un match en direct est seulement supporté par le lecteur MPV</value>
+    <comment>Tip</comment>
   </data>
 </root>

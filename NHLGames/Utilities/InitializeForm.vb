@@ -8,38 +8,7 @@ Imports NHLGames.Objects
 Namespace Utilities
     Public Class InitializeForm
         Private Shared ReadOnly Form As NHLGamesMetro = NHLGamesMetro.FormInstance
-
-        Public Shared Async Function VersionCheck() As Task(Of Boolean)
-
-            Dim latestVersion As Version = Await Downloader.DownloadApplicationVersion()
-            If latestVersion.Equals(New Version()) Then Return False
-
-            If latestVersion > My.Application.Info.Version Then
-                Form.lnkDownload.Text = String.Format(
-                    NHLGamesMetro.RmText.GetString("msgNewVersionText"),
-                    latestVersion.ToString())
-                Form.lnkDownload.Width = 700
-                Dim strChangeLog As String = Await Downloader.DownloadChangelog()
-                InvokeElement.MsgBoxBlue(
-                    String.Format(NHLGamesMetro.RmText.GetString("msgChangeLog"), latestVersion.ToString(), vbCrLf,
-                                  vbCrLf, strChangeLog),
-                    NHLGamesMetro.RmText.GetString("msgNewVersionAvailable"),
-                    MessageBoxButtons.OK)
-            End If
-
-            Await AnnouncementCheck()
-            Return True
-        End Function
-
-        Private Shared Async Function AnnouncementCheck() As Task(Of Boolean)
-            Dim latestAnnouncement As String = Await Downloader.DownloadAnnouncement()
-            If Not latestAnnouncement.Equals(String.Empty) Then
-                InvokeElement.MsgBoxBlue(latestAnnouncement,
-                                         NHLGamesMetro.RmText.GetString("msgAnnouncement"),
-                                         MessageBoxButtons.OK)
-            End If
-            Return Not latestAnnouncement.Equals(String.Empty)
-        End Function
+        Public Shared ReadOnly TotalTipCount As Integer = 10
 
         Public Shared Sub SetLanguage()
             Dim lstStreamQualities = New String() {
@@ -144,6 +113,13 @@ Namespace Utilities
             Form.flpCalendarPanel.Controls.Clear()
             Form.flpCalendarPanel.Controls.Add(New CalendarControl())
 
+            'Tips
+            NHLGamesMetro.Tips.Clear()
+            For index As Integer = 1 To TotalTipCount
+                NHLGamesMetro.Tips.Add(index, NHLGamesMetro.RmText.GetString($"tipMessage{index}"))
+            Next
+            Form.lblTip.Text = NHLGamesMetro.Tips.First().Value
+
             SetThemeAndSvgOnForm()
         End Sub
 
@@ -167,7 +143,7 @@ Namespace Utilities
 
             Form.cbLanguage.Items.Clear()
             Form.cbLanguage.Items.AddRange(lstLanguages)
-            Form.cbLanguage.SelectedIndex = 0
+            Form.cbLanguage.SelectedItem = ApplicationSettings.Read(Of String)(SettingsEnum.SelectedLanguage, "English")
 
             Form.lblVersion.Text = String.Format("v {0}.{1}.{2}",
                                                  My.Application.Info.Version.Major,
@@ -363,6 +339,7 @@ Namespace Utilities
                 Form.lblDate.BackColor = Color.FromArgb(80, 80, 80)
                 Form.lblVersion.ForeColor = Color.LightGray
                 Form.lblStatus.ForeColor = Color.LightGray
+                Form.lblTip.ForeColor = Color.LightGray
                 Form.lblGamePanel.Theme = MetroThemeStyle.Dark
                 Form.tgShowTodayLiveGamesFirst.Theme = MetroThemeStyle.Dark
                 Form.tgShowLiveTime.Theme = MetroThemeStyle.Dark
