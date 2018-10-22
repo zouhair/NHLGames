@@ -51,15 +51,26 @@ Namespace Objects
             If String.IsNullOrEmpty(PlayerPath) OrElse PlayerType.Equals(PlayerTypeEnum.None) Then _
                 Console.WriteLine(English.errorPlayerPathEmpty)
 
-            Dim result = PlayerArgs() & ReplayArgs() & ProxyArgs()
+            Dim result = ""
+
+            If UseOutputArgs Then
+                result = OutputArgs()
+            Else
+                result = PlayerArgs() & ReplayArgs()
+            End If
+
+            result &= ProxyArgs()
             If UseCustomStreamerArgs Then result &= CustomStreamerArgs
             If Not safeOutput Then result &= NhlCookieArgs()
-            result &= UserAgentArgs()
+            If Not safeOutput Then result &= UserAgentArgs()
             result &= If(safeOutput, StreamLinkCensoredArgs(), StreamLinkArgs())
             result &= If(Is60Fps, StreamBestQualityArgs(), StreamQualityArgs())
-            If UseOutputArgs Then result &= OutputArgs()
 
             Return result
+        End Function
+
+        Private Function ThreadArgs() As String
+            Return If (UseOutputArgs, "--ringbuffer-size=8M --hls-segment-threads=6 ", "--ringbuffer-size=16M --hls-segment-threads=2 ")
         End Function
 
         Private Function PlayerArgs() As String
@@ -84,16 +95,12 @@ Namespace Objects
                                String.Empty)
             If GameIsOnAir Then
                 If Not StreamLiveReplayCode.Equals(LiveStatusCodeEnum.Live) Then
-                    Return $"--ringbuffer-size=4M --hls-segment-threads=2 --hls-live-edge={ReplayMinutes()} "
+                    Return $"--hls-live-edge={ReplayMinutes()} "
                 Else
                     Return presetHls
                 End If
             Else
-                If PlayerType.Equals(PlayerTypeEnum.Vlc) Then
-                    Return $"--ringbuffer-size=8M --hls-segment-threads=2 "
-                Else
-                    Return presetHls
-                End If
+                Return presetHls
             End If
         End Function
 
