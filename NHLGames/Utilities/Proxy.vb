@@ -5,9 +5,11 @@ Namespace Utilities
     Public Class Proxy
         Private _proxy As Process
         Private const _stringToFind = "[MLBAMProxy] "
-        Private const _mlbamProxyExeName = "mlbamproxy.exe"
+        Private const _exeName = "mlbamproxy.exe"
         Public ReadOnly port As String = ApplicationSettings.Read(Of String)(SettingsEnum.ProxyPort, "17070")
-        Private ReadOnly _pathToProxy As String = Path.Combine(Application.StartupPath, _mlbamProxyExeName)
+        Private ReadOnly _folderPath As String = Path.Combine(Application.StartupPath, "mlbamproxy")
+
+        Private _pathToProxy As String = String.Empty
 
         Private Sub StartProxy()
             _proxy = New Process() With {.StartInfo =
@@ -49,6 +51,7 @@ Namespace Utilities
 
         Public Sub New()
             SetEnvironmentVariableForMpv()
+            SetPath()
 
             If IsProxyFileFound() Then
                 Dim taskLaunchProxy = New Task(Sub()
@@ -58,13 +61,17 @@ Namespace Utilities
             End If
         End Sub
 
+        Private Sub SetPath()
+            _pathToProxy = $"{_folderPath}\{If (Environment.Is64BitOperatingSystem, "x64", "x86")}\{_exeName}"
+        End Sub
+
         Public Function IsProxyFileFound() As Boolean
             Return File.Exists(_pathToProxy)
         End Function
 
         Public Shared Sub StopProxy()
             Dim psi As ProcessStartInfo = New ProcessStartInfo With {
-                .Arguments = $"/im {_mlbamProxyExeName} /f",
+                .Arguments = $"/im {_exeName} /f",
                 .FileName = "taskkill",
                 .UseShellExecute = False
             }
