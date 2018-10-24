@@ -18,7 +18,7 @@ Namespace Utilities
                     .Arguments = $"-p {port} -d {NHLGamesMetro.HostName} -s {NHLGamesMetro.DomainName}",
                     .UseShellExecute = False,
                     .RedirectStandardOutput = True,
-                    .CreateNoWindow =  Not NHLGamesMetro.FormInstance.tgOutput.Checked}
+                    .CreateNoWindow =  True}
                 }
             _proxy.EnableRaisingEvents = True
 
