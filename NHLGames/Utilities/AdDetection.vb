@@ -6,6 +6,9 @@ Imports NHLGames.Objects.Modules
 
 Namespace Utilities
     Public Class AdDetection
+        Implements IDisposable
+        Private _disposedValue As Boolean
+
         Private _mediaPlayerProcesses As List(Of Integer)
         Private ReadOnly _adModules As List(Of IAdModule) = New List(Of IAdModule)
         Private _previousAdPlayingState As Boolean
@@ -106,7 +109,7 @@ Namespace Utilities
                 Dim modulesToRemove = _adModules.Where(Function(x) x.Title = moduleTitle).ToList()
                 For Each m In modulesToRemove
                     _adModules.Remove(m)
-                    m.Dispose()
+                    m.DisposeIt()
                 Next
             End SyncLock
         End Sub
@@ -202,6 +205,22 @@ Namespace Utilities
                 ApplicationSettings.SetValue(SettingsEnum.AdDetection,
                                              Serialization.SerializeObject(Of AdDetectionConfigs)(_settings))
             End If
+        End Sub
+
+        Private Sub Dispose(disposing As Boolean)
+            If Not _disposedValue Then
+                _disposedValue = True
+            End If
+            _aMmDevices.Dispose()
+        End Sub
+
+        Public Sub Dispose() Implements IDisposable.Dispose
+            Dispose(True)
+            GC.SuppressFinalize(Me)
+        End Sub
+
+        Protected Overrides Sub Finalize()
+            Dispose(False)
         End Sub
     End Class
 End Namespace

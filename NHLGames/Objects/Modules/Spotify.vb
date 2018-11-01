@@ -141,8 +141,9 @@ Namespace Objects.Modules
             _initialized = True
         End Sub
 
-        Public Sub Dispose() Implements IAdModule.Dispose
+        Public Sub DisposeIt() Implements IAdModule.DisposeIt
             _stopIt = True
+            Dispose()
         End Sub
 
         Private Sub ConnectLoop()

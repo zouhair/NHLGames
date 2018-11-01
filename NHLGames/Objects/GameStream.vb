@@ -24,11 +24,11 @@ Namespace Objects
         Public Sub New()
         End Sub
 
-        Public Sub New(game As Game, stream As JObject, type As StreamTypeEnum, streamTypeSelected As String)
+        Public Sub New(game As Game, stream As NHL.Item, type As StreamTypeEnum, streamTypeSelected As String)
             Me.Game = game
-            Network = stream.Property("callLetters")
-            If Network = String.Empty Then Network = "NHLTV"
-            PlayBackId = stream.Property("mediaPlaybackId").Value.ToString()
+            Network = stream.callLetters
+            If Network = String.Empty Then Network = NHL.Epg.NHLTV
+            PlayBackId = stream.mediaPlaybackId
             Me.Type = type
             If type = StreamTypeEnum.Unknown Then
                 Me.StreamTypeSelected = streamTypeSelected

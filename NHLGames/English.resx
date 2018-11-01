@@ -509,10 +509,6 @@
     <value>Error: Failed to fetch games schedule.</value>
     <comment>Console</comment>
   </data>
-  <data name="errorUnableToDecodeJson" xml:space="preserve">
-    <value>Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this.</value>
-    <comment>Console</comment>
-  </data>
   <data name="msgStreamer" xml:space="preserve">
     <value>Streamer:</value>
     <comment>Console</comment>
@@ -972,5 +968,9 @@
   <data name="tipMessage9" xml:space="preserve">
     <value>Fast forward/rewind on a live game is only supported by the MPV player</value>
     <comment>Tip</comment>
+  </data>
+  <data name="lblServerDown" xml:space="preserve">
+    <value>Server unavailable</value>
+    <comment>Game panel</comment>
   </data>
 </root>

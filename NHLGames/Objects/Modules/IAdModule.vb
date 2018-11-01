@@ -7,6 +7,6 @@ Namespace Objects.Modules
         Sub Initialize()
         Sub AdStarted()
         Sub AdEnded()
-        Sub Dispose()
+        Sub DisposeIt()
     End Interface
 End Namespace
