@@ -32,7 +32,7 @@ Namespace Objects.Modules
         Public Sub Initialize() Implements IAdModule.Initialize
         End Sub
 
-        Public Sub Dispose() Implements IAdModule.Dispose
+        Public Sub DisposeIt() Implements IAdModule.DisposeIt
         End Sub
 
         Public ReadOnly Property Title As AdModulesEnum = AdModulesEnum.Obs Implements IAdModule.Title

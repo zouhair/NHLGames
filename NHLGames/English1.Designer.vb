@@ -560,15 +560,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Error: Unable to decode url from NHL API, the structure has changed. We will have to fix this..
-        '''</summary>
-        Friend Shared ReadOnly Property errorUnableToDecodeJson() As String
-            Get
-                Return ResourceManager.GetString("errorUnableToDecodeJson", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to unknown (server is not available).
         '''</summary>
         Friend Shared ReadOnly Property errorUnknownServerDown() As String
@@ -1015,6 +1006,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property lblRefCam() As String
             Get
                 Return ResourceManager.GetString("lblRefCam", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Server unavailable.
+        '''</summary>
+        Friend Shared ReadOnly Property lblServerDown() As String
+            Get
+                Return ResourceManager.GetString("lblServerDown", resourceCulture)
             End Get
         End Property
         

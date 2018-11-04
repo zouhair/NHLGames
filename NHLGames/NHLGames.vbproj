@@ -220,6 +220,33 @@
     <Compile Include="Objects\GitHub\Milestone.vb" />
     <Compile Include="Objects\GitHub\Release.vb" />
     <Compile Include="Objects\GitHub\User.vb" />
+    <Compile Include="Objects\NHL\Conference.vb" />
+    <Compile Include="Objects\NHL\Content.vb" />
+    <Compile Include="Objects\NHL\Date.vb" />
+    <Compile Include="Objects\NHL\Division.vb" />
+    <Compile Include="Objects\NHL\Editorial.vb" />
+    <Compile Include="Objects\NHL\Epg.vb" />
+    <Compile Include="Objects\NHL\Franchise.vb" />
+    <Compile Include="Objects\NHL\Game.vb" />
+    <Compile Include="Objects\NHL\Highlights.vb" />
+    <Compile Include="Objects\NHL\Image.vb" />
+    <Compile Include="Objects\NHL\IntermissionInfo.vb" />
+    <Compile Include="Objects\NHL\Item.vb" />
+    <Compile Include="Objects\NHL\Keyword.vb" />
+    <Compile Include="Objects\NHL\LeagueRecord.vb" />
+    <Compile Include="Objects\NHL\Linescore.vb" />
+    <Compile Include="Objects\NHL\Media.vb" />
+    <Compile Include="Objects\NHL\Schedule.vb" />
+    <Compile Include="Objects\NHL\Period.vb" />
+    <Compile Include="Objects\NHL\Playback.vb" />
+    <Compile Include="Objects\NHL\PowerPlayInfo.vb" />
+    <Compile Include="Objects\NHL\SeriesSummary.vb" />
+    <Compile Include="Objects\NHL\Status.vb" />
+    <Compile Include="Objects\NHL\Team.vb" />
+    <Compile Include="Objects\NHL\TeamInfo.vb" />
+    <Compile Include="Objects\NHL\Teams.vb" />
+    <Compile Include="Objects\NHL\TimeZone.vb" />
+    <Compile Include="Objects\NHL\Venue.vb" />
     <Compile Include="res\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -235,7 +262,6 @@
     <Compile Include="Utilities\ApplicationSettings.vb" />
     <Compile Include="Utilities\Common.vb" />
     <Compile Include="Utilities\DateHelper.vb" />
-    <Compile Include="Utilities\Downloader.vb" />
     <Compile Include="Objects\Game.vb" />
     <Compile Include="Objects\GameStream.vb" />
     <Compile Include="res\AssemblyInfo.vb" />

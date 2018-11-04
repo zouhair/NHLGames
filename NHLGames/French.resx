@@ -749,4 +749,8 @@
     <value>L'avance/recule rapide d'un match en direct est seulement supporté par le lecteur MPV</value>
     <comment>Tip</comment>
   </data>
+  <data name="lblServerDown" xml:space="preserve">
+    <value>Serveur indisponible</value>
+    <comment>Game panel</comment>
+  </data>
 </root>

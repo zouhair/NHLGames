@@ -1,20 +1,23 @@
-﻿Imports System.IO
+﻿Imports System.Globalization
+Imports System.IO
 Imports System.Net
 Imports System.Text
+Imports System.Text.RegularExpressions
+Imports Newtonsoft.Json
 Imports NHLGames.My.Resources
-Imports NHLGames.Utilities
+Imports NHLGames.Objects.NHL
 
 Namespace Utilities
     Public Class Common
-        Public _
-            Const UserAgent =
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+        Private Const ApiUrl As String = "http://statsapi.web.nhl.com/api/v1/schedule"
+        Private Shared ReadOnly Regex As New Regex("(\d+\.)(\d+\.)?(\d+\.)?(\*|\d+)")
+        Private Const ScheduleApiurl As String = ApiUrl & "?startDate={0}&endDate={1}&expand=schedule.teams,schedule.linescore,schedule.game.seriesSummary,schedule.game.content.media.epg"
 
-        Public Const Timeout = 10000
+        Public Const UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+        Private Const s = "abcdefghijklmnopqrstuvwxyz0123456789"
+        Private Shared r As New Random
 
         Public Shared Function GetRandomString(intLength As Integer)
-            Const s = "abcdefghijklmnopqrstuvwxyz0123456789"
-            Dim r As New Random
             Dim sb As New StringBuilder
 
             For i = 1 To intLength
@@ -25,60 +28,37 @@ Namespace Utilities
             Return sb.ToString()
         End Function
 
+        Public Shared Async Function GetScheduleAsync(startDate As DateTime) As Task(Of Schedule)
+            Dim dateTimeString As String = startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
+            Dim url As String = String.Format(ScheduleApiurl, dateTimeString, dateTimeString)
+
+            Console.WriteLine(English.msgGettingSchedule, English.msgFetching,
+                              startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))
+
+            Dim data = Await Common.SendWebRequestAndGetContentAsync(url)
+            If data.Equals(String.Empty) Then Return Nothing
+
+            Return JsonConvert.DeserializeObject(Of Schedule)(data)
+        End Function
+
         Public Shared Function SetHttpWebRequest(address As String) As HttpWebRequest
             Dim defaultHttpWebRequest = CType(WebRequest.Create(New Uri(address)), HttpWebRequest)
             defaultHttpWebRequest.UserAgent = UserAgent
             defaultHttpWebRequest.Method = WebRequestMethods.Http.Head
             defaultHttpWebRequest.Proxy = WebRequest.DefaultWebProxy
-            defaultHttpWebRequest.ContentType = "text/plain"
             defaultHttpWebRequest.CookieContainer = New CookieContainer()
-            defaultHttpWebRequest.CookieContainer.Add(New Cookie("mediaAuth", GetRandomString(240), String.Empty,
-                                                                 "nhl.com"))
-            defaultHttpWebRequest.Timeout = Timeout
-            defaultHttpWebRequest.Accept =
-                "text/plain,text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"
-            defaultHttpWebRequest.Referer = "https://www.google.ca"
-            defaultHttpWebRequest.Headers.Add("Origin", "https://wwww.google.ca")
+            defaultHttpWebRequest.CookieContainer.Add(New Cookie("mediaAuth", GetRandomString(240), String.Empty, "nhl.com"))
 
             Return defaultHttpWebRequest
         End Function
 
-        Public Shared Function SendWebRequest(address As String, Optional httpWebRequest As HttpWebRequest = Nothing) _
-            As Boolean
+        Public Shared Async Function SendWebRequestAsync(address As String, Optional httpWebRequest As HttpWebRequest = Nothing) As Task(Of Boolean)
             If address Is Nothing AndAlso httpWebRequest Is Nothing Then Return False
 
             Dim myHttpWebRequest As HttpWebRequest
             Dim result = False
 
-            If httpWebRequest Is Nothing Then
-                myHttpWebRequest = SetHttpWebRequest(address)
-            Else
-                myHttpWebRequest = httpWebRequest
-            End If
-
-            Try
-                Using myHttpWebResponse As HttpWebResponse = myHttpWebRequest.GetResponse()
-                    result = (myHttpWebResponse.StatusCode = HttpStatusCode.OK)
-                End Using
-            Catch ex As Exception
-            End Try
-
-            Return result
-        End Function
-
-        Public Shared Async Function SendWebRequestAsync(address As String,
-                                                         Optional httpWebRequest As HttpWebRequest = Nothing) _
-            As Task(Of Boolean)
-            If address Is Nothing AndAlso httpWebRequest Is Nothing Then Return False
-
-            Dim myHttpWebRequest As HttpWebRequest
-            Dim result = False
-
-            If httpWebRequest Is Nothing Then
-                myHttpWebRequest = SetHttpWebRequest(address)
-            Else
-                myHttpWebRequest = httpWebRequest
-            End If
+            myHttpWebRequest = If(httpWebRequest, SetHttpWebRequest(address))
 
             Try
                 Using _
@@ -96,18 +76,11 @@ Namespace Utilities
             Dim content = New MemoryStream()
             Dim myHttpWebRequest As HttpWebRequest
 
-            If httpWebRequest Is Nothing Then
-                myHttpWebRequest = SetHttpWebRequest(address)
-                myHttpWebRequest.Method = WebRequestMethods.Http.Get
-            Else
-                myHttpWebRequest = httpWebRequest
-                myHttpWebRequest.Method = WebRequestMethods.Http.Get
-            End If
+            myHttpWebRequest = If(httpWebRequest, SetHttpWebRequest(address))
+            myHttpWebRequest.Method = WebRequestMethods.Http.Get
 
             Try
-                Using _
-                    myHttpWebResponse As HttpWebResponse =
-                        Await myHttpWebRequest.GetResponseAsync().ConfigureAwait(False)
+                Using myHttpWebResponse As HttpWebResponse = Await myHttpWebRequest.GetResponseAsync().ConfigureAwait(False)
                     If myHttpWebResponse.StatusCode = HttpStatusCode.OK Then
                         Using reader As Stream = myHttpWebResponse.GetResponseStream()
                             reader.CopyTo(content)
@@ -139,7 +112,7 @@ Namespace Utilities
             InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgChekingRequirements"))
 
             Dim errorMessage = String.Empty
-            
+
             If Environment.Version < New Version(4, 0, 30319, 0) Then
                 errorMessage = "missingFramework"
             ElseIf Not Await SendWebRequestAsync("https://www.google.com") Then
@@ -148,6 +121,10 @@ Namespace Utilities
 
             Await GitHub.GetVersion()
             Await GitHub.GetAccouncement()
+
+            NHLGamesMetro.IsServerUp = Task.Run(Function()
+                                                    Return My.Computer.Network.Ping(NHLGamesMetro.HostName, 5000)
+                                                End Function)
 
             If Not errorMessage.Equals(String.Empty) Then
                 FatalError(NHLGamesMetro.RmText.GetString(errorMessage))

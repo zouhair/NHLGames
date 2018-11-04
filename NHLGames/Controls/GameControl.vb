@@ -29,7 +29,6 @@ Namespace Controls
 
         Public Sub UpdateGame(showScores As Boolean, showLiveScores As Boolean, showSeriesRecord As Boolean,
                               showTeamCityAbr As Boolean, showLiveTime As Boolean, Optional gameUpdated As Game = Nothing)
-
             If gameUpdated IsNot Nothing Then
                 If gameUpdated.StreamsDict Is Nothing Then Return
                 _game = gameUpdated
@@ -52,18 +51,18 @@ Namespace Controls
                 lblPeriod.ForeColor = Color.White
 
                 If showLiveTime Then
-                    If _game.IsInIntermission Then
-                        lblPeriod.Text =
-                            $"{NHLGamesMetro.RmText.GetString("gameIntermission")} { _
-                                _game.IntermissionTimeRemaining.ToString("mm:ss")}".ToUpper()
-                    Else
-                        lblPeriod.Text = $"{_game.GamePeriod.
+                    Dim period = _game.GamePeriod.
                             Replace($"1st", NHLGamesMetro.RmText.GetString("gamePeriod1")).
                             Replace($"2nd", NHLGamesMetro.RmText.GetString("gamePeriod2")).
                             Replace($"3rd", NHLGamesMetro.RmText.GetString("gamePeriod3")).
                             Replace($"OT", NHLGamesMetro.RmText.GetString("gamePeriodOt")).
                             Replace($"SO", NHLGamesMetro.RmText.GetString("gamePeriodSo")).
-                            ToUpper()}              {_game.GameTimeLeft.ToLower().Replace("end", "00:00")}".ToUpper() '1st 2nd 3rd OT SO... Final, 12:34, 20:00 
+                            ToUpper()
+                    If _game.IsInIntermission Then
+                        lblPeriod.Text = $"{period} {NHLGamesMetro.RmText.GetString("gameIntermission")} { _
+                                _game.IntermissionTimeRemaining.ToString("mm:ss")}".ToUpper()
+                    Else
+                        lblPeriod.Text = $"{period}             {_game.GameTimeLeft.ToLower().Replace("end", "00:00")}".ToUpper() '1st 2nd 3rd OT SO... Final, 12:34, 20:00 
 
                         If _game.GameTimeLeft.ToLower() = "final" Then
                             lblPeriod.Text = NHLGamesMetro.RmText.GetString("gamePeriodFinal").ToUpper()
@@ -168,7 +167,9 @@ Namespace Controls
             End If
 
             If Not _game.AreAnyStreamsAvailable Then
-                If _game.GameDate.ToLocalTime() > Date.UtcNow.ToLocalTime() And _game.GameState < GameStateEnum.InProgress Then
+                If NHLGamesMetro.IsServerUp.Result = False Then
+                    lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblServerDown")
+                Else If _game.GameDate.ToLocalTime() > Date.UtcNow.ToLocalTime() And _game.GameState < GameStateEnum.InProgress Then
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblStreamAvailableAtGameTime")
                 Else
                     lblStreamStatus.Text = NHLGamesMetro.RmText.GetString("lblNoStreamAvailable")

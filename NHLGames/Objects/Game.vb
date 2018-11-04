@@ -22,7 +22,7 @@ Namespace Objects
         Public Property IsInIntermission As Boolean
         Public Property IntermissionTimeRemaining As Date 'seconds
 
-        Public Property SeriesGameNumber As String 'Series: Game 1.. 7
+        Public Property SeriesGameNumber As Integer 'Series: Game 1.. 7
         Public Property SeriesGameStatus As String 'Series: Team wins 4-2, Tied 2-2, Team leads 1-0
 
         Public Property Away As String
@@ -83,42 +83,15 @@ Namespace Objects
             Return (StreamsDict IsNot Nothing) AndAlso StreamsDict.ContainsKey(streamType)
         End Function
 
-        Public Sub SetGameDate(jDate As String)
-            Dim dateTimeVal As Date
-
-            If (Date.TryParseExact(jDate, "yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.None,
-                                        dateTimeVal) = False) Then
-                dateTimeVal = Date.Parse(jDate)
-            End If
-
-            GameDate = dateTimeVal.ToUniversalTime() ' Must use universal time to always get correct date for stream
-        End Sub
-
-        Public Function SetSeriesInfo(game As JObject) As Boolean
-            If Not game.TryGetValue("seriesSummary", "gameNumber") And
-               game.TryGetValue("seriesSummary", "seriesStatusShort") Then
-                Console.WriteLine(English.errorUnableToDecodeJson)
-                Return False
-            End If
-
-            SeriesGameNumber = game.SelectToken("seriesSummary.gameNumber").ToString()
-            SeriesGameStatus = game.SelectToken("seriesSummary.seriesStatusShort").ToString()
-            Return True
-        End Function
-
-        Public Sub SetStatsInfo(game As JObject)
-            HomeScore = game.SelectToken("teams.home.score").ToString()
-            AwayScore = game.SelectToken("teams.away.score").ToString()
-            GamePeriod = game.SelectToken("linescore.currentPeriodOrdinal").ToString()
-            GameTimeLeft = game.SelectToken("linescore.currentPeriodTimeRemaining").ToString()
-            IsInIntermission =
-                game.SelectToken("linescore.intermissionInfo.inIntermission").ToString().ToLower().Equals("true")
+        Public Sub SetStatsInfo(game As NHL.Game)
+            HomeScore = game.teams.home.score.ToString()
+            AwayScore = game.teams.away.score.ToString()
+            GamePeriod = game.linescore.currentPeriodOrdinal
+            GameTimeLeft = game.linescore.currentPeriodTimeRemaining
+            IsInIntermission = game.linescore.intermissionInfo.inIntermission
 
             If IsInIntermission Then
-                IntermissionTimeRemaining =
-                    Date.MinValue.AddSeconds(
-                        CType(game.SelectToken("linescore.intermissionInfo.intermissionTimeRemaining").ToString(),
-                              Integer))
+                IntermissionTimeRemaining = Date.MinValue.AddSeconds(game.linescore.intermissionInfo.intermissionTimeRemaining)
             End If
         End Sub
 
