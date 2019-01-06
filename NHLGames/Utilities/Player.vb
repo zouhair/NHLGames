@@ -37,8 +37,7 @@ Namespace Utilities
         End Sub
 
         Private Shared Sub LaunchingStream(args As GameWatchArguments)
-            Dim _
-                lstValidLines As _
+            Dim lstValidLines As _
                     New List(Of String) _
                     From {"found matching plugin stream", "available streams", "opening stream", "starting player"}
             Dim lstInvalidLines As New List(Of String) From {"could not open stream", "failed to read"}
@@ -146,9 +145,9 @@ Namespace Utilities
             If NHLGamesMetro.FormLoaded OrElse forceSet Then
                 Dim watchArgs As New GameWatchArguments With {
                     .Is60Fps = form.cbStreamQuality.SelectedIndex = 0,
-                    .Quality = CType(form.cbStreamQuality.SelectedIndex, StreamQualityEnum),
+                    .Quality = form.cbStreamQuality.SelectedIndex,
                     .StreamLiveRewind = form.tbLiveRewind.Value * 5,
-                    .StreamLiveReplay = CType(form.cbLiveReplay.SelectedIndex, LiveReplayEnum),
+                    .StreamLiveReplay = form.cbLiveReplay.SelectedIndex,
                     .StreamerPath = form.txtStreamerPath.Text,
                     .StreamerType = GetStreamerType(form.txtStreamerPath.Text),
                     .PlayerType = GetPlayerType(form),
@@ -163,7 +162,7 @@ Namespace Utilities
                 }
 
                 ApplicationSettings.SetValue(SettingsEnum.DefaultWatchArgs,
-                                             Serialization.SerializeObject(Of GameWatchArguments)(watchArgs))
+                                             Serialization.SerializeObject(watchArgs))
             End If
         End Sub
 

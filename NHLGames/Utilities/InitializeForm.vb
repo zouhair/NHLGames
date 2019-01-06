@@ -183,7 +183,7 @@ Namespace Utilities
             PopulateComboBox(Form.cbServers, SettingsEnum.SelectedServer, SettingsEnum.ServerList, String.Empty)
             Common.SetRedirectionServerInApp()
 
-            BindWatchArgsToForm(watchArgs)
+            watchArgs = BindWatchArgsToForm(watchArgs)
 
             Dim adDetectionConfigs = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection, Nothing)
 
@@ -256,7 +256,7 @@ Namespace Utilities
             Return False
         End Function
 
-        Private Shared Sub BindWatchArgsToForm(watchArgs As GameWatchArguments)
+        Private Shared Function BindWatchArgsToForm(watchArgs As GameWatchArguments) As GameWatchArguments
             If watchArgs IsNot Nothing Then
                 Form.cbStreamQuality.SelectedIndex = CType(watchArgs.Quality, Integer)
 
@@ -268,12 +268,13 @@ Namespace Utilities
                 Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc AndAlso Form.rbVLC.Enabled
                 Form.rbMPC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpc AndAlso Form.rbMPC.Enabled
 
-                If Form.rbVLC.Checked AndAlso watchArgs.PlayerPath <> Form.txtVLCPath.Text Then
-                    Player.RenewArgs()
-                ElseIf Form.rbMPC.Checked AndAlso watchArgs.PlayerPath <> Form.txtMPCPath.Text Then
-                    Player.RenewArgs()
-                ElseIf Form.rbMPV.Checked AndAlso watchArgs.PlayerPath <> Form.txtMpvPath.Text Then
-                    Player.RenewArgs()
+                Dim isVLCPathOutdated = Form.rbVLC.Checked AndAlso watchArgs.PlayerPath <> Form.txtVLCPath.Text
+                Dim isMPCPathOutdated = Form.rbMPC.Checked AndAlso watchArgs.PlayerPath <> Form.txtMPCPath.Text
+                Dim isMPVPathOutdated = Form.rbMPV.Checked AndAlso watchArgs.PlayerPath <> Form.txtMpvPath.Text
+
+                If isVLCPathOutdated OrElse isMPCPathOutdated OrElse isMPVPathOutdated Then
+                    Player.RenewArgs(True)
+                    watchArgs = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, New GameWatchArguments)
                 End If
 
                 Form.tgPlayer.Checked = watchArgs.UseCustomPlayerArgs
@@ -288,7 +289,9 @@ Namespace Utilities
                 Form.txtOutputArgs.Enabled = watchArgs.UseOutputArgs
                 Form.tgOutput.Checked = watchArgs.UseOutputArgs
             End If
-        End Sub
+
+            Return watchArgs
+        End Function
 
         Private Shared Sub BindAdDetectionConfigsToForm(configs As AdDetectionConfigs)
             If configs IsNot Nothing Then

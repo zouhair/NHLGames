@@ -59,7 +59,7 @@ Namespace Objects
                 result = PlayerArgs() & ReplayArgs()
             End If
 
-            result &= ProxyArgs()
+            result &= ThreadArgs() & ProxyArgs()
             If UseCustomStreamerArgs Then result &= CustomStreamerArgs
             If Not safeOutput Then result &= NhlCookieArgs()
             If Not safeOutput Then result &= UserAgentArgs()
@@ -70,15 +70,16 @@ Namespace Objects
         End Function
 
         Private Function ThreadArgs() As String
-            Return If (UseOutputArgs, "--ringbuffer-size=8M --hls-segment-threads=6 ", "--ringbuffer-size=16M --hls-segment-threads=2 ")
+            Return If(UseOutputArgs,
+                "--hls-segment-threads=4 --hls-segment-attempts=10 --hls-segment-timeout=60 ",
+                "--hls-segment-threads=2 --hls-segment-attempts=5 --hls-segment-timeout=30 ")
         End Function
 
         Private Function PlayerArgs() As String
             Dim literalPlayerArgs = If(UseCustomPlayerArgs, $" {CustomPlayerArgs} ", String.Empty)
             Select Case PlayerType
                 Case PlayerTypeEnum.Mpv
-                    Return _
-                        $"--player ""{PlayerPath} --force-window=immediate --title """"{GameTitle _
+                    Return $"--player ""{PlayerPath} --force-window=immediate --title """"{GameTitle _
                             }"""" --user-agent=User-Agent=""""{Common.UserAgent}""""{literalPlayerArgs}"" "
                 Case PlayerTypeEnum.Vlc
                     Return $"--player ""{PlayerPath} --meta-title """"{GameTitle}""""{literalPlayerArgs}"" "

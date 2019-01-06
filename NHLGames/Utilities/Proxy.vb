@@ -27,6 +27,7 @@ Namespace Utilities
 
             If Not IsProxyFileFound() Then
                 Console.WriteLine(English.errorMitmProxyNotFound)
+                Return
             End If
 
              Try
@@ -53,12 +54,10 @@ Namespace Utilities
             SetEnvironmentVariableForMpv()
             SetPath()
 
-            If IsProxyFileFound() Then
-                Dim taskLaunchProxy = New Task(Sub()
-                                                   StartProxy()
-                                               End Sub)
-                taskLaunchProxy.Start()
-            End If
+            Dim taskLaunchProxy = New Task(Sub()
+                                               StartProxy()
+                                           End Sub)
+            taskLaunchProxy.Start()
         End Sub
 
         Private Sub SetPath()
