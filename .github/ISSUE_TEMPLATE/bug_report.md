@@ -8,10 +8,10 @@ assignees: ''
 ---
 
 **Describe the bug**
-If your title may be unclear, please add a clear and concise description of what the bug is.
+If your title may be unclear, add a clear and concise description of what the bug is.
 
 **To Reproduce**
-If applicable, enumerate the steps to reproduce the issue:
+If applicable, enumerate the steps to reproduce the bug:
 1.
 2. 
 3. 
