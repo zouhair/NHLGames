@@ -1,6 +1,9 @@
 ---
 name: Feature request
 about: Suggest an enhancement or a feature idea to improve NHLGames
+title: ''
+labels: ''
+assignees: ''
 
 ---
 
