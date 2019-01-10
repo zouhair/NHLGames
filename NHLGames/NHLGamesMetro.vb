@@ -81,7 +81,6 @@ Public Class NHLGamesMetro
 
         MLBAMProxy = New Proxy()
 
-        HostsFile.ResetHost() 'TODO: Remove when we remove hosts class
         Await Common.CheckAppCanRun()
 
         FormLoaded = True

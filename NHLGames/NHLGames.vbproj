@@ -277,7 +277,6 @@
     <Compile Include="Utilities\FileAccess.vb" />
     <Compile Include="Utilities\GameFetcher.vb" />
     <Compile Include="Utilities\GitHub.vb" />
-    <Compile Include="Utilities\HostsFile.vb" />
     <Compile Include="Utilities\ImageFetcher.vb" />
     <Compile Include="Utilities\InitializeForm.vb" />
     <Compile Include="Utilities\InvokeElement.vb" />
