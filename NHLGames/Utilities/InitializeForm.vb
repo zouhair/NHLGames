@@ -193,6 +193,9 @@ Namespace Utilities
                                                                                       New AdDetectionConfigs)
             End If
 
+            Form.SetStreamerDefaultArgs(Form)
+            Form.SetPlayerDefaultArgs(Form)
+
             BindAdDetectionConfigsToForm(adDetectionConfigs)
 
             Form.lblNoGames.Location = New Point(((Form.tabGames.Width - Form.lblNoGames.Width) / 2),
@@ -236,9 +239,26 @@ Namespace Utilities
             End If
         End Sub
 
+        Public Shared Sub SetSelectedPlayer(watchArgs As GameWatchArguments)
+            If Not String.IsNullOrEmpty(Form.txtMpvPath.Text) Then
+                watchArgs.PlayerType = PlayerTypeEnum.Mpv
+            ElseIf Not String.IsNullOrEmpty(Form.txtVLCPath.Text) Then
+                watchArgs.PlayerType = PlayerTypeEnum.Vlc
+            ElseIf Not String.IsNullOrEmpty(Form.txtMPCPath.Text) Then
+                watchArgs.PlayerType = PlayerTypeEnum.Mpc
+            Else
+                watchArgs.PlayerType = PlayerTypeEnum.None
+            End If
+
+            ApplicationSettings.SetValue(SettingsEnum.DefaultWatchArgs,
+                                             Serialization.SerializeObject(watchArgs))
+        End Sub
+
         Private Shared Function ValidWatchArgs(watchArgs As GameWatchArguments, playersPath As String(),
                                                streamerPath As String) As Boolean
             If watchArgs Is Nothing Then Return True
+
+            SetSelectedPlayer(watchArgs)
 
             Dim hasPlayerSet As Boolean = playersPath.Any(Function(x) x = watchArgs.PlayerPath)
             If Not watchArgs.StreamerPath.Equals(streamerPath) Then Return True
@@ -263,6 +283,8 @@ Namespace Utilities
                 Form.tgAlternateCdn.Checked = watchArgs.Cdn = CdnTypeEnum.L3C
 
                 Form.tbLiveRewind.Value = If(watchArgs.StreamLiveRewind Mod 5 = 0, watchArgs.StreamLiveRewind / 5, 1)
+
+                SetSelectedPlayer(watchArgs)
 
                 Form.rbMPV.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpv AndAlso Form.rbMPV.Enabled
                 Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc AndAlso Form.rbVLC.Enabled

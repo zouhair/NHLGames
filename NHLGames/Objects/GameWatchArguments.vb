@@ -14,10 +14,10 @@ Namespace Objects
         Public Property PlayerPath As String = String.Empty
         Public Property PlayerType As PlayerTypeEnum = PlayerTypeEnum.None
         Public Property StreamerPath As String = String.Empty
-        Public Property UseCustomStreamerArgs As Boolean = False
-        Public Property CustomStreamerArgs As String = String.Empty
-        Public Property UseCustomPlayerArgs As Boolean = False
-        Public Property CustomPlayerArgs As String = String.Empty
+        Public Property UseCustomStreamerArgs As Boolean = True
+        Public Property CustomStreamerArgs As String = " --hls-segment-threads=2 --hls-segment-attempts=10 --hls-segment-timeout=60"
+        Public Property UseCustomPlayerArgs As Boolean = True
+        Public Property CustomPlayerArgs As String = " --file-caching=10000 --network-caching=10000 --cache=50000"
         Public Property UseOutputArgs As Boolean = False
         Public Property PlayerOutputPath As String = String.Empty
         Public Property StreamLiveRewind As Integer = 5
@@ -25,6 +25,15 @@ Namespace Objects
         Public Property StreamLiveReplayCode As LiveStatusCodeEnum = LiveStatusCodeEnum.Live
         Public Property StreamerType As StreamerTypeEnum = StreamerTypeEnum.None
         Public Property StreamLiveReplay As LiveReplayEnum = LiveReplayEnum.StreamStarts
+
+        Public Shared ReadOnly StreamerDefaultArgs As Dictionary(Of String, String) = New Dictionary(Of String, String)() From {
+            {"--hls-segment-threads", "4"}, {"--hls-segment-attempts", "10"}, {"--hls-segment-timeout", "60"}}
+
+        Public Shared ReadOnly MpvDefaultArgs As Dictionary(Of String, String) = New Dictionary(Of String, String)() From {
+            {"--cache", "50000"}}
+
+        Public Shared ReadOnly VlcDefaultArgs As Dictionary(Of String, String) = New Dictionary(Of String, String)() From {
+            {"--file-caching", "10000"}, {"--network-caching", "10000"}}
 
         Public Overrides Function ToString() As String
             Return OutputArgs(False)
@@ -59,7 +68,7 @@ Namespace Objects
                 result = PlayerArgs() & ReplayArgs()
             End If
 
-            result &= ThreadArgs() & ProxyArgs()
+            result &= ProxyArgs()
             If UseCustomStreamerArgs Then result &= CustomStreamerArgs
             If Not safeOutput Then result &= NhlCookieArgs()
             If Not safeOutput Then result &= UserAgentArgs()
