@@ -64,7 +64,7 @@ Namespace Utilities
             Dim content = Await Common.SendWebRequestAndGetContentAsync(Nothing, request)
             Dim issues = JsonConvert.DeserializeObject(Of Issue())(content)
 
-            If issues.Count = 0 Then Return
+            If issues Is Nothing OrElse issues.Count = 0 Then Return
             Dim issue = issues.First()
 
             If String.IsNullOrWhiteSpace(issue.title) OrElse String.IsNullOrWhiteSpace(issue.body) Then Return
