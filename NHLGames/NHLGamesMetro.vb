@@ -427,6 +427,7 @@ Public Class NHLGamesMetro
         For Each arg In args
             If Not txt.Text.Contains(arg.Key) Then txt.Text &= $" {arg.Key}={arg.Value}"
         Next
+        txt.Text = txt.Text.Trim()
     End Sub
 
     Private Sub NHLGamesMetro_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
