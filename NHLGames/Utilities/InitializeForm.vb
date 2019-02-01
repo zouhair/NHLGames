@@ -239,7 +239,14 @@ Namespace Utilities
             End If
         End Sub
 
-        Public Shared Sub SetSelectedPlayer(watchArgs As GameWatchArguments)
+        Public Shared Function GetSelectedPlayerType(watchArgs As GameWatchArguments) As PlayerTypeEnum
+            If watchArgs.PlayerType.Equals(PlayerTypeEnum.Mpv) AndAlso Not String.IsNullOrEmpty(Form.txtMpvPath.Text) Then Return PlayerTypeEnum.Mpv
+            If watchArgs.PlayerType.Equals(PlayerTypeEnum.Vlc) AndAlso Not String.IsNullOrEmpty(Form.txtVLCPath.Text) Then Return PlayerTypeEnum.Vlc
+            If watchArgs.PlayerType.Equals(PlayerTypeEnum.Mpc) AndAlso Not String.IsNullOrEmpty(Form.txtMPCPath.Text) Then Return PlayerTypeEnum.Mpc
+            Return watchArgs.PlayerType = PlayerTypeEnum.None
+        End Function
+
+        Public Shared Sub ResetSelectedPlayer(watchArgs As GameWatchArguments)
             If Not String.IsNullOrEmpty(Form.txtMpvPath.Text) Then
                 watchArgs.PlayerType = PlayerTypeEnum.Mpv
             ElseIf Not String.IsNullOrEmpty(Form.txtVLCPath.Text) Then
@@ -258,7 +265,10 @@ Namespace Utilities
                                                streamerPath As String) As Boolean
             If watchArgs Is Nothing Then Return True
 
-            SetSelectedPlayer(watchArgs)
+            Dim selectedPlayerType = GetSelectedPlayerType(watchArgs)
+            If Not selectedPlayerType.Equals(watchArgs.PlayerType) OrElse selectedPlayerType.Equals(PlayerTypeEnum.None) Then
+                ResetSelectedPlayer(watchArgs)
+            End If
 
             Dim hasPlayerSet As Boolean = playersPath.Any(Function(x) x = watchArgs.PlayerPath)
             If Not watchArgs.StreamerPath.Equals(streamerPath) Then Return True
@@ -284,7 +294,10 @@ Namespace Utilities
 
                 Form.tbLiveRewind.Value = If(watchArgs.StreamLiveRewind Mod 5 = 0, watchArgs.StreamLiveRewind / 5, 1)
 
-                SetSelectedPlayer(watchArgs)
+                Dim selectedPlayerType = GetSelectedPlayerType(watchArgs)
+                If Not selectedPlayerType.Equals(watchArgs.PlayerType) OrElse selectedPlayerType.Equals(PlayerTypeEnum.None) Then
+                    ResetSelectedPlayer(watchArgs)
+                End If
 
                 Form.rbMPV.Checked = watchArgs.PlayerType = PlayerTypeEnum.Mpv AndAlso Form.rbMPV.Enabled
                 Form.rbVLC.Checked = watchArgs.PlayerType = PlayerTypeEnum.Vlc AndAlso Form.rbVLC.Enabled
