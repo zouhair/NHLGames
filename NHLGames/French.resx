@@ -753,4 +753,8 @@
     <value>Serveur indisponible</value>
     <comment>Game panel</comment>
   </data>
+  <data name="lblOutput" xml:space="preserve">
+    <value>Enregistrer sous</value>
+    <comment>Settings tab</comment>
+  </data>
 </root>

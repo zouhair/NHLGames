@@ -158,7 +158,7 @@
     <comment>Console</comment>
   </data>
   <data name="errorReadingSettings" xml:space="preserve">
-    <value>Warning: Failed to read app setting: {0}</value>
+    <value>Warning: Failed to read app setting: {0}. Exception occured with: {1}</value>
     <comment>Console</comment>
   </data>
   <data name="errorSetAdModule" xml:space="preserve">
@@ -170,7 +170,7 @@
     <comment>Console</comment>
   </data>
   <data name="errorWritingSettings" xml:space="preserve">
-    <value>Warning: Failed to write app settings</value>
+    <value>Warning: Failed to write app settings. Make sure that NHLGames is inside a folder that your user account has full access, like a folder in your user workspace (Documents) or the root of your hard drive. Exception occured with: {0}</value>
     <comment>Console</comment>
   </data>
   <data name="lblAwayTeam" xml:space="preserve">
@@ -246,7 +246,7 @@
     <comment>Game panel</comment>
   </data>
   <data name="lblOutput" xml:space="preserve">
-    <value>Output</value>
+    <value>Save as</value>
     <comment>Settings tab</comment>
   </data>
   <data name="lblPlayer" xml:space="preserve">

@@ -175,9 +175,7 @@ Namespace Utilities
             Dim watchArgs = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, Nothing)
 
             If ValidWatchArgs(watchArgs, playersPath, Form.txtStreamerPath.Text) Then
-                Player.RenewArgs(True)
-                watchArgs = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs,
-                                                                             New GameWatchArguments)
+                watchArgs = Player.RenewArgs(True)
             End If
 
             PopulateComboBox(Form.cbServers, SettingsEnum.SelectedServer, SettingsEnum.ServerList, String.Empty)
@@ -188,9 +186,7 @@ Namespace Utilities
             Dim adDetectionConfigs = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection, Nothing)
 
             If adDetectionConfigs Is Nothing Then
-                AdDetection.Renew(True)
-                adDetectionConfigs = ApplicationSettings.Read(Of AdDetectionConfigs)(SettingsEnum.AdDetection,
-                                                                                      New AdDetectionConfigs)
+                adDetectionConfigs = AdDetection.Renew(True)
             End If
 
             Form.SetStreamerDefaultArgs(Form)
@@ -308,8 +304,7 @@ Namespace Utilities
                 Dim isMPVPathOutdated = Form.rbMPV.Checked AndAlso watchArgs.PlayerPath <> Form.txtMpvPath.Text
 
                 If isVLCPathOutdated OrElse isMPCPathOutdated OrElse isMPVPathOutdated Then
-                    Player.RenewArgs(True)
-                    watchArgs = ApplicationSettings.Read(Of GameWatchArguments)(SettingsEnum.DefaultWatchArgs, New GameWatchArguments)
+                    watchArgs = Player.RenewArgs(True)
                 End If
 
                 Form.tgPlayer.Checked = watchArgs.UseCustomPlayerArgs

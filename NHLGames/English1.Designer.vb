@@ -515,7 +515,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Warning: Failed to read app setting: {0}.
+        '''  Looks up a localized string similar to Warning: Failed to read app setting: {0}. Exception occured with: {1}.
         '''</summary>
         Friend Shared ReadOnly Property errorReadingSettings() As String
             Get
@@ -578,7 +578,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Warning: Failed to write app settings.
+        '''  Looks up a localized string similar to Warning: Failed to write app settings. Make sure that NHLGames is inside a folder that your user account has full access, like a folder in your user workspace (Documents) or the root of your hard drive. Exception occured with: {0}.
         '''</summary>
         Friend Shared ReadOnly Property errorWritingSettings() As String
             Get
@@ -947,7 +947,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Output.
+        '''  Looks up a localized string similar to Save as.
         '''</summary>
         Friend Shared ReadOnly Property lblOutput() As String
             Get

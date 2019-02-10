@@ -767,6 +767,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Enregistrer sous.
+        '''</summary>
+        Friend Shared ReadOnly Property lblOutput() As String
+            Get
+                Return ResourceManager.GetString("lblOutput", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Lecteur par défaut.
         '''</summary>
         Friend Shared ReadOnly Property lblPlayer() As String

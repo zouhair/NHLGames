@@ -12,15 +12,16 @@ Namespace Utilities
         Private _pathToProxy As String = String.Empty
 
         Private Sub StartProxy()
-            _proxy = New Process() With {.StartInfo =
-                    New ProcessStartInfo With {
+            _proxy = New Process() With {
+                .StartInfo = New ProcessStartInfo With {
                     .FileName = _pathToProxy,
                     .Arguments = $"-p {port} -d {NHLGamesMetro.HostName} -s {NHLGamesMetro.DomainName}",
                     .UseShellExecute = False,
                     .RedirectStandardOutput = True,
-                    .CreateNoWindow =  True}
-                }
-            _proxy.EnableRaisingEvents = True
+                    .CreateNoWindow = True
+                },
+                .EnableRaisingEvents = True
+            }
 
             Console.WriteLine(English.msgProxyStarting)
             InvokeElement.SetFormStatusLabel(NHLGamesMetro.RmText.GetString("msgProxyGettingReady"))
@@ -46,7 +47,7 @@ Namespace Utilities
                 End While
 
             Catch ex As Exception
-                Console.WriteLine(English.errorGeneral, $"Starting proxy", ex.Message.ToString())
+                Console.WriteLine(English.errorGeneral, $"Starting proxy", ex.Message)
             End Try
         End Sub
 
@@ -58,6 +59,12 @@ Namespace Utilities
                                                StartProxy()
                                            End Sub)
             taskLaunchProxy.Start()
+
+            ' For proxy debug purpose, uncomment below, comment above
+
+            'NHLGamesMetro.FormInstance.ProxyListening = Task.Run(Function()
+            'Return True
+            'End Function)
         End Sub
 
         Private Sub SetPath()
@@ -98,7 +105,7 @@ Namespace Utilities
         End Function
 
         Public Sub SetEnvironmentVariableForMpv()
-            Environment.SetEnvironmentVariable("http_proxy", $"http://127.0.0.1:{port}", EnvironmentVariableTarget.Process)
+            Environment.SetEnvironmentVariable("http_proxy", $"http://127.0.0.1:{port}/", EnvironmentVariableTarget.Process)
         End Sub
 
     End Class

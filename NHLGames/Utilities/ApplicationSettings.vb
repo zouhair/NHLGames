@@ -39,7 +39,7 @@ Namespace Utilities
                 End Try
 
             Catch e As ConfigurationErrorsException
-                Console.WriteLine(English.errorReadingSettings, key)
+                Console.WriteLine(English.errorReadingSettings, key, e.Message)
                 Return defaultReturnValue
             End Try
         End Function
@@ -61,7 +61,7 @@ Namespace Utilities
                 configFile.Save(ConfigurationSaveMode.Modified)
                 ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name)
             Catch e As ConfigurationErrorsException
-                Console.WriteLine(English.errorWritingSettings)
+                Console.WriteLine(English.errorWritingSettings, e.Message)
             End Try
         End Sub
     End Class

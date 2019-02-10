@@ -120,7 +120,7 @@ Public Class NHLGamesMetro
         flpGames.Focus()
     End Sub
 
-    Private Sub RichTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtConsole.TextChanged
+    Private Sub txtConsole_TextChanged(sender As Object, e As EventArgs) Handles txtConsole.TextChanged
         txtConsole.SelectionStart = txtConsole.Text.Length
         txtConsole.ScrollToCaret()
     End Sub

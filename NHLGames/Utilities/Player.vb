@@ -88,7 +88,7 @@ Namespace Utilities
                 End While
             Catch ex As IOException
             Catch ex As Exception
-                Console.WriteLine(English.errorGeneral, $"Starting stream", ex.Message.ToString())
+                Console.WriteLine(English.errorGeneral, $"Starting stream", ex.Message)
             Finally
                 NHLGamesMetro.StreamStarted = False
             End Try
@@ -138,7 +138,7 @@ Namespace Utilities
             Return If(form.tgAlternateCdn.Checked, CdnTypeEnum.L3C, CdnTypeEnum.Akc)
         End Function
 
-        Public Shared Sub RenewArgs(Optional forceSet As Boolean = False)
+        Public Shared Function RenewArgs(Optional forceSet As Boolean = False) As GameWatchArguments
 
             Dim form As NHLGamesMetro = NHLGamesMetro.FormInstance
 
@@ -163,8 +163,12 @@ Namespace Utilities
 
                 ApplicationSettings.SetValue(SettingsEnum.DefaultWatchArgs,
                                              Serialization.SerializeObject(watchArgs))
+
+                Return watchArgs
             End If
-        End Sub
+
+            Return New GameWatchArguments()
+        End Function
 
         Private Shared Function GetStreamerType(streamerPath As String) As StreamerTypeEnum
             Dim selectedStreamerExe = Path.GetFileNameWithoutExtension(streamerPath).ToLower()

@@ -180,7 +180,7 @@ Namespace Utilities
             Return _mediaPlayerProcesses.Count <> 0
         End Function
 
-        Public Shared Sub Renew(Optional forceSet As Boolean = False)
+        Public Shared Function Renew(Optional forceSet As Boolean = False) As AdDetectionConfigs
             Dim form = NHLGamesMetro.FormInstance
             If NHLGamesMetro.FormLoaded OrElse forceSet Then
                 _settings = New AdDetectionConfigs With {
@@ -204,8 +204,12 @@ Namespace Utilities
 
                 ApplicationSettings.SetValue(SettingsEnum.AdDetection,
                                              Serialization.SerializeObject(Of AdDetectionConfigs)(_settings))
+
+                Return _settings
             End If
-        End Sub
+
+            Return New AdDetectionConfigs()
+        End Function
 
         Private Sub Dispose(disposing As Boolean)
             If Not _disposedValue Then
