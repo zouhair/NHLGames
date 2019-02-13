@@ -119,8 +119,16 @@ The Rewind/Replay feature is only available for Live games only. If you see a bl
 > *WARNING: If you want to use the Rewind/Replay feature, but you don't click on the *Live* icon before starting a stream, you will still be in live mode !*
 
 If you use the rewind or replay feature and you want to change the default behaviour, you can set your preferences here.
-- Live Replay: If Replay is selected , it will start the stream from the selected value.
-- Live Rewind: If Rewind is selected , it will use the value to set the stream x minutes behind the live stream. Use the slider.
+#### Live Replay
+If Replay is selected , it will start the stream from the selected value
+- When the game starts (drops the puck) - *7:10PM for a game scheduled at 7PM*
+- When the event starts (game time) - *7:00PM for a game scheduled at 7PM*
+- At the beginning of the stream - *Around 6:30PM (pregame) for a game starting at 7PM*
+
+#### Live Rewind
+If Rewind is selected , it will use the value to set the stream x minutes behind the live stream. Use the slider.
+
+![image](https://user-images.githubusercontent.com/23088305/52688428-76cd3980-2f24-11e9-944c-f1990ad7bb6a.png)
 
 > *NOTE: If you use the rewind slider in settings, but you set it before game time and the stream has no data at this time, it might start from live.*
 
