@@ -192,7 +192,7 @@ Ad detection supports these applications:
    - Ad starting hotkey: Set the same hotkey that you use in OBS to display the window when a commercial plays.
 
 ## //_Console_
-Go to this tab to see everything that NHLGames does. Also, any error or warning will show up here.
+Go to this tab to see everything that NHLGames logs. Also, any error or warning will show up here. Click on `Copy to clipboard` if you get an issue and want to report it on Github, just paste it when opening an issue.
 
 # /_Support_
 Having an issue with NHLGames? Head to our [Wiki](https://github.com/NHLGames/NHLGames/wiki) to find a fix. Look at the side bar, on the right, to navigate between known issues. If you can't find it, feel free to open an [issue](https://github.com/NHLGames/NHLGames/issues).
