@@ -12,7 +12,6 @@ Enjoy!
 ## /_Index_
 * [First use](#first-use)
   * [Requirements](#requirements)
-  * [Message about the hosts file](#message-about-the-hosts-file) _v.1.3 and before_
   * [Is this app safe?](#is-this-app-safe)
  * [User interface](#user-interface)
    * [Games](#games)
@@ -24,7 +23,7 @@ Enjoy!
      * [Rewind and Replay](#rewind-and-replay)
      * [Content Delivery Network (CDN)](#content-delivery-network-cdn)
      * [Server's Hostname](#servers-hostname)
-     * [Server Hosts Entry](#server-hosts-entry) _v.1.3 and before_
+     * [Proxy Port](#proxy-port)
      * [Players](#players)
      * [Streamer](#streamer)
      * [Language](#language)
@@ -52,10 +51,6 @@ You will also need, if you downloaded the simplified version instead of the comp
 - A supported [media player](#players)
 - A supported [streamer](#streamer)
 
-## //_Message about the hosts file_
---- _v.1.3 and before_ ---    
-First time you start NHLGames it will ask if you wish to view the Hosts file. That means the app has changed a system file to let you use NHLGames without issues by adding a line like this one `XXX.XXX.XXX.XXX www.hosting.site.com` at the end of it. If you want to view the changes, then click Yes and you will have to select Notepad to view the file. If NHLGames did not succesfully changed this file, see the [Server Hosts Entry](#server-hosts-entry) section.
-
 ## //_Is this app safe?_
 Yes, it is. However, some anti-virus or anti-malware won't agree because we edit your hosts file in Windows/System32/drivers/etc/, a file used to redirect nhl.com to another ip. We do that, to make sure the app will get stream links for games that are available. But don't worry, this server only responds in plain text and won't hurt your pc. If you don't trust us, find out by yourself by looking at our code.
 
@@ -69,38 +64,49 @@ If you want to watch past games, use the calendar or use the arrows to navigate 
 Use the refresh button (at the right) to refresh the current day games.
 
 ### ///_Game panel_
-Game panels can be customize to show or hide infos, it can be set in settings. Only today's games will show with a blue frame, like the one below :
+Game panels will have different frame color base on their game status (scheduled, pregame, live, ended).
 
-![image](https://user-images.githubusercontent.com/23088305/38785698-79bfe94e-40f0-11e8-85c6-505119cdd0c1.png)
+Only today's games will show with a blue frame, like the one below :
 
-Today's games are blue:
-- Upcoming games : blue frame
-- Pregame games: blue frame and blue top banner
-- Live games : blue frame, blue top banner and live icon (red)
+![image](https://user-images.githubusercontent.com/23088305/52686505-fd314d80-2f1b-11e9-83a7-17bf80997cc8.png)
 
-Every others games, past or scheduled, are grey:
-- Past games: grey frame with a grey top banner
-- Scheduled games: grey frame
+Today's games (Today's upcoming scheduled games, Pregame, Live) have a blue frame around them (like above). Every others games (ended or scheduled) are grey (like below)
+
+![image](https://user-images.githubusercontent.com/23088305/52686420-99a72000-2f1b-11e9-93a4-5df0f85c6a1d.png)
+![image](https://user-images.githubusercontent.com/23088305/52686434-b5aac180-2f1b-11e9-9eaa-abe31e889902.png)
+
+Features on the panel: 
+- Watch recap by clicking on the play icon on the top-right corner (when available)
+- Watch a stream by clicking on a network logo or a camera (hover on it to get some more info)
+
+Game panels can be customize to show or hide infos, it can be set in settings (see the next section)
+
 
 ## //_Settings_
 ### ///_Customize Game panels_
 NHLGames gives you some options to change how a game panel will appear.
 
-*Final Scores* : If on, it shows final score of all past games between the teams logo.    
-*Live Scores* : If on, it shows live score of all games in progress between the teams logo.    
-*Series Record* : If on, it shows serie records under the game status, like: Game 4 Tied 2-2  
-*Teams city abbreviation*: If on, it shows team city abbreviation under the team logo, like: MTL   
-*Live games first*: If on, games list will be ordered by live games first
+| Option | Game status | Default value |
+| :--- |  :----- | :-----: |
+| Order by live games first | Today's games | `ON` |
+| Live remaining time | Live games | `ON` |
+| Live scores | Live games | `OFF` |
+| Series record | Live and past series games | `ON` |
+| Teams city abbreviation |  Upcoming, live and past games | `OFF` |
+| Final scores |  Past games | `OFF` |
 
 ### ///_Stream Quality_
 The selected value will defined which quality will be sent to your media player, from the worst to the best quality. Selecting the highest quality also means bigger files to download :
-- Excellent: 720p or better at 60fps ~2.50 Gb/hr
-- Superb: 720p ~1.80 Gb/hr
-- Great: 540p ~1.30 Gb/hr
-- Good: 504p ~950 Mb/hr
-- Normal: 360p ~700 Mb/hr
-- Low: 228p ~500 Mb/hr
-- Mobile: 224p or worst ~300/hr
+
+| Name      | Resolution    | Data usage   |
+| :-------- | :------------ | :----------: |
+| Excellent | 720p at 60fps (or best) | ~ 2.5 Gb/hr |
+| Superb    | 720p          | ~ 1.8 Gb/hr |
+| Great     | 540p          | ~ 1.3 Gb/hr |
+| Normal    | 360p          | ~ 0.7 Gb/hr |
+| Low       | 228p          | ~ 0.5 Gb/hr |
+| Mobile    | 224p (or worst) | ~ 0.3 Gb/hr |
+
 
 ### ///_Rewind and Replay_
 The Rewind/Replay feature is only available for Live games only. If you see a blue game panel with a ![image](https://user-images.githubusercontent.com/23088305/38781081-37d9d68a-40ae-11e8-8c37-50388470b299.png) icon in the left corner that means you will have access to the Replay or Rewind feature. To use the feature, you have click on the icon (top-left corner of the game panel), and click on a stream to start watching.
@@ -113,8 +119,8 @@ The Rewind/Replay feature is only available for Live games only. If you see a bl
 > *WARNING: If you want to use the Rewind/Replay feature, but you don't click on the *Live* icon before starting a stream, you will still be in live mode !*
 
 If you use the rewind or replay feature and you want to change the default behaviour, you can set your preferences here.
-- Live Rewind: If Rewind is enabled , it will use the value to set the stream x minutes behind the live stream.
-- Live Replay: If Replay is enabled , it will start the stream from the selected value.
+- Live Replay: If Replay is selected , it will start the stream from the selected value.
+- Live Rewind: If Rewind is selected , it will use the value to set the stream x minutes behind the live stream. Use the slider.
 
 > *NOTE: If you use the rewind slider in settings, but you set it before game time and the stream has no data at this time, it might start from live.*
 
@@ -130,39 +136,10 @@ Alternate: Level 3
 ### ///_Server's Hostname_
 This drop down list shows all NHLGames server hostname, so if you can't play games, try another hostname.
 
-### ///_Server Hosts Entry_
---- _v.1.3 and before_ ---    
-If the selected hostname (above) can be resolved by your network, it will get and save the related IP address in the Windows Hosts file. 
+### ///_Proxy Port_
+Use the slider to change the proxy port when starting NHLGames.
 
-To test your Hosts file, go to Settings and use the *Hosts File* drop down list (like shown below):
-![image](https://user-images.githubusercontent.com/23088305/38848870-64037f66-41d7-11e8-9873-f26c3fb3085a.png)
-> Select ***Test if the NHL.tv authentication bypass works*** and click on GO.    
-It should tells you if everything is fine.
-
-If NHLGames is not set properly, try the following options:
-> Right click on NHLGames.exe and select *Run as an administrator*.
-
-In settings, use the *Hosts file* drop down list:
-> Select ***Add the NHL.tv authentication bypass line to Hosts file***
-
-If it does not work, try this other host file action:  
-> Select ***Copy to clipboard the authentication bypass line***, click on GO  
-> Select ***View Hosts file content in Notepad***, click on GO  
-
-If it does not open, try this other host file action:
-> Select ***Open Hosts file location*** or go to *C:\Windows\System32\Drivers\etc*. 
-> Right click on **hosts** file and select Notepad as the editor.   
-
-Go at the end of the file:  
-> Press *CTRL+V* (or right click and click on Paste), our server redirection should be added.   
-
-Now, save the hosts file:   
-> Go to File > Save as, *CTRL+S*.  
-On the save file dialog pops. Make sure: 
-> File name is: `hosts`, not hosts.txt    
-> File type is: `All Files (*.*)`, not Documents (\*.txt)  
-
-Note: If you need to remove NHLGames entry, go back into the Hosts file drop down list in Settings and select *Remove the NHL.tv authentication bypass line from Hosts file* or *View Hosts file content in Notepad* and remove our entry.
+Remember that if you close NHLGames while watching a stream, it will close the proxy as well and it will kill the stream. Just minimize NHLGames instead while playing.
 
 ### ///_Players_
 NHLGames supports up to 3 media players:     
