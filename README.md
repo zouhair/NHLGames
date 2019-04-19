@@ -238,7 +238,7 @@ Thanks to our [contributors](https://github.com/NHLGames/NHLGames/graphs/contrib
 
 # /_Donation_
 
-[Donate via Paypal](https://www.donation-tracker.de/donate/kturris)    
+[Donate via Paypal](https://streamlabs.com/melnykout)    
 Donate via Bitcoin: `17uSfctCE4n5uLAHqZQEozqEiLafSaUgQL`
 
 # /_Download_
