@@ -122,7 +122,8 @@ Namespace Utilities
             Await GitHub.GetVersion()
             Await GitHub.GetAccouncement()
 
-            NHLGamesMetro.IsServerUp = Await SendWebRequestAsync($"http://{NHLGamesMetro.HostName}")
+            Dim hostName As String = NHLGamesMetro.HostName
+            NHLGamesMetro.IsServerUp = If(Not hostName.Equals(String.Empty), Await SendWebRequestAsync($"http://{hostName}"), False)
 
             If Not errorMessage.Equals(String.Empty) Then
                 FatalError(NHLGamesMetro.RmText.GetString(errorMessage))
