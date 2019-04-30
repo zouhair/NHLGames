@@ -44,6 +44,9 @@ Namespace Objects.Modules
         Public Sub AdStarted() Implements IAdModule.AdStarted
             Switching(HotkeyAd, IsHotkeyAdSet, IsHotkeyAdHasSpecialKeys, English.msgObsAdWord)
         End Sub
+        Public Sub AdPlaying() Implements IAdModule.AdPlaying
+
+        End Sub
 
         Private Sub Switching(hotkey As Hotkey, isHotkeySet As Boolean, specialKey As Boolean, scene As String)
             If Not isHotkeySet Then

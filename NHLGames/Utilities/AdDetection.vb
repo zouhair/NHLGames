@@ -12,7 +12,7 @@ Namespace Utilities
         Private _mediaPlayerProcesses As List(Of Integer)
         Private ReadOnly _adModules As List(Of IAdModule) = New List(Of IAdModule)
         Private _previousAdPlayingState As Boolean
-        Private _firstAdCheck As Boolean
+        Private _newAdPlayingState As Boolean
         Private _initializationTasks As List(Of Task)
         Private Shared _settings As AdDetectionConfigs
         Private ReadOnly _lastSoundTime As Dictionary(Of Integer, DateTime) = New Dictionary(Of Integer, DateTime)
@@ -116,7 +116,6 @@ Namespace Utilities
 
         Public Sub Start()
             _previousAdPlayingState = False
-            _firstAdCheck = True
             _initializationTasks = _adModules.Select(Function(x) AddModule(x)).ToList()
             Task.Run(AddressOf LoopForever)
         End Sub
@@ -125,7 +124,13 @@ Namespace Utilities
             SyncLock _adModules
                 For Each adModule In _adModules
                     Dim m = adModule
-                    If _previousAdPlayingState Then
+                    Task.Run(Sub()
+                                 m.AdPlaying()
+                             End Sub)
+
+                    If _previousAdPlayingState = _newAdPlayingState Then Return
+
+                    If _newAdPlayingState Then
                         Task.Run(Sub()
                                      m.AdStarted()
                                  End Sub)
@@ -152,11 +157,9 @@ Namespace Utilities
                     End If
                     Await Task.Delay(PollPeriodMilliseconds)
                     Dim newAdPlayingState = IsAdCurrentlyPlaying()
-                    If _firstAdCheck OrElse newAdPlayingState <> _previousAdPlayingState Then
-                        _firstAdCheck = False
-                        _previousAdPlayingState = newAdPlayingState
-                        NotifyModules()
-                    End If
+                    _newAdPlayingState = IsAdCurrentlyPlaying()
+                    NotifyModules()
+                    _previousAdPlayingState = newAdPlayingState
                 Catch ex As Exception
                     Console.WriteLine(English.msgAdDetectionException, ex.Message)
                 End Try

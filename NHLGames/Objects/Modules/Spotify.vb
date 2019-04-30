@@ -122,6 +122,10 @@ Namespace Objects.Modules
             Play()
         End Sub
 
+        Public Sub AdPlaying() Implements IAdModule.AdPlaying
+
+        End Sub
+
         Public Sub Initialize() Implements IAdModule.Initialize
             If AnyMediaPlayer Then
                 _initialized = True
