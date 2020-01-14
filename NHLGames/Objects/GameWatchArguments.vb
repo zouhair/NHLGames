@@ -89,7 +89,7 @@ Namespace Objects
             Dim title = $"{GameTitle} - {Stream.Network} - {Quality.ToString()}"
             Select Case PlayerType
                 Case PlayerTypeEnum.Mpv
-                    args &= $"--force-window=immediate --title """"{title}"""" --user-agent=User-Agent=""""{Common.UserAgent}"""""
+                    args &= $"--force-window=immediate --title=""""{title}"""" --user-agent=User-Agent=""""{Common.UserAgent}"""""
                 Case PlayerTypeEnum.Vlc
                     args &= $"--meta-title """"{title}"""" "
                     If IsProxyNecessary() Then args &= $"{VlcHttpProxyArgs()} "
